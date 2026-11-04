@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Rectal Cancer — Long-Course CTV / GTV Contouring Atlas</title>
+<meta content="Long-course rectal (chemo)radiotherapy CTV/GTV delineation atlas: compartment borders, 45 Gy vs 50-54 Gy volumes, MRI appearances and post-chemo change." name="description"/>
+
+<meta content="#10243f" name="theme-color"/>
+
+
+
+
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="Rectal Atlas" name="apple-mobile-web-app-title"/>
+<style>
+  :root{
+    --navy:#10243f;
+    --navy2:#1d3a5f;
+    --teal:#14756b;
+    --teal-bg:#e7f3f1;
+    --amber:#9a5a00;
+    --amber-bg:#fdf3e3;
+    --rust:#8a2f23;
+    --rust-bg:#fbeae7;
+    --line:#d6dde6;
+    --ink:#1c2530;
+    --soft:#5b6b7c;
+    --hi45:#2f6fb0;
+    --hi45bg:#e9f1f9;
+    --hi50:#b03a2e;
+    --hi50bg:#fceae7;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    line-height:1.5;
+    font-size:13.4px;
+    background:#fff;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 30px 60px;}
+
+  /* Masthead */
+  .masthead{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+    color:#fff;padding:34px 40px 30px;margin-bottom:6px;
+  }
+  .masthead .eyebrow{
+    text-transform:uppercase;letter-spacing:.16em;font-size:11px;
+    color:#9fc7c1;font-weight:600;margin-bottom:10px;
+  }
+  .masthead h1{font-size:25px;line-height:1.18;margin:0 0 10px;font-weight:700;}
+  .masthead .sub{font-size:13px;color:#cdd9e6;margin:0;max-width:680px;}
+  .masthead .meta{
+    margin-top:16px;font-size:11px;color:#9fc7c1;border-top:1px solid rgba(255,255,255,.18);
+    padding-top:12px;
+  }
+
+  h2{
+    font-size:17px;color:var(--navy);margin:30px 0 4px;font-weight:700;
+    border-bottom:2px solid var(--teal);padding-bottom:5px;
+  }
+  h2 .num{
+    display:inline-block;background:var(--teal);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 8px;margin-right:9px;vertical-align:middle;font-weight:700;
+  }
+  h3{font-size:13.8px;color:var(--navy2);margin:18px 0 4px;font-weight:700;}
+  h4{font-size:12.6px;color:var(--teal);margin:14px 0 3px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+  p{margin:6px 0;}
+  ul,ol{margin:6px 0 6px;padding-left:20px;}
+  li{margin:3px 0;}
+  b,strong{color:var(--navy);}
+  em{color:var(--rust);font-style:normal;font-weight:600;}
+  code{background:#eef2f6;padding:1px 5px;border-radius:4px;font-size:.92em;color:var(--navy2);}
+
+  .lede{font-size:13.6px;color:var(--soft);margin:14px 0 4px;}
+
+  /* Callout boxes */
+  .box{border-radius:8px;padding:12px 16px;margin:14px 0;border:1px solid var(--line);}
+  .box.key{background:var(--teal-bg);border-color:#bfe0db;}
+  .box.warn{background:var(--amber-bg);border-color:#f0d6a8;}
+  .box.crit{background:var(--rust-bg);border-color:#f0c4bc;}
+  .box .t{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;}
+  .box.key .t{color:var(--teal);}
+  .box.warn .t{color:var(--amber);}
+  .box.crit .t{color:var(--rust);}
+
+  /* Tables */
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:12.2px;}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;}
+  th{background:var(--navy);color:#fff;font-weight:600;font-size:11.5px;}
+  tr:nth-child(even) td{background:#f7f9fb;}
+  td.c{text-align:center;}
+  .pill{display:inline-block;border-radius:20px;padding:1px 9px;font-size:11px;font-weight:700;}
+  .pill.d45{background:var(--hi45bg);color:var(--hi45);border:1px solid #bcd6ee;}
+  .pill.d50{background:var(--hi50bg);color:var(--hi50);border:1px solid #eec0b9;}
+  .pill.gtv{background:#fbe8e6;color:#a3271a;border:1px solid #eec0b9;}
+
+  /* Figure cards */
+  .fig{border:1px solid var(--line);border-radius:10px;padding:14px 16px 10px;margin:18px 0;background:#fff;}
+  .fig .cap{font-size:11.6px;color:var(--soft);margin-top:8px;}
+  .fig .cap b{color:var(--navy);}
+  .figttl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);font-weight:700;margin-bottom:8px;}
+  svg{display:block;width:100%;height:auto;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:9px 16px;margin:8px 0 2px;font-size:11.4px;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.25);}
+
+  .twocol{display:flex;gap:18px;}
+  .twocol>div{flex:1;}
+
+  .ref{font-size:11.6px;color:var(--soft);margin:5px 0;padding-left:22px;text-indent:-22px;}
+  .ref b{color:var(--navy);}
+  .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;background:var(--navy);color:#fff;border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:middle;}
+  .tag.new{background:var(--teal);}
+
+  .foot{margin-top:30px;border-top:1px solid var(--line);padding-top:12px;font-size:10.6px;color:#8a98a8;}
+
+  @media print{
+    .wrap{max-width:none;padding:0 14mm 14mm;}
+    .masthead{margin:0 0 6px;}
+    h2{break-after:avoid;}
+    .fig,.box,table{break-inside:avoid;}
+    .no-print{display:none;}
+    a{color:var(--ink);text-decoration:none;}
+  }
+  /* wide 6-direction border table */
+  table.borders{font-size:10.2px;}
+  table.borders th,table.borders td{padding:5px 6px;}
+  table.borders th{font-size:10px;}
+  table.borders td:first-child,table.borders th:first-child{background:#f0f4f8;}
+  table.borders td:first-child{font-weight:600;}
+  @page{size:A4;margin:14mm 0;}
+  @media print{ .borderswrap{break-inside:avoid;} }
+
+  /* ---- PWA install UI (screen only) ---- */
+  #installChip{
+    position:fixed;right:16px;bottom:16px;z-index:9999;display:none;
+    background:var(--teal);color:#fff;border:none;border-radius:24px;
+    padding:11px 18px;font-size:13.5px;font-weight:700;cursor:pointer;
+    box-shadow:0 4px 14px rgba(16,36,63,.28);font-family:inherit;
+  }
+  #installChip:hover{background:#0f5c54;}
+  #iosHint{
+    position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;display:none;
+    background:var(--navy);color:#eaf1f8;border-radius:12px;padding:12px 14px;
+    font-size:12.6px;line-height:1.45;box-shadow:0 6px 20px rgba(16,36,63,.32);
+  }
+  #iosHint b{color:#fff;}
+  #iosHint .x{float:right;color:#9fc7c1;cursor:pointer;font-weight:700;margin-left:10px;}
+  #iosHint .share{display:inline-block;width:15px;height:15px;vertical-align:-2px;}
+  @media print{ #installChip,#iosHint{display:none !important;} }
+</style>
+<style id="qr-mobile">@media (max-width:820px){table.borders{display:block;overflow-x:auto;max-width:100%}svg,img{max-width:100%;height:auto}}</style></head>
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gi-rectum-colon.html#planning" style="color:#9fe0d6;text-decoration:none">Rectum &amp; colon page</a><span style="opacity:.7;font-weight:400">Contouring atlas</span></div>
+<div class="masthead">
+<div class="eyebrow">Radiation Oncology · Lower Gastrointestinal</div>
+<h1>Rectal Carcinoma — Long-Course (Chemo)Radiotherapy<br/>Contouring &amp; Volume Delineation Atlas</h1>
+<p class="sub">A step-by-step CTV / GTV delineation protocol for definitive and neoadjuvant long-course rectal radiotherapy, with explicit high-dose (50–54 Gy) versus elective (45 Gy) volume rules, chemotherapy-response adaptation, and schematic atlas figures.</p>
+<div class="meta">Synthesises ESTRO/ESGAR consensus (Valentini 2016 · Chiloiro 2026), RAPIDO Appendix F, the Dutch/SAR nodal criteria and Lateral Node Consortium, and the rectal dose-escalation / organ-preservation trial literature. Clinical reference document — verify against your local protocol, planning system and MDT before use.</div>
+</div>
+<div class="wrap">
+<p class="lede">This atlas covers conventionally fractionated long-course treatment. Two dose levels are described throughout: an <span class="pill d45">45 Gy</span> elective nodal volume and a <span class="pill d50">50–54 Gy</span> high-dose volume covering gross disease, delivered either by sequential boost or simultaneous integrated boost (SIB). Dose <em>escalation</em> above 54 Gy (organ-preservation / watch-and-wait) is summarised separately in Step 7.</p>
+<!-- ================= STEP 0 ================= -->
+<h2><span class="num">0</span>Before you contour — imaging &amp; fusion</h2>
+<h3>Required source information</h3>
+<ul>
+<li><b>Pelvic MRI is mandatory</b> for defining gross disease and is the gold standard for primary staging and restaging. The minimum protocol is 2D T2-weighted sequences in three planes, with a high-resolution oblique-axial T2 angled <em>perpendicular</em> to the tumour axis (slice ≤3 mm), plus an axial high-b-value DWI (b≥800) read against the ADC map.</li>
+<li>For <b>distal tumours</b>, add a coronal sequence aligned to the anal canal to assess the tumour–sphincter relationship.</li>
+<li><b>Do not use endorectal filling / gel for the diagnostic MRI</b> — luminal distension distorts the tumour–mesorectal-fascia (MRF) distance and gel causes T2 shine-through on DWI. (A separate planning consideration: matching rectal/bladder filling between diagnostic MRI and CT-sim improves transfer of the GTV onto CT.)</li>
+<li><b>CT simulation:</b> supine or prone (belly board optional), comfortably full bladder, empty rectum, with a reproducible immobilisation. IV contrast helps define the iliac vessels that anchor the nodal CTV.</li>
+<li><b>FDG-PET/CT</b> is <em>not</em> routine — reserve it as a problem-solver for large/equivocal nodes; it does not define a biological target volume here.</li>
+</ul>
+<div class="box key">
+<div class="t">Fusion is the foundation</div>
+  Co-register the diagnostic MRI to the planning CT before contouring gross disease — a non-angulated T2 sequence registers most reliably. The GTV is read off MRI and transferred to CT; the elective CTV is then built on CT anatomy. Account for organ-motion mismatch between the two scans when judging the registration.
+</div>
+<h3>MRI sequences — what each is for</h3>
+<table>
+<tr><th>Sequence</th><th>Plane / setting</th><th>What it shows</th></tr>
+<tr><td><b>High-resolution T2 (oblique-axial)</b></td><td>Angled <em>perpendicular</em> to tumour axis, ≤3 mm</td><td>Workhorse for T-stage, mesorectal extent, MRF distance, and the GTV. Best soft-tissue contrast between tumour, wall layers and fat.</td></tr>
+<tr><td><b>T2 sagittal</b></td><td>Whole pelvis</td><td>Tumour height/length, relation to peritoneal reflection and anal verge; orients the oblique planning.</td></tr>
+<tr><td><b>T2 coronal</b></td><td>Aligned to anal canal (low tumours)</td><td>Tumour–sphincter / levator relationship; intersphincteric plane.</td></tr>
+<tr><td><b>DWI (high b ≥800) + ADC</b></td><td>Axial</td><td>Restricted diffusion in viable tumour — improves lesion conspicuity and, post-CRT, helps separate residual tumour from fibrosis. Read DWI <em>and</em> ADC together; do not call nodes on DWI alone.</td></tr>
+<tr><td><b>Large-FOV T2</b></td><td>Promontory → anal canal</td><td>Covers lateral compartments / all nodal stations for nodal mapping.</td></tr>
+<tr><td colspan="3"><em>Not routine:</em> fat-suppressed/contrast-enhanced T1 and DCE are not advised for delineation; endorectal filling is not used (distorts MRF distance, T2 shine-through on DWI).</td></tr>
+</table>
+<h3>Classical appearances — how to read them</h3>
+<table>
+<tr><th>Finding</th><th>Appearance</th></tr>
+<tr><td><b>Viable tumour</b></td><td><em>Intermediate</em> T2 signal (between low muscle and bright fat/mucosa), with restricted diffusion (bright on high-b DWI, dark on ADC).</td></tr>
+<tr><td><b>Muscularis propria</b></td><td>Low T2 signal; tumour breaching it into perirectal fat = T3.</td></tr>
+<tr><td><b>T3 extramural spread</b></td><td>Broad-based intermediate-signal tumour bulging beyond the low-signal muscle into fat. Measure depth from outer muscle edge.</td></tr>
+<tr><td><b>EMVI</b></td><td>Serpiginous intermediate tumour signal expanding a perirectal <em>vessel</em> contiguous with the tumour — a key adverse feature; trace into the mesorectum.</td></tr>
+<tr><td><b>MRF threat</b></td><td>Tumour, EMVI or node ≤1 mm from the thin low-signal mesorectal fascia. Flag the clock position.</td></tr>
+<tr><td><b>Mucinous tumour</b></td><td><em>Very high</em> T2 signal (like fluid) — can be mistaken for benign; tends to respond/regress less reliably.</td></tr>
+<tr><td><b>Suspicious node</b></td><td>Use morphology + size (Step 3): irregular border, heterogeneous/mixed signal, round shape — more predictive than size alone for mesorectal nodes.</td></tr>
+</table>
+<div class="fig">
+<div class="figttl">Figure 0 · T2 signal scale &amp; tumour layers</div>
+<svg aria-label="T2 signal intensity scale and rectal wall layers" role="img" viewbox="0 0 640 200">
+<!-- signal bar -->
+<defs><lineargradient id="t2" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0" stop-color="#1c2530"></stop><stop offset="0.5" stop-color="#9aa7b4"></stop><stop offset="1" stop-color="#f2f5f8"></stop>
+</lineargradient></defs>
+<rect fill="url(#t2)" height="26" rx="5" stroke="#c4cedb" width="560" x="40" y="30"></rect>
+<text fill="#5b6b7c" font-size="10.5" x="40" y="74">Low T2</text>
+<text fill="#5b6b7c" font-size="10.5" text-anchor="middle" x="320" y="74">Intermediate</text>
+<text fill="#5b6b7c" font-size="10.5" text-anchor="end" x="600" y="74">High T2</text>
+<!-- markers -->
+<g font-size="9.5" font-weight="700">
+<line stroke="#1c2530" stroke-width="1.6" x1="95" x2="95" y1="22" y2="56"></line><text fill="#1c2530" text-anchor="middle" x="95" y="16">muscularis</text>
+<line stroke="#14756b" stroke-width="1.6" x1="150" x2="150" y1="22" y2="56"></line><text fill="#14756b" text-anchor="middle" x="150" y="16">fibrosis*</text>
+<line stroke="#a3271a" stroke-width="1.6" x1="330" x2="330" y1="22" y2="56"></line><text fill="#a3271a" text-anchor="middle" x="330" y="16">viable tumour</text>
+<line stroke="#5b2a86" stroke-width="1.6" x1="560" x2="560" y1="22" y2="56"></line><text fill="#5b2a86" text-anchor="middle" x="560" y="16">mucin / fluid</text>
+</g>
+<!-- wall layer cartoon -->
+<g transform="translate(40,110)">
+<rect fill="#f2f5f8" height="22" stroke="#c4cedb" width="560" x="0" y="0"></rect><text fill="#5b6b7c" font-size="9" text-anchor="end" x="-4" y="16">lumen</text>
+<rect fill="#d7e7d2" height="14" width="560" x="0" y="22"></rect><text fill="#2f6b2a" font-size="9" x="566" y="33">mucosa/submucosa</text>
+<rect fill="#3b4654" height="16" width="560" x="0" y="36"></rect><text fill="#3b4654" font-size="9" x="566" y="48">muscularis (low T2)</text>
+<rect fill="#fbf2dd" height="22" width="560" x="0" y="52"></rect><text fill="#8a5510" font-size="9" x="566" y="67">perirectal fat</text>
+<!-- tumour breaching -->
+<path d="M180 22 L300 22 L320 52 L330 74 L210 74 L190 52 Z" fill="#e7867a" opacity="0.92" stroke="#a3271a" stroke-width="1.3"></path>
+<text fill="#5a160d" font-size="9.5" font-weight="700" text-anchor="middle" x="255" y="50">T3 tumour</text>
+</g>
+</svg>
+<div class="cap"><b>*Post-treatment fibrosis is low T2 signal</b>, approaching muscle — the basis for distinguishing it from intermediate-signal residual tumour after CRT (Step 6). Mucin is the brightest. Schematic only.</div>
+</div>
+<h3>Stage, locate, measure</h3>
+<p>From MRI + endoscopy record: distance of the lower tumour edge from the anal verge and anorectal junction; craniocaudal length; cT and cN; <b>MRF status</b> (involved if tumour ≤1 mm from fascia); EMVI; relation to the peritoneal reflection; and every suspicious node by <b>compartment, short-axis size and morphology</b> (criteria in Step 3).</p>
+<!-- ================= STEP 1 ================= -->
+<h2><span class="num">1</span>Compartment map — the seven elective subsites</h2>
+<p>The elective nodal CTV is assembled from a defined set of pelvic subsites. Whether each is included depends on tumour height, depth and MRF/nodal status. The mesorectum, presacral space and posterior lateral nodes are <b>always</b> included; the rest are conditional.</p>
+<div class="fig">
+<div class="figttl">Figure 1 · Axial pelvic compartments at risk</div>
+<svg aria-label="Axial schematic of pelvic nodal compartments" role="img" viewbox="0 0 640 360">
+<!-- body outline -->
+<ellipse cx="320" cy="195" fill="#f4f7fa" rx="278" ry="150" stroke="#c4cedb" stroke-width="2"></ellipse>
+<!-- sacrum posterior -->
+<path d="M150 300 Q320 360 490 300 L470 268 Q320 312 170 268 Z" fill="#e4e8ee" stroke="#b9c3d1" stroke-width="1.5"></path>
+<text fill="#5b6b7c" font-size="12" font-weight="600" text-anchor="middle" x="320" y="300">Sacrum</text>
+<!-- presacral space -->
+<path d="M196 250 Q320 286 444 250 L436 230 Q320 262 204 230 Z" fill="#d9c7e6" stroke="#a986c4" stroke-width="1.4"></path>
+<text fill="#5b2a86" font-size="11" font-weight="700" text-anchor="middle" x="320" y="250">Presacral (PS)</text>
+<!-- mesorectum -->
+<ellipse cx="320" cy="196" fill="#cfe7c9" rx="92" ry="74" stroke="#5fa45a" stroke-width="1.6"></ellipse>
+<text fill="#2f6b2a" font-size="11" font-weight="700" text-anchor="middle" x="320" y="150">Mesorectum (M)</text>
+<!-- rectum + tumour -->
+<ellipse cx="320" cy="205" fill="#fff" rx="40" ry="38" stroke="#7d8a99" stroke-width="1.4"></ellipse>
+<path d="M320 167 A40 38 0 0 1 356 196 L320 205 Z" fill="#e7867a" stroke="#a3271a" stroke-width="1.2"></path>
+<text fill="#5b6b7c" font-size="10" text-anchor="middle" x="320" y="212">rectal lumen</text>
+<text fill="#a3271a" font-size="9.5" font-weight="700" x="372" y="176">GTV</text>
+<!-- lateral / internal iliac L -->
+<ellipse cx="150" cy="170" fill="#cfe0f2" rx="40" ry="48" stroke="#3f78b4" stroke-width="1.5"></ellipse>
+<text fill="#1d4d80" font-size="10" font-weight="700" text-anchor="middle" x="150" y="167">Lateral /</text>
+<text fill="#1d4d80" font-size="10" font-weight="700" text-anchor="middle" x="150" y="181">int. iliac</text>
+<!-- lateral / internal iliac R -->
+<ellipse cx="490" cy="170" fill="#cfe0f2" rx="40" ry="48" stroke="#3f78b4" stroke-width="1.5"></ellipse>
+<text fill="#1d4d80" font-size="10" font-weight="700" text-anchor="middle" x="490" y="174">LLN</text>
+<!-- external iliac -->
+<ellipse cx="118" cy="96" fill="#fbe6cf" rx="34" ry="28" stroke="#cf8a3a" stroke-dasharray="5 4" stroke-width="1.4"></ellipse>
+<text fill="#8a5510" font-size="9.5" font-weight="700" text-anchor="middle" x="118" y="100">Ext iliac</text>
+<ellipse cx="522" cy="96" fill="#fbe6cf" rx="34" ry="28" stroke="#cf8a3a" stroke-dasharray="5 4" stroke-width="1.4"></ellipse>
+<text fill="#8a5510" font-size="9.5" font-weight="700" text-anchor="middle" x="522" y="100">EIN</text>
+<!-- bladder anterior -->
+<ellipse cx="320" cy="70" fill="#eef3f8" rx="70" ry="40" stroke="#9fb1c6" stroke-width="1.3"></ellipse>
+<text fill="#5b6b7c" font-size="11" text-anchor="middle" x="320" y="74">Bladder (anterior)</text>
+</svg>
+<div class="legend">
+<span><span class="sw" style="background:#cfe7c9"></span>Mesorectum — always</span>
+<span><span class="sw" style="background:#d9c7e6"></span>Presacral — always (pelvic)</span>
+<span><span class="sw" style="background:#cfe0f2"></span>Lateral / internal iliac — posterior always</span>
+<span><span class="sw" style="background:#fbe6cf;border-style:dashed"></span>External iliac — conditional (T4 anterior)</span>
+</div>
+<div class="cap"><b>Schematic only — not for direct transfer to a patient.</b> Subsites after Valentini 2016. The seven at-risk subsites are mesorectum (M), presacral (PS), lateral lymph nodes (LLN), external iliac (EIN), inguinal (IN), ischiorectal fossa (IRF) and sphincter complex (SC). Inguinal, IRF and SC (not shown) enter only for low/anal-canal or anterior-organ extension.</div>
+</div>
+<h3>Inclusion rules by subsite</h3>
+<table>
+<tr><th>Subsite</th><th>Include when…</th><th>Notes</th></tr>
+<tr><td><b>Mesorectum (M)</b></td><td class="c">Always</td><td>Distally, include node-bearing mesorectum to ~4 cm below gross disease. For low tumours this means the whole mesorectum to the pelvic floor; for high tumours the most distal mesorectum may be spared to limit sphincter dose.</td></tr>
+<tr><td><b>Presacral (PS) — pelvic</b></td><td class="c">Always</td><td>Thin space between rectum and sacrum. Cover the anterior sacral surface.</td></tr>
+<tr><td><b>Presacral (PS) — abdominal</b></td><td class="c">Only if positive nodes here</td><td>Cranial limit ~aortic bifurcation, but cover ≥5 mm above the most cranial involved node.</td></tr>
+<tr><td><b>Posterior lateral (LLN) / internal iliac</b></td><td class="c">Always</td><td>Cranial limit modulated by MRF/nodal status — see Step 2.</td></tr>
+<tr><td><b>Anterior lateral / obturator</b></td><td class="c">Tumour below peritoneal reflection or ≤8–10 cm from anal verge</td><td>Rarely involved in high tumours.</td></tr>
+<tr><td><b>External iliac (EIN)</b></td><td class="c">T4 invading bladder / prostate / cervix / vagina</td><td>"Napping"/minimal dorsal overgrowth is <em>not</em> sufficient.</td></tr>
+<tr><td><b>Inguinal (IN)</b></td><td class="c">Tumour into anal canal below dentate line, or lower vagina</td><td>Mirrors anal-cancer drainage.</td></tr>
+<tr><td><b>Ischiorectal fossa (IRF)</b></td><td class="c">Tumour into levators / anal canal</td><td>Implies rectal excision territory.</td></tr>
+<tr><td><b>Sphincter complex (SC)</b></td><td class="c">Low tumours involving / abutting the canal</td><td>Balance against continence-sparing.</td></tr>
+</table>
+<h3>Six-directional borders of each compartment</h3>
+<p>Borders below follow the ESTRO/Valentini consensus, cross-checked against the RTOG anorectal panel and JASTRO atlas. Where a border is anatomy-defined (vessel, fascia, muscle) prefer the soft-tissue landmark over bone. Items marked <em>flag</em> vary between guideline sets and should be confirmed against your departmental atlas.</p>
+<table class="borders">
+<tr><th>Compartment</th><th>Cranial</th><th>Caudal</th><th>Anterior</th><th>Posterior</th><th>Lateral</th><th>Medial</th></tr>
+<tr>
+<td><b>Mesorectum (M)</b></td>
+<td>Where the superior rectal artery enters / rectosigmoid junction (recto-sigmoid takeoff)</td>
+<td>Pelvic floor (levator/puborectalis sling); anorectal junction for high tumours where distal mesorectum spared</td>
+<td>Posterior bladder / seminal vesicles / vagina (mesorectal fascia)</td>
+<td>Anterior sacral / presacral space (mesorectal fascia)</td>
+<td class="c" colspan="2">Bounded circumferentially by the mesorectal fascia (the visceral fascia enveloping rectum + perirectal fat/nodes)</td>
+</tr>
+<tr>
+<td><b>Presacral (PS)</b></td>
+<td>Pelvic: sacral promontory / S1–S2. <em>Abdominal PS only if node here → aortic bifurcation, ≥5 mm above node (flag)</em></td>
+<td>Coccyx / caudal extent of mesorectum</td>
+<td>Mesorectal fascia / posterior mesorectum (≈1 cm strip)</td>
+<td>Anterior cortex of sacrum &amp; coccyx (abut, do not enter bone)</td>
+<td class="c" colspan="2">Sacro-iliac joints / merges laterally into the internal iliac region</td>
+</tr>
+<tr>
+<td><b>Posterior LLN /<br/>internal iliac</b></td>
+<td>Common iliac bifurcation (into int/ext iliac). <em>Lower to SRA bifurcation in cT3N0 MRF−; raise to ≥1 cm above a high involved node (flag)</em></td>
+<td>Level of the ischial spine / where the internal iliac vessels branch to the pelvic floor</td>
+<td>Coronal plane at the posterior aspect of the external iliac vessels (cranially) / anterior wall of ureter as it joins bladder</td>
+<td>Sacral ala / piriformis / sacral nerve roots</td>
+<td>Pelvic sidewall musculature (obturator internus, piriformis) — to bone where muscle absent</td>
+<td>Mesorectal fascia / ureter</td>
+</tr>
+<tr>
+<td><b>Anterior LLN /<br/>obturator</b><br/><span style="font-size:10.5px;color:#8a5510">only cT4 anterior, cN2, or +posterior LLN</span></td>
+<td>Where internal &amp; external iliac vessel contours begin (bifurcation)</td>
+<td>Upper margin of the obturator foramen / top of symphysis pubis (obturator vessels leave pelvis)</td>
+<td>Behind the external iliac vessels (posterior border of ext iliac vein)</td>
+<td>Internal iliac vessels / joins posterior LLN</td>
+<td>Obturator internus / medial aspect of ilium</td>
+<td>Bladder wall / a ~1 cm strip medial, avoiding bladder</td>
+</tr>
+<tr>
+<td><b>External iliac (EIN)</b><br/><span style="font-size:10.5px;color:#8a5510">only T4 anterior organ invasion</span></td>
+<td>Common iliac bifurcation</td>
+<td>Where deep circumflex iliac vein crosses the external iliac artery (→ becomes femoral / inguinal)</td>
+<td>≈7 mm anterior to external iliac vessels (anteromedial strip)</td>
+<td>Joins internal iliac / obturator posteriorly</td>
+<td>Iliopsoas muscle</td>
+<td>Bladder (avoid) — vessel-based 7 mm expansion</td>
+</tr>
+<tr>
+<td><b>Inguinal (IN)</b><br/><span style="font-size:10.5px;color:#8a5510">anal-canal / lower-vagina extension</span></td>
+<td>Where deep circumflex vein crosses external iliac artery (continuous with EIN)</td>
+<td>Bottom of femoral heads / ischial tuberosity (≈saphenofemoral junction level)</td>
+<td>Sartorius / anterior femoral vessels (≈1.5–2 cm on vessels)</td>
+<td>Iliopsoas / pectineus / femoral vessels</td>
+<td>Sartorius / medial edge of iliopsoas</td>
+<td>Adductor / pectineus muscles</td>
+</tr>
+<tr>
+<td><b>Ischiorectal fossa (IRF)</b><br/><span style="font-size:10.5px;color:#8a5510">levator / anal-canal involvement</span></td>
+<td>Where the inferior pudendal artery leaves the pelvis into Alcock's canal</td>
+<td>Inferior level of the sphincter complex</td>
+<td>Transverse perineal muscles / posterior vagina or urethra</td>
+<td>Gluteus maximus / oblique plane to ischial tuberosity</td>
+<td>Obturator internus &amp; its fascia / ischial tuberosity</td>
+<td>External anal sphincter / levator ani</td>
+</tr>
+<tr>
+<td><b>Sphincter complex (SC)</b><br/><span style="font-size:10.5px;color:#8a5510">low tumours abutting canal</span></td>
+<td>Anorectal junction (puborectalis sling)</td>
+<td>Anal verge (inferior end of external sphincter)</td>
+<td class="c" colspan="2">Encloses the anal canal: internal sphincter (inner) + external sphincter (outer) with intersphincteric plane</td>
+<td class="c" colspan="2">External anal sphincter / ischioanal fat interface circumferentially</td>
+</tr>
+</table>
+<div class="box warn">
+<div class="t">Landmark quick-reference</div>
+<b>Cranial anchors:</b> SRA bifurcation (low-risk top) · common iliac bifurcation ≈ L5/S1 (standard nodal top) · aortic bifurcation (abdominal PS if node). <b>Compartment "hand-off" points:</b> ext-iliac → inguinal at the deep circumflex iliac vein crossing; internal-iliac ↔ obturator split at the posterior border of the external iliac vessels; IRF top at the pudendal vessel entering Alcock's canal. Prefer vessel/fascia/muscle landmarks; use bone only where soft tissue is absent.
+</div>
+<!-- ================= STEP 2 ================= -->
+<h2><span class="num">2</span>Cranial &amp; caudal borders of the elective CTV</h2>
+<div class="fig">
+<div class="figttl">Figure 2 · Sagittal craniocaudal ladder</div>
+<svg aria-label="Sagittal craniocaudal border ladder" role="img" viewbox="0 0 640 380">
+<!-- vertebral ladder -->
+<g fill="#5b6b7c" font-size="10.5">
+<rect fill="#eef2f6" height="34" rx="5" stroke="#c4cedb" width="70" x="70" y="30"></rect><text text-anchor="middle" x="105" y="51">L5</text>
+<rect fill="#eef2f6" height="34" rx="5" stroke="#c4cedb" width="70" x="70" y="68"></rect><text text-anchor="middle" x="105" y="89">S1</text>
+<rect fill="#eef2f6" height="34" rx="5" stroke="#c4cedb" width="70" x="70" y="106"></rect><text text-anchor="middle" x="105" y="127">S2</text>
+<rect fill="#eef2f6" height="34" rx="5" stroke="#c4cedb" width="70" x="70" y="144"></rect><text text-anchor="middle" x="105" y="165">S3</text>
+<rect fill="#eef2f6" height="34" rx="5" stroke="#c4cedb" width="70" x="70" y="182"></rect><text text-anchor="middle" x="105" y="203">S4–5</text>
+<rect fill="#e4e8ee" height="50" rx="5" stroke="#b9c3d1" width="70" x="70" y="220"></rect><text text-anchor="middle" x="105" y="249">coccyx /</text>
+<rect fill="#e4e8ee" height="46" rx="5" stroke="#b9c3d1" width="70" x="70" y="270"></rect><text text-anchor="middle" x="105" y="296">pelvic floor</text>
+</g>
+<!-- standard cranial border -->
+<line stroke="#2f6fb0" stroke-width="2.4" x1="150" x2="560" y1="85" y2="85"></line>
+<text fill="#1d4d80" font-size="11" font-weight="700" text-anchor="end" x="560" y="81">Standard cranial CTV ≈ S1–S2 / SRA bifurcation</text>
+<!-- nodal-driven extension -->
+<line stroke="#8a2f23" stroke-dasharray="7 4" stroke-width="2.4" x1="150" x2="560" y1="44" y2="44"></line>
+<text fill="#8a2f23" font-size="11" font-weight="700" text-anchor="end" x="560" y="40">If high presacral / internal-iliac node → ≥1 cm above it</text>
+<!-- arrow showing modulation -->
+<path d="M175 83 L175 47" marker-end="url(#arr)" stroke="#8a2f23" stroke-width="1.6"></path>
+<defs><marker id="arr" markerheight="9" markerwidth="9" orient="auto" refx="5" refy="4"><path d="M0 0 L9 4 L0 8 Z" fill="#8a2f23"></path></marker></defs>
+<!-- caudal high tumour -->
+<line stroke="#14756b" stroke-width="2.2" x1="150" x2="430" y1="150" y2="150"></line>
+<text fill="#14756b" font-size="10.5" font-weight="700" x="436" y="154">High tumour: spare distal mesorectum</text>
+<!-- caudal low tumour -->
+<line stroke="#14756b" stroke-width="2.2" x1="150" x2="430" y1="296" y2="296"></line>
+<text fill="#14756b" font-size="10.5" font-weight="700" x="436" y="300">Low tumour: mesorectum to pelvic floor (± SC)</text>
+</svg>
+<div class="cap"><b>Cranial border is nodal-status driven.</b> The default elective top sits around S1–S2 / the superior rectal artery (SRA) bifurcation; it is raised to ≥1 cm above the most cranial pathological presacral or internal-iliac node. Caudal extent depends on tumour height and canal involvement.</div>
+</div>
+<h3>Practical border rules</h3>
+<ul>
+<li><b>Cranial (default):</b> bifurcation of the superior rectal artery for cT3N0 / MRF-negative; otherwise the common-/internal-iliac bifurcation level (typically S1–S2, occasionally above L5–S1). Local recurrence above S1–S2 is unusual, so do not routinely extend higher <em>unless</em> nodal disease drives it.</li>
+<li><b>Cranial (nodal-driven):</b> if a pathological presacral or internal-iliac node sits high, carry the relevant compartment to <b>≥1 cm above the most cranial involved node</b> (≥5 mm specifically quoted for abdominal presacral nodes). <em>This is the key modification for a high tumour with high mesorectal/presacral nodes.</em></li>
+<li><b>Caudal:</b> include node-bearing mesorectum to ~4 cm below gross disease. Whole mesorectum to the pelvic floor for low tumours; spare the most distal mesorectum/sphincters for high tumours.</li>
+<li><b>Lateral:</b> internal-iliac chain to just below the internal/external iliac bifurcation; obturator added for sub-peritoneal-reflection / ≤8–10 cm tumours.</li>
+<li><b>Posterior:</b> abut — do not carve into — the anterior sacral cortex; QA programmes repeatedly flag erroneous editing of the elective CTV away from sacrum/OARs.</li>
+</ul>
+<!-- ================= STEP 3 ================= -->
+<h2><span class="num">3</span>Gross tumour volume — GTVp and GTVn</h2>
+<p>GTV is read primarily from MRI. It comprises the primary tumour (<b>GTVp</b>) and, where relevant, pathological nodes (<b>GTVn</b>) and tumour deposits. Structure naming follows ICRU / AAPM TG-263.</p>
+<h3>GTVp</h3>
+<ul>
+<li>All macroscopic primary tumour on T2 MRI (high T2 signal), correlated with DWI and endoscopy/EUA. Transfer to CT via fusion.</li>
+<li>Mucinous tumours: persistent/expanding pure-mucin pools are not necessarily viable tumour — judge on serial imaging.</li>
+</ul>
+<h3>GTVn — which nodes count (Dutch / ESGAR criteria)</h3>
+<table>
+<tr><th>Node group</th><th>Treat as positive (GTVn) when…</th></tr>
+<tr><td><b>Mesorectal / superior rectal / IMA</b></td><td>Short axis ≥9 mm; <em>or</em> 5–8 mm with ≥2 suspicious features; <em>or</em> &lt;5 mm with ≥3 features; <em>or</em> any size if mucinous. Features = irregular border, heterogeneous signal, round shape.</td></tr>
+<tr><td><b>Lateral pelvic (internal iliac / obturator)</b></td><td>Lateral Node Consortium emphasises <em>size</em>: short axis ≥7 mm in cT3/4 tumours &lt;8 cm from the verge carries increased post-CRT lateral recurrence risk. Report all visible lateral nodes with location + short axis.</td></tr>
+</table>
+<div class="box warn">
+<div class="t">DWI / DCE and PET for nodes</div>
+  Do not rely on DWI or DCE-MRI to <em>call</em> nodes positive — DWI highlights benign and malignant nodes alike and quantitative ADC has limited discrimination. FDG-PET/CT is a problem-solver for large/equivocal nodes only.
+</div>
+<!-- ================= STEP 4 ================= -->
+<h2><span class="num">4</span>From GTV to high-dose CTV (50–54 Gy)</h2>
+<p>The high-dose volume covers gross disease plus a margin for microscopic spread. There is no single universally-agreed GTV→CTV margin in the dose-escalation literature (reported 0–2 cm); the operational consensus is a directional, compartment-respecting expansion rather than a uniform ball.</p>
+<table>
+<tr><th>Volume</th><th>Construction</th><th>Dose</th></tr>
+<tr>
+<td><span class="pill gtv">GTVp / GTVn</span></td>
+<td>Macroscopic primary + pathological nodes (MRI-defined).</td>
+<td class="c">—</td>
+</tr>
+<tr>
+<td><b>CTV high-dose<br/>(CTV<sub>boost</sub>)</b></td>
+<td>
+<b>RAPIDO-style construction:</b> GTV + <b>2 cm</b> within the same anatomical compartment (the 2 cm is added chiefly cranio-caudally), including around radiologically involved nodes. If the tumour is entirely within the mesorectum with no threatened MRF, the 2 cm need <em>not</em> cross the fascia. If the tumour invades sacrum/bladder, the 2 cm applies within that organ.
+      <br/><br/><b>Nodal high-dose (CTVn):</b> a margin of ~<b>0.5 cm</b> from GTVn may be used (ESTRO 2026).
+      <br/><br/>Many groups additionally include the <b>whole rectal wall on involved slices</b>, and some include the entire mesorectum as the CTVp.
+    </td>
+<td class="c"><span class="pill d50">50–54 Gy</span></td>
+</tr>
+<tr>
+<td><b>CTV elective<br/>(CTV<sub>45</sub>)</b></td>
+<td>The compartments selected in Steps 1–2 (mesorectum, presacral, posterior LLN/internal iliac ± obturator/EIN/IN/IRF/SC), with cranial/caudal borders as above.</td>
+<td class="c"><span class="pill d45">45 Gy</span></td>
+</tr>
+</table>
+<h3>What goes in 45 Gy vs 50–54 Gy — at a glance</h3>
+<table>
+<tr><th>Structure</th><th class="c"><span class="pill d45">45 Gy elective</span></th><th class="c"><span class="pill d50">50–54 Gy high-dose</span></th></tr>
+<tr><td>GTV primary + 2 cm compartmental margin</td><td class="c">✓ (within elective)</td><td class="c"><b>✓</b></td></tr>
+<tr><td>Pathological nodes (GTVn) + ~0.5 cm</td><td class="c">✓</td><td class="c"><b>✓</b></td></tr>
+<tr><td>Rectal wall on involved slices</td><td class="c">✓</td><td class="c"><b>✓</b></td></tr>
+<tr><td>Whole mesorectum (uninvolved portion)</td><td class="c"><b>✓</b></td><td class="c">—</td></tr>
+<tr><td>Presacral space (pelvic)</td><td class="c"><b>✓</b></td><td class="c">only if PS node</td></tr>
+<tr><td>Posterior LLN / internal iliac chain</td><td class="c"><b>✓</b></td><td class="c">only involved node + margin</td></tr>
+<tr><td>Obturator / external iliac / inguinal (if indicated)</td><td class="c"><b>✓</b></td><td class="c">only involved node + margin</td></tr>
+</table>
+<div class="box key">
+<div class="t">Sequential vs SIB</div>
+  Both are acceptable; there is no strict guidance. <b>SIB is preferred for dose escalation</b> and spares most OARs in dosimetric comparison, while <b>sequential boost</b> better facilitates mid-treatment adaptive replanning. A typical SIB delivers 45 Gy/25 to the elective PTV with a simultaneous 50–54 Gy to the boost PTV; a typical sequential schedule gives 45 Gy/25 then a 5.4–9 Gy boost (RAPIDO permits 1.8–2 Gy × 2–4).
+</div>
+<div class="fig">
+<div class="figttl">Figure 3 · Nested target concept (axial)</div>
+<svg aria-label="Nested CTV concept" role="img" viewbox="0 0 640 300">
+<ellipse cx="250" cy="150" fill="#e9f1f9" rx="200" ry="120" stroke="#2f6fb0" stroke-width="2"></ellipse>
+<text fill="#1d4d80" font-size="12" font-weight="700" text-anchor="middle" x="250" y="55">CTV 45 Gy — elective compartments</text>
+<ellipse cx="250" cy="160" fill="#fceae7" rx="120" ry="80" stroke="#b03a2e" stroke-width="2"></ellipse>
+<text fill="#8a2f23" font-size="12" font-weight="700" text-anchor="middle" x="250" y="120">CTV 50–54 Gy</text>
+<text fill="#8a2f23" font-size="10.5" text-anchor="middle" x="250" y="135">GTV + 2 cm (compartmental)</text>
+<ellipse cx="250" cy="175" fill="#e7867a" rx="52" ry="40" stroke="#a3271a" stroke-width="2"></ellipse>
+<text fill="#5a160d" font-size="12" font-weight="700" text-anchor="middle" x="250" y="180">GTV</text>
+<!-- PTV note -->
+<line marker-end="url(#arr2)" stroke="#5b6b7c" stroke-width="1.4" x1="455" x2="520" y1="150" y2="150"></line>
+<defs><marker id="arr2" markerheight="9" markerwidth="9" orient="auto" refx="5" refy="4"><path d="M0 0 L9 4 L0 8 Z" fill="#5b6b7c"></path></marker></defs>
+<text fill="#5b6b7c" font-size="10.5" font-weight="700" x="528" y="140">+ PTV margin</text>
+<text fill="#5b6b7c" font-size="10" x="528" y="155">5–10 mm (local</text>
+<text fill="#5b6b7c" font-size="10" x="528" y="168">protocol / IGRT)</text>
+</svg>
+<div class="cap">Each CTV is grown to its own PTV by the institutional setup/internal-motion margin (commonly 5–10 mm; tighter with daily IGRT/online correction). The 2 cm boost margin is predominantly cranio-caudal and stays within the involved compartment.</div>
+</div>
+<!-- ================= STEP 5 ================= -->
+<h2><span class="num">5</span>PTV, OARs &amp; verification</h2>
+<div class="twocol">
+<div>
+<h4>PTV</h4>
+<ul>
+<li>CTV → PTV by local setup + internal-motion margin, typically <b>5–10 mm</b>.</li>
+<li>Generate <b>PTV<sub>45</sub></b> and <b>PTV<sub>50–54</sub></b> separately (SIB) or sequentially.</li>
+<li>Rectal/bladder filling is the dominant internal-motion source — standardise it.</li>
+</ul>
+</div>
+<div>
+<h4>Organs at risk</h4>
+<ul>
+<li>Small &amp; large bowel / bowel bag, bladder, femoral heads, anal sphincter/canal, external genitalia, cauda equina, pelvic bone marrow.</li>
+<li>For escalation, anal canal and uninvolved rectal wall become priority OARs.</li>
+</ul>
+</div>
+</div>
+<h4>Verification</h4>
+<ul>
+<li>Daily IGRT (CBCT). RAPIDO specifies imaging ≥2× in week 1 then weekly for long-course; online correction strongly recommended where available.</li>
+<li>Acceptable residual error must fit your chosen CTV→PTV margin.</li>
+</ul>
+<!-- ================= STEP 6 ================= -->
+<h2><span class="num">6</span>Modifying for chemotherapy response</h2>
+<p>Tumour shrinks fast and early under (chemo)radiation — ~26%/week initially, slowing later; residual volume ~46% at end of CRT and ~32% at surgery. This kinetics has two distinct implications depending on whether chemo is <em>concurrent</em> or given as <em>induction before</em> RT.</p>
+<table>
+<tr><th>Scenario</th><th>How to define gross volumes</th></tr>
+<tr>
+<td><b>Concurrent chemo-RT</b><br/>(standard long-course)</td>
+<td>Plan on the <b>pre-treatment (baseline) extent</b>. Do not shrink the GTV/boost to interim appearance — regression occurs <em>during</em> the same course and microscopic disease persists in the regressed bed. Elective compartments are anatomical and unchanged by response.</td>
+</tr>
+<tr>
+<td><b>Induction (neoadjuvant) chemo, then RT</b><br/>(TNT induction arm)</td>
+<td>Contour the boost on the <b>baseline pre-chemotherapy</b> gross extent and location, fused with the planning CT — analogous to head-and-neck induction practice (pre-induction GTV defines the target; the post-induction volume only re-shapes the contour if a dramatic response leaves the original volume in air/outside the body). Elective CTV stays defined by the <em>baseline</em> stage/nodal map: nodes that were high or borderline at diagnosis still drive the cranial border even if they have regressed.</td>
+</tr>
+<tr>
+<td><b>Consolidation chemo after CRT</b></td>
+<td>Does not change RT volumes (delivered after RT). Relevant only to restaging/response assessment for organ preservation.</td>
+</tr>
+<tr>
+<td><b>Adaptive / response-guided escalation</b></td>
+<td>Interim MRI (≈10th fraction, or BED<sub>α/β=5</sub>≈25 Gy / end of week 2) can stratify responders and trigger an adaptive boost in poor responders. If you adapt, escalate <em>onto residual disease</em> while keeping elective coverage at baseline extent.</td>
+</tr>
+</table>
+<h3>Post-chemo MRI — how the picture changes</h3>
+<p>Always read the restaging MRI <b>side-by-side with baseline</b>, on the same sequences. The central task is separating <em>residual viable tumour</em> from <em>treatment fibrosis</em>.</p>
+<table>
+<tr><th>Structure</th><th>Baseline</th><th>After CRT — classical change</th></tr>
+<tr>
+<td><b>Primary tumour</b></td>
+<td>Intermediate T2, restricted diffusion (DWI bright / ADC dark).</td>
+<td><b>Fibrosis = low T2 signal</b> (dark, like muscle), no diffusion restriction. <b>Residual tumour = persistent intermediate T2</b> signal within/through the fibrosis, often with focal DWI restriction. ymrT is scored on the residual intermediate-signal component.</td>
+</tr>
+<tr>
+<td><b>mrTRG pattern</b></td>
+<td>—</td>
+<td>Graded like pathological TRG: TRG1 = near-complete low-signal fibrosis / normalised wall (best); through to TRG5 = no signal change (worst). Predominantly dark, layered wall = good response.</td>
+</tr>
+<tr>
+<td><b>Mucinous tumour</b></td>
+<td>Very high T2 (fluid-like).</td>
+<td><em>Caveat:</em> persistent or even enlarging pure-mucin pools (acellular mucin) are <b>not</b> necessarily viable tumour — do not over-call progression. Judge on serial change and any solid/restricting nodule within the mucin.</td>
+</tr>
+<tr>
+<td><b>Nodes</b></td>
+<td>Sized + morphology criteria (Step 3).</td>
+<td>Re-measure short axis. Mesorectal nodes that shrink and lose malignant features down-stage; nodes with persistent malignant morphology and short axis ≥5 mm are still considered involved. Lateral nodes regress <em>less</em> reliably than mesorectal — persistent lateral nodes are clinically important.</td>
+</tr>
+<tr>
+<td><b>cCR / near-CR</b></td>
+<td>—</td>
+<td>No visible tumour on T2 with restored normal wall layers, <em>or</em> only thin residual fibrosis confined to the wall, <b>and</b> no suspicious DWI restriction (plus normalised mucosa on endoscopy). Drives watch-and-wait decisions.</td>
+</tr>
+</table>
+<div class="box warn">
+<div class="t">DWI pitfalls after CRT</div>
+  Post-treatment inflammation and the anal canal/normal wall can show bright DWI — always correlate DWI with the T2 morphology and the ADC map, and against baseline. Use DWI to <em>find</em> residual disease, not to define its border in isolation.
+</div>
+<div class="fig">
+<div class="figttl">Figure 4 · Tumour vs fibrosis after CRT (axial T2)</div>
+<svg aria-label="Pre and post CRT T2 appearance" role="img" viewbox="0 0 640 220">
+<!-- pre -->
+<g transform="translate(20,20)">
+<text fill="#10243f" font-size="11" font-weight="700" text-anchor="middle" x="140" y="-2">Baseline</text>
+<ellipse cx="140" cy="95" fill="#fbf2dd" rx="120" ry="80" stroke="#c4cedb" stroke-width="1.5"></ellipse>
+<ellipse cx="140" cy="100" fill="#fff" rx="55" ry="50" stroke="#3b4654" stroke-width="3"></ellipse>
+<path d="M140 50 A55 50 0 0 1 195 100 L140 100 Z" fill="#e7867a" stroke="#a3271a" stroke-width="1.4"></path>
+<text fill="#5a160d" font-size="9.5" font-weight="700" x="172" y="70">tumour</text>
+<text fill="#a3271a" font-size="9.5" text-anchor="middle" x="140" y="180">intermediate T2 · DWI+</text>
+</g>
+<!-- arrow -->
+<line marker-end="url(#arr3)" stroke="#5b6b7c" stroke-width="1.6" x1="290" x2="345" y1="115" y2="115"></line>
+<defs><marker id="arr3" markerheight="9" markerwidth="9" orient="auto" refx="5" refy="4"><path d="M0 0 L9 4 L0 8 Z" fill="#5b6b7c"></path></marker></defs>
+<text fill="#5b6b7c" font-size="9" text-anchor="middle" x="317" y="105">CRT</text>
+<!-- post -->
+<g transform="translate(360,20)">
+<text fill="#10243f" font-size="11" font-weight="700" text-anchor="middle" x="140" y="-2">Post-CRT</text>
+<ellipse cx="140" cy="95" fill="#fbf2dd" rx="120" ry="80" stroke="#c4cedb" stroke-width="1.5"></ellipse>
+<ellipse cx="140" cy="100" fill="#fff" rx="55" ry="50" stroke="#3b4654" stroke-width="3"></ellipse>
+<!-- fibrosis -->
+<path d="M140 50 A55 50 0 0 1 195 100 L140 100 Z" fill="#46535f" opacity="0.85" stroke="#2b343d" stroke-width="1.2"></path>
+<!-- focal residual tumour -->
+<circle cx="170" cy="78" fill="#e7867a" r="9" stroke="#a3271a" stroke-width="1.2"></circle>
+<text fill="#46535f" font-size="9.5" font-weight="700" text-anchor="middle" x="140" y="172">low-T2 fibrosis</text>
+<text fill="#a3271a" font-size="9" text-anchor="middle" x="140" y="186">+ focal residual (intermediate, DWI+)</text>
+</g>
+</svg>
+<div class="cap">Good response = the intermediate-signal tumour is replaced by <b>dark, low-T2 fibrosis</b>. Any nodule of persistent intermediate signal with diffusion restriction within that fibrosis is treated as residual tumour for ymrT scoring and (if escalating/adapting) for the residual-disease target. Schematic only.</div>
+</div>
+<div class="box crit">
+<div class="t">Core principle</div>
+  Chemotherapy response re-shapes the <b>boost/GTV</b> conversation, never the <b>elective compartments</b>. The 45 Gy elective CTV is anatomy- and baseline-stage-driven and is not down-sized because a tumour or node regressed. When in doubt, anchor gross volumes to the <em>maximal pre-treatment extent</em>.
+</div>
+<!-- ================= STEP 7 ================= -->
+<h2><span class="num">7</span>Dose escalation &gt;54 Gy (organ preservation)</h2>
+<p>Distinct from the 50–54 Gy boost above. ESTRO 2026 defines escalation as <b>any dose &gt;54 Gy</b>, indicated chiefly for <b>mid–low rectal tumours near the verge</b> where surgery means a stoma, and for <b>comorbid/unfit patients pursuing watch-and-wait</b>.</p>
+<ul>
+<li>Dose–response: ~50–60+ Gy (EQD2) needed for meaningful complete-response rates; reported cCR up to ~78% with high-dose schedules.</li>
+<li>For tumours <b>within 6 cm of the verge</b>, consider 60–62 Gy via endoluminal <b>contact X-ray brachytherapy (CXB)</b> or <b>HDR endorectal brachytherapy</b>, or <b>MR-guided adaptive RT</b> — expertise/equipment dependent.</li>
+<li>ESMO 2025 recognises endorectal brachytherapy after standard CRT as a validated escalation strategy in selected early cT2–cT3 tumours &lt;5 cm pursuing non-operative management.</li>
+<li><b>Nodal</b> dose escalation has <em>no</em> consensus and no prospective support — boost the primary, not the nodes, outside a trial.</li>
+</ul>
+<!-- ================= ATLAS / RESOURCES ================= -->
+<h2><span class="num">8</span>Atlas &amp; external reference images</h2>
+<p>The schematics here are deliberately stylised to teach the rules, not to be copied onto a patient. For slice-by-slice CT/MRI atlas images, use these openly accessible, peer-reviewed resources:</p>
+<ul>
+<li><b>ESTRO FALCON / EduCase</b> — the official consensus delineation atlases for both the Valentini elective-CTV cases and the new Chiloiro 2026 GTV/dose-escalation cases (three worked cases with ground-truth contours). <code>estro.educase.com</code></li>
+<li><b>Valentini 2016 — open-access full text &amp; figures</b> (axial border figures Fig. 1–4): <em>Radiotherapy &amp; Oncology</em> 120:195–201, available via the green-journal site.</li>
+<li><b>Chiloiro 2026 — open-access (CC BY-NC-ND)</b> with the three FALCON cases as supplementary material: <em>Clin Transl Radiat Oncol</em> 58:101131.</li>
+<li><b>eContour</b> — interactive rectal contouring cases with expert commentary.</li>
+<li><b>Radiopaedia</b> — pelvic nodal station and mesorectal-fascia reference anatomy.</li>
+<li><b>SAR Rectal Cancer Lexicon 2023</b> — standardised nodal/compartment terminology for MDT and contouring concordance.</li>
+</ul>
+<div class="box key">
+<div class="t">Quick build sequence</div>
+  (1) Fuse MRI→CT · (2) contour GTVp + GTVn on MRI/CT · (3) decide compartments (Step 1) · (4) set cranial border by nodal status (Step 2) · (5) grow CTV<sub>50–54</sub> = GTV+2 cm compartmental, CTV<sub>45</sub> = elective compartments · (6) PTVs by margin · (7) anchor everything to baseline extent if chemo given.
+</div>
+<!-- ================= REFERENCES ================= -->
+<h2><span class="num">9</span>Supporting articles</h2>
+<h4>Core delineation consensus</h4>
+<p class="ref"><span class="tag new">key</span><b>Chiloiro G, Romano A, Beets-Tan R, et al.</b> ESTRO consensus guidelines on GTV delineation and dose-escalation in rectal cancer. <i>Clin Transl Radiat Oncol</i> 2026;58:101131. doi:10.1016/j.ctro.2026.101131.</p>
+<p class="ref"><span class="tag">key</span><b>Valentini V, Gambacorta MA, Barbaro B, et al.</b> International consensus guidelines on Clinical Target Volume delineation in rectal cancer. <i>Radiother Oncol</i> 2016;120:195–201. doi:10.1016/j.radonc.2016.07.017.</p>
+<p class="ref"><b>Roels S, Duthoy W, Haustermans K, et al.</b> Definition and delineation of the clinical target volume for rectal cancer. <i>Int J Radiat Oncol Biol Phys</i> 2006;65:1129–42.</p>
+<h4>Trial radiotherapy protocols (boost / cranial-border rules)</h4>
+<p class="ref"><b>Bahadoer RR, Dijkstra EA, van Etten B, et al. (RAPIDO).</b> Short-course RT followed by chemotherapy before TME vs chemoradiotherapy in high-risk rectal cancer. <i>Lancet Oncol</i> 2021;22:29–42 (Appendix F radiotherapy protocol).</p>
+<p class="ref"><b>Gerard JP, Barbet N, Schiappa R, et al. (OPERA).</b> Neoadjuvant CRT with CXB or EBRT boost for organ preservation in early cT2–cT3 rectal cancer: phase 3 RCT. <i>Lancet Gastroenterol Hepatol</i> 2023;8:356–67.</p>
+<p class="ref"><b>Couwenberg AM, Burbach JPM, Berbee M, et al. (RECTAL-BOOST).</b> Dose-escalated chemoradiation on complete tumour response: phase 2 RCT. <i>Int J Radiat Oncol Biol Phys</i> 2020;108:1008–18.</p>
+<p class="ref"><b>Garant A, Vasilevsky CA, Boutros M, et al. (MORPHEUS).</b> HDR endorectal boost — phase II–III interim analysis. <i>Cancers</i> 2022;14:3665.</p>
+<p class="ref"><b>Valentini V, Gambacorta MA, Cellini F, et al. (INTERACT).</b> Preoperative capecitabine-based RCT intensified by concomitant boost or oxaliplatin. <i>Radiother Oncol</i> 2019;134:110–18.</p>
+<h4>Imaging &amp; nodal criteria</h4>
+<p class="ref"><b>Beets-Tan RGH, Lambregts DMJ, Maas M, et al.</b> MRI for clinical management of rectal cancer: updated ESGAR 2016 consensus. <i>Eur Radiol</i> 2018;28:1465–75.</p>
+<p class="ref"><b>Sluckin TC, Couwenberg AM, Lambregts DMJ, et al. (Lateral Node Consortium).</b> Lateral lymph nodes in rectal cancer: multidisciplinary obstacles and recommendations. <i>Clin Colorectal Cancer</i> 2022;21:80–8.</p>
+<p class="ref"><b>Lee S, Kassam Z, Baheti AD, et al.</b> Rectal cancer lexicon 2023 — SAR Colorectal &amp; Anal Cancer DFP consensus. <i>Abdom Radiol</i> 2023;48:2792–806.</p>
+<p class="ref"><b>Patel UB, Taylor F, Blomqvist L, et al.</b> Magnetic resonance imaging-detected tumor response for advanced rectal cancer (mrTRG) — MERCURY experience. <i>J Clin Oncol</i> 2011;29:3753–60.</p>
+<p class="ref"><b>Lambregts DMJ, Vandecaveye V, et al.</b> Value of DWI-MRI for prediction and assessment of response to neoadjuvant CRT in rectal cancer. <i>Int J Radiat Oncol Biol Phys</i> 2012;82:863–70.</p>
+<h4>Dose–response, regression kinetics &amp; escalation</h4>
+<p class="ref"><b>Appelt AL, Pløen J, Vogelius IR, et al.</b> Radiation dose–response model for LARC after preoperative CRT. <i>Int J Radiat Oncol Biol Phys</i> 2013;85:74–80.</p>
+<p class="ref"><b>Appelt AL, Pløen J, Harling H, et al.</b> High-dose CRT and watchful waiting for distal rectal cancer. <i>Lancet Oncol</i> 2015;16:919–27.</p>
+<p class="ref"><b>Van den Begin R, Kleijnen JP, Engels B, et al.</b> Tumour volume regression during preoperative CRT: weekly MRI. <i>Acta Oncol</i> 2018;57:723–7.</p>
+<p class="ref"><b>Burbach JPM, den Harder AM, Intven M, et al.</b> Impact of RT boost on pCR in LARC: systematic review/meta-analysis. <i>Radiother Oncol</i> 2014;113:1–9.</p>
+<p class="ref"><b>Hearn N, Atwell D, Cahill K, et al.</b> Neoadjuvant RT dose escalation in LARC: systematic review &amp; meta-analysis. <i>Clin Oncol (R Coll Radiol)</i> 2021;33:e1–e14.</p>
+<p class="ref"><b>Chiloiro G, Cusumano D, Boldrini L, et al. (THUNDER 2).</b> MR-guided adaptive dose-escalation up to 60.1 Gy — phase II interim. <i>Radiat Oncol</i> 2023;18:163.</p>
+<h4>Guideline context &amp; nomenclature</h4>
+<p class="ref"><b>Hofheinz RD, Fokas E, Benhaim L, et al.</b> Localised rectal cancer: ESMO Clinical Practice Guideline. <i>Ann Oncol</i> 2025;36:1007–24.</p>
+<p class="ref"><b>Mayo CS, Moran JM, Bosch W, et al.</b> AAPM TG-263: standardising nomenclatures in radiation oncology. <i>Int J Radiat Oncol Biol Phys</i> 2018;100:1057–66.</p>
+<div class="foot">
+  Compiled as a clinical aide-memoire from the cited consensus guidelines and trial protocols. Schematic figures are original, stylised teaching diagrams and must not be transferred to a patient dataset. Dose levels, margins and OAR priorities must be reconciled with your departmental protocol, planning system constraints and MDT decision before clinical use. Generated for personal reference.
+</div>
+</div>
+<!-- PWA install affordances (screen only) -->
+
+
+
+</body>
+</html>

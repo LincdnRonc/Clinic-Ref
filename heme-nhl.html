@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Non-Hodgkin lymphoma Quick Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#heme">Haematology</a> › <span>Non-Hodgkin lymphoma</span></nav>
+    <div class="title-row">
+      <h1>Non-Hodgkin lymphoma <span>Quick Reference</span></h1>
+      <div class="meta">Synthesised Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
+      <input id="q" type="search" placeholder="Search this page: trial, dose, drug" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<main id="main">
+<nav class="sitenav" aria-label="All pages"><a href="index.html">Home</a><a href="heme-hodgkin.html">Hodgkin</a><a href="heme-nhl.html" aria-current="page">Non-Hodgkin</a><a href="heme-other.html">Myeloma, TBI &amp; skin</a></nav>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
+<section class="panel" id="p-dlbcl" data-tab="dlbcl" data-label="DLBCL">
+  <div class="panel-head">
+    <h2>Diffuse large B-cell lymphoma</h2>
+    <p class="lede">Limited stage: R-CHOP × 4 (+ R × 2) if PET-negative (FLYER), or short chemo + ISRT. Advanced: RT consolidates bulky or PET-positive residual sites. Doses are 30–36 Gy after CR and 36–45 Gy for residual disease.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="DLBCL RT">
+    <h3>When and how much (ILROG)</h3>
+    <ul>
+      <li><b>PET CR after chemo:</b> <span class="d">30–36 Gy</span> ISRT to initially bulky (≥7.5 cm) or extranodal sites if consolidating.</li>
+      <li><b>PET-positive residual:</b> <span class="d">36–45 Gy</span> (up to 40–55 Gy if refractory or RT alone).</li>
+      <li><b>Limited stage, PET-negative after R-CHOP × 4:</b> chemo alone is acceptable (FLYER, 3 y PFS about 95%). PET3-positive: add ISRT 36 Gy ± 9 Gy boost (SWOG S1001).</li>
+      <li><b>Bulky (≥7.5 cm) in older patients:</b> RT to bulk reduces relapse (UNFOLDER, RICOVER-noRTh, OPTIMAL &gt;60).</li>
+      <li><b>Testicular:</b> R-CHOP + intrathecal MTX + <span class="d">30 Gy</span> to the contralateral testis (IELSG-10).</li>
+      <li><b>CAR-T bridging:</b> RT alone (20–40 Gy) gives in-field response.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="DLBCL trials">
+    <h3>Key trials</h3>
+    <div class="trial"><b>ECOG 1484</b><i>352 · bulky/early stage · CHOP × 8 → ± 30 Gy in CR</i><span>6 y DFS 56 → 73% with RT in CR. No OS difference.</span></div>
+    <div class="trial"><b>UNFOLDER</b><i>R-CHOP-21 vs -14 · ± 39.6 Gy to bulky/extranodal</i><span>RT arm better: 3 y EFS 68 → 84% (fewer partial responses needing more treatment). 3 y PFS 81 → 89% (p=0.22).</span></div>
+    <div class="trial"><b>SWOG S1001</b><i>R-CHOP × 3 → PET-adapted ISRT 36 Gy (± 9 Gy) for PET3-positive</i><span>5 y PFS 87%, OS 89%. PET-positive patients given RT did as well as PET-negative.</span></div>
+    <div class="trial"><b>FLYER</b><i>Young, favourable · R-CHOP × 4 + R × 2 vs R-CHOP × 6</i><span>Non-inferior: 3 y PFS about 95%.</span></div>
+    <div class="trial"><b>RICOVER-60</b><i>1,222 · 61–80 y · CHOP-14 × 6/8 ± R · 36 Gy to bulky/extranodal</i><span>Rituximab: 3 y EFS 47 → 66%, OS 68 → 78%.</span></div>
+  </article>
+</section>
+
+<section class="panel" id="p-indolent" data-tab="indolent" data-label="Follicular &amp; MZL" hidden>
+  <div class="panel-head">
+    <h2>Indolent lymphoma (follicular, marginal zone)</h2>
+    <p class="lede">Stage I–II indolent lymphoma can be cured with 24 Gy ISRT. For palliation, 4 Gy in 2 fractions is effective and can be repeated.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Indolent doses">
+    <h3>Doses</h3>
+    <ul>
+      <li><b>Curative stage I–II:</b> <span class="d">24/12</span> (24–30 Gy). Larger margins if RT alone.</li>
+      <li><b>Palliative:</b> <span class="d">4/2</span> (FORT: CR 49% with 4 Gy vs 68% with 24 Gy). Re-treat as needed.</li>
+      <li><b>Stage I–II FL with systemic therapy:</b> adding R-CVP to 30 Gy improved 10 y PFS 43 → 62% (TROG 99.03).</li>
+      <li>Grade 3 FL is treated like DLBCL.</li>
+    </ul>
+    <div class="trial"><b>UK FORT</b><i>548 · indolent NHL · 24/12 vs 4/2</i><span>ORR 91 vs 81%, CR 68 vs 49%. 24 Gy better for durable control.</span></div>
+    <div class="trial"><b>TROG 99.03 <span class="flag au">ANZ</span></b><i>150 · stage I–II FL · 30 Gy ISRT ± R-CVP</i><span>10 y PFS 43 → 62% with systemic therapy.</span></div>
+  </article>
+
+  <article class="card key" data-title="Extranodal indolent">
+    <h3>Extranodal MALT and orbit (ILROG)</h3>
+    <ul>
+      <li><b>Gastric MALT:</b> eradicate H. pylori first. RT for H. pylori-negative or persistent disease: <span class="d">24–30 Gy</span> in 1.5–2 Gy fractions to the whole stomach (nil by mouth for 6 h; consider DIBH).</li>
+      <li><b>Orbit/ocular adnexa:</b> <span class="d">24 Gy</span>; 4/2 is being studied. Cataract about 33% after 2.5–6.5 Gy; retinal damage does not occur below 24 Gy.</li>
+      <li><b>Salivary:</b> 24 Gy. Other extranodal sites 24–30 Gy, usually treating the whole organ.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-pcnsl" data-tab="pcnsl" data-label="PCNSL" hidden>
+  <div class="panel-head">
+    <h2>Primary CNS lymphoma</h2>
+    <p class="lede">High-dose methotrexate-based chemo (e.g. R-MPV) first. Reduced-dose WBRT consolidation for CR; avoid 45 Gy WBRT because of delayed neurotoxicity, especially if &gt;60 y.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="PCNSL doses">
+    <h3>WBRT doses</h3>
+    <ul>
+      <li><b>CR after R-MPV:</b> <span class="d">23.4 Gy</span> WBRT, then cytarabine × 2.</li>
+      <li><b>PR:</b> ILROG 36–45 Gy WBRT (1.5–1.8 Gy) without boost; NCCN 30–36 Gy with a 45 Gy boost to residual. Example: 36/24 + SIB 43.2/24.</li>
+      <li>Median survival about 6 y with this approach (MSKCC).</li>
+      <li>Intraocular involvement: CTV includes the entire globe and optic nerves to the chiasm.</li>
+    </ul>
+  </article>
+</section>
+
+</main>
+<footer><p>Synthesised from the RadOncReview Hematologic document (collaborative, US-centric: NCCN, ILROG, ASTRO), including 2025–26 guidelines and ASTRO '26 abstracts. Doses are as reported in the source and its trials. Check eviQ, departmental protocols and drug availability before prescribing.</p></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
