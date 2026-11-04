@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breast contouring protocol Quick Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#contouring">Contouring</a> › <span>Breast contouring protocol</span></nav>
+    <div class="title-row">
+      <h1>Breast contouring protocol <span>Quick Reference</span></h1>
+      <div class="meta">Synthesised Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
+      <input id="q" type="search" placeholder="Search this page: trial, dose, drug" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<main id="main">
+<nav class="sitenav" aria-label="All pages"><a href="index.html">Home</a><a href="ctr-library.html">Library</a><a href="ctr-breast.html" aria-current="page">Breast</a><a href="ctr-thorax.html">Thorax</a><a href="ctr-hn.html">H&amp;N</a><a href="ctr-cns.html">CNS</a><a href="ctr-upper-gi.html">Upper GI</a><a href="ctr-anal.html">Anal</a><a href="ctr-gyn.html">Gynae</a><a href="ctr-heme.html">Lymphoma</a><a href="ctr-sarcoma.html">Sarcoma</a><a href="ctr-spine.html">Spine &amp; bone</a><a href="contouring/prostate.html">Prostate</a><a href="contouring/rectal-long-course.html">Rectum</a></nav>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
+<section class="panel" id="p-setup" data-tab="setup" data-label="Set-up">
+  <div class="panel-head">
+    <h2>Before you contour</h2>
+    <p class="lede">ESTRO (Offersen 2015/2016) is the default atlas: nodal volumes are built around the vessels rather than the muscles, so they are smaller than RTOG volumes, especially at the supraclavicular level. Use one atlas consistently and name it in the plan.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Simulation">
+    <h3>Simulation and imaging</h3>
+    <ul>
+      <li>Supine on a breast board, arms up. Wire the scar and palpable breast tissue. DIBH for left-sided cases.</li>
+      <li>Contrast CT helps you see the axillary, subclavian and internal mammary vessels that define the nodal CTVs.</li>
+      <li>Fuse the pre-op imaging and read the operation note: tumour site, clip placement, oncoplastic tissue movement, number of nodes removed and their levels.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Which volumes">
+    <h3>Which volumes for which scenario</h3>
+    <div class="tw wide"><table>
+      <tr><th>Scenario</th><th>CTV</th></tr>
+      <tr><td>Whole breast</td><td>CTVp_breast (± tumour bed boost)</td></tr>
+      <tr><td>Partial breast</td><td>Tumour bed CTV only (GEC-ESTRO/IMPORT-style margin; see Tumour bed)</td></tr>
+      <tr><td>Chest wall</td><td>CTVp_chestwall</td></tr>
+      <tr><td>Regional nodes after axillary dissection</td><td>Level 3, level 4, IMN, ± interpectoral. Levels 1–2 only if residual risk (e.g. limited dissection, gross ENE)</td></tr>
+      <tr><td>Regional nodes after SLNB only (no ALND)</td><td>Levels 1–4 + IMN (axilla treated in place of dissection)</td></tr>
+      <tr><td>Implant reconstruction</td><td>ESTRO-ACROP 2019: implant usually excluded (see Reconstruction)</td></tr>
+    </table></div>
+  </article>
+</section>
+
+<section class="panel" id="p-borders" data-tab="borders" data-label="ESTRO borders" hidden>
+  <div class="panel-head">
+    <h2>ESTRO CTV borders (summary)</h2>
+    <p class="lede">Condensed from Offersen 2015 Tables 1–2. Use the original tables and images for the final word; this is a quick check while you contour.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="CTVp breast chest wall">
+    <h3>CTVp breast and chest wall</h3>
+    <div class="tw wide"><table>
+      <tr><th>Border</th><th>Breast</th><th>Chest wall (no reconstruction)</th></tr>
+      <tr><td>Cranial</td><td>Upper border of palpable / visible breast tissue; at most the caudal edge of the sternoclavicular joint</td><td>Guided by the contralateral breast and the scar; at most the caudal edge of the sternoclavicular joint</td></tr>
+      <tr><td>Caudal</td><td>Most caudal CT-visible breast tissue</td><td>Guided by the contralateral inframammary fold</td></tr>
+      <tr><td>Ventral</td><td>5 mm under the skin</td><td>Skin surface (bolus decisions are separate)</td></tr>
+      <tr><td>Dorsal</td><td>Pectoralis major, or ribs and intercostal muscles where there is no muscle</td><td>Pectoralis major, or ribs where there is no muscle</td></tr>
+      <tr><td>Medial</td><td>Lateral to the medial perforating mammary vessels; at most the edge of the sternum</td><td>Same</td></tr>
+      <tr><td>Lateral</td><td>Lateral breast fold; anterior to the lateral thoracic artery</td><td>Guided by the contralateral breast; usually anterior to the mid-axillary line</td></tr>
+    </table></div>
+  </article>
+  <article class="card key" data-title="Nodal CTVs levels">
+    <h3>Nodal CTVs</h3>
+    <div class="tw wide"><table>
+      <tr><th>CTV</th><th>Key landmarks</th></tr>
+      <tr><td>Level 1 (axilla)</td><td>Lateral to pectoralis minor. Cranial: about 1 cm above the axillary vein medially; laterally stays about 1 cm below the humeral head. Caudal: around rib 4–5 (consider the SLNB site). Lateral: line between pectoralis major and latissimus dorsi. Dorsal: subscapularis, then thoracodorsal vessels / latissimus. Medial: level 2, interpectoral space, serratus anterior.</td></tr>
+      <tr><td>Level 2</td><td>Behind pectoralis minor, between its medial and lateral edges. Cranial: top of the axillary artery (about 5 mm above the vein). Caudal: lower border of pectoralis minor. Dorsal: about 5 mm behind the axillary vein, or ribs / intercostals.</td></tr>
+      <tr><td>Level 3 (infraclavicular)</td><td>Medial to pectoralis minor, behind pectoralis major, around the subclavian vein (about 5 mm margin). Medial end: junction of the subclavian and internal jugular veins, where it joins level 4.</td></tr>
+      <tr><td>Level 4 (supraclavicular)</td><td>Around the subclavian vein / artery up to the cranial extent of the subclavian artery (much lower than RTOG's cricoid). Includes the internal jugular vein without margin; excludes thyroid and common carotid. Lateral: lateral edge of sternocleidomastoid. Dorsal: pleura / anterior scalene.</td></tr>
+      <tr><td>IMN</td><td>Internal mammary vessels with about 5 mm margin. From the caudal limit of level 4 to the cranial side of the 4th rib (5th in selected cases). Dorsal: pleura.</td></tr>
+      <tr><td>Interpectoral</td><td>Between pectoralis major and minor, at the cranial–caudal extent of level 2.</td></tr>
+    </table></div>
+    <p class="note">ESTRO excludes the vessels' surrounding muscle and keeps level 4 low. If you use RTOG volumes (NRG trials), the supraclavicular CTV extends to the cricoid and follows muscle borders, so it is larger.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-bed" data-tab="bed" data-label="Tumour bed" hidden>
+  <div class="panel-head">
+    <h2>Tumour bed, boost and partial breast</h2>
+    <p class="lede">The tumour bed is usually the hardest structure to define. Clips are the most reliable marker; seroma helps but shrinks over time.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Tumour bed">
+    <h3>Defining the tumour bed (GEC-ESTRO / Strnad 2018)</h3>
+    <ul>
+      <li>GTV of the bed: clips, seroma, architectural distortion, and the pre-op tumour position (registration to pre-op imaging and the surgical note).</li>
+      <li>CTV: the bed plus a margin for microscopic disease, reduced by the excision margin already achieved (the GEC-ESTRO approach targets a total safety margin of about 2 cm, combining surgical and added margins).</li>
+      <li>Clip the cavity at surgery (at least 4–6 clips: medial, lateral, cranial, caudal, deep). Without clips, inter-observer variation is large.</li>
+      <li>After oncoplastic surgery the bed can move far from the original tumour site; the boost may be omitted or the whole quadrant considered when the bed is uncertain.</li>
+    </ul>
+    <p class="note flag caution">Margin numbers differ between IMPORT, NSABP B-39 and GEC-ESTRO. Use the trial or departmental protocol your fractionation follows.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-recon" data-tab="recon" data-label="Reconstruction" hidden>
+  <div class="panel-head">
+    <h2>PMRT after implant reconstruction (ESTRO-ACROP 2019)</h2>
+    <p class="lede">The main change from older practice: the implant itself is not a target. Treat the tissue where chest-wall recurrences actually occur.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Implant reconstruction">
+    <h3>What to include</h3>
+    <ul>
+      <li><b>Prepectoral implant:</b> the CTV is the thin layer of residual subcutaneous tissue ventral to the implant; the dorsal tissue behind the implant is added only when the tumour was deep. Check the guideline's figures for the ventral (skin) border you use.</li>
+      <li><b>Subpectoral implant:</b> the CTV is the tissue ventral to pectoralis major; the space between the implant and the ribs is not included unless the tumour was deep / involved the muscle.</li>
+      <li>Nodal CTVs as for any PMRT (ESTRO levels 1–4, IMN).</li>
+    </ul>
+    <p class="note">See Kaidar-Person 2021 (Clin Oncol) for planning examples and dose-coverage compromises.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-oar" data-tab="oar" data-label="OARs" hidden>
+  <div class="panel-head">
+    <h2>Organs at risk</h2>
+    <p class="lede">Contour the heart with an atlas (Feng 2011 or Duane 2017) and, for left-sided or IMN cases, the LAD. Report mean heart dose.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="OAR list">
+    <h3>OAR list</h3>
+    <ul>
+      <li>Heart (whole heart from the pulmonary trunk bifurcation to the apex, including pericardium per Feng), LAD, left ventricle.</li>
+      <li>Ipsilateral and contralateral lung; contralateral breast; thyroid and oesophagus when level 4 is treated; humeral head; brachial plexus when level 3–4 doses are high.</li>
+      <li>Constraints: see the Breast planning page.</li>
+    </ul>
+  </article>
+</section>
+
+</main>
+<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

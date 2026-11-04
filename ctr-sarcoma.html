@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sarcoma contouring protocol Quick Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#contouring">Contouring</a> › <span>Sarcoma contouring protocol</span></nav>
+    <div class="title-row">
+      <h1>Sarcoma contouring protocol <span>Quick Reference</span></h1>
+      <div class="meta">Synthesised Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
+      <input id="q" type="search" placeholder="Search this page: trial, dose, drug" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<main id="main">
+<nav class="sitenav" aria-label="All pages"><a href="index.html">Home</a><a href="ctr-library.html">Library</a><a href="ctr-breast.html">Breast</a><a href="ctr-thorax.html">Thorax</a><a href="ctr-hn.html">H&amp;N</a><a href="ctr-cns.html">CNS</a><a href="ctr-upper-gi.html">Upper GI</a><a href="ctr-anal.html">Anal</a><a href="ctr-gyn.html">Gynae</a><a href="ctr-heme.html">Lymphoma</a><a href="ctr-sarcoma.html" aria-current="page">Sarcoma</a><a href="ctr-spine.html">Spine &amp; bone</a><a href="contouring/prostate.html">Prostate</a><a href="contouring/rectal-long-course.html">Rectum</a></nav>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
+<section class="panel" id="p-extremity" data-tab="extremity" data-label="Extremity">
+  <div class="panel-head">
+    <h2>Extremity soft tissue sarcoma, pre-op (RTOG, Wang 2011)</h2>
+    <p class="lede">Contour on the planning CT fused with the diagnostic MRI (T1 post-contrast for the GTV, T2 for oedema). Sarcoma spreads along the long axis of the muscle compartment, so the margin is long and narrow.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Extremity volumes">
+    <h3>Volumes</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>Definition</th></tr>
+      <tr><td>GTV</td><td>Gross tumour on T1 post-contrast MRI.</td></tr>
+      <tr><td>CTV</td><td>GTV + 3 cm longitudinally and 1.5 cm radially, plus suspicious peritumoral oedema on T2. Edited so it does not cross intact fascia or uninvolved bone, and stops at the skin surface.</td></tr>
+      <tr><td>PTV</td><td>Typically 5 mm with daily IGRT (RTOG 0630).</td></tr>
+    </table></div>
+    <p class="note">Spare a strip of skin and soft tissue along the limb circumference (lymphoedema), joints, and about half the bone circumference where possible.</p>
+  </article>
+  <article class="card" data-title="Post-op extremity">
+    <h3>Post-op</h3>
+    <p>CTV covers the tumour bed, surgical scar and drain sites with a longer margin than pre-op (commonly 4 cm longitudinal, 1.5 cm radial for the first phase), followed by a boost to the bed. Fuse the pre-op MRI to place the original tumour.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-rps" data-tab="rps" data-label="Retroperitoneum" hidden>
+  <div class="panel-head">
+    <h2>Retroperitoneal sarcoma, pre-op (Baldini 2015)</h2>
+    <p class="lede">Since STRASS, pre-op RT is selective (e.g. liposarcoma at high risk of local recurrence). The posterior margin against the psoas and abdominal wall is where the surgeon has least room.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="RPS volumes">
+    <h3>Volumes</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>Definition</th></tr>
+      <tr><td>GTV / IGTV</td><td>Tumour on contrast CT / MRI; 4D-CT for motion (IGTV).</td></tr>
+      <tr><td>CTV</td><td>GTV (or IGTV) + 1.5 cm, edited: no expansion into intact bone or the retroperitoneal compartment boundaries it cannot cross, small or no expansion into bowel, liver and kidney, and stop short of the skin.</td></tr>
+      <tr><td>HR CTV (optional)</td><td>The surface against the posterior abdominal wall / psoas / vertebral body that the surgeon expects to be at risk, agreed with the surgeon, for a simultaneous boost.</td></tr>
+      <tr><td>PTV</td><td>Institutional (commonly 5 mm with IGRT).</td></tr>
+    </table></div>
+    <p class="note flag caution">Exact editing distances (bowel, liver, kidney) are tabulated in Baldini 2015; check them.</p>
+  </article>
+</section>
+
+</main>
+<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

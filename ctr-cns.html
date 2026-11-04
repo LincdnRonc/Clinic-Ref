@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CNS contouring protocol Quick Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#contouring">Contouring</a> › <span>CNS contouring protocol</span></nav>
+    <div class="title-row">
+      <h1>CNS contouring protocol <span>Quick Reference</span></h1>
+      <div class="meta">Synthesised Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
+      <input id="q" type="search" placeholder="Search this page: trial, dose, drug" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<main id="main">
+<nav class="sitenav" aria-label="All pages"><a href="index.html">Home</a><a href="ctr-library.html">Library</a><a href="ctr-breast.html">Breast</a><a href="ctr-thorax.html">Thorax</a><a href="ctr-hn.html">H&amp;N</a><a href="ctr-cns.html" aria-current="page">CNS</a><a href="ctr-upper-gi.html">Upper GI</a><a href="ctr-anal.html">Anal</a><a href="ctr-gyn.html">Gynae</a><a href="ctr-heme.html">Lymphoma</a><a href="ctr-sarcoma.html">Sarcoma</a><a href="ctr-spine.html">Spine &amp; bone</a><a href="contouring/prostate.html">Prostate</a><a href="contouring/rectal-long-course.html">Rectum</a></nav>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
+<section class="panel" id="p-glioma" data-tab="glioma" data-label="Glioma">
+  <div class="panel-head">
+    <h2>Glioblastoma and lower-grade glioma</h2>
+    <p class="lede">Fuse the post-op MRI (T1 post-gadolinium and T2/FLAIR, ideally within 2–3 weeks of planning) and the pre-op MRI. Contour the GTV on MRI; the CTV follows anatomy, not just a sphere.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="GBM ESTRO-EANO">
+    <h3>Glioblastoma (ESTRO-EANO, Niyazi 2023)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>Definition</th></tr>
+      <tr><td>GTV</td><td>Resection cavity + residual contrast-enhancing tumour on post-op T1-Gd. FLAIR change is not routinely included.</td></tr>
+      <tr><td>CTV</td><td>GTV + 15 mm (reduced from the 20 mm of the 2016 guideline), edited at anatomical barriers: bone, falx, tentorium, ventricles (ependyma), and not into the contralateral hemisphere except along the corpus callosum / commissures when involved.</td></tr>
+      <tr><td>PTV</td><td>Institutional, usually 3 mm with mask and daily IGRT.</td></tr>
+    </table></div>
+    <p class="note">US (NRG, Kruser 2019) practice may still use a two-phase volume (FLAIR + margin to 46 Gy, then enhancement + margin to 60 Gy). Name the approach in your plan.</p>
+  </article>
+  <article class="card" data-title="IDH-mutant glioma">
+    <h3>IDH-mutant grade 2–3 glioma (ESTRO-EANO, Baumert 2025)</h3>
+    <ul>
+      <li>GTV: the T2 / FLAIR abnormality plus cavity (enhancement if present), using the post-op MRI.</li>
+      <li>CTV: GTV + a smaller margin than for glioblastoma, edited at barriers. Check the guideline for the margin by grade and the use of amino-acid PET.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-benign" data-tab="benign" data-label="Skull base" hidden>
+  <div class="panel-head">
+    <h2>Meningioma and skull base (ESTRO-ACROP, Combs 2021)</h2>
+    <p class="lede">Thin-slice volumetric T1-Gd and T2 MRI, fused with the planning CT (bone window for skull base invasion and hyperostosis).</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Skull base volumes">
+    <h3>Volumes by tumour</h3>
+    <div class="tw wide"><table>
+      <tr><th>Tumour</th><th>GTV → CTV</th></tr>
+      <tr><td>Meningioma WHO 1</td><td>Enhancing tumour + hyperostotic bone; CTV = GTV (0–2 mm), dural tail only if thickened / nodular.</td></tr>
+      <tr><td>Meningioma WHO 2–3</td><td>Tumour or bed + margin; RTOG 0539 used GTV + 1 cm (intermediate risk), and 1 cm (high dose) plus 2 cm (lower dose) for high risk. DOTATATE PET helps define residual (Perlow 2025).</td></tr>
+      <tr><td>Vestibular schwannoma, pituitary adenoma</td><td>CTV = GTV (0–1 mm).</td></tr>
+      <tr><td>Craniopharyngioma</td><td>Solid and cystic parts; re-image during treatment for cyst change.</td></tr>
+      <tr><td>Chordoma / chondrosarcoma</td><td>High-risk CTV around gross disease and the pre-op extent; lower-dose CTV covering the anatomical compartment (see McDonald 2026 for chordoma).</td></tr>
+    </table></div>
+  </article>
+</section>
+
+<section class="panel" id="p-mets" data-tab="mets" data-label="Metastases" hidden>
+  <div class="panel-head">
+    <h2>Brain metastases</h2>
+    <p class="lede">Planning MRI within about a week of SRS (thin-slice T1-Gd). Intact metastases are GTV-only; cavities need a CTV.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Cavity SRS">
+    <h3>Post-op cavity SRS (Soliman 2018)</h3>
+    <ul>
+      <li>CTV: the whole contrast-enhancing cavity wall plus the surgical tract seen on the post-op MRI / CT (no oedema).</li>
+      <li>If the tumour touched the dura before surgery: extend along the dura (about 5–10 mm beyond the bone flap / contact). If it touched a venous sinus, include a small margin along the sinus.</li>
+      <li>Use the pre-op MRI to see where the tumour contacted the dura.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Hippocampal avoidance">
+    <h3>Hippocampal avoidance WBRT (Gondi 2010, RTOG 0933)</h3>
+    <ul>
+      <li>Contour the hippocampus on thin T1 MRI (the grey matter medial to the temporal horn), from the tail beside the atrium down to the amygdala.</li>
+      <li>Avoidance zone = hippocampus + 5 mm. Constraint set from NRG CC001.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-oar" data-tab="oar" data-label="OARs" hidden>
+  <div class="panel-head">
+    <h2>Neuro OARs (EPTN atlas, Eekers 2018 / 2021)</h2>
+    <p class="lede">The EPTN atlas is free and online with MRI and CT images: optic nerves, chiasm, brainstem, cochlea, lacrimal glands, lens, retina, hippocampus, pituitary, temporal lobes.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="Neuro OAR tips">
+    <h3>Tips</h3>
+    <ul>
+      <li>Optic chiasm: thin T1 or T2 MRI, above the pituitary, between the internal carotid arteries.</li>
+      <li>Cochlea: bone window on CT.</li>
+      <li>Brainstem: midbrain to the foramen magnum; Beddok 2019 adds the area postrema for nausea.</li>
+    </ul>
+  </article>
+</section>
+
+</main>
+<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
