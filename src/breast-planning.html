@@ -1,0 +1,86 @@
+<section class="panel" id="p-volumes" data-tab="volumes" data-label="Volumes">
+  <div class="panel-head">
+    <h2>Volumes and technique</h2>
+    <p class="lede">Contour to an atlas (ESTRO or RTOG), use DIBH for left-sided cases (and consider it for right-sided ones), and aim for homogeneity. Use IMRT or VMAT when cardiac anatomy is difficult, not routinely.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Breast volumes">
+    <h3>Breast and chest wall (NSABP B-39 and B-51 style)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>Definition</th></tr>
+      <tr><td>Lumpectomy GTV</td><td>Cavity, post-op changes, seroma and clips</td></tr>
+      <tr><td>Lumpectomy CTV (boost or PBI)</td><td>GTV + 1 cm, cropped 5 mm from skin, excluding pectoralis and chest wall</td></tr>
+      <tr><td>Breast CTV</td><td>Palpable or visible breast tissue, cropped 5 mm from skin</td></tr>
+      <tr><td>Chest wall CTV</td><td>Skin to the anterior ribs, including the scar and the extent of the original breast. Excludes heart, lung and sternum</td></tr>
+      <tr><td>PTV</td><td>CTV + 7 mm. Excludes heart; should not cross midline</td></tr>
+      <tr><td>PTV_eval</td><td>PTV cropped 5 mm from skin (3 mm for chest wall) and no deeper than the anterior ribs</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Tangent field edges (2D/3D):</b> superior 1 cm above palpable tissue; inferior 1–2 cm below the inframammary fold; lateral at the mid-axillary line; medial at midline; 2 cm anterior flash. Lung in field &lt;3 cm (typically 1–2 cm).</li>
+      <li><b>Nodal fields:</b> match at the inferior clavicular head. Use a mono-isocentric technique with half-beam block (field length up to 20 cm), or two isocentres with couch kick.</li>
+      <li><b>Chest wall boost:</b> electrons with a 2–5 cm margin on the scar. Use only for close or positive margins or inflammatory cancer.</li>
+    </ul>
+  </article>
+
+  <article class="card key" data-title="Breast constraints">
+    <h3>Coverage and constraints</h3>
+    <div class="tw wide"><table>
+      <tr><th>Structure</th><th>Goal</th></tr>
+      <tr><td>PTV_eval</td><td>D95 ≥95% (unacceptable if V90 &lt;90%). V105 &lt;200 cc (or &lt;5–10%), V107 &lt;2 cc, Dmax &lt;110%</td></tr>
+      <tr><td>IMN PTV</td><td>D90 ≥90% (unacceptable if V90 &lt;80%)</td></tr>
+      <tr><td>Heart</td><td>Mean ≤4 Gy for left-sided cases; goal &lt;2 Gy for tangents alone</td></tr>
+      <tr><td>Ipsilateral lung</td><td>V20 (conventional) or V16 (hypofractionated) 15–20%, up to 35–40% with RNI (B-51: V20 15–20%, up to 30% with RNIlt;30%). With RNI also V10 &lt;50–60% and V5 &lt;65–70%</td></tr>
+      <tr><td>Contralateral breast</td><td>V3 ≤5% (B-51)</td></tr>
+      <tr><td>FAST-Forward (26/5)</td><td>Lung V8 Gy &lt;15%. Heart V7 Gy &lt;5% and V1.5 Gy &lt;30%</td></tr>
+      <tr><td>Florence PBI (30/5)</td><td>PTV V95 ≥95–98%, V105 &lt;5–10%. Ipsilateral breast minus PTV V15 Gy &lt;50–60%</td></tr>
+    </table></div>
+  </article>
+</section>
+
+<section class="panel" id="p-consent" data-tab="consent" data-label="Toxicity &amp; consent" hidden>
+  <div class="panel-head">
+    <h2>Toxicity and consent</h2>
+    <p class="lede">These are the numbers to quote. Hypofractionation and partial-breast RT reduce acute toxicity. Smoking status matters most for long-term lung and heart risk.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Acute toxicity">
+    <h3>Acute effects</h3>
+    <div class="tw wide"><table>
+      <tr><th>Outcome</th><th>Rate</th><th>Source</th></tr>
+      <tr><td>Skin reaction (any)</td><td>30–50%</td><td>Jagsi 2022 summary</td></tr>
+      <tr><td>G2+ dermatitis</td><td>About 30% with hypofractionation vs 60% with conventional</td><td>Jagsi/Shaitelman 2015</td></tr>
+      <tr><td>Moist desquamation</td><td>7% with hypofractionation vs 28% with conventional</td><td>Shaitelman 2015</td></tr>
+      <tr><td>G2+ dermatitis with RNI</td><td>40 → 50%</td><td>MA.20</td></tr>
+      <tr><td>G2+ dermatitis, PBI vs WBI</td><td>45% (WBI) vs 28% (PBI)</td><td>RAPID</td></tr>
+      <tr><td>Fatigue</td><td>About 10% with hypofractionation vs 20% with conventional</td><td>Shaitelman 2015</td></tr>
+      <tr><td>Pneumonitis</td><td>&lt;2% even with RNI. G2+ 0.2 → 1.2% with RNI</td><td>Jagsi; MA.20</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card key" data-title="Late toxicity">
+    <h3>Late effects</h3>
+    <div class="tw wide"><table>
+      <tr><th>Outcome</th><th>Rate</th><th>Source</th></tr>
+      <tr><td>Good or excellent cosmesis</td><td>About 70%</td><td>Jagsi 2022</td></tr>
+      <tr><td>Moderate or marked breast effects at 10 y</td><td>13% (40/15) vs 14% (26/5)</td><td>FAST-Forward</td></tr>
+      <tr><td>Severe fibrosis with boost</td><td>4.4% with boost vs 1.6% without, at 10 y</td><td>EORTC 22881</td></tr>
+      <tr><td>Lymphoedema</td><td>SLNB about 5% (up to 10%). ALND about 15% (up to 25%). RNI adds about 4% (G2+ 4.5 → 8.4%)</td><td>Erickson; MA.20</td></tr>
+      <tr><td>Cardiac events</td><td>1–4%. Major coronary events rise 7.4% (relative) per Gy of mean heart dose, with no threshold</td><td>Darby 2013</td></tr>
+      <tr><td>Second lung cancer</td><td>About 0.3% for non-smokers vs about 4% for long-term continuing smokers</td><td>EBCTCG (Taylor 2017)</td></tr>
+      <tr><td>Second malignancy (overall)</td><td>&lt;1%. Angiosarcoma in the field about 10 per 10,000</td><td>—</td></tr>
+      <tr><td>Brachial plexopathy</td><td>&lt;1% if &lt;50 Gy without chemotherapy; about 4.5% with chemotherapy; 5.6% if &gt;50 Gy</td><td>—</td></tr>
+      <tr><td>Rib fracture, arm or shoulder stiffness</td><td>Uncommon; quote as rare</td><td>—</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card" data-title="Reconstruction consent">
+    <h3>With reconstruction</h3>
+    <ul>
+      <li>Major reconstruction complications are common with PMRT (about 40% in one series). Reconstruction failure is about 10%.</li>
+      <li>Irradiating a tissue expander carries more risk than irradiating the permanent implant.</li>
+      <li>Infection 6 → 13% and skin necrosis 3 → 8% with PMRT in one implant series.</li>
+    </ul>
+  </article>
+</section>

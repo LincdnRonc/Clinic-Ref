@@ -1,3 +1,30 @@
-# Clinic-Ref
-Clinic Resource 
- 
+# Clinic-Ref: Radiation Oncology Quick Reference
+
+Clinic resource: tumour-site quick-reference pages, a contouring guideline library and site contouring protocols. Live at https://lincdnronc.github.io/Clinic-Ref/
+
+This repo is the single source of truth: the built pages and the build kit that makes them both live here.
+
+## Layout
+| Path | What it is |
+|---|---|
+| `*.html` (root) | Built pages, served by GitHub Pages. Do not edit by hand; edit `src/` and rebuild. |
+| `src/<page>.html` | Page body fragments (tabs, cards, tables). Edit these. |
+| `build.py` | Assembles every page: groups (`GROUPS`), home page, nav, footers, eviQ link tabs, contouring pages (`CONTOUR`), site colours (`CTR_SITE`). |
+| `contour_lib.py` | Contouring guideline library data (rendered to `src/ctr-library.html`). |
+| `eviq_links.py` | eviQ protocol links per page (links only; no eviQ content is copied). |
+| `theme.py` | Generates the tumour-site colour block in `assets/site.css`. |
+| `assets/` | Shared CSS and JS. |
+| `contouring/` | Full-length contouring atlases (prostate, rectal long-course). |
+| `tools/check.py` | Render check at phone width (Playwright): overflow, console errors. |
+| `notes/` | Working notes, e.g. figures still to verify against source papers. |
+
+## Making a change
+1. Edit the fragment in `src/` (or the data in `contour_lib.py` / `eviq_links.py`).
+2. `python3 build.py`
+3. `python3 tools/check.py <changed pages>` (needs Playwright)
+4. Commit and push to `main`. GitHub Pages redeploys in a minute or two.
+
+Avoid pushing several times in quick succession: a newer push cancels a Pages deploy that is still running.
+
+## Content rules
+Australian spelling. Every number comes from a cited source; anything not yet checked against the original paper is marked "check". Not affiliated with or endorsed by eviQ, ESTRO, NRG or other groups. Follow departmental protocols.
