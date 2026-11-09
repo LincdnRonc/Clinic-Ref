@@ -1,0 +1,101 @@
+<section class="panel" id="p-adaptive" data-tab="adaptive" data-label="Adaptive workflow">
+  <div class="panel-head">
+    <h2>Online adaptive workflow</h2>
+    <p class="lede">On the day you are editing, not delineating from scratch. Spend your minutes on the target and the dose-limiting OAR nearest the PTV, and leave distant structures as propagated.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Before the patient is on the table">
+    <h3>Before the patient is on the table</h3>
+    <ul>
+      <li>Review the reference plan: which OAR is dose-limiting, how close it is, and whether the PTV was compromised.</li>
+      <li>Look at the reference T2 and the previous fraction's contours so the daily image looks familiar.</li>
+      <li>Note two or three vascular landmarks next to the GTV for when the lesion is faint.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="ATP vs ATS">
+    <h3>Adapt-to-position vs adapt-to-shape</h3>
+    <div class="tw wide"><table>
+      <tr><th></th><th>ATP</th><th>ATS</th></tr>
+      <tr><td>What changes</td><td>Isocentre shift; plan re-optimised on reference contours</td><td>Contours propagated deformably to the daily MR, edited, plan re-optimised</td></tr>
+      <tr><td>Your job</td><td>Confirm registration and that target and OARs sit where expected</td><td>Edit GTV and nearby OARs on the daily image</td></tr>
+      <tr><td>When it fits</td><td>Stable anatomy, OARs far from PTV</td><td>GI OARs near the PTV, changed filling or shape</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card key" data-title="Editing propagated contours">
+    <h3>Editing propagated contours (ATS)</h3>
+    <ol>
+      <li><b>Registration first:</b> check the rigid match on the target organ (liver, pancreas, prostate), not bone.</li>
+      <li><b>GTV next:</b> confirm or edit in all three planes.</li>
+      <li><b>Closest OARs within a ring:</b> many groups recontour only within about 2 cm of the PTV (e.g. a 2 cm isotropic PTV expansion in liver SMART, Mayinger 2021). Follow departmental protocol.</li>
+      <li><b>Deformation fails at bowel:</b> propagated stomach and duodenum are least reliable; check every slice near the PTV, especially where gas and fluid have moved.</li>
+      <li><b>Don't chase distant edges:</b> they barely affect optimisation and cost time.</li>
+    </ol>
+  </article>
+
+  <article class="card" data-title="Gas and bulk density">
+    <h3>Gas and bulk density</h3>
+    <ul>
+      <li>Unity calculates dose on the daily MR using bulk electron-density overrides per structure, not real HU.</li>
+      <li><span class="flag caution">Caution</span> New gas pockets near the PTV (stomach, duodenum, colon, rectum) are not in the reference densities. Follow your physics protocol on contouring and overriding them: at 1.5 T the electron return effect changes dose at tissue–air interfaces.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Time and safety">
+    <h3>Time and safety</h3>
+    <ul>
+      <li>Work in a fixed order every time so nothing is missed under pressure.</li>
+      <li>Second check (RT or physicist) on the GTV and dose-limiting OAR.</li>
+      <li>Look at the verification scan or cine before beam-on: stomach filling and peristalsis change over a 20–40 minute session.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-reading" data-tab="reading" data-label="Resources" hidden>
+  <div class="panel-head">
+    <h2>Resources</h2>
+    <p class="lede">Start with the Lukovic MRI atlas and its free eContour cases: built for exactly this problem, with MR-linac sequences and the biliary tree highlighted.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Atlases">
+    <h3>Atlases</h3>
+    <ul class="lib">
+      <li><span class="libstar">Start here</span> <a href="https://pubmed.ncbi.nlm.nih.gov/31953061/" target="_blank" rel="noopener">MRI-based upper abdominal organs-at-risk atlas</a><span class="libmeta">2020 · Lukovic et al., IJROBP · PubMed</span><span class="libnote">Consensus MR OAR atlas incl. bile duct and biliary tree, on diagnostic and MR-linac sequences.</span></li>
+      <li><a href="https://econtour.org" target="_blank" rel="noopener">eContour</a><span class="libmeta">Website</span><span class="libnote">Free interactive DICOM of the Lukovic atlas; scroll and contour yourself.</span></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4285338" target="_blank" rel="noopener">RTOG upper abdominal normal organ contouring atlas (CT)</a><span class="libmeta">Jabbour et al. · PMC</span><span class="libnote">Standard OAR definitions to keep MR contours consistent with CT-era constraints.</span></li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Unity papers">
+    <h3>MR-linac papers</h3>
+    <ul class="lib">
+      <li><a href="https://doi.org/10.1016/j.ctro.2024.100797" target="_blank" rel="noopener">Pancreas SBRT on a 1.5 T MR-linac: global consensus protocol</a><span class="libmeta">2024 · Grimbergen et al., CTRO · DOI</span><span class="libnote">13-centre Unity consensus on planning, margins and constraints.</span></li>
+      <li><a href="https://link.springer.com/10.1186/s13014-021-01813-6" target="_blank" rel="noopener">Benefit of replanning in MR-guided liver SBRT</a><span class="libmeta">2021 · Mayinger et al., Radiat Oncol · Website</span><span class="libnote">Adaptation helps most when the PTV is within 2 cm of a luminal OAR.</span></li>
+      <li><a href="https://doi.org/10.1016/j.ctro.2020.11.014" target="_blank" rel="noopener">Marker-less MR-guided SBRT of liver metastases on a 1.5 T MR-linac</a><span class="libmeta">2021 · CTRO · DOI</span><span class="libnote">Unity liver workflow with exhale-triggered and free-breathing T2.</span></li>
+      <li><a href="https://rcastoragev2.blob.core.windows.net/f75e8f090c27a584c0b27612270ada0a/PMC7256110.pdf" target="_blank" rel="noopener">4D-MRI driven adaptive abdominal SBRT on Unity</a><span class="libmeta">Website</span><span class="libnote">ATP/ATS workflow and bulk-density overrides.</span></li>
+      <li><a href="https://rcastoragev2.blob.core.windows.net/05e3f8d5366b15b20fdf09b5c941092e/main.PMC11099332.pdf" target="_blank" rel="noopener">Contrast-enhanced T1 on Unity for upper abdominal tumours</a><span class="libmeta">Website</span><span class="libnote">Half-dose gadolinium when tumours are poorly visible.</span></li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Liver MRI and central biliary">
+    <h3>Liver MRI and the central biliary tree</h3>
+    <ul class="lib">
+      <li><a href="https://www.dovepress.com/basic-mri-for-the-liver-oncologists-and-surgeons-peer-reviewed-fulltext-article-JHC" target="_blank" rel="noopener">Basic MRI for the liver oncologists and surgeons</a><span class="libmeta">J Hepatocell Carcinoma · Website</span><span class="libnote">Plain-language primer on T1/T2 appearance of liver and lesions.</span></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6448751" target="_blank" rel="noopener">Liver MRI basics review</a><span class="libmeta">PMC</span><span class="libnote">Signal curves: haemangioma "light bulb" vs metastasis.</span></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/27865544/" target="_blank" rel="noopener">Central liver toxicity after SBRT (cHBT)</a><span class="libmeta">2017 · Toesca et al., Radiother Oncol · PubMed</span><span class="libnote">cHBT = 15 mm portal vein expansion; constraints for primary liver cancer.</span></li>
+      <li><a href="https://radiopaedia.org" target="_blank" rel="noopener">Radiopaedia</a><span class="libmeta">Website</span><span class="libnote">Search "MRCP anatomy", "Couinaud classification", "duodenum" and individual lesions.</span></li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Ask for internally">
+    <h3>Worth asking for internally</h3>
+    <ul>
+      <li>Departmental Unity site protocols.</li>
+      <li>Previous patients' reference and daily contours to review offline.</li>
+      <li>A session with a GI radiologist going through two or three T2 nav cases.</li>
+    </ul>
+  </article>
+</section>

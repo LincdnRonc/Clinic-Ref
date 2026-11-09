@@ -2,7 +2,7 @@ import re, os, pathlib
 os.chdir(pathlib.Path(__file__).resolve().parent)
 P = {  # gid: (label, light accent)
  'breast':'#ad2f68','cns':'#6b3fa8','gi':'#a14a0b','gu':'#1d5fb0','gyn':'#0d7366',
- 'heme':'#9b1c3f','hn':'#006f8e','sarcoma':'#5a6b10','thorax':'#2b7a3e','pall':'#4f5f74','contouring':'#0d5d78'}
+ 'heme':'#9b1c3f','hn':'#006f8e','sarcoma':'#5a6b10','thorax':'#2b7a3e','pall':'#4f5f74','contouring':'#0d5d78','mrl':'#7a5c00'}
 def hx(c): return [int(c[i:i+2],16) for i in (1,3,5)]
 def tohex(v): return '#'+''.join(f'{max(0,min(255,round(x))):02x}' for x in v)
 def mix(a,b,t): a,b=hx(a),hx(b); return tohex([a[i]*(1-t)+b[i]*t for i in range(3)])

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-site="mrl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MR-linac pelvis Quick Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#mrl">MR-linac</a> › <span>MR-linac pelvis</span></nav>
+    <div class="title-row">
+      <h1>MR-linac pelvis <span>Quick Reference</span></h1>
+      <div class="meta">Synthesised Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
+      <input id="q" type="search" placeholder="Search this page: trial, dose, drug" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<main id="main">
+<nav class="sitenav" aria-label="All pages"><a href="index.html">Home</a><a href="mrl-images.html">Sequences &amp; signal</a><a href="mrl-liver-gi.html">Liver &amp; upper GI</a><a href="mrl-pelvis.html" aria-current="page">Pelvis</a><a href="mrl-workflow.html">Adaptive workflow</a></nav>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
+<section class="panel" id="p-structures" data-tab="structures" data-label="Pelvic anatomy">
+  <div class="panel-head">
+    <h2>Pelvis on the MR-linac</h2>
+    <p class="lede">Breathing motion is minimal in the pelvis, so the standard T2 3D is sharp. The main challenges are day-to-day bladder, rectum and bowel changes.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Prostate and male pelvis">
+    <h3>Prostate and male pelvis (T2)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Structure</th><th>T2 appearance</th><th>Tips</th></tr>
+      <tr><td>Peripheral zone</td><td>Bright</td><td>Tumour = dark focus within bright PZ</td></tr>
+      <tr><td>Transition zone</td><td>Heterogeneous grey BPH nodules</td><td>Blends anteriorly with the dark fibromuscular stroma</td></tr>
+      <tr><td>Capsule</td><td>Thin dark line</td><td>Against bright periprostatic fat and venous plexus</td></tr>
+      <tr><td>Apex</td><td>Merges with dark membranous urethra/sphincter</td><td>Use sagittal and coronal; usually ends above the penile bulb</td></tr>
+      <tr><td>Seminal vesicles</td><td>Bright, grape-like</td><td>Include proximal portion per protocol</td></tr>
+      <tr><td>Neurovascular bundles</td><td>Small dark dots at 5 and 7 o'clock</td><td>Visible on MR, unlike CT</td></tr>
+      <tr><td>Penile bulb</td><td>Bright, rounded, below GU diaphragm</td><td>Easier than on CT</td></tr>
+      <tr><td>Urethra</td><td>Usually not seen without a catheter; TURP defect = bright cavity</td><td>Some protocols catheterise at simulation only</td></tr>
+      <tr><td>Hydrogel spacer</td><td>Very bright, prostate–rectum</td><td>Exclude from rectum and prostate</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card" data-title="Rectum and bladder">
+    <h3>Rectum and bladder</h3>
+    <ul>
+      <li><b>Rectal wall:</b> mucosa grey, submucosa bright, muscularis propria dark; gas black. Contour the outer wall.</li>
+      <li><b>Mesorectal fascia:</b> thin dark line around bright mesorectal fat; key for rectal boost targets.</li>
+      <li><b>Bladder:</b> urine bright, wall dark; edit the dome carefully as volume changes daily.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Female pelvis">
+    <h3>Female pelvis</h3>
+    <ul>
+      <li><b>Cervix:</b> dark fibrous stromal ring; tumour is intermediate-to-bright tissue disrupting it.</li>
+      <li><b>Uterus:</b> bright endometrium, dark junctional zone, intermediate myometrium; position shifts with bladder filling.</li>
+      <li><b>Ovaries:</b> identified by bright follicles.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Nodes, bowel and fiducials">
+    <h3>Nodes, bowel and fiducials</h3>
+    <ul>
+      <li><b>Nodes</b> are intermediate ovals in bright fat that end; <b>vessels</b> are black tubes that continue.</li>
+      <li><b>Small bowel:</b> bright fluid, grey wall; edit the bowel bag near the PTV only.</li>
+      <li><b>Fiducials:</b> small black voids, less conspicuous than on CT, bloom more on GRE.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-pelvictips" data-tab="pelvictips" data-label="Workflow tips" hidden>
+  <div class="panel-head">
+    <h2>Pelvis workflow tips</h2>
+    <p class="lede">Consistent preparation is what keeps pelvic adaptive sessions short.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Pelvic workflow">
+    <h3>Pelvic workflow</h3>
+    <ul>
+      <li><b>Consistent bladder and rectal preparation</b> reduces editing on the day.</li>
+      <li><b>Rectal gas matters twice:</b> it pushes the anterior rectal wall into high dose, and at 1.5 T gas pockets cause electron return effect dose changes at the tissue–air interface.</li>
+      <li><b>Apex and base</b> carry the most inter-observer variation: agree a rule (e.g. sagittal-based apex) and apply it every fraction.</li>
+    </ul>
+    <p class="note">For full prostate and rectal volumes see the <a href="contouring/prostate.html">prostate</a> and <a href="contouring/rectal-long-course.html">rectal long-course</a> contouring protocols.</p>
+  </article>
+</section>
+
+</main>
+<footer><p>Practical MR-linac (Elekta Unity) delineation tips written for T2 navigator-triggered and T1 3D Vane images. Signal descriptions are typical, not absolute; always compare with diagnostic imaging and the reference plan. Follow departmental MR-linac and physics protocols.</p></footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

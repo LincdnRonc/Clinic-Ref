@@ -1,0 +1,118 @@
+<section class="panel" id="p-sequences" data-tab="sequences" data-label="Sequences">
+  <div class="panel-head">
+    <h2>Know your two sequences</h2>
+    <p class="lede">Check which breathing phase and which contrast you are looking at before drawing anything. T2 nav is a sharp end-exhale snapshot where fluid is bright; 3D Vane is a blurrier, motion-averaged T1 where fluid is dark.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="T2 nav vs 3D Vane">
+    <h3>T2 nav vs 3D Vane at a glance</h3>
+    <div class="tw wide"><table>
+      <tr><th></th><th>T2 nav (T2 3D, navigator-triggered)</th><th>3D Vane (T1 Vane XD)</th></tr>
+      <tr><td>Weighting</td><td>T2 turbo spin echo</td><td>T1 spoiled gradient echo, radial stack-of-stars</td></tr>
+      <tr><td>Breathing state</td><td>End-exhale (diaphragm navigator)</td><td>Free-breathing, motion-averaged (like a slow CT)</td></tr>
+      <tr><td>Fluid (bile, cysts, bowel fluid, urine)</td><td>Bright</td><td>Dark</td></tr>
+      <tr><td>Fat</td><td>Bright (no fat sat)</td><td>Bright</td></tr>
+      <tr><td>Liver vs spleen</td><td>Liver darker than spleen</td><td>Liver brighter than spleen</td></tr>
+      <tr><td>Liver lesions</td><td>Usually best: most mets/HCC mildly bright</td><td>Usually dark; edges blurred by motion</td></tr>
+      <tr><td>Pancreas</td><td>Intermediate, similar to liver</td><td>Relatively bright vs dark fluid-filled duodenum</td></tr>
+      <tr><td>Vessels</td><td>Mostly black flow voids; slow flow grey</td><td>Variable, often bright (inflow)</td></tr>
+      <tr><td>Typical failure</td><td>Irregular breathing → ghosting, stair-step edges, long scan</td><td>Radial streaks, blurring at moving edges</td></tr>
+      <tr><td>CMM gating pairing</td><td>Expiration gating</td><td>Average gating (with bTFE or T1 3D Vane)</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card" data-title="Practical habits">
+    <h3>Practical habits</h3>
+    <ul>
+      <li><b>Match the image to the delivery.</b> T2 nav shows only the exhale position. For free-breathing ITV delivery the 3D Vane (average) position is closer to the time-weighted reality. On Unity CMM, expiration gating is tied to T2 nav and average gating to bTFE or T1 3D Vane.</li>
+      <li><b>Use both when available.</b> Find the lesion and bile ducts on T2 nav; check edges and bowel gas on 3D Vane. If they disagree about organ position, that is breathing, not anatomy.</li>
+      <li><b>Scroll all three planes.</b> Both are 3D acquisitions, so reformats are good. Duodenum, CBD and IVC are far easier to follow coronally.</li>
+      <li><b>Window aggressively.</b> Narrow the window and centre on liver parenchyma; a mildly T2-bright met can vanish on a wide window.</li>
+      <li><b>Grey levels are relative.</b> No Hounsfield units: judge each structure against its neighbours (liver vs spleen, lesion vs liver, fluid vs CSF).</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-signal" data-tab="signal" data-label="Signal cheat sheet" hidden>
+  <div class="panel-head">
+    <h2>What shade is each structure?</h2>
+    <p class="lede">On T2 nav: water white, fat white-grey, solid organs grey, muscle dark grey; flowing blood, air, cortical bone and metal black. On 3D Vane (T1): water flips to dark, fat stays bright, liver and pancreas are the brightest solid organs.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Bile ducts vs vessels">
+    <h3>Bile duct or vessel?</h3>
+    <ul>
+      <li>On T2 nav <b>bile ducts are white</b> and <b>portal veins are black</b>, running side by side in the portal triads.</li>
+      <li>Bright tubes heading to the porta and gallbladder = biliary. On 3D Vane the pattern reverses: ducts dark, vessels often bright.</li>
+      <li>Gas in non-dependent ducts after a stent or sphincterotomy (pneumobilia) is black on both, as are metal stents.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Hepatobiliary and solid organs">
+    <h3>Hepatobiliary and solid organs</h3>
+    <div class="tw wide"><table>
+      <tr><th>Structure</th><th>T2 nav</th><th>3D Vane (T1)</th><th>Recognise it by</th></tr>
+      <tr><td>Bile ducts, CBD</td><td>Bright tubes</td><td>Dark tubes</td><td>Run with portal veins into the porta; CBD descends behind D1 into the pancreatic head</td></tr>
+      <tr><td>Gallbladder</td><td>Very bright (sludge layers darker)</td><td>Dark (concentrated bile can be bright)</td><td>Sac under segments IV/V</td></tr>
+      <tr><td>Pancreatic duct</td><td>Thin bright line</td><td>Dark line</td><td>Joins CBD at the ampulla</td></tr>
+      <tr><td>Liver</td><td>Mid-dark grey, darker than spleen</td><td>Bright grey, brighter than spleen</td><td>Very dark on both if iron-overloaded</td></tr>
+      <tr><td>Spleen</td><td>Brighter than liver</td><td>Darker than liver</td><td>Left upper quadrant, posterolateral</td></tr>
+      <tr><td>Pancreas</td><td>Intermediate, like liver</td><td>Relatively bright (protein)</td><td>Along the splenic vein; head in the duodenal C-loop</td></tr>
+      <tr><td>Kidneys</td><td>Cortex grey, medulla brighter, pelvis bright</td><td>Cortex brighter than medulla</td><td>Fluid in collecting system marks the hilum</td></tr>
+      <tr><td>Adrenals</td><td>Thin dark λ/Y in bright fat</td><td>Grey in bright fat</td><td>Right behind IVC; left anteromedial to upper pole</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card" data-title="Hollow viscera">
+    <h3>Hollow viscera</h3>
+    <div class="tw wide"><table>
+      <tr><th>Structure</th><th>T2 nav</th><th>3D Vane (T1)</th><th>Recognise it by</th></tr>
+      <tr><td>Stomach</td><td>Wall grey; fluid bright; gas black; food mottled</td><td>Wall grey; fluid dark; gas black</td><td>Rugal folds; continuous with GOJ</td></tr>
+      <tr><td>Duodenum</td><td>Wall grey; bright fluid or black gas</td><td>Wall grey; fluid dark</td><td>C-loop round the pancreatic head; D3 between SMA and aorta</td></tr>
+      <tr><td>Jejunum</td><td>Feathery folds outlined by bright fluid</td><td>Grey folds, dark fluid</td><td>Left upper quadrant</td></tr>
+      <tr><td>Ileum</td><td>Smoother, bright fluid</td><td>Smooth, grey</td><td>Right lower quadrant, pelvis</td></tr>
+      <tr><td>Colon</td><td>Haustra; gas black; stool mottled</td><td>Similar; stool often brighter</td><td>Peripheral frame, gas-filled</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card" data-title="Vessels, fat, bone, air and metal">
+    <h3>Vessels, fat, bone, air and metal</h3>
+    <div class="tw wide"><table>
+      <tr><th>Structure</th><th>T2 nav</th><th>3D Vane (T1)</th><th>Note</th></tr>
+      <tr><td>Portal/hepatic veins, IVC, aorta</td><td>Mostly black flow voids</td><td>Often bright (inflow) or grey</td><td>Black tubes beside bright ducts on T2</td></tr>
+      <tr><td>Fat</td><td>Bright</td><td>Bright</td><td>Outlines everything</td></tr>
+      <tr><td>Muscle, diaphragm, crura</td><td>Dark grey</td><td>Grey</td><td>Crura are dark bands hugging the aorta</td></tr>
+      <tr><td>Air, bowel gas, lung</td><td>Black</td><td>Black</td><td>Blooming at the edge</td></tr>
+      <tr><td>Cortical bone</td><td>Black</td><td>Black</td><td>Marrow bright on both (fat)</td></tr>
+      <tr><td>Fiducials, clips, stents</td><td>Black void, larger than the object</td><td>Black, more blooming on GRE</td><td>Metal stent = long black tube; plastic = thin dark line</td></tr>
+      <tr><td>CSF</td><td>Very bright</td><td>Dark</td><td>Your internal pure-fluid reference</td></tr>
+    </table></div>
+  </article>
+</section>
+
+<section class="panel" id="p-pitfalls" data-tab="pitfalls" data-label="Pitfalls" hidden>
+  <div class="panel-head">
+    <h2>Common pitfalls and artefacts</h2>
+    <p class="lede">Most daily contouring errors on the MR-linac come from mistaking breathing position or artefact for anatomy, or one tube for another.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Pitfalls and fixes">
+    <h3>Pitfalls and fixes</h3>
+    <div class="tw wide"><table>
+      <tr><th>Pitfall</th><th>What you see</th><th>What to do</th></tr>
+      <tr><td>Exhale vs average position</td><td>Organs higher/lower between T2 nav and 3D Vane</td><td>Treat as respiratory position; match the image to how you deliver</td></tr>
+      <tr><td>Navigator mistriggering</td><td>Stair-step edges, ghosting, blurred dome</td><td>Check reformats; rescan or use 3D Vane</td></tr>
+      <tr><td>Radial streaks (3D Vane)</td><td>Fine lines across the image</td><td>Usually cosmetic; don't contour them</td></tr>
+      <tr><td>Susceptibility at gas, clips, stents</td><td>Black blooming larger than the object</td><td>Contour the anatomical wall, not the void edge; check the other sequence</td></tr>
+      <tr><td>Flow artefact</td><td>Ghost of aorta/IVC repeated along the phase direction</td><td>A copy of a vessel, not a lesion</td></tr>
+      <tr><td>Chemical shift</td><td>Bright/dark band at kidney or bowel–fat edges</td><td>A pixel or two; don't move borders for it</td></tr>
+      <tr><td>Bile duct taken for vessel</td><td>Bright tube near the porta</td><td>Bright on T2 = bile; black = portal vein</td></tr>
+      <tr><td>Duodenum taken for pancreas</td><td>Collapsed D2/D3 looks solid</td><td>Follow it as a tube; check T1 where pancreas is brighter</td></tr>
+      <tr><td>Collapsed vs distended stomach</td><td>Wall position changes between fractions</td><td>Edit near the PTV; record filling if it affects dose</td></tr>
+      <tr><td>Mucinous/NET mets look like cysts</td><td>Very bright on T2</td><td>Check the reference GTV and diagnostic imaging</td></tr>
+      <tr><td>Field-of-view edge distortion</td><td>Body outline warps peripherally</td><td>Check external contour per physics protocol</td></tr>
+    </table></div>
+  </article>
+</section>

@@ -137,6 +137,13 @@ PALL = [
  ('pall-bone-spine.html','Bone, cord & spine SBRT','Bone metastases, cord compression and spine SBRT','8/1 vs multiple fractions, SC.24, MSCC (NOMS, SINS, SCORAD), HyTEC cord limits, VCF.'),
  ('pall-oligo.html','Oligomets & palliation','Oligometastases and general palliation','SABR-COMET, CURB, NRG-LU002; palliative regimens for lung, SVC, H&N, bleeding, liver and coeliac plexus.'),
 ]
+MRL = [
+ ('mrl-images.html','Sequences & signal','MR-linac sequences and signal','T2 nav vs 3D Vane, what shade each organ is (biliary tree, stomach, duodenum, vessels), pitfalls and artefacts.'),
+ ('mrl-liver-gi.html','Liver & upper GI','MR-linac liver and upper GI','Liver lesion appearance by type, Couinaud orientation for liver SABR, duodenum D1–D4, stomach, bowel and pancreas.'),
+ ('mrl-pelvis.html','Pelvis','MR-linac pelvis','Prostate zones, apex, SVs, spacer, rectal wall, cervix and uterus, nodes vs vessels on T2.'),
+ ('mrl-workflow.html','Adaptive workflow','MR-linac adaptive workflow and resources','ATP vs ATS, editing propagated contours, gas and bulk density, atlases and papers.'),
+]
+FOOT_MRL = '<footer><p>Practical MR-linac (Elekta Unity) delineation tips written for T2 navigator-triggered and T1 3D Vane images. Signal descriptions are typical, not absolute; always compare with diagnostic imaging and the reference plan. Follow departmental MR-linac and physics protocols.</p></footer>'
 try:
     from groups_extra import EXTRA
 except ImportError:
@@ -153,6 +160,7 @@ GROUPS = [
  ('sarcoma','Sarcoma','Sarcoma',SARCOMA,mkfoot('Sarcoma/Musculoskeletal','NCCN, ASTRO, ESMO')),
  ('thorax','Thorax','Thorax',THORAX,mkfoot('Thorax','NCCN, ASTRO, ASCO')),
  ('pall','Palliative','Palliative & oligometastases',PALL,mkfoot('Brain Mets/Palliative/Oligo/Immuno','NCCN, ASTRO, ASCO')),
+ ('mrl','MR-linac','MR-linac',MRL,FOOT_MRL),
 ] + EXTRA
 for gid,gname,_,pages,foot in GROUPS:
     for g in pages:
