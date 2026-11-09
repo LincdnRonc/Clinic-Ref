@@ -118,6 +118,7 @@ HN = [
 CNS = [
  ('cns-glioma.html','Glioma','Glioma (adult)','GBM by age and PS (Stupp, Perry, 25/5), volumes, IDH-mutant grade 2–3 (RTOG 9802, CATNON, INDIGO), re-irradiation.'),
  ('cns-benign.html','Benign & functional','Benign and functional CNS','Meningioma (ROAM, RTOG 0539), vestibular schwannoma SRS, pituitary, optic tolerance, AVM, trigeminal neuralgia.'),
+ ('cns-vs.html','Vestibular schwannoma','Vestibular schwannoma','Surveillance vs SRS vs surgery by Koos grade, work-up and hearing classes, SRS doses and cochlear limits, consent numbers, V-REX and ACOUNEU.'),
  ('cns-general.html','Eye & tolerances','Uveal melanoma and CNS tolerances','COMS sizes and plaque dosing, brain necrosis, optic, hippocampal, lens and lacrimal limits.'),
  ('peds-cns.html','Paediatric CNS','Paediatric CNS','Medulloblastoma risk groups and CSI, ependymoma, germ cell tumours, craniopharyngioma, LGG and DIPG.'),
  ('peds-solid.html','Paediatric solid tumours','Paediatric solid tumours','RMS dose by group, Ewing sarcoma, Wilms flank/abdomen/lung, neuroblastoma, retinoblastoma.'),

@@ -85,6 +85,10 @@ EVIQ = {
   ('', 'All eviQ neurological radiation oncology protocols', CAT + 'Neurological'),
   ('', 'All eviQ stereotactic protocols', CAT + 'Stereotactic'),
  ],
+ 'cns-vs.html': [
+  ('', 'All eviQ stereotactic protocols', CAT + 'Stereotactic'),
+  ('', 'All eviQ neurological radiation oncology protocols', CAT + 'Neurological'),
+ ],
  'cns-general.html': [
   ('', 'All eviQ neurological radiation oncology protocols', CAT + 'Neurological'),
  ],
