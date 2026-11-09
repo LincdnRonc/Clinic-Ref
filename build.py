@@ -140,6 +140,7 @@ PALL = [
 MRL = [
  ('mrl-images.html','Sequences & signal','MR-linac sequences and signal','T2 nav vs 3D Vane, what shade each organ is (biliary tree, stomach, duodenum, vessels), pitfalls and artefacts.'),
  ('mrl-liver-gi.html','Liver & upper GI','MR-linac liver and upper GI','Liver lesion appearance by type, Couinaud orientation for liver SABR, duodenum D1–D4, stomach, bowel and pancreas.'),
+ ('mrl-tumour-nodes.html','Tumours & nodes','MR-linac tumours and involved nodes','Involved node features and size thresholds, node vs vessel vs bowel, pancreas, biliary, gastric, rectal, prostate and cervix GTVs on T2 and 3D Vane.'),
  ('mrl-pelvis.html','Pelvis','MR-linac pelvis','Prostate zones, apex, SVs, spacer, rectal wall, cervix and uterus, nodes vs vessels on T2.'),
  ('mrl-workflow.html','Adaptive workflow','MR-linac adaptive workflow and resources','ATP vs ATS, editing propagated contours, gas and bulk density, atlases and papers.'),
 ]
