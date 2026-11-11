@@ -7,6 +7,14 @@ The source is one big Word table per tumour group: a full-width row is a group o
 subsite heading, every other row holds topic cells (Epi, Path, Mgmt, EBRT, ...).
 Each subsite becomes a tab and each cell a card. Text is reproduced as written
 (apart from tumor -> tumour); figures are not copied, a note marks where one sits.
+
+Formatting is applied by rule, not copied from the source's (uneven) bolding:
+  h4 (accent colour): lines ending in ':', section words (Staging, Volumes...), short lines
+      followed by a list ('Basal type'), numbered steps ('1. Surgery'), trial-name lines
+      ('EORTC 22922', 'AMAROS – RT instead of ALND') and any line followed by 'P:'.
+  bold: the leading 'Label:' of a line (P:, I:, O:, Dose:, Luminal A:) and trial names
+      anywhere in the text (TRIAL_WORDS, TRIAL_PHRASES and cooperative-group + number).
+  dose chips: 50Gy/25# style doses.  Add missing trial names to TRIAL_WORDS / TRIAL_PHRASES.
 """
 import sys, re, html, pathlib
 import docx
@@ -144,6 +152,84 @@ def ausp(s):
     s = re.sub(r'\b([Tt])umor', r'\1umour', s)
     return re.sub(r'\bTUMOR', 'TUMOUR', s)
 
+
+# ---- consistent inline formatting (source bold is ignored: it was applied unevenly) ----
+TRIAL_WORDS = [  # matched case-sensitively, as whole words
+ 'ADAURA','ADRIATIC','AEGEAN','ALINA','AMAROS','ARASENS','ART-DECO','ARTDECO','ASCENDE-RT','AVATAR','BART','BC2001','BCON',
+ 'BILCAP','C-POST','CARMENA','CASPIAN','Caspian','CATNON','CHAARTED','CHHiP','CHISEL','CODEL','COMBI-AD','CONTINUUM','CONVERT',
+ 'CREST','CRITICS','CROSS','CURB','DART','DIAMOND','EBCTCG','EMBARK','ENCEPHALON','ENZAMET','ESOPEC','EUROPA','EXTEND','FABREC',
+ 'Fabrec','FROLIS','FLAME','FLYER','HEARTBEAT','HORRAD','HYBRID','HYPNO','HYPORT-STS','HYPO-RT-PC','INDIGO','INSEMA','INSEMNA',
+ 'Insema','INTERLACE','IMpower133','LACC','LANA-1','LATITUDE','LAURA','LUSTRE','MAGIC','MARCH','MATTERHORN','MERCURY','NADINA',
+ 'NICHE','NIAGARA','OCAT','OLIGOMA','OPRA','ORATOR','ORIOLE','OUTBACK','PACIFIC','PET-PLAN','PIVOT','POLCAGB','POP-RT','POSEIDON',
+ 'PROSPECT','PROTECT','ProtecT','PROTEUS','QUARTZ','RADICALS','RADIOSA','RAIDER','RAPCHEM','RAPIDO','RAVES','ROADS','ROSEL','RUBY',
+ 'SABR-COMET','SANO','SENOMAC','Senomac','SHERBERT','SINODAR-ONE','SMART','SOUND','Sound','SPAN-C','SPPORT','STAMPEDE','STARS',
+ 'STOMP','STOPCAP','STRASS','STREXIT','SUPREMO','SURTIME','THORA','TOPGEAR','VALSG','VISION','VORTEX','WOLVERINE','iROCK','IROCK',
+ 'iSABR','ARTISTIC','DBCG','ACCORD','CAPP','Codel','De-escalate','Doremy','FORT','Florence','GORTEC','LYSA','Landoni',
+ 'Mammosite','MINDACT','POST','ProPSMA','ROCS','SEMPET','Treasure','UNFOLDER','B24','DELPHI-306','STELLAR','VESPER','Oligoma',
+ 'Trendy','TRENDY','I-MAT','TARGIT','sweDCIS','TAM-01','Bonner','Hoskin','Lowry','NOVEL','HYPO-PMRT','DADSPPORT','MARCAP','GROINSS-V','Senti-MERORL','TARGIT-A','SKAGEN','EORTC','EMBRACE','RetroEMBRACE',
+]
+TRIAL_PHRASES = [  # matched case-insensitively
+ 'RT CHARM','IMPORT HIGH','IMPORT LOW','FAST-FORWARD','FAST FORWARD','FASTRACK II','PRIME II','UK START B','START B','START A',
+ 'LUNG-ART','LUNG ART','MARS II','PEACE V STORM','NON BELIEVERS','DUTCH TME','STOCKHOLM III','VA LARYNX','NEO-AEGIS','SCORAD III',
+ 'SC.24','GROINSS VII','GROINSS-V II','HOSKIN TRIAL','LOWRY TRIAL','CHINESE NCC','MILAN','PATCHELL','TOPAZ-1','RASOLUTE 302',
+ 'SAKK 01/10','SAK 01/10','SAKK 17/04','TROG BIG 07.01','TROG BIG','DBCG IMN 2','DBCG-IMN','DBCG IMN','CALGB/ALLIANCE 140503',
+ 'ESO-SHANGHAI','EMBRACE II','EMBRACE I','DBCG SKAGEN','NEOCRTEC5010','ROAM','EXPERT',
+]
+_GRP = (r'RTOG|NRG[\s-]?[A-Z]{2}|NRG|EORTC|TROG|CALGB|NSABP(?:[\s-]?B)?|ECOG(?:\s?E)?|SWOG(?:\s?S)?|JCOG|GOG|ACOSOG[\s-]?Z|DBCG|NCIC(?:\s?[A-Z]{2}\.)?|CCTG|'
+        r'Alliance|NCCTG\s?N|INT|Intergroup|GHSG\s?HD|HD|KEYNOTE|Keynote|CHECKMATE|CheckMate|Checkmate|PORTEC|PACE|PREOPANC|PRODIGE|SARC|ESPAC|'
+        r'CONKO|IESLG|FLOT|ACNS|AREN|ANBL|ARST|AEWS|NOA|GETUG(?:-AFU)?|ARTIST|ACT|NADIM|PEACE|PLATO|SIOP|UKCCCR\s?ACT|TROG\s?BIG|EV|CE|LAP')
+TRIAL_RE = re.compile(
+    r'(?<![\w-])(?:'
+    + r'(?:' + _GRP + r')[\s\-.]?(?:[A-Z]{1,2}(?=\d)|[A-Z](?=\s|$|[,);:]))?\d(?:[\d.\-/]*\d)?[A-Za-z]?(?:\s?(?:I{1,3}|IV)\b)?'   # group + number
+    + r'|(?:PACE|ACT|PEACE)\s?(?:[A-C]|I{1,3}|IV|[1-5])\b'
+    + r'|[ESN]\d{4}[A-Z]?|N\d{3}[A-Z]|Z-?0?0?11|MA[.\s]?(?:20|17)'
+    + r'|' + '|'.join(sorted((re.escape(w) for w in TRIAL_WORDS), key=len, reverse=True))
+    + r')(?![\w-])')
+TRIAL_CI = re.compile(r'(?<![\w-])(?:' + '|'.join(sorted((re.escape(w).replace(r'\ ', r'\s') for w in TRIAL_PHRASES), key=len, reverse=True)).replace('MILAN', r'MILAN(?!\s+criteria)') + r')(?![\w-])', re.I)
+# words that look like group+number but are not trials
+NOT_TRIAL = re.compile(r'^(?:E\d|S\d|N\d|Z\d{1}$|HD\d?$|CE\d|MA\d{2,}|INT\d?$|ACT\d|EV\d?$|N[0-3][a-c]?$|E[1-9]$|S[0-9]$)')
+def _trial_ok(m):
+    t = m.group(0)
+    if t.startswith('ECOG') and not re.search(r'\d{4}', t): return False   # ECOG 0-1 = performance status
+    if re.fullmatch(r'[ESNZ]\d+[A-Za-z]?', t):          # E3311 / S1001 / N107C / Z0011 / Z11
+        return bool(re.fullmatch(r'Z0?0?11|[ESN]\d{3,}[A-Z]?', t)) and t != 'S100'
+    if re.fullmatch(r'(?:HD|CE|EV|MA|INT|LAP)[\s.-]?\d+', t):
+        return bool(re.fullmatch(r'(?:HD[\s-]?1\d|CE\.?6|EV-?30\d|MA[.\s]?20|MA[.\s]?17|INT[\s-]?0\d{3}|LAP[\s-]?0?7)', t))
+    if re.fullmatch(r'(?:ACT)[\s-]?\d.*', t): return False
+    return True
+def _outside_tags(h, fn):
+    parts = re.split(r'(<b>.*?</b>|<span class="d">.*?</span>|<[^>]+>)', h)
+    return ''.join(p if (i % 2) else fn(p) for i, p in enumerate(parts))
+def bold_trials(h):
+    def one(seg):
+        seg = TRIAL_CI.sub(lambda m: f'<b>{m.group(0)}</b>', seg)
+        return _outside_tags(seg, lambda s2: TRIAL_RE.sub(lambda m: f'<b>{m.group(0)}</b>' if _trial_ok(m) else m.group(0), s2))
+    return _outside_tags(h, one)
+LABEL_RE = re.compile(r'^([A-Z0-9][A-Za-z0-9 /&+()\-–≤≥.,\'’]{0,26}?)\s?:(?=\s|$)')
+def fmt_inline(text, label=True):
+    h = ausp(html.escape(text.strip()))
+    if label:
+        m = LABEL_RE.match(h)
+        if m and not re.fullmatch(r'\d+', m.group(1)):
+            h = f'<b>{m.group(1)}:</b>' + h[m.end():]
+    h = bold_trials(h)
+    h = _outside_tags(h, dose)
+    h = h.replace('</b><b>', '').replace('\n', '<br>')
+    return h
+def starts_with_trial(text):
+    """True if the line is a trial heading: a trial name, optionally followed by a short qualifier."""
+    h = bold_trials(html.escape(text.strip()))
+    m = re.match(r'^<b>[^<]+</b>', h)
+    if not m: return False
+    rest = re.sub(r'<[^>]+>', '', h[m.end():]).strip()
+    return rest == '' or bool(re.match(r'^(?:[–\-:/&(,]|trial|et al|vs\b|and\b|\d|[A-Z]{2,}|\w+\)?\s*$)', rest)) and len(text) <= 70
+
+SECTION_WORDS = {'rf','rfs','risk factors','staging','pathology','path','ddx','work-up','workup','work up','mgmt','management','toxicities',
+ 'toxicity','volumes','oars','sim','simulation','dose','f/u','follow-up','follow up','fu','prognosis','evidence','trials','natural hx',
+ 'natural history','presentation','screening','investigations','ix','ihc','molecular','genetics','technique','planning','pre-invasive',
+ 'invasive','subtypes','classification','anatomy','epi','biological subtypes','gene panel','genetic testing','acute','late','side effects',
+ 'indications','contraindications','treatment','surveillance','imaging','examination','history','diagnosis','histology','pathophysiology'}
+
 class Conv:
     def __init__(self, path):
         self.d = docx.Document(path)
@@ -199,14 +285,10 @@ class Conv:
                 out.append((cur, curb)); cur = ''
             cur += s; curb = b
         if cur: out.append((cur, curb))
-        h = ''
-        for s, b in out:
-            e = dose(ausp(html.escape(s))).replace('\n', '<br>')
-            if b and s.strip(): h += f'<b>{e}</b>'
-            else: h += e
+        h = fmt_inline(text) if text.strip() else ''
         allbold = bool(out) and all(b for s, b in out if s.strip())
         ppr = p.find(qn('w:pPr'))
-        lvl, fmt = None, None
+        lvl, fmt, nid = None, None, None
         if ppr is not None:
             np_ = ppr.find(qn('w:numPr'))
             if np_ is not None and np_.find(qn('w:numId')) is not None:
@@ -214,6 +296,8 @@ class Conv:
                 il = np_.find(qn('w:ilvl')); il = il.get(qn('w:val')) if il is not None else '0'
                 if nid != '0':
                     lvl, fmt = int(il), self.numfmt.get((nid, il), 'bullet')
+                else:
+                    nid = None
         imgs = len(list(p.iter(A_BLIP)))
         boxes = []
         for ch in p.iter(MC + 'Choice'):
@@ -221,7 +305,7 @@ class Conv:
                 for bp in tb.findall(qn('w:p')):
                     t = ''.join(s for s, _ in self.runs(bp)).strip()
                     if t: boxes.append(t)
-        return dict(text=text.strip(), html=h.strip(), bold=allbold, lvl=lvl, fmt=fmt, imgs=imgs, boxes=boxes)
+        return dict(text=text.strip(), html=h.strip(), bold=allbold, lvl=lvl, fmt=fmt, nid=nid, imgs=imgs, boxes=boxes)
 
     # ---- block content of a table cell ----
     def blocks(self, tc):
@@ -239,7 +323,7 @@ class Conv:
             cells = []
             for tc in tr.findall(qn('w:tc')):
                 ps = [self.para(p) for p in tc.iter(qn('w:p'))]
-                cells.append('<br>'.join(p['html'] for p in ps if p['html']))
+                cells.append('<br>'.join(fmt_inline(p['text'], label=False) for p in ps if p['text']))
             if any(cells): rows.append(cells)
         if not rows: return ''
         n = max(len(r) for r in rows)
@@ -252,38 +336,76 @@ class Conv:
         return ''.join(out)
 
     def render(self, items):
-        """items -> (title, html). Title = first short heading-like line."""
-        out, stack, title = [], [], None
-        def close_to(level):
-            while len(stack) > level:
-                out.append('</li></' + stack.pop() + '>')
-        imgnote = False
+        """items -> (title, html). Title = first short heading-like line.
+        Headings (h4) are decided by rule, not by the source's bolding:
+          - a short line ending in ':' (or a known section word such as Staging, Volumes)
+          - a short line followed directly by a list (e.g. '1. Surgery', 'Basal type')
+          - a trial name line (e.g. 'EORTC 22922', 'AMAROS – RT instead of ALND') or any line followed by 'P:'
+        Lines typed with a leading dash become list items."""
+        blocks, title, imgnote = [], None, False
         for kind, x in items:
             if kind == 't':
-                close_to(0); out.append(self.mini_table(x)); continue
-            p = x
+                blocks.append(('raw', self.mini_table(x))); continue
+            p = dict(x)
             if p['imgs']: imgnote = True
             for b in p['boxes']:
-                if len(b) >= 25:
-                    close_to(0); out.append(f'<p class="box">{dose(ausp(html.escape(b)))}</p>')
-            if not p['html']: continue
+                if len(b) >= 25: blocks.append(('raw', f'<p class="box">{fmt_inline(b)}</p>'))
+            t = p['text']
+            if not t: continue
+            if p['lvl'] is None and re.match(r'^[-•▪]\s*\S', t):
+                t = re.sub(r'^[-•▪]\s*', '', t)
+                p.update(text=t, html=fmt_inline(t), lvl=0, fmt='bullet')
             if title is None and p['lvl'] is None:
-                t = p['text']
                 m = re.match(r'^([A-Za-z][^:\n]{0,38}?)\s*:\s*(.*)$', t, re.S)
                 if len(t) <= 40:
                     title = t.rstrip(':').strip(); continue
                 if m and m.group(2):
                     title = m.group(1).strip()
-                    rest = re.sub(r'^(<b>)?' + re.escape(html.escape(m.group(1))) + r'\s*:?\s*(</b>)?\s*:?\s*', '', p['html'])
-                    out.append(f'<p>{rest}</p>'); continue
+                    rest = m.group(2).strip()
+                    blocks.append(('p', dict(p, text=rest, html=fmt_inline(rest)))); continue
                 title = ' '.join(t.split()[:4])
-            if p['lvl'] is not None:
+            blocks.append(('li' if p['lvl'] is not None else 'p', p))
+        # Word numbered steps (1., 2., ...) that carry their own bullet sub-points become numbered headings,
+        # matching the typed '1. Surgery' style; long ones stay list items with the bullets nested under them.
+        ORD = ('decimal', 'lowerLetter', 'lowerRoman', 'upperLetter', 'upperRoman')
+        counters, shift = {}, None
+        for n, (k, p) in enumerate(blocks):
+            if k != 'li': shift = None; continue
+            if p['fmt'] in ORD:
+                key = (p['nid'], p['lvl'])
+                counters[key] = counters.get(key, 0) + 1
+                nk2 = blocks[n + 1] if n + 1 < len(blocks) else (None, None)
+                has_sub = nk2[0] == 'li' and (nk2[1]['lvl'] > p['lvl'] or (nk2[1]['lvl'] == p['lvl'] and nk2[1]['fmt'] not in ORD))
+                if has_sub and p['lvl'] == 0 and len(p['text']) <= 80:
+                    t = f"{counters[key] if p['fmt'] == 'decimal' else chr(96 + counters[key])}. {p['text']}"
+                    blocks[n] = ('p', dict(p, text=t, html=fmt_inline(t), lvl=None, numhead=True))
+                    shift = None
+                elif has_sub:
+                    shift = p['lvl']
+                else:
+                    shift = None
+            elif shift is not None and p['lvl'] == shift:
+                p['lvl'] = shift + 1
+        out, stack = [], []
+        def close_to(level):
+            while len(stack) > level:
+                out.append('</li></' + stack.pop() + '>')
+        NUM = re.compile(r'^\d{1,2}\s?[.)]\s?[A-Za-z]')
+        num_idx = [n for n, (k, p) in enumerate(blocks) if k == 'p' and NUM.match(p['text']) and len(p['text']) <= 55]
+        num_head = any(n + 1 < len(blocks) and blocks[n + 1][0] == 'li' for n in num_idx)
+        for n, (kind, p) in enumerate(blocks):
+            if kind == 'raw':
+                close_to(0); out.append(p); continue
+            if kind == 'li':
                 lv = p['lvl'] + 1
                 tag = 'ol' if p['fmt'] in ('decimal', 'lowerLetter', 'lowerRoman', 'upperLetter', 'upperRoman') else 'ul'
                 if len(stack) < lv:
                     while len(stack) < lv:
-                        out.append(f'<{tag}><li>' if len(stack) == lv - 1 else '<ul><li>'); stack.append(tag if len(stack) == lv - 1 else 'ul')
+                        last = len(stack) == lv - 1
+                        out.append(f'<{tag}><li>' if last else '<ul><li>'); stack.append(tag if last else 'ul')
                     out.append(p['html'])
+                elif stack[lv - 1] != tag:
+                    close_to(lv - 1); out.append(f'<{tag}><li>' + p['html']); stack.append(tag)
                 else:
                     close_to(lv); out.append('</li><li>' + p['html'])
                 continue
@@ -291,8 +413,27 @@ class Conv:
             t = p['text']
             if re.fullmatch(r'[_\-–—=*. ]{5,}', t):
                 out.append('<hr>'); continue
-            if (p['bold'] or (t.endswith(':') and len(t) < 50)) and 4 <= len(t) <= 60:
-                out.append(f'<h4>{p["html"]}</h4>')
+            nxt = blocks[n + 1] if n + 1 < len(blocks) else (None, None)
+            nk, nt = nxt[0], (nxt[1]['text'] if nxt[0] in ('p', 'li') else '')
+            core = t.rstrip(': ').strip()
+            single = bool(re.fullmatch(r'[A-Z]', core))
+            colon_label = t.endswith(':') and 3 <= len(t) <= 60 and not single and '\n' not in t
+            section = core.lower() in SECTION_WORDS
+            before_list = nk == 'li' and len(t) <= 45 and not t.endswith('.') and not re.search(r'\S:\s+\S', t) and not single and t.count(',') < 2
+            mnemonic = nk == 'p' and len(t) <= 40 and re.match(r'^[A-Z]\s?[-–]\s?\w', nt) and not re.match(r'^[A-Z]\s?[-–]', t)
+            topic = len(t) <= 45 and not re.search(r'[<>≤≥%]|\dGy|\bvs\b', t) and (
+                re.search(r'\b(scores?|staging|stage|grading|classification|criteria|outcomes|histology|groups|assay|types|borders|subtypes|algorithm|stratification)\b\)?$', t, re.I)
+                or re.match(r'^Mgmt\s?[–-]', t)
+                or re.fullmatch(r'(Low|Intermediate|High|Very high|Favourable|Unfavourable) risk|Resectable|Unresectable|Borderline resectable|Primary|Outcomes|Prognosis|Advanced stage|Early stage|Grade \d|WHO G\d|\d+ ?yr OS', t.strip(' :–-'), re.I))
+            trial = (starts_with_trial(t) and not t.endswith('.') and not re.search(r':\s+\S', t)) \
+                    or (nk == 'p' and re.match(r'^P\s?:', nt) and len(t) <= 70 and not re.match(r'^[A-Z]\s?:', t))
+            statement = re.search(r'[<>≤≥%]|\dGy|\b(is|are|was|were|has|have|can|should|shows?|showed|presents?)\b', t)
+            if before_list and statement: before_list = False
+            letter_label = re.match(r'^(?:[A-Z0-9]\s?[:\-–]\s|[A-Z] [A-Z][a-z])', t)
+            numbered = (num_head and n in num_idx) or p.get('numhead')
+            if numbered: core = re.sub(r'^(\d{1,2})\s?([.)])\s?', r'\1\2 ', core)
+            if numbered or (not letter_label and (colon_label or section or before_list or trial or mnemonic or topic)):
+                out.append(f'<h4>{dose(ausp(html.escape(core if not t.endswith(")") else t.strip())))}</h4>')
             else:
                 out.append(f'<p>{p["html"]}</p>')
         close_to(0)
