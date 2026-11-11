@@ -21,3 +21,13 @@
 - TG-263 names to confirm against the worksheet: Chestwall, GreatVes / A_Aorta / V_Venacava_I, Bile_Duct_Common, V_Portal. Confirm the 16-character limit and z-prefix rule in the report itself (taken from a secondary summary).
 - MR-linac re-contouring zone (3 cm radial / 2 cm CC) is adopted from a single-fraction SMART protocol in pancreas; needs departmental sign-off for liver.
 - Oesophagus cranial extent ("2–3 slices above the PTV") is a placeholder; set departmentally.
+
+## Palliative: WBRT principles (pall-wbrt.html), Nov 2026
+- Source is an evidence synthesis (trial abstracts, news reports of ASTRO/WCLC 2026), not RadOncReview. NRG CC009 and MAVERICK are conference data; update when published.
+- NRG CC001 6-month cognitive failure: the JCO 2020 / ASCO Post figure 68.2 → 59.5% is used. The SNO 2018 preliminary report gave 69.1 → 58.0%. pall-brain.html currently quotes 63 → 55%; harmonise.
+- Cochrane 2018 lower-BED HR 1.21: check which schedules fall in that comparison (mainly ultra-rapid 10/1, 12/2). eviQ 1251 says 20/5 is neither inferior nor superior to higher doses.
+- DeAngelis 1989: "no dementia with ≤3 Gy per fraction" comes from a secondary review; check the original.
+- HA-WBRT constraints: only hippocampus D100% ≤9 Gy, Dmax ≤16 Gy and PTV D98% ≥25 Gy are quoted. Add the full CC001 table (PTV D2%, V30, optic structures) from the protocol if wanted.
+- Re-irradiation (20/10) and PCNSL 23.4/13 are common practice, not trial-quoted figures here; check against departmental and haematology protocols.
+- Hair regrowth timing (2–3 months) and the somnolence window are general textbook values.
+- Amantadine: no RCT in brain RT; the dose is standard Parkinson's/TBI dosing. Check the AU product information for renal dosing.

@@ -135,6 +135,7 @@ SARCOMA = [
 ]
 PALL = [
  ('pall-brain.html','Brain metastases','Brain metastases','SRS vs WBRT, SRS dose by size, cavity SRS, HA-WBRT + memantine, necrosis limits, QUARTZ.'),
+ ('pall-wbrt.html','WBRT principles','Whole-brain radiotherapy principles','Who still needs WBRT, 20/5 vs 30/10 vs PCI doses, HA technique, memantine and amantadine, acute/subacute/late toxicity timeline, consent rates.'),
  ('pall-bone-spine.html','Bone, cord & spine SBRT','Bone metastases, cord compression and spine SBRT','8/1 vs multiple fractions, SC.24, MSCC (NOMS, SINS, SCORAD), HyTEC cord limits, VCF.'),
  ('pall-oligo.html','Oligomets & palliation','Oligometastases and general palliation','SABR-COMET, CURB, NRG-LU002; palliative regimens for lung, SVC, H&N, bleeding, liver and coeliac plexus.'),
 ]

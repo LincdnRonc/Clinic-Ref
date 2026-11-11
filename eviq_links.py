@@ -112,6 +112,10 @@ EVIQ = {
   ('3882', 'Brain metastases hippocampal avoidance whole brain', p('palliative/3882-palliative-brain-metastases-ebrt-hippocampal')),
   ('1251', 'Brain metastases whole brain', p('palliative/1251-brain-metastases-palliative-ebrt-whole-brain')),
  ],
+ 'pall-wbrt.html': [
+  ('1251', 'Brain metastases whole brain', p('palliative/1251-brain-metastases-palliative-ebrt-whole-brain')),
+  ('3882', 'Brain metastases hippocampal avoidance whole brain', p('palliative/3882-palliative-brain-metastases-ebrt-hippocampal')),
+ ],
  'pall-bone-spine.html': [
   ('268', 'Bone metastases palliative EBRT', p('palliative/268-palliative-bone-metastases-ebrt')),
   ('296', 'Spinal cord compression palliative EBRT', p('palliative/296-palliative-spinal-cord-compression-ebrt')),
