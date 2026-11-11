@@ -15,7 +15,8 @@
 - Brainstem surface point dose (<12–14 Gy single fraction) is common practice, not from a single guideline; check departmental SRS protocol.
 
 ## Liver SBRT OAR protocol (contouring/liver-sbrt.html), v1.0 Nov 2026
-- Built from abstracts and open-access manuscripts; the Jabbour 2014 and Lukovic 2020 full texts were not available. Section 3 organ border tables use anatomical landmarks and are marked check: confirm against Jabbour Table 2 and the Lukovic figures, then remove the flags.
+- v1.1: Section 3 rewritten from the Jabbour 2014 author manuscript (PMC4285338). Jabbour has no border table; its definitions are in the text, and Table 1 gives kappa values. Resolved: liver portal-vein/IVC/gallbladder rules, whole duodenum to the ligament of Treitz, loops not bowel bag, renal pelvis included, chest wall = liver + lung expanded 2 cm (no sternum or vertebral bodies), CBD extent.
+- Still open from Section 3: oesophagus and heart borders (Jabbour gives contours but no written rule; check against Kong 2011 RTOG thoracic atlas); small/large bowel cranio-caudal extent (departmental); Lukovic 2020 full text for MRI-specific tips (the ScienceDirect link supplied had expired; needs the PDF uploaded).
 - UK SABR 2022 (Diez) Tables 2–5 were read from the accepted manuscript, whose extracted text flattens the optimal/mandatory columns. Every value marked check in Section 8 needs its column confirmed in the published tables (stomach, duodenum, small and large bowel 3 fx; liver 5 fx mean 13 vs 15.2; CBD 50 Gy; combined kidney; heart second values; spinal canal 20.3/25.3).
 - Osmundson 2015: PMID not yet verified (library uses a title search). Check from the methods whether the cHBT was cropped by GTV/PTV.
 - TG-263 names to confirm against the worksheet: Chestwall, GreatVes / A_Aorta / V_Venacava_I, Bile_Duct_Common, V_Portal. Confirm the 16-character limit and z-prefix rule in the report itself (taken from a secondary summary).
