@@ -114,6 +114,13 @@ LIB = [
   (2025,'NRG pancreatic dose-escalation contouring atlas','Sanford · IJROBP','Ablative pancreas volumes and OARs.','pm:39510320',False),
   (2014,'RTOG upper abdominal normal-organ contouring atlas','Jabbour · Pract Radiat Oncol','Liver, kidneys, stomach, bowel, duodenum.','pm:24890348',True),
  ]),
+ ('Liver SBRT and MRI upper abdominal OARs',[
+  (2020,'MRI-based upper abdominal organs-at-risk atlas','Lukovic · IJROBP','Hepatobiliary-phase and bSSFP plus MR-linac sequences; biliary tree on MRI. DICOM sets on econtour.org. Used in our liver SBRT OAR protocol.','pm:31953061',True),
+  (2015,'Predictors of toxicity of SBRT to the central hepatobiliary tract','Osmundson · IJROBP','Defines cHBT: portal vein (splenic confluence to first bifurcation) + 15 mm; V40/V37.7 limits.','q:Predictors of toxicity associated with stereotactic body radiation therapy to the central hepatobiliary tract',True),
+  (2017,'Central liver toxicity after SBRT: expanded analysis and nomogram','Toesca · Radiother Oncol','15 mm portal vein expansion confirmed as cHBT surrogate; limits for primary liver cancer.','pm:27865544',False),
+  (2021,'HyTEC: radiation dose-volume effects for liver SBRT','Miften · IJROBP','Exclude GTV from liver; report absolute volumes; NTCP for liver and GI.','pm:29482870',False),
+  (2022,'UK 2022 consensus on normal tissue constraints for SABR','Diez · Clin Oncol','Liver, luminal GI, bile duct and kidney limits for 3 and 5 fx; bony canal surrogate.','pm:35272913',True),
+ ]),
  ('Rectum and anus',[
   (2016,'International consensus guidelines on CTV delineation in rectal cancer','Valentini · Radiother Oncol','Subsites (mesorectum, presacral, internal iliac, obturator, external iliac, inguinal, ischiorectal) and when to include them.','q:Valentini international consensus guidelines on clinical target volume delineation in rectal cancer',True),
   (2006,'Definition and delineation of CTV for rectal cancer','Roels · IJROBP','Original subsite review.','q:Roels definition and delineation of the clinical target volume for rectal cancer',False),

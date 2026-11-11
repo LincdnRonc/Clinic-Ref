@@ -14,7 +14,7 @@ This repo is the single source of truth: the built pages and the build kit that 
 | `eviq_links.py` | eviQ protocol links per page (links only; no eviQ content is copied). |
 | `theme.py` | Generates the tumour-site colour block in `assets/site.css`. |
 | `assets/` | Shared CSS and JS. |
-| `contouring/` | Full-length contouring atlases (prostate, rectal long-course). |
+| `contouring/` | Full-length contouring atlases and protocols (prostate, rectal long-course, liver SBRT OARs). Standalone pages: edit the HTML directly. |
 | `tools/check.py` | Render check at phone width (Playwright): overflow, console errors. |
 | `notes/` | Working notes, e.g. figures still to verify against source papers. |
 
