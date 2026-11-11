@@ -52,8 +52,28 @@ def sitenav(current, group):
         cur = ' aria-current="page"' if f==current else ''
         links.append(f'<a href="{f}"{cur}{_ds(f)}>{html.escape(short)}</a>')
     return '<nav class="sitenav" aria-label="All pages">' + ''.join(links) + '</nav>'
+from exam_links import EXAM, FOOT_EXAM, XREF
+def _tablabels(f):
+    t = (root/'src'/f).read_text()
+    return dict(re.findall(r'data-tab="([^"]+)" data-label="([^"]+)"', t))
+def xref_bar(f):
+    if f not in XREF: return ''
+    links = []
+    for ef, tab in XREF[f]:
+        lab = _tablabels(ef).get(tab, tab)
+        links.append(f'<a href="{ef}#{tab}">{lab}</a>')
+    return '<p class="xref" data-site="exam"><b>Exam summary:</b> ' + ' · '.join(links) + '</p>'
+def xref_back(f, body):
+    def rep(m):
+        tab = m.group(1)
+        back = [cf for cf, lst in XREF.items() if (f, tab) in lst]
+        if not back: return ''
+        names = {g[0]: g[2] for _,_,_,pages,_ in GROUPS for g in pages}
+        return '<p class="xref"><b>Clinic page:</b> ' + ' · '.join(f'<a href="{cf}">{html.escape(names.get(cf, cf))}</a>' for cf in back) + '</p>'
+    return re.sub(r'<!--xref:([\w-]+)-->', rep, body)
 def page(f, short, long, desc, group, gname, gid, foot):
     body = (root/'src'/f).read_text() + eviq_panel(f)
+    if f.startswith('exam-'): body = xref_back(f, body)
     title = f'{long} Quick Reference'
     site = CTR_SITE.get(f, gid)
     return f'''<!DOCTYPE html>
@@ -82,7 +102,7 @@ def page(f, short, long, desc, group, gname, gid, foot):
   </div>
 </header>
 <main id="main">
-{sitenav(f, group)}
+{sitenav(f, group)}{xref_bar(f)}
 <div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
 {body}
 </main>
@@ -164,6 +184,7 @@ GROUPS = [
  ('thorax','Thorax','Thorax',THORAX,mkfoot('Thorax','NCCN, ASTRO, ASCO')),
  ('pall','Palliative','Palliative & oligometastases',PALL,mkfoot('Brain Mets/Palliative/Oligo/Immuno','NCCN, ASTRO, ASCO')),
  ('mrl','MR-linac','MR-linac',MRL,FOOT_MRL),
+ ('exam','Exam summary','Phase 2 exam summary',EXAM,FOOT_EXAM),
 ] + EXTRA
 for gid,gname,_,pages,foot in GROUPS:
     for g in pages:

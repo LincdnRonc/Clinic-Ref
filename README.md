@@ -15,6 +15,8 @@ This repo is the single source of truth: the built pages and the build kit that 
 | `theme.py` | Generates the tumour-site colour block in `assets/site.css`. |
 | `assets/` | Shared CSS and JS. |
 | `contouring/` | Full-length contouring atlases and protocols (prostate, rectal long-course, liver SBRT OARs). Standalone pages: edit the HTML directly. |
+| `exam_links.py` | Phase 2 exam-summary page list (`EXAM`) and the cross-links between clinic pages and exam-summary tabs (`XREF`). |
+| `tools/super_summary.py` | Regenerates `src/exam-*.html` from the Super Summary .docx (`python3 tools/super_summary.py Super_Summary.docx`), one tab per subsite. The .docx itself is not stored here. |
 | `tools/check.py` | Render check at phone width (Playwright): overflow, console errors. |
 | `notes/` | Working notes, e.g. figures still to verify against source papers. |
 
