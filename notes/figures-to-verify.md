@@ -32,3 +32,13 @@
 - Re-irradiation (20/10) and PCNSL 23.4/13 are common practice, not trial-quoted figures here; check against departmental and haematology protocols.
 - Hair regrowth timing (2–3 months) and the somnolence window are general textbook values.
 - Amantadine: no RCT in brain RT; the dose is standard Parkinson's/TBI dosing. Check the AU product information for renal dosing.
+
+## Lung contouring protocol (contouring/lung.html, Nov 2026)
+- SUNSET 60 Gy/8 # result (Giuliani 2024) taken from the web abstract; not in the folder or departmental protocol.
+- Lung ART primary results (3-year DFS 47% vs 44%, late G3–4 cardiopulmonary 11% vs 5%) from the published abstract; folder holds only the protocol supplement.
+- Departmental V4 55 Gy/20 # spinal canal minor range printed "41–454 Gy" (read as 41–44); spinal canal extent "10 mm" above/below PTV (Kong/RTOG use 10 cm).
+- Lung OAR definition: Kong 2011 (inflated lung only) vs NRG template (include collapsed lung).
+- UK 2022 Table 2 skin column placement (transcribed from two-column PDF).
+- TG-263 names and RayStation 4D workflow to confirm with physics.
+- Departmental source is the Liverpool/Macarthur V4 (2024) protocol; replace with the St George lung protocol if different.
+- Missing starred source: Guckenberger 2017 ESTRO-ACROP SBRT.
