@@ -42,3 +42,10 @@
 - TG-263 names and RayStation 4D workflow to confirm with physics.
 - Departmental source is the Liverpool/Macarthur V4 (2024) protocol (chosen by Lincoln as the departmental standard for all sites).
 - Missing starred source: Guckenberger 2017 ESTRO-ACROP SBRT.
+
+## Oesophagus & GOJ protocol (contouring/oesophagus.html)
+- CROSS volumes (PTV = GTV + 4 cm CC, 3 cm into stomach, 1.5 cm radial) quoted from memory/site note — verify against van Hagen 2012 NEJM or the CROSS protocol.
+- No Liverpool oesophageal protocol: simulation, 4D policy, PTV margins, IGRT match and constraints are SW ODN 2023 (SCOPE2) values.
+- Airway edit of CTV_B (not on SW ODN edit list); adjuvant cranio-caudal extent; conduit dose; splenic vaccination pathway (SW ODN cites BCSH); adjuvant nivolumab PBS status; AJCC location definitions.
+- Machiels 2019 (Radiat Oncol) page number; Nowee 2019 journal (ctRO?).
+- Elective coeliac/gastrohepatic coverage for N+ GOJ adenocarcinoma and cervical elective neck levels: departmental decision.

@@ -109,6 +109,10 @@ LIB = [
 ('gi','GI','Oesophagus, stomach, pancreas, liver, rectum and anus.',[
  ('Upper GI',[
   (2015,'Expert consensus contouring guidelines for IMRT in oesophageal and GEJ cancer','Wu · IJROBP','GTV, CTV margins and nodal coverage by tumour location.','pm:26104943',True),
+  (2023,'SW RT ODN regional oesophagus guideline (SCOPE2-based)','South West RT ODN · UK','CTV_A/B/C involved-field build, lower-third and GOJ rules, PTV, constraints and doses. Used in our oesophagus protocol.','q:South West Radiotherapy Operational Delivery Network oesophagus radiotherapy guidelines SCOPE2',False),
+  (2020,'SCOPE2 nodal delineation protocol for upper-third oesophageal cancer','Nicholas · ESTRO poster','Bilateral SCF CTV and borders for SCF node-positive disease; no elective SCF for N0.','q:Nicholas new nodal delineation protocol upper third oesophageal cancers SCOPE 2',False),
+  (2025,'ARS appropriate use criteria: cervical oesophagus SCC','Williams · Am J Clin Oncol','Larynx preservation, CTV/PTV margins, elective neck levels, dose.','doi:10.1097/COC.0000000000001165',False),
+  (2022,'Involved-field vs elective nodal RT in oesophageal cancer: meta-analysis','Wang · Front Oncol','23 studies, 4120 patients: IFI no worse for survival, less acute oesophagitis.','doi:10.3389/fonc.2022.1034656',False),
   (2021,'ESTRO-ACROP delineation of lymph-node areas in upper GI malignancies','Valentini · Radiother Oncol','Station borders for oesophagus, stomach, pancreas, biliary (+FALCON case).','pm:34547352',True),
   (2009,'EORTC-ROG: neoadjuvant RT volumes for GEJ and gastric adenocarcinoma','Matzinger · Radiother Oncol','Gastric/GEJ CTV by tumour site.','q:Matzinger EORTC-ROG expert opinion radiotherapy volume treatment guidelines neoadjuvant adenocarcinomas gastroesophageal junction stomach',False),
   (2021,'ESTRO-ACROP target volume definition in pancreatic cancer','Brunner · Radiother Oncol','GTV on pancreatic phase, CTV by size, no ENI in LAPC, nodal lists for post-op, PTV with/without 4D.','q:Brunner ESTRO ACROP guidelines for target volume definition in pancreatic cancer',True),
