@@ -44,7 +44,7 @@ def eviq_panel(f):
 '''
 CTR_SITE = {'ctr-breast.html':'breast','ctr-thorax.html':'thorax','ctr-hn.html':'hn','ctr-skin.html':'hn','ctr-cns.html':'cns','ctr-peds.html':'cns',
  'ctr-upper-gi.html':'gi','ctr-anal.html':'gi','ctr-gyn.html':'gyn','ctr-heme.html':'heme','ctr-sarcoma.html':'sarcoma','ctr-spine.html':'pall',
- 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/lung.html':'thorax','contouring/biliary.html':'gi','ctr-library.html':'contouring'}
+ 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/lung.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','ctr-library.html':'contouring'}
 def _ds(f): return f' data-site="{CTR_SITE[f]}"' if f in CTR_SITE else ''
 def sitenav(current, group):
     links = ['<a href="index.html">Home</a>']
@@ -243,6 +243,7 @@ CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
  ('contouring/lung.html','Lung','Lung contouring protocol','SABR peripheral, central and ultracentral; stage III definitive; PORT; IASLC station borders and landmarks; OARs and constraints.'),
  ('contouring/prostate.html','Prostate','Prostate contouring protocol','Intact prostate and SVs, prostate bed, NRG pelvic nodes, CT vs MRI apex/base pearls, IGRT, OARs.'),
  ('contouring/rectal-long-course.html','Rectum','Rectal long-course atlas','Elective compartments and borders, GTV criteria, 45 vs 50–54 Gy volumes.'),
+ ('contouring/pancreas-stomach.html','Pancreas & stomach','Pancreas and stomach contouring protocol','Pancreas neoadjuvant, definitive, NRG dose-escalated (triangle) and SBRT volumes; RTOG post-op CTV; gastric nodal anatomy; constraints.'),
  ('contouring/biliary.html','Biliary','Cholangiocarcinoma and gallbladder contouring protocol','Intrahepatic SBRT and chemoRT, perihilar and distal CTV margins, post-op nodal templates (Park, RTOG), gallbladder, doses.'),
  ('contouring/liver-sbrt.html','Liver SBRT OARs','Liver SBRT OAR contouring protocol','Liver, luminal GI and other OARs on CT and MRI, central hepatobiliary tract, MR-linac re-contouring zone, UK 2022 constraints.')]
 FOOT_CTR = '<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>'
