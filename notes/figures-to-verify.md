@@ -40,5 +40,5 @@
 - Lung OAR definition: Kong 2011 (inflated lung only) vs NRG template (include collapsed lung).
 - UK 2022 Table 2 skin column placement (transcribed from two-column PDF).
 - TG-263 names and RayStation 4D workflow to confirm with physics.
-- Departmental source is the Liverpool/Macarthur V4 (2024) protocol; replace with the St George lung protocol if different.
+- Departmental source is the Liverpool/Macarthur V4 (2024) protocol (chosen by Lincoln as the departmental standard for all sites).
 - Missing starred source: Guckenberger 2017 ESTRO-ACROP SBRT.
