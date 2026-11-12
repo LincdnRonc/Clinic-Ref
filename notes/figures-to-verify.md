@@ -49,3 +49,14 @@
 - Airway edit of CTV_B (not on SW ODN edit list); adjuvant cranio-caudal extent; conduit dose; splenic vaccination pathway (SW ODN cites BCSH); adjuvant nivolumab PBS status; AJCC location definitions.
 - Machiels 2019 (Radiat Oncol) page number; Nowee 2019 journal (ctRO?).
 - Elective coeliac/gastrohepatic coverage for N+ GOJ adenocarcinoma and cervical elective neck levels: departmental decision.
+
+## Breast protocol (contouring/breast.html)
+- Departmental source: SWSLHD (Liverpool/Macarthur) breast contouring protocol v4.0 (June 2021). It has no partial breast or brachytherapy section.
+- DBCG PBI CTV/PTV margins and RAPID PTV margin (+10 mm) need the trial papers; RAPID CTV from a secondary source.
+- 26 Gy/5 to the IMPORT LOW partial breast volume is an extrapolation of FAST-Forward; check local/eviQ 3658.
+- GEC-ESTRO 2015 EBRT PTV margin stated as 10 mm in the text and 20 mm in the summary.
+- Department level 4 cranial "often inferior edge of cricoid" vs ESTRO (≤2 slices above subclavian vein).
+- Department palliative "40.05 Gy/9#" as written (likely a typo).
+- Routine 3 mm PMRT bolus (department) vs Delphi 2021 (not routine).
+- IGRT policy; RayStation NS crop recipe; local PBI/brachytherapy names; autologous flap guideline not in folder.
+- DBCG PBI page numbers (JCO 2022;40:4189–?).

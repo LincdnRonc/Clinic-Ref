@@ -8,7 +8,7 @@ LIB = [
 ('breast','Breast','Whole breast, chest wall, regional nodes, reconstruction, partial breast and cardiac OARs.',[
  ('Target volumes: breast, chest wall and nodes',[
   (2015,'ESTRO consensus guideline on CTV delineation for elective RT of early breast cancer','Offersen · Radiother Oncol','The standard European atlas: CTVp breast/chest wall, levels 1–4, IMN, interpectoral; vessel-based nodal borders.','pm:25630428',True),
-  (2016,'ESTRO guideline version 1.1 (post-mastectomy chest wall)','Offersen · Radiother Oncol','Adds chest-wall CTV after mastectomy without reconstruction.','pm:26791404',True),
+  (2016,'ESTRO guideline version 1.1','Offersen · Radiother Oncol','Level 4 caudal border lowered to include the subclavian vein; IMN includes vein and artery + 5 mm; lateral breast border and humeral-head PRV clarified.','pm:26791404',True),
   (2019,'ESTRO-ACROP PMRT after implant-based immediate reconstruction','Kaidar-Person · Radiother Oncol','Implant usually excluded from CTV; pre- vs subpectoral implant volumes.','pm:31108277',True),
   (2021,'Planning PMRT after implant reconstruction using ESTRO-ACROP','Kaidar-Person · Clin Oncol','Worked planning examples for the 2019 guideline.','pm:32988717',False),
   (2013,'DBCG national contouring guidelines and atlas','Nielsen · Acta Oncol','Danish atlas; basis of later ESTRO work.','pm:23421926',False),
@@ -21,14 +21,19 @@ LIB = [
   (2024,'Prone-position axillary contouring atlas','Purswani · Pract Radiat Oncol','Nodal anatomy shifts when prone.','pm:38729261',False),
  ]),
  ('Tumour bed, partial breast and set-up',[
-  (2018,'GEC-ESTRO breast WG: target definition for APBI / boost','Strnad · Radiother Oncol','Tumour-bed definition, clips, seroma, margins for APBI and boost.','q:Recommendations from GEC ESTRO Breast Cancer Working Group target definition accelerated partial breast irradiation',True),
+  (2015,'GEC-ESTRO breast WG: target definition for APBI / boost','Strnad · Radiother Oncol','Whole scar, ImTV and estimated tumour bed; CTV = ETB + (20 mm − margin), min 10 mm. Used in our breast protocol.','q:Recommendations from GEC ESTRO Breast Cancer Working Group target definition accelerated partial breast irradiation',True),
+  (2012,'Boost CTV delineation guideline with pre-operative CT','Boersma · Radiother Oncol','CTV = tumour bed + (15 mm − free margin); pre-op CT reduces boost volume and variation.','q:Boersma reducing interobserver variation boost CTV delineation breast conserving pre-operative CT',False),
+  (2021,'Delphi consensus on bolus in PMRT','Kaidar-Person · Radiother Oncol','No routine bolus; use for skin involvement, T4b–d, DCIS with positive anterior margin, recurrence.','q:Kaidar-Person Delphi study international consensus bolus postmastectomy radiation therapy',False),
+  (2021,'Tricks and tips for breast target volume delineation (ESTRO courses)','Kaidar-Person · Radiother Oncol','Practical pitfalls; ESTRO vs RTOG recurrence data; what the nodal trials treated.','q:Kaidar-Person tricks and tips target volume definition delineation breast cancer ESTRO breast courses',True),
+  (2023,'Radiation therapy after oncoplastic breast surgery','Kaidar-Person · Breast','Tumour-bed uncertainty after oncoplastic surgery; clip before rotation; boost only for high risk.','doi:10.1016/j.breast.2023.103584',False),
+  (2017,'IMPORT LOW partial breast trial (planning pack)','Coles · Lancet','Tumour bed + 15 mm CTV, + 10 mm PTV, 40 Gy/15.','q:Coles partial-breast radiotherapy after breast conservation surgery IMPORT LOW',False),
   (2020,'MRI contouring of primary breast tumours (preoperative PBI)','Vasmel · Pract Radiat Oncol','For neoadjuvant / ablative PBI studies.','pm:32315784',False),
   (2024,'ASTRO partial breast irradiation guideline','Shaitelman · Pract Radiat Oncol','Selection and technique (not an atlas).','pm:37977261',False),
   (2023,'ESTRO-ACROP positioning, immobilisation and set-up verification for breast RT','Mast · tipsRO','Immobilisation, DIBH, IGRT.','pm:37745181',False),
  ]),
  ('Cardiac OARs',[
   (2011,'Heart atlas for breast RT (whole heart, chambers, LAD)','Feng · IJROBP','The widely used cardiac substructure atlas.','pm:20421148',True),
-  (2017,'Cardiac contouring atlas for radiotherapy','Duane · Radiother Oncol','Detailed CT substructure atlas (coronaries, valves).','q:Duane cardiac contouring atlas for radiotherapy',False),
+  (2017,'Cardiac contouring atlas for radiotherapy','Duane · Radiother Oncol','15 left ventricular and coronary artery segments on planning CT.','q:Duane cardiac contouring atlas for radiotherapy',False),
   (2020,'Danish whole heart and substructure delineation guidelines','Milo · Radiother Oncol','DBCG cardiac guideline.','pm:32544606',False),
  ]),
 ]),

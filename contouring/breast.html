@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Breast Target Volume Delineation Protocol</title>
+<style>
+  :root{
+    --navy:#10243f; --navy2:#1d3a5f;
+    --teal:#14756b; --teal-bg:#e7f3f1;
+    --amber:#9a5a00; --amber-bg:#fdf3e3;
+    --rust:#8a2f23; --rust-bg:#fbeae7;
+    --paper:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6b7c;
+    --rule:#d6dde6;
+    --rule-strong:#14756b;
+    --dose-elective:#2f6fb0;
+    --dose-bed:#9a5a00;
+    --dose-sib:#c0721c;
+    --dose-boost:#8a2f23;
+    --dose-prostate:#b03a2e;
+    --flag:#8a2f23; --flag-bg:#fbeae7;
+    --key-bg:#e7f3f1;
+    --petrol:#10243f;
+    --petrol-2:#14756b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;background:#e6ebf0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:10.3px;line-height:1.5;
+  }
+  .page{
+    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
+    padding:16mm 17mm 14mm;position:relative;
+    box-shadow:0 1px 8px rgba(16,36,63,.16);
+    display:flex;flex-direction:column;
+  }
+  @page{size:A4;margin:13mm;}
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .page + .page{page-break-before:always;}
+    h2,h3{page-break-after:avoid;}
+    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
+  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
+  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
+  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
+  p{margin:.35em 0;}
+  a{color:var(--teal);}
+  .lead{font-size:11px;color:var(--muted);}
+  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
+  .sechead{margin:0 0 .5em;}
+  .sechead .eyebrow{display:block;margin-bottom:3px;}
+  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
+  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
+  .masthead h1{color:#fff;}
+  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
+  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
+  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
+  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
+  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
+  tbody tr:nth-child(even){background:#eef2f6;}
+  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
+  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
+  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
+  .p-elect{background:var(--dose-elective);}
+  .p-bed{background:var(--dose-bed);}
+  .p-sib{background:var(--dose-sib);}
+  .p-boost{background:var(--dose-boost);}
+  .p-pros{background:var(--dose-prostate);}
+  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
+  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
+  .flag .lbl:before{content:"\26A0  ";}
+  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
+  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
+  ol.steps li{margin:.28em 0;padding-left:.15em;}
+  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
+  ul.tight{margin:.25em 0;padding-left:1.15em;}
+  ul.tight li{margin:.18em 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid2>div{min-width:0;}
+  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
+  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  svg{display:block;width:100%;height:auto;}
+  .kv{font-size:9.3px;}
+  .kv b{color:var(--navy);}
+  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
+  .ref{font-size:8.6px;line-height:1.4;}
+  .ref li{margin:.2em 0;}
+  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
+  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
+  .named .pos{font-weight:700;color:var(--amber);}
+  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc td{border:none;padding:2px 4px;}
+  .toc .n{color:var(--teal);font-weight:700;width:24px;}
+  .toc .pg{text-align:right;color:var(--muted);width:32px;}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
+  .small{font-size:8.6px;color:var(--muted);}
+</style>
+
+<style id="brst-extra">
+  .p-gtv{background:#1d4f91;}
+  .p-hi{background:#b03a2e;}
+  .p-lo{background:#2f6fb0;}
+  .p-ctv{background:#14756b;}
+  .p-ptv{background:#a07a00;}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:8.4px;color:var(--muted);}
+  .follow{border-left:4px solid #ad2f68;}
+</style>
+<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #ad2f68}</style></head>
+
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../breast-early.html" style="color:#ffc9df;text-decoration:none">Early breast page</a><a href="../breast-nodes-pmrt.html" style="color:#ffc9df;text-decoration:none">Nodes &amp; PMRT page</a><a href="../breast-planning.html" style="color:#ffc9df;text-decoration:none">Breast planning page</a><a href="../ctr-breast.html" style="color:#ffc9df;text-decoration:none">Breast quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<section class="page">
+<div class="masthead">
+<span class="eyebrow">Departmental Contouring Protocol · Breast Radiation Oncology</span>
+<h1>Breast — Target Volume Delineation Protocol</h1>
+<p class="sub">Target volumes for <b>whole breast</b> after breast-conserving surgery, <b>tumour bed boost and SIB</b>, <b>partial breast</b> (external beam and multicatheter brachytherapy, with what each trial did), <b>chest wall</b> after mastectomy with and without <b>implant reconstruction</b>, and <b>regional nodes</b> (axilla levels 1–4, internal mammary, interpectoral) for early and locally advanced disease.</p>
+<div class="pillrow">
+<span class="pill p-gtv">Tumour bed</span>
+<span class="pill p-hi">Boost / partial breast CTV</span>
+<span class="pill p-ctv">Breast / chest wall CTV</span>
+<span class="pill p-lo">Nodal CTV</span>
+<span class="pill p-ptv">PTV</span>
+</div>
+<div class="meta">Liverpool/Macarthur (SWSLHD) breast contouring protocol v4.0 (2021) · ESTRO 2015 and v1.1 2016 · ESTRO-ACROP implant 2019 · Delphi bolus 2021 · ESTRO tips &amp; tricks 2021 · oncoplastic 2023 · Boersma 2012 boost · GEC-ESTRO 2015 APBI · IMPORT LOW planning pack · Gee 2019 (ESTRO vs RTOG vs RADCOMP vs PET-LABRADOR) · PBI trials — Version 1.0 · Nov 2026</div>
+</div>
+<div class="callout">
+<span class="lbl">Governing principles of this protocol</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>The departmental standard is the Liverpool/Macarthur protocol v4.0</b>: ESTRO volumes for early disease, more generous RTOG/RADCOMP volumes for locally advanced disease, PTV = CTV + 5 mm not clipped to skin, coverage judged on non-skin (NS) evaluation volumes.</li>
+<li><b>Nodal CTVs follow the vessels</b>: in general 5 mm of fat around the veins, not bony landmarks (ESTRO 2015). Do not make fields larger than the old simulator fields unless the disease demands it.</li>
+<li><b>Delineate the tumour bed in every patient</b>, boost or not, using clips, seroma, pre-operative imaging and the pathology margins (ESTRO tips &amp; tricks 2021).</li>
+<li><b>Partial breast volumes are trial volumes</b>: copy the trial whose dose you use (Section 5). The once-daily regimens (IMPORT LOW 40/15, Florence 30/5) have the best toxicity record; avoid 38.5/10 twice daily (RAPID).</li>
+<li><b>Heart dose as low as achievable</b>: DIBH for all left-sided patients and right-sided patients having IMC treatment (department).</li>
+</ul>
+</div>
+<h3 style="margin-top:1.1em;">Contents</h3>
+<table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, simulation, DIBH and imaging</a></td><td class="pg">2</td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Which volumes for which patient; which guideline</a></td><td class="pg">2</td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario A — Whole breast after breast-conserving surgery</a></td><td class="pg">3</td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario B — Tumour bed, boost and SIB</a></td><td class="pg">4</td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Scenario C — Partial breast: what the trials did</a></td><td class="pg">5</td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Scenario D — Multicatheter brachytherapy APBI (GEC-ESTRO)</a></td><td class="pg">6</td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Scenario E — Chest wall after mastectomy; bolus</a></td><td class="pg">7</td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Scenario F — Chest wall after implant reconstruction</a></td><td class="pg">8</td></tr>
+<tr><td class="n">9</td><td><a href="#s9">Scenario G — Regional nodes: early and locally advanced</a></td><td class="pg">9</td></tr>
+<tr><td class="n">10</td><td><a href="#s10">Pearls and common errors</a></td><td class="pg">11</td></tr>
+<tr><td class="n">11</td><td><a href="#s11">Dose, fractionation, margins and review</a></td><td class="pg">11</td></tr>
+<tr><td class="n">12</td><td><a href="#s12">Organs at risk and constraints</a></td><td class="pg">12</td></tr>
+<tr><td class="n">13</td><td><a href="#s13">Names and RayStation implementation</a></td><td class="pg">13</td></tr>
+<tr><td class="n">14</td><td><a href="#s14">References and further guidelines</a></td><td class="pg">14</td></tr>
+</table>
+<h3>Sources used</h3>
+<table>
+<thead><tr><th style="width:38%">Source</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td class="b">SWSLHD (Liverpool &amp; Macarthur) breast RT contouring protocol v4.0 (June 2021; v1 2014, v2.1 2019 also in folder)</td><td>Departmental simulation, DIBH, which volumes, breast/chest wall and nodal borders, tumour bed, implants, doses, DVH scorecards, names, review schedule.</td></tr>
+<tr><td class="b">Offersen 2015 ESTRO consensus and v1.1 (2016)</td><td>Breast, chest wall and nodal CTV borders (Table 1).</td></tr>
+<tr><td class="b">Kaidar-Person 2019 ESTRO-ACROP implant; 2021 Delphi bolus; 2021 tips &amp; tricks; 2023 oncoplastic review</td><td>Reconstruction volumes, bolus indications, practical tips, nodal trials, oncoplastic boost.</td></tr>
+<tr><td class="b">Boersma 2012 (boost guideline and preop-CT study); Strnad 2015 GEC-ESTRO</td><td>Tumour bed and boost CTV; APBI brachytherapy CTV.</td></tr>
+<tr><td class="b">IMPORT LOW protocol and planning pack</td><td>Partial breast volumes and eligibility.</td></tr>
+<tr><td class="b">Gee 2019 JMIRO (Westmead/St George); Z0011 field design (Jagsi 2014)</td><td>ESTRO vs RTOG vs RADCOMP vs TROG PET-LABRADOR nodal borders; high tangents.</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
+</section>
+
+<!-- ============================ S1 + S2 ============================ -->
+<section class="page" id="s1">
+<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, simulation, DIBH and imaging</h2></div>
+<table>
+<thead><tr><th style="width:18%">Item</th><th>Department (SWSLHD v4.0)</th><th>ESTRO (2015; tips &amp; tricks 2021)</th></tr></thead>
+<tbody>
+<tr><td class="b">Position</td><td>Supine on breast board or Sabella board, arms above head. Nodal RT: head turned 45° (or as far as comfortable) to the other side; chin position recorded</td><td>Breast board inclined 12.5–15°, both arms abducted about 120°, head straight with chin slightly up to avoid neck skin folds. Prone not covered</td></tr>
+<tr><td class="b">Markers</td><td>Wire placed at simulation guides breast/chest wall borders</td><td>Radio-opaque wires around palpable breast and scar; they do not mark the true CTV. Marking scars helps if it does not cause artefact</td></tr>
+<tr><td class="b">CT</td><td>3D CT, 2 mm slices, no routine IV contrast</td><td>2–3 mm slices; no routine IV contrast. IV contrast or diagnostic PET-CT fusion can help locate involved nodes</td></tr>
+<tr><td class="b">Bolus at CT</td><td>PMRT: 3 mm over chest wall. Inflammatory cancer: 1 cm over breast or chest wall</td><td>Not routine for PMRT (Delphi 2021; see Section 7)</td></tr>
+<tr><td class="b">MRI / PET</td><td>Not routine; selected cases or studies</td><td>—</td></tr>
+</tbody>
+</table>
+<h3>1.1  DIBH (department)</h3>
+<ul class="tight">
+<li><b>Who:</b> all left-sided patients, and right-sided patients having IMC treatment. Not suitable: dentures, or unable to follow simple English commands.</li>
+<li><b>Workflow:</b> RO explains and assesses at clinic; patient practises with a snorkel and watches the DIBH video; ABC training at simulation.</li>
+<li><b>ABC criteria:</b> tolerates ABC; breath hold at least 20 s; threshold set at 80% of maximum inspiratory capacity. Patients not meeting all criteria are planned free-breathing.</li>
+<li>Radiotherapy starts ≥3 weeks after chemotherapy (department).</li>
+</ul>
+
+<div class="sechead" id="s2" style="margin-top:1.1em"><span class="eyebrow">Section 2</span><h2><span class="sectnum">2</span>Which volumes for which patient; which guideline</h2></div>
+<table>
+<thead><tr><th style="width:24%">Intended treatment (department)</th><th>Example</th><th>Volumes</th></tr></thead>
+<tbody>
+<tr><td class="b">Breast/chest wall + comprehensive nodal RT</td><td>Node-positive with undissected axilla; dissected axilla with heavy nodal burden or inadequate dissection</td><td>Breast or CW + L1 + L2 + L3 + L4 + IMC + interpectoral</td></tr>
+<tr><td class="b">Breast/chest wall + nodes not including the axilla</td><td>Node-positive, satisfactorily dissected axilla</td><td>Breast or CW + IMC + interpectoral + L4 + L3 ± L2 (depending on the extent of dissection)</td></tr>
+<tr><td class="b">Breast/chest wall + low axilla</td><td>Micrometastases in SLNB</td><td>Breast or CW + L1 ± L2</td></tr>
+<tr><td class="b">Breast alone / partial breast / boost</td><td>Node negative</td><td>Sections 3–6</td></tr>
+</tbody>
+</table>
+<div class="callout follow"><span class="lbl">This page follows</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>Early disease (e.g. T1–2 N1):</b> ESTRO 2015 / v1.1 borders (department Appendix 5). The ESTRO and RTOG atlases cover high-risk areas equally in early disease, so ESTRO is preferred for its lower toxicity (tips &amp; tricks 2021).</li>
+<li><b>Locally advanced disease (e.g. T3–4 N2–3, gross SCF disease):</b> enlarge using RTOG and RADCOMP (department). In pT3–4 or N2–3 disease, up to 28% of regional recurrences fell outside the ESTRO volumes, against about 4% in pT1–2 N0–1 (tips &amp; tricks 2021).</li>
+<li><b>Dissected axilla:</b> review the pathology and the planning CT to see which levels were actually operated on. Dissection often removes level 1 and only the lateral part of level 2; the old "apex and supra" field can miss undissected level 2 and Rotter nodes (tips &amp; tricks 2021).</li>
+</ul>
+</div>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
+</section>
+
+<!-- ============================ S3 ============================ -->
+<section class="page" id="s3">
+<div class="sechead"><span class="eyebrow">Section 3 · Scenario A</span><h2><span class="sectnum">3</span>Whole breast after breast-conserving surgery</h2></div>
+<p>Before drawing, look at the simulation wire, the glandular tissue on CT (breast window), the seroma and clips, and (for chest wall) the other breast (department Appendix 4).</p>
+<table>
+<thead><tr><th style="width:12%">Border</th><th>Department (SWSLHD v4.0)</th><th>ESTRO 2015 / v1.1 (CTVp_breast)</th></tr></thead>
+<tbody>
+<tr><td class="b">Cranial</td><td>Top of palpable/visible breast tissue, up to the inferior edge of the sternoclavicular joint</td><td>Upper border of palpable/visible breast tissue; at most to the caudal edge of the sternoclavicular joint (not strict)</td></tr>
+<tr><td class="b">Caudal</td><td>Lowest visible breast contour; guided by the wire</td><td>Most caudal CT slice where breast shape is still visible</td></tr>
+<tr><td class="b">Anterior</td><td>Skin (PTV not clipped to skin; coverage judged on NS volumes)</td><td>5 mm under the skin, except T4b–d (full dose to skin, with bolus)</td></tr>
+<tr><td class="b">Posterior</td><td>Chest wall, excluding ribs and muscles</td><td>Front of pectoralis major; where there is no muscle, ribs and intercostals. Caudally, move forward off abdominal-wall fat in obese patients</td></tr>
+<tr><td class="b">Medial</td><td>Lateral to the medial mammary branches of the internal thoracic artery; at most the ipsilateral sternal edge</td><td>Lateral to the medial perforating mammary vessels; at most to the sternal edge (not strict, e.g. ptotic breasts)</td></tr>
+<tr><td class="b">Lateral</td><td>Guided by the wire; excludes latissimus dorsi; medial to the mid-axillary line; excludes the lateral thoracic vessels</td><td>Lateral breast fold; in front of the lateral thoracic artery. v1.1: if glandular tissue is clearly visible, include it without necessarily reaching the vessels</td></tr>
+</tbody>
+</table>
+<p class="src">Superficial border: the department contours to skin and evaluates on NS volumes; ESTRO stops 5 mm under the skin. Both end with the same evaluated region. This page follows the department.</p>
+<div class="grid2">
+<div>
+<h3>3.1  Walkthrough</h3>
+<ol class="steps">
+<li>Start on a mid-breast slice where the breast edges are obvious, then work cranially and caudally (tips &amp; tricks 2021).</li>
+<li>Cranial slices: stop where breast tissue ends, no higher than the inferior edge of the sternoclavicular joint.</li>
+<li>Medially, find the perforating branches of the internal thoracic artery and stay lateral to them.</li>
+<li>Laterally, find the lateral thoracic artery; stay in front of it, or on the glandular tissue if that is clear.</li>
+<li>Posteriorly, stop on the front of pectoralis major; no ribs or muscle.</li>
+<li>Caudal slices: stop where breast shape disappears; in obese patients bring the deep border forward off abdominal fat (lowers heart dose on the left).</li>
+<li>Check that the tumour bed and its margin sit inside the breast CTV, especially for upper-inner or very lateral tumours.</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 230" role="img" aria-label="Axial schematic of the whole breast CTV with vessel landmarks">
+<rect width="300" height="230" fill="#fff"/>
+<path d="M20 200 Q150 150 280 200" fill="none" stroke="#9aa3ad" stroke-width="10" opacity=".5"/>
+<text x="120" y="215" font-size="8" fill="#5b6b7c">ribs, intercostals, lung</text>
+<rect x="128" y="160" width="40" height="22" rx="4" fill="#eef0f2" stroke="#b8c2cc"/><text x="133" y="175" font-size="7.5" fill="#5b6b7c">sternum</text>
+<path d="M172 168 Q215 150 262 160 L262 172 Q215 164 172 178 Z" fill="#e8c7b8" stroke="#b0786b"/><text x="200" y="186" font-size="7.5" fill="#8a4a3e">pectoralis major</text>
+<path d="M176 160 Q182 70 238 64 Q284 80 280 156 Q240 150 176 160 Z" fill="#fbe7ef" stroke="#c9a2b4"/>
+<path d="M186 156 Q190 84 236 76 Q272 90 270 150 Q236 146 186 156 Z" fill="rgba(20,117,107,.16)" stroke="#14756b" stroke-width="1.8" stroke-dasharray="6 3"/>
+<circle cx="181" cy="163" r="3" fill="#b03a2e"/><line x1="181" y1="160" x2="192" y2="140" stroke="#b03a2e" stroke-width="1"/>
+<text x="92" y="140" font-size="7.5" fill="#b03a2e">internal thoracic a. and</text>
+<text x="92" y="150" font-size="7.5" fill="#b03a2e">medial perforator:</text>
+<text x="92" y="160" font-size="7.5" fill="#b03a2e">CTV stays lateral</text>
+<circle cx="276" cy="150" r="3" fill="#b03a2e"/>
+<line x1="276" y1="153" x2="262" y2="190" stroke="#b03a2e" stroke-width=".8"/><text x="214" y="200" font-size="7.5" fill="#b03a2e">lateral thoracic a.</text>
+<rect x="222" y="98" width="20" height="14" rx="4" fill="rgba(29,79,145,.55)" stroke="#1d4f91"/><text x="214" y="94" font-size="7" fill="#1d4f91">tumour bed</text>
+<text x="196" y="50" font-size="7.5" fill="#14756b">CTVp_breast</text>
+<text x="20" y="40" font-size="7.5" fill="#555">Deep border: front of pectoralis major</text>
+<text x="20" y="50" font-size="7.5" fill="#555">Superficial: skin (dept) or 5 mm under (ESTRO)</text>
+</svg>
+<figcaption>Original schematic (axial, left breast). The internal and lateral thoracic vessels mark the medial and lateral edges.</figcaption>
+</figure>
+</div>
+</div>
+<h3>3.2  Pitfalls</h3>
+<ul class="tight">
+<li>No inframammary fold on CT (small breasts): use the wires carefully; wrong marking makes the CTV and abdominal dose large (tips &amp; tricks 2021).</li>
+<li>Asymmetric arms or rotation on the board makes the other breast a poor guide; check the humeral heads (tips &amp; tricks 2021).</li>
+<li>High tangents: in Z0011 about half the patients with evaluable records had high tangents (cranial border ≤2 cm from the humeral head), which irradiate level 1 and part of level 2 (Jagsi 2014). Whole-breast-only patients should not get this by accident.</li>
+</ul>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
+</section>
+
+<!-- ============================ S4 ============================ -->
+<section class="page" id="s4">
+<div class="sechead"><span class="eyebrow">Section 4 · Scenario B</span><h2><span class="sectnum">4</span>Tumour bed, boost and SIB</h2></div>
+<h3>4.1  Indications and doses (department)</h3>
+<ul class="tight">
+<li>Strongly consider a boost for patients aged ≤50 and those with positive or close margins. Prefer SIB (48 Gy with 42.4/16; 60 Gy with 50/25); sequential boost if SIB is unsuitable: 10 Gy/4 or 16 Gy/8, photons or electrons.</li>
+<li>After oncoplastic surgery, reserve a boost for truly high-risk patients, since the bed may have moved; tell the surgeon before surgery so clips go in before tissue is rotated (Kaidar-Person 2023).</li>
+</ul>
+<h3>4.2  Tumour bed (department Appendix 6)</h3>
+<ul class="tight">
+<li>Use visible seroma, mammogram and ultrasound reports for tumour position, pathology (size and margins), surgical clips and the simulation wire.</li>
+<li><b>Seroma or clips easy to see:</b> contour seroma and clips as TUMOURBED.</li>
+<li><b>Bed hard to see:</b> ESTRO approach — reconstruct the tumour position and size from the mammogram and pathology, then add 1.5 cm for microscopic spread to make the CTV.</li>
+</ul>
+<h3>4.3  Boost CTV methods compared</h3>
+<table>
+<thead><tr><th style="width:20%">Source</th><th>Tumour bed</th><th>Boost CTV</th></tr></thead>
+<tbody>
+<tr><td class="b">Department v4.0</td><td>Seroma ± clips</td><td>SIB: CTV48 / CTV60 = TUMOURBED; PTV = CTV + 5 mm. Bed not visible: reconstructed tumour + 1.5 cm</td></tr>
+<tr><td class="b">Boersma 2012 (Dutch boost guideline)</td><td>The thin rim of scar that lay against the tumour, reconstructed from pre-op imaging, surgical report and clips; not necessarily all clips</td><td>Bed + (15 mm − smallest free margin); no boost CTV if the margin is ≥15 mm. Exclude 5 mm under skin and muscle/ribs. Length along the rim at most tumour diameter + 3 cm</td></tr>
+<tr><td class="b">GEC-ESTRO 2015</td><td>Estimated tumour bed from clips, whole scar and imaging-related volume</td><td>Total safety margin (surgical margin + added margin) about 2 cm for boost and APBI</td></tr>
+</tbody>
+</table>
+<div class="callout follow"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">The department for SIB (CTV = tumour bed, PTV 5 mm). When the bed is uncertain or margins are close in one direction, use Boersma's margin-based CTV (15 mm minus the free margin) rather than a uniform expansion. A pre-operative CT in treatment position cut the boost CTV from 42 to 36 cc and reduced observer variation (Boersma 2012).</p></div>
+<h3>4.4  Seroma, clips and pitfalls</h3>
+<ul class="tight">
+<li>Clips placed on the chest wall mark the surgical bed, not always the tumour bed; decide which clips matter (GEC-ESTRO 2015).</li>
+<li>The skin scar is on average 4 cm (up to 9 cm) from the clips; do not use the scar alone to place the boost (GEC-ESTRO 2015).</li>
+<li>Large seromas shrink during treatment; check bed position on IGRT for long courses <span class="chk">CHECK</span> departmental IGRT policy.</li>
+</ul>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
+</section>
+
+<!-- ============================ S5 ============================ -->
+<section class="page" id="s5">
+<div class="sechead"><span class="eyebrow">Section 5 · Scenario C</span><h2><span class="sectnum">5</span>Partial breast: what the trials did <span class="pill p-hi">PBI</span></h2></div>
+<p>The departmental protocol has no partial breast section; use the trial volumes for the regimen chosen <span class="chk">CHECK</span> local policy. eviQ 3658 covers partial breast EBRT (link in Section 14).</p>
+<table>
+<thead><tr><th style="width:13%">Trial</th><th style="width:19%">Patients</th><th style="width:13%">Dose, technique</th><th style="width:26%">Volumes</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td class="b">IMPORT LOW (UK; Coles 2017; 10-year 2025)</td><td>n = 2018; age ≥50; pT1–2 ≤3 cm; grade 1–3; pN0–1 (1–3 nodes); unifocal, not classic lobular; margin ≥2 mm</td><td>40 Gy/15 daily: whole breast vs 36 Gy whole + 40 Gy partial vs 40 Gy partial only; field-in-field ("mini-tangents")</td><td>Tumour bed (clips or gold seeds) <b>+ 15 mm = CTV</b>, 5 mm from skin, not beyond pectoral fascia (or ≤5 mm from lung/chest wall). <b>PTV = CTV + 10 mm</b>, 5 mm from skin, not cut posteriorly</td><td>5-year IBTR 1.1% (whole) vs 0.2% (reduced dose) vs 0.5% (partial). 10-year IBTR 2.8% whole vs 3.0% partial. Fewer adverse events with partial breast</td></tr>
+<tr><td class="b">DBCG PBI (Denmark; Offersen 2022)</td><td>n = 865; age ≥60; low risk, node negative</td><td>40 Gy/15 daily, partial vs whole</td><td>Tumour bed + margin <span class="chk">CHECK</span> CTV/PTV values against the paper</td><td>3-year grade 2–3 induration 5.1% vs 9.7% (non-inferior, fewer with PBI); 16 locoregional recurrences in total (10 PBI, 6 WBI). Induration rose with breast volume given ≥40 Gy</td></tr>
+<tr><td class="b">Florence (Livi 2015; Meattini 2020)</td><td>n = 520; age &gt;40; tumour &lt;25 mm; margins ≥5 mm; ≥4 clips required</td><td>30 Gy/5 on non-consecutive days, IMRT</td><td><b>CTV = clips + 1 cm</b> (3 mm from skin and from the lung–chest wall interface). <b>PTV = CTV + 1 cm</b> (may extend 4 mm into lung; 3 mm from skin)</td><td>10-year IBTR 3.7% vs 2.5% with WBI + boost (NS); OS 91.9% both arms; less acute and late toxicity and better cosmesis with APBI</td></tr>
+<tr><td class="b">RAPID (Canada, Australia, NZ; Whelan 2019)</td><td>n = 2135; DCIS or node-negative invasive</td><td>38.5 Gy/10 twice daily (6–8 h apart), 3D-CRT</td><td><b>CTV = cavity + 10 mm</b>, excluding chest wall, muscle and 5 mm under skin; PTV + 10 mm <span class="chk">CHECK</span></td><td>8-year IBTR 3.0% vs 2.8% (non-inferior). Late grade ≥2 toxicity 32% vs 13%; adverse cosmesis 32% vs 16% at 5 years</td></tr>
+<tr><td class="b">NSABP B-39 / RTOG 0413 (Vicini 2019)</td><td>n = 4216; stage 0–II; ≤3 cm; 0–3 positive nodes; clear margins</td><td>38.5 Gy/10 twice daily 3D-CRT, or 34 Gy/10 twice daily brachytherapy (multicatheter or MammoSite)</td><td>3D-CRT: <b>CTV = cavity + 15 mm</b>, 5 mm from skin, excluding chest wall and pectoralis; <b>PTV = CTV + 10 mm</b>; PTV_EVAL for DVH</td><td>10-year IBTR 4.6% vs 3.9%: did not meet equivalence, though the absolute difference was &lt;1%</td></tr>
+<tr><td class="b">GEC-ESTRO APBI (Strnad 2016; 10-year 2023)</td><td>n = 1328 (1184 analysed); age ≥40; early invasive or DCIS</td><td>Multicatheter HDR 32 Gy/8 or 30.1 Gy/7 over 5 days, or PDR 50 Gy</td><td>Section 6 (total safety margin about 2 cm)</td><td>10-year local recurrence 3.51% vs 1.58% (difference 1.93%, p = 0.074); grade 3 late toxicity 1% vs 4%</td></tr>
+</tbody>
+</table>
+<div class="callout follow"><span class="lbl">This page follows</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>40 Gy/15 (or 26 Gy/5) partial breast:</b> IMPORT LOW volumes — tumour bed + 15 mm CTV, + 10 mm PTV, both 5 mm off skin. 26 Gy/5 to the partial breast extrapolates FAST-Forward to the IMPORT LOW volume <span class="chk">CHECK</span> local and eviQ guidance.</li>
+<li><b>30 Gy/5 alternate days (IMRT/VMAT):</b> Florence volumes — clips + 1 cm CTV, + 1 cm PTV.</li>
+<li><b>Avoid 38.5 Gy/10 twice daily</b> (RAPID toxicity and cosmesis).</li>
+<li>All PBI needs clips (≥4, ideally 6) or a clearly visible cavity; without them no PBI CTV can be drawn (GEC-ESTRO 2015; Florence).</li>
+</ul>
+</div>
+<div class="grid2">
+<div>
+<h3>5.1  Building the PBI volume (IMPORT LOW)</h3>
+<ol class="steps">
+<li>Contour the tumour bed around the clips or seeds and any change in tissue architecture.</li>
+<li>Expand 15 mm → CTV_PBI; crop 5 mm inside skin and at the pectoral fascia.</li>
+<li>Expand 10 mm → PTV_PBI; crop 5 mm inside skin; leave posteriorly.</li>
+<li>Check the CTV lies within CTVp_breast.</li>
+<li>Coverage: partial breast CTV 95% to receive 95% (IMPORT LOW planning pack).</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 200" role="img" aria-label="Schematic of tumour bed, partial breast CTV and PTV">
+<rect width="300" height="200" fill="#fff"/>
+<path d="M10 180 Q150 140 290 180" fill="none" stroke="#e8c7b8" stroke-width="12"/>
+<text x="20" y="196" font-size="7.5" fill="#8a4a3e">pectoral fascia / chest wall</text>
+<path d="M14 170 Q60 20 150 18 Q240 20 286 170" fill="#fbe7ef" stroke="#c9a2b4"/>
+<path d="M24 166 Q66 32 150 30 Q234 32 276 166" fill="none" stroke="#999" stroke-dasharray="2 3"/>
+<text x="196" y="40" font-size="7" fill="#777">5 mm under skin</text>
+<ellipse cx="150" cy="100" rx="70" ry="54" fill="rgba(160,122,0,.10)" stroke="#a07a00" stroke-width="1.6" stroke-dasharray="6 3"/>
+<ellipse cx="150" cy="104" rx="48" ry="36" fill="rgba(176,58,46,.12)" stroke="#b03a2e" stroke-width="1.6"/>
+<ellipse cx="150" cy="106" rx="18" ry="12" fill="rgba(29,79,145,.55)" stroke="#1d4f91"/>
+<text x="134" y="109" font-size="7" fill="#fff" font-weight="700">bed</text>
+<text x="224" y="112" font-size="7.5" fill="#b03a2e">CTV = bed + 15 mm</text>
+<text x="224" y="58" font-size="7.5" fill="#a07a00">PTV = CTV + 10 mm</text>
+<text x="20" y="120" font-size="7" fill="#555">both 5 mm off skin;</text>
+<text x="20" y="130" font-size="7" fill="#555">CTV stops at fascia</text>
+</svg>
+<figcaption>Original schematic of the IMPORT LOW partial breast volumes.</figcaption>
+</figure>
+</div>
+</div>
+<p class="src">Intra-operative techniques (TARGIT, ELIOT) have no external-beam contouring step and are not covered. Patient selection: ASTRO 2024 PBI guideline (site library).</p>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
+</section>
+
+<!-- ============================ S6 ============================ -->
+<section class="page" id="s6">
+<div class="sechead"><span class="eyebrow">Section 6 · Scenario D</span><h2><span class="sectnum">6</span>Multicatheter brachytherapy APBI (GEC-ESTRO 2015)</h2></div>
+<p>For APBI or boost with interstitial multicatheter brachytherapy after closed-cavity or oncoplastic breast-conserving surgery. Requirements: detailed knowledge of the operation (clips: number and site, scar), the full pathology report with margins in all six directions, and the pre-operative imaging. 4–6 clips marking the lumpectomy are a prerequisite.</p>
+<h3>6.1  Three surgical situations</h3>
+<table>
+<thead><tr><th style="width:24%">Situation</th><th>Reference for the tumour bed</th></tr></thead>
+<tbody>
+<tr><td class="b">Open cavity (cavity visualisation score 4–5)</td><td>The seroma cavity</td></tr>
+<tr><td class="b">Closed cavity (score 1–3)</td><td>The scar inside the breast, plus clips and skin scar</td></tr>
+<tr><td class="b">Oncoplastic</td><td>Large tissue shifts; clips may be in different quadrants; CTV large and poorly defined</td></tr>
+</tbody>
+</table>
+<p class="src">No visible scar and no clips: no tumour bed or CTV can be drawn.</p>
+<h3>6.2  Step by step after closed-cavity surgery</h3>
+<ol class="steps">
+<li>CT with a marker on the skin scar.</li>
+<li>Contour the clips. Clips inside breast tissue belong to the target; decide which chest-wall clips mark the tumour bed.</li>
+<li><b>Whole scar (WS):</b> the whole visible surgical path inside the breast plus all clips, from skin scar to the deepest point on the chest wall.</li>
+<li><b>ImTV (imaging-related target volume):</b> the tumour projected from the pre-operative mammogram/US/MRI (relative distance to skin and chest wall). Less reliable in large fatty breasts.</li>
+<li><b>ETB (estimated tumour bed):</b> the part of WS that matches the tumour position and size (ImTV), with all clips except irrelevant chest-wall clips.</li>
+<li><b>CTV = ETB + (20 mm − surgical margin), at least 10 mm</b> in each direction (e.g. 3 mm margin → 17 mm). Skin (about 5 mm) and chest wall are never part of the CTV.</li>
+<li><b>PTV:</b> brachytherapy with clearly seen bed and clips — PTV = CTV. If position is uncertain (large breasts, bra ≥38 and/or ≥D cup, absent clips, poor scar visibility), add 5–10 mm in the doubtful region.</li>
+</ol>
+<table>
+<thead><tr><th style="width:28%">Rule</th><th>GEC-ESTRO 2015</th></tr></thead>
+<tbody>
+<tr><td class="b">Total safety margin</td><td>Resection margin + added margin, about 2 cm (at least 1–2 cm); set it per direction because margins differ</td></tr>
+<tr><td class="b">CTV volume</td><td>&lt;50 cc risks missing the target (except small breasts or upper inner quadrant with a well-defined bed); avoid &gt;200–250 cc (complications)</td></tr>
+<tr><td class="b">Oncoplastic (limited rotation flaps only)</td><td>CTV = clipped area + (20 mm − smallest free margin); PTV = CTV + 10 mm. No firm recommendation</td></tr>
+<tr><td class="b">External beam PBI</td><td>The paper gives an additional PTV margin of 10 mm in one place and 20 mm in its summary <span class="chk">CHECK</span>; this page uses the trial volumes in Section 5 for EBRT</td></tr>
+</tbody>
+</table>
+<p class="src">Clips move about 3 mm after surgery but move with the bed, so no extra margin is needed for this. The skin scar is on average 4 cm from the clips. Dose: GEC-ESTRO trial HDR 32 Gy/8 or 30.1 Gy/7 twice daily over 5 days, or PDR 50 Gy (Section 5). Departmental brachytherapy technique and dose <span class="chk">CHECK</span>.</p>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
+</section>
+
+<!-- ============================ S7 + S8 ============================ -->
+<section class="page" id="s7">
+<div class="sechead"><span class="eyebrow">Section 7 · Scenario E</span><h2><span class="sectnum">7</span>Chest wall after mastectomy; bolus</h2></div>
+<table>
+<thead><tr><th style="width:14%">Border</th><th>CTVp_thoracic wall (ESTRO 2015 / v1.1; department uses the same breast-style borders)</th></tr></thead>
+<tbody>
+<tr><td class="b">Cranial</td><td>Palpable/visible signs; if appropriate the other breast; at most the caudal edge of the sternoclavicular joint</td></tr>
+<tr><td class="b">Caudal</td><td>Palpable/visible signs; if appropriate the other breast</td></tr>
+<tr><td class="b">Anterior</td><td>5 mm under skin (ESTRO); department contours to skin and evaluates on NS volumes. Thin chest wall that disappears after cropping: use 5 mm bolus and extend the CTV to skin</td></tr>
+<tr><td class="b">Posterior</td><td>Pectoralis major, or ribs and intercostals where there is no muscle. Muscle and ribs are not routinely included unless invaded (T4a, T4c)</td></tr>
+<tr><td class="b">Medial / lateral</td><td>Palpable/visible signs and the other breast; laterally usually in front of the mid-axillary line</td></tr>
+</tbody>
+</table>
+<ul class="tight">
+<li>Place wires around the imaginary original breast and on the scar. Closing the defect pulls skin in, so the chest wall CTV is usually smaller than the original breast; palpate before marking (ESTRO 2015).</li>
+<li>Include the scar only where it lies over the original breast; the whole scar matters when the skin is at high risk (e.g. inflammatory cancer) (tips &amp; tricks 2021).</li>
+<li>After skin- or nipple-sparing mastectomy, the CTV is the residual breast tissue plus the preserved subcutaneous layer (tips &amp; tricks 2021).</li>
+</ul>
+<h3>7.1  Bolus: department vs international consensus</h3>
+<table>
+<thead><tr><th style="width:32%">Situation</th><th>Department v4.0</th><th>Delphi consensus 2021 (Kaidar-Person)</th></tr></thead>
+<tbody>
+<tr><td class="b">Routine PMRT</td><td>3 mm bolus over chest wall</td><td>Panel disagreed with routine bolus for all PMRT, with or without reconstruction</td></tr>
+<tr><td class="b">Inflammatory cancer / skin involvement (T4b–d, any ypT4)</td><td>1 cm bolus</td><td>Bolus indicated</td></tr>
+<tr><td class="b">DCIS with positive anterior margin, no overlying skin removed</td><td>—</td><td>Bolus indicated</td></tr>
+<tr><td class="b">Chest wall recurrence; inoperable or fungating cancer</td><td>—</td><td>Bolus routinely used</td></tr>
+<tr><td class="b">Other skin at high risk</td><td>—</td><td>Case by case; when used, apply daily for the whole course</td></tr>
+</tbody>
+</table>
+<div class="callout follow"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">The department (3 mm routine PMRT bolus; 1 cm for inflammatory cancer), with the Delphi indications noted. Whether to drop routine bolus is a departmental decision <span class="chk">CHECK</span>.</p></div>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
+</section>
+
+<section class="page" id="s8">
+<div class="sechead"><span class="eyebrow">Section 8 · Scenario F</span><h2><span class="sectnum">8</span>Chest wall after implant reconstruction</h2></div>
+<p>The CTV is the subcutaneous lymphatic plexus and any residual glandular tissue in front of the implant, not the implant itself. The implant and transplanted tissue are not CTV (ESTRO-ACROP 2019; department Appendix 4).</p>
+<div class="grid2">
+<div>
+<table>
+<thead><tr><th style="width:22%">Part</th><th>Retro-pectoral implant</th><th>Pre-pectoral implant</th></tr></thead>
+<tbody>
+<tr><td class="b">Ventral part (always)</td><td>Skin (3–5 mm under) to pectoralis major, and to the implant where muscle does not cover it (medial/lateral/caudal)</td><td>Skin (3–5 mm under) to the front of the implant</td></tr>
+<tr><td class="b">Dorsal part (only with adverse factors)</td><td><b>Partial:</b> separate volume behind the implant where it was not originally covered by muscle (mainly caudal), if adverse factors or a tumour close to the deep fascia there</td><td><b>Whole space</b> between back of implant and pectoralis (or ribs/intercostals)</td></tr>
+<tr><td class="b">Cranial / caudal</td><td colspan="2">As for chest wall: visible signs, the other breast, at most the caudal edge of the sternoclavicular joint</td></tr>
+</tbody>
+</table>
+<p class="src"><b>Adverse factors</b> (ESTRO-ACROP Table 2; department): pT3 treated by mastectomy and implant; locally advanced disease without pCR after primary systemic therapy; invasion of pectoralis major or chest wall.</p>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 260" role="img" aria-label="Schematic of ventral and dorsal chest wall CTV with retro-pectoral and pre-pectoral implants">
+<rect width="300" height="260" fill="#fff"/>
+<text x="20" y="16" font-size="8" font-weight="700" fill="#333">Retro-pectoral</text>
+<path d="M10 118 Q150 92 290 118" fill="none" stroke="#9aa3ad" stroke-width="8" opacity=".6"/>
+<path d="M40 104 Q150 30 260 104" fill="#d9eef7" stroke="#5a7fa8"/><text x="134" y="84" font-size="7.5" fill="#1d4f91">implant</text>
+<path d="M30 104 Q150 18 270 104 L262 104 Q150 26 38 104 Z" fill="#e8c7b8" stroke="#b0786b"/>
+<text x="196" y="44" font-size="7" fill="#8a4a3e">pectoralis</text>
+<path d="M22 106 Q150 4 278 106 L270 104 Q150 16 30 104 Z" fill="rgba(20,117,107,.35)" stroke="#14756b"/>
+<text x="12" y="34" font-size="7" fill="#14756b">ventral CTV</text>
+<path d="M200 98 Q240 104 262 106 L262 112 Q232 112 200 106 Z" fill="rgba(47,111,176,.4)" stroke="#2f6fb0"/>
+<text x="196" y="124" font-size="7" fill="#2f6fb0">dorsal part (if adverse)</text>
+<text x="20" y="146" font-size="8" font-weight="700" fill="#333">Pre-pectoral</text>
+<path d="M10 248 Q150 222 290 248" fill="none" stroke="#9aa3ad" stroke-width="8" opacity=".6"/>
+<path d="M30 234 Q150 214 270 234 L270 240 Q150 222 30 240 Z" fill="#e8c7b8" stroke="#b0786b"/>
+<path d="M44 232 Q150 160 256 232 Q150 218 44 232 Z" fill="rgba(47,111,176,.25)" stroke="#2f6fb0" stroke-dasharray="4 2"/>
+<path d="M50 226 Q150 168 250 226 Q150 214 50 226 Z" fill="#d9eef7" stroke="#5a7fa8"/><text x="134" y="210" font-size="7.5" fill="#1d4f91">implant</text>
+<path d="M34 232 Q150 150 266 232 L256 230 Q150 162 44 230 Z" fill="rgba(20,117,107,.35)" stroke="#14756b"/>
+<text x="196" y="170" font-size="7" fill="#14756b">ventral CTV</text>
+<text x="12" y="256" font-size="7" fill="#2f6fb0">dorsal part = whole space behind implant (adverse factors only)</text>
+</svg>
+<figcaption>Original schematics. Green: ventral CTV, always treated. Blue: dorsal part, only with adverse factors.</figcaption>
+</figure>
+</div>
+</div>
+<h3>8.1  Pitfalls</h3>
+<ul class="tight">
+<li>Including the whole implant out of habit treats far more tissue than needed and raises heart and lung dose.</li>
+<li>The skin over the implant is thin; "5 mm under skin" may leave no CTV. ESTRO-ACROP uses 3–5 mm; with tangents the build-up region is mostly covered except medially and laterally.</li>
+<li>Department 50 Gy/25 is the option for patients with implants (Section 11).</li>
+<li>Autologous flap reconstruction is not covered by any source in the folder <span class="chk">CHECK</span> for an ESTRO-ACROP guideline on autologous reconstruction.</li>
+</ul>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
+</section>
+
+<!-- ============================ S9 ============================ -->
+<section class="page" id="s9">
+<div class="sechead"><span class="eyebrow">Section 9 · Scenario G</span><h2><span class="sectnum">9</span>Regional nodes: early and locally advanced</h2></div>
+<h3>9.1  Early disease: ESTRO borders (department Appendix 5; ESTRO v1.1 Table 1)</h3>
+<table>
+<thead><tr><th style="width:10%">Border</th><th>Level 1</th><th>Level 2</th><th>Level 3</th><th>Level 4</th><th>IMC</th><th>Interpectoral</th></tr></thead>
+<tbody>
+<tr><td class="b">Cranial</td><td>Medially 5 mm above the axillary vein; laterally no higher than 1 cm below the humeral head, 5 mm around the vein</td><td>Top of the axillary artery (5 mm above the axillary vein)</td><td>Top of the subclavian artery (5 mm above the subclavian vein)</td><td>Top of the subclavian artery arch (1 slice above it)</td><td>Caudal limit of level 4</td><td>Top of the axillary artery</td></tr>
+<tr><td class="b">Caudal</td><td>Rib 4–5, allowing for the SLNB scar</td><td>Lower border of pectoralis minor (or top of ALND)</td><td>5 mm below the subclavian vein (or top of ALND)</td><td>Includes the subclavian vein + 5 mm, joining the IMC (v1.1 moved this lower)</td><td>Cranial side of the 4th rib (5th in selected cases)</td><td>Level 2's caudal limit</td></tr>
+<tr><td class="b">Anterior</td><td>Pectoralis major and minor</td><td>Pectoralis minor</td><td>Pectoralis major</td><td>Sternocleidomastoid, back of the clavicle</td><td>Front of the vascular area</td><td>Pectoralis major</td></tr>
+<tr><td class="b">Posterior</td><td>Cranially the thoracodorsal vessels; caudally a line from the front of latissimus dorsi to the intercostals</td><td>5 mm behind the axillary vein, or ribs/intercostals</td><td>5 mm behind the subclavian vein, or ribs/intercostals</td><td>Pleura</td><td>Pleura</td><td>Pectoralis minor</td></tr>
+<tr><td class="b">Medial</td><td>Level 2, interpectoral level and chest wall</td><td>Medial edge of pectoralis minor</td><td>Junction of subclavian and internal jugular veins</td><td>Internal jugular vein without margin; excludes thyroid and common carotid</td><td>5 mm from the internal mammary vein (artery cranially, to the 1st intercostal space)</td><td>Medial edge of pectoralis minor</td></tr>
+<tr><td class="b">Lateral</td><td>Cranially a line from pectoralis major to deltoid; caudally from pectoralis major to latissimus dorsi</td><td>Lateral edge of pectoralis minor</td><td>Medial edge of pectoralis minor</td><td>Includes anterior scalene; joins level 3</td><td>5 mm from the internal mammary artery (v1.1: both vessels + 5 mm)</td><td>Lateral edge of pectoralis minor</td></tr>
+</tbody>
+</table>
+<p class="src">Department table matches ESTRO with small wording differences: level 4 cranial is "often at the inferior edge of the cricoid" in the department text, whereas ESTRO says level 4 rarely extends more than 2 slices (about 6 mm) above the subclavian vein and stays behind the clavicle (tips &amp; tricks 2021) <span class="chk">CHECK</span>; this page follows ESTRO. Department IMC caudal: superior 4th rib. Draw a 1 cm PRV around the humeral head to keep level 1 off the joint (ESTRO).</p>
+<div class="grid2">
+<div>
+<h3>9.2  Locally advanced disease (department, from RTOG and RADCOMP)</h3>
+<ul class="tight">
+<li><b>Level 4:</b> include the internal carotid region and retroclavicular nodes, and extend back beyond the lateral edge of SCM into the "posterior triangle" (trapezius behind, clavicle laterally, paraspinal muscles below).</li>
+<li><b>Level 3:</b> higher cranial limit (up to the pectoralis minor insertion on the coracoid) and lower caudal limit (to where the fat between pectoralis major and minor disappears).</li>
+<li><b>Level 1:</b> extend back to the front of subscapularis and latissimus dorsi.</li>
+<li>Involved nodes: contour as GTVn, add margin and the at-risk regions (CTVn; department radical names, Section 13). Fuse diagnostic PET-CT to place them (tips &amp; tricks 2021).</li>
+<li>Gross SCF disease: contour the brachial plexus (department).</li>
+</ul>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 250" role="img" aria-label="Coronal schematic of breast nodal levels relative to pectoralis minor and clavicle">
+<rect width="300" height="250" fill="#fff"/>
+<path d="M20 60 Q140 40 230 72" fill="none" stroke="#9aa3ad" stroke-width="9" stroke-linecap="round"/>
+<text x="24" y="50" font-size="7.5" fill="#5b6b7c">clavicle</text>
+<rect x="232" y="40" width="40" height="200" rx="8" fill="#eef0f2" stroke="#b8c2cc"/><text x="238" y="150" font-size="7.5" fill="#5b6b7c">sternum</text>
+<path d="M80 80 L130 80 L150 190 L96 190 Z" fill="#e8c7b8" stroke="#b0786b" opacity=".85"/>
+<text x="88" y="140" font-size="7" fill="#8a4a3e">pect. minor</text>
+<rect x="20" y="96" width="56" height="104" rx="8" fill="rgba(47,111,176,.18)" stroke="#2f6fb0"/><text x="30" y="150" font-size="8" fill="#1d4f91" font-weight="700">L1</text><text x="24" y="162" font-size="6.5" fill="#1d4f91">lateral to</text><text x="24" y="170" font-size="6.5" fill="#1d4f91">pect. minor</text>
+<text x="104" y="104" font-size="8" fill="#1d4f91" font-weight="700">L2</text><text x="96" y="114" font-size="6.5" fill="#1d4f91">behind</text>
+<rect x="138" y="72" width="54" height="40" rx="8" fill="rgba(47,111,176,.18)" stroke="#2f6fb0"/><text x="152" y="96" font-size="8" fill="#1d4f91" font-weight="700">L3</text>
+<rect x="176" y="20" width="52" height="46" rx="8" fill="rgba(47,111,176,.25)" stroke="#2f6fb0"/><text x="192" y="46" font-size="8" fill="#1d4f91" font-weight="700">L4</text>
+<rect x="214" y="80" width="16" height="120" rx="6" fill="rgba(47,111,176,.25)" stroke="#2f6fb0"/><text x="180" y="214" font-size="7" fill="#1d4f91">IMC (to 4th rib)</text>
+<text x="20" y="232" font-size="7" fill="#555">Interpectoral (Rotter) nodes lie in front of pectoralis minor,</text>
+<text x="20" y="242" font-size="7" fill="#555">behind pectoralis major, at the level of L2</text>
+</svg>
+<figcaption>Original schematic (coronal, simplified). Levels are defined by pectoralis minor; L4 is the ESTRO name for the supraclavicular region.</figcaption>
+</figure>
+</div>
+</div>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
+</section>
+
+<section class="page">
+<h3>9.3  Supraclavicular region compared (Gee 2019, JMIRO)</h3>
+<table>
+<thead><tr><th style="width:11%">Border</th><th>ESTRO (level 4)</th><th>RTOG</th><th>RTOG-RADCOMP</th><th>TROG 12.02 PET-LABRADOR</th></tr></thead>
+<tbody>
+<tr><td class="b">Cranial</td><td>Whole subclavian vein and artery (or 1–2 cm above an involved node)</td><td>Below the cricoid</td><td>Below the cricoid</td><td>Inferior aspect of the cricoid</td></tr>
+<tr><td class="b">Caudal</td><td>Subclavian vein + 5 mm, joining IMN</td><td>Junction of brachiocephalic and axillary veins / caudal edge of clavicle head</td><td>Joins IMN (includes subclavian vein)</td><td>Top of the jugulo-subclavian junction</td></tr>
+<tr><td class="b">Medial</td><td>Jugular vein without margin; excludes thyroid and carotid</td><td>Excludes thyroid and trachea</td><td>Medial edge of carotid</td><td>Medial edge of internal carotid and jugular vein</td></tr>
+<tr><td class="b">Lateral</td><td>Anterior scalene; joins level 3</td><td>Cranially lateral SCM; caudally first rib–clavicle junction</td><td>Lateral SCM, clavicle, joining level 3</td><td>No further lateral than the clavicle</td></tr>
+<tr><td class="b">Posterior</td><td>Pleura</td><td>Anterior scalene</td><td>Anterior and middle scalene, levator scapulae</td><td>Scalene muscles; laterally omohyoid, levator scapulae, middle scalene</td></tr>
+</tbody>
+</table>
+<p class="src">RADCOMP also adds a posterior neck volume (below cricoid to where the fat ends; trapezius behind). Several recurrence-mapping studies found the SCF the area most at risk of a geographical miss (Gee 2019). PET-LABRADOR is an ANZ (TROG) trial guideline.</p>
+<h3>9.4  What the nodal trials treated (tips &amp; tricks 2021, Table 4)</h3>
+<table>
+<thead><tr><th style="width:18%">Trial</th><th>Nodal volume treated</th><th>Lymphoedema (median follow-up)</th></tr></thead>
+<tbody>
+<tr><td class="b">ACOSOG Z0011</td><td>Mostly tangents alone; about half had high tangents (level 1 and part of level 2); 18.9% of reviewed patients had a third (nodal) field against protocol (Jagsi 2014)</td><td>ALND 19% vs SLNB + RT 6% (1 year)</td></tr>
+<tr><td class="b">AMAROS</td><td>Levels 1–4, fields larger than ESTRO including the arm lymphatics; axilla lateral to the coracoid to full thickness</td><td>ALND 28% vs RT 13.6% (5 years)</td></tr>
+<tr><td class="b">EORTC 22922-10925</td><td>Undissected parts: level 3–4 and IMN (all levels if ALND incomplete)</td><td>9.8% vs 11.1% with nodal RT (10.9 years)</td></tr>
+<tr><td class="b">MA.20</td><td>Level 3–4 and IMN; dissected axilla added if &lt;10 nodes removed or &gt;3 positive</td><td>4.5% vs 8.4% (9.5 years)</td></tr>
+</tbody>
+</table>
+<p class="src">Regional recurrence after EORTC 22922 was 3.2% at 15 years despite limiting nodal RT to undissected levels. Most regional recurrences in a large series were in level 4 (33.8%), then level 1 (28.3%), level 2 (14.3%) and level 3 (8.9%) (tips &amp; tricks 2021). Lymphatic drainage to IMN by quadrant: up to about half for lower-inner tumours (tips &amp; tricks 2021, Table 1).</p>
+<h3>9.5  Walkthrough, cranial to caudal (ESTRO)</h3>
+<ol class="steps">
+<li>Find the subclavian arch on coronal view; start level 4 one slice above it. Medially include the internal jugular vein (no margin); exclude carotid and thyroid; back to pleura; laterally to anterior scalene.</li>
+<li>Follow the subclavian vein laterally behind the clavicle: level 3 medial to pectoralis minor, 5 mm around the vein.</li>
+<li>Level 2 behind pectoralis minor, 5 mm around the axillary vein; interpectoral nodes in front of it, behind pectoralis major.</li>
+<li>Level 1 lateral to pectoralis minor; stop 1 cm short of the humeral head; caudally to rib 4–5; include the SLNB scar.</li>
+<li>IMC: from the bottom of level 4 down to the top of the 4th rib, vein and artery + 5 mm, cropped to lung.</li>
+<li>View all volumes in 3D to check they join (ESTRO 2015).</li>
+</ol>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
+</section>
+
+<!-- ============================ S10 + S11 ============================ -->
+<section class="page" id="s10">
+<div class="sechead"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>Pearls and common errors</h2></div>
+<table>
+<thead><tr><th style="width:30%">Error</th><th>What to do</th><th style="width:17%">Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Breast CTV drawn to the wires</td><td>Wires mark palpable breast, not the CTV; follow glandular tissue and the internal/lateral thoracic vessels</td><td>ESTRO 2015</td></tr>
+<tr><td class="b">Ribs and pectoralis in the breast or chest wall CTV</td><td>Exclude unless invaded (T4a/T4c)</td><td>ESTRO; department</td></tr>
+<tr><td class="b">Breast CTV deep into abdominal fat caudally</td><td>Bring the deep border forward in obese patients; lowers heart dose on the left</td><td>ESTRO 2015</td></tr>
+<tr><td class="b">No tumour bed drawn because there is no boost</td><td>Always draw it and check it sits inside the breast CTV with margin</td><td>Tips &amp; tricks 2021</td></tr>
+<tr><td class="b">Uniform boost margin regardless of pathology</td><td>Use 15 mm minus the free margin in each direction (Boersma) or 20 mm minus margin (GEC-ESTRO)</td><td>Boersma 2012; Strnad 2015</td></tr>
+<tr><td class="b">Boost placed under the skin scar</td><td>Scar is on average 4 cm (up to 9 cm) from the clips</td><td>GEC-ESTRO 2015</td></tr>
+<tr><td class="b">Mixing trial volumes and doses for PBI</td><td>Copy one trial: IMPORT LOW (15 + 10 mm) for 40/15; Florence (clips + 1 + 1 cm) for 30/5</td><td>Section 5</td></tr>
+<tr><td class="b">Level 1 reaching the humeral head</td><td>1 cm PRV around the humeral head; field edge (50% isodose) follows it</td><td>ESTRO v1.1</td></tr>
+<tr><td class="b">Level 4 drawn up to the cricoid in early disease</td><td>ESTRO stops one slice above the subclavian arch; RTOG/RADCOMP extent only for advanced disease</td><td>ESTRO; department</td></tr>
+<tr><td class="b">IMC only around the artery</td><td>Include vein and artery + 5 mm (v1.1)</td><td>ESTRO v1.1</td></tr>
+<tr><td class="b">Gap between breast and nodal CTVs</td><td>Expected when level 1 is not treated (e.g. between breast and level 2–4); check the dose bridges it rather than drawing extra volume</td><td>ESTRO 2015</td></tr>
+<tr><td class="b">Treating a dissected axilla by default</td><td>Check which levels were dissected; treat undissected levels; dissected axilla only for high-risk features</td><td>Tips &amp; tricks 2021</td></tr>
+<tr><td class="b">Implant included in the CTV</td><td>Ventral part only, unless adverse factors</td><td>ESTRO-ACROP 2019</td></tr>
+<tr><td class="b">Heart contour stops short</td><td>Whole heart with pericardium, from the top of the left atrium; exclude ascending aorta, pulmonary trunk and SVC</td><td>Department; Feng 2011</td></tr>
+<tr><td class="b">Registrar contours left in the plan</td><td>Prefix REG; delete before approval</td><td>Department</td></tr>
+</tbody>
+</table>
+
+<div class="sechead" id="s11" style="margin-top:1.1em"><span class="eyebrow">Section 11</span><h2><span class="sectnum">11</span>Dose, fractionation, margins and review</h2></div>
+<table>
+<thead><tr><th style="width:30%">Treatment (department)</th><th>Dose</th><th>SIB</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td class="b">Breast alone</td><td>26 Gy/5</td><td>—</td><td>Preferred for patients &gt;50 without implants and no boost (FAST-Forward)</td></tr>
+<tr><td class="b">Breast or chest wall ± nodes</td><td>42.4 Gy/16</td><td>48 Gy</td><td>When 26/5 is unsuitable; with nodes</td></tr>
+<tr><td class="b">Breast or chest wall ± nodes</td><td>50 Gy/25</td><td>60 Gy</td><td>Younger (&lt;40), implants, inflammatory cancer, connective tissue disease</td></tr>
+<tr><td class="b">Sequential boost</td><td>10 Gy/4 or 16 Gy/8</td><td>—</td><td>If SIB unsuitable</td></tr>
+<tr><td class="b">Palliative (locally advanced or fungating)</td><td>8 Gy/1; 20 Gy/5; 40.05 Gy/9 as written <span class="chk">CHECK</span></td><td>—</td><td>Frailty, systemic disease</td></tr>
+<tr><td class="b">Partial breast; brachytherapy</td><td colspan="3">Not in the department protocol: trial regimens in Section 5 <span class="chk">CHECK</span></td></tr>
+</tbody>
+</table>
+<ul class="tight">
+<li><b>PTV = CTV + 5 mm, not clipped to skin</b> (department). Evaluate coverage on NS (non-skin) volumes; PTVLD_NS is cropped 5 mm back from PTVHD to allow dose fall-off.</li>
+<li>Coverage: PTV_NS D95 &gt;97% (minor 95–97%; major &lt;95%), D2 &lt;105% (minor 105–107%; major &gt;107%) for every regimen.</li>
+<li>Prescriptions from the Mosaiq standard list (\breastXX, \chestwallXX).</li>
+<li><b>RO review:</b> 5 fractions once; 16 fractions in week 3; &gt;16 fractions every second week from week 2; palliative weekly; nurses weekly.</li>
+<li>IGRT match and frequency are not in the protocol <span class="chk">CHECK</span>.</li>
+</ul>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 11</span></div>
+</section>
+
+<!-- ============================ S12 + S13 ============================ -->
+<section class="page" id="s12">
+<div class="sechead"><span class="eyebrow">Section 12</span><h2><span class="sectnum">12</span>Organs at risk and constraints</h2></div>
+<h3>12.1  OAR contours (department)</h3>
+<table>
+<thead><tr><th style="width:26%">Structure</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td class="b mono">SPINALCANAL, SPINALCANAL_5MM</td><td>Canal from 10 mm above to 10 mm below the PTV; PRV + 5 mm</td></tr>
+<tr><td class="b mono">LUNG_R, LUNG_L</td><td>Auto-contours</td></tr>
+<tr><td class="b mono">HEART</td><td>Whole heart and pericardium (atria and ventricles), from the top of the left atrium; excludes ascending aorta, pulmonary trunk, SVC (Feng 2011). RO checks and removes the zzz prefix</td></tr>
+<tr><td class="b mono">BREAST_R / BREAST_L</td><td>Contralateral breast auto-contour; RO checks</td></tr>
+<tr><td class="b mono">STOMACH, LIVER, HUMERAL HEAD, TRACHEA, OESOPHAGUS</td><td>VMAT plans only (stomach left-sided, liver right-sided)</td></tr>
+<tr><td class="b mono">BRACHIALPLEX_R / _L</td><td>Only when at risk (e.g. gross SCF nodes); C4–5 to its end in the subclavian bundle (lung protocol atlas)</td></tr>
+</tbody>
+</table>
+<p class="src">RTs contour OARs (except brachial plexus). Cardiac substructures and LAD: Duane 2017 atlas (15 left ventricular and coronary segments; coronary contours vary most, so dose differences near a field edge can be large).</p>
+<h3>12.2  Department DVH scorecards (per protocol value; minor / major variation in brackets)</h3>
+<table>
+<thead><tr><th style="width:17%">Structure</th><th>Breast 26/5</th><th>Breast/CW 42.4/16</th><th>Breast/CW 50/25</th><th>+ low axilla 42.4/16</th><th>+ low axilla 50/25</th><th>+ nodes 42.4/16</th><th>+ nodes 50/25 (VMAT)</th></tr></thead>
+<tbody>
+<tr><td class="b">Ipsilateral lung</td><td>V8 &lt;15% (15–20; &gt;20)</td><td>V18 &lt;15%</td><td>V20 &lt;15%</td><td>V18 &lt;20%</td><td>V20 &lt;20%</td><td>V18 &lt;30%</td><td>V20 &lt;30%</td></tr>
+<tr><td class="b">Combined lungs</td><td>V8 &lt;10%</td><td>V18 &lt;10%</td><td>V20 &lt;10%</td><td>V18 &lt;15%</td><td>V20 &lt;15%</td><td>V18 &lt;20%</td><td>V20 &lt;20%</td></tr>
+<tr><td class="b">Heart mean</td><td>&lt;2.5 Gy (2.5–3; &gt;3)</td><td>&lt;3 Gy (3–3.75; &gt;3.75)</td><td>&lt;4 Gy (4–5; &gt;5)</td><td>&lt;3.5 Gy (3.5–4; &gt;4)</td><td>&lt;4 Gy</td><td>&lt;3.5 Gy</td><td>&lt;4 Gy</td></tr>
+<tr><td class="b">Heart Vx</td><td>V7 &lt;5%</td><td>V18 &lt;5%</td><td>V20 &lt;5%</td><td>V18 &lt;5%</td><td>V20 &lt;5%</td><td>V18 &lt;5%</td><td>V20 &lt;5%</td></tr>
+<tr><td class="b">Cord max</td><td>&lt;10 Gy (10–25; &gt;25)</td><td>&lt;10 Gy (10–40; &gt;40)</td><td>&lt;10 Gy (10–45; &gt;45)</td><td>&lt;10 Gy (10–45)</td><td>&lt;10 Gy (10–45)</td><td>&lt;10 Gy (10–40)</td><td>&lt;10 Gy (10–45)</td></tr>
+<tr><td class="b">Contralateral breast</td><td>V1.86 Gy &lt;5%; D1cc &lt;3.1 Gy</td><td colspan="2">IMRT: V1.86 &lt;5%, D1cc &lt;3.1 Gy. VMAT: V4.1 &lt;5%, V5 &lt;10%</td><td colspan="4">V4.1 Gy &lt;5%; V5 Gy &lt;10%</td></tr>
+<tr><td class="b">VMAT: lungs V5</td><td>—</td><td>&lt;40%</td><td>&lt;40%</td><td>&lt;40%</td><td>&lt;40%</td><td>&lt;40%</td><td>&lt;45%</td></tr>
+<tr><td class="b">VMAT: stomach (L) / liver (R) max</td><td>—</td><td>&lt;13 Gy</td><td>&lt;15 Gy</td><td>&lt;13 Gy</td><td>&lt;15 Gy</td><td>&lt;13 Gy</td><td>&lt;15 Gy</td></tr>
+<tr><td class="b">VMAT: trachea / oesophagus max</td><td>—</td><td>&lt;25 / &lt;25 Gy</td><td>&lt;25 / &lt;25 Gy</td><td>&lt;25 / &lt;25 Gy</td><td>&lt;25 / &lt;25 Gy</td><td>&lt;30 / &lt;25 Gy</td><td>&lt;30 / &lt;30 Gy</td></tr>
+<tr><td class="b">VMAT: humeral head max</td><td>—</td><td>&lt;20 Gy</td><td>&lt;20 Gy</td><td>&lt;25 Gy</td><td>&lt;25 Gy</td><td>&lt;25 Gy</td><td>&lt;25 Gy</td></tr>
+</tbody>
+</table>
+<p class="src">Keep heart dose as low as achievable (linear rise in cardiac events with dose; Darby 2013). The RO may accept higher values (e.g. heart when treating IMC) and must comment on any red value in the DVH report. VMAT items are secondary objectives. Minor/major bands for every cell are in the department protocol.</p>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 12</span></div>
+</section>
+
+<section class="page" id="s13">
+<div class="sechead"><span class="eyebrow">Section 13</span><h2><span class="sectnum">13</span>Names and RayStation implementation</h2></div>
+<table>
+<thead><tr><th style="width:24%">Structure</th><th>Department name</th><th>ESTRO / TG-263 style</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="b">Breast / chest wall</td><td class="mono">CTV_L_BREAST, CTV_L_CW</td><td class="mono">CTVp_Breast_L, CTVp_ChestWall_L</td><td>R for right</td></tr>
+<tr><td class="b">Tumour bed</td><td class="mono">TUMOURBED</td><td class="mono">CTVp_TumourBed / GTVp_TB</td><td>Seroma ± clips</td></tr>
+<tr><td class="b">Nodes</td><td class="mono">CTVn_L_L1, _L2, _L3, _L4, _IMC, _INTERPEC</td><td class="mono">CTVn_L1_L … CTVn_IMN_L, CTVn_Interpect_L</td><td>Section 9</td></tr>
+<tr><td class="b">Dose-level CTVs</td><td class="mono">CTV26, CTV42,4, CTV50; CTV48, CTV60 (SIB)</td><td class="mono">CTV_2600, CTV_4240 …</td><td>Comma for decimals in department names</td></tr>
+<tr><td class="b">PTVs</td><td class="mono">PTV26, PTV42,4, PTV48 …</td><td class="mono">PTV_4240 …</td><td>CTV + 5 mm, not clipped to skin</td></tr>
+<tr><td class="b">Evaluation</td><td class="mono">PTV26_NS; PTVHD_NS; PTVLD_NS</td><td>—</td><td>NS = skin removed; LD_NS cropped 5 mm from PTVHD</td></tr>
+<tr><td class="b">Partial breast (trial)</td><td>—</td><td class="mono">CTVp_PBI, PTVp_PBI, PTV_Eval</td><td>Section 5 <span class="chk">CHECK</span> local names</td></tr>
+<tr><td class="b">Radical / palliative</td><td class="mono">GTVp, GTVp_PRECX, GTVn, GTVn_PRECX, CTVp, CTVn, PTVXX</td><td>—</td><td>PRECX = pre-chemotherapy extent</td></tr>
+<tr><td class="b">Helpers</td><td class="mono">REG prefix; zzz on unchecked atlas OARs</td><td class="mono">HumeralHead_PRV10</td><td>Delete REG volumes before approval</td></tr>
+</tbody>
+</table>
+<h3>13.1  ROI algebra (RayStation)</h3>
+<ul class="tight">
+<li><span class="mono">CTV_4240</span> = union of breast/CW and nodal CTVs for the 42.4 Gy level; <span class="mono">PTV_4240</span> = CTV ⊕ 5 mm (not cropped to external).</li>
+<li><span class="mono">PTV_4240_NS</span> = PTV − (External ⊖ 5 mm skin rind) <span class="chk">CHECK</span> exact skin crop used by physics; <span class="mono">PTVLD_NS</span> = PTV_LD_NS − (PTV_HD ⊕ 5 mm).</li>
+<li>PBI (IMPORT LOW): <span class="mono">CTVp_PBI</span> = (TumourBed ⊕ 15 mm) ∩ (CTVp_Breast) ∩ (External ⊖ 5 mm); <span class="mono">PTVp_PBI</span> = (CTVp_PBI ⊕ 10 mm) ∩ (External ⊖ 5 mm).</li>
+<li>Humeral head PRV = HumeralHead ⊕ 10 mm, used to shape the level 1 field edge.</li>
+</ul>
+<p class="src">The department protocol was written for Pinnacle/Mosaiq (breast window in Pinnacle); RayStation equivalents above are suggestions <span class="chk">CHECK</span> with physics.</p>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 13</span></div>
+</section>
+
+<!-- ============================ S14 REFS ============================ -->
+<section class="page" id="s14">
+<div class="sechead"><span class="eyebrow">Section 14</span><h2><span class="sectnum">14</span>References and further guidelines</h2></div>
+<h3>14.1  Supplied sources</h3>
+<ol class="ref">
+<li>SWSLHD Liverpool &amp; Macarthur Cancer Therapy Centres. Breast radiotherapy contouring protocol, version 4.0 (June 2021; distributed Dec 2021). Earlier versions 1 (2014) and 2.1 (Feb 2019) also in the folder.</li>
+<li>Offersen BV, Boersma LJ, Kirkove C, <i>et al.</i> ESTRO consensus guideline on target volume delineation for elective radiation therapy of early stage breast cancer. <i>Radiother Oncol</i> 2015;114:3–10. <a href="https://pubmed.ncbi.nlm.nih.gov/25630428/">PMID 25630428</a>.</li>
+<li>Offersen BV, Boersma LJ, Kirkove C, <i>et al.</i> ESTRO consensus guideline … version 1.1. <i>Radiother Oncol</i> 2016;118:205–8. <a href="https://pubmed.ncbi.nlm.nih.gov/26791404/">PMID 26791404</a>.</li>
+<li>Kaidar-Person O, Vrou Offersen B, Hol S, <i>et al.</i> ESTRO ACROP consensus guideline for target volume delineation in the setting of PMRT after implant-based immediate reconstruction. <i>Radiother Oncol</i> 2019;137:159–66. <a href="https://pubmed.ncbi.nlm.nih.gov/31108277/">PMID 31108277</a>.</li>
+<li>Kaidar-Person O, Dahn HM, Nichol AM, <i>et al.</i> A Delphi study and international consensus recommendations: the use of bolus in PMRT for early breast cancer. <i>Radiother Oncol</i> 2021;164:115–21.</li>
+<li>Kaidar-Person O, Offersen BV, Boersma L, <i>et al.</i> Tricks and tips for target volume definition and delineation in breast cancer: lessons learned from ESTRO breast courses. <i>Radiother Oncol</i> 2021;162:185–94.</li>
+<li>Kaidar-Person O, Offersen BV, Tramm T, <i>et al.</i> The King is in the altogether: radiation therapy after oncoplastic breast surgery. <i>Breast</i> 2023;72:103584. doi:10.1016/j.breast.2023.103584.</li>
+<li>Boersma LJ, Janssen T, Elkhuizen PHM, <i>et al.</i> Reducing interobserver variation of boost-CTV delineation in breast conserving radiation therapy using a pre-operative CT and delineation guidelines. <i>Radiother Oncol</i> 2012;103:178–82 (with appendix).</li>
+<li>Strnad V, Hannoun-Levi JM, Guinot JL, <i>et al.</i> Recommendations from GEC ESTRO Breast Cancer Working Group (I): target definition and target delineation for APBI or boost using multicatheter interstitial brachytherapy after closed cavity surgery. <i>Radiother Oncol</i> 2015;115:342–8.</li>
+<li>IMPORT LOW trial protocol and radiotherapy planning pack (ICR); Coles CE <i>et al.</i> supplementary appendix, <i>Lancet</i> 2017.</li>
+<li>Gee HE, Moses L, Stuart K, <i>et al.</i> Contouring consensus guidelines in breast cancer radiotherapy: comparison and systematic review of patterns of failure. <i>J Med Imaging Radiat Oncol</i> 2019;63:102–15. doi:10.1111/1754-9485.12804.</li>
+<li>Jagsi R, Chadha M, Moni J, <i>et al.</i> Radiation field design in the ACOSOG Z0011 (Alliance) trial. <i>J Clin Oncol</i> 2014;32:3600–6.</li>
+<li>Duane F, Aznar MC, Bartlett F, <i>et al.</i> A cardiac contouring atlas for radiotherapy. <i>Radiother Oncol</i> 2017;122:416–22.</li>
+<li>Also in the folder, not used in detail: RTOG breast atlas; RADCOMP atlas v3 (images); ESTRO atlas PDFs and LAD atlas; Nielsen 2013 DBCG (Acta Oncol); Dijkema 2004; ASBrS axilla consensus; eviQ 3634 traditional nodal field borders (MA.20).</li>
+</ol>
+<h3>14.2  Partial breast trials (web sources)</h3>
+<ol class="ref">
+<li>Coles CE, Griffin CL, Kirby AM, <i>et al.</i> Partial-breast radiotherapy after breast conservation surgery (IMPORT LOW). <i>Lancet</i> 2017;390:1048–60; 10-year results <i>Lancet Oncol</i> 2025.</li>
+<li>Offersen BV, Alsner J, Nielsen HM, <i>et al.</i> Partial breast irradiation versus whole breast irradiation … the DBCG PBI trial. <i>J Clin Oncol</i> 2022;40:4189–97 <span class="chk">CHECK</span> pages. doi:10.1200/JCO.22.00451.</li>
+<li>Meattini I, Marrazzo L, Saieva C, <i>et al.</i> APBI compared with WBI for early breast cancer: long-term results of the APBI-IMRT-Florence trial. <i>J Clin Oncol</i> 2020;38:4175–83. Volumes from NCT02104895.</li>
+<li>Whelan TJ, Julian JA, Berrang TS, <i>et al.</i> External beam APBI versus WBI (RAPID). <i>Lancet</i> 2019;394:2165–72. doi:10.1016/S0140-6736(19)32515-2.</li>
+<li>Vicini FA, Cecchini RS, White JR, <i>et al.</i> Long-term primary results of APBI (NSABP B-39/RTOG 0413). <i>Lancet</i> 2019;394:2155–64. <a href="https://pubmed.ncbi.nlm.nih.gov/31813636/">PMID 31813636</a>.</li>
+<li>Strnad V, Polgár C, Ott OJ, <i>et al.</i> APBI using sole interstitial multicatheter brachytherapy compared with WBI with boost: 10-year results of a GEC-ESTRO randomised phase 3 trial. <i>Lancet Oncol</i> 2023;24:262–72. <a href="https://pubmed.ncbi.nlm.nih.gov/36738756/">PMID 36738756</a>.</li>
+<li>Shaitelman SF, <i>et al.</i> ASTRO partial breast irradiation guideline. <i>Pract Radiat Oncol</i> 2024 (selection).</li>
+</ol>
+<h3>14.3  eviQ protocols (links only)</h3>
+<ul class="ref">
+<li><a href="https://www.eviq.org.au/radiation-oncology/breast/3650-breast-invasive-cancer-adjuvant-whole-breast">ID 3650 Whole breast EBRT</a> · <a href="https://www.eviq.org.au/radiation-oncology/breast/3658-breast-invasive-cancer-ductal-carcinoma-in-si">ID 3658 Partial breast EBRT</a> · <a href="https://www.eviq.org.au/radiation-oncology/breast/1921-breast-ductal-carcinoma-in-situ-adjuvant-ebrt">ID 1921 DCIS</a></li>
+<li><a href="https://www.eviq.org.au/radiation-oncology/breast/1924-breast-invasive-cancer-adjuvant-nodal-irradia">ID 1924 Nodal irradiation</a> · <a href="https://www.eviq.org.au/radiation-oncology/breast/1925-breast-invasive-cancer-adjuvant-ebrt-post-mas">ID 1925 Post-mastectomy</a> · <a href="https://www.eviq.org.au/radiation-oncology/breast/1926-breast-inflammatory-cancer-adjuvant-neoadjuva">ID 1926 Inflammatory</a> · <a href="https://www.eviq.org.au/p/3634">ID 3634 Traditional nodal field borders</a></li>
+</ul>
+<div class="callout" style="margin-top:1em;"><span class="lbl">Items marked CHECK</span>
+<ul class="tight" style="margin-top:4px;">
+<li>Department has no PBI or brachytherapy section: local regimen, volumes and names. DBCG PBI and RAPID PTV margins need the trial papers; 26/5 to partial breast is an extrapolation.</li>
+<li>GEC-ESTRO EBRT PTV margin (10 vs 20 mm in the paper); departmental brachytherapy dose.</li>
+<li>Department level 4 "inferior cricoid" wording vs ESTRO; palliative "40.05 Gy/9" as written; routine 3 mm PMRT bolus vs Delphi; IGRT policy; RayStation NS crop.</li>
+<li>Autologous flap reconstruction (no guideline in folder).</li>
+</ul>
+</div>
+<p class="small" style="margin-top:1em;">Written from the sources above in our own words; schematics are original. Review by a colleague before clinical use.</p>
+<div class="foot"><span>Breast RT Delineation Protocol · v1.0</span><span>Page 14</span></div>
+</section>
+</body>
+</html>
