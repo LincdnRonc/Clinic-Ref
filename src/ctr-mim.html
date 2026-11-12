@@ -1,0 +1,170 @@
+<section class="panel" id="p-keys" data-tab="keys" data-label="Hot keys">
+  <div class="panel-head">
+    <h2>Default keyboard shortcuts</h2>
+    <p class="lede">Defaults listed in a GenesisCare MIM introduction guide (2022), written before MIM 7.4.3. If a key does not behave as listed, check it in <b>Settings › Keyboard Shortcuts…</b></p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Display and navigation">
+    <h3>Display and navigation</h3>
+    <div class="tw"><table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>F1</kbd></td><td>W/L preset: <b>soft tissue</b></td></tr>
+      <tr><td><kbd>F2</kbd></td><td>W/L preset: <b>lung</b></td></tr>
+      <tr><td><kbd>F3</kbd></td><td>W/L preset: <b>bone</b></td></tr>
+      <tr><td><kbd>F4</kbd></td><td>W/L preset: <b>brain</b></td></tr>
+      <tr><td><kbd>W</kbd></td><td>Manual window / level for any dataset</td></tr>
+      <tr><td><kbd>3</kbd> / <kbd>4</kbd></td><td>Zoom in / zoom out</td></tr>
+      <tr><td><kbd>=</kbd></td><td>Toggle crosshair display</td></tr>
+      <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Scroll image slices</td></tr>
+      <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Move between session pages (e.g. one page per fusion)</td></tr>
+    </table></div>
+  </article>
+  <article class="card key" data-title="Editing and tools">
+    <h3>Editing and tools</h3>
+    <div class="tw"><table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Undo (back to the last saved point)</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td><td>Redo</td></tr>
+      <tr><td><kbd>C</kbd></td><td><b>Clean</b> the current slice of the contour</td></tr>
+      <tr><td><kbd>X</kbd></td><td><b>Erase</b> the current slice of the contour</td></tr>
+      <tr><td><kbd>F</kbd></td><td><b>Fill</b> the current slice of the contour</td></tr>
+      <tr><td><kbd>E</kbd></td><td>Localise to a DICOM coordinate</td></tr>
+      <tr><td><kbd>M</kbd></td><td>MIP movie / 3D render: check 3D bolus covers the wire markers, final OAR review</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd></td><td>Transfer contours to another dataset (must be fused or share a frame of reference)</td></tr>
+    </table></div>
+  </article>
+  <article class="card" data-title="Printable PDF">
+    <h3>Printable PDF</h3>
+    <p><a href="assets/pdf/MIM_7.4.3_Contouring_Quick_Reference.pdf" target="_blank" rel="noopener">Download the 3-page A4 PDF</a> (same content, with a table to record your own hotkeys).</p>
+  </article>
+</section>
+
+<section class="panel" id="p-mouse" data-tab="mouse" data-label="Mouse & custom keys" hidden>
+  <div class="panel-head">
+    <h2>Mouse actions and creating your own hotkeys</h2>
+    <p class="lede">There is no default key for brush size: resize with a right-click drag, or assign a key yourself if your version lists one.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Mouse and modifier actions">
+    <h3>Mouse and modifier actions</h3>
+    <div class="tw wide"><table>
+      <tr><th>Action</th><th>What it does</th></tr>
+      <tr><td>Brush: <b>left-click drag</b></td><td>Draw or erase contours (2D and 3D brush)</td></tr>
+      <tr><td>Brush: <b>right-click drag</b></td><td>Resize the brush</td></tr>
+      <tr><td><kbd>Alt</kbd> held while brushing</td><td>Draw <b>outside</b> the current contour: makes a separate island instead of merging</td></tr>
+      <tr><td>Dynamic brush</td><td>Left-click drag, keeping the inner circle inside the organ of interest</td></tr>
+      <tr><td>Pan tool</td><td>Right-click drag to move the image</td></tr>
+      <tr><td>Zoom tool</td><td>Left-click in the image, drag up / down</td></tr>
+      <tr><td><b>Double-click</b> contour name</td><td>Show contour statistics (volume, density); double-click again to hide</td></tr>
+      <tr><td><b>Right-click</b> contour name</td><td>Set as a <b>hard</b> contour (H appears); right-click the H to remove it</td></tr>
+      <tr><td><b>Double-click</b> an image</td><td>Creates a new page in the session from that view</td></tr>
+      <tr><td><kbd>Shift</kbd>+click in the patient list</td><td>Combine search results for the same patient under different IDs (e.g. a PET from another site)</td></tr>
+      <tr><td>Spyglass tool</td><td>Shows the fused secondary image in a small box over the primary</td></tr>
+    </table></div>
+  </article>
+  <article class="card key" data-title="Create your own hotkeys">
+    <h3>Create your own hotkeys: Settings › Keyboard Shortcuts… › Edit</h3>
+    <ol>
+      <li>Click <b>Settings</b> (cog in the top-left bar, next to Patients and Sessions).</li>
+      <li>Choose <b>Keyboard Shortcuts…</b>: the list shows each action and its current key.</li>
+      <li>Select the action, click <b>Edit</b>, press the new key or combination, then confirm.</li>
+      <li>Avoid keys already taken: F1–F4, W, 3, 4, =, C, X, F, E, M, the arrows, Ctrl+Z / Y and Ctrl+Shift+B.</li>
+    </ol>
+    <p class="note">The guide gives only the menu path; steps 2–4 describe the dialog as it usually works, so wording may differ slightly in 7.4.3.</p>
+  </article>
+  <article class="card" data-title="Worth binding">
+    <h3>Worth binding (no default key)</h3>
+    <ul>
+      <li>2D brush, 3D brush, dynamic brush</li>
+      <li>Interpolate, Co-Pilot</li>
+      <li>Smooth, Hard Edge, Clone</li>
+      <li>Toggle adjacent contour slices</li>
+      <li>Expansion / contraction, Boolean</li>
+      <li>Your most-used site workflow</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-tools" data-tab="tools" data-label="Contouring toolkit" hidden>
+  <div class="panel-head">
+    <h2>Contouring toolkit</h2>
+    <p class="lede">The tools used most for target and OAR contouring, with how each works.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="Tools">
+    <h3>Tools</h3>
+    <div class="tw wide"><table>
+      <tr><th>Tool</th><th>How it works</th><th>Use it for</th></tr>
+      <tr><td><b>2D / 3D brush</b></td><td>2D: one slice, any plane. 3D: across slices. Hold Alt to start a separate contour.</td><td>Most targets and OARs; 3D brush for globes and mandible.</td></tr>
+      <tr><td><b>Dynamic brush</b></td><td>Left-click drag; keep the inner circle inside the organ of interest.</td><td>Organs with a clear boundary.</td></tr>
+      <tr><td><b>Co-Pilot</b></td><td>Scroll to the next slice, wait for the shadowed suggestion, left-click to accept, edit, repeat. Uses deformable registration.</td><td>Parotids, cord, brainstem, oesophagus.</td></tr>
+      <tr><td><b>Interpolate</b></td><td>Contour every few slices, click to fill the gaps; can be re-run on the same structure.</td><td>Tubular OARs. Tip: <i>Erase Contour Slices</i> (every other slice) then interpolate to tidy a jagged structure.</td></tr>
+      <tr><td><b>Toggle adjacent slices</b></td><td>Shows the current contour dotted on the previous / next slice.</td><td>Slice-to-slice consistency; 3D bolus.</td></tr>
+      <tr><td><b>Clean &amp; Fill</b></td><td>Clean removes small islands. Fill: single slice, each slice, or volumetric (only fully enclosed holes).</td><td>After range-lock contouring: range lock None → Fill → Smooth.</td></tr>
+      <tr><td><b>Smooth</b></td><td>One click smooths edges; repeatable.</td><td>Over-smoothing shrinks the volume.</td></tr>
+      <tr><td><b>Hard Edge</b></td><td>Removes overlap with any contour marked hard (H).</td><td>Bowel bag minus bladder; pharynx vs larynx / constrictors.</td></tr>
+      <tr><td><b>Expand / contract</b></td><td>Uniform or six-direction margins; inner / outer rings.</td><td>PTVs, PRVs, skin and bolus rings.</td></tr>
+      <tr><td><b>Boolean</b></td><td>Contour → operation → contour (chain several) → destination → green tick; steps can be undone.</td><td>PTV minus OAR, combined lungs.</td></tr>
+      <tr><td><b>Region Grow</b></td><td>Load Region Templates (e.g. Chest › Rt Lung) → adjust box → chequered flag → Done.</td><td>Lungs, then delete trachea and contralateral air.</td></tr>
+      <tr><td><b>Whole Body, Clone, Erase</b></td><td>Body contour by dragging the range in sagittal or coronal; duplicate a contour; erase all slices (name kept, in italics).</td><td>Erase is not delete: the name stays in the list.</td></tr>
+    </table></div>
+  </article>
+  <article class="card" data-title="Workspace set-up">
+    <h3>Set up your workspace</h3>
+    <ul>
+      <li><b>Toolbar:</b> cog on the right of the toolbar → green + to add, red – to remove, drag to reorder tools, extensions and workflows. Saved for your next login.</li>
+      <li><b>Mode Tools:</b> settings option in the panel → add or remove contouring tools and workflows.</li>
+      <li><b>Contour settings:</b> colour, line width, name, <b>Fill</b> 0–100 % (good for checking Hard Edge results) and <b>range lock</b> (bone, tissue, air presets or custom HU). Set range lock back to None after use.</li>
+      <li><b>Contour cog menu:</b> rename, erase, delete, clone, statistics, Localize to Contour Centroid, <b>Lock Contour</b> (protects previous-treatment volumes).</li>
+      <li><b>Series to Contour</b> must be the planning CT: structures attach to it.</li>
+      <li><b>Colour:</b> click the grey-scale bar to change the colour map for fusions and PET.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-hn" data-tab="hn" data-label="H&N OAR recipes" hidden>
+  <div class="panel-head">
+    <h2>Head and neck OAR recipes</h2>
+    <p class="lede">Tool combinations suggested in the guide's MIM tips for head and neck OARs.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="H&N OAR recipes">
+    <h3>Recipes</h3>
+    <div class="tw wide"><table>
+      <tr><th>Structure</th><th>Recipe</th></tr>
+      <tr><td><b>Parotids</b></td><td>Move tool, or 2D brush + Co-Pilot; range lock <i>tissue</i></td></tr>
+      <tr><td><b>Submandibular glands</b></td><td>Move tool + 2D brush with Co-Pilot or Interpolate</td></tr>
+      <tr><td><b>Globes / lens</b></td><td>Globes: Move tool + Smooth, or 3D brush. Lens: 2D brush + Smooth</td></tr>
+      <tr><td><b>Brainstem, spinal cord, oesophagus</b></td><td>2D brush + Interpolate or Co-Pilot. Consider <i>Erase Contour Slices</i> (every other) then Interpolate</td></tr>
+      <tr><td><b>Larynx, pharyngeal constrictors</b></td><td>2D brush + Interpolate, then Smooth; set as hard edge to avoid overlap</td></tr>
+      <tr><td><b>Pharynx</b></td><td>2D brush + Interpolate or Co-Pilot, Smooth; avoid overlap with larynx, constrictors and oral cavity</td></tr>
+      <tr><td><b>Mandible</b></td><td>Range lock <i>bone</i> → 2D or 3D brush → range lock <i>None</i> → Fill and Smooth</td></tr>
+      <tr><td><b>Optic nerves</b></td><td>2D brush + Smooth; consider a custom range lock with lower limit −50 HU</td></tr>
+    </table></div>
+  </article>
+</section>
+
+<section class="panel" id="p-save" data-tab="save" data-label="Saving & recovery" hidden>
+  <div class="panel-head">
+    <h2>Sessions, saving and recovery</h2>
+    <p class="lede">Saving structures is not the same as saving a session. Follow your local work instruction for saving sessions.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Saving">
+    <h3>Saving</h3>
+    <ul>
+      <li>The blue floppy in the contour list saves <b>structures</b> to a dataset. It does <b>not</b> save the session.</li>
+      <li>Contour names in <i>italics</i> are empty; white names contain contours.</li>
+      <li>Avoid several open sessions for one patient: it causes confusion.</li>
+      <li>Use <b>Session Notes</b> to flag issues for RTs and planners.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Recovery and auto-deletion">
+    <h3>Recovery and auto-deletion</h3>
+    <ul>
+      <li><b>Autosave recovery:</b> Import › Browse… → your MIM recovery share (ask your MIM SME or physics) → your username › RECOVERY › RTAUTOSAVE → select all RTst files → import to MIMpacs → reopen with <i>Add All Data</i>.</li>
+      <li>In the guide's set-up, data not opened for <b>35 days</b> are deleted automatically. To keep a case, save a session called <b>Keep</b>, or anonymise it with <b>Case</b> in the patient name (teaching).</li>
+    </ul>
+    <p class="note flag caution">Recovery paths and deletion rules are local configuration. Check with your MIM SME.</p>
+  </article>
+</section>

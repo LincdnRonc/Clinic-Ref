@@ -44,7 +44,7 @@ def eviq_panel(f):
 '''
 CTR_SITE = {'ctr-breast.html':'breast','ctr-thorax.html':'thorax','ctr-hn.html':'hn','ctr-skin.html':'hn','ctr-cns.html':'cns','ctr-peds.html':'cns',
  'ctr-upper-gi.html':'gi','ctr-anal.html':'gi','ctr-gyn.html':'gyn','ctr-heme.html':'heme','ctr-sarcoma.html':'sarcoma','ctr-spine.html':'pall',
- 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/lung.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','contouring/oesophagus.html':'gi','contouring/breast.html':'breast','ctr-library.html':'contouring'}
+ 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/lung.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','contouring/oesophagus.html':'gi','contouring/breast.html':'breast','ctr-library.html':'contouring','ctr-mim.html':'contouring','ctr-monaco.html':'contouring'}
 def _ds(f): return f' data-site="{CTR_SITE[f]}"' if f in CTR_SITE else ''
 def sitenav(current, group):
     links = ['<a href="index.html">Home</a>']
@@ -248,6 +248,13 @@ CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
  ('contouring/pancreas-stomach.html','Pancreas & stomach','Pancreas and stomach contouring protocol','Pancreas neoadjuvant, definitive, NRG dose-escalated (triangle) and SBRT volumes; RTOG post-op CTV; gastric nodal anatomy; constraints.'),
  ('contouring/biliary.html','Biliary','Cholangiocarcinoma and gallbladder contouring protocol','Intrahepatic SBRT and chemoRT, perihilar and distal CTV margins, post-op nodal templates (Park, RTOG), gallbladder, doses.'),
  ('contouring/liver-sbrt.html','Liver SBRT OARs','Liver SBRT OAR contouring protocol','Liver, luminal GI and other OARs on CT and MRI, central hepatobiliary tract, MR-linac re-contouring zone, UK 2022 constraints.')]
+SOFTWARE = [
+ ('ctr-mim.html','MIM shortcuts','MIM contouring shortcuts','MIM 7.4 default hotkeys, creating your own, mouse actions, contouring tools, H&N OAR recipes, saving and recovery. Printable PDF.'),
+ ('ctr-monaco.html','Monaco shortcuts','Monaco contouring shortcuts','Elekta Monaco hot keys, navigation, contouring toolkit, Monaco-specific gotchas, workflow and W/L presets. Printable PDF.')]
+CNAV += SOFTWARE
+FOOT_SW = '<footer><p>Software quick references compiled from vendor user and training guides and a departmental MIM guide. Shortcuts and tool names change between versions and local configurations; check in your installed version. Not affiliated with or endorsed by MIM Software, GE HealthCare or Elekta. Follow departmental work instructions.</p></footer>'
+for f,short,long,desc in SOFTWARE:
+    (root/f).write_text(page(f,short,long,desc,CNAV,'Contouring','contouring',FOOT_SW))
 FOOT_CTR = '<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>'
 for f,short,long,desc,_ in CONTOUR:
     (root/f).write_text(page(f,short,long,desc,CNAV,'Contouring','contouring',FOOT_CTR))

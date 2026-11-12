@@ -14,6 +14,8 @@ This repo is the single source of truth: the built pages and the build kit that 
 | `eviq_links.py` | eviQ protocol links per page (links only; no eviQ content is copied). |
 | `theme.py` | Generates the tumour-site colour block in `assets/site.css`. |
 | `assets/` | Shared CSS and JS. |
+| `assets/pdf/` | Printable PDFs linked from pages (MIM and Monaco contouring shortcut sheets). |
+| `src/ctr-mim.html`, `src/ctr-monaco.html` | Contouring software quick references (`SOFTWARE` in `build.py`). |
 | `contouring/` | Full-length contouring atlases and protocols (prostate, rectal long-course, liver SBRT OARs). Standalone pages: edit the HTML directly. |
 | `exam_links.py` | Phase 2 exam-summary page list (`EXAM`) and the cross-links between clinic pages and exam-summary tabs (`XREF`). |
 | `tools/super_summary.py` | Regenerates `src/exam-*.html` from the Super Summary .docx (`python3 tools/super_summary.py Super_Summary.docx`), one tab per subsite. The .docx itself is not stored here. |

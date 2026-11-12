@@ -1,0 +1,173 @@
+<section class="panel" id="p-keys" data-tab="keys" data-label="Hot keys">
+  <div class="panel-head">
+    <h2>Keyboard shortcuts (official)</h2>
+    <p class="lede">Key bindings from the Monaco 5.11 User Guide. They can change between releases: press F1 and search “shortcut” to check your installed version.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="All activities">
+    <h3>All activities</h3>
+    <div class="tw"><table>
+      <tr><th>Keys</th><th>Action</th></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Save patient data</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Undo last <b>contour</b> or block edit</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>X</kbd></td><td>Cut selected contour</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd></td><td>Copy selected contour</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Paste cut / copied contour</td></tr>
+      <tr><td><kbd>PgUp</kbd> / <kbd>PgDn</kbd></td><td>Next superior / inferior image (transverse)</td></tr>
+      <tr><td><kbd>Num +</kbd> / <kbd>Num −</kbd></td><td>Zoom in / zoom out (numeric keypad)</td></tr>
+      <tr><td><kbd>F1</kbd></td><td>Online help (searchable — try “shortcut”)</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td>Print BEV / DRR</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>PrtScn</kbd></td><td>Print entire screen</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>PrtScn</kbd></td><td>Active window → clipboard (teaching slides, M&amp;M)</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Alt</kbd>+<kbd>F4</kbd></td><td>Exit Monaco</td></tr>
+    </table></div>
+  </article>
+  <article class="card key" data-title="Contouring and editing">
+    <h3>Contouring and editing</h3>
+    <div class="tw"><table>
+      <tr><th>Keys</th><th>Action</th></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Abort an incomplete drawing / edit</td></tr>
+      <tr><td><kbd>Delete</kbd></td><td>Delete the <b>selected contour</b> (this slice) or port object</td></tr>
+      <tr><td><kbd>Shift</kbd>+<kbd>Delete</kbd></td><td><b>Remove the whole structure</b> from the studyset</td></tr>
+      <tr><td><kbd>→</kbd><kbd>↑</kbd><kbd>&gt;</kbd></td><td>Increase guide radius</td></tr>
+      <tr><td><kbd>←</kbd><kbd>↓</kbd><kbd>&lt;</kbd></td><td>Decrease guide radius</td></tr>
+      <tr><td><b>Right-click</b> in T/S/C/O view</td><td>Pop-up menu to pick a contouring tool without going to the ribbon</td></tr>
+    </table></div>
+  </article>
+  <article class="card" data-title="Three keys that bite">
+    <h3>Three keys that bite</h3>
+    <ul>
+      <li><kbd>Ctrl</kbd>+<kbd>Z</kbd> only reverses <b>contour / block edits</b> — not margins, booleans or structure deletion. Save before big operations.</li>
+      <li><kbd>Delete</kbd> removes the <b>selected contour on that slice</b>; <kbd>Shift</kbd>+<kbd>Delete</kbd> removes the <b>entire structure</b>. Know which one your finger is on.</li>
+      <li><kbd>Esc</kbd> cancels a half-drawn contour — use it instead of clicking out and leaving a stray open segment.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Printable PDF">
+    <h3>Printable PDF</h3>
+    <p><a href="assets/pdf/Monaco_Contouring_Quick_Reference.pdf" target="_blank" rel="noopener">Download the 3-page A4 PDF</a> (same content, with a box for your department's version notes and margin templates).</p>
+  </article>
+</section>
+
+<section class="panel" id="p-nav" data-tab="nav" data-label="Navigation & display" hidden>
+  <div class="panel-head">
+    <h2>Navigation and image display</h2>
+    <p class="lede">Moving around the image set quickly, and the one-off set-up that saves time on every case.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="Navigation tools">
+    <h3>Navigation tools</h3>
+    <div class="tw wide"><table>
+      <tr><th>Tool</th><th>Use it for</th></tr>
+      <tr><td>Mouse scroll wheel</td><td>Step through slices in the active view</td></tr>
+      <tr><td>Colour-coded T-bars</td><td>Drag to move the S/C/O plane displayed in the other views</td></tr>
+      <tr><td>Quick locator / Jump to point</td><td>Centre all views on a point — fast for checking a contour in 3 planes</td></tr>
+      <tr><td>Slice navigator / reference plane values</td><td>Type a slice position directly (useful for matching a diagnostic report)</td></tr>
+      <tr><td>Window / level by mouse</td><td>Drag in the image; or set from the Tools tab</td></tr>
+      <tr><td>W/L presets (user-definable)</td><td>Save your own (e.g. prostate, lung, mediastinum) — one click per switch</td></tr>
+      <tr><td>Link W/L affect</td><td>Apply one W/L to linked image sets — handy for planning CT + fused MR</td></tr>
+      <tr><td>Magnifying glass / zoom area</td><td>Zoom a region (apex, chiasm, cochlea) without losing context</td></tr>
+      <tr><td>Reset zoom &amp; pan</td><td>Recover a lost image fast</td></tr>
+      <tr><td>Maximise / restore window</td><td>Contour on one large view, restore to check others</td></tr>
+      <tr><td>Layouts — save as preset</td><td>Store a contouring layout (e.g. big axial + small sag/cor) as a user default</td></tr>
+    </table></div>
+  </article>
+  <article class="card key" data-title="Speed set-up (do once)">
+    <h3>Speed set-up (do once)</h3>
+    <ul>
+      <li>Build personal <b>W/L presets</b> and a <b>saved layout</b>; set it as your user default.</li>
+      <li>Learn the guide-radius arrows ( <kbd>↑</kbd> / <kbd>↓</kbd> ) so you never leave the image to resize the Replace tool.</li>
+      <li>Use <b>right-click → tool</b> instead of travelling to the ribbon; keep one hand on the keyboard for <kbd>PgUp</kbd> / <kbd>PgDn</kbd>, <kbd>Esc</kbd>, <kbd>Ctrl</kbd>+<kbd>Z</kbd>.</li>
+      <li>Turn on <b>Autosave Contours</b> so a crash doesn't cost you the session.</li>
+      <li>Use <b>Anatomical Groups</b> to show/hide related structures (e.g. all H&amp;N OARs) in one click.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-tools" data-tab="tools" data-label="Contouring toolkit" hidden>
+  <div class="panel-head">
+    <h2>Contouring toolkit: what to reach for</h2>
+    <p class="lede">What each tool does and when it is the right one.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="Tools">
+    <h3>Tools</h3>
+    <div class="tw wide"><table>
+      <tr><th>Tool</th><th>What it does</th><th>Best use / tip</th></tr>
+      <tr><td><b>Draw Contour</b></td><td>Click points (or drag) to outline a structure on a slice.</td><td>Small or irregular targets; anything needing precise, deliberate edges (GTV).</td></tr>
+      <tr><td><b>Replace + Swap</b></td><td>Redraw a segment; Monaco splices it in. Swap flips to the other possible result if it kept the wrong side.</td><td>The workhorse edit. If the splice looks wrong, hit Swap before undoing.</td></tr>
+      <tr><td><b>Guide radius</b></td><td>Sets the snap distance for Replace / reshape edits.</td><td>Arrow keys or &lt; &gt; adjust on the fly. Small for fine edits near OARs; large for broad corrections.</td></tr>
+      <tr><td><b>Reshape</b></td><td>Push/pull an existing contour.</td><td>Smoothing bumps on a CTV after margin expansion.</td></tr>
+      <tr><td><b>Contour by Shapes</b></td><td>Drop circles / rectangles.</td><td>Quick blocking structures, ring aids, or palliative field references.</td></tr>
+      <tr><td><b>Paintbrush</b></td><td>Paint voxels with a user-set width; contour forms when you exit the tool. Has its own erase, smoothing and transparency.</td><td>Fast for soft-tissue OARs and editing CTVs. Paint with a slightly translucent fill to see anatomy beneath.</td></tr>
+      <tr><td><b>Edge Detection (Paintbrush)</b></td><td>Brush stops at image edges; sensitivity adjustable.</td><td>Works best on high-contrast boundaries (bladder–fat, lung–tissue); poor on iso-dense interfaces (prostate–rectum).</td></tr>
+      <tr><td><b>Structure Avoidance (Paintbrush)</b></td><td>Brush cannot paint into selected structures.</td><td>Paint a CTV while avoiding bone / bowel / air; paint rectum while avoiding prostate — no overlap to clean later.</td></tr>
+      <tr><td><b>EZ Sketch</b></td><td>Semi-automatic 3D structure creation, then <i>Refine</i> (local) or <i>Global edit</i>; Quick Scheme for repeat use.</td><td>Bladder, femoral heads, kidneys, liver. Always scroll every slice afterwards.</td></tr>
+      <tr><td><b>Auto Threshold</b></td><td>HU-based contour.</td><td>External/body, lungs, airway, bone. Set HU limits deliberately for lung window.</td></tr>
+      <tr><td><b>Auto Segmentation</b></td><td>Model-based auto-contours.</td><td>Starting point for OAR sets — review and edit, never accept unseen.</td></tr>
+      <tr><td><b>Interpolation</b></td><td>Fills slices between two drawn contours.</td><td>Contour every 2–3 slices on smooth OARs, interpolate, then check each interpolated slice (fails at bifurcations / apex).</td></tr>
+      <tr><td><b>Copy Sup/Inf, Ant/Post, R/L</b></td><td>Copies a contour to adjacent slices (from T, S or C views).</td><td>Tubular structures (spinal canal, rectum); then edit with Replace.</td></tr>
+      <tr><td><b>Copy Structure</b></td><td>Duplicate a whole structure.</td><td>Make an editable CTV copy before cropping; keep the original as an audit trail.</td></tr>
+      <tr><td><b>Auto Margin</b></td><td>Uniform / anisotropic 3D margins; save <b>Common Margin Templates</b>.</td><td>GTV→CTV, CTV→PTV, PRVs, rings. Save departmental templates once.</td></tr>
+      <tr><td><b>Advanced Margins</b></td><td>Boolean-style combinations (union, subtract, intersect) with margins; save templates; print margin report.</td><td>Crop PTV from skin, CTV minus bone, rectum minus PTV for optimisation, PTV_eval structures.</td></tr>
+      <tr><td><b>EZClean</b></td><td>Removes stray islands / tidies contours.</td><td>Run after paintbrush or threshold work to remove specks that inflate volumes.</td></tr>
+      <tr><td><b>PET SUV / threshold</b></td><td>SUV calculation and threshold contouring on fused PET.</td><td>Confirm SUV units first (DICOM editor for SUV if missing). Treat as a guide, not the GTV.</td></tr>
+      <tr><td><b>Generate Bolus</b></td><td>Creates bolus structure (incl. Fill VOI) with editing tools.</td><td>Chest wall / skin cases — confirm thickness &amp; density with planning.</td></tr>
+      <tr><td><b>Convert Isodose → Structure</b></td><td>In Plan Review: turns an isodose into a structure.</td><td>Optimisation helpers, re-irradiation overlap, recording composite high-dose regions.</td></tr>
+    </table></div>
+  </article>
+</section>
+
+<section class="panel" id="p-gotchas" data-tab="gotchas" data-label="Gotchas & workflow" hidden>
+  <div class="panel-head">
+    <h2>Monaco-specific gotchas and workflow</h2>
+    <p class="lede">How Monaco handles structures differently from other systems, a working order for a typical case, and window/level starting points.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Monaco-specific gotchas">
+    <h3>Monaco-specific gotchas</h3>
+    <div class="tw wide"><table>
+      <tr><th>Issue</th><th>What to do</th></tr>
+      <tr><td>Voxel-based structures</td><td>Monaco rasterises structures to voxels; a voxel is assigned to a structure once roughly half of it lies inside the contour. Thin or tiny structures (urethra, chiasm, cochlea, small mets) can lose or gain volume — check the reported volume and DVH, and contour generously-but-accurately rather than 1-voxel-thin.</td></tr>
+      <tr><td>Jagged external / body</td><td>Monaco re-voxelises the CT on import, so contours follow the voxel grid and the external can look stepped (relevant for SGRT surfaces). Applying a <b>0 mm Auto Margin</b> to the external is a commonly used way to smooth it.</td></tr>
+      <tr><td>Structure layering &amp; overlaps</td><td>When structures overlap, the layering order in the IMRT constraints decides which owns each voxel during optimisation. Create explicit optimisation structures (PTV minus OAR, OAR minus PTV) rather than relying on layering alone.</td></tr>
+      <tr><td>Contours outside the patient</td><td>Structures extending beyond the external (e.g. PTV into air) need cropping or deliberate density handling — crop PTV 3–5 mm under skin for optimisation where your protocol allows.</td></tr>
+      <tr><td>Scan reference point</td><td>Define and <b>lock</b> it once contouring is complete; moving it late creates downstream set-up errors.</td></tr>
+      <tr><td>Structure mismatch at planning</td><td>Renaming or deleting structures after a template is loaded triggers mismatches — finalise names (TG-263 style) before the planner starts.</td></tr>
+    </table></div>
+  </article>
+  <article class="card" data-title="Efficient sequence for a typical case">
+    <h3>Efficient sequence for a typical case</h3>
+    <ul>
+      <li>Fuse first (MR/PET) and check the registration locally around the target, not globally.</li>
+      <li>External → auto-segment / EZ Sketch OARs → edit → targets last, when your eye is fresh.</li>
+      <li>GTV on <b>every slice</b>; OARs every 2–3 slices + interpolation, then verify.</li>
+      <li>CTV via Auto Margin from GTV, then edit against anatomical barriers using paintbrush with <b>structure avoidance</b>.</li>
+      <li>PTV and PRVs <b>only</b> by Auto Margin / templates — never hand-drawn.</li>
+      <li>Run EZClean, then a final scroll in sagittal and coronal: steps and gaps jump out.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Quality habits">
+    <h3>Quality habits</h3>
+    <ul>
+      <li>Change W/L for each structure: soft-tissue for pelvis, lung window for airways/lung, bone for canal and sacral plexus.</li>
+      <li>Check superior/inferior extent on sagittal &amp; coronal — the commonest miss in axial-only contouring.</li>
+      <li>Use colour-wash / transparency to spot overlaps between CTV and OARs.</li>
+      <li>Keep a <i>_orig</i> copy before major edits; it's your audit trail and undo for non-undoable steps.</li>
+      <li>Consistent naming and colours via structure templates help peer review and auto-planning.</li>
+      <li>Screen-grab with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>PrtScn</kbd> for peer-review or teaching cases (de-identify first).</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Window / level starting points">
+    <h3>Window / level starting points</h3>
+    <div class="tw wide"><table>
+      <tr><th>Preset</th><th>Window</th><th>Level</th><th>Use for</th></tr>
+      <tr><td>Soft tissue / pelvis</td><td>400</td><td>40</td><td>Prostate, bladder, rectum, gynae CTVs</td></tr>
+      <tr><td>Mediastinum</td><td>350</td><td>50</td><td>Heart, oesophagus, great vessels, nodes</td></tr>
+      <tr><td>Lung</td><td>1500–1600</td><td>−600</td><td>Lung GTV, airways, lung OARs</td></tr>
+      <tr><td>Bone</td><td>1800–2000</td><td>400–500</td><td>Canal, vertebrae, femoral heads, sacrum</td></tr>
+      <tr><td>Brain</td><td>80</td><td>40</td><td>Brainstem, chiasm boundaries (pair with MR)</td></tr>
+      <tr><td>Liver</td><td>150</td><td>30–60</td><td>Liver lesions with contrast</td></tr>
+    </table></div>
+    <p class="note">Typical starting values — tune to your scanner, contrast phase and departmental protocol, then save as user-definable presets.</p>
+  </article>
+</section>
