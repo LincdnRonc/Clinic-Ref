@@ -52,6 +52,16 @@ def sitenav(current, group):
         cur = ' aria-current="page"' if f==current else ''
         links.append(f'<a href="{f}"{cur}{_ds(f)}>{html.escape(short)}</a>')
     return '<nav class="sitenav" aria-label="All pages">' + ''.join(links) + '</nav>'
+def tree(current):
+    """Collapsible all-pages menu: one <details> per group, current group open."""
+    groups = [(gid, head, pages) for gid,_,head,pages,_ in GROUPS] + [('contouring','Contouring',CNAV)]
+    out = []
+    for gid, head, pages in groups:
+        here = any(pg[0]==current for pg in pages)
+        links = ''.join(f'<a href="{pg[0]}"{" aria-current=\"page\"" if pg[0]==current else ""}>{html.escape(pg[1])}</a>' for pg in pages)
+        out.append(f'<details data-site="{gid}"{" open" if here else ""}><summary>{html.escape(head)}</summary>{links}</details>')
+    return ('<details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary>'
+            '<nav class="tree" aria-label="All pages"><a class="home" href="index.html">Home</a>' + ''.join(out) + '</nav></details>')
 from exam_links import EXAM, FOOT_EXAM, XREF
 def _tablabels(f):
     t = (root/'src'/f).read_text()
@@ -101,11 +111,14 @@ def page(f, short, long, desc, group, gname, gid, foot):
     <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
   </div>
 </header>
+<div class="layout">
+<aside class="side">{tree(f)}</aside>
 <main id="main">
-{sitenav(f, group)}{xref_bar(f)}
+{xref_bar(f)}
 <div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
 {body}
 </main>
+</div>
 {foot}
 <script src="assets/site.js"></script>
 </body>
@@ -186,9 +199,6 @@ GROUPS = [
  ('mrl','MR-linac','MR-linac',MRL,FOOT_MRL),
  ('exam','Exam summary','Phase 2 exam summary',EXAM,FOOT_EXAM),
 ] + EXTRA
-for gid,gname,_,pages,foot in GROUPS:
-    for g in pages:
-        (root/g[0]).write_text(page(*g, pages, gname, gid, foot))
 # old gu.html -> redirect to home GU section
 (root/'gu.html').write_text('<!DOCTYPE html>\n<html lang="en-AU"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=index.html#gu"><title>GU Quick Reference</title></head><body><p>The GU reference is now split by tumour site. <a href="index.html#gu">Go to the GU pages</a>.</p></body></html>\n')
 def cards(pages): return ''.join(f'<a class="hubcard" href="{f}"{_ds(f)}><h3>{html.escape(long)}</h3><p>{html.escape(desc)}</p></a>' for f,short,long,desc in pages)
@@ -258,6 +268,9 @@ for f,short,long,desc in SOFTWARE:
 FOOT_CTR = '<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>'
 for f,short,long,desc,_ in CONTOUR:
     (root/f).write_text(page(f,short,long,desc,CNAV,'Contouring','contouring',FOOT_CTR))
+for gid,gname,_,pages,foot in GROUPS:
+    for g in pages:
+        (root/g[0]).write_text(page(*g, pages, gname, gid, foot))
 contour_cards = cards(CNAV)
 # Home
 groupnav = ''.join(f'<a href="#{gid}" data-site="{gid}">{html.escape(head)}</a>' for gid,_,head,_,_ in GROUPS)
@@ -285,6 +298,8 @@ home = f'''<!DOCTYPE html>
     <p class="lede" style="margin:4px 0 0">Clinic-ready summaries by tumour site: management by stage, doses, planning volumes and constraints, consent numbers and landmark trials.</p>
   </div>
 </header>
+<div class="layout">
+<aside class="side">{tree('index.html')}</aside>
 <main>
 <nav class="sitenav" aria-label="Tumour groups">{groupnav}<a href="#contouring">Contouring</a></nav>
 {sections}
@@ -292,7 +307,9 @@ home = f'''<!DOCTYPE html>
   <div class="hub">{contour_cards}</div>
 {('<h2 class="group-title" id="soon">Still to add</h2><div class="hub">'+cards_soon+'</div>') if soon else ''}
 </main>
+</div>
 {FOOT.replace('RadOncReview GI document','RadOncReview tumour-site documents').replace('NCCN, ASTRO, ASCO','NCCN, ASTRO and others')}
+<script src="assets/site.js"></script>
 </body>
 </html>
 '''

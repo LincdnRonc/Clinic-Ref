@@ -1,3 +1,15 @@
+// All-pages menu: always open on wide screens, collapsed on phones
+(function(){
+  var m = document.querySelector('details.menu'); if(!m) return;
+  var mq = window.matchMedia('(min-width:1100px)');
+  function sync(){ if(mq.matches) m.open = true; }
+  sync(); if(mq.addEventListener) mq.addEventListener('change', sync);
+  var top = document.querySelector('.top');
+  function setTop(){ if(top) document.documentElement.style.setProperty('--side-top', top.offsetHeight + 'px'); }
+  setTop(); window.addEventListener('resize', setTop);
+  var cur = m.querySelector('[aria-current="page"]');
+  if(cur && mq.matches){ var side = m.closest('.side'); if(side) side.scrollTop = Math.max(0, cur.offsetTop - 120); }
+})();
 
 (function(){
   if(!document.getElementById('chips')) return;
