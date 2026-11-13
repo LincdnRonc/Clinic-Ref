@@ -60,3 +60,16 @@
 - Routine 3 mm PMRT bolus (department) vs Delphi 2021 (not routine).
 - IGRT policy; RayStation NS crop recipe; local PBI/brachytherapy names; autologous flap guideline not in folder.
 - DBCG PBI page numbers (JCO 2022;40:4189–?).
+
+## Gynae protocol (contouring/gynae.html)
+- Departmental source: SSWAHS (LCTC & MCTC) gynae RT contouring protocol, 22 June 2020 (K Lim, reviewed V Do), written for MIM/Pinnacle; confirm it is current and the RayStation names/template.
+- High-risk CTV-E upper border: department gives top of L2 (risk table) and top of L1 (expansions, CTVn_PA); EMBRACE II says at least renal veins (usually incl. L2). Page uses renal veins / top of L1, whichever is higher.
+- Presacral strip width: department 10 mm (cervix sections) vs 15 mm (vagina section); Small 2021 1–1.5 cm.
+- Department external/internal iliac inferior border "top of acetabulum" vs Small 2021 (circumflex origin / vessels turn laterally).
+- Department inguinal anterior 20 mm vs Gaffney appendix anterior 23 mm (anteromedial 35, anterolateral 25, medial 22).
+- Department definitive vulva CTVp = GTVp + 0.5–1 cm vs Gaffney 2016 whole vulva; page follows Gaffney — confirm with gynae team.
+- Post-op EBRT OAR constraints: none in the department document; page quotes NRG GYN template (2018) example values.
+- IGRT method for post-op, vaginal and vulval cases not in the department document.
+- CTV_IR margin per direction (Haie-Meder 2005 / ICRU 88) not in folder; NRG template gives CTV_HR + 5–15 mm.
+- Not in folder: Fields 2025 intact cervix update, Viswanathan 2014 CT vs MRI HR-CTV, ABS vaginal cuff guideline (Small 2012), Schmid 2020, Kamrava 2023.
+- EMBRACE II summary paper reference (Pötter 2018 CTRO 9:48–60): add DOI after checking.
