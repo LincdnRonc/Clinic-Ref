@@ -44,7 +44,7 @@ def eviq_panel(f):
 '''
 CTR_SITE = {'ctr-breast.html':'breast','ctr-thorax.html':'thorax','ctr-hn.html':'hn','ctr-skin.html':'hn','ctr-cns.html':'cns','ctr-peds.html':'cns',
  'ctr-upper-gi.html':'gi','ctr-anal.html':'gi','ctr-gyn.html':'gyn','ctr-heme.html':'heme','ctr-sarcoma.html':'sarcoma','ctr-spine.html':'pall',
- 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/lung.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','contouring/oesophagus.html':'gi','contouring/breast.html':'breast','contouring/gynae.html':'gyn','contouring/anal.html':'gi','contouring/spine-bone.html':'pall','contouring/cns.html':'cns','contouring/head-neck.html':'hn','contouring/lymphoma.html':'heme','ctr-library.html':'contouring','ctr-mim.html':'contouring','ctr-monaco.html':'contouring'}
+ 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/bladder.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/lung.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','contouring/oesophagus.html':'gi','contouring/breast.html':'breast','contouring/gynae.html':'gyn','contouring/anal.html':'gi','contouring/spine-bone.html':'pall','contouring/cns.html':'cns','contouring/head-neck.html':'hn','contouring/lymphoma.html':'heme','ctr-library.html':'contouring','ctr-mim.html':'contouring','ctr-monaco.html':'contouring'}
 def _ds(f): return f' data-site="{CTR_SITE[f]}"' if f in CTR_SITE else ''
 def sitenav(current, group):
     links = ['<a href="index.html">Home</a>']
@@ -258,6 +258,7 @@ CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
  ('contouring/lymphoma.html','Lymphoma ISRT','Lymphoma ISRT contouring protocol','ILROG pre- and post-chemo GTV, ISRT CTV for indolent, early HL/DLBCL, mediastinal, advanced and extranodal disease, doses, mini-atlas margins.'),
  ('contouring/lung.html','Lung','Lung contouring protocol','SABR peripheral, central and ultracentral; stage III definitive; PORT; IASLC station borders and landmarks; OARs and constraints.'),
  ('contouring/prostate.html','Prostate','Prostate contouring protocol','Intact prostate and SVs, prostate bed, NRG pelvic nodes, CT vs MRI apex/base pearls, IGRT, OARs.'),
+ ('contouring/bladder.html','Bladder','Bladder contouring protocol','Bladder preservation (FROGG 2020): whole-bladder CTV and extension rules, high-risk CTV and escalation, nodes, PTV and plan of the day; post-cystectomy bed and nodal borders (Baumann/NRG-GU001); constraints.'),
  ('contouring/rectal-long-course.html','Rectum','Rectal long-course atlas','Elective compartments and borders, GTV criteria, 45 vs 50–54 Gy volumes.'),
  ('contouring/anal.html','Anal canal','Anal canal contouring protocol','T1N0 and T2–4/N+ primary and nodal CTVs, all elective regions with border tables (department/AGITG vs UK, NOAC, ECOG), ischiorectal fossa and risk-adapted options, doses, constraints.'),
  ('contouring/oesophagus.html','Oesophagus & GOJ','Oesophagus and GOJ contouring protocol','Neoadjuvant and definitive involved-field build (SCOPE2), GOJ and coeliac rules, cervical and SCF node-positive volumes, adjuvant tumour bed, constraints.'),

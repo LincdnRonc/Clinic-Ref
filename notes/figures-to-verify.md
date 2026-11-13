@@ -105,3 +105,17 @@
 - No departmental lymphoma protocol; page follows Wirth 2020 ILROG overview, Specht 2014 and the ILROG mini-atlas. ITV/PTV/IGRT institutional.
 - Wirth Table 1 (Dabaja 2018) OAR optimal/acceptable levels not reproduced: folder text extraction garbled — transcribe from the PDF.
 - Not in folder: Illidge 2014, Yahalom 2015, Tsang 2018 plasmacytoma, TBI/TMI guidance.
+
+## Bladder (contouring/bladder.html) — Nov 2026
+Sources in folder: FROGG 2020 (Cardoso, JMIRO 64:882–893) and Baumann 2016 post-cystectomy consensus slides (NRG-GU001). No departmental bladder protocol.
+- Departmental bladder filling (empty vs comfortably full), bowel preparation, contrast, immobilisation — not in sources.
+- Departmental PTV margins; FROGG gives only an example (15 mm sup/ant, 10 mm elsewhere with daily CBCT, Adil 2019). High-risk PTV margin not given.
+- Plan-of-the-day library: number and timing of scans, selection rule — not in sources (RAIDER/BC2001 protocols would resolve).
+- Elective node dose in a 20-fraction SIB: FROGG quotes 45–50.4 Gy in 1.8 Gy only. GTVn-to-CTV margin not given.
+- FROGG Table 14 title says 64 Gy/32 but the text says 64 Gy in 34 fractions; page uses 32.
+- Post-cystectomy: dose, fractionation, PTV and IGRT not in the slides (NRG-GU001 protocol).
+- Baumann: presacral nodes listed only for positive margins in the coverage table but included in the "nodal CTV" union — check the IJROBP paper.
+- Baumann plane 2: border table says from the posterior aspect of the symphysis; figure caption says the anterior border — check the paper figure.
+- BC2001/BCON CTV and PTV margins quoted from the bladder site page for comparison (not from a supplied PDF).
+- Department structure names (TG-263 suggestions only; diversion and ostomy bag names non-standard).
+- IBIS post-cystectomy update (Verghote 2022) quoted on ctr-bladder.html was not supplied.
