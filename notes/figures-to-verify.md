@@ -73,3 +73,10 @@
 - CTV_IR margin per direction (Haie-Meder 2005 / ICRU 88) not in folder; NRG template gives CTV_HR + 5–15 mm.
 - Not in folder: Fields 2025 intact cervix update, Viswanathan 2014 CT vs MRI HR-CTV, ABS vaginal cuff guideline (Small 2012), Schmid 2020, Kamrava 2023.
 - EMBRACE II summary paper reference (Pötter 2018 CTRO 9:48–60): add DOI after checking.
+
+## Anal protocol (contouring/anal.html)
+- Departmental source: SWSLHD anal canal SCC contouring protocol (1 Sept 2020), written for Pinnacle; confirm current RayStation names and simulation guide.
+- Department inguinal anterior border "minimum 7 mm" in front of femoral vessels vs AGITG "minimum 20 mm" (department otherwise copies AGITG); page uses ~20 mm (to 5 mm from skin) + visible nodes.
+- Department T1N0 CTV42 excludes external iliac and inguinal nodes and starts at the top of the mesorectum (differs from AGITG/UK/ECOG); confirm intended.
+- No departmental IGRT method or OAR constraint table; page quotes UK v4 planning sheet and ECOG-ACRIN EA2182 table.
+- RTOG 0529 protocol constraints not in folder.
