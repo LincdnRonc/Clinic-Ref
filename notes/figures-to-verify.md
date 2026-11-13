@@ -88,3 +88,9 @@
 - National spine SABR protocol (2023) sacrum CTV = GTV, PTV + 10 mm differs from Dunne 2020 (page follows Dunne).
 - Local RayStation names/prefixes.
 - ISRC row "body + bilateral pedicles": sector list derived from the CTV description (PDF table layout garbled).
+
+## CNS protocol (contouring/cns.html)
+- No Liverpool or St George CNS protocol in the folder; page uses ESTRO-EANO (glioma), RTOG 0539/EORTC 22042 (meningioma, via ARRO case), ISRS (VS), Soliman 2018 + Canberra Health Services SRS guideline, RTOG 0933/NRG CC001. Local PTV/IGRT and naming to confirm.
+- Baumert 2025 margins now verified from the paper (G2 GTV + 10 mm, G3 + 15 mm, PTV ≤3 mm; 50.4/28 and 59.4/33).
+- Not in folder: Combs 2021 ESTRO-ACROP skull base (pituitary, craniopharyngioma, skull-base meningioma), EORTC 1308, grade 1 intact meningioma margins.
+- RTOG 0539 and EORTC 22042 volumes taken from the ARRO case slides, not the protocols themselves.
