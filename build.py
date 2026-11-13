@@ -82,17 +82,19 @@ def xref_back(f, body):
         return '<p class="xref"><b>Clinic page:</b> ' + ' · '.join(f'<a href="{cf}">{html.escape(names.get(cf, cf))}</a>' for cf in back) + '</p>'
     return re.sub(r'<!--xref:([\w-]+)-->', rep, body)
 _SCORETAB = {'breast':('breast','Breast'),'gu':('prostate','Prostate'),'thorax':('lung','Lung'),'cns':('cns','CNS'),'gi':('gi','Liver and GI'),'gyn':('gynae','Gynae'),'pall':('bone','Bone and spine'),'sarcoma':('bone','Bone (Mirels)'),'heme':('heme','Lymphoma'),'hn':('general','Head and neck')}
+_SYSLINK = {'breast':('sys-breast-endocrine.html','Breast endocrine therapy'),'gu':('sys-prostate-adt.html','Prostate ADT'),'pall':('sys-bone.html','Bone agents')}
 def tools_bar(gid):
     if gid not in _SCORETAB: return ''
     t,l = _SCORETAB[gid]
-    return f'<p class="xref"><b>Calculators:</b> <a href="scores.html#{t}">{l} scores and nomograms</a> · <a href="tools.html">EQD2, BED and re-irradiation</a></p>'
+    x,xl = _SYSLINK.get(gid, ('sys-chemort.html','Concurrent chemo-RT'))
+    return f'<p class="xref"><b>Systemic therapy:</b> <a href="{x}">{xl}</a> · <a href="sys-timing.html">Targeted and immunotherapy with RT</a> · <a href="sys-supportive.html">Supportive drugs</a></p><p class="xref"><b>Calculators:</b> <a href="scores.html#{t}">{l} scores and nomograms</a> · <a href="tools.html">EQD2, BED and re-irradiation</a></p>'
 DISCLAIMER = '<footer class="disclaimer"><p><b>Personal resource, not for distribution.</b> This site is the author\'s personal working reference. Every effort is made to keep it accurate, but it may contain errors or be out of date. Anyone else who uses it must exercise their own clinical judgement and independently verify all information, including doses, volumes, constraints, scores and calculator results, against primary sources and local protocols. It is not medical advice and not a medical device.</p></footer>'
-STAGERS = {'breast':'Breast (AJCC 8 anatomic stage)','lung':'Lung (TNM 9th edition)','prostate':'Prostate (AJCC 8)','crc':'Colon and rectum (AJCC 8)','anal':'Anal canal (AJCC 8)',
+STAGERS = {'nccn':'Prostate NCCN risk group','breast':'Breast (AJCC 8 anatomic stage)','lung':'Lung (TNM 9th edition)','prostate':'Prostate (AJCC 8)','crc':'Colon and rectum (AJCC 8)','anal':'Anal canal (AJCC 8)',
  'oes_scc':'Oesophagus, squamous (AJCC 8 clinical)','oes_ac':'Oesophagus, adenocarcinoma (AJCC 8 clinical)','gastric':'Stomach (AJCC 8 clinical)','pancreas':'Pancreas (AJCC 8)','hcc':'Hepatocellular carcinoma (AJCC 8)',
  'hn':'Oral cavity, larynx, hypopharynx, p16-negative oropharynx (AJCC 8)','opc':'Oropharynx, p16-positive (AJCC 8 clinical)','npc':'Nasopharynx (AJCC 8)','bladder':'Bladder (AJCC 8)','kidney':'Kidney (AJCC 8)',
  'cervix':'Cervix (FIGO 2018)','endo':'Endometrium (FIGO 2009)','lugano':'Lymphoma (Lugano)'}
 STAGE_PAGES = {'breast-early.html':['breast'],'breast-nodes-pmrt.html':['breast'],'breast-planning.html':['breast'],'thorax-early.html':['lung'],'thorax-stage3.html':['lung'],'thorax-sclc.html':['lung'],
- 'gu-prostate.html':['prostate'],'gu-bladder.html':['bladder'],'gu-kidney.html':['kidney'],'gi-oesophagus-gastric.html':['oes_scc','oes_ac','gastric'],'gi-pancreas.html':['pancreas'],'gi-hepatobiliary.html':['hcc'],
+ 'gu-prostate.html':['nccn','prostate'],'gu-bladder.html':['bladder'],'gu-kidney.html':['kidney'],'gi-oesophagus-gastric.html':['oes_scc','oes_ac','gastric'],'gi-pancreas.html':['pancreas'],'gi-hepatobiliary.html':['hcc'],
  'gi-rectum-colon.html':['crc'],'gi-anal.html':['anal'],'gyn-cervix.html':['cervix'],'gyn-endometrial.html':['endo'],'hn-oropharynx.html':['opc','hn'],'hn-larynx.html':['hn'],'hn-oral-salivary.html':['hn'],
  'hn-npc-sinonasal.html':['npc'],'hn-general.html':['hn','opc','npc'],'heme-hodgkin.html':['lugano'],'heme-nhl.html':['lugano'],'scores.html':list(STAGERS)}
 def stage_panel(f):
@@ -100,8 +102,8 @@ def stage_panel(f):
     if not ids: return ''
     cards_ = ''.join(f'<article class="card{" key" if i==0 else ""}" data-title="{html.escape(STAGERS[k])}"><h3>{html.escape(STAGERS[k])}</h3><div data-stage="{k}"></div></article>' for i,k in enumerate(ids))
     return f'''
-<section class="panel" id="p-staging" data-tab="staging" data-label="Auto-staging" hidden>
-  <div class="panel-head"><h2>Auto-staging</h2><p class="lede">Choose the T, N and M categories (or findings) to read the stage group. A cross-check, not a substitute for the staging manual: T definitions are abbreviated.</p><div class="jump"></div></div>
+<section class="panel" id="p-staging" data-tab="staging" data-label="Staging &amp; risk" hidden>
+  <div class="panel-head"><h2>Auto-staging and risk groups</h2><p class="lede">Choose the T, N and M categories (or findings) to read the stage or risk group. A cross-check, not a substitute for the staging manual: T definitions are abbreviated.</p><div class="jump"></div></div>
   {cards_}
 </section>
 <script src="assets/staging.js"></script>'''
@@ -148,7 +150,6 @@ def page(f, short, long, desc, group, gname, gid, foot):
 </main>
 </div>
 {foot}
-{DISCLAIMER}
 <script src="assets/site.js"></script>
 <script src="assets/extras.js"></script>
 </body>
@@ -215,6 +216,15 @@ try:
 except ImportError:
     EXTRA = []
 # (gid, crumb name, home heading, pages, footer)
+SYS = [
+ ('sys-chemort.html','Concurrent chemo-RT','Concurrent chemotherapy with RT','Regimens and doses by site (stage III NSCLC, head and neck, GI, cervix, bladder, glioma), half-lives, toxicities and first-line management.'),
+ ('sys-timing.html','Targeted & immunotherapy','Targeted therapy and immunotherapy with RT','ESMO–ESTRO and OligoCare consensus on stopping and restarting around RT, SBRT and SRS by drug class; immune-related toxicity; pneumonitis.'),
+ ('sys-breast-endocrine.html','Breast endocrine','Endocrine therapy for breast cancer','Tamoxifen, aromatase inhibitors, ovarian suppression, CDK4/6; duration, sequencing with RT, side-effect management.'),
+ ('sys-prostate-adt.html','Prostate ADT','Endocrine therapy for prostate cancer','LHRH agonists and antagonists, antiandrogens, ARPIs; duration with RT; monitoring and side-effect management.'),
+ ('sys-bone.html','Bone agents','Bisphosphonates and denosumab','Zoledronic acid and denosumab by indication, calcium and dental checks, MRONJ, what changes with RT.'),
+ ('sys-supportive.html','Supportive drugs','Supportive and symptom drugs','Venlafaxine and alternatives for hot flushes, dexamethasone, antiemetics, mucositis, bowel, bladder, sexual health, late effects.'),
+]
+FOOT_SYS = '<footer><p>Systemic therapy notes for a radiation oncologist, not a prescribing reference. Doses, half-lives and withholding intervals not attributed to a named source were entered from memory and are flagged Verify. Prescribe from eviQ, the product information and local protocols, with the treating medical oncologist and pharmacist.</p></footer>'
 GROUPS = [
  ('breast','Breast','Breast',BREAST,mkfoot('Breast','NCCN, ASTRO, ASCO')),
  ('cns','CNS','CNS & Paediatrics',CNS,mkfoot('CNS and Peds','NCCN, ASTRO, COG')),
@@ -226,6 +236,7 @@ GROUPS = [
  ('sarcoma','Sarcoma','Sarcoma',SARCOMA,mkfoot('Sarcoma/Musculoskeletal','NCCN, ASTRO, ESMO')),
  ('thorax','Thorax','Thorax',THORAX,mkfoot('Thorax','NCCN, ASTRO, ASCO')),
  ('pall','Palliative','Palliative & oligometastases',PALL,mkfoot('Brain Mets/Palliative/Oligo/Immuno','NCCN, ASTRO, ASCO')),
+ ('sys','Systemic therapy','Systemic therapy & supportive drugs',SYS,FOOT_SYS),
  ('mrl','MR-linac','MR-linac',MRL,FOOT_MRL),
  ('exam','Exam summary','Phase 2 exam summary',EXAM,FOOT_EXAM),
 ] + EXTRA
@@ -316,7 +327,7 @@ def _cards(body):
 def _gather(pick):
     out = []
     for i,(gid,gname,head,pages,_) in enumerate(GROUPS):
-        if gid in ('exam','mrl'): continue
+        if gid in ('exam','mrl','sys'): continue
         parts = []
         for g in pages:
             f, short, long = g[0], g[1], g[2]
@@ -364,7 +375,7 @@ for f,short,long,desc in CNAV:
     srcp = root/'src'/f
     if not srcp.exists(): continue
     _qp = root/'src'/'quick'/pathlib.Path(f).name
-    (root/f).write_text(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR + DISCLAIMER, _qp.read_text() if _qp.exists() else None))
+    (root/f).write_text(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR, _qp.read_text() if _qp.exists() else None))
 # Retired URLs: lung protocol and thorax quick guide merged into contouring/thorax.html
 def _redirect(path, target, tabmap=None):
     tm = repr(tabmap or {}).replace("'", '"')

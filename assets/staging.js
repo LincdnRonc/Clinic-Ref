@@ -4,6 +4,15 @@
   function o(a){return a.map(function(x){return typeof x==='string'?[x,x]:x;});}
   var M01=o([['0','M0'],['1','M1']]);
   var D={
+   nccn:{t:'Prostate NCCN risk group (initial risk stratification, 2025)',lab:'Risk group',src:'Definitions per NCCN Prostate Cancer 2025: high = one or more of cT3–cT4, grade group 4–5, PSA >20; very high = at least two of cT3–cT4, grade group 4–5, PSA >40. Check the current NCCN version.',note:'For clinically localised disease (N0 M0). Very-low criteria (fewer than 3 positive cores, each ≤50% cancer, PSA density <0.15) should be confirmed against the guideline.',
+     f:[['T',o([['1c','cT1c'],['2a','cT1a–b or cT2a'],['2b','cT2b–cT2c'],['3','cT3–cT4']])],['GG',o([['1','Grade group 1 (3+3)'],['2','Grade group 2 (3+4)'],['3','Grade group 3 (4+3)'],['4','Grade group 4 (8)'],['5','Grade group 5 (9–10)']])],['PSA',o([['a','<10'],['b','10–20'],['c','>20 to 40'],['d','>40']])],['Cores positive',o([['lt','<50% of cores'],['ge','≥50% of cores']])],['Very-low criteria',o([['n','Not met or unknown'],['y','<3 cores positive, each ≤50%, PSA density <0.15']])]],
+     s:function(v){var t3=v.T==='3', g45=(v.GG==='4'||v.GG==='5'), p20=(v.PSA==='c'||v.PSA==='d'), p40=v.PSA==='d';
+       var vh=(t3?1:0)+(g45?1:0)+(p40?1:0), h=(t3?1:0)+(g45?1:0)+(p20?1:0);
+       if(vh>=2)return 'Very high'; if(h>=1)return 'High';
+       var irf=(v.T==='2b'?1:0)+((v.GG==='2'||v.GG==='3')?1:0)+(v.PSA==='b'?1:0);
+       if(irf>=1){var why=[]; if(irf>=2)why.push(irf+' intermediate risk factors'); if(v.GG==='3')why.push('grade group 3'); if(v['Cores positive']==='ge')why.push('≥50% cores positive');
+         return why.length?'Unfavourable intermediate ('+why.join(', ')+')':'Favourable intermediate (1 intermediate risk factor, grade group 1–2, <50% cores)';}
+       return (v.T==='1c'&&v['Very-low criteria']==='y')?'Very low':'Low';}},
    breast:{t:'Breast (AJCC 8 anatomic stage)',note:'Anatomic groups only. The AJCC 8 prognostic stage also uses grade, ER, PR, HER2 and Oncotype: use a prognostic-stage tool for that.',
      f:[['T',o([['is','Tis (DCIS)'],['0','T0'],['1','T1 (≤2 cm)'],['2','T2 (>2–5 cm)'],['3','T3 (>5 cm)'],['4','T4 (chest wall, skin, inflammatory)']])],['N',o([['0','N0'],['1mi','N1mi'],['1','N1 (movable level I–II; pN1 1–3 nodes)'],['2','N2 (fixed/matted or clinical IMN alone; pN2 4–9)'],['3','N3 (infraclavicular, IMN + axilla, supraclavicular; pN3 ≥10)']])],['M',M01]],
      s:function(v){var T=v.T,N=v.N; if(v.M==='1')return 'IV'; if(N==='3')return 'IIIC'; if(T==='4')return 'IIIB'; if(T==='is')return N==='0'?'0':'Not a valid combination (Tis with nodes: look for invasion)';
@@ -71,13 +80,13 @@
   document.querySelectorAll('[data-stage]').forEach(function(box){
     var k=box.getAttribute('data-stage'), d=D[k]; if(!d) return;
     var h='<div class="calc">'+d.f.map(function(fl){return '<label>'+fl[0]+'<select data-sf="'+k+'" data-k="'+fl[0]+'">'+fl[1].map(function(x){return '<option value="'+x[0]+'">'+x[1]+'</option>';}).join('')+'</select></label>';}).join('')+'</div><div class="calcout" data-so="'+k+'"></div>';
-    box.innerHTML=h+'<p class="note">'+(d.note?d.note+' ':'')+'<span class="flag caution">Verify</span> Groupings entered from the standard table; confirm against the staging manual before documenting.</p>';
+    box.innerHTML=h+'<p class="note">'+(d.note?d.note+' ':'')+(d.src?d.src:'<span class="flag caution">Verify</span> Groupings entered from the standard table; confirm against the staging manual before documenting.')+'</p>';
   });
   function run(){
     document.querySelectorAll('[data-stage]').forEach(function(box){
       var k=box.getAttribute('data-stage'), d=D[k]; if(!d) return; var v={};
       box.querySelectorAll('select[data-sf]').forEach(function(s){v[s.getAttribute('data-k')]=s.value;});
-      var o=box.querySelector('[data-so]'); if(o) o.innerHTML='Stage <b>'+d.s(v)+'</b>';
+      var o=box.querySelector('[data-so]'); if(o) o.innerHTML=(d.lab||'Stage')+' <b>'+d.s(v)+'</b>';
     });
   }
   window.QR_STAGE_TITLES={}; Object.keys(D).forEach(function(k){window.QR_STAGE_TITLES[k]=D[k].t;});

@@ -127,3 +127,9 @@ Sources in folder: FROGG 2020 (Cardoso, JMIRO 64:882–893) and Baumann 2016 pos
 
 ## Auto-staging (assets/staging.js)
 - All 18 stage-group tables and the abbreviated T/N definitions were entered from memory (AJCC 8; lung TNM 9; FIGO 2018 cervix; FIGO 2009 endometrium; Lugano). Verify each against the manual. Known edition caveats: anal and nasopharynx have AJCC version 9 updates; endometrium FIGO 2023 not implemented; breast prognostic stage not implemented. No stager yet for testis, vulva, skin/melanoma, sarcoma, thyroid, salivary, SCLC-specific or paediatric tumours.
+
+## Systemic therapy section (src/sys-*.html, generated once by a script)
+- Sourced items only: carboplatin/paclitaxel 45 mg/m2 weekly x 6 (eviQ 1436); denosumab 120 mg q28d, calcium/vitamin D, dental review, ONJ about 2% (eviQ 1300/1301); denosumab calcium monitoring and dental precautions (MHRA 2014); venlafaxine 37.5-75 mg and paroxetine not with tamoxifen (Cancer Australia; RACGP); breast drug-RT statements (Meattini 2024 as summarised in secondary reports, not the full table).
+- Everything else is from memory and flagged Verify: all other regimen doses, every half-life, every hold interval around RT (check against ESMO-ESTRO 2025 PMID 41016600 and Kroeze 2023), proceed thresholds, steroid doses, PJP thresholds, ADT durations, bone-loss treatment thresholds, symptom drug doses, TGA/PBS status of relugolix, fezolinetant, elinzanetant.
+- Wanted sources: eviQ concurrent protocols per site, ESMO-ESTRO 2025 full tables, Kroeze 2023 tables, Meattini 2024 full text, eviQ MRONJ page, MASCC/ESMO antiemetic guideline.
+- sys-timing.html: EGFR/ALK/BRAF-MEK matrix read from ESMO Open 2026 open-access text (PMC12955645); Meattini 2024 statement wording read from the PDF. Annals 2026 and Radiother Oncol 2025 rows, the Kroeze 2023 intervals and the "restart at least 1 week after RT" line came from abstracts or secondary summaries: check against the original tables (PDFs wanted).

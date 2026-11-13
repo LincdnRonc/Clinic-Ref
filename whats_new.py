@@ -10,6 +10,8 @@ SITE entry: (date, text, page or '')
 EVIDENCE = [
 ]
 SITE = [
+ ('2026-11-14', 'NCCN prostate risk group calculator (prostate page, Staging & risk tab); prostate very-high-risk definition updated to NCCN 2025; disclaimer now on the home page only.', 'gu-prostate.html#staging'),
+ ('2026-11-13', 'New Systemic therapy section: concurrent chemo-RT regimens, targeted and immunotherapy timing with RT, breast and prostate endocrine therapy, bone agents, supportive drugs (venlafaxine, dexamethasone and more).', 'sys-chemort.html'),
  ('2026-11-13', 'Auto-staging tab on the tumour-site pages (18 staging systems; also all together on the clinical scores page).', 'scores.html#staging'),
  ('2026-11-13', 'Clinical scores and nomograms page (Child-Pugh, ALBI, PSA doubling time, Roach, CTS5, SINS and more, with links to external tools); personal-resource disclaimer on every page.', 'scores.html'),
  ('2026-11-13', 'One contouring entry per site: each quick guide is now the "Quick reference" first tab of its full guide.', 'index.html#contouring'),
