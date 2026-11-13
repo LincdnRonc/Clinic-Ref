@@ -21,7 +21,7 @@ LIB = [
   (2024,'Prone-position axillary contouring atlas','Purswani · Pract Radiat Oncol','Nodal anatomy shifts when prone.','pm:38729261',False),
  ]),
  ('Tumour bed, partial breast and set-up',[
-  (2015,'GEC-ESTRO breast WG: target definition for APBI / boost','Strnad · Radiother Oncol','Whole scar, ImTV and estimated tumour bed; CTV = ETB + (20 mm − margin), min 10 mm. Used in our breast protocol.','q:Recommendations from GEC ESTRO Breast Cancer Working Group target definition accelerated partial breast irradiation',True),
+  (2015,'GEC-ESTRO breast WG: target definition for APBI / boost','Strnad · Radiother Oncol','Whole scar, ImTV and estimated tumour bed; CTV = ETB + (20 mm − margin), min 10 mm. Used in our breast guide.','q:Recommendations from GEC ESTRO Breast Cancer Working Group target definition accelerated partial breast irradiation',True),
   (2012,'Boost CTV delineation guideline with pre-operative CT','Boersma · Radiother Oncol','CTV = tumour bed + (15 mm − free margin); pre-op CT reduces boost volume and variation.','q:Boersma reducing interobserver variation boost CTV delineation breast conserving pre-operative CT',False),
   (2021,'Delphi consensus on bolus in PMRT','Kaidar-Person · Radiother Oncol','No routine bolus; use for skin involvement, T4b–d, DCIS with positive anterior margin, recurrence.','q:Kaidar-Person Delphi study international consensus bolus postmastectomy radiation therapy',False),
   (2021,'Tricks and tips for breast target volume delineation (ESTRO courses)','Kaidar-Person · Radiother Oncol','Practical pitfalls; ESTRO vs RTOG recurrence data; what the nodal trials treated.','q:Kaidar-Person tricks and tips target volume definition delineation breast cancer ESTRO breast courses',True),
@@ -114,7 +114,7 @@ LIB = [
 ('gi','GI','Oesophagus, stomach, pancreas, liver, rectum and anus.',[
  ('Upper GI',[
   (2015,'Expert consensus contouring guidelines for IMRT in oesophageal and GEJ cancer','Wu · IJROBP','GTV, CTV margins and nodal coverage by tumour location.','pm:26104943',True),
-  (2023,'SW RT ODN regional oesophagus guideline (SCOPE2-based)','South West RT ODN · UK','CTV_A/B/C involved-field build, lower-third and GOJ rules, PTV, constraints and doses. Used in our oesophagus protocol.','q:South West Radiotherapy Operational Delivery Network oesophagus radiotherapy guidelines SCOPE2',False),
+  (2023,'SW RT ODN regional oesophagus guideline (SCOPE2-based)','South West RT ODN · UK','CTV_A/B/C involved-field build, lower-third and GOJ rules, PTV, constraints and doses. Used in our oesophagus guide.','q:South West Radiotherapy Operational Delivery Network oesophagus radiotherapy guidelines SCOPE2',False),
   (2020,'SCOPE2 nodal delineation protocol for upper-third oesophageal cancer','Nicholas · ESTRO poster','Bilateral SCF CTV and borders for SCF node-positive disease; no elective SCF for N0.','q:Nicholas new nodal delineation protocol upper third oesophageal cancers SCOPE 2',False),
   (2025,'ARS appropriate use criteria: cervical oesophagus SCC','Williams · Am J Clin Oncol','Larynx preservation, CTV/PTV margins, elective neck levels, dose.','doi:10.1097/COC.0000000000001165',False),
   (2022,'Involved-field vs elective nodal RT in oesophageal cancer: meta-analysis','Wang · Front Oncol','23 studies, 4120 patients: IFI no worse for survival, less acute oesophagitis.','doi:10.3389/fonc.2022.1034656',False),
@@ -131,7 +131,7 @@ LIB = [
   (2014,'RTOG upper abdominal normal-organ contouring atlas','Jabbour · Pract Radiat Oncol','Liver, kidneys, stomach, bowel, duodenum.','pm:24890348',True),
  ]),
  ('Liver SBRT and MRI upper abdominal OARs',[
-  (2020,'MRI-based upper abdominal organs-at-risk atlas','Lukovic · IJROBP','Hepatobiliary-phase and bSSFP plus MR-linac sequences; biliary tree on MRI. DICOM sets on econtour.org. Used in our liver SBRT OAR protocol.','pm:31953061',True),
+  (2020,'MRI-based upper abdominal organs-at-risk atlas','Lukovic · IJROBP','Hepatobiliary-phase and bSSFP plus MR-linac sequences; biliary tree on MRI. DICOM sets on econtour.org. Used in our liver SBRT OAR guide.','pm:31953061',True),
   (2015,'Predictors of toxicity of SBRT to the central hepatobiliary tract','Osmundson · IJROBP','Defines cHBT: portal vein (splenic confluence to first bifurcation) + 15 mm; V40/V37.7 limits.','q:Predictors of toxicity associated with stereotactic body radiation therapy to the central hepatobiliary tract',True),
   (2017,'Central liver toxicity after SBRT: expanded analysis and nomogram','Toesca · Radiother Oncol','15 mm portal vein expansion confirmed as cHBT surrogate; limits for primary liver cancer.','pm:27865544',False),
   (2021,'HyTEC: radiation dose-volume effects for liver SBRT','Miften · IJROBP','Exclude GTV from liver; report absolute volumes; NTCP for liver and GI.','pm:29482870',False),

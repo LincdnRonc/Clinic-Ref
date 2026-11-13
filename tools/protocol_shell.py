@@ -250,12 +250,12 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot):
   <div class="top-inner">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>{html.escape(long)}</span></nav>
     <div class="title-row">
-      <h1>{html.escape(short)} <span>Contouring protocol</span></h1>
-      <div class="meta">Full protocol · Nov 2026</div>
+      <h1>{html.escape(short)} <span>Contouring guide</span></h1>
+      <div class="meta">Full guide · Nov 2026</div>
     </div>
     <form class="search" role="search" id="searchForm">
-      <label for="q" class="note" style="position:absolute;left:-9999px">Search this protocol</label>
-      <input id="q" type="search" placeholder="Search this protocol: border, margin, dose, trial" autocomplete="off">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this guide</label>
+      <input id="q" type="search" placeholder="Search this guide: border, margin, dose, trial" autocomplete="off">
       <button type="button" id="clear">Clear</button>
     </form>
     <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>

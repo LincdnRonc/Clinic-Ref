@@ -211,7 +211,7 @@ def _link(l):
     if l.startswith('doi:'): return f'https://doi.org/{l[4:]}', 'DOI'
     if l.startswith('q:'): return 'https://pubmed.ncbi.nlm.nih.gov/?term='+quote_plus(l[2:]), 'PubMed search'
     return l, 'Website'
-LIB_FULL = [('contouring/thorax.html','Thorax','Thorax contouring protocol','',('thorax',))]
+LIB_FULL = [('contouring/thorax.html','Thorax','Thorax contouring guide','',('thorax',))]
 def build_library():
     out=[]
     for i,(tid,label,lede,cards_) in enumerate(LIB):
@@ -219,7 +219,7 @@ def build_library():
         out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <div class="jump"></div>\n  </div>')
         prot = [c for c in CONTOUR if tid in c[4]] + [c for c in LIB_FULL if tid in c[4]]
         if prot:
-            out.append('  <article class="card key" data-title="Our protocols"><h3>Our protocols</h3><ul class="eviq">'+''.join(f'<li><a href="{f}">{html.escape(long)}</a></li>' for f,short,long,desc,tags in prot)+'</ul></article>')
+            out.append('  <article class="card key" data-title="Our guides"><h3>Our guides</h3><ul class="eviq">'+''.join(f'<li><a href="{f}">{html.escape(long)}</a></li>' for f,short,long,desc,tags in prot)+'</ul></article>')
         for title,entries in cards_:
             lis=[]
             for yr,t,cite,note,l,star in sorted(entries,key=lambda e:not e[5]):
@@ -234,37 +234,37 @@ def build_library():
 # (file, short, long, desc, library tabs)
 CONTOUR = [
  ('ctr-library.html','Library','Contouring guideline library','Every major international contouring guideline and atlas by tumour site, old and new, with links.',()),
- ('ctr-breast.html','Breast','Breast contouring protocol','ESTRO breast, chest wall and nodal borders, tumour bed, implant reconstruction, cardiac OARs.',('breast',)),
- ('ctr-hn.html','H&N','Head and neck contouring protocol','5 + 5 mm CTV-P, neck levels I–X landmarks, level selection, post-op, PNI and OARs.',('hn',)),
- ('ctr-cns.html','CNS','CNS contouring protocol','Glioblastoma (15 mm CTV), IDH-mutant glioma, meningioma and skull base, cavity SRS, hippocampus.',('cns',)),
- ('ctr-upper-gi.html','Upper GI','Upper GI contouring protocol','Oesophagus/GEJ margins, gastric nodal stations, post-op and SBRT pancreas, abdominal OARs.',('gi',)),
- ('ctr-anal.html','Anal','Anal canal contouring protocol','AGITG regions A, B and C, primary and nodal margins, inguinal borders, pitfalls.',('gi',)),
- ('ctr-gyn.html','Gynae','Gynae contouring protocol','Intact cervix CTV components, post-op cuff ITV, vulva, and IGABT HR-CTV / IR-CTV.',('gyn',)),
- ('ctr-heme.html','Lymphoma','Lymphoma ISRT contouring protocol','ILROG pre-chemo GTV to ISRT CTV, indolent RT alone, and extranodal organ CTVs.',('heme',)),
- ('ctr-sarcoma.html','Sarcoma','Sarcoma contouring protocol','Extremity 3 cm / 1.5 cm CTV with oedema, post-op, and retroperitoneal volumes.',('sarc',)),
- ('ctr-bladder.html','Bladder','Bladder contouring protocol','Whole-bladder and tumour CTV, simulation and adaptive IGRT, post-cystectomy side walls and bed.',('gu',)),
- ('ctr-kidney-liver.html','Kidney & liver','Kidney and liver SBRT contouring protocol','Primary kidney SABR (IROCK) and liver SBRT: imaging, GTV rules, motion, OARs.',('gu','gi')),
- ('ctr-skin.html','Skin','Skin contouring protocol','BCC/cSCC clinical margins, electron and orthovoltage fields, post-op cSCC, PNI, Merkel and melanoma.',('sarc',)),
- ('ctr-peds.html','Paeds','Paediatric contouring protocol','CSI CTV pitfalls, CNS boosts, pre-chemo CTV rules for RMS, Ewing, Wilms, neuroblastoma; paediatric OARs.',('peds',)),
- ('ctr-spine.html','Spine & bone','Spine and bone SBRT contouring protocol','ISRC six-sector rules, post-op epidural donut, sacral and non-spine bone CTV.',('sbrt',)),
+ ('ctr-breast.html','Breast','Breast contouring guide','ESTRO breast, chest wall and nodal borders, tumour bed, implant reconstruction, cardiac OARs.',('breast',)),
+ ('ctr-hn.html','H&N','Head and neck contouring guide','5 + 5 mm CTV-P, neck levels I–X landmarks, level selection, post-op, PNI and OARs.',('hn',)),
+ ('ctr-cns.html','CNS','CNS contouring guide','Glioblastoma (15 mm CTV), IDH-mutant glioma, meningioma and skull base, cavity SRS, hippocampus.',('cns',)),
+ ('ctr-upper-gi.html','Upper GI','Upper GI contouring guide','Oesophagus/GEJ margins, gastric nodal stations, post-op and SBRT pancreas, abdominal OARs.',('gi',)),
+ ('ctr-anal.html','Anal','Anal canal contouring guide','AGITG regions A, B and C, primary and nodal margins, inguinal borders, pitfalls.',('gi',)),
+ ('ctr-gyn.html','Gynae','Gynae contouring guide','Intact cervix CTV components, post-op cuff ITV, vulva, and IGABT HR-CTV / IR-CTV.',('gyn',)),
+ ('ctr-heme.html','Lymphoma','Lymphoma ISRT contouring guide','ILROG pre-chemo GTV to ISRT CTV, indolent RT alone, and extranodal organ CTVs.',('heme',)),
+ ('ctr-sarcoma.html','Sarcoma','Sarcoma contouring guide','Extremity 3 cm / 1.5 cm CTV with oedema, post-op, and retroperitoneal volumes.',('sarc',)),
+ ('ctr-bladder.html','Bladder','Bladder contouring guide','Whole-bladder and tumour CTV, simulation and adaptive IGRT, post-cystectomy side walls and bed.',('gu',)),
+ ('ctr-kidney-liver.html','Kidney & liver','Kidney and liver SBRT contouring guide','Primary kidney SABR (IROCK) and liver SBRT: imaging, GTV rules, motion, OARs.',('gu','gi')),
+ ('ctr-skin.html','Skin','Skin contouring guide','BCC/cSCC clinical margins, electron and orthovoltage fields, post-op cSCC, PNI, Merkel and melanoma.',('sarc',)),
+ ('ctr-peds.html','Paeds','Paediatric contouring guide','CSI CTV pitfalls, CNS boosts, pre-chemo CTV rules for RMS, Ewing, Wilms, neuroblastoma; paediatric OARs.',('peds',)),
+ ('ctr-spine.html','Spine & bone','Spine and bone SBRT contouring guide','ISRC six-sector rules, post-op epidural donut, sacral and non-spine bone CTV.',('sbrt',)),
 ]
 (root/'src'/'ctr-library.html').write_text(build_library())
 CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
- ('contouring/breast.html','Breast','Breast contouring protocol','Whole breast, tumour bed and SIB, partial breast with trial volumes, multicatheter APBI, chest wall with and without implants, ESTRO/RTOG nodal borders, Liverpool DVH scorecards.'),
- ('contouring/cns.html','CNS','CNS contouring protocol','Glioblastoma (ESTRO-EANO 2023), IDH-mutant glioma (2025), meningioma (RTOG 0539/EORTC), vestibular schwannoma, SRS for metastases and cavities, HA-WBRT, EPTN OAR constraints.'),
- ('contouring/gynae.html','Gynae','Gynaecological contouring protocol','Cervix EBRT (EMBRACE II ITV and nodal SIB), MRI-guided brachytherapy targets and aims, post-op cervix and endometrium, vaginal vault and vaginal cancer, vulva definitive and post-op, inguinal margins, constraints.'),
- ('contouring/spine-bone.html','Spine & bone SBRT','Spine and bone SBRT contouring protocol','St George selection and workflow, ISRC sector CTV table, post-op spine, sacrum (Dunne), non-spine bone and soft tissue, re-irradiation cord limits, 1–5 fraction constraints.'),
- ('contouring/head-neck.html','Head & neck','Head and neck contouring protocol','Neck level border tables (Grégoire 2014), 5 + 5 mm primary CTV, Biau 2019 level selection, DAHANCA post-op, PATHOS, NPC 2024 dose levels, HNCIG cSCC, PNI pathways, DAHANCA constraints.'),
- ('contouring/lymphoma.html','Lymphoma ISRT','Lymphoma ISRT contouring protocol','ILROG pre- and post-chemo GTV, ISRT CTV for indolent, early HL/DLBCL, mediastinal, advanced and extranodal disease, doses, mini-atlas margins.'),
- ('contouring/thorax.html','Thorax','Thorax contouring protocol','Lung SABR (peripheral, central, ultracentral), stage II–III definitive, PORT, limited-stage SCLC, IASLC station borders and landmarks, thoracic OAR definitions and constraints.'),
- ('contouring/prostate.html','Prostate','Prostate contouring protocol','Intact prostate and SVs, prostate bed, NRG pelvic nodes, CT vs MRI apex/base pearls, IGRT, OARs.'),
- ('contouring/bladder.html','Bladder','Bladder contouring protocol','Bladder preservation (FROGG 2020): whole-bladder CTV and extension rules, high-risk CTV and escalation, nodes, PTV and plan of the day; post-cystectomy bed and nodal borders (Baumann/NRG-GU001); constraints.'),
+ ('contouring/breast.html','Breast','Breast contouring guide','Whole breast, tumour bed and SIB, partial breast with trial volumes, multicatheter APBI, chest wall with and without implants, ESTRO/RTOG nodal borders, Liverpool DVH scorecards.'),
+ ('contouring/cns.html','CNS','CNS contouring guide','Glioblastoma (ESTRO-EANO 2023), IDH-mutant glioma (2025), meningioma (RTOG 0539/EORTC), vestibular schwannoma, SRS for metastases and cavities, HA-WBRT, EPTN OAR constraints.'),
+ ('contouring/gynae.html','Gynae','Gynaecological contouring guide','Cervix EBRT (EMBRACE II ITV and nodal SIB), MRI-guided brachytherapy targets and aims, post-op cervix and endometrium, vaginal vault and vaginal cancer, vulva definitive and post-op, inguinal margins, constraints.'),
+ ('contouring/spine-bone.html','Spine & bone SBRT','Spine and bone SBRT contouring guide','St George selection and workflow, ISRC sector CTV table, post-op spine, sacrum (Dunne), non-spine bone and soft tissue, re-irradiation cord limits, 1–5 fraction constraints.'),
+ ('contouring/head-neck.html','Head & neck','Head and neck contouring guide','Neck level border tables (Grégoire 2014), 5 + 5 mm primary CTV, Biau 2019 level selection, DAHANCA post-op, PATHOS, NPC 2024 dose levels, HNCIG cSCC, PNI pathways, DAHANCA constraints.'),
+ ('contouring/lymphoma.html','Lymphoma ISRT','Lymphoma ISRT contouring guide','ILROG pre- and post-chemo GTV, ISRT CTV for indolent, early HL/DLBCL, mediastinal, advanced and extranodal disease, doses, mini-atlas margins.'),
+ ('contouring/thorax.html','Thorax','Thorax contouring guide','Lung SABR (peripheral, central, ultracentral), stage II–III definitive, PORT, limited-stage SCLC, IASLC station borders and landmarks, thoracic OAR definitions and constraints.'),
+ ('contouring/prostate.html','Prostate','Prostate contouring guide','Intact prostate and SVs, prostate bed, NRG pelvic nodes, CT vs MRI apex/base pearls, IGRT, OARs.'),
+ ('contouring/bladder.html','Bladder','Bladder contouring guide','Bladder preservation (FROGG 2020): whole-bladder CTV and extension rules, high-risk CTV and escalation, nodes, PTV and plan of the day; post-cystectomy bed and nodal borders (Baumann/NRG-GU001); constraints.'),
  ('contouring/rectal-long-course.html','Rectum','Rectal long-course atlas','Elective compartments and borders, GTV criteria, 45 vs 50–54 Gy volumes.'),
- ('contouring/anal.html','Anal canal','Anal canal contouring protocol','T1N0 and T2–4/N+ primary and nodal CTVs, all elective regions with border tables (department/AGITG vs UK, NOAC, ECOG), ischiorectal fossa and risk-adapted options, doses, constraints.'),
- ('contouring/oesophagus.html','Oesophagus & GOJ','Oesophagus and GOJ contouring protocol','Neoadjuvant and definitive involved-field build (SCOPE2), GOJ and coeliac rules, cervical and SCF node-positive volumes, adjuvant tumour bed, constraints.'),
- ('contouring/pancreas-stomach.html','Pancreas & stomach','Pancreas and stomach contouring protocol','Pancreas neoadjuvant, definitive, NRG dose-escalated (triangle) and SBRT volumes; RTOG post-op CTV; gastric nodal anatomy; constraints.'),
- ('contouring/biliary.html','Biliary','Cholangiocarcinoma and gallbladder contouring protocol','Intrahepatic SBRT and chemoRT, perihilar and distal CTV margins, post-op nodal templates (Park, RTOG), gallbladder, doses.'),
- ('contouring/liver-sbrt.html','Liver SBRT OARs','Liver SBRT OAR contouring protocol','Liver, luminal GI and other OARs on CT and MRI, central hepatobiliary tract, MR-linac re-contouring zone, UK 2022 constraints.')]
+ ('contouring/anal.html','Anal canal','Anal canal contouring guide','T1N0 and T2–4/N+ primary and nodal CTVs, all elective regions with border tables (department/AGITG vs UK, NOAC, ECOG), ischiorectal fossa and risk-adapted options, doses, constraints.'),
+ ('contouring/oesophagus.html','Oesophagus & GOJ','Oesophagus and GOJ contouring guide','Neoadjuvant and definitive involved-field build (SCOPE2), GOJ and coeliac rules, cervical and SCF node-positive volumes, adjuvant tumour bed, constraints.'),
+ ('contouring/pancreas-stomach.html','Pancreas & stomach','Pancreas and stomach contouring guide','Pancreas neoadjuvant, definitive, NRG dose-escalated (triangle) and SBRT volumes; RTOG post-op CTV; gastric nodal anatomy; constraints.'),
+ ('contouring/biliary.html','Biliary','Cholangiocarcinoma and gallbladder contouring guide','Intrahepatic SBRT and chemoRT, perihilar and distal CTV margins, post-op nodal templates (Park, RTOG), gallbladder, doses.'),
+ ('contouring/liver-sbrt.html','Liver SBRT OARs','Liver SBRT OAR contouring guide','Liver, luminal GI and other OARs on CT and MRI, central hepatobiliary tract, MR-linac re-contouring zone, UK 2022 constraints.')]
 SOFTWARE = [
  ('ctr-mim.html','MIM shortcuts','MIM contouring shortcuts','MIM 7.4 default hotkeys, creating your own, mouse actions, contouring tools, H&N OAR recipes, saving and recovery. Printable PDF.'),
  ('ctr-monaco.html','Monaco shortcuts','Monaco contouring shortcuts','Elekta Monaco hot keys, navigation, contouring toolkit, Monaco-specific gotchas, workflow and W/L presets. Printable PDF.')]
@@ -283,13 +283,13 @@ for f,short,long,desc in CNAV:
     srcp = root/'src'/f
     if not srcp.exists(): continue
     (root/f).write_text(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR))
-# Retired URLs: lung protocol and thorax quick protocol merged into contouring/thorax.html
+# Retired URLs: lung protocol and thorax quick guide merged into contouring/thorax.html
 def _redirect(path, target, tabmap=None):
     tm = repr(tabmap or {}).replace("'", '"')
     (root/path).write_text(f'''<!DOCTYPE html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved</title>
 <meta http-equiv="refresh" content="0; url={target}">
 <script>var m={tm};var h=location.hash.slice(1);location.replace("{target}"+(h?"#"+(m[h]||h):""));</script>
-</head><body><p>This page has moved to <a href="{target}">the thorax contouring protocol</a>.</p></body></html>
+</head><body><p>This page has moved to <a href="{target}">the thorax contouring guide</a>.</p></body></html>
 ''')
 _redirect('contouring/lung.html', 'thorax.html')
 _redirect('ctr-thorax.html', 'contouring/thorax.html', {'nsclc':'s3','sbrt':'s2','oar':'s8'})
@@ -328,7 +328,7 @@ home = f'''<!DOCTYPE html>
 <main>
 <nav class="sitenav" aria-label="Tumour groups">{groupnav}<a href="#contouring">Contouring</a></nav>
 {sections}
-  <h2 class="group-title" id="contouring" data-site="contouring">Contouring guidelines and protocols</h2>
+  <h2 class="group-title" id="contouring" data-site="contouring">Contouring library and guides</h2>
   <div class="hub">{contour_cards}</div>
 {('<h2 class="group-title" id="soon">Still to add</h2><div class="hub">'+cards_soon+'</div>') if soon else ''}
 </main>

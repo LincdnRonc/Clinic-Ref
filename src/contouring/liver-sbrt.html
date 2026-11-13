@@ -118,12 +118,12 @@
   .p-chk{background:#fff;color:#8a2f23;border:1.2px solid #8a2f23;font-size:7.6px;padding:0 5px;}
 </style>
 <style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}svg,img{max-width:100%;height:auto}.grid2{grid-template-columns:1fr!important}}</style><style id="site-band">body{border-top:6px solid #a14a0b}</style></head>
-<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gi-hepatobiliary.html" style="color:#9fe0d6;text-decoration:none">Liver &amp; biliary page</a><a href="../mrl-liver-gi.html" style="color:#9fe0d6;text-decoration:none">MR-linac liver &amp; upper GI</a><a href="biliary.html" style="color:#9fe0d6;text-decoration:none">Biliary target protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gi-hepatobiliary.html" style="color:#9fe0d6;text-decoration:none">Liver &amp; biliary page</a><a href="../mrl-liver-gi.html" style="color:#9fe0d6;text-decoration:none">MR-linac liver &amp; upper GI</a><a href="biliary.html" style="color:#9fe0d6;text-decoration:none">Biliary target guide</a><span style="opacity:.7;font-weight:400">Contouring guide</span></div>
 <!-- ============================ PAGE 1 : COVER ============================ -->
 <section class="page">
 <div class="masthead">
-<span class="eyebrow">Departmental Contouring Protocol · Upper GI / Hepatobiliary Radiation Oncology</span>
-<h1>Liver SBRT — Organs at Risk Delineation Protocol</h1>
+<span class="eyebrow">Contouring Guide · Upper GI / Hepatobiliary Radiation Oncology</span>
+<h1>Liver SBRT — Organs at Risk Delineation Guide</h1>
 <p class="sub">Organ-at-risk delineation for stereotactic radiotherapy to <b>hepatocellular carcinoma, cholangiocarcinoma and liver metastases</b>, on <b>CT simulation</b> and on the <b>MR-linac with daily online adaptation</b>. Built on the RTOG upper abdominal CT atlas, the MRI upper abdominal OAR atlas, the central hepatobiliary tract (cHBT) literature and UK SABR Consortium 2022 constraints, with RayStation implementation.</p>
 <div class="pillrow">
 <span class="pill p-liver">Parallel: liver, kidneys</span>
@@ -135,9 +135,9 @@
 <div class="meta">RTOG atlas · MRI OAR atlas · Osmundson / Toesca cHBT · UK SABR 2022 · HyTEC · SMART · TG-263 · eviQ  —  Version 1.1 (Nov 2026)</div>
 </div>
 <div class="callout">
-<span class="lbl">Governing principles of this protocol</span>
+<span class="lbl">Governing principles of this guide</span>
 <ul class="tight" style="margin-top:4px;">
-<li><b>Target volumes are out of scope.</b> GTV, ITV and PTV rules for liver SBRT are on the <a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick protocol</a> (cholangiocarcinoma: <a href="biliary.html">biliary protocol</a>); dose and patient selection are on the <a href="../gi-hepatobiliary.html">Liver and biliary page</a>. This document is about what to protect and how to draw it.</li>
+<li><b>Target volumes are out of scope.</b> GTV, ITV and PTV rules for liver SBRT are on the <a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick guide</a> (cholangiocarcinoma: <a href="biliary.html">biliary guide</a>); dose and patient selection are on the <a href="../gi-hepatobiliary.html">Liver and biliary page</a>. This document is about what to protect and how to draw it.</li>
 <li><b>Liver is a parallel organ, so the GTV comes out of it.</b> Much of the liver dose–volume and NTCP work used liver minus GTV, and leaving the tumour in overstates the dose to functioning liver (Miften, HyTEC 2021).</li>
 <li><b>Luminal GI organs are serial and mobile.</b> Their near-maximum doses drive most liver SBRT plans, and on the MR-linac they are re-contoured every fraction near the PTV.</li>
 <li><b>Central and primary liver tumours get a cHBT.</b> The 15 mm portal-vein expansion is the best-studied surrogate for biliary toxicity, a main late risk of central SBRT in primary liver cancer.</li>
@@ -178,7 +178,7 @@
 </ul>
 <h3>1.2  CT</h3>
 <ul class="tight">
-<li>Contrast-enhanced, multiphase planning CT (arterial, portal venous and delayed) per the site's <a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick protocol</a>. The portal venous phase is the phase to draw the <b>portal vein</b> (cHBT seed, Section 4), IVC and bowel wall from.</li>
+<li>Contrast-enhanced, multiphase planning CT (arterial, portal venous and delayed) per the site's <a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick guide</a>. The portal venous phase is the phase to draw the <b>portal vein</b> (cHBT seed, Section 4), IVC and bowel wall from.</li>
 <li>The RTOG CT atlas (Jabbour 2014) was written for RTOG 1112 (SBRT then sorafenib vs sorafenib in HCC) on a breath-hold, portal venous phase CT with 3 mm slices, IV contrast and 1000 mL of oral water. Agreement (κ) between expert contours: liver 0.94, stomach 0.90, duodenum 0.87, oesophagus 0.62, CBD 0.42, GOJ 0.41. Expect the most variation, and spend the most care, on the <b>GOJ and CBD</b>, and on the caudate and D4, which were often missed.</li>
 </ul>
 <h3>1.3  MRI (diagnostic fusion and MR-linac)</h3>
@@ -557,7 +557,7 @@
 <tbody>
 <tr><td class="b">HCC dose by liver function; RTOG 1112 mean-liver de-escalation</td><td><a href="../gi-hepatobiliary.html">Liver and biliary page</a>, HCC tab</td></tr>
 <tr><td class="b">Liver metastases dose; technique, motion management, CTV and PTV margins</td><td><a href="../gi-hepatobiliary.html">Liver and biliary page</a>, Liver mets tab</td></tr>
-<tr><td class="b">GTV, ITV and PTV definitions</td><td><a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick protocol</a></td></tr>
+<tr><td class="b">GTV, ITV and PTV definitions</td><td><a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick guide</a></td></tr>
 <tr><td class="b">Conventional-fraction liver and GI constraints (QUANTEC, TG-101)</td><td><a href="../gi-general.html">General GI page</a></td></tr>
 <tr><td class="b">eviQ</td><td>4024 hepatic primary stereotactic EBRT; 4026 hepatic metastases stereotactic EBRT (links in Section 10)</td></tr>
 </tbody>

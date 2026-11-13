@@ -1,6 +1,6 @@
 # Clinic-Ref: Radiation Oncology Quick Reference
 
-Clinic resource: tumour-site quick-reference pages, a contouring guideline library and site contouring protocols. Live at https://lincdnronc.github.io/Clinic-Ref/
+Clinic resource: tumour-site quick-reference pages, a contouring guideline library and site contouring guides. Live at https://lincdnronc.github.io/Clinic-Ref/
 
 This repo is the single source of truth: the built pages and the build kit that makes them both live here.
 
@@ -33,3 +33,5 @@ Avoid pushing several times in quick succession: a newer push cancels a Pages de
 
 ## Content rules
 Australian spelling. Every number comes from a cited source; anything not yet checked against the original paper is marked "check". Not affiliated with or endorsed by eviQ, ESTRO, NRG or other groups. Follow departmental protocols.
+
+Naming (13 Nov 2026): the site calls its own contouring pages "contouring guides" (quick guides and full guides), not "protocols". "Protocol" is kept only for source documents (departmental, trial, eviQ).
