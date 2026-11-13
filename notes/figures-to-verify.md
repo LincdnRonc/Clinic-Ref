@@ -100,3 +100,8 @@
 - Biau 2019 node-positive CTV-N-HR = GTV-N + 5 mm now verified (clears the quick-protocol check).
 - Evans 2025 ESTRO post-op oral cavity not in folder; folder items not yet used: trigeminal atlas 2018, PNS guideline 2018, parotid pathways 2022, ESTRO base of skull 2021, ASTRO oropharynx.
 - NPC Ib indications and CTVp_50 structure list summarised, not reproduced in full (see Lin 2025 Table 1/E1).
+
+## Lymphoma ISRT protocol (contouring/lymphoma.html)
+- No departmental lymphoma protocol; page follows Wirth 2020 ILROG overview, Specht 2014 and the ILROG mini-atlas. ITV/PTV/IGRT institutional.
+- Wirth Table 1 (Dabaja 2018) OAR optimal/acceptable levels not reproduced: folder text extraction garbled — transcribe from the PDF.
+- Not in folder: Illidge 2014, Yahalom 2015, Tsang 2018 plasmacytoma, TBI/TMI guidance.
