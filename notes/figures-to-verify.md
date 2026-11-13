@@ -80,3 +80,11 @@
 - Department T1N0 CTV42 excludes external iliac and inguinal nodes and starts at the top of the mesorectum (differs from AGITG/UK/ECOG); confirm intended.
 - No departmental IGRT method or OAR constraint table; page quotes UK v4 planning sheet and ECOG-ACRIN EA2182 table.
 - RTOG 0529 protocol constraints not in folder.
+
+## Spine and bone SBRT protocol (contouring/spine-bone.html)
+- Departmental source: St George CCC spine SBRT protocol, DRAFT v9 (2024) — confirm it is the current approved version. It lists de novo schedules only (post-op and re-irradiation taken from the 2021 bone and soft tissue SABR protocol, origin not stated in the document).
+- Motion management: St George "none required" vs folder spine protocol 4D-CT for mid-thoracic and below (OAR ITVs).
+- 1-fraction OAR constraints are from the 2021 bone/soft tissue protocol (St George table covers 2, 3 and 5 fractions).
+- National spine SABR protocol (2023) sacrum CTV = GTV, PTV + 10 mm differs from Dunne 2020 (page follows Dunne).
+- Local RayStation names/prefixes.
+- ISRC row "body + bilateral pedicles": sector list derived from the CTV description (PDF table layout garbled).

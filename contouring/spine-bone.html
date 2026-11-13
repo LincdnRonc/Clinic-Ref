@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Spine and Bone SBRT Target Volume Delineation Protocol</title>
+<style>
+  :root{
+    --navy:#10243f; --navy2:#1d3a5f;
+    --teal:#14756b; --teal-bg:#e7f3f1;
+    --amber:#9a5a00; --amber-bg:#fdf3e3;
+    --rust:#8a2f23; --rust-bg:#fbeae7;
+    --paper:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6b7c;
+    --rule:#d6dde6;
+    --rule-strong:#14756b;
+    --dose-elective:#2f6fb0;
+    --dose-bed:#9a5a00;
+    --dose-sib:#c0721c;
+    --dose-boost:#8a2f23;
+    --dose-prostate:#b03a2e;
+    --flag:#8a2f23; --flag-bg:#fbeae7;
+    --key-bg:#e7f3f1;
+    --petrol:#10243f;
+    --petrol-2:#14756b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;background:#e6ebf0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:10.3px;line-height:1.5;
+  }
+  .page{
+    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
+    padding:16mm 17mm 14mm;position:relative;
+    box-shadow:0 1px 8px rgba(16,36,63,.16);
+    display:flex;flex-direction:column;
+  }
+  @page{size:A4;margin:13mm;}
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .page + .page{page-break-before:always;}
+    h2,h3{page-break-after:avoid;}
+    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
+  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
+  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
+  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
+  p{margin:.35em 0;}
+  a{color:var(--teal);}
+  .lead{font-size:11px;color:var(--muted);}
+  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
+  .sechead{margin:0 0 .5em;}
+  .sechead .eyebrow{display:block;margin-bottom:3px;}
+  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
+  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
+  .masthead h1{color:#fff;}
+  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
+  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
+  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
+  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
+  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
+  tbody tr:nth-child(even){background:#eef2f6;}
+  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
+  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
+  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
+  .p-elect{background:var(--dose-elective);}
+  .p-bed{background:var(--dose-bed);}
+  .p-sib{background:var(--dose-sib);}
+  .p-boost{background:var(--dose-boost);}
+  .p-pros{background:var(--dose-prostate);}
+  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
+  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
+  .flag .lbl:before{content:"\26A0  ";}
+  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
+  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
+  ol.steps li{margin:.28em 0;padding-left:.15em;}
+  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
+  ul.tight{margin:.25em 0;padding-left:1.15em;}
+  ul.tight li{margin:.18em 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid2>div{min-width:0;}
+  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
+  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  svg{display:block;width:100%;height:auto;}
+  .kv{font-size:9.3px;}
+  .kv b{color:var(--navy);}
+  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
+  .ref{font-size:8.6px;line-height:1.4;}
+  .ref li{margin:.2em 0;}
+  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
+  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
+  .named .pos{font-weight:700;color:var(--amber);}
+  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc td{border:none;padding:2px 4px;}
+  .toc .n{color:var(--teal);font-weight:700;width:24px;}
+  .toc .pg{text-align:right;color:var(--muted);width:32px;}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
+  .small{font-size:8.6px;color:var(--muted);}
+</style>
+
+<style id="site-extra">
+  .p-gtv{background:#1d4f91;}
+  .p-hi{background:#b03a2e;}
+  .p-lo{background:#2f6fb0;}
+  .p-ctv{background:#14756b;}
+  .p-ptv{background:#a07a00;}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:8.4px;color:var(--muted);}
+  .follow{border-left:4px solid #4f5f74;}
+</style>
+<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #4f5f74}</style></head>
+
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../pall-bone-spine.html" style="color:#cfd8e3;text-decoration:none">Bone &amp; spine page</a><a href="../pall-oligo.html" style="color:#cfd8e3;text-decoration:none">Oligometastases page</a><a href="../ctr-spine.html" style="color:#cfd8e3;text-decoration:none">Spine quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<section class="page">
+<div class="masthead">
+<span class="eyebrow">Departmental Contouring Protocol · Stereotactic Body Radiotherapy</span>
+<h1>Spine and Bone SBRT — Target Volume Delineation Protocol</h1>
+<p class="sub">Target volumes for <b>intact mobile spine</b> (ISRC sectors), <b>post-operative spine</b>, <b>sacrum</b>, <b>non-spine bone</b> (including post-fixation long bone) and <b>re-irradiation</b>, with selection, simulation, cord and thecal sac delineation, PRVs, dose schedules, coverage goals, OAR constraints for 1–5 fractions and names.</p>
+<div class="pillrow">
+<span class="pill p-gtv">GTV</span>
+<span class="pill p-ctv">CTV (anatomic bony compartments)</span>
+<span class="pill p-ptv">PTV (2 mm, minus cord PRV)</span>
+<span class="pill p-hi">Spinal cord / thecal sac PRV</span>
+</div>
+<div class="meta">St George Cancer Care Centre spine SBRT protocol (draft v9, 2024) · Bone and soft tissue metastases SABR protocol v1.0 (Oct 2021) · ISRC (Cox 2012) · Redmond 2017 post-op · Dunne 2020 sacrum · Nguyen 2022 non-spine bone (and 2020 practice patterns) · ESTRO 2024 spine SBRT guideline · HyTEC spinal cord (Sahgal) · CCTG SC.24 protocol · national spine SABR protocol (2023) — Version 1.0 · Nov 2026</div>
+</div>
+<div class="callout">
+<span class="lbl">Governing principles of this protocol</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>The departmental standard is the St George spine SBRT protocol (draft v9)</b>: ISRC anatomic CTV for the mobile spine, Dunne 2020 for the sacrum, 5 mm anatomic epidural margin when there is epidural disease, PTV = CTV + 2 mm minus the cord PRV, cord PRV = cord + 2 mm.</li>
+<li><b>The CTV is anatomic, not a margin</b>: include the whole compartment (body, pedicle, transverse process/lamina, spinous process) that holds GTV, plus the next marrow space at risk (Cox 2012).</li>
+<li><b>The cord comes first</b>: cord PRV dose is prioritised over PTV coverage; contour the cord on MRI and the thecal sac as the cauda equina surrogate.</li>
+<li><b>Every case is peer reviewed</b> at the SRS planning meeting (Tuesday 07:45) before planning; no more than 14 days from simulation and planning MRI to the first fraction.</li>
+<li><b>Dose to the right level</b>: count levels on CT and MRI, contour adjacent vertebrae for matching, and have the RO check the level on CBCT.</li>
+</ul>
+</div>
+<h3 style="margin-top:1.1em;">Contents</h3>
+<table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Selection, work-up and timing</a></td><td class="pg">2</td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Simulation, immobilisation and imaging</a></td><td class="pg">3</td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario A — Intact mobile spine (ISRC)</a></td><td class="pg">4</td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario B — Post-operative spine</a></td><td class="pg">5</td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Scenario C — Sacrum</a></td><td class="pg">6</td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Scenario D — Non-spine bone and soft tissue</a></td><td class="pg">7</td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Scenario E — Re-irradiation</a></td><td class="pg">8</td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Pearls and common errors</a></td><td class="pg">8</td></tr>
+<tr><td class="n">9</td><td><a href="#s9">Dose, PTV, plan evaluation and IGRT</a></td><td class="pg">9</td></tr>
+<tr><td class="n">10</td><td><a href="#s10">Organs at risk and constraints</a></td><td class="pg">10</td></tr>
+<tr><td class="n">11</td><td><a href="#s11">Names and RayStation implementation</a></td><td class="pg">11</td></tr>
+<tr><td class="n">12</td><td><a href="#s12">References and further guidelines</a></td><td class="pg">12</td></tr>
+</table>
+<h3>Sources used</h3>
+<table>
+<thead><tr><th style="width:38%">Source</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td class="b">St George CCC spine SBRT protocol, draft v9 (Aren, Bece, Clark, Poder, Saba, Schmidt, Wallace; 2024)</td><td>Departmental selection, workflow, simulation, volumes, PTV, coverage goals, OAR list and 2/3/5-fraction constraints, IGRT, follow-up.</td></tr>
+<tr><td class="b">Bone and soft tissue metastases SABR protocol v1.0 (Oct 2021); spine SBRT contouring protocol (folder)</td><td>Non-spine bone, post-op long bone and soft tissue volumes; 1-fraction constraints; re-irradiation cord table; fracture risk; dexamethasone; alternative selection rules.</td></tr>
+<tr><td class="b">Cox 2012 (ISRC); Redmond 2017; Dunne 2020; Nguyen 2022</td><td>CTV rules for mobile spine, post-op spine, sacrum and non-spine bone.</td></tr>
+<tr><td class="b">ESTRO 2024 guideline (Guckenberger); HyTEC spinal cord (Sahgal); CCTG SC.24; national spine SABR protocol (Young et al., 2023)</td><td>Immobilisation, imaging, PTV and IGRT recommendations; cord tolerance; trial volumes; alternative PTV/PRV policies.</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 1</span></div>
+</section>
+
+<!-- ============================ S1 ============================ -->
+<section class="page" id="s1">
+<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Selection, work-up and timing</h2></div>
+<table>
+<thead><tr><th style="width:18%">Item</th><th>St George v9</th><th>Other protocols in the folder</th></tr></thead>
+<tbody>
+<tr><td class="b">Aims</td><td>Analgesia; prevent neurological deterioration; definitive treatment of oligometastases</td><td>Bone/soft tissue protocol adds oligoprogression and painful bone metastases</td></tr>
+<tr><td class="b">Patient</td><td>ECOG 0–2; life expectancy &gt;3 months; able to have MRI; able to lie flat up to 60 min</td><td>Same ECOG and life expectancy (bone/soft tissue)</td></tr>
+<tr><td class="b">Tumour</td><td>Histology; <b>≤3 consecutive segments</b> in PTV; tumour ≥2 mm from cord; SINS 0–12</td><td>Spine protocol (folder): ≤2 consecutive segments or ≤3 sites in one session; gross tumour &gt;2 mm from cord; paraspinal mass &lt;5 cm</td></tr>
+<tr><td class="b">Exclude</td><td>No MRI; SINS &gt;12; symptomatic cord compression or cauda equina syndrome; &gt;3 segments; <b>any previous RT to the region</b></td><td>Spine protocol (folder) also excludes myeloma and lymphoma, symptomatic VCF and significant neurological deficit; allows one prior course (BED &lt;100 Gy<sub>2</sub>, &gt;5 months)</td></tr>
+<tr><td class="b">Caution / refer</td><td>SINS 7–12: consider neurosurgical referral. Widespread rapidly progressive disease; pacemaker</td><td>Bone/soft tissue: refer to neurosurgery for SINS ≥7 or Bilsky ≥2; orthopaedics for Mirels ≥9 or high-risk radiology (≥30% circumferential cortical involvement, &gt;30 mm axial cortical involvement)</td></tr>
+</tbody>
+</table>
+<h3>1.1  Workflow (St George)</h3>
+<ol class="steps">
+<li>RO review: can the patient tolerate MRI and lying flat (pacemaker, claustrophobia, pain, dyspnoea); optimise analgesia; consider pre-sim/RT analgesia and dexamethasone.</li>
+<li>Neuro-oncology MDT if needed. Systemic therapy: immunotherapy may continue; stop TKIs 1 day before to 1 day after; stop chemotherapy ≥1 week before to 1 week after (confirm with the medical oncologist).</li>
+<li>SRS planning meeting (Tuesday 07:45): suitability, then formal peer review of contours.</li>
+<li>Maximum 14 days from CT simulation and planning MRI to fraction 1.</li>
+</ol>
+<h3>1.2  Scores to record</h3>
+<div class="grid2">
+<div>
+<table>
+<thead><tr><th>SINS (Fourney)</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td class="b">0–6 stable</td><td>Proceed</td></tr>
+<tr><td class="b">7–12 indeterminate</td><td>Neurosurgical opinion (StG: consider; bone/soft tissue protocol: refer)</td></tr>
+<tr><td class="b">13–18 unstable</td><td>Not for SBRT first; stabilise</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<ul class="tight">
+<li><b>Bilsky grade</b> (epidural): grade ≥2 → neurosurgical opinion (bone/soft tissue protocol).</li>
+<li><b>Mirels score</b> (long bones): ≤7 RT and observe; 8 judgement; ≥9 prophylactic fixation.</li>
+<li><b>Pain</b>: record worst pain 0–10 and all analgesia (bone/soft tissue protocol).</li>
+<li><b>Prior RT</b>: retrieve all previous plans and cord doses (section 7).</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 2</span></div>
+</section>
+
+<!-- ============================ S2 ============================ -->
+<section class="page" id="s2">
+<div class="sechead"><span class="eyebrow">Section 2</span><h2><span class="sectnum">2</span>Simulation, immobilisation and imaging</h2></div>
+<table>
+<thead><tr><th style="width:15%">Item</th><th>St George v9</th><th>Bone/soft tissue protocol</th><th>ESTRO 2024</th></tr></thead>
+<tbody>
+<tr><td class="b">Position</td><td>Supine, arms by sides if possible</td><td>Supine vac-bag, arms down for T/L/S spine (consider BodyFIX)</td><td>Reproducible supine</td></tr>
+<tr><td class="b">C1–C2</td><td>Thermoplastic SRS mask</td><td rowspan="2">Thermoplastic mask for C-spine; consider for upper T-spine</td><td rowspan="2">Above the cervicothoracic junction (about T4 and above): patient-specific rigid fixation such as a head and neck mask. Below: near-rigid body immobilisation, or none with intra-fraction tracking</td></tr>
+<tr><td class="b">C3–T4</td><td>Thermoplastic head and neck mask</td></tr>
+<tr><td class="b">T5 and below</td><td>Full-body vac-bag</td><td>Vac-bag</td><td></td></tr>
+<tr><td class="b">CT</td><td>1 mm slices; target vertebrae + ≥10 cm cranially and caudally; no IV contrast; no motion management</td><td>1 mm, no IV contrast; intrathecal contrast (CT myelogram) if MRI contraindicated or heavy post-op artefact</td><td>Slice ≤1.5 mm</td></tr>
+<tr><td class="b">MRI</td><td>Thin-slice (1 mm) diagnostic MRI: T1 true axial and T2 true sagittal; involved levels + 2 above and 2 below; gadolinium at RO discretion (extraosseous disease)</td><td>1–2 mm non-contrast T1 and T2, one level above and below</td><td>Co-registered T1 and T2; MRI in treatment position conditionally recommended</td></tr>
+<tr><td class="b">PET</td><td>At RO discretion (extent of disease; GTV)</td><td>Optional (FDG, PSMA, DOTATATE)</td><td>—</td></tr>
+</tbody>
+</table>
+<p class="src">Spine protocol (folder): scan 3 vertebrae above and below; consider 4D-CT from mid-thoracic spine down to build OAR ITVs for moving organs; hexapod frame cut-out; RO checks fusion with priority on the spinal canal.</p>
+<h3>2.1  Image registration checklist</h3>
+<ol class="steps">
+<li>Count the levels on CT (from C2 or from the last rib/sacrum) and confirm the target level on the sagittal MRI before contouring.</li>
+<li>Register MRI to CT locally on the target vertebra (rigid, box around the target ± one level); check the canal, the posterior vertebral body wall and the pedicles.</li>
+<li>If the patient's curvature differs between scans, register each level separately rather than accept a poor match at the target.</li>
+<li>Post-op: register the pre-operative MRI as well (it defines the CTV) and use the post-op MRI or CT myelogram for residual disease and the cord.</li>
+</ol>
+<div class="flag"><span class="lbl">Check</span> St George v9 says "no motion management required"; the folder spine protocol suggests 4D-CT for mid-thoracic and lower lesions to make ITVs for moving OARs (oesophagus, bowel). Confirm the local policy for lower thoracic/lumbar targets near bowel <span class="chk">CHECK</span>.</div>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 3</span></div>
+</section>
+
+<!-- ============================ S3 ============================ -->
+<section class="page" id="s3">
+<div class="sechead"><span class="eyebrow">Section 3 · Scenario A</span><h2><span class="sectnum">3</span>Intact mobile spine (cervical, thoracic, lumbar)</h2></div>
+<div class="grid2">
+<div>
+<h3>3.1  Volumes (St George; Cox 2012)</h3>
+<ul class="tight">
+<li><b>GTV</b>: all gross tumour on CT and T1/T2 MRI, including epidural and paraspinal components.</li>
+<li><b>CTV</b>: GTV + abnormal marrow signal + the whole anatomic compartment(s) by the ISRC table; drawn on the planning CT.</li>
+<li><b>Epidural disease</b>: 5 mm anatomic margin beyond GTV within the epidural space (not into cord), including cranio-caudally (St George; SC.24). Donut CTV allowed at RO discretion (SC.24).</li>
+<li><b>Paraspinal disease</b>: SC.24 requires ≥5 mm beyond GTV; bone/soft tissue protocol 5 mm.</li>
+<li><b>Multiple levels</b> (≤3 contiguous): contour each level's CTV separately and join (St George; SC.24).</li>
+<li><b>PTV</b> = CTV + 2 mm minus the cord PRV; may be modified at the dura and next to critical structures unless the GTV is compromised.</li>
+<li>Osteophytes need not be included (folder spine protocol).</li>
+</ul>
+</div>
+<div>
+<figure>
+<svg viewBox="0 -24 300 254" role="img" aria-label="Axial vertebra divided into the six ISRC sectors">
+<rect width="300" height="230" fill="#fff"/>
+<ellipse cx="150" cy="70" rx="54" ry="44" fill="#eef0f2" stroke="#5b6b7c" stroke-width="1.5"/><text x="140" y="64" font-size="14" font-weight="700" fill="#4f5f74">1</text><text x="122" y="80" font-size="7" fill="#4f5f74">vertebral body</text>
+<path d="M104 96 L92 130 L112 138 L126 110 Z" fill="#dfe4ea" stroke="#5b6b7c"/><text x="102" y="124" font-size="12" font-weight="700" fill="#4f5f74">6</text>
+<path d="M196 96 L208 130 L188 138 L174 110 Z" fill="#dfe4ea" stroke="#5b6b7c"/><text x="188" y="124" font-size="12" font-weight="700" fill="#4f5f74">2</text>
+<path d="M92 130 L40 140 L44 154 L96 150 L112 138 Z" fill="#e8ecf0" stroke="#5b6b7c"/>
+<path d="M112 138 L96 150 L138 186 L146 176 Z" fill="#e8ecf0" stroke="#5b6b7c"/><text x="76" y="150" font-size="12" font-weight="700" fill="#4f5f74">5</text>
+<path d="M208 130 L260 140 L256 154 L204 150 L188 138 Z" fill="#e8ecf0" stroke="#5b6b7c"/>
+<path d="M188 138 L204 150 L162 186 L154 176 Z" fill="#e8ecf0" stroke="#5b6b7c"/><text x="212" y="150" font-size="12" font-weight="700" fill="#4f5f74">3</text>
+<path d="M146 176 L154 176 L162 186 L158 220 L142 220 L138 186 Z" fill="#dfe4ea" stroke="#5b6b7c"/><text x="144" y="208" font-size="11" font-weight="700" fill="#4f5f74">4</text>
+<ellipse cx="150" cy="140" rx="24" ry="22" fill="#fff6d6" stroke="#c9a400"/><circle cx="150" cy="140" r="9" fill="#f6c9a8" stroke="#b03a2e"/><line x1="170" y1="150" x2="224" y2="178" stroke="#8a6d00" stroke-width=".6"/><text x="214" y="188" font-size="6.5" fill="#8a6d00">thecal sac / cord</text>
+<text x="10" y="-14" font-size="7" fill="#555">Sectors (Cox 2012): 1 body · 2 left pedicle ·</text>
+<text x="10" y="-5" font-size="7" fill="#555">3 left transverse process + lamina · 4 spinous</text>
+<text x="10" y="4" font-size="7" fill="#555">process · 5 right TP + lamina · 6 right pedicle</text>
+</svg>
+<figcaption>Original schematic (axial vertebra, radiological view: patient's left on the image right). The CTV is built from whole sectors.</figcaption>
+</figure>
+</div>
+</div>
+<h3>3.2  ISRC bony CTV (Cox 2012 Table 3)</h3>
+<table>
+<thead><tr><th style="width:30%">GTV involves</th><th style="width:12%">GTV sectors</th><th style="width:14%">CTV sectors</th><th>CTV description</th></tr></thead>
+<tbody>
+<tr><td class="b">Any part of the vertebral body</td><td>1</td><td>1</td><td>Whole vertebral body</td></tr>
+<tr><td class="b">Body, lateralised</td><td>1</td><td>1, 2</td><td>Whole body + ipsilateral pedicle/transverse process</td></tr>
+<tr><td class="b">Body, diffuse</td><td>1</td><td>1, 2, 6</td><td>Whole body + both pedicles/transverse processes</td></tr>
+<tr><td class="b">Body + one pedicle</td><td>1, 2</td><td>1, 2, 3</td><td>Whole body, pedicle, ipsilateral transverse process and lamina</td></tr>
+<tr><td class="b">Body + both pedicles / TPs</td><td>1, 2, 6</td><td>1, 2, 3, 5, 6</td><td>Whole body, both pedicles/TPs and both laminae</td></tr>
+<tr><td class="b">One pedicle</td><td>2</td><td>2, 3 ± 1</td><td>Pedicle, ipsilateral TP and lamina ± body</td></tr>
+<tr><td class="b">One lamina</td><td>3</td><td>2, 3, 4</td><td>Lamina, ipsilateral pedicle/TP and spinous process</td></tr>
+<tr><td class="b">Spinous process</td><td>4</td><td>3, 4, 5</td><td>Whole spinous process and both laminae</td></tr>
+</tbody>
+</table>
+<p class="src">Cox 2012: no epidural CTV expansion without epidural disease; circumferential (cord-encircling) CTVs only when body, both pedicles/laminae and spinous process are involved or epidural disease is near-circumferential. ISRC kappa: GTV 0.65, CTV 0.64. The St George 5 mm epidural margin (from SC.24) applies only when there <i>is</i> epidural disease. The ISRC body-and-both-pedicles row is given as the CTV description in the paper; sector numbers here are derived from it.</p>
+<h3>3.3  Walkthrough</h3>
+<ol class="steps">
+<li>Sagittal T2: confirm level, epidural extent, cord position. Axial T1: marrow replacement (dark) and the GTV.</li>
+<li>Draw GTV on each axial slice (bone, epidural, paraspinal), checking on CT for cortical breach.</li>
+<li>Pick the CTV row from the table; paint whole sectors from the top to the bottom endplate of the involved level(s).</li>
+<li>Add 5 mm epidural (not into cord) and ≥5 mm paraspinal if present; then cord on MRI; cord PRV; PTV = CTV + 2 mm − PRV.</li>
+</ol>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 4</span></div>
+</section>
+
+<!-- ============================ S4 ============================ -->
+<section class="page" id="s4">
+<div class="sechead"><span class="eyebrow">Section 4 · Scenario B</span><h2><span class="sectnum">4</span>Post-operative spine (Redmond 2017)</h2></div>
+<table>
+<thead><tr><th style="width:18%">Volume</th><th>Definition (Redmond 2017 Table 5; bone/soft tissue protocol)</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV_preop</td><td>All involved bone, epidural extension and extraosseous soft tissue on the pre-operative imaging</td></tr>
+<tr><td class="b">GTV_postop (GTV)</td><td>Residual disease on post-op CT and MRI, with attention to residual epidural or paraspinal disease</td></tr>
+<tr><td class="b">CTV</td><td>The post-op region and the whole anatomic compartment matching every pre-operative MRI abnormality, plus the immediately adjacent bony compartments (ISRC logic applied to the <i>pre-op</i> extent). Include residual epidural and paraspinal tumour</td></tr>
+<tr><td class="b">Donut CTV</td><td>Use when there was pre-operative circumferential epidural (or osseous) disease, regardless of what remains after surgery; consider for near-circumferential epidural disease</td></tr>
+<tr><td class="b">Extra margin</td><td>Consider up to 5 mm beyond paraspinal extension and cranio-caudally for epidural disease</td></tr>
+<tr><td class="b">Exclude</td><td>Surgical instrumentation and the incision, unless involved</td></tr>
+<tr><td class="b">PTV</td><td>Uniform CTV + ≤2.5 mm (Redmond; St George 2 mm); may subtract the cord avoidance structure; may modify at the reconstructed dural space</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>4.1  Imaging</h3>
+<ul class="tight">
+<li>Hardware artefact can hide the cord: use a CT myelogram (intrathecal contrast) when MRI is degraded (bone/soft tissue protocol; folder spine protocol).</li>
+<li>Fuse pre-op MRI (extent of disease) and post-op MRI (residual, cord).</li>
+<li>Department dose for post-op spine: 30–35 Gy/5 preferred (Redmond phase 2); 24 Gy/2 or 27–30 Gy/3 alternatives (bone/soft tissue protocol). St George v9 lists de novo schedules only <span class="chk">CHECK</span>.</li>
+</ul>
+</div>
+<div>
+<h3>4.2  Pitfalls</h3>
+<ul class="tight">
+<li>Drawing the CTV on the post-op anatomy only: the CTV must cover the whole pre-operative extent.</li>
+<li>Including rods, screws and the scar adds volume without benefit (Redmond).</li>
+<li>Epidural recurrence is the common failure after surgery; do not under-cover the epidural space next to the decompression.</li>
+<li>Redmond kappa was only 0.58 for CTV and PTV — peer review matters most here.</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 5</span></div>
+</section>
+
+<!-- ============================ S5 ============================ -->
+<section class="page" id="s5">
+<div class="sechead"><span class="eyebrow">Section 5 · Scenario C</span><h2><span class="sectnum">5</span>Sacrum (Dunne 2020)</h2></div>
+<p>The sacral classification divides each level into 8 segments: 1 body; 2 left anterior ala; 3 left posterior ala; 4 left lamina; 5 spinous process; 6 right lamina; 7 right posterior ala; 8 right anterior ala. At S3–S5 the ala may appear as a single segment.</p>
+<div class="grid2">
+<div>
+<table>
+<thead><tr><th style="width:42%">GTV involves</th><th>CTV segments</th></tr></thead>
+<tbody>
+<tr><td class="b">Any part of the body</td><td>1</td></tr>
+<tr><td class="b">Body, lateralised (S1–S2)</td><td>1, 2, 3</td></tr>
+<tr><td class="b">Body, lateralised (S3–S5)</td><td>1, 3</td></tr>
+<tr><td class="b">Body, diffuse (S1–S2)</td><td>1, 2, 3, 7, 8</td></tr>
+<tr><td class="b">Body, diffuse (S3–S5)</td><td>1, 3, 7</td></tr>
+<tr><td class="b">Body + one ala (S1–S2)</td><td>1, 2, 3, 4</td></tr>
+<tr><td class="b">Body + one ala (S3–S5)</td><td>1, 3, 4</td></tr>
+<tr><td class="b">Body + both alae (S1–S2)</td><td>1, 2, 3, 4, 6, 7, 8</td></tr>
+<tr><td class="b">Body + both alae (S3–S5)</td><td>1, 3, 4, 6, 7</td></tr>
+<tr><td class="b">One ala (S1–S2)</td><td>2, 3 ± 1</td></tr>
+<tr><td class="b">One lamina</td><td>4, 5 ± 1</td></tr>
+<tr><td class="b">Both laminae</td><td>4, 5, 6 ± 1</td></tr>
+<tr><td class="b">Spinous process</td><td>4, 5, 6</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 200" role="img" aria-label="Axial schematic of the sacrum with eight segments">
+<rect width="300" height="200" fill="#fff"/>
+<path d="M120 40 Q150 30 180 40 L184 92 Q150 100 116 92 Z" fill="#eef0f2" stroke="#5b6b7c"/><text x="146" y="70" font-size="12" font-weight="700" fill="#4f5f74">1</text>
+<path d="M180 40 L250 54 L262 84 L184 78 Z" fill="#e8ecf0" stroke="#5b6b7c"/><text x="222" y="70" font-size="11" font-weight="700" fill="#4f5f74">2</text>
+<path d="M184 78 L262 84 L250 118 L184 100 Z" fill="#dfe4ea" stroke="#5b6b7c"/><text x="222" y="102" font-size="11" font-weight="700" fill="#4f5f74">3</text>
+<path d="M120 40 L50 54 L38 84 L116 78 Z" fill="#e8ecf0" stroke="#5b6b7c"/><text x="72" y="70" font-size="11" font-weight="700" fill="#4f5f74">8</text>
+<path d="M116 78 L38 84 L50 118 L116 100 Z" fill="#dfe4ea" stroke="#5b6b7c"/><text x="72" y="102" font-size="11" font-weight="700" fill="#4f5f74">7</text>
+<ellipse cx="150" cy="114" rx="22" ry="12" fill="#fff6d6" stroke="#c9a400"/><text x="135" y="117" font-size="6.5" fill="#8a6d00">sacral canal</text>
+<path d="M172 118 L196 112 L176 150 L158 140 Z" fill="#e8ecf0" stroke="#5b6b7c"/><text x="176" y="134" font-size="10" font-weight="700" fill="#4f5f74">4</text>
+<path d="M128 118 L104 112 L124 150 L142 140 Z" fill="#e8ecf0" stroke="#5b6b7c"/><text x="114" y="134" font-size="10" font-weight="700" fill="#4f5f74">6</text>
+<path d="M142 140 L158 140 L156 172 L144 172 Z" fill="#dfe4ea" stroke="#5b6b7c"/><text x="146" y="164" font-size="9" font-weight="700" fill="#4f5f74">5</text>
+<line x1="250" y1="86" x2="186" y2="86" stroke="#b03a2e" stroke-dasharray="3 2"/><text x="220" y="140" font-size="6.5" fill="#b03a2e">ossification line</text><line x1="230" y1="134" x2="226" y2="90" stroke="#b03a2e" stroke-width=".6"/>
+<circle cx="174" cy="96" r="5" fill="#fff" stroke="#2f6fb0"/><circle cx="126" cy="96" r="5" fill="#fff" stroke="#2f6fb0"/><text x="196" y="190" font-size="6.5" fill="#2f6fb0">○ sacral foramina (nerve roots)</text>
+<text x="6" y="16" font-size="7" fill="#555">Patient's left on image right (radiological view)</text>
+
+</svg>
+<figcaption>Original schematic (axial S1). Anterior (2, 8) and posterior (3, 7) alae are separated by the ossification line at S1–S2.</figcaption>
+</figure>
+</div>
+</div>
+<h3>5.1  Rules that are easy to miss (Dunne 2020)</h3>
+<ul class="tight">
+<li><b>Cranio-caudal extent</b> follows the vertebral levels. Exception: if the GTV touches any part of the S1 ala, start the CTV at the top of the S1 ala, which sits above the S1 body.</li>
+<li><b>Ossification line</b>: when adding an ala only as the adjacent marrow space, the visible ossification line can limit the CTV (anterior or posterior part next to the disease). If the GTV is in the ala, do not use the line as a barrier.</li>
+<li>Contour the <b>thecal sac</b> as the cauda equina surrogate; the sacral nerve roots (S1–S5) are separate OARs.</li>
+<li>Most sacral failures were within the vertebral body or toward the alae/SI joint when these were not covered.</li>
+</ul>
+<div class="flag"><span class="lbl">Different policy elsewhere</span> The national spine SABR protocol (2023) uses CTV = GTV with PTV = CTV + 10 mm for the sacrum. St George follows Dunne 2020 (anatomic CTV, 2 mm PTV); this page does too.</div>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 6</span></div>
+</section>
+
+<!-- ============================ S6 ============================ -->
+<section class="page" id="s6">
+<div class="sechead"><span class="eyebrow">Section 6 · Scenario D</span><h2><span class="sectnum">6</span>Non-spine bone and soft tissue</h2></div>
+<table>
+<thead><tr><th style="width:18%">Setting</th><th>CTV</th><th>PTV</th><th>Dose (bone/soft tissue protocol)</th></tr></thead>
+<tbody>
+<tr><td class="b">Non-spine bone, de novo</td><td>GTV (all bone and extraosseous disease) + intraosseous 5–10 mm within contiguous bone + extraosseous 5–10 mm where there is soft tissue disease or cortical breach (Nguyen 2022; protocol says 5 mm extraosseous). Crop to barriers: uninvolved joint spaces, uninvolved OARs, peritoneal cavity, pleura, intact cortex</td><td>CTV + 2–5 mm, case by case (2 mm if small, still and confidently matched)</td><td>Long bone 30–35 Gy/5 preferred, 24 Gy/2. Non-spine non-long bone 35–40 Gy/5, 24 Gy/2</td></tr>
+<tr><td class="b">Long bone, post-fixation</td><td>CTV HD: GTV_preop/postop + 5 mm intraosseous + 5 mm extraosseous. CTV LD: CTV HD + the whole bone likely contaminated by the hardware</td><td>+2–5 mm</td><td>SIB 35 Gy/5 to gross tumour; 20 Gy/5 to the hardware region</td></tr>
+<tr><td class="b">Soft tissue / node</td><td>GTV + 0–5 mm: 0 mm for a node with an intact capsule; 5 mm for possible ECE or non-nodal soft tissue</td><td>+2–5 mm; ITV or breath-hold where it moves</td><td>Per site (45 Gy/5 for oligometastases is for a trial)</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>6.1  Evidence behind the margins</h3>
+<ul class="tight">
+<li>Nguyen 2022 (9 international experts, 10 cases): mean kappa 0.72, DSC 0.77. Median intraosseous margin 7.3 mm, extraosseous 7.9 mm; most used 5 mm with a fused MRI, some 7–10 mm (larger without MRI).</li>
+<li>Nguyen 2020 practice patterns: doses ranged from 18–24 Gy/1 to 42–50 Gy/10 (all ≥BED10 60 Gy); 35 Gy/5 was the most common; some used a two-level SIB (e.g. GTV/CTV1 30 Gy/3 and CTV2 15–24 Gy/3).</li>
+<li>Pelvis/ilium attracted larger intraosseous margins (marrow spread is harder to see).</li>
+</ul>
+</div>
+<div>
+<h3>6.2  Walkthrough</h3>
+<ol class="steps">
+<li>GTV on CT + MRI (T1 marrow, STIR/T2 for oedema vs tumour) ± PET.</li>
+<li>Expand 5–10 mm inside the same bone along the marrow; 5–10 mm into soft tissue only where there is extraosseous disease or a cortical breach.</li>
+<li>Crop: stop at joint spaces, intact cortex, pleura, peritoneum and uninvolved OARs.</li>
+<li>Check fracture risk (Mirels, cortical involvement) before treating weight-bearing bones.</li>
+</ol>
+</div>
+</div>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 7</span></div>
+</section>
+
+<!-- ============================ S7 + S8 ============================ -->
+<section class="page" id="s7">
+<div class="sechead"><span class="eyebrow">Section 7 · Scenario E</span><h2><span class="sectnum">7</span>Re-irradiation</h2></div>
+<p>St George v9 excludes previously irradiated regions. Where re-irradiation SBRT is considered elsewhere (bone/soft tissue protocol; folder spine protocol), volumes follow the de novo rules and the cord limits change:</p>
+<div class="grid2">
+<div>
+<ul class="tight">
+<li><b>HyTEC (Sahgal)</b>: cumulative thecal sac EQD2<sub>2</sub> Dmax ≤70 Gy; re-irradiation SBRT thecal sac EQD2<sub>2</sub> Dmax ≤25 Gy; SBRT/cumulative ratio ≤0.5; interval ≥5 months.</li>
+<li>Dose: 30–35 Gy/5 preferred (Thibault), or 27–30 Gy/3.</li>
+<li>Folder spine protocol: one prior course allowed if prior BED was &lt;100 Gy<sub>2</sub> and &gt;5 months ago; earlier Sahgal data showed no myelopathy with initial course &lt;50 Gy EQD2<sub>2</sub>, SBRT course &lt;25 Gy and interval &gt;5 months.</li>
+<li>Import every prior plan and sum doses to the cord/thecal sac.</li>
+</ul>
+</div>
+<div>
+<table>
+<thead><tr><th>Prior course</th><th>EQD2<sub>2</sub></th><th>1#</th><th>2#</th><th>3#</th><th>4#</th><th>5#</th></tr></thead>
+<tbody>
+<tr><td class="b">20 Gy/5</td><td>30</td><td>9</td><td>12.2</td><td>14.5</td><td>16.2</td><td>18</td></tr>
+<tr><td class="b">30 Gy/10</td><td>37.5</td><td>9</td><td>12.2</td><td>14.5</td><td>16.2</td><td>18</td></tr>
+<tr><td class="b">40 Gy/20</td><td>40</td><td>—</td><td>12.2</td><td>14.5</td><td>16.2</td><td>18</td></tr>
+<tr><td class="b">45 Gy/25</td><td>43</td><td>—</td><td>12.2</td><td>14.5</td><td>16.2</td><td>18</td></tr>
+<tr><td class="b">50 Gy/25</td><td>50</td><td>—</td><td>11</td><td>12.5</td><td>14</td><td>15.5</td></tr>
+</tbody>
+</table>
+<p class="src">Recommended cord / thecal sac PRV Dmax (Gy) for re-irradiation SBRT by prior course (bone/soft tissue protocol Appendix 6, from Sahgal).</p>
+</div>
+</div>
+<hr class="soft"/>
+<div class="sechead" id="s8"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>Pearls and common errors</h2></div>
+<div class="grid2">
+<div>
+<ul class="tight">
+<li><b>Wrong level</b> is the classic error: count twice, contour the vertebra above and below for matching, and have the RO confirm the level on the first CBCT.</li>
+<li><b>Cord</b>: draw on T1/T2 MRI fused locally; at least 10 mm above and below the PTV (St George), one vertebra above and below (other protocols). Below the conus use the thecal sac.</li>
+<li><b>Gap to cord</b>: RTOG 0631 required 3 mm between cord and epidural disease, whereas SC.24 only excluded symptomatic cord compression or cauda equina syndrome (ESTRO 2024). St George requires tumour ≥2 mm from the cord.</li>
+<li><b>No epidural CTV without epidural disease</b>; no cord-encircling CTV unless disease is (near-)circumferential (Cox 2012).</li>
+</ul>
+</div>
+<div>
+<ul class="tight">
+<li><b>Fracture risk</b>: higher single-fraction doses such as 24 Gy/1 raise the vertebral compression fracture risk; ESTRO recommends more than BED10 50 Gy (about 18 Gy/1) for durable control and accepts 2–5 fraction schedules.</li>
+<li><b>Pain flare</b>: dexamethasone 8 mg daily from ≥1 h before fraction 1 and for 4 days after (bone/soft tissue protocol); St George reviews on the last day and considers short-term dexamethasone.</li>
+<li><b>Paraspinal mass</b>: the folder spine protocol excludes masses ≥5 cm.</li>
+<li>Bring prior PTVs and dose into the plan for any adjacent-level treatment to avoid unrecognised overlap.</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 8</span></div>
+</section>
+
+<!-- ============================ S9 ============================ -->
+<section class="page" id="s9">
+<div class="sechead"><span class="eyebrow">Section 9</span><h2><span class="sectnum">9</span>Dose, PTV, plan evaluation and IGRT</h2></div>
+<table>
+<thead><tr><th style="width:18%">Indication</th><th>St George v9</th><th>Bone/soft tissue protocol</th><th>Evidence</th></tr></thead>
+<tbody>
+<tr><td class="b">De novo spine</td><td><span class="pill p-hi">24 Gy/2</span> alternate days (preferred); 27–30 Gy/3 alternate days; 30–35 Gy/5 daily</td><td>Same order</td><td>SC.24 / TROG 17.06 (24/2); SABR-COMET (27–30/3); Thibault (30–35/5)</td></tr>
+<tr><td class="b">Post-op spine</td><td>— <span class="chk">CHECK</span></td><td>30–35 Gy/5 preferred; 24/2; 27–30/3</td><td>Redmond phase 2</td></tr>
+<tr><td class="b">Re-irradiation</td><td>Excluded</td><td>30–35 Gy/5 preferred; 27–30/3</td><td>Thibault</td></tr>
+<tr><td class="b">Long / other bone</td><td>—</td><td>Long bone 30–35/5 (24/2); other bone 35–40/5 (24/2); post-fixation SIB 35/5 + 20/5</td><td>Erler; Nguyen 2020</td></tr>
+</tbody>
+</table>
+<p class="src">Technique (St George): VMAT, 6–10 MV FFF. National protocol: 24 Gy/2 given 2–3 times a week, ≥48 h apart, no more than 4 calendar days between fractions.</p>
+<div class="grid2">
+<div>
+<h3>9.1  PTV and PRV policies compared</h3>
+<table>
+<thead><tr><th>Source</th><th>PTV</th><th>Cord / thecal sac PRV</th></tr></thead>
+<tbody>
+<tr><td class="b">St George v9</td><td>CTV + 2 mm − cord PRV</td><td>Cord + 2 mm; thecal sac for cauda; brainstem + 2 mm</td></tr>
+<tr><td class="b">Bone/soft tissue</td><td>Spine CTV + 2 mm; bone/soft tissue 2–5 mm</td><td>SpinalCord_02 (canal + 2 mm); CAUDA_01 (thecal sac + 1 mm)</td></tr>
+<tr><td class="b">ISRC / ESTRO 2024</td><td>≤3 mm; ESTRO minimum 1 mm; never overlap cord or cauda</td><td>Cropped PTV and PRV in optimisation only (ESTRO)</td></tr>
+<tr><td class="b">SC.24</td><td>1–3 mm uniform</td><td>Cord + 1.5–2 mm; thecal sac without PRV for cauda</td></tr>
+<tr><td class="b">National (2023)</td><td>+2 mm (robotic couch) or +3 mm; sacrum GTV + 10 mm</td><td>Cord + 2 mm to L1; thecal sac + 1 mm from L2 (optional)</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>9.2  Coverage goals</h3>
+<table>
+<thead><tr><th>Source</th><th>Ideal</th><th>Acceptable</th></tr></thead>
+<tbody>
+<tr><td class="b">St George v9</td><td>PTV D90% ≥90%; GTV D99% ≥110%</td><td>PTV D90% ≥80%; GTV D99% ≥100%. Max ≤140% inside GTV. Cord PRV before coverage</td></tr>
+<tr><td class="b">Bone/soft tissue</td><td>PTV V100% &gt;80% (as high as OARs allow)</td><td>Dmax &lt;145%</td></tr>
+<tr><td class="b">SC.24</td><td>PTV covered by 100% where possible; 80% of CTV ≥24 Gy</td><td>PTV by 85% if shielding needed; +50% heterogeneity</td></tr>
+</tbody>
+</table>
+<h3>9.3  IGRT</h3>
+<ul class="tight">
+<li>St George: CBCT before and mid-treatment each fraction; bony match; RO available to review.</li>
+<li>Bone/soft tissue and folder spine protocol: hexapod couch, 1 mm and 1° tolerance (re-image if exceeded); pre-, mid- and post-CBCT; RO or senior registrar at fraction 1.</li>
+<li>ESTRO 2024: online imaging before each fraction; intra-fraction imaging at least once; 6-degree correction.</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 9</span></div>
+</section>
+
+<!-- ============================ S10 ============================ -->
+<section class="page" id="s10">
+<div class="sechead"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>Organs at risk and constraints</h2></div>
+<p>St George v9: Dmax to ≤0.035 cc for all OARs. Contour all OARs within 1 cm cranio-caudally of the PTV (bone/soft tissue protocol). Lumbosacral plexus = L4, L5 and S1–S5 roots followed to the abdominopelvic contents. Skin = outer 5 mm of the body (folder spine protocol).</p>
+<table>
+<thead><tr><th style="width:22%">OAR</th><th>1 fraction (bone/soft tissue protocol)</th><th>2 fractions (St George)</th><th>3 fractions (St George)</th><th>5 fractions (St George)</th></tr></thead>
+<tbody>
+<tr><td class="b">Spinal cord PRV</td><td>12.4 (14) Gy</td><td>Dmax ≤17 Gy</td><td>≤20.3 Gy</td><td>≤25.3 Gy</td></tr>
+<tr><td class="b">Cauda equina (thecal sac)</td><td>14 (16) Gy</td><td>≤17 Gy</td><td>≤24 Gy; V21.9 ≤5 cc</td><td>≤32 Gy; V30 ≤5 cc</td></tr>
+<tr><td class="b">Brainstem PRV</td><td>—</td><td>≤14 Gy</td><td>≤18 Gy</td><td>≤23 Gy</td></tr>
+<tr><td class="b">Brachial plexus</td><td>17.5 (18.8) Gy</td><td>≤24 Gy</td><td>≤24 Gy; V20.4 ≤3 cc</td><td>≤30.5 Gy; V27 ≤3 cc</td></tr>
+<tr><td class="b">Lumbosacral plexus / sacral roots</td><td>16 (18.8) Gy</td><td>≤24 Gy</td><td>≤24 Gy; V22.5 ≤5 cc</td><td>≤32 Gy; V30 ≤5 cc</td></tr>
+<tr><td class="b">Oesophagus</td><td>15.4 Gy</td><td>≤20 Gy</td><td>≤25.2 Gy</td><td>≤35 Gy</td></tr>
+<tr><td class="b">Heart</td><td>22 Gy</td><td>≤25.1 Gy</td><td>≤30 Gy</td><td>≤38 Gy</td></tr>
+<tr><td class="b">Great vessels</td><td>37 Gy</td><td>≤40 Gy</td><td>≤45 Gy</td><td>≤53 Gy</td></tr>
+<tr><td class="b">Trachea / proximal bronchi</td><td>20.2 Gy</td><td>≤20 Gy</td><td>≤30 Gy</td><td>≤32 Gy</td></tr>
+<tr><td class="b">Lungs</td><td>D1000cc &lt;7.4, D1500cc &lt;7 Gy</td><td>Each lung V5 &lt;35%, V10 &lt;10%, V20 &lt;3%, mean ≤5 Gy</td><td>Combined D1500cc &lt;11.6, D1000cc &lt;12.4 Gy</td><td>Combined D1500cc &lt;12.5, D1000cc &lt;13.5 Gy</td></tr>
+<tr><td class="b">Stomach</td><td>12.4 Gy</td><td>≤20 Gy</td><td>≤22.2 Gy; D10cc ≤16.5 Gy</td><td>≤32 Gy; D10cc ≤25; D50cc ≤12 Gy</td></tr>
+<tr><td class="b">Duodenum</td><td>12.4 Gy</td><td>≤20 Gy</td><td>≤22.2 Gy</td><td>≤32 Gy</td></tr>
+<tr><td class="b">Small bowel</td><td>15.4 Gy</td><td>≤20 Gy</td><td>≤25.2 Gy</td><td>≤35 Gy</td></tr>
+<tr><td class="b">Large bowel / rectum</td><td>18.4 Gy</td><td>≤20 Gy</td><td>≤28.2 Gy</td><td>≤38 Gy</td></tr>
+<tr><td class="b">Bladder</td><td>18.4 Gy</td><td>≤20 Gy</td><td>≤28.2 Gy</td><td>≤38 Gy</td></tr>
+<tr><td class="b">Liver − GTV</td><td>D700cc 9.1 Gy</td><td>Dmax ≤26 Gy; mean ≤8 Gy</td><td>D&gt;700cc ≤17 Gy</td><td>D&gt;700cc ≤21 Gy</td></tr>
+<tr><td class="b">Kidneys</td><td>Cortices D200cc 8.4 Gy</td><td>Each: Dmax ≤26, mean ≤6 Gy</td><td>Combined D&gt;200cc ≤16 Gy; each V10 ≤33%</td><td>Combined D&gt;200cc ≤17.5 Gy; each V10 ≤45%</td></tr>
+<tr><td class="b">Femoral heads</td><td>D10cc 14 Gy</td><td>V19.3 ≤10 cc</td><td>V21.9 ≤10 cc</td><td>V30 ≤10 cc</td></tr>
+<tr><td class="b">Skin</td><td>—</td><td>Dmax ≤26; V24 &lt;10 cc</td><td>Dmax ≤33; V30 &lt;10 cc</td><td>Dmax ≤39.5; V36.5 &lt;10 cc</td></tr>
+</tbody>
+</table>
+<p class="src">1-fraction column: standard (higher-risk) Dmax from the bone/soft tissue protocol (HyTEC spinal cord; Gerhard 2021). Cord values match HyTEC 1–5% myelopathy risk: 12.4–14 Gy/1, 17 Gy/2, 20.3 Gy/3, 23 Gy/4, 25.3 Gy/5 (Sahgal). SC.24 and the national protocol use cord PRV/thecal sac 17 Gy for 24 Gy/2; the national protocol caps oesophagus, bowel, stomach and bronchus at 20 Gy and heart, great vessels and skin at 24 Gy for 2 fractions.</p>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 10</span></div>
+</section>
+
+<!-- ============================ S11 ============================ -->
+<section class="page" id="s11">
+<div class="sechead"><span class="eyebrow">Section 11</span><h2><span class="sectnum">11</span>Names and RayStation implementation</h2></div>
+<table>
+<thead><tr><th style="width:30%">Structure</th><th style="width:28%">Name (TG-263 style)</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV; GTV_preop; GTV_postop</td><td>GTV, GTV_PreOp, GTV_PostOp</td><td>Bone/soft tissue protocol names</td></tr>
+<tr><td class="b">CTV per level; treatment CTV</td><td>CTV_T7; CTV_T6T7T8</td><td>SC.24 convention: contour each level, then join</td></tr>
+<tr><td class="b">CTV high/low (post-fixation bone)</td><td>CTV_HD, CTV_LD</td><td>Bone/soft tissue protocol</td></tr>
+<tr><td class="b">PTV before and after cord crop</td><td>PTV_Unclipped; PTV_2400</td><td>Folder spine protocol: PTV24 = PTVunclipped clipped to cord PRV</td></tr>
+<tr><td class="b">Spinal cord; PRV</td><td>SpinalCord; SpinalCord_PRV02</td><td>Bone/soft tissue protocol uses SpinalCord_02</td></tr>
+<tr><td class="b">Thecal sac (cauda); PRV</td><td>CaudaEquina (thecal sac); CaudaEquina_PRV01</td><td>Protocol names CAUDA, CAUDA_01</td></tr>
+<tr><td class="b">Sacral / lumbosacral roots</td><td>SacralPlex or LumbarPlex (NERVE_ROOTS)</td><td>—</td></tr>
+<tr><td class="b">Brainstem PRV; brachial plexus</td><td>Brainstem_PRV02; BrachialPlex_L/R</td><td>—</td></tr>
+<tr><td class="b">Other OARs</td><td>Esophagus, Heart, GreatVes, Trachea, Bronchus, Lungs, Stomach, Duodenum, Bowel_Small, Bowel_Large, Bladder, Liver, Kidneys, Femur_Head_L/R, Skin</td><td>Add _ITV if moving (4D)</td></tr>
+</tbody>
+</table>
+<p class="src">Local RayStation template and prefixes not in the folder <span class="chk">CHECK</span>.</p>
+<h3>11.1  ROI algebra</h3>
+<div class="stepbox">
+<ol class="steps">
+<li><code>CTV_Tx</code> for each level from the ISRC/Dunne table (manual), plus <code>GTV + 5 mm</code> in the epidural space (minus cord) when epidural disease is present.</li>
+<li><code>CTV</code> = ∪ CTV_Tx (≤3 contiguous levels).</li>
+<li><code>SpinalCord_PRV02</code> = SpinalCord + 2 mm (or CaudaEquina for lumbosacral levels).</li>
+<li><code>PTV_Unclipped</code> = CTV + 2 mm; <code>PTV_2400</code> = PTV_Unclipped − SpinalCord_PRV02.</li>
+<li>Evaluation: PTV D90%, GTV D99%, max ≤140% inside GTV; cord PRV and thecal sac D0.035cc.</li>
+<li>Matching aids: contour the vertebra above and below and the spinal canal.</li>
+</ol>
+</div>
+<h3>11.2  Peer review and QA</h3>
+<ul class="tight">
+<li>SRS planning meeting (Tuesday 07:45) at St George; fortnightly SABR audit (bone/soft tissue protocol).</li>
+<li>Mock-up/collision check before treatment; dose grid ≤1.5 mm (ESTRO) or ≤2.5 mm (SC.24).</li>
+<li>Follow-up: 4–6 weeks clinically; MRI at 3 months, then every 2–3 months to 1 year and 3–6-monthly after (St George); most VCFs occur in the first 4 months.</li>
+</ul>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 11</span></div>
+</section>
+
+<!-- ============================ S12 ============================ -->
+<section class="page" id="s12">
+<div class="sechead"><span class="eyebrow">Section 12</span><h2><span class="sectnum">12</span>References and further guidelines</h2></div>
+<h3>Provided sources (in the folder)</h3>
+<ol class="ref">
+<li>Aren E, Bece A, Clark C, Poder J, Saba A, Schmidt L, Wallace A. Stereotactic body radiotherapy for spinal metastases — protocol. St George Cancer Care Centre, draft v9 (2024).</li>
+<li>Bone and soft tissue metastases SABR protocol, v1.0 (24 Oct 2021); Spine SBRT contouring protocol (folder document).</li>
+<li>Cox BW, Spratt DE, Lovelock M, et al. International Spine Radiosurgery Consortium consensus guidelines for target volume definition in spinal stereotactic radiosurgery. Int J Radiat Oncol Biol Phys 2012;83:e597–e605.</li>
+<li>Redmond KJ, Robertson S, Lo SS, et al. Consensus contouring guidelines for postoperative stereotactic body radiation therapy for metastatic solid tumor malignancies to the spine. Int J Radiat Oncol Biol Phys 2017;97:64–74. doi:10.1016/j.ijrobp.2016.09.014.</li>
+<li>Dunne EM, Sahgal A, Lo SS, et al. International consensus recommendations for target volume delineation specific to sacral metastases and spinal stereotactic body radiation therapy (SBRT). Radiother Oncol 2020;145:21–29.</li>
+<li>Nguyen TK, Chin L, Sahgal A, et al. International multi-institutional patterns of contouring practice and clinical target volume recommendations for SBRT for non-spine bone metastases. Int J Radiat Oncol Biol Phys 2022;112:351–360. doi:10.1016/j.ijrobp.2021.09.004.</li>
+<li>Nguyen TK, Sahgal A, Dagan R, et al. Stereotactic body radiation therapy for nonspine bone metastases: international practice patterns to guide treatment planning. Pract Radiat Oncol 2020;10:e452–e460.</li>
+<li>Guckenberger M, Andratschke N, Belka C, et al. ESTRO clinical practice guideline: stereotactic body radiotherapy for spine metastases. Radiother Oncol 2024;190:109966.</li>
+<li>Sahgal A, Chang JH, Ma L, et al. Spinal cord dose tolerance to stereotactic body radiation therapy (HyTEC). Int J Radiat Oncol Biol Phys 2021;110:124–136.</li>
+<li>CCTG SC.24 / TROG 17.06 protocol (2015, amended 2017). National protocol: SABR for spine oligometastases (Young S, Harper C, Potter A, Porter I, de Leon J; updated 28 Nov 2023).</li>
+</ol>
+<h3>Trials referred to</h3>
+<p class="ref">SC.24 (24 Gy/2 vs 20 Gy/5; Sahgal, Lancet Oncol 2021); SABR-COMET; RTOG 0631; Redmond post-op phase 2. ANZ: TROG 17.06 (SC.24 partner).</p>
+<h3>eviQ protocols (links only)</h3>
+<p class="ref">See the "eviQ protocols" tab on the <a href="../pall-bone-spine.html">bone and spine page</a> (eviQ 4098 spinal bone metastases stereotactic).</p>
+<div class="flag"><span class="lbl">Before clinical use</span> This protocol condenses the sources above in our own words; schematics are original and not to scale. The St George document is a draft (v9). Have a colleague review this page, and confirm items marked CHECK.</div>
+<div class="foot"><span>Spine &amp; Bone SBRT Delineation Protocol · v1.0</span><span>Page 12</span></div>
+</section>
+</body>
+</html>
