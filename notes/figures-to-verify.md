@@ -119,3 +119,8 @@ Sources in folder: FROGG 2020 (Cardoso, JMIRO 64:882–893) and Baumann 2016 pos
 - BC2001/BCON CTV and PTV margins quoted from the bladder site page for comparison (not from a supplied PDF).
 - Department structure names (TG-263 suggestions only; diversion and ostomy bag names non-standard).
 - IBIS post-cystectomy update (Verghote 2022) quoted on ctr-bladder.html was not supplied.
+
+## Clinical scores page (scores.html) and calculators (tools.html)
+- All scoring rules and formulas were entered from memory of the standard definitions, not from supplied sources; each is tagged Verify on the page. Check against the original papers: Child-Pugh, ALBI (Johnson 2015), MELD, Roach formulas, D'Amico, UCSF-CAPRA, CTS5 (Dowsett 2018 coefficients and cut-offs), USC/Van Nuys PI, SINS (Fisher 2010), Mirels, ESCC, RPA (Gaspar 1997), IPI/R-IPI, IPS, Deauville, Sedlis (GOG 92), ProMisE order, mrTRG, ppo-FEV1 segment counts, Cockcroft-Gault/Calvert.
+- Gap calculator defaults (K 0.9 Gy/day, Tk 28 days) need the RCR interruptions guidance.
+- External tools marked "(web search)" have no verified address yet; IBTR! 2.0's original Tufts address may be dead.

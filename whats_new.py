@@ -10,6 +10,7 @@ SITE entry: (date, text, page or '')
 EVIDENCE = [
 ]
 SITE = [
+ ('2026-11-13', 'Clinical scores and nomograms page (Child-Pugh, ALBI, PSA doubling time, Roach, CTS5, SINS and more, with links to external tools); personal-resource disclaimer on every page.', 'scores.html'),
  ('2026-11-13', 'One contouring entry per site: each quick guide is now the "Quick reference" first tab of its full guide.', 'index.html#contouring'),
  ('2026-11-13', 'Site-wide search, "Contour now" view on every contouring guide, copy buttons on tables, pinned pages, calculators, consent numbers and doses-at-a-glance pages; installable as an app with offline use.', 'tools.html'),
  ('2026-11-13', 'Contouring pages renamed "contouring guides" and shown in the normal site layout; thorax quick guide and lung guide merged into one Thorax guide.', 'contouring/thorax.html'),

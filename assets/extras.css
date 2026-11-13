@@ -47,3 +47,6 @@ body.cn .panel{gap:8px;margin-bottom:14px}
   .card{break-inside:avoid;border-color:#bbb}
   .panel{gap:6px}
 }
+
+footer.disclaimer p{border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:0 8px 8px 0;padding:8px 12px;background:var(--panel);color:var(--ink)}
+.calc select{appearance:auto}
