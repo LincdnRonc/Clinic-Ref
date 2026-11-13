@@ -87,8 +87,26 @@ def tools_bar(gid):
     t,l = _SCORETAB[gid]
     return f'<p class="xref"><b>Calculators:</b> <a href="scores.html#{t}">{l} scores and nomograms</a> · <a href="tools.html">EQD2, BED and re-irradiation</a></p>'
 DISCLAIMER = '<footer class="disclaimer"><p><b>Personal resource, not for distribution.</b> This site is the author\'s personal working reference. Every effort is made to keep it accurate, but it may contain errors or be out of date. Anyone else who uses it must exercise their own clinical judgement and independently verify all information, including doses, volumes, constraints, scores and calculator results, against primary sources and local protocols. It is not medical advice and not a medical device.</p></footer>'
+STAGERS = {'breast':'Breast (AJCC 8 anatomic stage)','lung':'Lung (TNM 9th edition)','prostate':'Prostate (AJCC 8)','crc':'Colon and rectum (AJCC 8)','anal':'Anal canal (AJCC 8)',
+ 'oes_scc':'Oesophagus, squamous (AJCC 8 clinical)','oes_ac':'Oesophagus, adenocarcinoma (AJCC 8 clinical)','gastric':'Stomach (AJCC 8 clinical)','pancreas':'Pancreas (AJCC 8)','hcc':'Hepatocellular carcinoma (AJCC 8)',
+ 'hn':'Oral cavity, larynx, hypopharynx, p16-negative oropharynx (AJCC 8)','opc':'Oropharynx, p16-positive (AJCC 8 clinical)','npc':'Nasopharynx (AJCC 8)','bladder':'Bladder (AJCC 8)','kidney':'Kidney (AJCC 8)',
+ 'cervix':'Cervix (FIGO 2018)','endo':'Endometrium (FIGO 2009)','lugano':'Lymphoma (Lugano)'}
+STAGE_PAGES = {'breast-early.html':['breast'],'breast-nodes-pmrt.html':['breast'],'breast-planning.html':['breast'],'thorax-early.html':['lung'],'thorax-stage3.html':['lung'],'thorax-sclc.html':['lung'],
+ 'gu-prostate.html':['prostate'],'gu-bladder.html':['bladder'],'gu-kidney.html':['kidney'],'gi-oesophagus-gastric.html':['oes_scc','oes_ac','gastric'],'gi-pancreas.html':['pancreas'],'gi-hepatobiliary.html':['hcc'],
+ 'gi-rectum-colon.html':['crc'],'gi-anal.html':['anal'],'gyn-cervix.html':['cervix'],'gyn-endometrial.html':['endo'],'hn-oropharynx.html':['opc','hn'],'hn-larynx.html':['hn'],'hn-oral-salivary.html':['hn'],
+ 'hn-npc-sinonasal.html':['npc'],'hn-general.html':['hn','opc','npc'],'heme-hodgkin.html':['lugano'],'heme-nhl.html':['lugano'],'scores.html':list(STAGERS)}
+def stage_panel(f):
+    ids = STAGE_PAGES.get(f)
+    if not ids: return ''
+    cards_ = ''.join(f'<article class="card{" key" if i==0 else ""}" data-title="{html.escape(STAGERS[k])}"><h3>{html.escape(STAGERS[k])}</h3><div data-stage="{k}"></div></article>' for i,k in enumerate(ids))
+    return f'''
+<section class="panel" id="p-staging" data-tab="staging" data-label="Auto-staging" hidden>
+  <div class="panel-head"><h2>Auto-staging</h2><p class="lede">Choose the T, N and M categories (or findings) to read the stage group. A cross-check, not a substitute for the staging manual: T definitions are abbreviated.</p><div class="jump"></div></div>
+  {cards_}
+</section>
+<script src="assets/staging.js"></script>'''
 def page(f, short, long, desc, group, gname, gid, foot):
-    body = (root/'src'/f).read_text() + eviq_panel(f)
+    body = (root/'src'/f).read_text() + stage_panel(f) + eviq_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
     title = f'{long} Quick Reference'
     site = CTR_SITE.get(f, gid)
@@ -284,7 +302,7 @@ CNAV += SOFTWARE
 # ---------------- Tools: calculators, consent numbers, doses at a glance, what's new ----------------
 TOOLS = [
  ('tools.html','Calculators','Calculators and tools','EQD2 and BED, cumulative dose across courses, treatment gap, and links to re-irradiation tools and SABR constraint tables.'),
- ('scores.html','Clinical scores','Clinical scores and nomograms','Child-Pugh, ALBI, MELD, PSA doubling time, Roach, CAPRA, CTS5, Van Nuys, SINS, Mirels, RPA, IPI, Sedlis, brachytherapy EQD2 and more, with links to MSKCC, PREDICT, GPA and other external tools.'),
+ ('scores.html','Clinical scores','Clinical scores and nomograms','Auto-staging for 18 sites, Child-Pugh, ALBI, MELD, PSA doubling time, Roach, CAPRA, CTS5, Van Nuys, SINS, Mirels, RPA, IPI, Sedlis, brachytherapy EQD2 and more, with links to MSKCC, PREDICT, GPA and other external tools.'),
  ('consent.html','Consent numbers','Consent numbers by site','The toxicity rates to quote, gathered from every tumour-site page. Print one site as a sheet.'),
  ('doses.html','Doses at a glance','Doses at a glance','Dose and fractionation cards from every tumour-site page in one place.'),
  ('whats-new.html',"What's new","What's new",'New evidence and landmark trials by tumour site, and changes to this site.'),
@@ -452,7 +470,7 @@ for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.ht
             _x = re.sub(r'\s+',' ',_c.get_text(' ',strip=True))
             _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', _x])
 (root/'assets'/'search-index.js').write_text('window.QR_INDEX=' + _json.dumps(_idx, ensure_ascii=False, separators=(',',':')) + ';')
-_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
+_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
 (root/'manifest.webmanifest').write_text(_json.dumps({'name':'Radiation Oncology Quick Reference','short_name':'RadOnc QR','start_url':'./index.html','scope':'./','display':'standalone','background_color':'#f3f5f6','theme_color':'#10243f','icons':[{'src':'assets/icon-192.png','sizes':'192x192','type':'image/png'},{'src':'assets/icon-512.png','sizes':'512x512','type':'image/png','purpose':'any maskable'}]}, indent=1))
 _ver = _hl.md5(''.join((root/x).read_text(errors='ignore') if not x.endswith('.png') else x for x in _files+_assets).encode()).hexdigest()[:10]
 (root/'sw.js').write_text("""// Generated by build.py. Network first (2.5 s), then the offline copy.
