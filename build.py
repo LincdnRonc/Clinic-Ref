@@ -44,7 +44,7 @@ def eviq_panel(f):
 '''
 CTR_SITE = {'ctr-breast.html':'breast','ctr-thorax.html':'thorax','ctr-hn.html':'hn','ctr-skin.html':'hn','ctr-cns.html':'cns','ctr-peds.html':'cns',
  'ctr-upper-gi.html':'gi','ctr-anal.html':'gi','ctr-gyn.html':'gyn','ctr-heme.html':'heme','ctr-sarcoma.html':'sarcoma','ctr-spine.html':'pall',
- 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/bladder.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/lung.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','contouring/oesophagus.html':'gi','contouring/breast.html':'breast','contouring/gynae.html':'gyn','contouring/anal.html':'gi','contouring/spine-bone.html':'pall','contouring/cns.html':'cns','contouring/head-neck.html':'hn','contouring/lymphoma.html':'heme','ctr-library.html':'contouring','ctr-mim.html':'contouring','ctr-monaco.html':'contouring'}
+ 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/bladder.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/thorax.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','contouring/oesophagus.html':'gi','contouring/breast.html':'breast','contouring/gynae.html':'gyn','contouring/anal.html':'gi','contouring/spine-bone.html':'pall','contouring/cns.html':'cns','contouring/head-neck.html':'hn','contouring/lymphoma.html':'heme','ctr-library.html':'contouring','ctr-mim.html':'contouring','ctr-monaco.html':'contouring'}
 def _ds(f): return f' data-site="{CTR_SITE[f]}"' if f in CTR_SITE else ''
 def sitenav(current, group):
     links = ['<a href="index.html">Home</a>']
@@ -211,14 +211,15 @@ def _link(l):
     if l.startswith('doi:'): return f'https://doi.org/{l[4:]}', 'DOI'
     if l.startswith('q:'): return 'https://pubmed.ncbi.nlm.nih.gov/?term='+quote_plus(l[2:]), 'PubMed search'
     return l, 'Website'
+LIB_FULL = [('contouring/thorax.html','Thorax','Thorax contouring protocol','',('thorax',))]
 def build_library():
     out=[]
     for i,(tid,label,lede,cards_) in enumerate(LIB):
         h=' hidden' if i else ''
         out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <div class="jump"></div>\n  </div>')
-        prot = [c for c in CONTOUR if tid in c[4]]
+        prot = [c for c in CONTOUR if tid in c[4]] + [c for c in LIB_FULL if tid in c[4]]
         if prot:
-            out.append('  <article class="card key" data-title="Our quick protocols"><h3>Our quick protocols</h3><ul class="eviq">'+''.join(f'<li><a href="{f}">{html.escape(long)}</a></li>' for f,short,long,desc,tags in prot)+'</ul></article>')
+            out.append('  <article class="card key" data-title="Our protocols"><h3>Our protocols</h3><ul class="eviq">'+''.join(f'<li><a href="{f}">{html.escape(long)}</a></li>' for f,short,long,desc,tags in prot)+'</ul></article>')
         for title,entries in cards_:
             lis=[]
             for yr,t,cite,note,l,star in sorted(entries,key=lambda e:not e[5]):
@@ -234,7 +235,6 @@ def build_library():
 CONTOUR = [
  ('ctr-library.html','Library','Contouring guideline library','Every major international contouring guideline and atlas by tumour site, old and new, with links.',()),
  ('ctr-breast.html','Breast','Breast contouring protocol','ESTRO breast, chest wall and nodal borders, tumour bed, implant reconstruction, cardiac OARs.',('breast',)),
- ('ctr-thorax.html','Thorax','Thorax contouring protocol','LA-NSCLC GTV/CTV/ITV, PORT stations, SBRT, SCLC and thoracic OAR definitions.',('thorax',)),
  ('ctr-hn.html','H&N','Head and neck contouring protocol','5 + 5 mm CTV-P, neck levels I–X landmarks, level selection, post-op, PNI and OARs.',('hn',)),
  ('ctr-cns.html','CNS','CNS contouring protocol','Glioblastoma (15 mm CTV), IDH-mutant glioma, meningioma and skull base, cavity SRS, hippocampus.',('cns',)),
  ('ctr-upper-gi.html','Upper GI','Upper GI contouring protocol','Oesophagus/GEJ margins, gastric nodal stations, post-op and SBRT pancreas, abdominal OARs.',('gi',)),
@@ -256,7 +256,7 @@ CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
  ('contouring/spine-bone.html','Spine & bone SBRT','Spine and bone SBRT contouring protocol','St George selection and workflow, ISRC sector CTV table, post-op spine, sacrum (Dunne), non-spine bone and soft tissue, re-irradiation cord limits, 1–5 fraction constraints.'),
  ('contouring/head-neck.html','Head & neck','Head and neck contouring protocol','Neck level border tables (Grégoire 2014), 5 + 5 mm primary CTV, Biau 2019 level selection, DAHANCA post-op, PATHOS, NPC 2024 dose levels, HNCIG cSCC, PNI pathways, DAHANCA constraints.'),
  ('contouring/lymphoma.html','Lymphoma ISRT','Lymphoma ISRT contouring protocol','ILROG pre- and post-chemo GTV, ISRT CTV for indolent, early HL/DLBCL, mediastinal, advanced and extranodal disease, doses, mini-atlas margins.'),
- ('contouring/lung.html','Lung','Lung contouring protocol','SABR peripheral, central and ultracentral; stage III definitive; PORT; IASLC station borders and landmarks; OARs and constraints.'),
+ ('contouring/thorax.html','Thorax','Thorax contouring protocol','Lung SABR (peripheral, central, ultracentral), stage II–III definitive, PORT, limited-stage SCLC, IASLC station borders and landmarks, thoracic OAR definitions and constraints.'),
  ('contouring/prostate.html','Prostate','Prostate contouring protocol','Intact prostate and SVs, prostate bed, NRG pelvic nodes, CT vs MRI apex/base pearls, IGRT, OARs.'),
  ('contouring/bladder.html','Bladder','Bladder contouring protocol','Bladder preservation (FROGG 2020): whole-bladder CTV and extension rules, high-risk CTV and escalation, nodes, PTV and plan of the day; post-cystectomy bed and nodal borders (Baumann/NRG-GU001); constraints.'),
  ('contouring/rectal-long-course.html','Rectum','Rectal long-course atlas','Elective compartments and borders, GTV criteria, 45 vs 50–54 Gy volumes.'),
@@ -283,6 +283,16 @@ for f,short,long,desc in CNAV:
     srcp = root/'src'/f
     if not srcp.exists(): continue
     (root/f).write_text(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR))
+# Retired URLs: lung protocol and thorax quick protocol merged into contouring/thorax.html
+def _redirect(path, target, tabmap=None):
+    tm = repr(tabmap or {}).replace("'", '"')
+    (root/path).write_text(f'''<!DOCTYPE html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved</title>
+<meta http-equiv="refresh" content="0; url={target}">
+<script>var m={tm};var h=location.hash.slice(1);location.replace("{target}"+(h?"#"+(m[h]||h):""));</script>
+</head><body><p>This page has moved to <a href="{target}">the thorax contouring protocol</a>.</p></body></html>
+''')
+_redirect('contouring/lung.html', 'thorax.html')
+_redirect('ctr-thorax.html', 'contouring/thorax.html', {'nsclc':'s3','sbrt':'s2','oar':'s8'})
 for gid,gname,_,pages,foot in GROUPS:
     for g in pages:
         (root/g[0]).write_text(page(*g, pages, gname, gid, foot))

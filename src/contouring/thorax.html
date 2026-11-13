@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lung Cancer Radiotherapy Target Volume Delineation Protocol</title>
+<title>Thorax Target Volume Delineation Protocol</title>
 <style>
   :root{
     --navy:#10243f; --navy2:#1d3a5f;
@@ -124,12 +124,12 @@
   .zone{font-weight:700;}
 </style>
 <style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #2b7a3e}</style></head>
-<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../thorax-early.html" style="color:#9fe0d6;text-decoration:none">Early-stage / SABR page</a><a href="../thorax-stage3.html" style="color:#9fe0d6;text-decoration:none">Stage III &amp; PORT page</a><a href="../ctr-thorax.html" style="color:#9fe0d6;text-decoration:none">Thorax quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../thorax-early.html" style="color:#9fe0d6;text-decoration:none">Early-stage / SABR page</a><a href="../thorax-stage3.html" style="color:#9fe0d6;text-decoration:none">Stage III &amp; PORT page</a><a href="../thorax-sclc.html" style="color:#9fe0d6;text-decoration:none">Small cell page</a><a href="../thorax-other.html" style="color:#9fe0d6;text-decoration:none">Thymic, meso &amp; other page</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
 <!-- ============================ PAGE 1 : COVER ============================ -->
 <section class="page">
 <div class="masthead">
 <span class="eyebrow">Departmental Contouring Protocol · Thoracic Radiation Oncology</span>
-<h1>Lung Cancer Radiotherapy — Target Volume Delineation Protocol</h1>
+<h1>Thorax — Target Volume Delineation Protocol</h1>
 <p class="sub">One reference for the three curative lung settings: <b>SABR</b> (peripheral, chest-wall-adjacent, central and ultracentral), <b>definitive (chemo)radiotherapy</b> for stage II–III NSCLC, and <b>post-operative radiotherapy</b> (R1/R2 and pN2). Mediastinal and hilar nodal stations are defined on CT with their landmarks, using the IASLC map as drawn by Lynch 2013.</p>
 <div class="pillrow">
 <span class="pill p-gtv">GTV / iGTV</span>
@@ -156,6 +156,7 @@
 <tr><td class="n">3</td><td><a href="#s3">Scenario B — Definitive RT / chemoRT for stage II–III NSCLC</a></td><td class="pg">6</td></tr>
 <tr><td class="n">4</td><td><a href="#s4">Mediastinal and hilar nodal stations: CT borders and landmarks</a></td><td class="pg">9</td></tr>
 <tr><td class="n">5</td><td><a href="#s5">Scenario C — Post-operative RT (R1/R2 and pN2)</a></td><td class="pg">12</td></tr>
+<tr><td class="n">5b</td><td><a href="#s5b">Limited-stage small cell lung cancer</a></td><td class="pg">14</td></tr>
 <tr><td class="n">6</td><td><a href="#s6">Pearls and common errors</a></td><td class="pg">14</td></tr>
 <tr><td class="n">7</td><td><a href="#s7">Dose, fractionation, CTV–PTV margins, plan evaluation and IGRT</a></td><td class="pg">15</td></tr>
 <tr><td class="n">8</td><td><a href="#s8">Organs at risk and dose constraints</a></td><td class="pg">17</td></tr>
@@ -177,12 +178,12 @@
 </table>
 <div class="flag"><span class="lbl">Not in the folder</span> Guckenberger 2017 ESTRO-ACROP SBRT guideline (starred on the checklist) and the RTOG thoracic OAR / heart atlas PDFs were not reviewed; SABR volume rules here come from the departmental protocol and the NRG template instead. The departmental protocol used throughout is the Liverpool/Macarthur V4 document (2024).</div>
 <p class="small" style="margin-top:10px;">Version 1.0 · Educational departmental reference written in our own words; no atlas images are reproduced (all figures are original schematics). Clinical judgement, institutional policy and current guideline versions take precedence. Have a colleague review before clinical use.</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 1</span></div>
 </section>
 <!-- ============================ SECTION 1 ============================ -->
 <section class="page" id="s1">
 <div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, simulation, 4D-CT and imaging</h2></div>
-<p>Covers photon EBRT for primary NSCLC and lung oligometastases treated with SABR, definitive conventional or moderately hypofractionated RT, and post-operative RT. SCLC volumes are in the <a href="../ctr-thorax.html#sbrt">thorax quick protocol</a> (Levy 2026); SCLC doses and constraints from the departmental protocol are listed in Sections 7–8 for completeness. Palliative volumes are summarised in Section 7.</p>
+<p>Covers photon EBRT for primary NSCLC and lung oligometastases treated with SABR, definitive conventional or moderately hypofractionated RT, and post-operative RT. Limited-stage SCLC volumes are summarised in <a href="#s5b">Section 5b</a> (Levy 2026); SCLC doses and constraints from the departmental protocol are listed in Sections 7–8 for completeness. Palliative volumes are summarised in Section 7.</p>
 <h3>1.1  Before simulation</h3>
 <ul class="tight">
 <li><b>MDT and work-up.</b> All patients discussed at the lung MDT. Definitive RT needs pulmonary function tests; there is no PFT cut-off that excludes treatment. Interstitial lung disease carries a high pneumonitis risk; estimate ILD mortality with the ILD-GAP index and weigh it against cancer mortality (Dept V4).</li>
@@ -221,7 +222,7 @@
 </tbody>
 </table>
 <div class="callout"><span class="lbl">Naming and colours</span><p style="margin:4px 0 0;">Departmental: GTVs blue, CTVs green, ITV yellow, PTV red; registrar drafts prefixed <code>REG</code> and deleted before approval; doses written in Gy (Dept V4). TG-263 equivalents are in Section 9.</p></div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 2</span></div>
 </section>
 
 <!-- ============================ SECTION 2 : SABR ============================ -->
@@ -301,7 +302,7 @@
 </tbody>
 </table>
 <p class="src">60 Gy/15 # for ultracentral or SABR-unsuitable early tumours uses the same volumes (motion margin only, no microscopic margin), as in LUSTRE (Dept V4).</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 3</span></div>
 </section>
 <section class="page">
 <h3>2.4  Edge-by-edge rules for the SABR GTV</h3>
@@ -359,7 +360,7 @@
 <li>Save the session as <code>RO_FINAL</code> with the planning CT (not the 4D-CT) as the associated series.</li>
 </ol></div>
 <p class="src">Steps 5–9 follow the departmental MIM 4D ITV work instruction (2018); steps 1–4 combine Dept V4 contouring tips and NRG.</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 4</span></div>
 </section>
 <section class="page">
 <h3>2.6  Central and ultracentral tumours</h3>
@@ -389,7 +390,7 @@
 <li><b>Lung DVH.</b> Subtract GTV_EVAL only, not the PTV (Dept V4; Kong 2011).</li>
 <li><b>Lower-lobe tumours</b> need a pre-treatment mock-up; check beam clearance for all patients (Dept V4).</li>
 </ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 5</span></div>
 </section>
 
 <!-- ============================ SECTION 3 : DEFINITIVE ============================ -->
@@ -449,7 +450,7 @@
 </table>
 </div>
 </div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 6</span></div>
 </section>
 <section class="page">
 <h3>3.4  Microscopic margin: guideline against department</h3>
@@ -496,7 +497,7 @@
 <li><b>Nodes:</b> include every initially involved node or station from pre-chemo clinical, pathological and imaging information, even if the node has disappeared (Nestle "M"). Helper: GTVn_PRECX.</li>
 <li>The same principle (post-chemo primary, pre-chemo nodes) applies to limited-stage SCLC (Dept V4).</li>
 </ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 7</span></div>
 </section>
 <section class="page">
 <h3>3.6  Step by step, cranial → caudal</h3>
@@ -526,7 +527,7 @@
 <li>Neoadjuvant 46 Gy/23 # for stage II–III (Dept V4). Draw the ipsilateral brachial plexus (Section 8.1) and the vertebral body.</li>
 <li>Hypofractionated 60 Gy/15 # is not used when the brachial plexus would receive the full dose (Dept V4).</li>
 </ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 8</span></div>
 </section>
 
 <!-- ============================ SECTION 4 : NODAL STATIONS ============================ -->
@@ -592,7 +593,7 @@
 </figure>
 </div>
 </div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 9</span></div>
 </section>
 <section class="page">
 <h3>4.2  Border table, stations 1–6</h3>
@@ -609,7 +610,7 @@
 <tr><td class="b">6<br><span class="small">para-aortic</span></td><td>Top of aortic arch</td><td>Lower border of aortic arch (meets 5)</td><td>Horizontal line from the front of the arch (meets 3a)</td><td>Between the arch and the pleura</td><td>Nodes in front of and lateral to the ascending aorta and arch</td></tr>
 </tbody>
 </table>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 10</span></div>
 </section>
 <section class="page">
 <h3>4.3  Border table, stations 7–11</h3>
@@ -635,7 +636,7 @@
 </tbody>
 </table>
 <p class="src">Lung ART wording, following the IASLC minimum: at least 3 hilar/intrapulmonary nodes and at least 3 mediastinal stations. Use this to judge whether the pathology report explored the stations at risk before building a station-based PORT CTV (Section 5). Lung ART also required stations 11–13 removed en bloc and each station submitted separately.</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 11</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 11</span></div>
 </section>
 
 <!-- ============================ SECTION 5 : PORT ============================ -->
@@ -672,7 +673,7 @@
 </tbody>
 </table>
 <div class="callout"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">Lung ART station selection, rCTV and CTV (they contain the Nestle set), drawn on the IASLC borders in Section 4; motion handled by the department 4D approach, with the PTV set from 4D-CT and IGRT data (department adjuvant range 0.5–1 cm).</p></div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 12</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 12</span></div>
 </section>
 <section class="page">
 <h3>5.4  CTV stations and limits by involved station (Lung ART)</h3>
@@ -744,10 +745,32 @@
 <li><b>After pneumonectomy</b> the remaining lung tolerates much less: departmental V20 &lt;10% and MLD &lt;8 Gy against &lt;30% and &lt;15 Gy after lobectomy (Section 8).</li>
 <li><b>Downstaged nodes.</b> Stations involved before neoadjuvant chemo stay in the rCTV (Lung ART).</li>
 </ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 13</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 13</span></div>
 </section>
 
 <!-- ============================ SECTION 6 : PEARLS ============================ -->
+<!-- ============================ S5b : SCLC (merged from the thorax quick protocol) ============================ -->
+<section class="page" id="s5b">
+<div class="sechead"><span class="eyebrow">Section 5b · Scenario D</span><h2><span class="sectnum">5b</span>Limited-stage small cell lung cancer</h2></div>
+<p>Merged from the former thorax quick protocol. The newest guideline is the ESTRO-EORTC SCLC delineation guideline (Levy 2026, <a href="https://pubmed.ncbi.nlm.nih.gov/41932500/">PMID 41932500</a>); it is not in the folder, so this section is a short summary <span class="chk">CHECK</span> against the paper before use.</p>
+<h3>5b.1  Volumes</h3>
+<table>
+<thead><tr><th style="width:22%">Volume</th><th>Rule</th></tr></thead>
+<tbody>
+<tr><td class="b">Primary (GTVp)</td><td>The post-chemotherapy volume when chemotherapy comes first</td></tr>
+<tr><td class="b">Nodes (GTVn / CTVn)</td><td>The nodal stations involved before chemotherapy, even if they have responded</td></tr>
+<tr><td class="b">Elective nodes</td><td>Not recommended; PET-CT staging is assumed</td></tr>
+<tr><td class="b">Motion, CTV, PTV</td><td>As for NSCLC (Sections 1, 3 and 7): 4D-CT ITV, departmental CTV and PTV margins</td></tr>
+</tbody>
+</table>
+<h3>5b.2  Points to check</h3>
+<ul class="tight">
+<li>Read Levy 2026 for the nodal rules after induction chemotherapy before relying on this summary.</li>
+<li>Use the IASLC station borders in <a href="#s4">Section 4</a> to draw the involved stations.</li>
+<li>Departmental SCLC doses (45 Gy/30 twice daily, 60 Gy/30 or 40.05 Gy/15) and constraints: Sections 7–8 and the <a href="../thorax-sclc.html">small cell page</a>.</li>
+</ul>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 14</span></div>
+</section>
 <section class="page" id="s6">
 <div class="sechead"><span class="eyebrow">Section 6</span><h2><span class="sectnum">6</span>Pearls and common errors</h2></div>
 <p class="small" style="margin-top:-2px;">Teaching points drawn from the supplied sources; each names where it comes from.</p>
@@ -779,7 +802,7 @@
 <tr><td class="b">Spinal canal extent</td><td>Kong 2011: from the level of the cricoid to the bottom of L2 (RTOG trials used 10 cm beyond the PTV). Dept V4: "10 mm" above and below the PTV.</td><td>Whole canal through the CT range. <span class="chk">CHECK</span> departmental "10 mm" (likely 10 cm).</td></tr>
 </tbody>
 </table>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 14</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 14</span></div>
 </section>
 <!-- ============================ SECTION 7 : DOSE / MARGINS / IGRT ============================ -->
 <section class="page" id="s7">
@@ -814,7 +837,7 @@
 <tr><td class="b">Palliative</td><td colspan="2">ITVDOSE = GTV + 8–10 mm</td><td>5–10 mm</td><td>Dept V4</td></tr>
 </tbody>
 </table>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 15</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 15</span></div>
 </section>
 <section class="page">
 <h3>7.3  Plan evaluation</h3>
@@ -875,7 +898,7 @@
 <tr><td class="b">Replanning</td><td colspan="2">For tumour shrinkage, atelectasis change or effusion: deform the original contours in MIM, edit, old contours prefixed PREV; new prescription RP1, RP2 (Dept V4). Adaptive replanning advised case by case for baseline shifts or intrathoracic change (Nestle 2018).</td></tr>
 </tbody>
 </table>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 16</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 16</span></div>
 </section>
 
 <!-- ============================ SECTION 8 : OARS ============================ -->
@@ -899,7 +922,7 @@
 </tbody>
 </table>
 <p class="src">For conventional and moderately hypofractionated RT the mandatory OARs are lungs (separately and together, minus GTV), whole heart, oesophagus and spinal canal; trachea, PBT, great vessels and chest wall are not needed (Nestle 2018). OARs are drawn by RTs on the average scan except where the department assigns them to the RO (Dept V4).</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 17</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 17</span></div>
 </section>
 <section class="page">
 <h3>8.2  SABR constraints (department V4, eviQ-based)</h3>
@@ -934,7 +957,7 @@
 </tbody>
 </table>
 <p class="src">Diez 2022, Table 2. *If not achievable, drop 60 Gy to 50 Gy. Chest-wall and skin limits are optimal only; consent for higher risk if not met. <span class="chk">CHECK</span> skin column placement against the original table (transcribed from a two-column PDF).</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 18</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 18</span></div>
 </section>
 <section class="page">
 <h3>8.4  Conventional and hypofractionated constraints (department V4; per protocol / major variation)</h3>
@@ -1000,7 +1023,7 @@
 <p class="src">Lung ART limits for comparison: cord max 45 Gy; lung V20 (lungs minus PTV) ≤31% after lobectomy, ≤22% after pneumonectomy; heart V35 ≤30%; record mean and maximum oesophageal dose.</p>
 </div>
 </div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 19</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 19</span></div>
 </section>
 <section class="page">
 <h3>8.5  Radical re-irradiation (department V4, from Rulach 2021 survey)</h3>
@@ -1018,7 +1041,7 @@
 </tbody>
 </table>
 <p class="src">Limits assume a 6–12 month interval and OARs at tolerance after the first course. Convert the first-course OAR maximum to EQD2, subtract from the cumulative limit, then convert what remains to the new fractionation; record the calculation in MOSAIQ and check the combined EQD2 plan in RayStation with physics (Dept V4). Worked example in the department protocol: cord max 35 Gy in 30 # (EQD2 27.7 Gy) leaves 32.3 Gy; 30 Gy/10 # with cord max 27 Gy gives EQD2 31.7 Gy.</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 20</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 20</span></div>
 </section>
 
 <!-- ============================ SECTION 9 : IMPLEMENTATION ============================ -->
@@ -1070,7 +1093,7 @@
 <li>All definitive, adjuvant and SABR volumes peer reviewed at the weekly lung audit with live RANZCR audit-tool entry; SABR plans peer reviewed before treatment (Dept V4).</li>
 <li>If contouring in RayStation instead of MIM, reproduce the same steps: contour on the 50% phase, deformably propagate to every phase, union, and check each phase. <span class="chk">CHECK</span> the local RayStation 4D workflow with physics.</li>
 </ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 21</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 21</span></div>
 </section>
 <!-- ============================ SECTION 10 : REFERENCES ============================ -->
 <section class="page" id="s10">
@@ -1121,7 +1144,7 @@
 <li>UK 2022 skin column placement; final TG-263 names with physics; local RayStation 4D workflow.</li>
 </ul>
 </div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 22</span></div>
+<div class="foot"><span>Thorax RT Delineation Protocol · v1.1</span><span>Page 22</span></div>
 </section>
 </body>
 </html>
