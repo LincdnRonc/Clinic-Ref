@@ -94,3 +94,9 @@
 - Baumert 2025 margins now verified from the paper (G2 GTV + 10 mm, G3 + 15 mm, PTV ≤3 mm; 50.4/28 and 59.4/33).
 - Not in folder: Combs 2021 ESTRO-ACROP skull base (pituitary, craniopharyngioma, skull-base meningioma), EORTC 1308, grade 1 intact meningioma margins.
 - RTOG 0539 and EORTC 22042 volumes taken from the ARRO case slides, not the protocols themselves.
+
+## Head and neck protocol (contouring/head-neck.html)
+- No departmental H&N protocol in the folder; page follows DAHANCA 2018 / Grégoire 2014 & 2018 / Biau 2019; local PTV margins, IGRT and naming to confirm.
+- Biau 2019 node-positive CTV-N-HR = GTV-N + 5 mm now verified (clears the quick-protocol check).
+- Evans 2025 ESTRO post-op oral cavity not in folder; folder items not yet used: trigeminal atlas 2018, PNS guideline 2018, parotid pathways 2022, ESTRO base of skull 2021, ASTRO oropharynx.
+- NPC Ib indications and CTVp_50 structure list summarised, not reproduced in full (see Lin 2025 Table 1/E1).
