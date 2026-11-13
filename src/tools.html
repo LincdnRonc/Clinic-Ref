@@ -1,0 +1,95 @@
+<section class="panel" id="p-eqd2" data-tab="eqd2" data-label="EQD2 &amp; BED">
+  <div class="panel-head">
+    <h2>EQD2 and BED</h2>
+    <p class="lede">Linear-quadratic model: BED = D × (1 + d / α/β); EQD2 = D × (d + α/β) / (2 + α/β). For education and cross-checking only. Verify every result independently.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Single schedule">
+    <h3>Single schedule</h3>
+    <div class="calc">
+      <label>Total dose (Gy)<input id="c1D" type="number" inputmode="decimal" step="any" value="40"></label>
+      <label>Fractions<input id="c1n" type="number" inputmode="numeric" step="1" value="15"></label>
+      <label>α/β (Gy)<input id="c1ab" type="number" inputmode="decimal" step="any" value="3"></label>
+      <label>Convert to this many fractions (optional)<input id="c1n2" type="number" inputmode="numeric" step="1" value=""></label>
+    </div>
+    <div class="calcout" id="c1out"></div>
+    <p class="note">The model is less reliable at very high doses per fraction (SABR/SRS) and ignores overall time and incomplete repair between twice-daily fractions.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-cumulative" data-tab="cumulative" data-label="Cumulative dose" hidden>
+  <div class="panel-head">
+    <h2>Cumulative dose across courses</h2>
+    <p class="lede">Converts each course to EQD2 with the same α/β and adds them. Enter the dose the organ received (a point dose such as D0.1cc), not the prescription. This gives point-dose arithmetic only: no spatial information.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Cumulative EQD2">
+    <h3>Cumulative EQD2</h3>
+    <div class="calc">
+      <label>α/β (Gy)<input id="c2ab" type="number" inputmode="decimal" step="any" value="2"></label>
+      <label>Cumulative EQD2 limit (Gy, optional)<input id="c2lim" type="number" inputmode="decimal" step="any" value=""></label>
+      <label>Fractions planned for the new course (optional)<input id="c2n5" type="number" inputmode="numeric" step="1" value=""></label>
+    </div>
+    <div class="tw"><table class="courses">
+      <tr><th>Course</th><th>Dose to organ (Gy)</th><th>Fractions</th><th>Recovery discount (%)</th></tr>
+      <tr><td>1</td><td><input id="c2D1" type="number" inputmode="decimal" step="any"></td><td><input id="c2n1" type="number" inputmode="numeric"></td><td><input id="c2r1" type="number" inputmode="decimal" step="any"></td></tr>
+      <tr><td>2</td><td><input id="c2D2" type="number" inputmode="decimal" step="any"></td><td><input id="c2n2" type="number" inputmode="numeric"></td><td><input id="c2r2" type="number" inputmode="decimal" step="any"></td></tr>
+      <tr><td>3</td><td><input id="c2D3" type="number" inputmode="decimal" step="any"></td><td><input id="c2n3" type="number" inputmode="numeric"></td><td><input id="c2r3" type="number" inputmode="decimal" step="any"></td></tr>
+      <tr><td>4</td><td><input id="c2D4" type="number" inputmode="decimal" step="any"></td><td><input id="c2n4" type="number" inputmode="numeric"></td><td><input id="c2r4" type="number" inputmode="decimal" step="any"></td></tr>
+    </table></div>
+    <div class="calcout" id="c2out"></div>
+    <p class="note">No limits or recovery values are built in: take them from the source you are following. Re-irradiation cord limits (Sahgal) are in the <a href="contouring/spine-bone.html#s6">spine and bone SBRT guide</a>; thoracic re-irradiation limits are in the <a href="contouring/thorax.html#s8">thorax guide</a>.</p>
+  </article>
+  <article class="card" data-title="Tim Wang's OAR dose limit calculator">
+    <h3>Tim Wang's OAR dose limit calculator</h3>
+    <p>For a full re-irradiation check, use <a href="https://oardoselimitcalculator.netlify.app/" target="_blank" rel="noopener"><b>OAR Dose Limit Calculator (EQD2 &amp; BED re-irradiation tool)</b></a> by A/Prof Tim Wang. It takes up to three previous courses, applies a repair discount (0, 25, 33 or 50%), checks the cumulative dose against a library of organ limits (QUANTEC, HyTEC and others), and gives the remaining EQD2, the permissible dose for the planned course and text for the plan note.</p>
+    <p class="note">Its own stated limits: point-dose estimates only, no spatial dose information; it does not replace image registration and cumulative dose-volume assessment. Needs an internet connection.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-gap" data-tab="gap" data-label="Treatment gap" hidden>
+  <div class="panel-head">
+    <h2>Unscheduled treatment gap</h2>
+    <p class="lede">Estimates the tumour BED lost when overall time is prolonged, using BED − K × (T − Tk). It shows the size of the problem; how to compensate (weekend or twice-daily fractions, or added dose) is a clinical and departmental decision.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="BED lost to a gap">
+    <h3>BED lost to a gap</h3>
+    <div class="calc">
+      <label>Total dose (Gy)<input id="c3D" type="number" inputmode="decimal" step="any" value="70"></label>
+      <label>Fractions<input id="c3n" type="number" inputmode="numeric" value="35"></label>
+      <label>Tumour α/β (Gy)<input id="c3ab" type="number" inputmode="decimal" step="any" value="10"></label>
+      <label>Planned overall time (days)<input id="c3T" type="number" inputmode="numeric" value="46"></label>
+      <label>Actual overall time (days)<input id="c3T2" type="number" inputmode="numeric" value="53"></label>
+      <label>K, BED lost per day (Gy/day)<input id="c3K" type="number" inputmode="decimal" step="any" value="0.9"></label>
+      <label>Tk, kick-off time (days)<input id="c3Tk" type="number" inputmode="numeric" value="28"></label>
+    </div>
+    <div class="calcout" id="c3out"></div>
+    <p class="note"><span class="flag caution">Check</span> The starting values for K (0.9 Gy/day) and Tk (28 days) are commonly quoted for head and neck squamous cell carcinoma and were entered from memory, not from a supplied source. Confirm them, and the values for other tumours, against the RCR guidance on unscheduled interruptions and your departmental policy before relying on the result. Check the late-tissue BED (α/β 3) of any compensated schedule with the first tab.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-links" data-tab="links" data-label="Other tools &amp; SABR limits" hidden>
+  <div class="panel-head">
+    <h2>Other tools and SABR constraint tables</h2>
+    <p class="lede">External resources. They open on their own sites; check each against your departmental constraints.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="SABR and SRS constraints">
+    <h3>SABR and SRS constraints</h3>
+    <ul>
+      <li><a href="https://www.iba-dosimetry.com/fileadmin/user_upload/products/02_radiation_therapy/myqa_srs/iba_dose_contraints_poster_rev2_0522.pdf" target="_blank" rel="noopener"><b>IBA "Normal tissue constraints for SRS / SBRT" poster</b></a> (rev. 2, 2022). One-page wall chart for 1, 3, 4, 5 and 8 fractions covering CNS, thoracic, GI, pelvic and skin/bone organs, plus the PACE prostate constraints. Compiled from the UK consensus (Hanna), Timmerman 2022, Pollom 2017 and the HyTEC overview (Grimm 2021).</li>
+      <li>On this site: UK 2022 and departmental SABR tables in the <a href="contouring/thorax.html#s8">thorax guide</a>, 1–5 fraction spine constraints in the <a href="contouring/spine-bone.html">spine and bone SBRT guide</a>, and liver and GI limits in the <a href="contouring/liver-sbrt.html">liver SBRT OAR guide</a>.</li>
+    </ul>
+    <p class="note">A vendor-compiled summary: where it differs from the source papers or your departmental protocol, those take precedence.</p>
+  </article>
+  <article class="card" data-title="Re-irradiation and EQD2 tools">
+    <h3>Re-irradiation and EQD2 tools</h3>
+    <ul>
+      <li><a href="https://oardoselimitcalculator.netlify.app/" target="_blank" rel="noopener">OAR Dose Limit Calculator</a> (Tim Wang): cumulative EQD2/BED against organ limits, with a repair discount.</li>
+      <li><a href="https://www.radonc.org/reirradiation" target="_blank" rel="noopener">RadOncReview re-irradiation calculator</a>: turns each organ's remaining EQD2 budget into a maximum physical D0.1cc for the new plan.</li>
+      <li><a href="https://eqd2calculator.com/" target="_blank" rel="noopener">EQD2 Calculator</a>: EQD2 and BED with cumulative dose across courses.</li>
+    </ul>
+  </article>
+</section>
+<script src="assets/tools.js"></script>

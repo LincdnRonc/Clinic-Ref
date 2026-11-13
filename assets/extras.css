@@ -1,0 +1,49 @@
+/* Extras: site-wide search, pinned pages, contour-now view, copy buttons, calculators, print sheets */
+.hdrbtn{font:inherit;font-size:.82rem;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--accent);cursor:pointer;white-space:nowrap}
+.hdrbtn[aria-pressed="true"]{background:var(--accent);color:var(--panel);border-color:var(--accent)}
+.hdrbtns{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+#pinned{margin:0 0 10px}
+#pinned h2{font-family:var(--font-display);font-size:1.1rem;margin:0 0 6px}
+.pins{display:flex;flex-wrap:wrap;gap:6px}
+.pin{display:inline-flex;align-items:center;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;background:var(--panel)}
+.pin a{padding:6px 8px 6px 10px;text-decoration:none;color:var(--ink);font-weight:700;font-size:.92rem}
+.pin button{border:0;background:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:4px 8px}
+#gresults{display:grid;gap:8px;margin-bottom:16px}
+#gresults[hidden]{display:none}
+.gres{display:block;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:9px 12px;text-decoration:none;color:var(--ink)}
+.gres b{font-family:var(--font-display);font-size:1.05rem}
+.gres .where{font-size:.8rem;color:var(--muted);display:block}
+.gres .snip{font-size:.9rem;display:block;margin-top:2px}
+.gcount{font-size:.88rem;color:var(--muted)}
+.twbar{display:flex;justify-content:flex-end;padding:3px 6px 0}
+.twbar button,.printbtn{font:inherit;font-size:.74rem;padding:1px 8px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--accent);cursor:pointer}
+.printbtn{font-size:.85rem;padding:4px 10px}
+/* Contour-now view: borders, margins, steps and diagrams only */
+body.cn .panel,body.cn .panel[hidden]{display:grid}
+body.cn .panel.cn-skip,body.cn .panel[hidden].cn-skip,body.cn .card.cn-hide,body.cn .xref,body.cn .side,body.cn .search{display:none!important}
+body.cn .layout{display:block;max-width:1500px}
+body.cn .panel-head .lede,body.cn .panel-head .jump,body.cn .panel-head .eyebrow,body.cn .panel-head .note,body.cn .pillrow{display:none}
+body.cn .panel-head h2{font-size:1.2rem;border-bottom:3px solid var(--accent);padding-bottom:3px}
+body.cn .card{padding:8px 10px}
+body.cn .card h3{font-size:1rem;margin-bottom:2px}
+body.cn .card>p,body.cn .card>ul,body.cn .card .src,body.cn .card .small,body.cn .card .callout:not(.follow),body.cn .card div.flag,body.cn .grid2>div>p,body.cn .grid2>div>ul,body.cn figcaption{display:none}
+body.cn table{font-size:.84rem}
+body.cn th,body.cn td{padding:4px 7px}
+body.cn .panel{gap:8px;margin-bottom:14px}
+@media (min-width:1100px){body.cn main{max-width:none}}
+/* Calculators */
+.calc{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end;margin:6px 0}
+.calc label{display:grid;gap:2px;font-size:.82rem;color:var(--muted)}
+.calc input,.calc select{font:inherit;font-size:16px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);min-width:0;width:100%}
+.calcout{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:8px 12px;margin:6px 0;font-variant-numeric:tabular-nums}
+.calcout b{font-size:1.1rem}
+.courses td{padding:3px 4px;border:0}
+.courses input{font:inherit;font-size:16px;padding:5px 7px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);width:100%;min-width:60px}
+@media print{
+  .top .search,.top .chips,.side,.xref,.jump,.printbtn,.hdrbtns,.twbar,footer,.crumbs{display:none!important}
+  .top{position:static;border:0}
+  .layout{display:block}
+  body{background:#fff;font-size:11px}
+  .card{break-inside:avoid;border-color:#bbb}
+  .panel{gap:6px}
+}

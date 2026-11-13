@@ -54,14 +54,14 @@ def sitenav(current, group):
     return '<nav class="sitenav" aria-label="All pages">' + ''.join(links) + '</nav>'
 def tree(current):
     """Collapsible all-pages menu: one <details> per group, current group open."""
-    groups = [(gid, head, pages) for gid,_,head,pages,_ in GROUPS] + [('contouring','Contouring',CNAV)]
+    groups = [(gid, head, pages) for gid,_,head,pages,_ in GROUPS] + [('contouring','Contouring',CNAV), ('tools','Tools',TOOLS)]
     out = []
     for gid, head, pages in groups:
         here = any(pg[0]==current for pg in pages)
         links = ''.join(f'<a href="{pg[0]}"{" aria-current=\"page\"" if pg[0]==current else ""}>{html.escape(pg[1])}</a>' for pg in pages)
         out.append(f'<details data-site="{gid}"{" open" if here else ""}><summary>{html.escape(head)}</summary>{links}</details>')
     return ('<details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary>'
-            '<nav class="tree" aria-label="All pages"><a class="home" href="index.html">Home</a>' + ''.join(out) + '</nav></details>')
+            '<nav class="tree" aria-label="All pages"><a class="home" href="index.html">Home</a><a class="home" href="index.html#search">Search all pages</a>' + ''.join(out) + '</nav></details>')
 from exam_links import EXAM, FOOT_EXAM, XREF
 def _tablabels(f):
     t = (root/'src'/f).read_text()
@@ -94,6 +94,9 @@ def page(f, short, long, desc, group, gname, gid, foot):
 <title>{html.escape(long)} Quick Reference</title>
 {FONTS}
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/extras.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#10243f">
 </head>
 <body>
 <header class="top">
@@ -121,6 +124,7 @@ def page(f, short, long, desc, group, gname, gid, foot):
 </div>
 {foot}
 <script src="assets/site.js"></script>
+<script src="assets/extras.js"></script>
 </body>
 </html>
 '''
@@ -269,6 +273,56 @@ SOFTWARE = [
  ('ctr-mim.html','MIM shortcuts','MIM contouring shortcuts','MIM 7.4 default hotkeys, creating your own, mouse actions, contouring tools, H&N OAR recipes, saving and recovery. Printable PDF.'),
  ('ctr-monaco.html','Monaco shortcuts','Monaco contouring shortcuts','Elekta Monaco hot keys, navigation, contouring toolkit, Monaco-specific gotchas, workflow and W/L presets. Printable PDF.')]
 CNAV += SOFTWARE
+# ---------------- Tools: calculators, consent numbers, doses at a glance, what's new ----------------
+TOOLS = [
+ ('tools.html','Calculators','Calculators and tools','EQD2 and BED, cumulative dose across courses, treatment gap, and links to re-irradiation tools and SABR constraint tables.'),
+ ('consent.html','Consent numbers','Consent numbers by site','The toxicity rates to quote, gathered from every tumour-site page. Print one site as a sheet.'),
+ ('doses.html','Doses at a glance','Doses at a glance','Dose and fractionation cards from every tumour-site page in one place.'),
+ ('whats-new.html',"What's new","What's new",'New evidence and landmark trials by tumour site, and changes to this site.'),
+]
+FOOT_TOOLS = '<footer><p>Calculators use the linear-quadratic model and are for education and cross-checking only; they are not a medical device. Verify every result independently. Consent numbers and doses are copied from the tumour-site pages, where the sources are cited. Follow departmental protocols.</p></footer>'
+def _panels(f):
+    t = (root/'src'/f).read_text()
+    return re.findall(r'<section class="panel" id="p-([\w-]+)" data-tab="[\w-]+" data-label="([^"]+)"[^>]*>(.*?)</section>', t, re.S)
+def _cards(body):
+    return re.findall(r'<article class="card[^"]*" data-title="([^"]*)">.*?</article>', body, re.S), re.findall(r'(<article class="card.*?</article>)', body, re.S)
+def _gather(pick):
+    out = []
+    for i,(gid,gname,head,pages,_) in enumerate(GROUPS):
+        if gid in ('exam','mrl'): continue
+        parts = []
+        for g in pages:
+            f, short, long = g[0], g[1], g[2]
+            got = []
+            for pid,label,body in _panels(f):
+                titles, arts = _cards(body)
+                got += [a for t,a in zip(titles,arts) if pick(pid,label,t)]
+            if got:
+                parts.append(f'<article class="card key" data-title="{html.escape(long)}"><h3>{html.escape(long)}</h3><p class="note">From the <a href="{f}">{html.escape(long)}</a> page, where sources and trials are cited.</p></article>' + ''.join(got))
+        if parts:
+            out.append(f'<section class="panel" id="p-{gid}" data-tab="{gid}" data-label="{html.escape(head)}"{" hidden" if out else ""}>\n<div class="panel-head"><h2>{html.escape(head)}</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>\n' + ''.join(parts) + '\n</section>')
+    return '\n'.join(out)
+(root/'src'/'consent.html').write_text(_gather(lambda pid,label,t: pid in ('consent','toxicity') or re.search(r'consent|toxicit', t, re.I)))
+(root/'src'/'doses.html').write_text(_gather(lambda pid,label,t: re.search(r'\bdoses?\b|fractionation|regimen', t, re.I) and not re.search(r'constraint|OAR|toxicit|limit', t, re.I)))
+import whats_new as _wn
+_TAG = {'practice':('Practice-changing','new'),'confirms':('Confirms practice','au'),'watch':('Watch','caution')}
+def _wn_page():
+    ev = sorted(_wn.EVIDENCE, key=lambda e: e[0], reverse=True)
+    if ev:
+        cards_ = ''
+        for d,site,tag,title,summ,url,src_,aff in ev:
+            lab,cls = _TAG.get(tag,('Watch','caution'))
+            affh = (' Affects: ' + ' · '.join(f'<a href="{p}">{html.escape(l)}</a>' for p,l in aff) + '.') if aff else ''
+            cards_ += f'<article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3><p><span class="flag {cls}">{lab}</span> <b>{html.escape(site)}</b> · {d} · {html.escape(src_)}</p><p>{html.escape(summ)}</p><p class="note"><a href="{html.escape(url)}" target="_blank" rel="noopener">Open the source</a>.{affh}</p></article>'
+    else:
+        cards_ = '<article class="card key" data-title="No entries yet"><h3>No entries yet</h3><p>The weekly evidence digest adds entries here: new phase III radiotherapy trials and guideline updates, each tagged practice-changing, confirms practice or watch, with the page on this site it affects.</p></article>'
+    site_ = ''.join(f'<li><b>{d}</b> · {html.escape(t)}' + (f' <a href="{p}">Open</a>' if p else '') + '</li>' for d,t,p in _wn.SITE)
+    return (f'<section class="panel" id="p-evidence" data-tab="evidence" data-label="Evidence"><div class="panel-head"><h2>New evidence and landmark trials</h2><p class="lede">Summaries are in our own words; open the source for the full paper. Tags are a first read, not a guideline.</p><div class="jump"></div></div>{cards_}</section>\n'
+            f'<section class="panel" id="p-site" data-tab="site" data-label="Site updates" hidden><div class="panel-head"><h2>Site updates</h2><div class="jump"></div></div><article class="card" data-title="Change log"><h3>Change log</h3><ul>{site_}</ul></article></section>')
+(root/'src'/'whats-new.html').write_text(_wn_page())
+for g in TOOLS:
+    (root/g[0]).write_text(page(*g, TOOLS, 'Tools', 'tools', FOOT_TOOLS))
+
 FOOT_SW = '<footer><p>Software quick references compiled from vendor user and training guides and a departmental MIM guide. Shortcuts and tool names change between versions and local configurations; check in your installed version. Not affiliated with or endorsed by MIM Software, GE HealthCare or Elekta. Follow departmental work instructions.</p></footer>'
 for f,short,long,desc in SOFTWARE:
     (root/f).write_text(page(f,short,long,desc,CNAV,'Contouring','contouring',FOOT_SW))
@@ -312,6 +366,9 @@ home = f'''<!DOCTYPE html>
 <title>Radiation Oncology Quick Reference</title>
 {FONTS}
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/extras.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#10243f">
 </head>
 <body>
 <header class="top">
@@ -321,22 +378,68 @@ home = f'''<!DOCTYPE html>
       <div class="meta">Synthesised Nov 2026</div>
     </div>
     <p class="lede" style="margin:4px 0 0">Clinic-ready summaries by tumour site: management by stage, doses, planning volumes and constraints, consent numbers and landmark trials.</p>
+    <form class="search" role="search" id="siteSearch" onsubmit="return false">
+      <label for="gq" class="note" style="position:absolute;left:-9999px">Search all pages</label>
+      <input id="gq" type="search" placeholder="Search every page: border, dose, trial, structure" autocomplete="off">
+      <button type="button" id="gclear">Clear</button>
+    </form>
   </div>
 </header>
 <div class="layout">
 <aside class="side">{tree('index.html')}</aside>
 <main>
-<nav class="sitenav" aria-label="Tumour groups">{groupnav}<a href="#contouring">Contouring</a></nav>
+<div id="gresults" hidden></div>
+<div id="homebody">
+<div id="pinned" hidden></div>
+<nav class="sitenav" aria-label="Tumour groups"><a href="#tools">Tools</a>{groupnav}<a href="#contouring">Contouring</a></nav>
+  <h2 class="group-title" id="tools">Tools and updates</h2>
+  <div class="hub">{cards(TOOLS)}</div>
 {sections}
   <h2 class="group-title" id="contouring" data-site="contouring">Contouring library and guides</h2>
   <div class="hub">{contour_cards}</div>
 {('<h2 class="group-title" id="soon">Still to add</h2><div class="hub">'+cards_soon+'</div>') if soon else ''}
+</div>
 </main>
 </div>
 {FOOT.replace('RadOncReview GI document','RadOncReview tumour-site documents').replace('NCCN, ASTRO, ASCO','NCCN, ASTRO and others')}
 <script src="assets/site.js"></script>
+<script src="assets/extras.js"></script>
 </body>
 </html>
 '''
 (root/'index.html').write_text(home)
 print('built')
+
+# ---------------- Search index and offline app files ----------------
+from bs4 import BeautifulSoup as _BS
+import json as _json, hashlib as _hl
+_idx = []; _files = ['index.html']
+for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.html'))):
+    _rel = str(_p.relative_to(root))
+    _t = _p.read_text()
+    if 'http-equiv="refresh"' in _t or _rel in ('index.html','gu.html'): continue
+    _files.append(_rel) if _rel in ('consent.html','doses.html') else None
+    if _rel in ('consent.html','doses.html'): continue
+    _files.append(_rel)
+    _sp = _BS(_t, 'html.parser')
+    _h1 = _sp.find('h1'); _ttl = re.sub(r'\s+',' ',_h1.get_text(' ',strip=True)).replace(' Quick Reference','') if _h1 else _rel
+    for _pan in _sp.select('section.panel'):
+        if _pan.get('data-tab') == 'eviq': continue
+        for _c in _pan.select('article.card'):
+            _x = re.sub(r'\s+',' ',_c.get_text(' ',strip=True))
+            _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', _x])
+(root/'assets'/'search-index.js').write_text('window.QR_INDEX=' + _json.dumps(_idx, ensure_ascii=False, separators=(',',':')) + ';')
+_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
+(root/'manifest.webmanifest').write_text(_json.dumps({'name':'Radiation Oncology Quick Reference','short_name':'RadOnc QR','start_url':'./index.html','scope':'./','display':'standalone','background_color':'#f3f5f6','theme_color':'#10243f','icons':[{'src':'assets/icon-192.png','sizes':'192x192','type':'image/png'},{'src':'assets/icon-512.png','sizes':'512x512','type':'image/png','purpose':'any maskable'}]}, indent=1))
+_ver = _hl.md5(''.join((root/x).read_text(errors='ignore') if not x.endswith('.png') else x for x in _files+_assets).encode()).hexdigest()[:10]
+(root/'sw.js').write_text("""// Generated by build.py. Network first (2.5 s), then the offline copy.
+const V='qr-%s';const FILES=%s;
+self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(V).then(c=>Promise.allSettled(FILES.map(f=>c.add(f)))));});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});
+self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET'||new URL(r.url).origin!==location.origin)return;
+ e.respondWith((async()=>{const c=await caches.open(V);const hit=await c.match(r,{ignoreSearch:true});
+  const net=fetch(r).then(x=>{if(x.ok)c.put(r,x.clone());return x;});
+  if(!hit)return net;
+  return Promise.race([net.catch(()=>hit),new Promise(res=>setTimeout(()=>res(hit),2500))]);})());});
+""" % (_ver, _json.dumps(_files+_assets)))
+print('search index', len(_idx), 'cards;', len(_files), 'pages')

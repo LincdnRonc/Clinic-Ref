@@ -215,6 +215,9 @@ LIB = [
  ]),
 ]),
 ('sbrt','SBRT & bone','Spine and non-spine bone SBRT, oligometastases.',[
+ ('SABR constraint tables',[
+  (2022,'IBA normal tissue constraints for SRS / SBRT (wall poster)','IBA Dosimetry · rev. 2','One-page chart for 1, 3, 4, 5 and 8 fractions, compiled from the UK consensus (Hanna), Timmerman 2022, Pollom 2017 and HyTEC. Vendor summary: check against the source papers.','https://www.iba-dosimetry.com/fileadmin/user_upload/products/02_radiation_therapy/myqa_srs/iba_dose_contraints_poster_rev2_0522.pdf',False),
+ ]),
  ('Spine and bone',[
   (2012,'ISRC: target volume definition for spinal SRS','Cox · IJROBP','The six-sector spine CTV rules.','pm:22608954',True),
   (2017,'Consensus contouring for post-operative spine SBRT','Redmond · IJROBP','Pre-op extent, epidural "donut", hardware.','pm:27843035',True),

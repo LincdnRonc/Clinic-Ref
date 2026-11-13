@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-site="tools">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doses at a glance Quick Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/extras.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#10243f">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#tools">Tools</a> › <span>Doses at a glance</span></nav>
+    <div class="title-row">
+      <h1>Doses at a glance <span>Quick Reference</span></h1>
+      <div class="meta">Synthesised Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
+      <input id="q" type="search" placeholder="Search this page: trial, dose, drug" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="side"><details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary><nav class="tree" aria-label="All pages"><a class="home" href="index.html">Home</a><a class="home" href="index.html#search">Search all pages</a><details data-site="breast"><summary>Breast</summary><a href="breast-early.html">DCIS &amp; early breast</a><a href="breast-nodes-pmrt.html">Nodes &amp; PMRT</a><a href="breast-planning.html">Breast planning &amp; consent</a></details><details data-site="cns"><summary>CNS &amp; Paediatrics</summary><a href="cns-glioma.html">Glioma</a><a href="cns-benign.html">Benign &amp; functional</a><a href="cns-vs.html">Vestibular schwannoma</a><a href="cns-general.html">Eye &amp; tolerances</a><a href="peds-cns.html">Paediatric CNS</a><a href="peds-solid.html">Paediatric solid tumours</a><a href="peds-late.html">Paediatric late effects</a></details><details data-site="gi"><summary>Gastrointestinal</summary><a href="gi-oesophagus-gastric.html">Oesophagus &amp; gastric</a><a href="gi-pancreas.html">Pancreas</a><a href="gi-hepatobiliary.html">Liver &amp; biliary</a><a href="gi-rectum-colon.html">Rectum &amp; colon</a><a href="gi-anal.html">Anal</a><a href="gi-general.html">General GI</a></details><details data-site="gu"><summary>Genitourinary</summary><a href="gu-prostate.html">Prostate</a><a href="gu-bladder.html">Bladder</a><a href="gu-kidney.html">Kidney</a><a href="gu-testis.html">Testis</a><a href="gu-other.html">UTUC, urethra &amp; penile</a></details><details data-site="gyn"><summary>Gynaecological</summary><a href="gyn-cervix.html">Cervix</a><a href="gyn-endometrial.html">Endometrial</a><a href="gyn-vulva-vagina.html">Vulva &amp; vagina</a><a href="gyn-general.html">General gynae</a></details><details data-site="heme"><summary>Haematology</summary><a href="heme-hodgkin.html">Hodgkin</a><a href="heme-nhl.html">Non-Hodgkin</a><a href="heme-other.html">Myeloma, TBI &amp; skin</a></details><details data-site="hn"><summary>Head and neck &amp; Skin</summary><a href="hn-general.html">H&amp;N general</a><a href="hn-oropharynx.html">Oropharynx</a><a href="hn-larynx.html">Larynx &amp; hypopharynx</a><a href="hn-oral-salivary.html">Oral cavity &amp; salivary</a><a href="hn-npc-sinonasal.html">Nasopharynx &amp; sinonasal</a><a href="hn-thyroid-cup.html">Thyroid &amp; unknown primary</a><a href="skin.html">Skin</a></details><details data-site="sarcoma"><summary>Sarcoma</summary><a href="sarcoma-sts.html">Soft tissue &amp; bone sarcoma</a><a href="benign.html">Benign MSK</a></details><details data-site="thorax"><summary>Thorax</summary><a href="thorax-early.html">Early NSCLC (SABR)</a><a href="thorax-stage3.html">Stage III NSCLC</a><a href="thorax-sclc.html">Small cell</a><a href="thorax-other.html">Thymic, meso &amp; other</a></details><details data-site="pall"><summary>Palliative &amp; oligometastases</summary><a href="pall-brain.html">Brain metastases</a><a href="pall-wbrt.html">WBRT principles</a><a href="pall-bone-spine.html">Bone, cord &amp; spine SBRT</a><a href="pall-oligo.html">Oligomets &amp; palliation</a></details><details data-site="mrl"><summary>MR-linac</summary><a href="mrl-images.html">Sequences &amp; signal</a><a href="mrl-liver-gi.html">Liver &amp; upper GI</a><a href="mrl-tumour-nodes.html">Tumours &amp; nodes</a><a href="mrl-pelvis.html">Pelvis</a><a href="mrl-workflow.html">Adaptive workflow</a></details><details data-site="exam"><summary>Phase 2 exam summary</summary><a href="exam-overview.html">Epi &amp; memory aids</a><a href="exam-breast.html">Breast</a><a href="exam-cns.html">CNS</a><a href="exam-peds.html">Paediatrics</a><a href="exam-ugi.html">Upper GI</a><a href="exam-lgi.html">Lower GI</a><a href="exam-gu.html">Bladder, kidney, testis, penis</a><a href="exam-prostate.html">Prostate</a><a href="exam-gyn.html">Gynae</a><a href="exam-heme.html">Haematology</a><a href="exam-hn.html">Head and neck</a><a href="exam-skin.html">Skin</a><a href="exam-endocrine-benign.html">Endocrine &amp; benign</a><a href="exam-sarcoma.html">Sarcoma</a><a href="exam-thorax.html">Thorax</a><a href="exam-pall.html">Palliative</a><a href="exam-clinonc.html">Clinical oncology</a><a href="exam-viva.html">Viva templates</a></details><details data-site="contouring"><summary>Contouring</summary><a href="ctr-library.html">Library</a><a href="ctr-breast.html">Breast</a><a href="ctr-hn.html">H&amp;N</a><a href="ctr-cns.html">CNS</a><a href="ctr-upper-gi.html">Upper GI</a><a href="ctr-anal.html">Anal</a><a href="ctr-gyn.html">Gynae</a><a href="ctr-heme.html">Lymphoma</a><a href="ctr-sarcoma.html">Sarcoma</a><a href="ctr-bladder.html">Bladder</a><a href="ctr-kidney-liver.html">Kidney &amp; liver</a><a href="ctr-skin.html">Skin</a><a href="ctr-peds.html">Paeds</a><a href="ctr-spine.html">Spine &amp; bone</a><a href="contouring/breast.html">Breast</a><a href="contouring/cns.html">CNS</a><a href="contouring/gynae.html">Gynae</a><a href="contouring/spine-bone.html">Spine &amp; bone SBRT</a><a href="contouring/head-neck.html">Head &amp; neck</a><a href="contouring/lymphoma.html">Lymphoma ISRT</a><a href="contouring/thorax.html">Thorax</a><a href="contouring/prostate.html">Prostate</a><a href="contouring/bladder.html">Bladder</a><a href="contouring/rectal-long-course.html">Rectum</a><a href="contouring/anal.html">Anal canal</a><a href="contouring/oesophagus.html">Oesophagus &amp; GOJ</a><a href="contouring/pancreas-stomach.html">Pancreas &amp; stomach</a><a href="contouring/biliary.html">Biliary</a><a href="contouring/liver-sbrt.html">Liver SBRT OARs</a><a href="ctr-mim.html">MIM shortcuts</a><a href="ctr-monaco.html">Monaco shortcuts</a></details><details data-site="tools" open><summary>Tools</summary><a href="tools.html">Calculators</a><a href="consent.html">Consent numbers</a><a href="doses.html" aria-current="page">Doses at a glance</a><a href="whats-new.html">What&#x27;s new</a></details></nav></details></aside>
+<main id="main">
+
+<div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
+<section class="panel" id="p-breast" data-tab="breast" data-label="Breast">
+<div class="panel-head"><h2>Breast</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="DCIS and early breast"><h3>DCIS and early breast</h3><p class="note">From the <a href="breast-early.html">DCIS and early breast</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Fractionation">
+    <h3>Fractionation</h3>
+    <div class="tw wide"><table>
+      <tr><th>Regimen</th><th>Use</th><th>Evidence</th></tr>
+      <tr><td><span class="d">26/5</span> daily over 1 week</td><td>Whole breast after BCS (ESTRO 2021). Chest wall, reconstruction and nodes only within trials or by protocol</td><td>FAST-Forward</td></tr>
+      <tr><td><span class="d">40/15</span> or <span class="d">42.5/16</span></td><td>Any whole-breast RT. Standard with nodal RT and PMRT</td><td>START B, OCOG, DBCG HYPO</td></tr>
+      <tr><td><span class="d">28.5/5</span> weekly</td><td>Frail or elderly patients unable to attend daily</td><td>FAST</td></tr>
+      <tr><td><span class="d">50/25</span></td><td>Conventional fractionation</td><td>—</td></tr>
+    </table></div>
+    <ul>
+      <li>Homogeneity: V105 &lt;200 cc, V107 &lt;2 cc. FAST-Forward used V95 &gt;95%, V105 &lt;5%, V107 &lt;2% and Dmax &lt;110%.</li>
+      <li>Acute toxicity with hypofractionation compared with conventional fractionation: G2+ dermatitis about 60 → 30%, moist desquamation 28 → 7% (Jagsi/Shaitelman). Fatigue, pain and hyperpigmentation are also lower.</li>
+    </ul>
+  </article><article class="card" data-title="Hypofractionation trials">
+    <h3>Hypofractionation trials</h3>
+    <div class="trial"><b>OCOG (Whelan)</b><i>1,234 · node-negative, margins clear · 50/25 vs 42.5/16 · no boost</i><span>Local recurrence about 3% at 5 y, with equivalent cosmesis.</span></div>
+    <div class="trial"><b>START B</b><i>2,200 · 50/25 vs 40/15</i><span>Cosmesis best with 40/15. 10 y distant metastasis 16 → 10%. 10 y overall mortality 19 → 16%.</span></div>
+    <div class="trial"><b>START A</b><i>2,236 · 50/25 vs 41.6/13 vs 39/13</i><span>10 y locoregional recurrence about 7%. Estimated α/β about 3.5 for tumour control and for late breast effects.</span></div>
+    <div class="trial"><b>DBCG HYPO</b><i>1,854 · 50/25 vs 40/15 · 13% DCIS</i><span>3 y induration 12 → 9% (non-inferior). 9 y LRR about 3%.</span></div>
+    <div class="trial"><b>FAST-Forward</b><i>4,096 · pT1–3 N0–1 · 40/15 vs 27/5 vs 26/5 · no nodal RT in main trial</i><span>10 y IBTR 3.6, 2.9 and 2.1% (40/15, 27/5, 26/5). HR for 26/5 vs 40/15 was 0.66. Moderate or marked breast effects at 10 y: 13.1, 19.3 and 14.4%. 26/5 is non-inferior; 27/5 is more toxic.</span></div>
+    <div class="trial"><b>FAST-Forward nodal substudy</b><i>40/15 vs 27/5 vs 26/5 with nodal RT</i><span>Arm and shoulder toxicity was not increased with 26/5, but the substudy is underpowered for efficacy.</span></div>
+    <div class="trial"><b>FAST</b><i>50/25 vs 30/5 vs 28.5/5 weekly</i><span>10 y moderate or marked breast effects: 9% (50/25), 18% (30/5), 15% (28.5/5). 28.5/5 weekly is an option for patients unable to attend daily.</span></div>
+  </article>
+</section>
+<section class="panel" id="p-cns" data-tab="cns" data-label="CNS &amp; Paediatrics" hidden>
+<div class="panel-head"><h2>CNS &amp; Paediatrics</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Benign and functional CNS"><h3>Benign and functional CNS</h3><p class="note">From the <a href="cns-benign.html">Benign and functional CNS</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="VS doses">
+    <h3>Doses and outcomes</h3>
+    <ul>
+      <li><b>SRS:</b> <span class="d">11–14 Gy</span> to the margin (ISRS), most often 12–13 Gy (Gamma Knife at the 50% isodose). Targets up to about 3 cm.</li>
+      <li><b>Fractionated SRS:</b> <span class="d">18–21/3</span> or <span class="d">25/5</span> for larger tumours (3–4 cm) or near the brainstem. Conventional 50.4/28–54/30 is also an option.</li>
+      <li>PTV margin 0–2 mm (0 mm preferred). Keep the cochlea mean &lt;4 Gy where possible.</li>
+      <li><b>Consent:</b> 10 y local control about 97%. Facial neuropathy &lt;1%; trigeminal symptoms about 3%. Serviceable hearing at 5 y about 41–79% (falls with time). Transient enlargement in about 14%. Malignant transformation 0.3%.</li>
+      <li><b>Full page:</b> <a href="cns-vs.html">Vestibular schwannoma</a> (decision by Koos grade, work-up, SRS planning, consent numbers, V-REX and ACOUNEU).</li>
+    </ul>
+  </article><article class="card key" data-title="Pituitary doses">
+    <h3>Doses</h3>
+    <div class="tw wide"><table>
+      <tr><th>Technique</th><th>Non-functioning</th><th>Secreting</th></tr>
+      <tr><td>Single-fraction SRS (&lt;2–2.5 cm, away from chiasm)</td><td><span class="d">13–16 Gy</span></td><td><span class="d">16–25 Gy</span></td></tr>
+      <tr><td>Fractionated SRS</td><td colspan="2"><span class="d">21/3</span> or <span class="d">25/5</span></td></tr>
+      <tr><td>Conventional</td><td colspan="2"><span class="d">45–50.4/25–28</span>; <span class="d">54/30</span> for aggressive tumours or carcinoma</td></tr>
+    </table></div>
+    <ul>
+      <li>CTV margin 2–3 mm for invasive or aggressive tumours.</li>
+      <li>Local control after RT &gt;90% for non-functioning tumours. Hormone normalisation in 50–60% of secreting tumours, over years.</li>
+      <li>Hypopituitarism is the main late effect (GH deficiency from as low as 18 Gy). Monitor pituitary function long term.</li>
+    </ul>
+  </article><article class="card key" data-title="Vestibular schwannoma"><h3>Vestibular schwannoma</h3><p class="note">From the <a href="cns-vs.html">Vestibular schwannoma</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="VS dose regimens">
+    <h3>Regimens</h3>
+    <div class="tw wide"><table>
+      <tr><th>Regimen</th><th>Dose</th><th>Use</th></tr>
+      <tr><td>Single fraction</td><td><span class="d">12–13 Gy</span> margin (most use 12)</td><td>Koos I–III. CNS 2018: &lt;13 Gy, since control is no better and nerves fare worse at higher doses.</td></tr>
+      <tr><td>Hypofractionated</td><td><span class="d">18/3</span> or <span class="d">25/5</span></td><td>Larger tumours, abutting brainstem, preference</td></tr>
+      <tr><td>Conventional</td><td><span class="d">50.4/28</span>–<span class="d">54/30</span></td><td>Large, unfit for surgery</td></tr>
+      <tr><td>Large VS (ISRS 2023)</td><td><span class="d">11–13 Gy</span></td><td>Selected ≥2.5 cm or Koos IV</td></tr>
+    </table></div>
+    <ul>
+      <li>Gamma Knife usually at the 50% isodose; linac or CyberKnife at 70–90%. No platform is preferred (CNS 2018: no comparative data).</li>
+      <li>PTV margin 0–1 mm with frame or high-precision mask.</li>
+    </ul>
+  </article><article class="card key" data-title="Paediatric solid tumours"><h3>Paediatric solid tumours</h3><p class="note">From the <a href="peds-solid.html">Paediatric solid tumours</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="RMS doses">
+    <h3>Dose by group (COG)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Group</th><th>Definition</th><th>Dose</th></tr>
+      <tr><td>I</td><td>R0, N0</td><td>RT only for alveolar (fusion-positive) histology: <span class="d">36 Gy</span></td></tr>
+      <tr><td>II</td><td>R1 or resected N1</td><td><span class="d">36 Gy</span> (R1); <span class="d">41.4 Gy</span> to resected nodes</td></tr>
+      <tr><td>III</td><td>R2 or biopsy only</td><td><span class="d">50.4–59.4 Gy</span> (59.4 Gy for bulky ≥5 cm); orbit <span class="d">45–50.4 Gy</span></td></tr>
+      <tr><td>IV</td><td>Metastatic</td><td>Primary and metastatic sites; SBRT 30–35/5 or whole lung 12–15 Gy (ARST 1431)</td></tr>
+    </table></div>
+    <ul>
+      <li>Volumes: IMRT GTV (pre-chemo extent, edited for anatomy) + 1 cm CTV + 0.3 cm PTV.</li>
+      <li>Delayed primary excision only if R0/R1 is achievable; otherwise give the full dose.</li>
+      <li>Tumours ≥5 cm have about 20–25% local failure (HR 2.0), hence the 59.4 Gy boost.</li>
+      <li>Breaks: add 1 fraction for a 2–3 week break, 2 fractions if &gt;3 weeks.</li>
+      <li>Metastatic with 0–1 Oberlin risk factors: 3 y EFS nearly 70%.</li>
+    </ul>
+  </article><article class="card key" data-title="Ewing doses">
+    <h3>Doses</h3>
+    <div class="tw wide"><table>
+      <tr><th>Setting</th><th>Dose</th></tr>
+      <tr><td>Definitive (skull, face, spine, pelvis)</td><td>45 Gy to pre-chemo volume + 1 cm → boost to <span class="d">55.8 Gy</span> to post-chemo soft tissue + pre-chemo bone + 1 cm</td></tr>
+      <tr><td>Vertebral body</td><td>45 Gy to the whole vertebral body + 1 cm</td></tr>
+      <tr><td>Extraosseous with CR to chemo</td><td><span class="d">50.4 Gy</span></td></tr>
+      <tr><td>Post-op R1</td><td><span class="d">50.4 Gy</span> (to pre-chemo GTV if &lt;90% necrosis, post-chemo if ≥90%)</td></tr>
+      <tr><td>Post-op R2</td><td>45 Gy pre-chemo volume + boost to <span class="d">55.8 Gy</span></td></tr>
+      <tr><td>Pre-op</td><td><span class="d">36 Gy</span> to the pre-chemo GTV, then top up R1 (+14.4 Gy) or R2 (+19.8 Gy)</td></tr>
+      <tr><td>Lung metastases</td><td>Whole lung <span class="d">15–18 Gy</span> (12 Gy if &lt;6 y), e.g. 15/10; boost gross residual to 45 Gy</td></tr>
+    </table></div>
+    <ul>
+      <li>Limits: epiphysis max 20 Gy; femoral head max 45 Gy.</li>
+      <li>Second malignancies: none seen below 40 Gy vs 130 per 10,000 above 60 Gy.</li>
+    </ul>
+  </article>
+</section>
+<section class="panel" id="p-gi" data-tab="gi" data-label="Gastrointestinal" hidden>
+<div class="panel-head"><h2>Gastrointestinal</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Oesophagus and gastric"><h3>Oesophagus and gastric</h3><p class="note">From the <a href="gi-oesophagus-gastric.html">Oesophagus and gastric</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Doses">
+    <h3>Dose-fractionation</h3>
+    <div class="tw wide"><table>
+      <tr><th>Setting</th><th>Dose</th><th>Notes</th></tr>
+      <tr><td>Neoadjuvant (CROSS)</td><td><span class="d">41.4/23</span> + weekly carboplatin AUC2 / paclitaxel 50</td><td>41.4–50.4 Gy used; favour lower end with carbo/pacli in older patients (pneumonitis)</td></tr>
+      <tr><td>Definitive</td><td><span class="d">50–50.4/25–28</span></td><td>"50 Gy all day". ARTDECO (61.6 SIB) and CONCORDE (66 Gy) no benefit; G5 5→10% in ARTDECO</td></tr>
+      <tr><td>Cervical SCC</td><td>50 Gy standard; some escalate to 60 Gy</td><td>NCCN removed 60–66 Gy language (2022). No randomised benefit</td></tr>
+      <tr><td>Chemo with definitive RT</td><td>Carbo/paclitaxel, cisplatin/5-FU or FOLFOX</td><td>ESO-Shanghai 1: paclitaxel/5-FU = cisplatin/5-FU at 10 y</td></tr>
+      <tr><td>Palliative dysphagia</td><td><span class="d">20/5</span> · <span class="d">30/10</span> · <span class="d">35/15</span> · BT 12/1 after EBRT</td><td>20/5 relieves dysphagia in ~75% for ~5 mo; higher doses give longer relief</td></tr>
+    </table></div>
+  </article><article class="card" data-title="Gastric doses and volumes">
+    <h3>Doses and volumes</h3>
+    <ul>
+      <li><b>Pre- or postop:</b> <span class="d">45/25</span> (strong). Boost 5.4–9 Gy for R2/gross residual. Definitive: 45/25 CTV + <span class="d">54–59.4 Gy</span> GTV.</li>
+      <li><b>Preop CTV:</b> whole stomach, perigastric extension, ≥1 cm proximal oesophagus (more for cardia/GOJ) and regional nodes (coeliac, common hepatic, splenic, left gastric, hepatoduodenal, peripancreatic, SMA, regional para-aortic).</li>
+      <li><b>Postop CTV:</b> tumour bed, anastomoses, duodenal stump, 2 cm beyond margins, regional nodes. Include gastric remnant only if margin positive. Proximal third: add paraoesophageal and hepatogastric; middle/distal: supra- and infrapyloric.</li>
+      <li>Coverage: preop PTV D95 ≥95%, D2cc ≤107%; postop PTV D100 ≥95%.</li>
+      <li>Fast 2 h before sim and treatment. 4DCT/motion management with IMRT; daily IGRT.</li>
+      <li>D2 dissection: recurrences still locoregional as often as distant; >¾ of regional relapses outside the D2 field (stations 16a2, 8, 12, 16b1, 9).</li>
+    </ul>
+  </article><article class="card key" data-title="Pancreas"><h3>Pancreas</h3><p class="note">From the <a href="gi-pancreas.html">Pancreas</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Dose options">
+    <h3>Dose options</h3>
+    <div class="tw wide"><table>
+      <tr><th>Setting</th><th>Regimen</th><th>Notes</th></tr>
+      <tr><td>Adjuvant chemoRT</td><td><span class="d">45–54/25–30</span> + capecitabine/5-FU</td><td>RTOG 0848: no OS gain overall; possible pN0 benefit (unclear)</td></tr>
+      <tr><td>Neoadjuvant chemoRT</td><td><span class="d">45–50.4/25–28</span> or <span class="d">36/15</span> + gemcitabine (PREOPANC)</td><td>36–45/15 rated highly for borderline (ARS)</td></tr>
+      <tr><td>Definitive chemoRT</td><td><span class="d">50.4–56 Gy</span> (1.75–2.2 Gy)</td><td>LAP07: no OS gain, less local progression</td></tr>
+      <tr><td>SBRT</td><td><span class="d">33–40/5</span> (dose-painted); aim <span class="d">40/5</span> to GTV</td><td>AGITG/TROG: 40/5 in DIBH. 33/5 ≈ only 45 Gy conventional</td></tr>
+      <tr><td>Ablative (MR-guided / adaptive)</td><td><span class="d">50/5</span> · <span class="d">67.5/15</span> · <span class="d">75/25</span></td><td>SMART (50/5, MR-linac): G3+ GI 0–2.2%</td></tr>
+      <tr><td>Coeliac plexus pain</td><td><span class="d">25/1</span></td><td>Hold chemo 6 d either side; ondansetron + dexamethasone pre-treatment; PPI ≥3 mo after</td></tr>
+    </table></div>
+  </article><article class="card key" data-title="Liver and biliary"><h3>Liver and biliary</h3><p class="note">From the <a href="gi-hepatobiliary.html">Liver and biliary</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="HCC dose by liver risk">
+    <h3>HCC dose by liver risk (consensus algorithm)</h3>
+    <div class="tw wide"><table>
+      <tr><th>RILD risk</th><th>Typical patient</th><th>Ablative Rx</th><th>Liver − GTV goals</th></tr>
+      <tr><td>Low</td><td>CP-5, mALBI 1, away from central biliary tree</td><td><span class="d">45–50/3–5</span></td><td>Mean &lt;13 Gy · 850 cc &lt;15 · 1000 cc &lt;18</td></tr>
+      <tr><td>Low-intermediate</td><td>CP-6, mALBI 2a</td><td><span class="d">45–50/3–5</span></td><td>Mean &lt;12 · 850 cc &lt;12 · 1000 cc &lt;18</td></tr>
+      <tr><td>High-intermediate</td><td>CP-6, mALBI 2b</td><td><span class="d">40–50/5</span></td><td>Mean &lt;6–10 · 850 cc &lt;12 · 1000 cc &lt;15</td></tr>
+      <tr><td>High</td><td>CP-7, mALBI 3</td><td><span class="d">27.5–40/5</span></td><td>Mean &lt;6 · 850 cc &lt;12 · 1000 cc &lt;15</td></tr>
+    </table></div>
+    <ul>
+      <li><b>RTOG 1112 schema:</b> start at 50/5 and de-escalate by mean liver dose (13 Gy at 50/5 up to 17 Gy at 27.5/5). Needs liver − GTV &gt;700 cc and GTV &gt;1 cm from stomach/duodenum/bowel.</li>
+      <li>Acceptable floor (CP-A): mean &lt;15 Gy, ≥700 cc &lt;15 Gy; otherwise drop to 40–45/5. CP-B: mean liver &lt;9 Gy.</li>
+      <li>If goals still unmet: mid-treatment break (3 fx, ~30 d, reassess CP/mALBI), spare ~35% of functional liver &lt;12–15 Gy, or non-ablative options.</li>
+      <li>Ablative = BED10 ≥80 Gy (e.g. 45/3, 50/5, 60/10, 72.6/22); 27.5/5 or 30/6 (BED10 ~45) still gives useful control.</li>
+      <li>ASTRO ranges: non-cirrhotic 40–60/3–5 · CP-A 40–50/3–5 · CP-B7 30–40/5 · or 45–67.5/15, 60/20, 50.4/28, 60/30.</li>
+    </ul>
+  </article><article class="card" data-title="Biliary dose and BED">
+    <h3>Dose and BED</h3>
+    <ul>
+      <li>MDACC (Tao): BED10 &gt;80.5 Gy → 3-y OS 38 → 72%, LC 45 → 78% for inoperable IHCC (median 7.9 cm). 80.5 Gy ≈ 43.5/5.</li>
+      <li>Brunner SBRT: Dmean BED10 &gt;76 Gy (~41.5/5) → 2-y LC 39 → 80%; Dmax BED10 &gt;91 Gy (~47/5) → MS 13 → 24 mo.</li>
+      <li>Biliary stricture after RT is hard to tell from progression.</li>
+      <li>Adjuvant volumes (SWOG 0809): retropancreaticoduodenal, coeliac and portal vein nodes + bed.</li>
+    </ul>
+  </article><article class="card key" data-title="Rectum and colon"><h3>Rectum and colon</h3><p class="note">From the <a href="gi-rectum-colon.html">Rectum and colon</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Rectal regimens">
+    <h3>Regimens</h3>
+    <div class="tw wide"><table>
+      <tr><th>Regimen</th><th>Dose</th><th>Notes</th></tr>
+      <tr><td>Long-course chemoRT</td><td><span class="d">45/25</span> pelvis → boost to <span class="d">50.4/28</span>; or <span class="d">50–50.4/25–28</span> + capecitabine 825 mg/m² BD or CI 5-FU</td><td>&gt;50.4 Gy (to 54–56) only if planning NOM</td></tr>
+      <tr><td>Short-course</td><td><span class="d">25/5</span>, no concurrent chemo</td><td>Surgery in 1 wk, or delayed 4–8 wk (Stockholm III), or chemo then TME (RAPIDO)</td></tr>
+      <tr><td>TNT (RAPIDO)</td><td>25/5 → CAPOX ×6 or FOLFOX ×9 → TME</td><td>Higher 5-y LRR (10% vs 6%) than LCCRT</td></tr>
+      <tr><td>TNT (OPRA)</td><td>LCCRT → FOLFOX/CAPOX (consolidation) → reassess</td><td>Best organ preservation (3-y 53%)</td></tr>
+      <tr><td>TNT (PRODIGE 23)</td><td>mFOLFIRINOX ×6 → LCCRT → TME → adjuvant chemo</td><td>Caution in elderly/frail</td></tr>
+      <tr><td>Unresectable / definitive</td><td>45/25 → 50.4 → <span class="d">54–59.4 Gy</span></td><td>Cone-downs with ≥2 cm CC on tumour</td></tr>
+      <tr><td>After local excision</td><td>Up to 56 Gy if margin ≥3 mm; 65 Gy if &lt;3 mm (RTOG 89-02); T2 54 Gy + 5-FU (CALGB 8984)</td><td>Observation reasonable for T1</td></tr>
+    </table></div>
+  </article><article class="card key" data-title="Anal canal"><h3>Anal canal</h3><p class="note">From the <a href="gi-anal.html">Anal canal</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Dose-painted IMRT (RTOG 0529)">
+    <h3>Dose-painted IMRT</h3>
+    <div class="tw wide"><table>
+      <tr><th>Stage</th><th>Primary</th><th>Involved nodes</th><th>Elective nodes</th></tr>
+      <tr><td>T1–2 N0</td><td><span class="d">50.4/28</span> (45–50.4; higher if ≥4 cm)</td><td>–</td><td><span class="d">42/28</span></td></tr>
+      <tr><td>T3–4 N0, or N+</td><td><span class="d">54/30</span> (53.2–59.4/28–33)</td><td>&gt;3 cm <span class="d">54/30</span>; ≤3 cm <span class="d">50.4/30</span></td><td><span class="d">45/30</span></td></tr>
+      <tr><td>Sequential alternative</td><td colspan="3">36/20 whole elective volume → 45/25 true pelvis + involved nodal regions → 50.4–54/28–30 to nodes and primary</td></tr>
+    </table></div>
+    <div class="sub">Chemotherapy</div>
+    <ul>
+      <li>5-FU <span class="d">1000 mg/m²/d CI d1–4 and d29–32</span> + MMC <span class="d">10 mg/m² d1 and d29</span> (RTOG 98-11), or single MMC 12 mg/m² d1 (ACT II, max 20 mg). Capecitabine 825 mg/m² BD on RT days is an alternative to 5-FU.</li>
+      <li>MMC causes more myelosuppression (G4 haematological 7 → 23% in RTOG 87-04); treatment breaks in a third with 5-FU/MMC (RTOG 98-11, 3D era).</li>
+    </ul>
+    <div class="sub">De-escalation</div>
+    <ul><li>PLATO ACT4: T1–2 (≤4 cm) N0, reduced-dose 41.4/23 gave cCR 92% with fewer breaks and less G3+ acute toxicity (46 → 35%) vs 50.4/28.</li></ul>
+  </article>
+</section>
+<section class="panel" id="p-gu" data-tab="gu" data-label="Genitourinary" hidden>
+<div class="panel-head"><h2>Genitourinary</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Prostate"><h3>Prostate</h3><p class="note">From the <a href="gu-prostate.html">Prostate</a> page, where sources and trials are cited.</p></article><article class="card" data-title="Fractionation and dose">
+<h3>Prostate: fractionation and dose</h3>
+<div class="trial"><b>CHHiP</b><i>Phase III NI · n=3216, mostly IR · 3–6 mo ADT in 96% · 74/37 vs 60/20 vs 57/19</i><span>5-y biochemical/clinical failure-free 88.3% (74) vs 90.6% (60/20, HR 0.84) vs 85.9% (57/19): 60/20 non-inferior, 57/19 not. Peak acute G2+ bowel 25% vs 38%; acute bladder no different. 5-y cumulative late G2+ bowel 13.7 / 11.9 / 11.3%, bladder 9.1 / 11.7 / 6.6%.</span></div>
+<div class="trial"><b>HYPO-RT-PC</b><i>Phase III NI · n=1200 IR (10% HR) · no ADT · 78/39 vs 42.7/7 alternate days · 80% 3D</i><span>5-y FFS ~84% both; 10-y FFS 65→72% (aHR 0.84). G2+ GU higher at 1 y (2→6%) then converged; 10-y late G2+ GU ~30%, GI ~14% both arms.</span></div>
+<div class="trial"><b>PACE-B</b><i>Phase III NI · n=874 LR/IR (92% IR) · no ADT · 78/39 or 62/20 vs 36.25/5 (40 Gy to CTV)</i><span>5-y bcF-free ~95% (HR 0.73), SBRT non-inferior. 5-y cumulative G2+ GU 18→27%; GI ~10.5% both. 5-y PROs similar.</span></div>
+<div class="trial"><b>PACE-C</b><i>Phase III · n=1208 IR/HR · 6 mo ADT · 60/20 vs 36.25/5 (prostate + 2 cm SV)</i><span>Acute RTOG toxicity similar (G2+ GU ~27%, GI 11→13%); CTCAE GU and bowel PROs a little worse with SBRT. Efficacy pending.</span></div>
+<div class="trial"><b>NRG-GU005</b><i>Phase III · n=698 IR (no 4+3) · 55% spacer · 70/28 or 60/20 vs 36.25/5 without CTV 40 Gy</i><span>SBRT better 2-y bowel QoL (MCID 44→35%) and continence, G3+ GU 2.5→0.6%, but 3-y biochemical failure 4→8% (HR 1.82). Lesson: give 40 Gy to the CTV.</span></div>
+<div class="trial"><b>HYDRA</b><i>IPD meta, 7 trials · isodose MHF (CHHiP, PROFIT, IRE-IFO) and dose-escalated MHF (HYPRO, RTOG 0415, MDACC, FCCC)</i><span>No PFS difference vs conventional. Dose-escalated MHF raised G2+ GI (OR 1.48) and bowel QoL decline (OR 1.68): use isodose 60/20.</span></div>
+<div class="trial"><b>FLAME</b><i>Phase III · n=571 IR/HR (84% HR), ADT in 2/3 · 77/35 ± SIB up to 95/35 to MRI lesion</i><span>5-y bDFS 85→92%; 10-y bDFS 71→86%, DFS 66→81%; DMFS 82→87% (NS). No significant toxicity increase; GU toxicity tracks urethral D0.1cc and bladder D2cc.</span></div>
+<div class="trial"><b>GETUG-AFU 18</b><i>Phase III · n=505 HR · LT-ADT, pelvis 46 Gy · 70 vs 80 Gy</i><span>10-y PFS 72→84% (HR 0.56); local failure 8→3%. OS 66→77% reported, but underpowered with a non-cancer-death imbalance.</span></div>
+<div class="trial"><b>TROG 18.01 NINJA</b> <span class="flag au">ANZ</span><i>Phase III · SBRT 40/5 vs SBRT boost 20/2 → 36/12 · 6 mo ADT unless biomarker-low</i><span>40/5 had better 2-y urinary QoL; GI minimal in both. MRI-only planning dosimetrically equivalent to CT. Efficacy pending.</span></div>
+<div class="trial"><b>PACE-A</b><i>RCT · n=123 (of 234 planned) LR/IR · RP vs SBRT 36.25–40/5, no ADT</i><span>≥1 pad/day at 2 y 50% vs 7%, at 5 y 48% vs 8%; better sexual scores with SBRT. Worse 2-y bowel scores (MCID decline 14→45%) but no difference in overall bowel bother. 8-y BCF-free 84% RP vs 91% SBRT.</span></div>
+</article><article class="card key" data-title="Bladder"><h3>Bladder</h3><p class="note">From the <a href="gu-bladder.html">Bladder</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="TMT regimens and doses">
+<h3>TMT regimens and doses</h3>
+<div class="tw wide"><table>
+<tr><th>Volume</th><th>Dose</th><th>Notes</th></tr>
+<tr><td>Bladder only</td><td><span class="d">55/20</span> or <span class="d">64/32</span></td><td>BC2001/BCON meta: 55/20 non-inferior, better invasive LRC (HR 0.71). Daily, no planned break</td></tr>
+<tr><td>Bladder + nodes</td><td><span class="d">40–46/20–25</span> nodes → bladder to <span class="d">64/32</span>; or <span class="d">40–44/20</span> nodes with 55/20 bladder</td><td>Elective nodes for cT3–4, hydronephrosis, LVI, incomplete TURBT, aggressive subtypes</td></tr>
+<tr><td>Gross nodes</td><td>Up to <span class="d">64/32</span></td><td>As OARs allow</td></tr>
+<tr><td>Partial boost</td><td>Reduced dose to uninvolved bladder</td><td>RAIDER: 46/20 uninvolved, 55–60/20 tumour</td></tr>
+<tr><td>Palliative / unfit</td><td><span class="d">36/6</span> weekly · <span class="d">21/3</span> alt days · <span class="d">30/10</span> · <span class="d">20/5</span> · <span class="d">6–8/1</span></td><td>HYBRID 36/6: LC ~92%</td></tr>
+</table></div>
+<div class="sub">Radiosensitiser</div>
+<ul>
+<li><b>5-FU <span class="d">500 mg/m² d1–5 &amp; d16–20</span> + MMC <span class="d">12 mg/m² d1</span></b> (BC2001: 2-y LRF 32→18%; good with reduced renal function).</li>
+<li>Cisplatin <span class="d">100 mg/m² q3w</span> ×2–3, or low-dose gemcitabine. Carbogen + nicotinamide (BCON) if no chemo.</li>
+<li>Bladder dose escalation above 64 Gy: trials only.</li>
+</ul>
+</article>
+</section>
+<section class="panel" id="p-gyn" data-tab="gyn" data-label="Gynaecological" hidden>
+<div class="panel-head"><h2>Gynaecological</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Endometrial"><h3>Endometrial</h3><p class="note">From the <a href="gyn-endometrial.html">Endometrial</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Endometrial doses">
+    <h3>Doses</h3>
+    <div class="tw wide"><table>
+      <tr><th>Setting</th><th>Regimen</th><th>Notes</th></tr>
+      <tr><td>VBT alone</td><td><span class="d">21/3</span> to 5 mm (PORTEC-2, most common) · <span class="d">30/5</span> to surface (MDACC) · <span class="d">22/4</span> to 5 mm (≈38/4 surface) · <span class="d">24/6</span> surface</td><td>Treat proximal 3–5 cm of vagina; whole length for IIIB. Consider 18/3 with a 2.5 cm cylinder</td></tr>
+      <tr><td>VBT boost after 45 Gy</td><td><span class="d">15–18/3</span> surface or <span class="d">15/3</span> to 5 mm (one less fraction after 50.4)</td><td>EQD2 65–70 Gy; 70–75 if superficial margin positive</td></tr>
+      <tr><td>Pelvic RT</td><td><span class="d">45–50.4/25–28</span> IMRT + daily IGRT, vaginal ITV</td><td>ChemoRT: cisplatin 50 mg/m² d1 and d29 (PORTEC-3: 48.6/27)</td></tr>
+      <tr><td>Vaginal recurrence (RT-naive)</td><td>45 Gy → BT to EQD2 ≥75 Gy: <span class="d">21/3</span> or <span class="d">24/4</span> to 5 mm, <span class="d">30/5</span> surface</td><td>Interstitial if &gt;5 mm thick</td></tr>
+    </table></div>
+  </article><article class="card key" data-title="Vulva and vagina"><h3>Vulva and vagina</h3><p class="note">From the <a href="gyn-vulva-vagina.html">Vulva and vagina</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Vulvar doses and volumes">
+    <h3>Doses and volumes</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>Dose</th></tr>
+      <tr><td>Elective vulva + nodes (CTV 45–50.4)</td><td><span class="d">45–50.4 Gy</span> (1.8–2 Gy)</td></tr>
+      <tr><td>Close margin (&lt;5 mm)</td><td><span class="d">56 Gy</span> with platinum-based chemo</td></tr>
+      <tr><td>Nodal disease</td><td>SLN ≤2 mm without ECE: 50 Gy ipsilateral groin/low pelvis. Macrometastasis or ECE: dissection, then 56 Gy</td></tr>
+      <tr><td>Gross primary / nodes &gt;2 cm (definitive)</td><td><span class="d">64–70 Gy</span> with weekly cisplatin</td></tr>
+    </table></div>
+    <ul>
+      <li>CTV: whole vulva + 1 cm beyond tumour extension; +2 cm along invaded structures (anus, urethra, clitoris, bladder), ≥3 cm along vagina.</li>
+      <li>Nodes: bilateral inguinal, obturator, external and internal iliac; nodes lie anterior/anteromedial to femoral vessels, so no margin needed posterior/lateral.</li>
+      <li>Sim supine frog-leg on vac-lok (less skin fold), wire tumour/scar/nodes, BB at introitus, bolus over the bed if visible tumour; check TLDs early. Replan for oedema or shrinkage. Full and empty bladder scans for IMRT.</li>
+      <li>Femoral neck tolerance ~50 Gy.</li>
+    </ul>
+  </article>
+</section>
+<section class="panel" id="p-heme" data-tab="heme" data-label="Haematology" hidden>
+<div class="panel-head"><h2>Haematology</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Non-Hodgkin lymphoma"><h3>Non-Hodgkin lymphoma</h3><p class="note">From the <a href="heme-nhl.html">Non-Hodgkin lymphoma</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Indolent doses">
+    <h3>Doses</h3>
+    <ul>
+      <li><b>Curative stage I–II:</b> <span class="d">24/12</span> (24–30 Gy). Larger margins if RT alone.</li>
+      <li><b>Palliative:</b> <span class="d">4/2</span> (FORT: CR 49% with 4 Gy vs 68% with 24 Gy). Re-treat as needed.</li>
+      <li><b>Stage I–II FL with systemic therapy:</b> adding R-CVP to 30 Gy improved 10 y PFS 43 → 62% (TROG 99.03).</li>
+      <li>Grade 3 FL is treated like DLBCL.</li>
+    </ul>
+    <div class="trial"><b>UK FORT</b><i>548 · indolent NHL · 24/12 vs 4/2</i><span>ORR 91 vs 81%, CR 68 vs 49%. 24 Gy better for durable control.</span></div>
+    <div class="trial"><b>TROG 99.03 <span class="flag au">ANZ</span></b><i>150 · stage I–II FL · 30 Gy ISRT ± R-CVP</i><span>10 y PFS 43 → 62% with systemic therapy.</span></div>
+  </article><article class="card key" data-title="PCNSL doses">
+    <h3>WBRT doses</h3>
+    <ul>
+      <li><b>CR after R-MPV:</b> <span class="d">23.4 Gy</span> WBRT, then cytarabine × 2.</li>
+      <li><b>PR:</b> ILROG 36–45 Gy WBRT (1.5–1.8 Gy) without boost; NCCN 30–36 Gy with a 45 Gy boost to residual. Example: 36/24 + SIB 43.2/24.</li>
+      <li>Median survival about 6 y with this approach (MSKCC).</li>
+      <li>Intraocular involvement: CTV includes the entire globe and optic nerves to the chiasm.</li>
+    </ul>
+  </article><article class="card key" data-title="Plasmacytoma, TBI and cutaneous lymphoma"><h3>Plasmacytoma, TBI and cutaneous lymphoma</h3><p class="note">From the <a href="heme-other.html">Plasmacytoma, TBI and cutaneous lymphoma</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Plasmacytoma doses">
+    <h3>Doses (ILROG)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Setting</th><th>Dose</th></tr>
+      <tr><td>Solitary bone plasmacytoma &lt;5 cm</td><td><span class="d">35–40 Gy</span> (NCCN minimum 40 Gy)</td></tr>
+      <tr><td>Solitary bone plasmacytoma &gt;5 cm</td><td><span class="d">40–50 Gy</span></td></tr>
+      <tr><td>Extramedullary plasmacytoma</td><td><span class="d">40–50 Gy</span>. Nodal involvement is more common than for bone (about 25% in the head and neck)</td></tr>
+      <tr><td>Myeloma, palliative</td><td><span class="d">8/1</span>, <span class="d">20/5</span> or <span class="d">30/10</span> (ILROG prefers 30/10 for large volumes); <span class="d">4 Gy</span> (2 × 2 or 4 × 1) works but slowly</td></tr>
+    </table></div>
+    <ul>
+      <li>CTV: GTV + 2–3 cm within anatomical boundaries.</li>
+      <li>Progression to myeloma: bone 65–85%; extramedullary 10–30% at 10 y.</li>
+    </ul>
+  </article><article class="card key" data-title="MF doses">
+    <h3>Doses</h3>
+    <ul>
+      <li><b>Localised MF/CTCL:</b> <span class="d">8/2</span> preferred (CR 92% vs 30% with 4 Gy in 2 fractions). Thicker or larger lesions: 20–30 Gy in 2–3 Gy fractions.</li>
+      <li><b>TSEBT:</b> <span class="d">12 Gy</span> in 1 Gy fractions over 2–3 weeks (historically 30–36 Gy). Boost shadowed areas (soles, perineum, scalp). It can be repeated.</li>
+      <li>Technique: 80% isodose at ≥4 mm depth and 20% isodose &lt;20 mm (EORTC).</li>
+      <li>Primary cutaneous B-cell lymphoma (MZL, FCL): curative 24–30 Gy (ILROG range 20–45 Gy, bolus required); palliative <span class="d">4/2</span>.</li>
+    </ul>
+  </article>
+</section>
+<section class="panel" id="p-hn" data-tab="hn" data-label="Head and neck &amp; Skin" hidden>
+<div class="panel-head"><h2>Head and neck &amp; Skin</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Head and neck: general"><h3>Head and neck: general</h3><p class="note">From the <a href="hn-general.html">Head and neck: general</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Definitive doses">
+    <h3>Dose levels</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>35 fractions</th><th>33 fractions</th></tr>
+      <tr><td>High risk (CTV70)</td><td><span class="d">70 Gy</span> (2 Gy)</td><td><span class="d">69.96 Gy</span> (2.12 Gy)</td></tr>
+      <tr><td>Intermediate risk</td><td><span class="d">63 Gy</span> (1.8 Gy)</td><td><span class="d">59.4 Gy</span> (1.8 Gy)</td></tr>
+      <tr><td>Low risk / elective</td><td><span class="d">56 Gy</span> (1.6 Gy)</td><td><span class="d">54.12 Gy</span> (1.64 Gy)</td></tr>
+      <tr><td>Postoperative</td><td colspan="2"><span class="d">60 Gy</span> to the high-risk bed (66 Gy for ENE or positive margin); 57.6–60 Gy to the bed + 1–1.5 cm and first-echelon nodes; elective nodes lower. Usually 30 fractions</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Not fit for cisplatin:</b> weekly docetaxel with RT (Tata: median OS 15 → 26 months). Cetuximab is inferior to cisplatin in HPV+ oropharynx (RTOG 1016, De-ESCALaTE). Accelerated (6 fractions a week, DAHANCA) or hypofractionated RT alone.</li>
+      <li><b>Hypofractionation:</b> <span class="d">44–55/20</span> was non-inferior to 66/33 over 5.5 weeks (6 fractions a week) in IAEA-HYPNO for LRC, with similar late G3+ toxicity (about 20%).</li>
+      <li><b>Induction:</b> if used, give TPF (TAX 324: 5 y OS 42 → 52% vs PF). It has no proven benefit over chemoRT alone (PARADIGM, DeCIDE).</li>
+    </ul>
+  </article><article class="card key" data-title="Larynx and hypopharynx"><h3>Larynx and hypopharynx</h3><p class="note">From the <a href="hn-larynx.html">Larynx and hypopharynx</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Glottic doses">
+    <h3>Doses</h3>
+    <div class="tw wide"><table>
+      <tr><th>Stage</th><th>Dose</th></tr>
+      <tr><td>Tis</td><td><span class="d">60.75/27</span> (2.25 Gy)</td></tr>
+      <tr><td>T1</td><td><span class="d">63/28</span> (2.25 Gy) or <span class="d">66/30</span> (2.2 Gy)</td></tr>
+      <tr><td>T2</td><td><span class="d">65.25/29</span> (2.25 Gy), <span class="d">74.4/62</span> BID, accelerated (DAHANCA) or ± chemo. Some use SIB <span class="d">66/30</span> ± nodes to 54 Gy if subglottic extension</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Fields:</b> generally 5×5 or 6×6 cm opposed laterals. Superior at the thyroid notch (1 cm higher for T2). 1 cm anterior skin flash (consider 5 mm bolus). Posterior 2 cm margin.</li>
+      <li>Laser surgery gives similar voice quality, with less breathy voice but more hoarseness-related inconvenience with RT.</li>
+    </ul>
+  </article><article class="card key" data-title="Skin: BCC, SCC, melanoma and Merkel"><h3>Skin: BCC, SCC, melanoma and Merkel</h3><p class="note">From the <a href="skin.html">Skin: BCC, SCC, melanoma and Merkel</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Skin doses">
+    <h3>Dose (NCCN 2025, BED10)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Setting</th><th>Conventional</th><th>Hypofractionated examples</th></tr>
+      <tr><td>Definitive</td><td>BED10 70–93 Gy (for example 60–70 Gy)</td><td><span class="d">55/20</span> (BED10 70), <span class="d">50/15</span> (67), <span class="d">45/15</span> (59), <span class="d">40/10</span> (56), <span class="d">35/5</span> (60), <span class="d">40/5</span> (72)</td></tr>
+      <tr><td>Adjuvant</td><td>BED10 60–79 Gy (for example 60–64 Gy)</td><td><span class="d">50/20</span> (BED10 63)</td></tr>
+      <tr><td>Regional SCC</td><td>50–60 Gy margin-negative; 60–66 Gy for positive margin or ENE; 50 Gy cN0 at risk; 60–70 Gy cN+</td><td>—</td></tr>
+    </table></div>
+    <p class="note">30/5 twice weekly is now regarded as possibly obsolete.</p>
+  </article>
+</section>
+<section class="panel" id="p-sarcoma" data-tab="sarcoma" data-label="Sarcoma" hidden>
+<div class="panel-head"><h2>Sarcoma</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Benign musculoskeletal"><h3>Benign musculoskeletal</h3><p class="note">From the <a href="benign.html">Benign musculoskeletal</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Benign doses">
+    <h3>Doses</h3>
+    <div class="tw wide"><table>
+      <tr><th>Condition</th><th>Dose</th><th>Notes</th></tr>
+      <tr><td>Heterotopic ossification prophylaxis (hip)</td><td><span class="d">7/1</span></td><td>Within 4 h before surgery, or within 72 h after. 5.5/1 post-op was less effective. Spare the medial third of acetabular hardware</td></tr>
+      <tr><td>Painful osteoarthritis</td><td><span class="d">3/6</span> (0.5 Gy/fx) 2–3 times a week</td><td>A second series may be given. Knee OA sham-controlled trial: 4-month response 42% (sham) vs 70% (3 Gy)</td></tr>
+      <tr><td>Plantar fasciitis</td><td><span class="d">3–6 Gy/6</span> (0.5–1 Gy/fx) 2–3 times a week; may repeat</td><td>80% improve with conservative treatment by 12 months</td></tr>
+      <tr><td>Dupuytren's / Ledderhose (early)</td><td><span class="d">30/10</span> split (2 × 15/5, 4–12 weeks apart) or <span class="d">21/7</span></td><td>Long-term progression: observation 52%, 21 Gy 22%, 30 Gy 16%</td></tr>
+    </table></div>
+  </article>
+</section>
+<section class="panel" id="p-thorax" data-tab="thorax" data-label="Thorax" hidden>
+<div class="panel-head"><h2>Thorax</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Early-stage NSCLC (SABR)"><h3>Early-stage NSCLC (SABR)</h3><p class="note">From the <a href="thorax-early.html">Early-stage NSCLC (SABR)</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="SABR doses">
+    <h3>Dose by location</h3>
+    <div class="tw wide"><table>
+      <tr><th>Location</th><th>Regimen</th><th>BED10</th></tr>
+      <tr><td>Peripheral, away from chest wall</td><td><span class="d">54/3</span> (ESTRO favoured) or <span class="d">34/1</span> (RTOG 0915, small peripheral)</td><td>151 / 150</td></tr>
+      <tr><td>Peripheral, broad chest wall contact</td><td><span class="d">48/4</span></td><td>105</td></tr>
+      <tr><td>Central (within 2 cm of the proximal bronchial tree, or touching mediastinum)</td><td><span class="d">50/5</span> or <span class="d">60/8</span>. RTOG 0813 escalated to <span class="d">60/5</span></td><td>100–132</td></tr>
+      <tr><td>Ultracentral (PTV touching PBT, or ≤1 cm from mainstem bronchus)</td><td><span class="d">60/8</span> with PBT hotspots limited, or <span class="d">60/15</span> (NCIC BR.25) or conventional chemoRT</td><td>105 / 84</td></tr>
+    </table></div>
+    <ul>
+      <li>HyTEC doses to the PTV periphery for maximum control: T1 <span class="d">42/3, 46/4, 48/5</span>; T2 <span class="d">45/3, 50/4, 53/5</span> (each ± 1 Gy).</li>
+      <li>For squamous cell carcinoma, BED10 &gt;150 Gy (54/3) was associated with better local control in one retrospective series (3 y LC 70 → 97%).</li>
+      <li><span class="flag caution">Ultracentral</span> HILUS (56/8, tumours ≤1 cm from mainstem) had G5 toxicity of 10% overall and 18% in the main bronchus arm, mostly from fatal haemoptysis (median 15 months after treatment). Limit the PBT to about 90–95% of the prescription, not 105%.</li>
+    </ul>
+  </article>
+</section>
+<section class="panel" id="p-pall" data-tab="pall" data-label="Palliative &amp; oligometastases" hidden>
+<div class="panel-head"><h2>Palliative &amp; oligometastases</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>
+<article class="card key" data-title="Brain metastases"><h3>Brain metastases</h3><p class="note">From the <a href="pall-brain.html">Brain metastases</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="SRS doses">
+    <h3>SRS dose by size (ASTRO)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Size</th><th>Dose</th></tr>
+      <tr><td>&lt;2 cm</td><td><span class="d">20–24/1</span></td></tr>
+      <tr><td>2–3 cm</td><td><span class="d">18/1</span>, <span class="d">27/3</span> or <span class="d">30/5</span></td></tr>
+      <tr><td>3–4 cm</td><td><span class="d">27/3</span> or <span class="d">30/5</span></td></tr>
+      <tr><td>&gt;4 cm</td><td>Discuss surgery; fractionated SRS if not resectable</td></tr>
+      <tr><td>Cavity</td><td>Single fraction (12–20 Gy by size, N107C) or fractionated <span class="d">27/3</span> or <span class="d">30/5</span>; fractionate cavities &gt;3 cm</td></tr>
+    </table></div>
+    <ul>
+      <li>Radionecrosis: single-fraction brain V12 &gt;8–8.5 cc → &gt;10% risk. 27/3: keep V18 &lt;30.2 cc (about 5% risk). Cavity 27/3: V24 &lt;16.8 cc.</li>
+      <li>Brainstem (JLGK0901): 20 Gy if &lt;1 cc, 18 Gy if &lt;4 cc, 16 Gy if &lt;10 cc.</li>
+      <li>HA-WBRT (NRG CC001): hippocampal D100% ≤9 Gy, Dmax ≤16 Gy; PTV D98% ≥25 Gy.</li>
+    </ul>
+  </article><article class="card key" data-title="Whole-brain radiotherapy principles"><h3>Whole-brain radiotherapy principles</h3><p class="note">From the <a href="pall-wbrt.html">Whole-brain radiotherapy principles</a> page, where sources and trials are cited.</p></article><article class="card" data-title="Dose and PCI trials">
+    <h3>Dose and PCI</h3>
+    <div class="trial"><b>Cochrane (Tsao 2018)</b><i>54 trials · 11,898 patients</i><span>Higher-BED schedules vs <span class="d">30/10</span>: no OS benefit (HR 0.97). Lower-BED schedules: worse OS (HR 1.21) and worse neurological function.</span></div>
+    <div class="trial"><b>DeAngelis 1989</b><i>Retrospective · long survivors after WBRT</i><span>Severe dementia in 11% of 1-year survivors. All cases had high dose per fraction (3–6 Gy).</span></div>
+    <div class="trial"><b>PCI 99-01 / RTOG 0212</b><i>720 · LS-SCLC in CR · PCI <span class="d">25/10</span> vs 36 Gy</i><span>36 Gy didn't reduce brain metastases, gave worse 2 y OS (42 → 37%), and more chronic neurotoxicity at 12 months (p=0.02). Age was the strongest predictor of neurotoxicity.</span></div>
+    <div class="trial"><b>MAVERICK (SWOG S1827, WCLC 2026)</b><i>304 · LS and ES-SCLC, no brain metastases on MRI · MRI ± PCI</i><span>Better cognitive failure–free survival with MRI alone (HR 0.60). Preliminary OS HR 0.90 (final analysis pending). Grade 3–5 adverse events 7.9 → 0.8%.</span></div>
+    <div class="trial"><b>RTOG 9508</b><i>333 · 1–3 metastases · WBRT ± SRS boost</i><span>OS benefit for a single metastasis only (median 4.9 → 6.5 months).</span></div>
+  </article><article class="card key" data-title="Oligometastases and general palliation"><h3>Oligometastases and general palliation</h3><p class="note">From the <a href="pall-oligo.html">Oligometastases and general palliation</a> page, where sources and trials are cited.</p></article><article class="card key" data-title="Palliative regimens">
+    <h3>Regimens</h3>
+    <div class="tw wide"><table>
+      <tr><th>Site / symptom</th><th>Regimens</th></tr>
+      <tr><td>Lung (haemoptysis, cough, obstruction)</td><td><span class="d">10/1</span>, <span class="d">17/2</span> (1 week apart; cord &lt;11 Gy), <span class="d">20/5</span>, <span class="d">30/10</span>. 30/10 gives modestly better survival and durability in fit patients</td></tr>
+      <tr><td>SVC obstruction</td><td><span class="d">30/10</span>, <span class="d">20/5</span>, <span class="d">37.5/15</span></td></tr>
+      <tr><td>Head and neck</td><td><span class="d">30/5</span> if longer expected survival; QUAD shot <span class="d">14.8/4</span> (3.7 Gy BID × 2 days) or 20/5 if median survival <td>30/10, 20/5, 37.5/15 or QUAD shot <span class="d">14.8/4</span> BID over 2 days</td>lt;4 months</td></tr>
+      <tr><td>Bleeding (gynae, bladder, GI)</td><td><span class="d">30/10</span>, <span class="d">20/5</span>, <span class="d">37.5/15</span> or QUAD shot 3.7 Gy BID × 2 days (repeat every 2–4 weeks)</td></tr>
+      <tr><td>Painful liver (whole liver)</td><td><span class="d">8/1</span>; keep mean dose to both kidneys &lt;4.5 Gy</td></tr>
+      <tr><td>Coeliac plexus pain</td><td>Radiosurgery <span class="d">25/1</span> to the plexus (T12–L2), bowel within 0.5 cm limited to 10 Gy</td></tr>
+    </table></div>
+  </article>
+</section>
+</main>
+</div>
+<footer><p>Calculators use the linear-quadratic model and are for education and cross-checking only; they are not a medical device. Verify every result independently. Consent numbers and doses are copied from the tumour-site pages, where the sources are cited. Follow departmental protocols.</p></footer>
+<script src="assets/site.js"></script>
+<script src="assets/extras.js"></script>
+</body>
+</html>

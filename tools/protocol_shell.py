@@ -243,6 +243,9 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot):
 {fonts}
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/protocol.css">
+<link rel="stylesheet" href="../assets/extras.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#10243f">
 <style>{extra_css}</style>
 </head>
 <body class="proto">
@@ -271,6 +274,7 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot):
 </div>
 {foot}
 <script src="../assets/site.js"></script>
+<script src="../assets/extras.js"></script>
 </body>
 </html>
 '''
