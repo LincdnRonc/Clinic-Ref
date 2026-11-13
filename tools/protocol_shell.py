@@ -169,7 +169,30 @@ def _head_parts(head):
     return num, title, (_text(eyebrow) if eyebrow else ''), ' '.join(pills)
 
 
-def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot):
+MERGED_QUICK = ('ctr-breast.html','ctr-hn.html','ctr-cns.html','ctr-anal.html','ctr-gyn.html','ctr-heme.html','ctr-spine.html','ctr-bladder.html','ctr-upper-gi.html','ctr-thorax.html','ctr-kidney-liver.html')
+
+
+def _quick_panel(quick_html):
+    q = BeautifulSoup(quick_html, 'html.parser')
+    for a in q.find_all('a', href=True):
+        if not re.match(r'https?:|#|\.\./|mailto:', a['href']):
+            a['href'] = '../' + a['href']
+    parts = []
+    secs = q.select('section.panel')
+    for sec in secs:
+        h2 = sec.select_one('.panel-head h2')
+        if h2 and len(secs) > 1:
+            parts.append(f'<p class="sub">{html.escape(_text(h2))}</p>')
+        for note in sec.select('p.note'):
+            if re.search(r'Full guide|Full-depth', note.get_text()):
+                note.decompose()
+        parts += [str(c) for c in sec.select('article.card')]
+    return ('<section class="panel" id="p-quick" data-tab="quick" data-label="Quick reference">\n  <div class="panel-head"><h2>Quick reference</h2>'
+            '<p class="lede">The one-screen version: volumes, margins and pitfalls. Use the numbered tabs for the full guide, or Contour now for tables and diagrams only.</p><div class="jump"></div></div>\n  '
+            + ''.join(parts) + '\n</section>')
+
+
+def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, quick_html=None):
     soup = BeautifulSoup(src_html, 'html.parser')
     for s in soup.find_all('script'):
         s.decompose()
@@ -183,6 +206,8 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot):
     if bar:
         for a in bar.find_all('a'):
             if 'index.html' in (a.get('href') or '') and a.get('href', '').rstrip('#').endswith('index.html'):
+                continue
+            if (a.get('href') or '').split('#')[0].split('/')[-1] in MERGED_QUICK:
                 continue
             related.append(f'<a href="{a.get("href")}">{html.escape(_text(a))}</a>')
         bar.decompose()
@@ -231,6 +256,8 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot):
             f'<section class="panel" id="p-{seg["id"]}" data-tab="{seg["id"]}" data-label="{html.escape(label)}"'
             f'{"" if not panels else " hidden"}>\n  <div class="panel-head">{head_html}<div class="jump"></div></div>\n  {cards_html}\n</section>')
 
+    if quick_html:
+        panels = [_quick_panel(quick_html)] + [p.replace('data-label="Overview">', 'data-label="Overview" hidden>', 1) for p in panels]
     tree_rel = re.sub(r'href="(?!https?:|#|\.\./)', 'href="../', tree_html)
     rel = (' · '.join(related))
     xref = f'<p class="xref"><b>Related:</b> {rel}</p>' if rel else ''

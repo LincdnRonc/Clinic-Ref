@@ -1,0 +1,27 @@
+<section class="panel" id="p-liver" data-tab="liver" data-label="Liver SBRT" hidden>
+  <div class="panel-head">
+    <h2>Liver SBRT: HCC and metastases</h2>
+    <p class="lede">There is no ESTRO-type atlas for the liver; volumes come from trial protocols (RTOG 1112, the Princess Margaret series) and single-institution practice. Fiducials and multiphase imaging do most of the work.</p>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Liver volumes">
+    <h3>Volumes</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>Definition</th></tr>
+      <tr><td>Imaging</td><td>Multiphase contrast CT and MRI (arterial, portal venous and delayed), registered to the planning scan in the same breathing phase. Fiducials help with registration and IGRT.</td></tr>
+      <tr><td>GTV (HCC)</td><td>Arterial-phase enhancing tumour with portal venous or delayed washout, plus any tumour vein thrombus (portal vein or IVC). Previously treated (TACE) areas: use the MRI enhancement, not the lipiodol.</td></tr>
+      <tr><td>GTV (metastases)</td><td>Lesion on the phase where it is most conspicuous (often portal venous or hepatobiliary-phase MRI).</td></tr>
+      <tr><td>CTV</td><td>Often equal to the GTV, or a small margin (0–5 mm) by protocol.</td></tr>
+      <tr><td>ITV / PTV</td><td>4D-CT ITV, or breath-hold / gating; PTV by IGRT method.</td></tr>
+    </table></div>
+    <p class="note flag caution">CTV and PTV margins vary by trial; check the protocol you follow (e.g. RTOG 1112).</p>
+  </article>
+  <article class="card" data-title="Liver OARs">
+    <h3>OARs (Jabbour 2014 atlas)</h3>
+    <ul>
+      <li>Liver minus GTV (sometimes minus the sum of GTVs), for mean dose and the volume of liver spared (e.g. at least 700 cc below a threshold dose, per protocol).</li>
+      <li>Stomach, duodenum, bowel, oesophagus, heart, kidneys, cord, chest wall / ribs, and the central biliary tree for central tumours.</li>
+    </ul>
+    <p class="note">Full OAR protocol (organ definitions on CT and MRI, cHBT, MR-linac re-contouring, constraints): <a href="contouring/liver-sbrt.html">Liver SBRT OAR contouring guide</a>.</p>
+  </article>
+</section>

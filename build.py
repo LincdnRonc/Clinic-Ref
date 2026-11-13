@@ -215,7 +215,15 @@ def _link(l):
     if l.startswith('doi:'): return f'https://doi.org/{l[4:]}', 'DOI'
     if l.startswith('q:'): return 'https://pubmed.ncbi.nlm.nih.gov/?term='+quote_plus(l[2:]), 'PubMed search'
     return l, 'Website'
-LIB_FULL = [('contouring/thorax.html','Thorax','Thorax contouring guide','',('thorax',))]
+LIB_FULL = [(f,'',n,'',t) for f,n,t in [
+ ('contouring/breast.html','Breast contouring guide',('breast',)),('contouring/thorax.html','Thorax contouring guide',('thorax',)),
+ ('contouring/head-neck.html','Head and neck contouring guide',('hn',)),('contouring/cns.html','CNS contouring guide',('cns',)),
+ ('contouring/oesophagus.html','Oesophagus and GOJ contouring guide',('gi',)),('contouring/pancreas-stomach.html','Pancreas and stomach contouring guide',('gi',)),
+ ('contouring/biliary.html','Cholangiocarcinoma and gallbladder contouring guide',('gi',)),('contouring/liver-sbrt.html','Liver SBRT OAR contouring guide',('gi',)),
+ ('contouring/rectal-long-course.html','Rectal long-course atlas',('gi',)),('contouring/anal.html','Anal canal contouring guide',('gi',)),
+ ('contouring/prostate.html','Prostate contouring guide',('gu',)),('contouring/bladder.html','Bladder contouring guide',('gu',)),
+ ('contouring/gynae.html','Gynaecological contouring guide',('gyn',)),('contouring/lymphoma.html','Lymphoma ISRT contouring guide',('heme',)),
+ ('contouring/spine-bone.html','Spine and bone SBRT contouring guide',('sbrt',))]]
 def build_library():
     out=[]
     for i,(tid,label,lede,cards_) in enumerate(LIB):
@@ -238,19 +246,10 @@ def build_library():
 # (file, short, long, desc, library tabs)
 CONTOUR = [
  ('ctr-library.html','Library','Contouring guideline library','Every major international contouring guideline and atlas by tumour site, old and new, with links.',()),
- ('ctr-breast.html','Breast','Breast contouring guide','ESTRO breast, chest wall and nodal borders, tumour bed, implant reconstruction, cardiac OARs.',('breast',)),
- ('ctr-hn.html','H&N','Head and neck contouring guide','5 + 5 mm CTV-P, neck levels I–X landmarks, level selection, post-op, PNI and OARs.',('hn',)),
- ('ctr-cns.html','CNS','CNS contouring guide','Glioblastoma (15 mm CTV), IDH-mutant glioma, meningioma and skull base, cavity SRS, hippocampus.',('cns',)),
- ('ctr-upper-gi.html','Upper GI','Upper GI contouring guide','Oesophagus/GEJ margins, gastric nodal stations, post-op and SBRT pancreas, abdominal OARs.',('gi',)),
- ('ctr-anal.html','Anal','Anal canal contouring guide','AGITG regions A, B and C, primary and nodal margins, inguinal borders, pitfalls.',('gi',)),
- ('ctr-gyn.html','Gynae','Gynae contouring guide','Intact cervix CTV components, post-op cuff ITV, vulva, and IGABT HR-CTV / IR-CTV.',('gyn',)),
- ('ctr-heme.html','Lymphoma','Lymphoma ISRT contouring guide','ILROG pre-chemo GTV to ISRT CTV, indolent RT alone, and extranodal organ CTVs.',('heme',)),
  ('ctr-sarcoma.html','Sarcoma','Sarcoma contouring guide','Extremity 3 cm / 1.5 cm CTV with oedema, post-op, and retroperitoneal volumes.',('sarc',)),
- ('ctr-bladder.html','Bladder','Bladder contouring guide','Whole-bladder and tumour CTV, simulation and adaptive IGRT, post-cystectomy side walls and bed.',('gu',)),
- ('ctr-kidney-liver.html','Kidney & liver','Kidney and liver SBRT contouring guide','Primary kidney SABR (IROCK) and liver SBRT: imaging, GTV rules, motion, OARs.',('gu','gi')),
+ ('ctr-kidney-liver.html','Kidney SABR','Kidney SABR contouring guide','Primary kidney SABR (IROCK): GTV, ITV and PTV, motion management and OARs. Quick guide only.',('gu',)),
  ('ctr-skin.html','Skin','Skin contouring guide','BCC/cSCC clinical margins, electron and orthovoltage fields, post-op cSCC, PNI, Merkel and melanoma.',('sarc',)),
  ('ctr-peds.html','Paeds','Paediatric contouring guide','CSI CTV pitfalls, CNS boosts, pre-chemo CTV rules for RMS, Ewing, Wilms, neuroblastoma; paediatric OARs.',('peds',)),
- ('ctr-spine.html','Spine & bone','Spine and bone SBRT contouring guide','ISRC six-sector rules, post-op epidural donut, sacral and non-spine bone CTV.',('sbrt',)),
 ]
 (root/'src'/'ctr-library.html').write_text(build_library())
 CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
@@ -272,6 +271,7 @@ CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
 SOFTWARE = [
  ('ctr-mim.html','MIM shortcuts','MIM contouring shortcuts','MIM 7.4 default hotkeys, creating your own, mouse actions, contouring tools, H&N OAR recipes, saving and recovery. Printable PDF.'),
  ('ctr-monaco.html','Monaco shortcuts','Monaco contouring shortcuts','Elekta Monaco hot keys, navigation, contouring toolkit, Monaco-specific gotchas, workflow and W/L presets. Printable PDF.')]
+CNAV = CNAV[:1] + sorted(CNAV[1:], key=lambda c: c[1].lower())
 CNAV += SOFTWARE
 # ---------------- Tools: calculators, consent numbers, doses at a glance, what's new ----------------
 TOOLS = [
@@ -336,7 +336,8 @@ for f,short,long,desc in CNAV:
     if not f.startswith('contouring/'): continue
     srcp = root/'src'/f
     if not srcp.exists(): continue
-    (root/f).write_text(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR))
+    _qp = root/'src'/'quick'/pathlib.Path(f).name
+    (root/f).write_text(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR, _qp.read_text() if _qp.exists() else None))
 # Retired URLs: lung protocol and thorax quick guide merged into contouring/thorax.html
 def _redirect(path, target, tabmap=None):
     tm = repr(tabmap or {}).replace("'", '"')
@@ -347,6 +348,17 @@ def _redirect(path, target, tabmap=None):
 ''')
 _redirect('contouring/lung.html', 'thorax.html')
 _redirect('ctr-thorax.html', 'contouring/thorax.html', {'nsclc':'s3','sbrt':'s2','oar':'s8'})
+def _redirect2(path, default, bytab=None):
+    tm = _json_dumps(bytab or {})
+    (root/path).write_text(f'''<!DOCTYPE html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved</title>
+<meta http-equiv="refresh" content="0; url={default}">
+<script>var m={tm};location.replace(m[location.hash.slice(1)]||"{default}");</script>
+</head><body><p>This quick guide is now the Quick reference tab of the <a href="{default}">full contouring guide</a>.</p></body></html>
+''')
+from json import dumps as _json_dumps
+for _old,_new in [('breast','breast'),('hn','head-neck'),('cns','cns'),('anal','anal'),('gyn','gynae'),('heme','lymphoma'),('spine','spine-bone'),('bladder','bladder')]:
+    _redirect2(f'ctr-{_old}.html', f'contouring/{_new}.html#quick')
+_redirect2('ctr-upper-gi.html', 'contouring/oesophagus.html#quick', {'stomach':'contouring/pancreas-stomach.html#quick','pancreas':'contouring/pancreas-stomach.html#quick'})
 for gid,gname,_,pages,foot in GROUPS:
     for g in pages:
         (root/g[0]).write_text(page(*g, pages, gname, gid, foot))
