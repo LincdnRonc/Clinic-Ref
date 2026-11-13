@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lymphoma ISRT Target Volume Delineation Protocol</title>
+<style>
+  :root{
+    --navy:#10243f; --navy2:#1d3a5f;
+    --teal:#14756b; --teal-bg:#e7f3f1;
+    --amber:#9a5a00; --amber-bg:#fdf3e3;
+    --rust:#8a2f23; --rust-bg:#fbeae7;
+    --paper:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6b7c;
+    --rule:#d6dde6;
+    --rule-strong:#14756b;
+    --dose-elective:#2f6fb0;
+    --dose-bed:#9a5a00;
+    --dose-sib:#c0721c;
+    --dose-boost:#8a2f23;
+    --dose-prostate:#b03a2e;
+    --flag:#8a2f23; --flag-bg:#fbeae7;
+    --key-bg:#e7f3f1;
+    --petrol:#10243f;
+    --petrol-2:#14756b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;background:#e6ebf0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:10.3px;line-height:1.5;
+  }
+  .page{
+    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
+    padding:16mm 17mm 14mm;position:relative;
+    box-shadow:0 1px 8px rgba(16,36,63,.16);
+    display:flex;flex-direction:column;
+  }
+  @page{size:A4;margin:13mm;}
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .page + .page{page-break-before:always;}
+    h2,h3{page-break-after:avoid;}
+    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
+  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
+  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
+  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
+  p{margin:.35em 0;}
+  a{color:var(--teal);}
+  .lead{font-size:11px;color:var(--muted);}
+  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
+  .sechead{margin:0 0 .5em;}
+  .sechead .eyebrow{display:block;margin-bottom:3px;}
+  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
+  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
+  .masthead h1{color:#fff;}
+  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
+  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
+  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
+  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
+  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
+  tbody tr:nth-child(even){background:#eef2f6;}
+  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
+  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
+  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
+  .p-elect{background:var(--dose-elective);}
+  .p-bed{background:var(--dose-bed);}
+  .p-sib{background:var(--dose-sib);}
+  .p-boost{background:var(--dose-boost);}
+  .p-pros{background:var(--dose-prostate);}
+  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
+  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
+  .flag .lbl:before{content:"\26A0  ";}
+  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
+  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
+  ol.steps li{margin:.28em 0;padding-left:.15em;}
+  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
+  ul.tight{margin:.25em 0;padding-left:1.15em;}
+  ul.tight li{margin:.18em 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid2>div{min-width:0;}
+  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
+  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  svg{display:block;width:100%;height:auto;}
+  .kv{font-size:9.3px;}
+  .kv b{color:var(--navy);}
+  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
+  .ref{font-size:8.6px;line-height:1.4;}
+  .ref li{margin:.2em 0;}
+  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
+  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
+  .named .pos{font-weight:700;color:var(--amber);}
+  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc td{border:none;padding:2px 4px;}
+  .toc .n{color:var(--teal);font-weight:700;width:24px;}
+  .toc .pg{text-align:right;color:var(--muted);width:32px;}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
+  .small{font-size:8.6px;color:var(--muted);}
+</style>
+
+<style id="site-extra">
+  .p-gtv{background:#1d4f91;}
+  .p-hi{background:#b03a2e;}
+  .p-lo{background:#2f6fb0;}
+  .p-ctv{background:#14756b;}
+  .p-ptv{background:#a07a00;}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:8.4px;color:var(--muted);}
+  .follow{border-left:4px solid #9b1c3f;}
+</style>
+<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #9b1c3f}</style></head>
+
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../heme-hodgkin.html" style="color:#f6bfd0;text-decoration:none">Hodgkin page</a><a href="../heme-nhl.html" style="color:#f6bfd0;text-decoration:none">NHL page</a><a href="../heme-other.html" style="color:#f6bfd0;text-decoration:none">Other haematology</a><a href="../ctr-heme.html" style="color:#f6bfd0;text-decoration:none">Haematology quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<section class="page">
+<div class="masthead">
+<span class="eyebrow">Contouring Protocol · Haematological Radiation Oncology</span>
+<h1>Lymphoma — Involved Site RT (ISRT) Delineation Protocol</h1>
+<p class="sub">ILROG involved-site volumes for <b>early indolent lymphoma treated with RT alone</b>, <b>early Hodgkin and DLBCL after limited chemotherapy</b> (including mediastinal disease and breath hold), <b>advanced disease and residual masses</b>, <b>primary extranodal lymphoma</b> (stomach, orbit, sinonasal, skin, bone) and <b>relapsed/refractory or palliative</b> treatment, with doses, organ-at-risk priorities and worked examples from the ILROG mini-atlas.</p>
+<div class="pillrow">
+<span class="pill p-gtv">Pre-chemo GTV</span>
+<span class="pill p-hi">Post-chemo / residual GTV</span>
+<span class="pill p-ctv">CTV (ISRT)</span>
+<span class="pill p-ptv">ITV / PTV</span>
+</div>
+<div class="meta">Wirth 2020 ILROG ISRT overview · Specht 2014 ILROG Hodgkin field and dose guidelines · ILROG lymphoma mini-atlas (Dabaja et al.) — Version 1.0 · Nov 2026</div>
+</div>
+<div class="callout">
+<span class="lbl">Governing principles of this protocol</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>No departmental lymphoma protocol is in the folder</b>; this page follows ILROG (Wirth 2020; Specht 2014). ITV and PTV follow institutional practice (ILROG) <span class="chk">CHECK</span>.</li>
+<li><b>Image the patient as you will treat them</b>: ideally PET-CT in the treatment position before chemotherapy; otherwise fuse and correct for arm, neck and breathing differences.</li>
+<li><b>The CTV keeps the original cranio-caudal extent</b> of disease but follows tumour shrinkage axially; uninvolved organs that were only displaced (lung, muscle, kidney) are excluded.</li>
+<li><b>Extranodal lymphoma usually means the whole organ</b> (e.g. whole stomach for gastric MZL), with exceptions such as conjunctival-only orbital disease.</li>
+<li><b>Low doses, wide benefits</b>: 20–30 Gy is typical; keep the 5 Gy isodose off breast, heart and salivary glands where possible (mini-atlas).</li>
+</ul>
+</div>
+<h3 style="margin-top:1.1em;">Contents</h3>
+<table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Terminology, imaging and simulation</a></td><td class="pg">2</td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Scenario A — Early indolent lymphoma, RT alone</a></td><td class="pg">3</td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario B — Early Hodgkin and DLBCL after limited chemotherapy; mediastinum</a></td><td class="pg">3</td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario C — Advanced disease, residual masses, relapsed/refractory</a></td><td class="pg">4</td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Scenario D — Primary extranodal lymphoma</a></td><td class="pg">5</td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Pearls, doses, margins and OARs</a></td><td class="pg">6</td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Names, RayStation and references</a></td><td class="pg">7</td></tr>
+</table>
+<div class="foot"><span>Lymphoma ISRT Delineation Protocol · v1.0</span><span>Page 1</span></div>
+</section>
+
+<section class="page" id="s1">
+<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Terminology, imaging and simulation</h2></div>
+<table>
+<thead><tr><th style="width:18%">Term</th><th>Meaning (ILROG)</th></tr></thead>
+<tbody>
+<tr><td class="b">Pre-chemo GTV</td><td>Disease evident before systemic therapy (generally PET-positive); drawn on the planning CT from fused or carefully transferred staging imaging</td></tr>
+<tr><td class="b">Post-chemo GTV</td><td>Radiologically evident or biopsy-proven disease after systemic therapy; always part of the CTV</td></tr>
+<tr><td class="b">CTV</td><td>RT alone: GTV + adjacent nodes. Combined modality: post-chemo GTV + the tissue that held the initially involved nodes and infiltrated sites, adjusted for shrinkage; plus specific at-risk sites</td></tr>
+<tr><td class="b">Equivocal nodes</td><td>Enlarged (&gt;1 cm) but PET-negative; normal-size with equivocal uptake; or increased number/asymmetric. Include by clinical context</td></tr>
+<tr><td class="b">ITV</td><td>CTV + internal motion: 4D-CT or fluoroscopy; chest/upper abdomen may need 1.5–2 cm superior–inferior; not needed in the neck (Specht 2014)</td></tr>
+<tr><td class="b">PTV</td><td>Institutional; mini-atlas examples: 3 mm head and neck (mask), 5 mm sinus/axilla/bone, 7 mm stomach, 8 mm groin</td></tr>
+</tbody>
+</table>
+<h3>1.1  Imaging and simulation</h3>
+<ul class="tight">
+<li>Best: pre-chemotherapy PET-CT in the treatment position with the planned immobilisation; otherwise fuse and correct. Review PET and structural imaging with a PET physician or radiologist (Wirth).</li>
+<li>Arms: PET is often done arms up, but treating young women arms down (or akimbo) reduces breast in the field — expect shifts in the axilla and supraclavicular region (Wirth Fig. 2; mini-atlas axilla).</li>
+<li>Deep-inspiration breath hold for mediastinal disease moves the CTV away from heart and breast but can complicate fusion with free-breathing staging scans (Wirth Fig. 3, 11).</li>
+<li>After bulky disease shrinks, normal structures move; compare landmarks on staging and planning scans and add an individual radial/cranio-caudal expansion where uncertain.</li>
+<li>Nodes &gt;5 cm apart can be planned as separate CTVs (Specht 2014).</li>
+</ul>
+<div class="foot"><span>Lymphoma ISRT Delineation Protocol · v1.0</span><span>Page 2</span></div>
+</section>
+
+<section class="page" id="s2">
+<div class="sechead"><span class="eyebrow">Section 2 · Scenario A</span><h2><span class="sectnum">2</span>Early indolent lymphoma treated with RT alone (FL, nodal MZL, NLPHL)</h2></div>
+<div class="grid2">
+<div>
+<ul class="tight">
+<li><b>GTV</b>: PET-positive nodes plus nearby enlarged or equivocal nodes (especially in low-avidity disease).</li>
+<li><b>CTV</b>: GTV + adjacent visible nodes (even if not enlarged); may extend to the boundaries of the involved nodal compartment axially and several cm cranio-caudally, depending on imaging uncertainty.</li>
+<li>Near salivary glands or breast in young patients, a minimal expansion may be used.</li>
+<li>Historical series used 3–6 cm field margins with excellent control; smaller margins are usual now.</li>
+<li><b>Dose</b>: FL 24–30 Gy (24 Gy equivalent to higher doses in a randomised trial); NLPHL 30 Gy (Specht: 30–35 Gy).</li>
+</ul>
+<p class="src">Mini-atlas groin case: stage IA grade 2 FL; GTV, CTV, 8 mm PTV; 24 Gy IMRT sparing marrow, genitalia, bladder and femur.</p>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 200" role="img" aria-label="Schematic of ISRT CTV for indolent lymphoma compared with chemo-responsive disease">
+<rect width="300" height="200" fill="#fff"/>
+<text x="20" y="18" font-size="8" fill="#555">RT alone (indolent)</text><text x="170" y="18" font-size="8" fill="#555">After chemotherapy (HL/DLBCL)</text>
+<line x1="150" y1="10" x2="150" y2="190" stroke="#ddd"/>
+<ellipse cx="75" cy="80" rx="16" ry="14" fill="rgba(29,79,145,.6)" stroke="#1d4f91"/><ellipse cx="80" cy="115" rx="10" ry="8" fill="rgba(29,79,145,.6)" stroke="#1d4f91"/><circle cx="58" cy="140" r="5" fill="none" stroke="#1d4f91" stroke-dasharray="2 2"/>
+<path d="M40 50 Q110 46 112 90 Q114 150 70 160 Q36 156 36 120 Q32 80 40 50 Z" fill="rgba(155,28,63,.10)" stroke="#9b1c3f" stroke-width="1.6"/>
+<text x="20" y="182" font-size="7" fill="#9b1c3f">CTV: GTV + adjacent nodes +</text><text x="20" y="191" font-size="7" fill="#9b1c3f">compartment / cm cranio-caudally</text>
+<path d="M190 50 Q250 50 254 100 Q250 150 196 150 Q176 100 190 50 Z" fill="none" stroke="#1d4f91" stroke-dasharray="4 2"/><text x="230" y="44" font-size="7" fill="#1d4f91">pre-chemo GTV</text>
+<ellipse cx="214" cy="100" rx="10" ry="18" fill="rgba(29,79,145,.6)" stroke="#1d4f91"/>
+<path d="M200 52 Q228 50 232 100 Q228 148 204 148 Q196 100 200 52 Z" fill="rgba(155,28,63,.10)" stroke="#9b1c3f" stroke-width="1.6"/>
+<text x="160" y="182" font-size="7" fill="#9b1c3f">CTV: full cranio-caudal extent,</text><text x="160" y="191" font-size="7" fill="#9b1c3f">axially follows shrinkage</text>
+</svg>
+<figcaption>Original schematic (coronal). Left: wider CTV without chemotherapy. Right: post-chemo CTV keeps the original length but not the displaced tissue.</figcaption>
+</figure>
+</div>
+</div>
+<hr class="soft"/>
+<div class="sechead" id="s3"><span class="eyebrow">Section 3 · Scenario B</span><h2><span class="sectnum">3</span>Early Hodgkin and DLBCL after limited chemotherapy; mediastinum</h2></div>
+<ul class="tight">
+<li><b>CTV</b>: the volume of all initially involved nodes, including those that normalised; separate distant sites need not be joined. Original cranio-caudal extent; axially adjusted for shrinkage. Include initially infiltrated lung or chest wall. Consider contiguous equivocal nodes; do not add initially normal nodes.</li>
+<li>Residual PET-positive lesion = post-chemo GTV; if it sits in a larger PET-negative mass, include the whole CT mass and initial sites.</li>
+<li>GHSG favourable after 2 ABVD: some use a slightly more generous volume (as for RT alone).</li>
+<li><b>Mediastinum</b>: well-defined anatomic boundaries allow precise CTV; give a generous supraclavicular CTV for arm-position change (Wirth Fig. 7). If bulky lower mediastinal or lung/chest wall disease cannot be treated safely even with IMRT/VMAT, DIBH or protons, consider full chemotherapy with a "modified ISRT" to initial bulk, slow responders and residual mass.</li>
+</ul>
+<table>
+<thead><tr><th style="width:36%">Setting</th><th>Dose (ILROG)</th></tr></thead>
+<tbody>
+<tr><td class="b">EORTC favourable ESHL, PET CR after 3–4 ABVD</td><td>30 Gy (ESMO suggests 20 Gy)</td></tr>
+<tr><td class="b">GHSG favourable after 2 ABVD</td><td>20 Gy</td></tr>
+<tr><td class="b">GHSG unfavourable in CR (Specht)</td><td>30 Gy</td></tr>
+<tr><td class="b">Residual PET-positive HL site</td><td>36–40 Gy</td></tr>
+<tr><td class="b">DLBCL in PET CR</td><td>30–36 Gy</td></tr>
+<tr><td class="b">DLBCL limited PET-positive sites after 2–4 cycles</td><td>≥36–40 Gy</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Lymphoma ISRT Delineation Protocol · v1.0</span><span>Page 3</span></div>
+</section>
+
+<section class="page" id="s4">
+<div class="sechead"><span class="eyebrow">Section 4 · Scenario C</span><h2><span class="sectnum">4</span>Advanced disease, residual masses, relapsed/refractory</h2></div>
+<ul class="tight">
+<li><b>After a full course</b> (typically 6 cycles): CTV = any residual GTV plus a subset of sites at higher risk (initial bulk, slow responders).</li>
+<li><b>Relapsed/refractory with salvage ± transplant</b>: CTV = some or all relapse sites and selected sites of prior disease. Small cardiophrenic nodes may be omitted after chemotherapy when it would add much heart dose (Wirth).</li>
+<li>Mini-atlas mesenteric case: consolidation to the site of the original bulky mass, 30 Gy; CTV only where the mass was, accounting for response, so it is smaller than the original tumour.</li>
+<li>Specht 2014: residual mass after chemotherapy may be more refractory — consider 36–40 Gy.</li>
+</ul>
+<hr class="soft"/>
+<div class="sechead" id="s5"><span class="eyebrow">Section 5 · Scenario D</span><h2><span class="sectnum">5</span>Primary extranodal lymphoma</h2></div>
+<table>
+<thead><tr><th style="width:16%">Site</th><th>CTV</th><th>PTV / dose (mini-atlas or ILROG)</th></tr></thead>
+<tbody>
+<tr><td class="b">Stomach (MZL, DLBCL)</td><td>Whole stomach + suspicious adjacent nodes; breath hold or empty-stomach protocol; CBCT shows large shape changes</td><td>PTV 7 mm in the mini-atlas; 30 Gy consolidation (DLBCL case); MZL 24–30 Gy</td></tr>
+<tr><td class="b">Orbit (MZL)</td><td>Conjunctival disease: conjunctival sac only. Posterior soft tissue mass: whole orbit. Lacrimal gland may be treated as its own organ</td><td>PTV 3 mm; 24 Gy (4 Gy/2 for palliation or recurrence)</td></tr>
+<tr><td class="b">Sinonasal / head and neck</td><td>Original longitudinal extent, axially following regression; fat between muscles, avoiding uninvolved muscle, parotid and submandibular glands</td><td>PTV 3 mm (mask) or 5 mm; 30 Gy consolidation (DLBCL); nasal NK/T-cell 54 Gy (50 Gy acceptable) with PTV 3 mm</td></tr>
+<tr><td class="b">Salivary, thyroid, breast (MZL)</td><td>Usually whole organ; partial organ only case by case</td><td>24–30 Gy</td></tr>
+<tr><td class="b">Skin</td><td>Lesion with margin; partial organ</td><td>Cutaneous MZL 4 Gy/2; CD30+ ALCL palliative 6 Gy/3 (mini-atlas)</td></tr>
+<tr><td class="b">Bone (myeloma, palliative)</td><td>Problem lesion only; avoid critical organs</td><td>PTV 5 mm; 24 Gy example</td></tr>
+</tbody>
+</table>
+<p class="src">Extranodal lymphomas track along walls, cavities and planes and move with organs, so ITV/PTV need image guidance and motion management (Wirth). 24–30 Gy is standard for MZL; 4 Gy gives durable control in many and is under trial (Wirth).</p>
+<div class="foot"><span>Lymphoma ISRT Delineation Protocol · v1.0</span><span>Page 4</span></div>
+</section>
+
+<section class="page" id="s6">
+<div class="sechead"><span class="eyebrow">Section 6</span><h2><span class="sectnum">6</span>Pearls, doses, margins and OARs</h2></div>
+<div class="grid2">
+<div>
+<h3>6.1  Pearls</h3>
+<ul class="tight">
+<li>Draw the pre-chemo GTV on the planning CT first; then subtract what was only displaced normal tissue.</li>
+<li>Keep the full cranio-caudal extent even when the axial width shrinks.</li>
+<li>Check arm position: PET arms up vs treatment arms down changes axillary and supraclavicular anatomy.</li>
+<li>Assess the 5 Gy isodose on breast, heart, lungs, parotids and thyroid, not only the prescription coverage (mini-atlas).</li>
+<li>Pericardial or pleural extent and displaced vs infiltrated lung are common uncertainties after bulky mediastinal disease (Wirth Fig. 1).</li>
+</ul>
+</div>
+<div>
+<h3>6.2  Doses at a glance</h3>
+<table>
+<thead><tr><th>Disease</th><th>Dose</th></tr></thead>
+<tbody>
+<tr><td class="b">FL / nodal MZL, RT alone</td><td>24–30 Gy (24 Gy standard)</td></tr>
+<tr><td class="b">Extranodal MZL</td><td>24–30 Gy; 4 Gy/2 palliative</td></tr>
+<tr><td class="b">NLPHL</td><td>30 Gy (30–35)</td></tr>
+<tr><td class="b">ESHL consolidation</td><td>20 Gy (GHSG fav.) / 30 Gy</td></tr>
+<tr><td class="b">DLBCL consolidation</td><td>30–36 Gy; residual 36–40 Gy</td></tr>
+<tr><td class="b">Residual PET+ HL</td><td>36–40 Gy</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3>6.3  OARs</h3>
+<p>ILROG gives optimal / acceptable / if-necessary / avoid levels for the heart (mean, V15, V30; coronary arteries and left ventricle), lungs (V5, V20, mean), thyroid (V25) and breast glandular tissue (mean, V4, V10), adapted from Dabaja 2018 (Wirth Table 1). The extracted table in the folder copy is not reliably readable, so the numbers are not reproduced here <span class="chk">CHECK</span>. Contour heart substructures (coronaries, left ventricle) for mediastinal cases; breast glandular tissue in young women; salivary glands for neck disease.</p>
+<p class="src">PTV and IGRT: institutional; DIBH and IMRT/VMAT for mediastinal disease; protons where available (Wirth).</p>
+<div class="foot"><span>Lymphoma ISRT Delineation Protocol · v1.0</span><span>Page 5</span></div>
+</section>
+
+<section class="page" id="s7">
+<div class="sechead"><span class="eyebrow">Section 7</span><h2><span class="sectnum">7</span>Names, RayStation and references</h2></div>
+<table>
+<thead><tr><th style="width:34%">Structure</th><th>Suggested name</th></tr></thead>
+<tbody>
+<tr><td class="b">Pre-chemo GTV; post-chemo GTV</td><td>GTV_PreChemo, GTV_PostChemo</td></tr>
+<tr><td class="b">CTV; ITV; PTV</td><td>CTV_3000 (dose suffix), ITV_3000, PTV_3000; residual boost CTV_3600</td></tr>
+<tr><td class="b">Heart substructures, breast</td><td>Heart, A_LAD, A_Coronary_L/R, Ventricle_L, Breast_L/R (glandular)</td></tr>
+</tbody>
+</table>
+<div class="stepbox"><b>ROI workflow</b>
+<ol class="steps">
+<li>Deformable or rigid fusion of staging PET-CT; draw GTV_PreChemo on the planning CT, correcting for position.</li>
+<li><code>CTV</code> = GTV_PreChemo (axially edited to current anatomy, cranio-caudal extent kept) ∪ GTV_PostChemo − uninvolved displaced organs.</li>
+<li><code>ITV</code> from 4D or breath hold for chest/upper abdomen; <code>PTV</code> = ITV/CTV + institutional margin.</li>
+</ol></div>
+<h3>References</h3>
+<ol class="ref">
+<li>Wirth A, Mikhaeel NG, Aleman BMP, et al. Involved site radiation therapy in adult lymphomas: an overview of International Lymphoma Radiation Oncology Group guidelines. Int J Radiat Oncol Biol Phys 2020;107:909–933. doi:10.1016/j.ijrobp.2020.03.019.</li>
+<li>Specht L, Yahalom J, Illidge T, et al. Modern radiation therapy for Hodgkin lymphoma: field and dose guidelines from ILROG. Int J Radiat Oncol Biol Phys 2014;89:854–862 (folder copy: online 2013, doi:10.1016/j.ijrobp.2013.05.005).</li>
+<li>Dabaja BS, Ng AK, Terezakis SA, et al. ILROG lymphoma mini-atlas (head and neck, nasal, sinus, orbits, axilla, stomach, mesenteric, groin, bones, skin).</li>
+</ol>
+<p class="ref"><b>Not in the folder:</b> Illidge 2014 (nodal NHL), Yahalom 2015 (extranodal), Tsang 2018 (plasmacytoma), TBI/TMI guidance, departmental protocol. <b>eviQ:</b> see the eviQ tabs on the haematology pages.</p>
+<div class="flag"><span class="lbl">Before clinical use</span> Schematics are original and not to scale. Have a colleague review this page and confirm items marked CHECK.</div>
+<div class="foot"><span>Lymphoma ISRT Delineation Protocol · v1.0</span><span>Page 6</span></div>
+</section>
+</body>
+</html>

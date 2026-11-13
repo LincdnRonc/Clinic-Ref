@@ -275,6 +275,14 @@ for f,short,long,desc in SOFTWARE:
 FOOT_CTR = '<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>'
 for f,short,long,desc,_ in CONTOUR:
     (root/f).write_text(page(f,short,long,desc,CNAV,'Contouring','contouring',FOOT_CTR))
+# Full contouring protocols: authored in src/contouring/, wrapped in the site shell
+import sys as _sys; _sys.path.insert(0, str(root/'tools'))
+from protocol_shell import convert as _proto_convert
+for f,short,long,desc in CNAV:
+    if not f.startswith('contouring/'): continue
+    srcp = root/'src'/f
+    if not srcp.exists(): continue
+    (root/f).write_text(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR))
 for gid,gname,_,pages,foot in GROUPS:
     for g in pages:
         (root/g[0]).write_text(page(*g, pages, gname, gid, foot))

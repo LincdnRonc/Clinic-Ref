@@ -1,197 +1,86 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="en-AU" data-site="gu">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Prostate Radiotherapy Target Volume Delineation Protocol</title>
-<style>
-  :root{
-    --navy:#10243f; --navy2:#1d3a5f;
-    --teal:#14756b; --teal-bg:#e7f3f1;
-    --amber:#9a5a00; --amber-bg:#fdf3e3;
-    --rust:#8a2f23; --rust-bg:#fbeae7;
-    --paper:#ffffff;
-    --ink:#1c2530;
-    --muted:#5b6b7c;
-    --rule:#d6dde6;
-    --rule-strong:#14756b;
-    --dose-elective:#2f6fb0;
-    --dose-bed:#9a5a00;
-    --dose-sib:#c0721c;
-    --dose-boost:#8a2f23;
-    --dose-prostate:#b03a2e;
-    --flag:#8a2f23; --flag-bg:#fbeae7;
-    --key-bg:#e7f3f1;
-    --petrol:#10243f;
-    --petrol-2:#14756b;
-  }
-  *{box-sizing:border-box;}
-  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  body{
-    margin:0;background:#e6ebf0;color:var(--ink);
-    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
-    font-size:10.3px;line-height:1.5;
-  }
-  .page{
-    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
-    padding:16mm 17mm 14mm;position:relative;
-    box-shadow:0 1px 8px rgba(16,36,63,.16);
-    display:flex;flex-direction:column;
-  }
-  @page{size:A4;margin:13mm;}
-  @media print{
-    body{background:#fff;}
-    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
-    .page + .page{page-break-before:always;}
-    h2,h3{page-break-after:avoid;}
-    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
-  }
-  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
-  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
-  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
-  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
-  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
-  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
-  p{margin:.35em 0;}
-  a{color:var(--teal);}
-  .lead{font-size:11px;color:var(--muted);}
-  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
-  .sechead{margin:0 0 .5em;}
-  .sechead .eyebrow{display:block;margin-bottom:3px;}
-  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
-  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
-  .masthead h1{color:#fff;}
-  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
-  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
-  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
-  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
-  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
-  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
-  tbody tr:nth-child(even){background:#eef2f6;}
-  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
-  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
-  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
-  .p-elect{background:var(--dose-elective);}
-  .p-bed{background:var(--dose-bed);}
-  .p-sib{background:var(--dose-sib);}
-  .p-boost{background:var(--dose-boost);}
-  .p-pros{background:var(--dose-prostate);}
-  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
-  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
-  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
-  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
-  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
-  .flag .lbl:before{content:"\26A0  ";}
-  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
-  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
-  ol.steps li{margin:.28em 0;padding-left:.15em;}
-  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
-  ul.tight{margin:.25em 0;padding-left:1.15em;}
-  ul.tight li{margin:.18em 0;}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .grid2>div{min-width:0;}
-  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
-  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
-  svg{display:block;width:100%;height:auto;}
-  .kv{font-size:9.3px;}
-  .kv b{color:var(--navy);}
-  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
-  .ref{font-size:8.6px;line-height:1.4;}
-  .ref li{margin:.2em 0;}
-  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
-  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
-  .named .pos{font-weight:700;color:var(--amber);}
-  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
-  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
-  .toc a{color:var(--ink);text-decoration:none;}
-  .toc td{border:none;padding:2px 4px;}
-  .toc .n{color:var(--teal);font-weight:700;width:24px;}
-  .toc .pg{text-align:right;color:var(--muted);width:32px;}
-  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
-  .small{font-size:8.6px;color:var(--muted);}
-</style>
-<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #1d5fb0}</style></head>
-<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gu-prostate.html#localised" style="color:#9fe0d6;text-decoration:none">Prostate page</a><span style="opacity:.7;font-weight:400">Contouring atlas</span></div>
-<!-- ============================ PAGE 1 : COVER / SCOPE ============================ -->
-<section class="page">
-<div class="masthead">
-<span class="eyebrow">Departmental Contouring Atlas · Genitourinary Radiation Oncology</span>
-<h1>Prostate Radiotherapy — Target Volume Delineation Protocol</h1>
-<p class="sub">A unified delineation reference across the three settings of prostate cancer radiotherapy — <b>intact / definitive prostate</b>, <b>post-prostatectomy bed (adjuvant &amp; salvage)</b>, and <b>pelvic nodal irradiation</b> — integrating ESTRO ACROP, FROGG 2024, NRG Oncology and multidisciplinary MRI consensus with RayStation implementation.</p>
-<div class="pillrow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prostate contouring protocol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/protocol.css">
+<style>.p-elect{background:var(--dose-elective);}
+.p-bed{background:var(--dose-bed);}
+.p-sib{background:var(--dose-sib);}
+.p-boost{background:var(--dose-boost);}
+.p-pros{background:var(--dose-prostate);}
+.p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}</style>
+</head>
+<body class="proto">
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>Prostate contouring protocol</span></nav>
+    <div class="title-row">
+      <h1>Prostate <span>Contouring protocol</span></h1>
+      <div class="meta">Full protocol · Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this protocol</label>
+      <input id="q" type="search" placeholder="Search this protocol: border, margin, dose, trial" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="side"><details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary><nav class="tree" aria-label="All pages"><a class="home" href="../index.html">Home</a><details data-site="breast"><summary>Breast</summary><a href="../breast-early.html">DCIS &amp; early breast</a><a href="../breast-nodes-pmrt.html">Nodes &amp; PMRT</a><a href="../breast-planning.html">Breast planning &amp; consent</a></details><details data-site="cns"><summary>CNS &amp; Paediatrics</summary><a href="../cns-glioma.html">Glioma</a><a href="../cns-benign.html">Benign &amp; functional</a><a href="../cns-vs.html">Vestibular schwannoma</a><a href="../cns-general.html">Eye &amp; tolerances</a><a href="../peds-cns.html">Paediatric CNS</a><a href="../peds-solid.html">Paediatric solid tumours</a><a href="../peds-late.html">Paediatric late effects</a></details><details data-site="gi"><summary>Gastrointestinal</summary><a href="../gi-oesophagus-gastric.html">Oesophagus &amp; gastric</a><a href="../gi-pancreas.html">Pancreas</a><a href="../gi-hepatobiliary.html">Liver &amp; biliary</a><a href="../gi-rectum-colon.html">Rectum &amp; colon</a><a href="../gi-anal.html">Anal</a><a href="../gi-general.html">General GI</a></details><details data-site="gu"><summary>Genitourinary</summary><a href="../gu-prostate.html">Prostate</a><a href="../gu-bladder.html">Bladder</a><a href="../gu-kidney.html">Kidney</a><a href="../gu-testis.html">Testis</a><a href="../gu-other.html">UTUC, urethra &amp; penile</a></details><details data-site="gyn"><summary>Gynaecological</summary><a href="../gyn-cervix.html">Cervix</a><a href="../gyn-endometrial.html">Endometrial</a><a href="../gyn-vulva-vagina.html">Vulva &amp; vagina</a><a href="../gyn-general.html">General gynae</a></details><details data-site="heme"><summary>Haematology</summary><a href="../heme-hodgkin.html">Hodgkin</a><a href="../heme-nhl.html">Non-Hodgkin</a><a href="../heme-other.html">Myeloma, TBI &amp; skin</a></details><details data-site="hn"><summary>Head and neck &amp; Skin</summary><a href="../hn-general.html">H&amp;N general</a><a href="../hn-oropharynx.html">Oropharynx</a><a href="../hn-larynx.html">Larynx &amp; hypopharynx</a><a href="../hn-oral-salivary.html">Oral cavity &amp; salivary</a><a href="../hn-npc-sinonasal.html">Nasopharynx &amp; sinonasal</a><a href="../hn-thyroid-cup.html">Thyroid &amp; unknown primary</a><a href="../skin.html">Skin</a></details><details data-site="sarcoma"><summary>Sarcoma</summary><a href="../sarcoma-sts.html">Soft tissue &amp; bone sarcoma</a><a href="../benign.html">Benign MSK</a></details><details data-site="thorax"><summary>Thorax</summary><a href="../thorax-early.html">Early NSCLC (SABR)</a><a href="../thorax-stage3.html">Stage III NSCLC</a><a href="../thorax-sclc.html">Small cell</a><a href="../thorax-other.html">Thymic, meso &amp; other</a></details><details data-site="pall"><summary>Palliative &amp; oligometastases</summary><a href="../pall-brain.html">Brain metastases</a><a href="../pall-wbrt.html">WBRT principles</a><a href="../pall-bone-spine.html">Bone, cord &amp; spine SBRT</a><a href="../pall-oligo.html">Oligomets &amp; palliation</a></details><details data-site="mrl"><summary>MR-linac</summary><a href="../mrl-images.html">Sequences &amp; signal</a><a href="../mrl-liver-gi.html">Liver &amp; upper GI</a><a href="../mrl-tumour-nodes.html">Tumours &amp; nodes</a><a href="../mrl-pelvis.html">Pelvis</a><a href="../mrl-workflow.html">Adaptive workflow</a></details><details data-site="exam"><summary>Phase 2 exam summary</summary><a href="../exam-overview.html">Epi &amp; memory aids</a><a href="../exam-breast.html">Breast</a><a href="../exam-cns.html">CNS</a><a href="../exam-peds.html">Paediatrics</a><a href="../exam-ugi.html">Upper GI</a><a href="../exam-lgi.html">Lower GI</a><a href="../exam-gu.html">Bladder, kidney, testis, penis</a><a href="../exam-prostate.html">Prostate</a><a href="../exam-gyn.html">Gynae</a><a href="../exam-heme.html">Haematology</a><a href="../exam-hn.html">Head and neck</a><a href="../exam-skin.html">Skin</a><a href="../exam-endocrine-benign.html">Endocrine &amp; benign</a><a href="../exam-sarcoma.html">Sarcoma</a><a href="../exam-thorax.html">Thorax</a><a href="../exam-pall.html">Palliative</a><a href="../exam-clinonc.html">Clinical oncology</a><a href="../exam-viva.html">Viva templates</a></details><details data-site="contouring" open><summary>Contouring</summary><a href="../ctr-library.html">Library</a><a href="../ctr-breast.html">Breast</a><a href="../ctr-thorax.html">Thorax</a><a href="../ctr-hn.html">H&amp;N</a><a href="../ctr-cns.html">CNS</a><a href="../ctr-upper-gi.html">Upper GI</a><a href="../ctr-anal.html">Anal</a><a href="../ctr-gyn.html">Gynae</a><a href="../ctr-heme.html">Lymphoma</a><a href="../ctr-sarcoma.html">Sarcoma</a><a href="../ctr-bladder.html">Bladder</a><a href="../ctr-kidney-liver.html">Kidney &amp; liver</a><a href="../ctr-skin.html">Skin</a><a href="../ctr-peds.html">Paeds</a><a href="../ctr-spine.html">Spine &amp; bone</a><a href="../contouring/breast.html">Breast</a><a href="../contouring/cns.html">CNS</a><a href="../contouring/gynae.html">Gynae</a><a href="../contouring/spine-bone.html">Spine &amp; bone SBRT</a><a href="../contouring/head-neck.html">Head &amp; neck</a><a href="../contouring/lymphoma.html">Lymphoma ISRT</a><a href="../contouring/lung.html">Lung</a><a href="../contouring/prostate.html" aria-current="page">Prostate</a><a href="../contouring/bladder.html">Bladder</a><a href="../contouring/rectal-long-course.html">Rectum</a><a href="../contouring/anal.html">Anal canal</a><a href="../contouring/oesophagus.html">Oesophagus &amp; GOJ</a><a href="../contouring/pancreas-stomach.html">Pancreas &amp; stomach</a><a href="../contouring/biliary.html">Biliary</a><a href="../contouring/liver-sbrt.html">Liver SBRT OARs</a><a href="../ctr-mim.html">MIM shortcuts</a><a href="../ctr-monaco.html">Monaco shortcuts</a></details></nav></details></aside>
+<main id="main">
+<p class="xref"><b>Related:</b> <a href="../gu-prostate.html#localised">Prostate page</a></p>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a structure, a margin (5 mm) or a trial name.</div>
+<section class="panel" id="p-overview" data-tab="overview" data-label="Overview">
+  <div class="panel-head"><p class="eyebrow">Departmental Contouring Atlas · Genitourinary Radiation Oncology</p><h2>Prostate contouring protocol</h2><p class="lede">A unified delineation reference across the three settings of prostate cancer radiotherapy — <b>intact / definitive prostate</b>, <b>post-prostatectomy bed (adjuvant &amp; salvage)</b>, and <b>pelvic nodal irradiation</b> — integrating ESTRO ACROP, FROGG 2024, NRG Oncology and multidisciplinary MRI consensus with RayStation implementation.</p><div class="pillrow">
 <span class="pill p-pros">Intact prostate — high dose</span>
 <span class="pill p-sib">Intermediate SIB / proximal SV</span>
 <span class="pill p-bed">Prostate bed / elective CTV</span>
 <span class="pill p-elect">Elective pelvic nodes 45–50 Gy</span>
 <span class="pill p-boost">Gross disease / macroscopic boost</span>
-</div>
-<div class="meta">ESTRO ACROP · FROGG 2024 · NRG Oncology · GFRU · PERYTON · eviQ  —  Version 1.0</div>
-</div>
-<div class="callout">
-<span class="lbl">Governing principles of this protocol</span>
-<ul class="tight" style="margin-top:4px;">
-<li><b>Elective volumes are anatomy- and baseline-stage-driven.</b> Prostate-bed and elective nodal borders are defined by fixed anatomical landmarks and pre-treatment disease extent; they are <b>never down-sized in response to ADT or PSA response</b>.</li>
-<li><b>Boost / gross-disease volumes are anchored to demonstrable disease.</b> For nodal disease treated after systemic therapy, the <b>post-ADT residual (shrunken) node</b> is the high-dose boost volume, while the elective envelope is unchanged.</li>
-<li><b>Genuine controversy is presented as named positions</b> (ESTRO ACROP / FROGG / GFRU / PERYTON) with a per-setting departmental default, rather than forced into false consensus.</li>
-<li>Parameters requiring <b>local physics or clinical-governance sign-off</b> are explicitly flagged and must not be adopted silently.</li>
-</ul>
-</div>
-<h3 style="margin-top:1.1em;">Contents</h3>
-<table class="toc">
-<tr><td class="n">1</td><td><a href="#s1">Scope, simulation &amp; imaging</a></td><td class="pg">2</td></tr>
-<tr><td class="n">2</td><td><a href="#s2">Setting A — Intact / definitive prostate ± seminal vesicles</a></td><td class="pg">3</td></tr>
-<tr><td class="n">2b</td><td><a href="#s2b">CT vs MRI: apex and base pearls (McLaughlin 2010)</a></td><td class="pg">4b</td></tr>
-<tr><td class="n">3</td><td><a href="#s3">Setting B — Prostate bed (adjuvant &amp; salvage)</a></td><td class="pg">5</td></tr>
-<tr><td class="n">4</td><td><a href="#s4">Setting C — Pelvic nodal CTV (NRG 10-step)</a></td><td class="pg">9</td></tr>
-<tr><td class="n">5</td><td><a href="#s5">Dose, fractionation, PTV margins &amp; image-guided delivery</a></td><td class="pg">11</td></tr>
-<tr><td class="n">6</td><td><a href="#s6">Organs at risk &amp; dose constraints</a></td><td class="pg">13</td></tr>
-<tr><td class="n">7</td><td><a href="#s7">RayStation implementation &amp; TG-263 nomenclature</a></td><td class="pg">14</td></tr>
-<tr><td class="n">8</td><td><a href="#s8">References &amp; teaching resources</a></td><td class="pg">15</td></tr>
-</table>
-<p class="small" style="margin-top:14px;">Version 1.0 · Prepared as a self-contained departmental reference. Recommendations are educational; individual clinical judgement, institutional policy and current guideline versions take precedence. Not a substitute for the source publications, which should be consulted for the full figure sets.</p>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
-</section>
-<!-- ============================ PAGE 2 : SCOPE / IMAGING ============================ -->
-<section class="page" id="s1">
-<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, simulation &amp; imaging</h2></div>
-<p>This protocol covers microscopic (elective) and macroscopic (gross) target delineation for external-beam photon radiotherapy of prostate adenocarcinoma. Brachytherapy, proton and metastasis-directed therapy are out of scope. Organ-at-risk delineation follows the ESTRO ACROP primary-prostate OAR guidance and the FROGG constraint tables reproduced in Section 6.</p>
-<h3>1.1  Simulation &amp; patient preparation</h3>
-<ul class="tight">
+</div><p class="note">ESTRO ACROP · FROGG 2024 · NRG Oncology · GFRU · PERYTON · eviQ  —  Version 1.0</p><div class="jump"></div></div>
+  <article class="card key" data-title="Governing principles of this protocol"><h3>Governing principles of this protocol</h3><div class="callout"></div></article><article class="card" data-title="Contents"><h3>Contents</h3><div class="tw"><table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, simulation &amp; imaging</a></td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Setting A — Intact / definitive prostate ± seminal vesicles</a></td></tr>
+<tr><td class="n">2b</td><td><a href="#s2b">CT vs MRI: apex and base pearls (McLaughlin 2010)</a></td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Setting B — Prostate bed (adjuvant &amp; salvage)</a></td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Setting C — Pelvic nodal CTV (NRG 10-step)</a></td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Dose, fractionation, PTV margins &amp; image-guided delivery</a></td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Organs at risk &amp; dose constraints</a></td></tr>
+<tr><td class="n">7</td><td><a href="#s7">RayStation implementation &amp; TG-263 nomenclature</a></td></tr>
+<tr><td class="n">8</td><td><a href="#s8">References &amp; teaching resources</a></td></tr>
+</table></div><p class="small" style="margin-top:14px;">Version 1.0 · Prepared as a self-contained departmental reference. Recommendations are educational; individual clinical judgement, institutional policy and current guideline versions take precedence. Not a substitute for the source publications, which should be consulted for the full figure sets.</p></article>
+</section><section class="panel" id="p-s1" data-tab="s1" data-label="1 Scope" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 1</p><h2><span class="sectnum">1</span>Scope, simulation &amp; imaging </h2><div class="lede"><p>This protocol covers microscopic (elective) and macroscopic (gross) target delineation for external-beam photon radiotherapy of prostate adenocarcinoma. Brachytherapy, proton and metastasis-directed therapy are out of scope. Organ-at-risk delineation follows the ESTRO ACROP primary-prostate OAR guidance and the FROGG constraint tables reproduced in Section 6.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Simulation &amp; patient preparation"><h3>1.1  Simulation &amp; patient preparation</h3><ul class="tight">
 <li><b>Position:</b> supine, arms on chest, reproducible immobilisation (knee-fix + ankle-fix / flat couch).</li>
 <li><b>Bladder:</b> comfortably full per a written departmental bladder-filling protocol (e.g. void then 300–500 mL water ~30 min pre-scan), reproduced daily.</li>
 <li><b>Rectum:</b> empty; laxative / micro-enema protocol. Rectal and bladder filling reproducibility has a <b>greater impact in the post-prostatectomy setting</b> than for the intact gland.</li>
 <li><b>CT:</b> 2–3 mm slices, superior border of femoral heads to below ischial tuberosities. For the <b>intact</b> gland, IV contrast is recommended (unless contraindicated) to separate prostatic base from bladder lumen and to depict median-lobe protrusion.</li>
 <li><b>Fiducials:</b> useful for intact soft-tissue / clip matching; <b>not recommended routinely in the post-prostatectomy bed</b>. Rectal balloons and hydrogel spacers are <b>not recommended</b> in the postoperative setting.</li>
-</ul>
-<h3>1.2  MRI fusion</h3>
-<ul class="tight">
+</ul></article><article class="card" data-title="MRI fusion"><h3>1.2  MRI fusion</h3><ul class="tight">
 <li>T2-weighted anatomical MRI is the reference modality for soft-tissue delineation. For planning purposes multiparametric acquisition is not mandatory unless a <b>focal DIL boost</b> is intended (then PI-RADS-compliant mpMRI).</li>
 <li><b>Registration workflow:</b> rigid CT–MRI fusion initialised on bony pelvis (pubic symphysis closure) then locally refined at the level of the <b>external urethral sphincter / peri-prostatic fat</b> (or implanted fiducials, which are superior to bone-only alignment). Mitigate bladder/rectal filling differences between modalities; reproduce treatment conditions.</li>
 <li><b>Accuracy matters:</b> the randomised MIRAGE trial showed that reducing the planning margin from 4 mm (CT-guided) to 2 mm (MRI-guided) significantly reduced GU and GI toxicity — i.e. contour / set-up errors as small as 2 mm are clinically meaningful.</li>
 <li>The greatest MRI segmentation uncertainty is at the <b>apex</b> (3 mm partial-volume) and the prostatic <b>base</b>; the dorsal venous plexus and neurovascular bundle are the commonest sources of postero-lateral over-contouring.</li>
-</ul>
-<h3>1.3  Post-prostatectomy MRI protocol</h3>
-<p>When available, postoperative ± preoperative MRI improves bed delineation and excludes macroscopic recurrence. Acquisition should include <b>T2W in three orthogonal planes, high-b-value DWI and dynamic contrast-enhanced</b> sequences, covering the vesico-urethral anastomosis (VUA), prostatic bed, bladder base, levator ani, rectum and residual seminal vesicles — the common sites of relapse. The MRI-defined VUA lies a median ~5 mm <b>inferior</b> to the CT-defined VUA (Lim Joon), which conditions the inferior-border margin in Section 3.</p>
-<h3>1.4  Molecular imaging (PSMA-PET)</h3>
-<ul class="tight">
+</ul></article><article class="card" data-title="Post-prostatectomy MRI protocol"><h3>1.3  Post-prostatectomy MRI protocol</h3><p>When available, postoperative ± preoperative MRI improves bed delineation and excludes macroscopic recurrence. Acquisition should include <b>T2W in three orthogonal planes, high-b-value DWI and dynamic contrast-enhanced</b> sequences, covering the vesico-urethral anastomosis (VUA), prostatic bed, bladder base, levator ani, rectum and residual seminal vesicles — the common sites of relapse. The MRI-defined VUA lies a median ~5 mm <b>inferior</b> to the CT-defined VUA (Lim Joon), which conditions the inferior-border margin in Section 3.</p></article><article class="card" data-title="Molecular imaging (PSMA-PET)"><h3>1.4  Molecular imaging (PSMA-PET)</h3><ul class="tight">
 <li>PSMA-PET/CT is the preferred modality for detecting nodal / distant recurrence, particularly when pre-salvage PSA ≥ 0.2 ng/mL; detection rises with PSA (≈33% at 0–0.19, 45% at 0.2–0.49, up to 95% at ≥2 ng/mL).</li>
 <li>Sensitivity for <b>local bed</b> recurrence is limited at low PSA (urinary tracer excretion / incontinence). A negative PSMA-PET therefore <b>excludes metastatic disease rather than local recurrence</b> — offer salvage RT regardless if otherwise appropriate.</li>
 <li>Furosemide 20 mg IV shortly before/after tracer improves surgical-bed sensitivity (European guideline option).</li>
 <li>Any macroscopic disease on clinical exam / imaging is contoured as <b>GTV</b>; PSMA and MRI fusion may be used to define it.</li>
-</ul>
-<div class="callout">
+</ul><div class="callout">
 <span class="lbl">Structure-naming convention used throughout</span>
 <p style="margin:4px 0 0;">Target volumes follow AAPM <b>TG-263</b> conventions (Section 7). Dose-encoded suffixes are in <b>cGy</b> (e.g. <code>PTV_7800</code>, <code>PTVn_4500</code>). Colour pills in this document map to dose tiers, not to fixed prescriptions, which are region- and fractionation-dependent.</p>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
-</section>
-<!-- ============================ PAGE 3 : SETTING A INTACT ============================ -->
-<section class="page" id="s2">
-<div class="sechead"><span class="eyebrow">Section 2 · Setting A</span><h2><span class="sectnum">2</span>Intact / definitive prostate ± seminal vesicles</h2></div>
-<p class="small" style="margin-top:-2px;">Primary source: ESTRO ACROP CT/MRI intact-prostate guideline (Salembier 2018); MRI reference standard (Song 2025, <i>Red J</i>); eviQ definitive EBRT (ID 234 intermediate, ID 235 high, ID 3657 prostate+nodes).</p>
-<h3>2.1  Risk stratification (drives SV inclusion &amp; ECE margin)</h3>
-<table>
+</div></article>
+</section><section class="panel" id="p-s2" data-tab="s2" data-label="2 Seminal vesicles" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 2 · Setting A (cont.)</p><h2><span class="sectnum">2</span>Seminal vesicles, ECE margin &amp; CTV structure </h2><div class="lede"><p class="small" style="margin-top:-2px;">Primary source: ESTRO ACROP CT/MRI intact-prostate guideline (Salembier 2018); MRI reference standard (Song 2025, <i>Red J</i>); eviQ definitive EBRT (ID 234 intermediate, ID 235 high, ID 3657 prostate+nodes).</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Risk stratification (drives SV inclusion &amp; ECE margin)"><h3>2.1  Risk stratification (drives SV inclusion &amp; ECE margin)</h3><div class="tw"><table>
 <caption>Risk groups as used by the ESTRO ACROP intact guideline (D’Amico-derived).</caption>
 <thead><tr><th style="width:16%">Group</th><th>PSA</th><th>ISUP / Gleason</th><th>Stage</th><th>Other</th></tr></thead>
 <tbody>
@@ -199,11 +88,9 @@
 <tr><td class="b">Intermediate</td><td>&gt;10–20</td><td>GG2–3 (GS 7)</td><td>T2b</td><td>any one factor</td></tr>
 <tr><td class="b">High</td><td>&gt;20</td><td>GG4–5 (GS ≥8)</td><td>T2c</td><td>any one factor</td></tr>
 </tbody>
-</table>
-<h3>2.2  CTV-prostate borders <span class="pill p-pros">high dose</span></h3>
-<div class="grid2">
+</table></div></article><article class="card" data-title="CTV-prostate borders high dose"><h3>2.2  CTV-prostate borders <span class="pill p-pros">high dose</span></h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:22%">Border</th><th>CT-only</th><th>CT + MRI refinement</th></tr></thead>
 <tbody>
 <tr><td class="b">Apex</td><td>~1 cm above upper penile bulb (cross-checks: 1.1±0.5 cm above bottom obturator foramen; 0.7±0.5 cm above bottom symphysis; 3.1±0.6 cm above ischial tuberosities)</td><td>Butterfly contour excluding distal urethra / external urethral sphincter; best modality for caudal apex — include any partial-volume suspicion of apex</td></tr>
@@ -212,7 +99,7 @@
 <tr><td class="b">Posterior</td><td>Anterior rectal wall (Denonvilliers fascia); contour adjacent to anterior rectal wall where no fat plane</td><td>Sharp capsule / rectal-wall discrimination on T2</td></tr>
 <tr><td class="b">Base</td><td>Continuity with bladder; IV contrast defines base–lumen interface; account for BPH median-lobe protrusion</td><td>T2 depicts hyperplastic protrusion without contrast; review in sagittal + coronal</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <div>
 <figure>
@@ -246,14 +133,7 @@
 <p style="margin:3px 0 0;">Confirm the departmental default for <b>DIL focal-boost</b> use (FLAME: prostate 77 Gy with micro-boost to DIL up to 95 Gy/35#). Routine focal boost outside a defined protocol is not mandated by the intact guideline.</p>
 </div>
 </div>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
-</section>
-<!-- ============================ PAGE 4 : SETTING A cont ============================ -->
-<section class="page">
-<div class="sechead"><span class="eyebrow">Section 2 · Setting A (cont.)</span><h2><span class="sectnum">2</span>Seminal vesicles, ECE margin &amp; CTV structure</h2></div>
-<h3>2.3  Seminal vesicle inclusion <span class="pill p-sib">intermediate SIB</span> <span class="pill p-pros">if involved → high dose</span></h3>
-<table>
+</div></article><article class="card" data-title="Seminal vesicle inclusion intermediate SIB if involved → high dose"><h3>2.3  Seminal vesicle inclusion <span class="pill p-sib">intermediate SIB</span> <span class="pill p-pros">if involved → high dose</span></h3><div class="tw"><table>
 <caption>Proximal SV inclusion by risk (Qi / ESTRO ACROP). Length measured in the axial plane from the point the SV separates from the prostatic base. The vas deferens is excluded.</caption>
 <thead><tr><th style="width:20%">Risk</th><th>SV handling</th></tr></thead>
 <tbody>
@@ -262,17 +142,13 @@
 <tr><td class="b">High</td><td>Include <b>≥ proximal 2.2 cm</b> of SV</td></tr>
 <tr><td class="b">SV invasion (imaging/clinical)</td><td>Include the <b>involved SV in full</b> regardless of tumour characteristics; base decision on mass-like low T2 signal, not absence of it</td></tr>
 </tbody>
-</table>
-<p class="small">MRI note (Song 2025): where an axial slice shows no clear dividing plane between SV and prostate, the tissue is included with the gland (over-coverage preferred to under-coverage; the distinction is not resolvable on CT and was historically included in CT-planned trials).</p>
-<h3>2.4  Compensating for extracapsular extension (ECE)</h3>
-<table>
+</table></div><p class="small">MRI note (Song 2025): where an axial slice shows no clear dividing plane between SV and prostate, the tissue is included with the gland (over-coverage preferred to under-coverage; the distinction is not resolvable on CT and was historically included in CT-planned trials).</p></article><article class="card" data-title="Compensating for extracapsular extension (ECE)"><h3>2.4  Compensating for extracapsular extension (ECE)</h3><div class="tw"><table>
 <thead><tr><th style="width:20%">Risk</th><th>CT-only expansion</th><th>With MRI</th></tr></thead>
 <tbody>
 <tr><td class="b">Low</td><td>None</td><td>None (unless capsular contact on mpMRI)</td></tr>
 <tr><td class="b">Intermediate / High</td><td><b>3 mm</b> expansion of the prostate contour (SV excluded) in inferior, lateral, anterior and posterior directions; <b>exclude rectum</b>; <b>no superior expansion</b></td><td>Apply the 3 mm expansion and additionally ensure the region of suspected ECE is encompassed; use MRI to trim levator from the expanded volume</td></tr>
 </tbody>
-</table>
-<div class="callout">
+</table></div><div class="callout">
 <span class="lbl">CTV structure &amp; SIB logic</span>
 <ul class="tight" style="margin-top:4px;">
 <li><b>CTV_Prostate</b> (+ ECE margin per risk) carries the high dose.</li>
@@ -280,9 +156,7 @@
 <li>Optional <b>GTV_DIL</b> for focal boost (protocol-dependent).</li>
 <li>Elective nodes, when indicated (Setting C), form the low-dose tier <span class="pill p-elect">45–50.4 Gy</span>.</li>
 </ul>
-</div>
-<h3>2.5  Prescription tiers (intact) — see Section 5 for full schedules</h3>
-<table>
+</div></article><article class="card" data-title="Prescription tiers (intact) — see Section 5 for full schedules"><h3>2.5  Prescription tiers (intact) — see Section 5 for full schedules</h3><div class="tw"><table>
 <thead><tr><th>Tier</th><th>Structure</th><th>Typical dose</th></tr></thead>
 <tbody>
 <tr><td><span class="pill p-pros">Prostate high dose</span></td><td>CTV_Prostate (±involved SV)</td><td>74–80 Gy/37–40# · 60 Gy/20# · 70 Gy/28# · SBRT 36.25–40 Gy/5#</td></tr>
@@ -290,94 +164,60 @@
 <tr><td><span class="pill p-boost">DIL boost</span></td><td>GTV_DIL (optional)</td><td>up to 95 Gy/35# (FLAME)</td></tr>
 <tr><td><span class="pill p-elect">Elective nodes</span></td><td>CTVn (if indicated)</td><td>45–50.4 Gy EQD2</td></tr>
 </tbody>
-</table>
-<div class="flag">
+</table></div><div class="flag">
 <span class="lbl">Physics / clinical review</span>
 <p style="margin:3px 0 0;">Fractionation choice (conventional vs moderate hypofractionation vs SBRT), SIB dose levels, and any DIL boost are departmental decisions requiring plan-class validation and agreed OAR constraints (Section 6). PTV margins are IGRT-technique dependent (Section 5).</p>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
-</section>
-<!-- ============================ PAGE 4b : CT vs MRI PEARLS (McLaughlin 2010) ============================ -->
-<section class="page" id="s2b">
-<div class="sechead"><span class="eyebrow">Section 2 · Setting A (cont.)</span><h2><span class="sectnum">2</span>CT vs MRI: apex and base pearls</h2></div>
-<p class="small" style="margin-top:-2px;">Source: McLaughlin PW, Evans C, Feng M, Narayana V. Radiographic and anatomic basis for prostate contouring errors and methods to improve prostate contouring accuracy. Int J Radiat Oncol Biol Phys 2010;76(2):369&ndash;378 (doi:10.1016/j.ijrobp.2009.02.019). Summary in our words; see the paper for the image sets.</p>
-<p>Earlier work cited by the authors found physician CT contours were on average about <b>30% larger</b> than the high-resolution standard yet included only about <b>84%</b> of it: CT adds volume in the wrong places and misses the true gland. Errors cluster at the apex, the anterior mid-gland and the base.</p>
-<h3>2.x  Apex: work up from the penile bulb (genitourinary diaphragm levels)</h3>
-<table>
-<tr><th>Level (inferior &rarr; superior)</th><th>What you see</th><th>Prostate?</th></tr>
+</div></article>
+</section><section class="panel" id="p-s2b" data-tab="s2b" data-label="2 CT vs MRI" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 2 · Setting A (cont.)</p><h2><span class="sectnum">2</span>CT vs MRI: apex and base pearls </h2><div class="lede"><p class="small" style="margin-top:-2px;">Source: McLaughlin PW, Evans C, Feng M, Narayana V. Radiographic and anatomic basis for prostate contouring errors and methods to improve prostate contouring accuracy. Int J Radiat Oncol Biol Phys 2010;76(2):369–378 (doi:10.1016/j.ijrobp.2009.02.019). Summary in our words; see the paper for the image sets.</p><p>Earlier work cited by the authors found physician CT contours were on average about <b>30% larger</b> than the high-resolution standard yet included only about <b>84%</b> of it: CT adds volume in the wrong places and misses the true gland. Errors cluster at the apex, the anterior mid-gland and the base.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="2.x Apex: work up from the penile bulb (genitourinary diaphragm levels)"><h3>2.x  Apex: work up from the penile bulb (genitourinary diaphragm levels)</h3><div class="tw"><table>
+<tr><th>Level (inferior → superior)</th><th>What you see</th><th>Prostate?</th></tr>
 <tr><td>Penile bulb</td><td>Bulb with a fat plane above it</td><td>No</td></tr>
-<tr><td>&ldquo;Triangle&rdquo;</td><td>Uniform triangle of tissue spanning between the pelvic bones</td><td>No</td></tr>
-<tr><td>&ldquo;Circle&rdquo;</td><td>Round external urethral sphincter</td><td>No</td></tr>
-<tr><td>&ldquo;Slit&rdquo; / hourglass</td><td>Levator ani bowing inwards on each side (seen on CT in fewer than half of cases)</td><td>No &mdash; the apex is just above</td></tr>
+<tr><td>“Triangle”</td><td>Uniform triangle of tissue spanning between the pelvic bones</td><td>No</td></tr>
+<tr><td>“Circle”</td><td>Round external urethral sphincter</td><td>No</td></tr>
+<tr><td>“Slit” / hourglass</td><td>Levator ani bowing inwards on each side (seen on CT in fewer than half of cases)</td><td>No — the apex is just above</td></tr>
 <tr><td>Apex</td><td>Homogeneous gland, no circle or slit</td><td>Yes</td></tr>
-</table>
-<ul class="tight">
+</table></div><ul class="tight">
 <li>Do not set the apex with a bony or bulb rule (e.g. a fixed distance above the bulb): the distance varies.</li>
 <li>On CT, the lowest slice with a clear circle or slit is below the apex; start the prostate one level up and check on MRI if available.</li>
-</ul>
-<h3>2.x  Mid-gland and anterior surface</h3>
-<ul class="tight">
+</ul></article><article class="card" data-title="2.x Mid-gland and anterior surface"><h3>2.x  Mid-gland and anterior surface</h3><ul class="tight">
 <li>The anterior fibromuscular stroma, dorsal venous plexus and endopelvic fascia look like gland on CT and cause <b>anterior over-contouring</b>. Narrow the window/level to separate them.</li>
 <li>Posteriorly, follow the rectal wall; do not leave a concave notch unless the seminal vesicles create it.</li>
-</ul>
-<h3>2.x  Base: the commonest site of under-contouring</h3>
-<ul class="tight">
+</ul></article><article class="card" data-title="2.x Base: the commonest site of under-contouring"><h3>2.x  Base: the commonest site of under-contouring</h3><ul class="tight">
 <li>The superior base extends higher than expected beside the bladder neck; follow it cranially until the bladder neck and seminal vesicle origins are clearly separate.</li>
-<li>An anterior-superior &ldquo;beak&rdquo; is usually bladder wall or fascia, not prostate.</li>
-<li>A posterior &ldquo;reverse beak&rdquo; or concave posterior surface at the base is the seminal vesicle junction.</li>
-</ul>
-<h3>2.x  Check the shape in the sagittal view</h3>
-<ul class="tight">
-<li>The gland should look globular. Common artefacts: a stepped &ldquo;pedestal&rdquo; from repeated small contours at the apex; an inferior-anterior projection into the GU diaphragm; an inferior-posterior projection along the rectum.</li>
+<li>An anterior-superior “beak” is usually bladder wall or fascia, not prostate.</li>
+<li>A posterior “reverse beak” or concave posterior surface at the base is the seminal vesicle junction.</li>
+</ul></article><article class="card" data-title="2.x Check the shape in the sagittal view"><h3>2.x  Check the shape in the sagittal view</h3><ul class="tight">
+<li>The gland should look globular. Common artefacts: a stepped “pedestal” from repeated small contours at the apex; an inferior-anterior projection into the GU diaphragm; an inferior-posterior projection along the rectum.</li>
 <li>Axial contours should taper smoothly from the largest slice; sudden jumps in size between slices usually mean a contour error.</li>
-</ul>
-<div class="flag"><span class="lbl">Practical</span><p style="margin:3px 0 0;">When MRI is available, register it on the prostate (fiducials or soft tissue) and contour on MRI, using CT for the posterior rectal interface and bladder. Without MRI, apply these level rules deliberately at the apex and base.</p></div>
-<div class="foot"><span>Prostate RT Delineation Protocol &middot; v1.1</span><span>Page 4b</span></div>
-</section>
-<!-- ============================ PAGE 5 : SETTING B DEFINITIONS ============================ -->
-<section class="page" id="s3">
-<div class="sechead"><span class="eyebrow">Section 3 · Setting B</span><h2><span class="sectnum">3</span>Prostate bed — adjuvant &amp; salvage</h2></div>
-<p class="small" style="margin-top:-2px;">Primary sources: ESTRO ACROP prostate-bed guideline (Dal Pra 2023); FROGG 2024 update (Warrender-Sparkes); comparison with GFRU (Robin 2021) and PERYTON (Staal 2024).</p>
-<h3>3.1  Definitions &amp; timing (FROGG)</h3>
-<table>
+</ul><div class="flag"><span class="lbl">Practical</span><p style="margin:3px 0 0;">When MRI is available, register it on the prostate (fiducials or soft tissue) and contour on MRI, using CT for the posterior rectal interface and bladder. Without MRI, apply these level rules deliberately at the apex and base.</p></div></article>
+</section><section class="panel" id="p-s3" data-tab="s3" data-label="3 Macroscopic recurrence" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 3 · Setting B (cont.)</p><h2><span class="sectnum">3</span>Macroscopic recurrence, positive margins &amp; IGRT </h2><div class="lede"><p class="small" style="margin-top:-2px;">Primary sources: ESTRO ACROP prostate-bed guideline (Dal Pra 2023); FROGG 2024 update (Warrender-Sparkes); comparison with GFRU (Robin 2021) and PERYTON (Staal 2024).</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Definitions &amp; timing (FROGG)"><h3>3.1  Definitions &amp; timing (FROGG)</h3><div class="tw"><table>
 <thead><tr><th style="width:24%">Term</th><th>Definition</th></tr></thead>
 <tbody>
 <tr><td class="b">Adjuvant RT (ART)</td><td>RT within 6 months of prostatectomy with PSA &lt;0.10 ng/mL and not rising.</td></tr>
 <tr><td class="b">Salvage RT (SRT)</td><td>RT delivered with PSA ≥0.10 ng/mL, or a rising PSA of any magnitude.</td></tr>
 </tbody>
-</table>
-<p><b>Early SRT is preferred</b> to ART for most pN0/Nx patients (RAVES, RADICALS-RT, GETUG-AFU 17, ARTISTIC meta-analysis: equivalent event-free survival, less toxicity). Refer before PSA exceeds 0.2 ng/mL. In <b>pN1</b> disease, particularly with multiple positive nodes or other high-risk features, ART remains reasonable (Tilki).</p>
-<div class="callout">
+</table></div><p><b>Early SRT is preferred</b> to ART for most pN0/Nx patients (RAVES, RADICALS-RT, GETUG-AFU 17, ARTISTIC meta-analysis: equivalent event-free survival, less toxicity). Refer before PSA exceeds 0.2 ng/mL. In <b>pN1</b> disease, particularly with multiple positive nodes or other high-risk features, ART remains reasonable (Tilki).</p><div class="callout">
 <span class="lbl">Uniform CTV, independent of indication</span>
 <p style="margin:4px 0 0;">Both ESTRO ACROP and FROGG apply a <b>single prostate-bed CTV recommendation irrespective of ART vs SRT timing</b>, tailored to case-specific pathology (EPE site, margin, SV involvement). The contours below assume <b>no macroscopic recurrence</b>; visible disease is handled as GTV (§3.4).</p>
-</div>
-<h3>3.2  Prostate-bed CTV borders — reconciled <span class="pill p-bed">bed CTV</span></h3>
-<p>Where ESTRO ACROP and FROGG diverge, both are shown as named positions with a departmental default. The two guidelines agree on the <b>lateral border</b> (medial levator ani / obturator internus) and on the primacy of covering the <b>VUA</b> and the <b>postero-lateral rectal recesses</b> (antero-lateral angles of the rectum) — a common recurrence site (26% of local recurrences in the Horsley PSMA series).</p>
-<div class="named">
+</div></article><article class="card" data-title="Prostate-bed CTV borders — reconciled bed CTV"><h3>3.2  Prostate-bed CTV borders — reconciled <span class="pill p-bed">bed CTV</span></h3><p>Where ESTRO ACROP and FROGG diverge, both are shown as named positions with a departmental default. The two guidelines agree on the <b>lateral border</b> (medial levator ani / obturator internus) and on the primacy of covering the <b>VUA</b> and the <b>postero-lateral rectal recesses</b> (antero-lateral angles of the rectum) — a common recurrence site (26% of local recurrences in the Horsley PSMA series).</p><div class="named">
 <p style="margin:0"><span class="pos">Inferior border — Position 1 (ESTRO ACROP):</span> 8–12 mm below the VUA. VUA = the slice below the last slice on which urine is seen; no routine contrast; if VUA not visible, start at the slice immediately above the penile bulb.</p>
 <p style="margin:.35em 0 0"><span class="pos">Inferior border — Position 2 (FROGG):</span> 5–10 mm below the VUA — the larger margin when MRI or IV contrast is <i>not</i> used (MRI-defined VUA sits ~5 mm inferior to the CT-defined VUA). Extend lower to include any inferior surgical clips.</p>
 <p class="small" style="margin:.35em 0 0"><b>Departmental default:</b> with MRI-defined VUA use 5 mm below; with CT/contrast-only use up to 10 mm below; always extend to enclose inferior clips. Up to 9% of recurrences fall &gt;5 mm below the VUA, but observed local-failure rates remain very low with adequate coverage.</p>
-</div>
-<div class="named">
+</div><div class="named">
 <p style="margin:0"><span class="pos">Anterior border — ESTRO:</span> cranially cover 1–2 cm of posterior bladder wall (or up to the posterior bladder-wall margin if reproducible daily IGRT, sparing bladder); caudally stop at the posterior symphysis, up to half–two-thirds of its height; <b>do not</b> extend to the top of the symphysis.</p>
 <p style="margin:.35em 0 0"><span class="pos">Anterior border — FROGG:</span> from the lower CTV border to 2–3 cm superior, the anterior border is the posterior symphysis, incorporating ≥1.5 cm of bladder neck; more superiorly the border wraps around the lateral aspects of the posterior bladder wall to extend 1.5 cm anteriorly.</p>
 <p class="small" style="margin:.35em 0 0"><b>Rationale (both):</b> anterior recurrences above the bladder neck / behind the pubic symphysis are rare; lowering this antero-superior border spares bladder and reduces the &gt;50% acute grade-2 GU toxicity seen historically (RAVES, RTOG 0534).</p>
-</div>
-<div class="named">
+</div><div class="named">
 <p style="margin:0"><span class="pos">Posterior border — both:</span> anterior rectal wall; include the antero-lateral rectal angles / postero-lateral recesses (FROGG: 5 mm coverage each side of the anterior rectal wall in the <b>mid-CTV only</b>). At/below the anorectal junction the CTV need <b>not</b> wrap posteriorly. Superiorly the posterior border is the <b>anterior mesorectal fascia</b>. Include existing surgical clips.</p>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
-</section>
-<!-- ============================ PAGE 6 : SETTING B SUPERIOR + SVG ============================ -->
-<section class="page">
-<div class="sechead"><span class="eyebrow">Section 3 · Setting B (cont.)</span><h2><span class="sectnum">3</span>Superior border, comparison table &amp; schematic</h2></div>
-<div class="named">
+</div><div class="named">
 <p style="margin:0"><span class="pos">Superior border — Position 1 (ESTRO ACROP):</span> include a 3–5 mm “bridge” between the SV beds. <b>No SV invasion (pT2–3a):</b> include the base (lower third) of the SV bed, to the level of the cut end of the vas deferens. <b>SV invasion:</b> include the entire SV bed (+ cranial clips).</p>
 <p style="margin:.35em 0 0"><span class="pos">Superior border — Position 2 (FROGG):</span> encompass the SV bed (non-vascular clips) to the cut end of the vas. If SV <i>not</i> involved and prostatic base <i>not</i> involved, do <b>not</b> extend &gt;4.5 cm above the VUA (avoids a bony surrogate; VUA position is variable relative to the symphysis). If SV involved, include residual SV.</p>
 <p style="margin:.35em 0 0"><span class="pos">Superior border — Position 3 (GFRU / PERYTON):</span> 1 cm above the pubic symphysis; in pT3b, 3 cm above the top of the symphysis (GFRU: up to 4 cm if distal-third SV involved; + posterior third of bladder wall).</p>
 <p class="small" style="margin:.35em 0 0"><b>Departmental default:</b> anchor to the <b>cut end of the vas / SV bed</b> and cap at <b>≤4.5 cm above the VUA</b> when SV and prostatic base are uninvolved (FROGG), reserving fuller SV-bed coverage for pathological SV involvement. Only ~6% of recurrences occur &gt;45 mm above the VUA, predicted by prostatic-base involvement.</p>
-</div>
-<div class="grid2" style="margin-top:.6em;">
+</div><div class="grid2" style="margin-top:.6em;">
 <div>
 <figure>
 <svg aria-label="Sagittal schematic of prostate-bed CTV borders" role="img" viewbox="0 0 300 300">
@@ -415,7 +255,7 @@
 </figure>
 </div>
 <div>
-<table>
+<div class="tw"><table>
 <caption>Cross-guideline comparison of the prostate-bed CTV (FROGG Table 10, condensed).</caption>
 <thead><tr><th>Border</th><th>FROGG 2024</th><th>ESTRO ACROP</th></tr></thead>
 <tbody>
@@ -425,17 +265,10 @@
 <tr><td class="b">Lateral</td><td>Medial levator ani / obturator internus</td><td>Internal margins obturator internus / levator ani</td></tr>
 <tr><td class="b">Superior</td><td>SV bed to cut vas; ≤4.5 cm above VUA if SV−/base−</td><td>3–5 mm bridge; base of SV bed (SV−) or whole SV bed (SV+)</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="small"><b>GFRU / PERYTON</b> differ chiefly at the superior border (bony surrogate: 1 cm above symphysis; 3 cm in pT3b) and inferior border (GFRU 5 mm above penile bulb; PERYTON ≤2 mm above penile bulb top).</p>
 </div>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
-</section>
-<!-- ============================ NEW PAGE 7 : SETTING B SLICE-BY-SLICE ============================ -->
-<section class="page">
-<div class="sechead"><span class="eyebrow">Section 3 · Setting B (cont.)</span><h2><span class="sectnum">3</span>Prostate-bed CTV — slice-by-slice walkthrough</h2></div>
-<p class="small" style="margin-top:-2px;">Caudal → cranial delineation, keyed to the levels on the sagittal map. Synthesised from the FROGG 2024 serial-slice figure and ESTRO ACROP border text. Contour on axial, verify on sagittal + coronal.</p>
-<div class="grid2" style="grid-template-columns:0.82fr 1.18fr;">
+</div><p class="small" style="margin-top:-2px;">Caudal → cranial delineation, keyed to the levels on the sagittal map. Synthesised from the FROGG 2024 serial-slice figure and ESTRO ACROP border text. Contour on axial, verify on sagittal + coronal.</p><div class="grid2" style="grid-template-columns:0.82fr 1.18fr;">
 <div>
 <figure>
 <svg aria-label="Sagittal level map of the prostate bed" role="img" viewbox="0 0 240 320">
@@ -481,7 +314,7 @@
 </figure>
 </div>
 <div>
-<table style="font-size:9px;">
+<div class="tw"><table style="font-size:9px;">
 <thead><tr><th style="width:8%">Lvl</th><th style="width:20%">Landmark</th><th>What to do</th></tr></thead>
 <tbody>
 <tr><td class="b">1</td><td>Inferior extent (peri–penile-bulb)</td><td>Start <b>5–12 mm below the VUA</b> (5 mm if MRI-defined VUA, up to 10 mm if CT/contrast-only); extend lower to enclose any <b>inferior surgical clips</b>. If VUA not visible, start on the slice <b>above the penile bulb</b>. At/below the anorectal junction do <b>not</b> wrap posteriorly (low recurrence risk). Lateral = medial levator ani.</td></tr>
@@ -491,51 +324,33 @@
 <tr><td class="b">5</td><td>Upper bed / SV bed</td><td>Anterior = <b>wrap around the lateral posterior bladder wall extending 1.5 cm anteriorly</b> (FROGG), or cover 1–2 cm posterior bladder wall / up to the posterior bladder-wall margin with reliable daily IGRT (ESTRO). Posterior = <b>anterior mesorectal fascia</b>. Include a <b>3–5 mm SV “bridge”</b>; cover the SV bed to the cut end of the vas.</td></tr>
 <tr><td class="b">6</td><td>Superior cap</td><td>If SV and prostatic base <b>uninvolved</b>: stop at the cut end of vas and do <b>not</b> exceed <b>4.5 cm above the VUA</b> (FROGG). If <b>SV involved</b>: include the entire SV bed + cranial clips (ESTRO).</td></tr>
 </tbody>
-</table>
+</table></div>
 <div class="callout" style="margin-top:.4em;">
 <span class="lbl">Anchor points</span>
 <p style="margin:3px 0 0;">The <b>VUA</b> is the caudal spatial reference for the whole bed; the <b>cut end of the vas / SV bed</b> anchors the cranial extent. Preferring these soft-tissue anchors over bony surrogates (symphysis) accounts for the variable VUA–symphysis relationship.</p>
 </div>
 </div>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
-</section>
-<!-- ============================ PAGE 7 : SETTING B GTV / margin / MRI ============================ -->
-<section class="page">
-<div class="sechead"><span class="eyebrow">Section 3 · Setting B (cont.)</span><h2><span class="sectnum">3</span>Macroscopic recurrence, positive margins &amp; IGRT</h2></div>
-<h3>3.3  Expansion at a positive surgical margin</h3>
-<p>Older EORTC guidance recommended a supplementary 5 mm CTV expansion toward a microscopically involved margin (except the rectal wall). <b>ESTRO ACROP reached no consensus</b> on this — judicious expansion is left to the treating radiation oncologist. Direct such expansion by the pathology report (site of EPE / R1) and preoperative MRI where available.</p>
-<h3>3.4  Macroscopic bed recurrence — GTV <span class="pill p-boost">boost</span></h3>
-<ul class="tight">
+</div></article><article class="card" data-title="Expansion at a positive surgical margin"><h3>3.3  Expansion at a positive surgical margin</h3><p>Older EORTC guidance recommended a supplementary 5 mm CTV expansion toward a microscopically involved margin (except the rectal wall). <b>ESTRO ACROP reached no consensus</b> on this — judicious expansion is left to the treating radiation oncologist. Direct such expansion by the pathology report (site of EPE / R1) and preoperative MRI where available.</p></article><article class="card" data-title="Macroscopic bed recurrence — GTV boost"><h3>3.4  Macroscopic bed recurrence — GTV <span class="pill p-boost">boost</span></h3><ul class="tight">
 <li>Any macroscopic recurrence on clinical exam / MRI / PSMA-PET is contoured as <b>GTVp</b>; MRI fusion best delineates PSMA-avid bed disease.</li>
 <li>The elective bed CTV is treated to the standard salvage dose <span class="pill p-bed">64–66 Gy EQD2</span>; gross recurrence is boosted to <span class="pill p-boost">≥70–74 Gy EQD2</span> respecting OAR constraints (SPIDER-supported PFS benefit at ≥72 Gy).</li>
 <li class="small"><b>Principle:</b> the boost is anchored to the demonstrable gross-disease extent; the surrounding elective bed envelope is unchanged.</li>
-</ul>
-<h3>3.5  IGRT &amp; motion (bed)</h3>
-<p class="small" style="margin-top:-2px;">The dedicated ESTRO ACROP IGRT guideline (Ghadjar 2019) covers the <b>intact</b> gland only; the bed rules below are from Dal Pra 2023 — see §5.4 for the intact IGRT margin framework.</p>
-<ul class="tight">
+</ul></article><article class="card" data-title="IGRT &amp; motion (bed)"><h3>3.5  IGRT &amp; motion (bed)</h3><p class="small" style="margin-top:-2px;">The dedicated ESTRO ACROP IGRT guideline (Ghadjar 2019) covers the <b>intact</b> gland only; the bed rules below are from Dal Pra 2023 — see §5.4 for the intact IGRT margin framework.</p><ul class="tight">
 <li>Daily (or ≥3×/week) <b>CBCT with soft-tissue and/or surgical-clip matching</b>; bone-only match or no IGRT is not recommended. Train RTTs in online soft-tissue matching.</li>
 <li>The <b>postero-superior bed moves most</b>; a larger antero-posterior PTV margin is appropriate in the upper bed. Divide upper vs lower bed at the level where the CTV leaves the pubic symphysis.</li>
 <li>Maintain an <b>empty rectum and comfortably full bladder</b>; no routine fiducials, rectal balloon or spacer in the bed.</li>
-</ul>
-<div class="callout">
+</ul><div class="callout">
 <span class="lbl">Adherence matters</span>
 <p style="margin:4px 0 0;">Central review of a salvage phase-3 trial (SAKK 09/10) showed that limited protocol adherence — notably CTV overlap with the rectal wall — was associated with higher toxicity and a trend to worse biochemical control. MRI-aided CT contouring reduces inter-observer variability, shifts the inferior border caudally and sharpens the anterior rectal-wall interface.</p>
-</div>
-<div class="flag">
+</div><div class="flag">
 <span class="lbl">Physics / clinical review</span>
 <ul class="tight" style="margin-top:3px;">
 <li>Positive-margin CTV expansion (0 vs 5 mm directional) is a governance decision — agree a departmental default and document per case.</li>
 <li>Bed boost dose / EQD2 assumptions (α/β for the bed) and hotspot control near the VUA require physics validation (Section 6).</li>
 </ul>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
-</section>
-<!-- ============================ PAGE 8 : SETTING C NODAL 10-STEP ============================ -->
-<section class="page" id="s4">
-<div class="sechead"><span class="eyebrow">Section 4 · Setting C</span><h2><span class="sectnum">4</span>Pelvic nodal CTV — NRG 10-step</h2></div>
-<p class="small" style="margin-top:-2px;">Primary source: NRG Oncology updated international consensus atlas (Hall 2021). Used for elective nodal irradiation in intact and post-prostatectomy settings (FROGG 7.4 defers to NRG for nodal volumes).</p>
-<div class="grid2">
+</div></article>
+</section><section class="panel" id="p-s4" data-tab="s4" data-label="4 Node-positivity criteria" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 4 · Setting C (cont.)</p><h2><span class="sectnum">4</span>Node-positivity criteria, ENI indications &amp; dose </h2><div class="lede"><p class="small" style="margin-top:-2px;">Primary source: NRG Oncology updated international consensus atlas (Hall 2021). Used for elective nodal irradiation in intact and post-prostatectomy settings (FROGG 7.4 defers to NRG for nodal volumes).</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Node-positivity criteria, ENI indications &amp; dose"><h3>Node-positivity criteria, ENI indications &amp; dose</h3><div class="grid2">
 <div>
 <div class="stepbox">
 <h4 style="margin-top:2px;">Prophylactic steps — clinically node-negative (intact &amp; postop) <span class="pill p-elect">45–50.4 Gy</span></h4>
@@ -597,14 +412,7 @@
 <p style="margin:3px 0 0;">CTV excludes bone, bladder, muscle and bowel. Perirectal / mesorectal nodes are <b>not</b> routinely included (only for highly selected T4 disease). In postop cases, aberrant nodal spread is common — incorporate pathology, operative report and PSMA/MRI; identify and consider including surgical clips.</p>
 </div>
 </div>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
-</section>
-<!-- ============================ PAGE 9 : NODE CRITERIA + ENI ============================ -->
-<section class="page">
-<div class="sechead"><span class="eyebrow">Section 4 · Setting C (cont.)</span><h2><span class="sectnum">4</span>Node-positivity criteria, ENI indications &amp; dose</h2></div>
-<h3>4.1  Clinical node-positivity criteria (NRG Fig. 1)</h3>
-<table>
+</div></article><article class="card" data-title="Clinical node-positivity criteria (NRG Fig. 1)"><h3>4.1  Clinical node-positivity criteria (NRG Fig. 1)</h3><div class="tw"><table>
 <caption>Short-axis size, morphology and PET thresholds for calling a pelvic node positive. Confirm equivocal findings with diagnostic radiology / nuclear medicine.</caption>
 <thead><tr><th>Station</th><th>Short-axis size</th><th>Morphology</th><th>PSMA-PET</th></tr></thead>
 <tbody>
@@ -613,37 +421,25 @@
 <tr><td class="b">Common / external iliac</td><td>&gt;8 mm</td><td>Irregular / heterogeneous</td><td>Uptake &gt; blood pool</td></tr>
 <tr><td class="b">Inguinal</td><td>&gt;8 mm</td><td>Irregular / heterogeneous</td><td>Asymmetric uptake &gt; liver</td></tr>
 </tbody>
-</table>
-<h3>4.2  Elective nodal irradiation (ENI) — contested indications</h3>
-<p class="small">The NRG atlas defines <i>how</i> to contour nodes but explicitly does not address <i>whether</i> to treat them (out of scope). Indications are presented below as named positions.</p>
-<div class="named">
+</table></div></article><article class="card" data-title="Elective nodal irradiation (ENI) — contested indications"><h3>4.2  Elective nodal irradiation (ENI) — contested indications</h3><p class="small">The NRG atlas defines <i>how</i> to contour nodes but explicitly does not address <i>whether</i> to treat them (out of scope). Indications are presented below as named positions.</p><div class="named">
 <p style="margin:0"><span class="pos">Salvage setting (FROGG / SPPORT):</span> RTOG 0534 SPPORT showed prostate-bed RT + short-term ADT + pelvic nodal RT improved 5-yr freedom-from-progression (87.4% vs 81.3% [PBRT+ADT] vs 70.9% [PBRT alone]) and delayed second salvage ADT — but <b>no MFS/OS benefit demonstrated</b>, and PLNRT increased acute GI and haematological toxicity. <b>ENI can be considered</b>, and should be <b>discussed</b> with patients who had minimal/no nodal dissection and high microscopic-nodal risk (ISUP GG4–5, pT3/4, preop PSA &gt;20, persistent PSA with clear margins, pre-salvage PSA &gt;0.35). Nodal RT without concurrent ADT is of unknown benefit — consider ADT alongside ENI.</p>
-</div>
-<div class="named">
+</div><div class="named">
 <p style="margin:0"><span class="pos">pN1 at prostatectomy (FROGG 6.3):</span> patients with pathologically involved nodes being considered for salvage <b>should receive</b> pelvic nodal RT in addition to prostate-bed RT.</p>
-</div>
-<div class="named">
+</div><div class="named">
 <p style="margin:0"><span class="pos">Intact high-risk (POP-RT / SPPORT-era practice):</span> whole-pelvis RT is an accepted option for high / very-high-risk disease and clinically node-positive disease; POP-RT demonstrated improved biochemical failure-free and disease-free survival with prophylactic whole-pelvis RT in high-risk patients. Indication remains an area of active trial inquiry.</p>
-</div>
-<h3>4.3  Nodal dose</h3>
-<table>
+</div></article><article class="card" data-title="Nodal dose"><h3>4.3  Nodal dose</h3><div class="tw"><table>
 <thead><tr><th>Volume</th><th>Dose</th><th>Notes</th></tr></thead>
 <tbody>
 <tr><td><span class="pill p-elect">Elective nodes</span></td><td>45–50.4 Gy (EQD2)</td><td>Conventional fractionation; postop 45–50 Gy EQD2 (FROGG). Hypofractionated pelvic-nodal dosing is investigational.</td></tr>
 <tr><td><span class="pill p-boost">Gross / involved nodes</span></td><td>60–74 Gy (EQD2)</td><td>Treat as high as feasible (up to primary-tumour dose) respecting OAR; use post-ADT residual node as the boost volume with appropriate image guidance.</td></tr>
 </tbody>
-</table>
-<div class="flag">
+</table></div><div class="flag">
 <span class="lbl">Physics / clinical review</span>
 <p style="margin:3px 0 0;">ENI indication, ADT pairing and boost dose to gross nodes are MDT / governance decisions. Simultaneous-integrated-boost dose painting to gross nodes requires plan-class and OAR validation (Section 6, NRG Table 1 constraints).</p>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
-</section>
-<!-- ============================ PAGE 10 : DOSE / FRACTIONATION / PTV ============================ -->
-<section class="page" id="s5">
-<div class="sechead"><span class="eyebrow">Section 5</span><h2><span class="sectnum">5</span>Dose, fractionation, PTV margins &amp; image-guided delivery</h2></div>
-<h3>5.1  Dose / fractionation summary</h3>
-<table>
+</div></article>
+</section><section class="panel" id="p-s5" data-tab="s5" data-label="5 Image-guided delivery" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 5 (cont.)</p><h2><span class="sectnum">5</span>Image-guided delivery — ESTRO ACROP IGRT </h2><div class="jump"></div></div>
+  <article class="card" data-title="Dose / fractionation summary"><h3>5.1  Dose / fractionation summary</h3><div class="tw"><table>
 <caption>Representative schedules from cited trials. Local prescription and fractionation are governance decisions; EQD2 with the stated α/β where trials report it.</caption>
 <thead><tr><th style="width:20%">Setting</th><th>Target</th><th>Schedules</th><th>Evidence</th></tr></thead>
 <tbody>
@@ -654,15 +450,10 @@
 <tr><td>Macroscopic bed recurrence <span class="pill p-boost">boost</span></td><td>≥70–74 Gy EQD2 to gross disease</td><td>SPIDER (retrospective)</td></tr>
 <tr><td class="b">Pelvic nodes <span class="pill p-elect"> </span></td><td>Elective / gross nodes</td><td>Elective 45–50.4 Gy; gross 60–74 Gy EQD2</td><td>SPPORT, NRG atlas, Hall Table 1</td></tr>
 </tbody>
-</table>
-<p class="small">SBRT to the prostate bed remains <b>investigational</b> (SCIMITAR II 30–34 Gy/5#; no biochemical outcomes yet) — deliver only within a trial. Both ESTRO ACROP and FROGG regard the delineation recommendations as applicable irrespective of fractionation regime.</p>
-<h3>5.2  ADT (post-prostatectomy salvage) — brief</h3>
-<ul class="tight">
+</table></div><p class="small">SBRT to the prostate bed remains <b>investigational</b> (SCIMITAR II 30–34 Gy/5#; no biochemical outcomes yet) — deliver only within a trial. Both ESTRO ACROP and FROGG regard the delineation recommendations as applicable irrespective of fractionation regime.</p></article><article class="card" data-title="ADT (post-prostatectomy salvage) — brief"><h3>5.2  ADT (post-prostatectomy salvage) — brief</h3><ul class="tight">
 <li>Add short-term ADT for higher-risk salvage (RTOG 9601 OS benefit likely limited to pre-salvage PSA &gt;0.6; GETUG-16 MFS benefit; SPPORT FFP benefit). RADICALS-HD: long-course (24 mo) improved MFS vs short in higher-risk; 6 mo did not improve MFS vs none but delayed second salvage ADT.</li>
 <li>Risk-stratify (ISUP GG≥4, PSA-DT &lt;12 mo, pre-salvage PSA &gt;0.6, ≥pT3b); 6–24 months, longer for multiple high-risk features. Patients receiving ENI should be considered for concurrent ADT.</li>
-</ul>
-<h3>5.3  CTV→PTV margins</h3>
-<table>
+</ul></article><article class="card" data-title="CTV→PTV margins"><h3>5.3  CTV→PTV margins</h3><div class="tw"><table>
 <thead><tr><th style="width:22%">Setting</th><th>Recommended CTV→PTV</th></tr></thead>
 <tbody>
 <tr><td class="b">Intact (CT-guided)</td><td>5–10 mm isotropic, reduced posteriorly (e.g. 5 mm) with daily IGRT to spare rectum</td></tr>
@@ -670,21 +461,10 @@
 <tr><td class="b">Prostate bed (FROGG)</td><td>Lower bed 5–7 mm; upper bed 5–10 mm with the larger margin AP (greatest motion). Divide upper/lower where the CTV leaves the symphysis. ESTRO: minimum 5 mm isotropic.</td></tr>
 <tr><td class="b">Nodal CTV</td><td>5–7 mm to generate nodal PTV</td></tr>
 </tbody>
-</table>
-<p class="small">Anisotropic (upper vs lower bed) expansions account for differential motion; final margin depends on the institutional IGRT technique and departmental experience. Daily CBCT soft-tissue matching is assumed.</p>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 11</span></div>
-</section>
-<!-- ============================ NEW PAGE 12 : ESTRO ACROP IGRT ============================ -->
-<section class="page">
-<div class="sechead"><span class="eyebrow">Section 5 (cont.)</span><h2><span class="sectnum">5</span>Image-guided delivery — ESTRO ACROP IGRT</h2></div>
-<p class="small" style="margin-top:-2px;">Primary source: ESTRO ACROP consensus guideline on IGRT for localized prostate cancer (Ghadjar 2019). Corroborating margin guidance: ACR Appropriateness Criteria; Oehler 2014.</p>
-<div class="flag">
+</table></div><p class="small">Anisotropic (upper vs lower bed) expansions account for differential motion; final margin depends on the institutional IGRT technique and departmental experience. Daily CBCT soft-tissue matching is assumed.</p><p class="small" style="margin-top:-2px;">Primary source: ESTRO ACROP consensus guideline on IGRT for localized prostate cancer (Ghadjar 2019). Corroborating margin guidance: ACR Appropriateness Criteria; Oehler 2014.</p><div class="flag">
 <span class="lbl">Scope of the guideline</span>
 <p style="margin:3px 0 0;">The Ghadjar guideline applies <b>only to patients without prior prostatectomy, eligible for definitive EBRT</b>. IGRT of the <b>prostate bed</b> is explicitly a separate topic and is <b>not</b> covered — use the bed rules in §3.5 (Dal Pra), for which no dedicated postoperative IGRT guideline exists.</p>
-</div>
-<h3>5.4  Intact prostate — IGRT method &amp; margin framework</h3>
-<p>The guideline reviews (a) inter- and intra-fractional prostate motion, (b) technical IGRT approaches, (c) clinical control/toxicity, and (d) margin selection, and recommends <b>daily online IGRT</b>. Example CTV→PTV margins are given for the three most common IGRT scenarios; margins scale with the precision and timing of the correction and must be <b>institution-derived</b> (e.g. van Herk recipe), <b>anisotropic</b> (reduced posteriorly to spare rectum), and matched to delivery/QA capability.</p>
-<table>
+</div></article><article class="card" data-title="Intact prostate — IGRT method &amp; margin framework"><h3>5.4  Intact prostate — IGRT method &amp; margin framework</h3><p>The guideline reviews (a) inter- and intra-fractional prostate motion, (b) technical IGRT approaches, (c) clinical control/toxicity, and (d) margin selection, and recommends <b>daily online IGRT</b>. Example CTV→PTV margins are given for the three most common IGRT scenarios; margins scale with the precision and timing of the correction and must be <b>institution-derived</b> (e.g. van Herk recipe), <b>anisotropic</b> (reduced posteriorly to spare rectum), and matched to delivery/QA capability.</p><div class="tw"><table>
 <caption>Illustrative CTV→PTV margin framework by IGRT scenario (examples — derive locally). Reduce posteriorly.</caption>
 <thead><tr><th style="width:26%">Scenario</th><th style="width:34%">Method</th><th style="width:18%">Example margin</th><th>Note</th></tr></thead>
 <tbody>
@@ -692,39 +472,30 @@
 <tr><td class="b">2 · Daily online interfraction correction</td><td>Daily CBCT soft-tissue match, or kV fiducial-marker match; correct before beam-on (no intrafraction monitoring)</td><td>~5 mm (ACR: ≥5 mm routine)</td><td>Standard of care; MR-based CTV delineation reduces the delineation component of the margin</td></tr>
 <tr><td class="b">3 · Intrafraction monitoring / tracking</td><td>Electromagnetic transponders, intrafraction kV / triggered imaging, or MRI-linac gating/tracking</td><td><b>2–4 mm</b></td><td>ESTRO ACROP example for online IGRT + tracking; ACR ≥3 mm only with intrafraction correction; Oehler: ≤5 mm feasible with stringent daily IGRT + tracking</td></tr>
 </tbody>
-</table>
-<div class="callout">
+</table></div><div class="callout">
 <span class="lbl">Motion &amp; delivery principles</span>
 <ul class="tight" style="margin-top:4px;">
 <li><b>Intrafraction motion grows with treatment time</b> — minimise beam-on time (VMAT) and consider tracking for SBRT / ultra-hypofractionation, where the 2–4 mm regime and MRI guidance are most relevant (cf. MIRAGE: 2 vs 4 mm reduced toxicity).</li>
 <li><b>Rectal distension on the planning CT worsens biochemical control</b> via geographic miss — enforce the empty-rectum / comfortably-full-bladder protocol and re-sim if the reference anatomy is non-representative.</li>
 <li>Only adopt tight margins when matched by appropriately precise delivery and QA; the margin, IGRT method and delivery technique are a single coupled decision.</li>
 </ul>
-</div>
-<h3>5.5  Prostate bed — IGRT recap (Dal Pra)</h3>
-<ul class="tight">
+</div></article><article class="card" data-title="Prostate bed — IGRT recap (Dal Pra)"><h3>5.5  Prostate bed — IGRT recap (Dal Pra)</h3><ul class="tight">
 <li>Preferred method: <b>CBCT with soft-tissue and/or surgical-clip matching</b>, daily or at minimum 3×/week. Bone-only match or no image guidance are <b>not</b> recommended; RTT online-matching training is critical.</li>
 <li><b>No implanted fiducials</b> in the bed; no routine rectal balloon or hydrogel spacer.</li>
 <li>Rectum/bladder filling variation has a <b>greater impact postoperatively</b> than for the intact gland — maintain an empty rectum and comfortably full bladder. Apply the anisotropic upper/lower-bed PTV margins of §5.3.</li>
-</ul>
-<div class="flag">
+</ul><div class="flag">
 <span class="lbl">Physics validation</span>
 <p style="margin:3px 0 0;">Margin values above are examples. Derive departmental CTV→PTV margins from a local van-Herk analysis of setup, intrafraction and delineation uncertainties for each plan class, and re-validate when IGRT technique or fractionation changes.</p>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 12</span></div>
-</section>
-<!-- ============================ PAGE 11 : OAR CONSTRAINTS ============================ -->
-<section class="page" id="s6">
-<div class="sechead"><span class="eyebrow">Section 6</span><h2><span class="sectnum">6</span>Organs at risk &amp; dose constraints</h2></div>
-<p class="small" style="margin-top:-2px;">Post-prostatectomy constraints from FROGG Table 8; nodal constraints from NRG Table 1. Ideal constraints illustrate what is achievable with modern technique — target coverage should not be compromised to meet <i>ideal</i> values.</p>
-<div class="flag">
+</div></article>
+</section><section class="panel" id="p-s6" data-tab="s6" data-label="6 Organs at risk" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 6</p><h2><span class="sectnum">6</span>Organs at risk &amp; dose constraints </h2><div class="lede"><p class="small" style="margin-top:-2px;">Post-prostatectomy constraints from FROGG Table 8; nodal constraints from NRG Table 1. Ideal constraints illustrate what is achievable with modern technique — target coverage should not be compromised to meet <i>ideal</i> values.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Organs at risk &amp; dose constraints"><h3>Organs at risk &amp; dose constraints</h3><div class="flag">
 <span class="lbl">Physics validation required</span>
 <p style="margin:3px 0 0;">These tables are a starting point for departmental plan-class definition. Rectum/bladder dose-volume relationships remain poorly defined post-prostatectomy. Local constraints, EQD2 conversions and hotspot policy near the VUA must be validated by departmental physics before adoption.</p>
-</div>
-<div class="grid2">
+</div><div class="grid2">
 <div>
 <h4>Conventional 2 Gy/# (FROGG 8.1)</h4>
-<table>
+<div class="tw"><table>
 <thead><tr><th>OAR</th><th>Acceptable</th><th>Ideal</th></tr></thead>
 <tbody>
 <tr><td class="b">Rectum</td><td>V50&lt;50% · V60&lt;35% · V65&lt;25% · V70&lt;20%*</td><td>V40&lt;51% · V60&lt;25%</td></tr>
@@ -732,12 +503,12 @@
 <tr><td class="b">Small bowel</td><td colspan="2">D1cc&lt;50 Gy; avoid hotspots. Nodal cases: peritoneal cavity V45&lt;195cc (PTV coverage priority)</td></tr>
 <tr><td class="b">Femoral heads</td><td>V50&lt;5%</td><td>V35&lt;15% · V45&lt;1.5%</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="small">*Minimise dose &gt; prescription in rectum/bladder and avoid hotspots near the VUA.</p>
 </div>
 <div>
 <h4>Moderate hypofx 52.5 Gy/20# (FROGG 8.2)</h4>
-<table>
+<div class="tw"><table>
 <thead><tr><th>OAR</th><th>Acceptable</th><th>Ideal</th></tr></thead>
 <tbody>
 <tr><td class="b">Rectum</td><td>V40&lt;50% · V48&lt;35% · V52&lt;25% · V56&lt;20%</td><td>—</td></tr>
@@ -745,11 +516,9 @@
 <tr><td class="b">Small bowel</td><td colspan="2">D1cc&lt;46 Gy; avoid hotspots</td></tr>
 <tr><td class="b">Femoral heads</td><td colspan="2">V43&lt;5%</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
-</div>
-<h4>Pelvic nodal schedules (NRG Table 1, condensed)</h4>
-<table>
+</div><h4>Pelvic nodal schedules (NRG Table 1, condensed)</h4><div class="tw"><table>
 <caption>Selected constraints when treating nodes; hypofractionated nodal dosing is investigational.</caption>
 <thead><tr><th>Schedule</th><th>Rectum</th><th>Bladder</th><th>Small bowel</th><th>Femur</th></tr></thead>
 <tbody>
@@ -757,14 +526,10 @@
 <tr><td class="b">70 Gy/28# (nodes 45–50.4, SIB)</td><td>V45≤45% · V55≤25% · V65≤15%</td><td>V45≤45% · V55≤25% · V65≤15%</td><td>V46.5≤2cc · Dmax≤52Gy</td><td>V50≤1% · Dmax≤52.5Gy</td></tr>
 <tr><td class="b">60 Gy/20# (nodes 44–47/20#)</td><td>V30≤57% · V40≤38% · V50≤22% · V60≤1%</td><td>V40≤50% · V48≤25% · V60≤3%</td><td>Dmax≤40Gy · V37≤90cc</td><td>V35≤5% · Dmax≤37Gy</td></tr>
 </tbody>
-</table>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 13</span></div>
-</section>
-<!-- ============================ PAGE 12 : RAYSTATION IMPLEMENTATION ============================ -->
-<section class="page" id="s7">
-<div class="sechead"><span class="eyebrow">Section 7</span><h2><span class="sectnum">7</span>RayStation implementation &amp; TG-263 nomenclature</h2></div>
-<h3>7.1  Target &amp; helper ROI naming (AAPM TG-263)</h3>
-<table>
+</table></div></article>
+</section><section class="panel" id="p-s7" data-tab="s7" data-label="7 RayStation implementation" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 7</p><h2><span class="sectnum">7</span>RayStation implementation &amp; TG-263 nomenclature </h2><div class="jump"></div></div>
+  <article class="card" data-title="Target &amp; helper ROI naming (AAPM TG-263)"><h3>7.1  Target &amp; helper ROI naming (AAPM TG-263)</h3><div class="tw"><table>
 <caption>Dose suffixes in cGy. Laterality via <code>_L</code>/<code>_R</code>. Keep GTV/CTV/PTV as primary types; encode dose on PTV (and CTV where dual-level).</caption>
 <thead><tr><th>Clinical volume</th><th>TG-263 name</th><th>Build / note</th></tr></thead>
 <tbody>
@@ -778,9 +543,7 @@
 <tr><td>PTVs</td><td class="mono">PTV_7800 / PTV_6600 / PTVn_4500</td><td>margin per Section 5.3</td></tr>
 <tr><td>Planning / eval helpers</td><td class="mono">Rectum_Wall, Bladder_Wall, zPTV_eval, zRing_2cm</td><td>lowercase <code>z</code> prefix for non-anatomic optimisation ROIs</td></tr>
 </tbody>
-</table>
-<h3>7.2  ROI algebra (RayStation)</h3>
-<div class="grid2">
+</table></div></article><article class="card" data-title="ROI algebra (RayStation)"><h3>7.2  ROI algebra (RayStation)</h3><div class="grid2">
 <div>
 <h4>Intact prostate + elective nodes (WPRT)</h4>
 <p class="mono" style="background:#eef2f6;border:1px solid var(--rule);border-radius:4px;padding:6px 8px;line-height:1.6;">
@@ -803,37 +566,26 @@
       PTV_Bed −= (Rectum) for reporting
       </p>
 </div>
-</div>
-<p class="small">Split the bed at the level where the CTV leaves the pubic symphysis (upper vs lower bed) and apply <b>anisotropic</b> margins — the larger antero-posterior margin in the upper bed where motion is greatest (FROGG 7.5). Use non-uniform margin expansion in RayStation (Anterior/Posterior/Superior/Inferior/Left/Right fields), not a uniform value.</p>
-<h3>7.3  Optimisation &amp; evaluation helpers</h3>
-<ul class="tight">
+</div><p class="small">Split the bed at the level where the CTV leaves the pubic symphysis (upper vs lower bed) and apply <b>anisotropic</b> margins — the larger antero-posterior margin in the upper bed where motion is greatest (FROGG 7.5). Use non-uniform margin expansion in RayStation (Anterior/Posterior/Superior/Inferior/Left/Right fields), not a uniform value.</p></article><article class="card" data-title="Optimisation &amp; evaluation helpers"><h3>7.3  Optimisation &amp; evaluation helpers</h3><ul class="tight">
 <li><b>Wall ROIs:</b> <code>Rectum_Wall = Rectum − (Rectum ⊖ 3mm)</code>; likewise <code>Bladder_Wall</code>. Report V-dose on walls where luminal filling varies.</li>
 <li><b>PTV eval / hotspot control near VUA:</b> <code>zPTV_eval = PTV − (Rectum ⊕ 3mm)</code>; add a <code>zVUA_avoid</code> planning ROI to suppress dosimetric hotspots at the anastomosis.</li>
 <li><b>Skin trim:</b> <code>PTV −= (External ⊖ 3mm)</code> to prevent build-up-region PTV.</li>
 <li><b>Rings:</b> <code>zRing = (PTV ⊕ 2cm) − (PTV ⊕ 3mm)</code> for conformality control.</li>
-</ul>
-<h3>7.4  Registration &amp; QA</h3>
-<ul class="tight">
+</ul></article><article class="card" data-title="Registration &amp; QA"><h3>7.4  Registration &amp; QA</h3><ul class="tight">
 <li>Rigid CT–MRI (and CT–PSMA) fusion: initialise on pelvic bone (symphysis closure), then <b>locally refine</b> at the external urethral sphincter / peri-prostatic fat or fiducials. Use deformable registration with caution given bladder/rectal filling differences; verify at the target.</li>
 <li>Contour QA: review every target in axial + sagittal + coronal (mandatory at apex/base and at the VUA). Confirm no CTV–rectal-wall overlap (adherence predicts toxicity / control).</li>
 <li>IGRT: daily CBCT, soft-tissue ± clip match; document upper/lower-bed match priority.</li>
-</ul>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 14</span></div>
-</section>
-<!-- ============================ PAGE 13 : REFERENCES ============================ -->
-<section class="page" id="s8">
-<div class="sechead"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>References &amp; teaching resources</h2></div>
-<h3>8.1  Consensus guidelines &amp; atlases (provided sources)</h3>
-<ol class="ref">
+</ul></article>
+</section><section class="panel" id="p-s8" data-tab="s8" data-label="8 References" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 8</p><h2><span class="sectnum">8</span>References &amp; teaching resources </h2><div class="jump"></div></div>
+  <article class="card" data-title="Consensus guidelines &amp; atlases (provided sources)"><h3>8.1  Consensus guidelines &amp; atlases (provided sources)</h3><ol class="ref">
 <li>Dal Pra A, Dirix P, Khoo V, <i>et al.</i> ESTRO ACROP guideline on prostate bed delineation for postoperative radiotherapy in prostate cancer. <i>Clin Transl Radiat Oncol</i> 2023;41:100638.</li>
 <li>Warrender-Sparkes M, Tomaszewski JM, Ip C, <i>et al.</i> Post-prostatectomy radiation therapy: updated guidelines of the Australian and New Zealand Radiation Oncology Genito-Urinary Group (FROGG). <i>Radiother Oncol</i> 2025;204:110690.</li>
 <li>Salembier C, Villeirs G, De Bari B, <i>et al.</i> ESTRO ACROP consensus guideline on CT- and MRI-based target volume delineation for primary radiation therapy of localized prostate cancer. <i>Radiother Oncol</i> 2018;127:49–61.</li>
 <li>Hall WA, Paulson E, Davis BJ, <i>et al.</i> NRG Oncology updated international consensus atlas on pelvic lymph node volumes for intact and postoperative prostate cancer. <i>Int J Radiat Oncol Biol Phys</i> 2021;109:174–185.</li>
 <li>McLaughlin PW, Evans C, Feng M, Narayana V. Radiographic and anatomic basis for prostate contouring errors and methods to improve prostate contouring accuracy. <i>Int J Radiat Oncol Biol Phys</i> 2010;76:369–78. Pearls in Section 2b.</li>
 <li>Song Y, Dornisch AM, Dess RT, <i>et al.</i> Multidisciplinary consensus prostate contours on MRI: educational atlas and reference standard for AI benchmarking. <i>Int J Radiat Oncol Biol Phys</i> 2025;123:183–194.</li>
-</ol>
-<h3>8.2  Additional guidelines &amp; key trials</h3>
-<ol class="ref" start="7">
+</ol></article><article class="card" data-title="Additional guidelines &amp; key trials"><h3>8.2  Additional guidelines &amp; key trials</h3><ol class="ref" start="7">
 <li>Robin S, Jolicoeur M, Palumbo S, <i>et al.</i> Prostate bed delineation guidelines for postoperative RT (GFRU). <i>Int J Radiat Oncol Biol Phys</i> 2021;109:1243–53.</li>
 <li>Staal FHE, Janssen J, Oprea-Lager DE, <i>et al.</i> PSMA-PET/CT-based CTV delineation guideline for post-prostatectomy salvage RT (PERYTON). <i>Int J Radiat Oncol Biol Phys</i> 2024;118:688–96.</li>
 <li>Horsley PJ, Koo CM, Eade T, <i>et al.</i> Mapping of local recurrences after radical prostatectomy using <sup>68</sup>Ga-PSMA PET/CT. <i>Int J Radiat Oncol Biol Phys</i> 2023;115:106–17.</li>
@@ -851,19 +603,13 @@
 <li>Mayo CS, Moran JM, Bosch W, <i>et al.</i> Standardizing nomenclatures in radiation oncology: the report of AAPM Task Group 263. <i>Int J Radiat Oncol Biol Phys</i> 2018;100:1057–66.</li>
 <li>ACR Appropriateness Criteria — external-beam RT treatment planning for clinically localized prostate cancer (CTV–PTV margin guidance).</li>
 <li>Oehler C, <i>et al.</i> PTV margin definition in hypofractionated IGRT of localized prostate cancer using CBCT and orthogonal image pairs with fiducial markers. <i>Radiat Oncol</i> 2014;9:229.</li>
-</ol>
-<h3>8.3  eviQ (Cancer Institute NSW) protocols</h3>
-<ul class="ref">
+</ol></article><article class="card" data-title="eviQ (Cancer Institute NSW) protocols"><h3>8.3  eviQ (Cancer Institute NSW) protocols</h3><ul class="ref">
 <li>Prostate adenocarcinoma — definitive EBRT, intermediate risk (ID 234).</li>
 <li>Prostate adenocarcinoma — definitive EBRT, high risk (ID 235).</li>
 <li>Prostate adenocarcinoma — definitive EBRT, prostate and lymph nodes (ID 3657).</li>
-</ul>
-<h3>8.4  Supplementary teaching videos (user-supplied)</h3>
-<ul class="ref">
+</ul></article><article class="card" data-title="Supplementary teaching videos (user-supplied)"><h3>8.4  Supplementary teaching videos (user-supplied)</h3><ul class="ref">
 <li>youtu.be/opu_ThHg_y4  ·  youtu.be/9jXuLP3U4R0  ·  youtu.be/om5YSJCOJes</li>
-</ul>
-<p class="small">Listed as departmental teaching aids provided by the requesting clinician; the delineation parameters in this protocol are drawn from the cited peer-reviewed sources above, not transcribed from video.</p>
-<div class="callout" style="margin-top:1em;">
+</ul><p class="small">Listed as departmental teaching aids provided by the requesting clinician; the delineation parameters in this protocol are drawn from the cited peer-reviewed sources above, not transcribed from video.</p><div class="callout" style="margin-top:1em;">
 <span class="lbl">Items flagged for local governance / physics sign-off</span>
 <ul class="tight" style="margin-top:4px;">
 <li>Fractionation choice and SIB dose levels (all settings); DIL focal-boost policy.</li>
@@ -871,8 +617,11 @@
 <li>ENI indication and ADT pairing; gross-node boost dose.</li>
 <li>All OAR constraint tables and VUA-hotspot policy (Section 6).</li>
 </ul>
-</div>
-<div class="foot"><span>Prostate RT Delineation Protocol · v1.0</span><span>Page 15</span></div>
+</div></article>
 </section>
+</main>
+</div>
+<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
+<script src="../assets/site.js"></script>
 </body>
 </html>

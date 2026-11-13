@@ -1,169 +1,73 @@
 <!DOCTYPE html>
-
-<html lang="en-AU">
+<html lang="en-AU" data-site="thorax">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lung Cancer Radiotherapy Target Volume Delineation Protocol</title>
-<style>
-  :root{
-    --navy:#10243f; --navy2:#1d3a5f;
-    --teal:#14756b; --teal-bg:#e7f3f1;
-    --amber:#9a5a00; --amber-bg:#fdf3e3;
-    --rust:#8a2f23; --rust-bg:#fbeae7;
-    --paper:#ffffff;
-    --ink:#1c2530;
-    --muted:#5b6b7c;
-    --rule:#d6dde6;
-    --rule-strong:#14756b;
-    --dose-elective:#2f6fb0;
-    --dose-bed:#9a5a00;
-    --dose-sib:#c0721c;
-    --dose-boost:#8a2f23;
-    --dose-prostate:#b03a2e;
-    --flag:#8a2f23; --flag-bg:#fbeae7;
-    --key-bg:#e7f3f1;
-    --petrol:#10243f;
-    --petrol-2:#14756b;
-  }
-  *{box-sizing:border-box;}
-  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  body{
-    margin:0;background:#e6ebf0;color:var(--ink);
-    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
-    font-size:10.3px;line-height:1.5;
-  }
-  .page{
-    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
-    padding:16mm 17mm 14mm;position:relative;
-    box-shadow:0 1px 8px rgba(16,36,63,.16);
-    display:flex;flex-direction:column;
-  }
-  @page{size:A4;margin:13mm;}
-  @media print{
-    body{background:#fff;}
-    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
-    .page + .page{page-break-before:always;}
-    h2,h3{page-break-after:avoid;}
-    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
-  }
-  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
-  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
-  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
-  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
-  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
-  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
-  p{margin:.35em 0;}
-  a{color:var(--teal);}
-  .lead{font-size:11px;color:var(--muted);}
-  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
-  .sechead{margin:0 0 .5em;}
-  .sechead .eyebrow{display:block;margin-bottom:3px;}
-  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
-  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
-  .masthead h1{color:#fff;}
-  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
-  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
-  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
-  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
-  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
-  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
-  tbody tr:nth-child(even){background:#eef2f6;}
-  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
-  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
-  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
-  .p-elect{background:var(--dose-elective);}
-  .p-bed{background:var(--dose-bed);}
-  .p-sib{background:var(--dose-sib);}
-  .p-boost{background:var(--dose-boost);}
-  .p-pros{background:var(--dose-prostate);}
-  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
-  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
-  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
-  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
-  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
-  .flag .lbl:before{content:"\26A0  ";}
-  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
-  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
-  ol.steps li{margin:.28em 0;padding-left:.15em;}
-  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
-  ul.tight{margin:.25em 0;padding-left:1.15em;}
-  ul.tight li{margin:.18em 0;}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .grid2>div{min-width:0;}
-  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
-  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
-  svg{display:block;width:100%;height:auto;}
-  .kv{font-size:9.3px;}
-  .kv b{color:var(--navy);}
-  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
-  .ref{font-size:8.6px;line-height:1.4;}
-  .ref li{margin:.2em 0;}
-  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
-  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
-  .named .pos{font-weight:700;color:var(--amber);}
-  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
-  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
-  .toc a{color:var(--ink);text-decoration:none;}
-  .toc td{border:none;padding:2px 4px;}
-  .toc .n{color:var(--teal);font-weight:700;width:24px;}
-  .toc .pg{text-align:right;color:var(--muted);width:32px;}
-  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
-  .small{font-size:8.6px;color:var(--muted);}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lung contouring protocol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/protocol.css">
+<style>.p-elect{background:var(--dose-elective);}
+.p-bed{background:var(--dose-bed);}
+.p-sib{background:var(--dose-sib);}
+.p-boost{background:var(--dose-boost);}
+.p-pros{background:var(--dose-prostate);}
+.p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
 
-<style id="lung-extra">
   .p-gtv{background:#1d4f91;}
   .p-itv{background:#a07a00;}
   .p-ptv{background:#b03a2e;}
   .p-node{background:#2f6fb0;}
   .p-port{background:#14756b;}
-  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
-  .src{font-size:8.4px;color:var(--muted);}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:12.0px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:12.6px;color:var(--muted);}
   td.c{text-align:center;}
   .zone{font-weight:700;}
 </style>
-<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #2b7a3e}</style></head>
-<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../thorax-early.html" style="color:#9fe0d6;text-decoration:none">Early-stage / SABR page</a><a href="../thorax-stage3.html" style="color:#9fe0d6;text-decoration:none">Stage III &amp; PORT page</a><a href="../ctr-thorax.html" style="color:#9fe0d6;text-decoration:none">Thorax quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
-<!-- ============================ PAGE 1 : COVER ============================ -->
-<section class="page">
-<div class="masthead">
-<span class="eyebrow">Departmental Contouring Protocol · Thoracic Radiation Oncology</span>
-<h1>Lung Cancer Radiotherapy — Target Volume Delineation Protocol</h1>
-<p class="sub">One reference for the three curative lung settings: <b>SABR</b> (peripheral, chest-wall-adjacent, central and ultracentral), <b>definitive (chemo)radiotherapy</b> for stage II–III NSCLC, and <b>post-operative radiotherapy</b> (R1/R2 and pN2). Mediastinal and hilar nodal stations are defined on CT with their landmarks, using the IASLC map as drawn by Lynch 2013.</p>
-<div class="pillrow">
+</head>
+<body class="proto">
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>Lung contouring protocol</span></nav>
+    <div class="title-row">
+      <h1>Lung <span>Contouring protocol</span></h1>
+      <div class="meta">Full protocol · Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this protocol</label>
+      <input id="q" type="search" placeholder="Search this protocol: border, margin, dose, trial" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="side"><details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary><nav class="tree" aria-label="All pages"><a class="home" href="../index.html">Home</a><details data-site="breast"><summary>Breast</summary><a href="../breast-early.html">DCIS &amp; early breast</a><a href="../breast-nodes-pmrt.html">Nodes &amp; PMRT</a><a href="../breast-planning.html">Breast planning &amp; consent</a></details><details data-site="cns"><summary>CNS &amp; Paediatrics</summary><a href="../cns-glioma.html">Glioma</a><a href="../cns-benign.html">Benign &amp; functional</a><a href="../cns-vs.html">Vestibular schwannoma</a><a href="../cns-general.html">Eye &amp; tolerances</a><a href="../peds-cns.html">Paediatric CNS</a><a href="../peds-solid.html">Paediatric solid tumours</a><a href="../peds-late.html">Paediatric late effects</a></details><details data-site="gi"><summary>Gastrointestinal</summary><a href="../gi-oesophagus-gastric.html">Oesophagus &amp; gastric</a><a href="../gi-pancreas.html">Pancreas</a><a href="../gi-hepatobiliary.html">Liver &amp; biliary</a><a href="../gi-rectum-colon.html">Rectum &amp; colon</a><a href="../gi-anal.html">Anal</a><a href="../gi-general.html">General GI</a></details><details data-site="gu"><summary>Genitourinary</summary><a href="../gu-prostate.html">Prostate</a><a href="../gu-bladder.html">Bladder</a><a href="../gu-kidney.html">Kidney</a><a href="../gu-testis.html">Testis</a><a href="../gu-other.html">UTUC, urethra &amp; penile</a></details><details data-site="gyn"><summary>Gynaecological</summary><a href="../gyn-cervix.html">Cervix</a><a href="../gyn-endometrial.html">Endometrial</a><a href="../gyn-vulva-vagina.html">Vulva &amp; vagina</a><a href="../gyn-general.html">General gynae</a></details><details data-site="heme"><summary>Haematology</summary><a href="../heme-hodgkin.html">Hodgkin</a><a href="../heme-nhl.html">Non-Hodgkin</a><a href="../heme-other.html">Myeloma, TBI &amp; skin</a></details><details data-site="hn"><summary>Head and neck &amp; Skin</summary><a href="../hn-general.html">H&amp;N general</a><a href="../hn-oropharynx.html">Oropharynx</a><a href="../hn-larynx.html">Larynx &amp; hypopharynx</a><a href="../hn-oral-salivary.html">Oral cavity &amp; salivary</a><a href="../hn-npc-sinonasal.html">Nasopharynx &amp; sinonasal</a><a href="../hn-thyroid-cup.html">Thyroid &amp; unknown primary</a><a href="../skin.html">Skin</a></details><details data-site="sarcoma"><summary>Sarcoma</summary><a href="../sarcoma-sts.html">Soft tissue &amp; bone sarcoma</a><a href="../benign.html">Benign MSK</a></details><details data-site="thorax"><summary>Thorax</summary><a href="../thorax-early.html">Early NSCLC (SABR)</a><a href="../thorax-stage3.html">Stage III NSCLC</a><a href="../thorax-sclc.html">Small cell</a><a href="../thorax-other.html">Thymic, meso &amp; other</a></details><details data-site="pall"><summary>Palliative &amp; oligometastases</summary><a href="../pall-brain.html">Brain metastases</a><a href="../pall-wbrt.html">WBRT principles</a><a href="../pall-bone-spine.html">Bone, cord &amp; spine SBRT</a><a href="../pall-oligo.html">Oligomets &amp; palliation</a></details><details data-site="mrl"><summary>MR-linac</summary><a href="../mrl-images.html">Sequences &amp; signal</a><a href="../mrl-liver-gi.html">Liver &amp; upper GI</a><a href="../mrl-tumour-nodes.html">Tumours &amp; nodes</a><a href="../mrl-pelvis.html">Pelvis</a><a href="../mrl-workflow.html">Adaptive workflow</a></details><details data-site="exam"><summary>Phase 2 exam summary</summary><a href="../exam-overview.html">Epi &amp; memory aids</a><a href="../exam-breast.html">Breast</a><a href="../exam-cns.html">CNS</a><a href="../exam-peds.html">Paediatrics</a><a href="../exam-ugi.html">Upper GI</a><a href="../exam-lgi.html">Lower GI</a><a href="../exam-gu.html">Bladder, kidney, testis, penis</a><a href="../exam-prostate.html">Prostate</a><a href="../exam-gyn.html">Gynae</a><a href="../exam-heme.html">Haematology</a><a href="../exam-hn.html">Head and neck</a><a href="../exam-skin.html">Skin</a><a href="../exam-endocrine-benign.html">Endocrine &amp; benign</a><a href="../exam-sarcoma.html">Sarcoma</a><a href="../exam-thorax.html">Thorax</a><a href="../exam-pall.html">Palliative</a><a href="../exam-clinonc.html">Clinical oncology</a><a href="../exam-viva.html">Viva templates</a></details><details data-site="contouring" open><summary>Contouring</summary><a href="../ctr-library.html">Library</a><a href="../ctr-breast.html">Breast</a><a href="../ctr-thorax.html">Thorax</a><a href="../ctr-hn.html">H&amp;N</a><a href="../ctr-cns.html">CNS</a><a href="../ctr-upper-gi.html">Upper GI</a><a href="../ctr-anal.html">Anal</a><a href="../ctr-gyn.html">Gynae</a><a href="../ctr-heme.html">Lymphoma</a><a href="../ctr-sarcoma.html">Sarcoma</a><a href="../ctr-bladder.html">Bladder</a><a href="../ctr-kidney-liver.html">Kidney &amp; liver</a><a href="../ctr-skin.html">Skin</a><a href="../ctr-peds.html">Paeds</a><a href="../ctr-spine.html">Spine &amp; bone</a><a href="../contouring/breast.html">Breast</a><a href="../contouring/cns.html">CNS</a><a href="../contouring/gynae.html">Gynae</a><a href="../contouring/spine-bone.html">Spine &amp; bone SBRT</a><a href="../contouring/head-neck.html">Head &amp; neck</a><a href="../contouring/lymphoma.html">Lymphoma ISRT</a><a href="../contouring/lung.html" aria-current="page">Lung</a><a href="../contouring/prostate.html">Prostate</a><a href="../contouring/bladder.html">Bladder</a><a href="../contouring/rectal-long-course.html">Rectum</a><a href="../contouring/anal.html">Anal canal</a><a href="../contouring/oesophagus.html">Oesophagus &amp; GOJ</a><a href="../contouring/pancreas-stomach.html">Pancreas &amp; stomach</a><a href="../contouring/biliary.html">Biliary</a><a href="../contouring/liver-sbrt.html">Liver SBRT OARs</a><a href="../ctr-mim.html">MIM shortcuts</a><a href="../ctr-monaco.html">Monaco shortcuts</a></details></nav></details></aside>
+<main id="main">
+<p class="xref"><b>Related:</b> <a href="../thorax-early.html">Early-stage / SABR page</a> · <a href="../thorax-stage3.html">Stage III &amp; PORT page</a> · <a href="../ctr-thorax.html">Thorax quick protocol</a></p>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a structure, a margin (5 mm) or a trial name.</div>
+<section class="panel" id="p-overview" data-tab="overview" data-label="Overview">
+  <div class="panel-head"><p class="eyebrow">Departmental Contouring Protocol · Thoracic Radiation Oncology</p><h2>Lung contouring protocol</h2><p class="lede">One reference for the three curative lung settings: <b>SABR</b> (peripheral, chest-wall-adjacent, central and ultracentral), <b>definitive (chemo)radiotherapy</b> for stage II–III NSCLC, and <b>post-operative radiotherapy</b> (R1/R2 and pN2). Mediastinal and hilar nodal stations are defined on CT with their landmarks, using the IASLC map as drawn by Lynch 2013.</p><div class="pillrow">
 <span class="pill p-gtv">GTV / iGTV</span>
 <span class="pill p-itv">ITV (motion ± microscopic)</span>
 <span class="pill p-ptv">PTV</span>
 <span class="pill p-node">Nodal stations</span>
 <span class="pill p-port">Post-op CTV</span>
-</div>
-<div class="meta">ESTRO-ACROP (Nestle 2018) · IASLC CT atlas (Lynch 2013) · Lung ART · RTOG OAR atlas (Kong 2011) · NRG SBRT template · UK SABR consensus 2022 · departmental lung protocol V4 — Version 1.0 · Nov 2026</div>
-</div>
-<div class="callout">
-<span class="lbl">Governing principles of this protocol</span>
-<ul class="tight" style="margin-top:4px;">
-<li><b>SABR treats only what you can see.</b> GTV = CTV; the motion envelope (iGTV, ITV) and a 5 mm PTV do the rest. Dose follows the tumour's position relative to the chest wall and the proximal bronchial tree.</li>
-<li><b>Conventional RT is involved-field.</b> Primary and PET- or biopsy-positive nodes are the GTV; elective nodal irradiation is not used. Microscopic margin is small (about 5 mm) and is folded into the ITV in the departmental 4D workflow.</li>
-<li><b>Post-op RT is station-based.</b> The CTV is built from the resected involved stations, the bronchial stump and the ipsilateral hilum, plus stations 4 and 7, using the pathology report station by station.</li>
-<li>Where the departmental protocol and an international guideline differ, both are shown and the page states which it follows. Values not found in a supplied source are marked <span class="chk">CHECK</span>.</li>
-</ul>
-</div>
-<h3 style="margin-top:1.1em;">Contents</h3>
-<table class="toc">
-<tr><td class="n">1</td><td><a href="#s1">Scope, simulation, 4D-CT and imaging</a></td><td class="pg">2</td></tr>
-<tr><td class="n">2</td><td><a href="#s2">Scenario A — SABR: peripheral, chest-wall-adjacent, central, ultracentral</a></td><td class="pg">3</td></tr>
-<tr><td class="n">3</td><td><a href="#s3">Scenario B — Definitive RT / chemoRT for stage II–III NSCLC</a></td><td class="pg">6</td></tr>
-<tr><td class="n">4</td><td><a href="#s4">Mediastinal and hilar nodal stations: CT borders and landmarks</a></td><td class="pg">9</td></tr>
-<tr><td class="n">5</td><td><a href="#s5">Scenario C — Post-operative RT (R1/R2 and pN2)</a></td><td class="pg">12</td></tr>
-<tr><td class="n">6</td><td><a href="#s6">Pearls and common errors</a></td><td class="pg">14</td></tr>
-<tr><td class="n">7</td><td><a href="#s7">Dose, fractionation, CTV–PTV margins, plan evaluation and IGRT</a></td><td class="pg">15</td></tr>
-<tr><td class="n">8</td><td><a href="#s8">Organs at risk and dose constraints</a></td><td class="pg">17</td></tr>
-<tr><td class="n">9</td><td><a href="#s9">RayStation / MIM implementation and TG-263 names</a></td><td class="pg">21</td></tr>
-<tr><td class="n">10</td><td><a href="#s10">References</a></td><td class="pg">22</td></tr>
-</table>
-<h3>Sources used and what was missing</h3>
-<table>
+</div><p class="note">ESTRO-ACROP (Nestle 2018) · IASLC CT atlas (Lynch 2013) · Lung ART · RTOG OAR atlas (Kong 2011) · NRG SBRT template · UK SABR consensus 2022 · departmental lung protocol V4 — Version 1.0 · Nov 2026</p><div class="jump"></div></div>
+  <article class="card key" data-title="Governing principles of this protocol"><h3>Governing principles of this protocol</h3><div class="callout"></div></article><article class="card" data-title="Contents"><h3>Contents</h3><div class="tw"><table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, simulation, 4D-CT and imaging</a></td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Scenario A — SABR: peripheral, chest-wall-adjacent, central, ultracentral</a></td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario B — Definitive RT / chemoRT for stage II–III NSCLC</a></td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Mediastinal and hilar nodal stations: CT borders and landmarks</a></td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Scenario C — Post-operative RT (R1/R2 and pN2)</a></td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Pearls and common errors</a></td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Dose, fractionation, CTV–PTV margins, plan evaluation and IGRT</a></td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Organs at risk and dose constraints</a></td></tr>
+<tr><td class="n">9</td><td><a href="#s9">RayStation / MIM implementation and TG-263 names</a></td></tr>
+<tr><td class="n">10</td><td><a href="#s10">References</a></td></tr>
+</table></div></article><article class="card" data-title="Sources used and what was missing"><h3>Sources used and what was missing</h3><div class="tw"><table>
 <thead><tr><th style="width:34%">Source (your folder)</th><th>Used for</th></tr></thead>
 <tbody>
 <tr><td class="b">Departmental lung RT contouring protocol V4.0 (2024; Liverpool &amp; Macarthur, SWSLHD)</td><td>Simulation, SABR eligibility and dose bands, volume names and margins (SABR, 4D and 3D conventional, adjuvant, palliative), OAR definitions, plan evaluation, all departmental constraint tables, re-irradiation, IGRT.</td></tr>
@@ -174,24 +78,15 @@
 <tr><td class="b">NRG SBRT lung physics template (2022); UK SABR consensus (Diez 2022)</td><td>SBRT structure names and definitions, R50%/D2cm table; 1-, 3-, 5- and 8-fraction thoracic constraints.</td></tr>
 <tr><td class="b">MIM 4D ITV work instruction (2018); archived SABR protocol 4.185.4</td><td>Phase-propagation workflow; PBT auto-contour method.</td></tr>
 </tbody>
-</table>
-<div class="flag"><span class="lbl">Not in the folder</span> Guckenberger 2017 ESTRO-ACROP SBRT guideline (starred on the checklist) and the RTOG thoracic OAR / heart atlas PDFs were not reviewed; SABR volume rules here come from the departmental protocol and the NRG template instead. The departmental protocol used throughout is the Liverpool/Macarthur V4 document (2024).</div>
-<p class="small" style="margin-top:10px;">Version 1.0 · Educational departmental reference written in our own words; no atlas images are reproduced (all figures are original schematics). Clinical judgement, institutional policy and current guideline versions take precedence. Have a colleague review before clinical use.</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
-</section>
-<!-- ============================ SECTION 1 ============================ -->
-<section class="page" id="s1">
-<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, simulation, 4D-CT and imaging</h2></div>
-<p>Covers photon EBRT for primary NSCLC and lung oligometastases treated with SABR, definitive conventional or moderately hypofractionated RT, and post-operative RT. SCLC volumes are in the <a href="../ctr-thorax.html#sbrt">thorax quick protocol</a> (Levy 2026); SCLC doses and constraints from the departmental protocol are listed in Sections 7–8 for completeness. Palliative volumes are summarised in Section 7.</p>
-<h3>1.1  Before simulation</h3>
-<ul class="tight">
+</table></div><div class="flag"><span class="lbl">Not in the folder</span> Guckenberger 2017 ESTRO-ACROP SBRT guideline (starred on the checklist) and the RTOG thoracic OAR / heart atlas PDFs were not reviewed; SABR volume rules here come from the departmental protocol and the NRG template instead. The departmental protocol used throughout is the Liverpool/Macarthur V4 document (2024).</div><p class="small" style="margin-top:10px;">Version 1.0 · Educational departmental reference written in our own words; no atlas images are reproduced (all figures are original schematics). Clinical judgement, institutional policy and current guideline versions take precedence. Have a colleague review before clinical use.</p></article>
+</section><section class="panel" id="p-s1" data-tab="s1" data-label="1 Scope" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 1</p><h2><span class="sectnum">1</span>Scope, simulation, 4D-CT and imaging </h2><div class="lede"><p>Covers photon EBRT for primary NSCLC and lung oligometastases treated with SABR, definitive conventional or moderately hypofractionated RT, and post-operative RT. SCLC volumes are in the <a href="../ctr-thorax.html#sbrt">thorax quick protocol</a> (Levy 2026); SCLC doses and constraints from the departmental protocol are listed in Sections 7–8 for completeness. Palliative volumes are summarised in Section 7.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Before simulation"><h3>1.1  Before simulation</h3><ul class="tight">
 <li><b>MDT and work-up.</b> All patients discussed at the lung MDT. Definitive RT needs pulmonary function tests; there is no PFT cut-off that excludes treatment. Interstitial lung disease carries a high pneumonitis risk; estimate ILD mortality with the ILD-GAP index and weigh it against cancer mortality (Dept V4).</li>
 <li><b>PET timing.</b> Departmental: PET within 4 weeks of simulation for stage II–III and within 6 weeks for stage I, otherwise repeat a planning PET in treatment position (Dept V4). ESTRO-ACROP recommends PET-CT within 3 weeks before the start of treatment (Nestle 2018, "R"). With induction chemotherapy, PET before chemo and a contrast CT after it are mandatory (Nestle 2018, "M").</li>
 <li><b>Nodal staging.</b> Biopsy (EBUS, EUS or mediastinoscopy) for nodes ≥1 cm short axis or PET-avid nodes when it changes the volume (Nestle 2018).</li>
 <li><b>Motion assessment.</b> Consider abdominal compression or breath-hold when tumour excursion is ≥1.5 cm or for lower-lobe tumours; check comprehension, dentures (breath-hold) and stomas (compression) before choosing (Dept V4).</li>
-</ul>
-<h3>1.2  Simulation</h3>
-<table>
+</ul></article><article class="card" data-title="Simulation"><h3>1.2  Simulation</h3><div class="tw"><table>
 <thead><tr><th style="width:22%">Item</th><th>Department (V4)</th><th>Guideline</th></tr></thead>
 <tbody>
 <tr><td class="b">Position</td><td>Supine on a vacbag, arms up. Pancoast tumours in a mask.</td><td>NRG: arms above head, reproducible immobilisation.</td></tr>
@@ -200,18 +95,13 @@
 <tr><td class="b">MRI</td><td>Pancoast tumours invading chest wall, brachial plexus or vertebra: MRI in treatment position.</td><td>Optional for chest-wall, superior sulcus or paraspinal tumours (Nestle "O").</td></tr>
 <tr><td class="b">PET fusion</td><td>Fuse PET ± MRI to the planning CT in MIM.</td><td>Co-register only images acquired in planning position; otherwise view side by side (Nestle "M/R").</td></tr>
 </tbody>
-</table>
-<h3>1.3  Window settings</h3>
-<table>
+</table></div></article><article class="card" data-title="Window settings"><h3>1.3  Window settings</h3><div class="tw"><table>
 <thead><tr><th>Structure</th><th>Window</th><th>Level</th><th>RayStation preset</th><th>MIM preset</th></tr></thead>
 <tbody>
 <tr><td class="b">Primary in lung</td><td>1600</td><td>−600</td><td>Lung</td><td>EORTC_LUNG</td></tr>
 <tr><td class="b">Nodes; primary invading mediastinum or chest wall</td><td>400</td><td>20</td><td>Mediastinum</td><td>EORTC_MEDIASTINUM</td></tr>
 </tbody>
-</table>
-<p class="src">Dept V4 and Nestle 2018 (EORTC presets). Lynch 2013 drew stations 9 and 11 on a narrower lung setting (W 850, L −750) to define their anterior, posterior and lateral edges.</p>
-<h3>1.4  Which 4D image for what</h3>
-<table>
+</table></div><p class="src">Dept V4 and Nestle 2018 (EORTC presets). Lynch 2013 drew stations 9 and 11 on a narrower lung setting (W 850, L −750) to define their anterior, posterior and lateral edges.</p></article><article class="card" data-title="Which 4D image for what"><h3>1.4  Which 4D image for what</h3><div class="tw"><table>
 <thead><tr><th style="width:22%">Image</th><th>What it shows</th><th>Use here</th></tr></thead>
 <tbody>
 <tr><td class="b">End-expiration (50%) phase</td><td>Most reproducible, longest-dwell phase</td><td>Draw GTV_EX; propagate to all phases to make the iGTV. Draw heart and great-vessel PRVs here when they abut the PTV (Dept V4).</td></tr>
@@ -219,26 +109,17 @@
 <tr><td class="b">Average (AIP)</td><td>Time-averaged density</td><td>OAR contouring by RTs and dose calculation (Dept V4).</td></tr>
 <tr><td class="b">Mid-ventilation / mid-position</td><td>Phase closest to, or reconstruction of, the mean tumour position</td><td>Alternative to ITV: motion becomes a random error in the PTV margin (Nestle 2018). Not the departmental default.</td></tr>
 </tbody>
-</table>
-<div class="callout"><span class="lbl">Naming and colours</span><p style="margin:4px 0 0;">Departmental: GTVs blue, CTVs green, ITV yellow, PTV red; registrar drafts prefixed <code>REG</code> and deleted before approval; doses written in Gy (Dept V4). TG-263 equivalents are in Section 9.</p></div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
-</section>
-
-<!-- ============================ SECTION 2 : SABR ============================ -->
-<section class="page" id="s2">
-<div class="sechead"><span class="eyebrow">Section 2 · Scenario A</span><h2><span class="sectnum">2</span>SABR: peripheral, chest-wall-adjacent, central and ultracentral</h2></div>
-<p class="small" style="margin-top:-2px;">Primary sources: departmental lung protocol V4 (2024); NRG SBRT lung physics template (2022); Kong 2011 (PBT and central zone); UK SABR consensus (Diez 2022). Not reviewed: Guckenberger 2017 ESTRO-ACROP SBRT.</p>
-<h3>2.1  Who is suitable</h3>
-<ul class="tight">
+</table></div><div class="callout"><span class="lbl">Naming and colours</span><p style="margin:4px 0 0;">Departmental: GTVs blue, CTVs green, ITV yellow, PTV red; registrar drafts prefixed <code>REG</code> and deleted before approval; doses written in Gy (Dept V4). TG-263 equivalents are in Section 9.</p></div></article>
+</section><section class="panel" id="p-s2" data-tab="s2" data-label="2 SABR" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 2 · Scenario A</p><h2><span class="sectnum">2</span>SABR: peripheral, chest-wall-adjacent, central and ultracentral </h2><div class="lede"><p class="small" style="margin-top:-2px;">Primary sources: departmental lung protocol V4 (2024); NRG SBRT lung physics template (2022); Kong 2011 (PBT and central zone); UK SABR consensus (Diez 2022). Not reviewed: Guckenberger 2017 ESTRO-ACROP SBRT.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Who is suitable"><h3>2.1  Who is suitable</h3><ul class="tight">
 <li>T1–T2b primary NSCLC up to 5 cm, or lung oligometastases meeting the same criteria (Dept V4).</li>
 <li>Histological proof where safe; otherwise the MDT accepts a clinical diagnosis from serial CT, PET and risk factors (Dept V4).</li>
 <li>Able to lie in treatment position for about 30 minutes (Dept V4).</li>
 <li><b>Not ultracentral:</b> the PTV must not abut or overlap the trachea, proximal bronchial tree, oesophagus, pulmonary vein or pulmonary artery (Dept V4).</li>
-</ul>
-<h3>2.2  Location zones and the dose they trigger</h3>
-<div class="grid2">
+</ul></article><article class="card" data-title="Location zones and the dose they trigger"><h3>2.2  Location zones and the dose they trigger</h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <caption>Departmental dose bands (V4), measured from the ITV unless stated. Delivered second-daily (or 2–3 days apart).</caption>
 <thead><tr><th style="width:36%">Zone</th><th>Definition</th><th>Dose</th></tr></thead>
 <tbody>
@@ -248,47 +129,45 @@
 <tr><td class="b zone">Ultracentral</td><td>PTV abuts or overlaps trachea, PBT, oesophagus, pulmonary vein or artery</td><td>Not SABR per department: 60 Gy/15 # with SABR-style volumes (LUSTRE) or conventional RT. See 2.6.</td></tr>
 <tr><td class="b zone">Previous RT overlap</td><td>Any zone</td><td>50 Gy/5 # or lower to meet combined OAR limits</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="src">Single fraction (30 Gy/1 #) is recommended for lung oligometastases; avoid it when motion is ≥1 cm, the 4D-CT is poor, or the histology is radioresistant (e.g. colorectal). An RO attends single-fraction treatment or its mock-up (Dept V4).</p>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 270" role="img" aria-label="Coronal schematic of SABR location zones around the proximal bronchial tree">
-<rect width="300" height="270" fill="#fff"/>
+<svg aria-label="Coronal schematic of SABR location zones around the proximal bronchial tree" role="img" viewbox="0 0 300 270">
+<rect fill="#fff" height="270" width="300"></rect>
 <!-- lungs -->
-<path d="M132 30 Q70 40 40 120 Q22 200 40 245 Q90 258 135 240 Q125 180 132 30 Z" fill="#eef4fa" stroke="#9db4cc"/>
-<path d="M168 30 Q230 40 260 120 Q278 200 260 245 Q210 258 165 240 Q175 180 168 30 Z" fill="#eef4fa" stroke="#9db4cc"/>
+<path d="M132 30 Q70 40 40 120 Q22 200 40 245 Q90 258 135 240 Q125 180 132 30 Z" fill="#eef4fa" stroke="#9db4cc"></path>
+<path d="M168 30 Q230 40 260 120 Q278 200 260 245 Q210 258 165 240 Q175 180 168 30 Z" fill="#eef4fa" stroke="#9db4cc"></path>
 <!-- chest wall 1.5 cm rim -->
-<path d="M120 46 Q76 56 54 120 Q40 192 54 232" fill="none" stroke="#c69a5f" stroke-dasharray="3 3"/>
-<path d="M180 46 Q224 56 246 120 Q260 192 246 232" fill="none" stroke="#c69a5f" stroke-dasharray="3 3"/>
-<text x="20" y="262" font-size="8" fill="#8a6a3a">dotted: 1.5 cm inside chest wall</text>
+<path d="M120 46 Q76 56 54 120 Q40 192 54 232" fill="none" stroke="#c69a5f" stroke-dasharray="3 3"></path>
+<path d="M180 46 Q224 56 246 120 Q260 192 246 232" fill="none" stroke="#c69a5f" stroke-dasharray="3 3"></path>
+<text fill="#8a6a3a" font-size="8" x="20" y="262">dotted: 1.5 cm inside chest wall</text>
 <!-- central zone (2 cm around PBT, not superior) -->
-<path d="M118 92 L182 92 L188 120 Q236 150 236 196 L208 214 Q182 186 160 170 L140 170 Q118 186 92 210 L66 192 Q66 150 112 120 Z" fill="rgba(20,117,107,.08)" stroke="#14756b" stroke-dasharray="5 3"/>
-<text x="196" y="104" font-size="8" fill="#14756b">PBT + 2 cm</text>
-<text x="196" y="113" font-size="8" fill="#14756b">(not superiorly)</text>
+<path d="M118 92 L182 92 L188 120 Q236 150 236 196 L208 214 Q182 186 160 170 L140 170 Q118 186 92 210 L66 192 Q66 150 112 120 Z" fill="rgba(20,117,107,.08)" stroke="#14756b" stroke-dasharray="5 3"></path>
+<text fill="#14756b" font-size="8" x="196" y="104">PBT + 2 cm</text>
+<text fill="#14756b" font-size="8" x="196" y="113">(not superiorly)</text>
 <!-- trachea + PBT -->
-<rect x="143" y="10" width="14" height="110" rx="5" fill="#d8e9e5" stroke="#5b8f86"/>
-<path d="M150 112 L150 122 M146 120 L112 150 L100 176 M112 150 L92 158 M104 166 L90 192 M154 120 L190 152 L206 182 M190 152 L212 150" stroke="#14756b" stroke-width="6" fill="none" stroke-linecap="round"/>
-<text x="160" y="40" font-size="8" fill="#5b6b7c">trachea</text>
-<line x1="138" y1="96" x2="162" y2="96" stroke="#14756b" stroke-width="1"/>
-<text x="164" y="88" font-size="7.5" fill="#14756b">PBT starts 2 cm above carina</text>
+<rect fill="#d8e9e5" height="110" rx="5" stroke="#5b8f86" width="14" x="143" y="10"></rect>
+<path d="M150 112 L150 122 M146 120 L112 150 L100 176 M112 150 L92 158 M104 166 L90 192 M154 120 L190 152 L206 182 M190 152 L212 150" fill="none" stroke="#14756b" stroke-linecap="round" stroke-width="6"></path>
+<text fill="#5b6b7c" font-size="8" x="160" y="40">trachea</text>
+<line stroke="#14756b" stroke-width="1" x1="138" x2="162" y1="96" y2="96"></line>
+<text fill="#14756b" font-size="7.5" x="164" y="88">PBT starts 2 cm above carina</text>
 <!-- tumours -->
-<circle cx="72" cy="96" r="9" fill="rgba(29,79,145,.25)" stroke="#1d4f91" stroke-width="1.6"/>
-<text x="56" y="80" font-size="8.5" font-weight="700" fill="#1d4f91">A</text>
-<circle cx="250" cy="182" r="9" fill="rgba(29,79,145,.25)" stroke="#1d4f91" stroke-width="1.6"/>
-<text x="246" y="166" font-size="8.5" font-weight="700" fill="#1d4f91">B</text>
-<circle cx="76" cy="176" r="9" fill="rgba(29,79,145,.25)" stroke="#1d4f91" stroke-width="1.6"/>
-<text x="58" y="172" font-size="8.5" font-weight="700" fill="#1d4f91">C</text>
-<circle cx="218" cy="166" r="9" fill="rgba(176,58,46,.22)" stroke="#b03a2e" stroke-width="1.6"/>
-<circle cx="218" cy="166" r="14" fill="none" stroke="#b03a2e" stroke-dasharray="2 2"/>
-<text x="226" y="148" font-size="8.5" font-weight="700" fill="#b03a2e">D</text>
+<circle cx="72" cy="96" fill="rgba(29,79,145,.25)" r="9" stroke="#1d4f91" stroke-width="1.6"></circle>
+<text fill="#1d4f91" font-size="8.5" font-weight="700" x="56" y="80">A</text>
+<circle cx="250" cy="182" fill="rgba(29,79,145,.25)" r="9" stroke="#1d4f91" stroke-width="1.6"></circle>
+<text fill="#1d4f91" font-size="8.5" font-weight="700" x="246" y="166">B</text>
+<circle cx="76" cy="176" fill="rgba(29,79,145,.25)" r="9" stroke="#1d4f91" stroke-width="1.6"></circle>
+<text fill="#1d4f91" font-size="8.5" font-weight="700" x="58" y="172">C</text>
+<circle cx="218" cy="166" fill="rgba(176,58,46,.22)" r="9" stroke="#b03a2e" stroke-width="1.6"></circle>
+<circle cx="218" cy="166" fill="none" r="14" stroke="#b03a2e" stroke-dasharray="2 2"></circle>
+<text fill="#b03a2e" font-size="8.5" font-weight="700" x="226" y="148">D</text>
 </svg>
 <figcaption>Original schematic (coronal). <b>A</b> peripheral → 54/3. <b>B</b> within 1.5 cm of chest wall → 48/4. <b>C</b> inside the 2 cm zone around the proximal bronchial tree → 50/5. <b>D</b> PTV (dashed) touches a lobar bronchus → ultracentral, not SABR in the department. The zone follows Kong 2011: a 2 cm expansion of the PBT in every direction except superiorly.</figcaption>
 </figure>
 </div>
-</div>
-<h3>2.3  Volumes <span class="pill p-gtv">GTV</span> <span class="pill p-itv">ITV</span> <span class="pill p-ptv">PTV</span></h3>
-<table>
+</div></article><article class="card" data-title="Volumes GTV ITV PTV"><h3>2.3  Volumes <span class="pill p-gtv">GTV</span> <span class="pill p-itv">ITV</span> <span class="pill p-ptv">PTV</span></h3><div class="tw"><table>
 <thead><tr><th style="width:17%">Department (MIM)</th><th>Definition (Dept V4)</th><th style="width:30%">NRG template equivalent</th></tr></thead>
 <tbody>
 <tr><td class="b">GTVp_EX</td><td>Primary on the end-expiration (50%) phase. Number multiple primaries p1, p2.</td><td>GTV (CTV identical to GTV; no microscopic margin)</td></tr>
@@ -299,16 +178,9 @@
 <tr><td class="b">GTV_EVAL</td><td>iGTVp ∪ GTVp_MIP, subtracted from lungs for the lung DVH.</td><td>Lungs-IGTV</td></tr>
 <tr><td class="b">PTVDOSE</td><td>ITVDOSE + 5 mm in all directions.</td><td>IGTV + 5 mm; up to 2 mm more acceptable for institutional reasons</td></tr>
 </tbody>
-</table>
-<p class="src">60 Gy/15 # for ultracentral or SABR-unsuitable early tumours uses the same volumes (motion margin only, no microscopic margin), as in LUSTRE (Dept V4).</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
-</section>
-<section class="page">
-<h3>2.4  Edge-by-edge rules for the SABR GTV</h3>
-<p class="small">SABR has no anatomical CTV borders; what matters is where the GTV edge is drawn at each interface.</p>
-<div class="grid2">
+</table></div><p class="src">60 Gy/15 # for ultracentral or SABR-unsuitable early tumours uses the same volumes (motion margin only, no microscopic margin), as in LUSTRE (Dept V4).</p></article><article class="card" data-title="Edge-by-edge rules for the SABR GTV"><h3>2.4  Edge-by-edge rules for the SABR GTV</h3><p class="small">SABR has no anatomical CTV borders; what matters is where the GTV edge is drawn at each interface.</p><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:28%">Interface</th><th>Rule</th></tr></thead>
 <tbody>
 <tr><td class="b">Lung parenchyma</td><td>Lung window (1600/−600), zoomed so the tumour fills the view (Dept V4; NRG).</td></tr>
@@ -318,36 +190,34 @@
 <tr><td class="b">Cranial and caudal</td><td>Partial-volume error is greatest here and matters most with VMAT; allow for it (Dept V4). Check in sagittal and coronal.</td></tr>
 <tr><td class="b">Through the cycle</td><td>Check the propagated iGTV on every phase, in cine and against the MIP; propagation can fail with large motion (MIM work instruction).</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 230" role="img" aria-label="Coronal schematic of GTV positions through the breathing cycle, iGTV envelope and 5 mm PTV">
-<rect width="300" height="230" fill="#fff"/>
-<rect x="20" y="10" width="260" height="190" rx="12" fill="#eef4fa" stroke="#9db4cc"/>
-<path d="M118 52 Q150 34 182 52 Q196 100 182 150 Q150 172 118 150 Q104 100 118 52 Z" fill="none" stroke="#b03a2e" stroke-width="2" stroke-dasharray="6 3"/>
-<path d="M125 62 Q150 48 175 62 Q186 100 175 140 Q150 158 125 140 Q114 100 125 62 Z" fill="rgba(160,122,0,.12)" stroke="#a07a00" stroke-width="2"/>
-<ellipse cx="150" cy="78" rx="21" ry="16" fill="none" stroke="#1d4f91" stroke-dasharray="3 2"/>
-<ellipse cx="150" cy="100" rx="21" ry="16" fill="none" stroke="#1d4f91" stroke-dasharray="3 2"/>
-<ellipse cx="150" cy="124" rx="21" ry="16" fill="rgba(29,79,145,.25)" stroke="#1d4f91" stroke-width="1.8"/>
-<text x="196" y="128" font-size="8.5" fill="#1d4f91">GTVp_EX (50%, exhale)</text>
-<text x="196" y="82" font-size="8.5" fill="#1d4f91">other phases (dashed)</text>
-<text x="40" y="104" font-size="8.5" fill="#a07a00">ITVDOSE</text>
-<text x="40" y="114" font-size="8" fill="#a07a00">iGTVp ∪ GTV_MIP</text>
-<text x="40" y="44" font-size="8.5" fill="#b03a2e">PTVDOSE = ITV + 5 mm</text>
-<line x1="236" y1="168" x2="236" y2="34" stroke="#5b6b7c" marker-end="url(#ar)"/>
-<defs><marker id="ar" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#5b6b7c"/></marker></defs>
-<text x="242" y="100" font-size="8" fill="#5b6b7c">cranio-</text>
-<text x="242" y="110" font-size="8" fill="#5b6b7c">caudal</text>
-<text x="242" y="120" font-size="8" fill="#5b6b7c">motion</text>
-<text x="30" y="218" font-size="8" fill="#5b6b7c">No CTV: GTV = CTV for SABR</text>
+<svg aria-label="Coronal schematic of GTV positions through the breathing cycle, iGTV envelope and 5 mm PTV" role="img" viewbox="0 0 300 230">
+<rect fill="#fff" height="230" width="300"></rect>
+<rect fill="#eef4fa" height="190" rx="12" stroke="#9db4cc" width="260" x="20" y="10"></rect>
+<path d="M118 52 Q150 34 182 52 Q196 100 182 150 Q150 172 118 150 Q104 100 118 52 Z" fill="none" stroke="#b03a2e" stroke-dasharray="6 3" stroke-width="2"></path>
+<path d="M125 62 Q150 48 175 62 Q186 100 175 140 Q150 158 125 140 Q114 100 125 62 Z" fill="rgba(160,122,0,.12)" stroke="#a07a00" stroke-width="2"></path>
+<ellipse cx="150" cy="78" fill="none" rx="21" ry="16" stroke="#1d4f91" stroke-dasharray="3 2"></ellipse>
+<ellipse cx="150" cy="100" fill="none" rx="21" ry="16" stroke="#1d4f91" stroke-dasharray="3 2"></ellipse>
+<ellipse cx="150" cy="124" fill="rgba(29,79,145,.25)" rx="21" ry="16" stroke="#1d4f91" stroke-width="1.8"></ellipse>
+<text fill="#1d4f91" font-size="8.5" x="196" y="128">GTVp_EX (50%, exhale)</text>
+<text fill="#1d4f91" font-size="8.5" x="196" y="82">other phases (dashed)</text>
+<text fill="#a07a00" font-size="8.5" x="40" y="104">ITVDOSE</text>
+<text fill="#a07a00" font-size="8" x="40" y="114">iGTVp ∪ GTV_MIP</text>
+<text fill="#b03a2e" font-size="8.5" x="40" y="44">PTVDOSE = ITV + 5 mm</text>
+<line marker-end="url(#ar)" stroke="#5b6b7c" x1="236" x2="236" y1="168" y2="34"></line>
+<defs><marker id="ar" markerheight="6" markerwidth="6" orient="auto" refx="3" refy="3"><path d="M0 0 L6 3 L0 6 Z" fill="#5b6b7c"></path></marker></defs>
+<text fill="#5b6b7c" font-size="8" x="242" y="100">cranio-</text>
+<text fill="#5b6b7c" font-size="8" x="242" y="110">caudal</text>
+<text fill="#5b6b7c" font-size="8" x="242" y="120">motion</text>
+<text fill="#5b6b7c" font-size="8" x="30" y="218">No CTV: GTV = CTV for SABR</text>
 </svg>
 <figcaption>Original schematic. The exhale GTV is propagated to all phases, unioned with the MIP GTV to give the ITV, then expanded 5 mm to the PTV.</figcaption>
 </figure>
 </div>
-</div>
-<h3>2.5  Step by step (MIM 4D workflow, cranial → caudal)</h3>
-<div class="stepbox"><ol class="steps">
+</div></article><article class="card" data-title="Step by step (MIM 4D workflow, cranial → caudal)"><h3>2.5  Step by step (MIM 4D workflow, cranial → caudal)</h3><div class="stepbox"><ol class="steps">
 <li>Open the 4D + PET page. Confirm you are on the <b>50% phase</b> (top-right of the viewer).</li>
 <li>Start two slices above the first visible tumour on lung window and scroll caudally; begin GTVp_EX on the first slice where tumour, not partial volume, is seen. Check that slice in sagittal and coronal.</li>
 <li>Draw each slice on lung window. Switch to mediastinal window wherever the tumour touches pleura, a fissure, vessels or mediastinum. Use the PET only to decide what is tumour, not to set the edge.</li>
@@ -357,13 +227,7 @@
 <li>Create the MIP, draw <code>GTVp_MIP</code>, then build <code>ITVDOSE</code> = iGTVp ∪ GTVp_MIP and <code>PTVDOSE</code> = ITVDOSE + 5 mm (Boolean expand tool, avoid hard edge).</li>
 <li>For central tumours draw <code>BRONCHUS_PROX</code> and its 2 cm expansion now, and the heart and great-vessel PRVs on the 50% phase propagated to all phases, before choosing the fractionation.</li>
 <li>Save the session as <code>RO_FINAL</code> with the planning CT (not the 4D-CT) as the associated series.</li>
-</ol></div>
-<p class="src">Steps 5–9 follow the departmental MIM 4D ITV work instruction (2018); steps 1–4 combine Dept V4 contouring tips and NRG.</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
-</section>
-<section class="page">
-<h3>2.6  Central and ultracentral tumours</h3>
-<table>
+</ol></div><p class="src">Steps 5–9 follow the departmental MIM 4D ITV work instruction (2018); steps 1–4 combine Dept V4 contouring tips and NRG.</p></article><article class="card" data-title="Central and ultracentral tumours"><h3>2.6  Central and ultracentral tumours</h3><div class="tw"><table>
 <thead><tr><th style="width:20%">Step</th><th>Central (≤2 cm from PBT or mediastinum)</th><th>Ultracentral (PTV touches trachea, PBT, oesophagus, PV or PA)</th></tr></thead>
 <tbody>
 <tr><td class="b">Extra OARs</td><td colspan="2">Trachea, BRONCHUS_PROX and BRONCHUS_PROX+2CM (RO, lung and mediastinal windows); named vessels (SVC, aorta, pulmonary artery and vein) when close; PRV_HEART and PRV_GREAT_VES drawn on the 50% phase and propagated (Dept V4).</td></tr>
@@ -371,40 +235,27 @@
 <tr><td class="b">UK 2022 (8 #)</td><td colspan="2">For 60 Gy/8 #: Bronchus_Prox and trachea D0.1cc 40 Gy; oesophagus 40 Gy; great vessels 60 Gy optimal / 65 Gy mandatory; heart + pulmonary artery 40 Gy optimal / 46 Gy mandatory, and if 46 Gy cannot be met drop the prescription to 50 Gy; keep hot spots inside the PTV (Diez 2022, Table 2).</td></tr>
 <tr><td class="b">Trial option</td><td>—</td><td>SUNSET: 60 Gy/8 # daily, hot spot ≤120% and inside the PTV, endobronchial tumours excluded; 30 patients, grade 3–5 toxicity 2/30, 3-year local control 89.6% (Giuliani 2024). <span class="chk">CHECK</span> trial result from the web abstract, not in the folder or the departmental protocol.</td></tr>
 </tbody>
-</table>
-<h4>Contouring the proximal bronchial tree</h4>
-<ul class="tight">
+</table></div><h4>Contouring the proximal bronchial tree</h4><ul class="tight">
 <li><b>Extent:</b> distal 2 cm of trachea, carina, both main bronchi, both upper-lobe bronchi, bronchus intermedius, middle-lobe and lingular bronchi, and both lower-lobe bronchi; stop each lobar bronchus at its segmental bifurcation (Kong 2011; NRG).</li>
 <li><b>Wall:</b> mediastinal window, to the outer cartilage rings, lumen included (NRG; Kong 2011). Trachea is drawn from the cricoid down to where the PBT begins (NRG).</li>
 <li><b>Quick method:</b> threshold-autocontour bronchial air on lung window (MIM raw values 200–1000), then expand 1 mm to include the wall; check in all three planes (archived SABR protocol, CHISEL method).</li>
 <li><b>Central zone:</b> PBT expanded 2 cm in all directions except superiorly (Kong 2011); departmental structure <code>BRONCHUS_PROX+2CM</code>.</li>
-</ul>
-<div class="flag"><span class="lbl">Wording differs</span> Dept V4 defines BRONCHUS_PROX as "trachea 2 cm above carina to bifurcation of primary bronchi". This page follows Kong 2011 and NRG (to the segmental bifurcation of each lobar bronchus), which matches the lobe-by-lobe images in the archived departmental SABR protocol.</div>
-<h3>2.7  Pitfalls (SABR)</h3>
-<ul class="tight">
+</ul><div class="flag"><span class="lbl">Wording differs</span> Dept V4 defines BRONCHUS_PROX as "trachea 2 cm above carina to bifurcation of primary bronchi". This page follows Kong 2011 and NRG (to the segmental bifurcation of each lobar bronchus), which matches the lobe-by-lobe images in the archived departmental SABR protocol.</div></article><article class="card" data-title="Pitfalls (SABR)"><h3>2.7  Pitfalls (SABR)</h3><ul class="tight">
 <li><b>Irregular breathing.</b> 4D-CT artefacts mislead the ITV; widen the margin and avoid single fraction (Dept V4).</li>
 <li><b>Failed propagation.</b> Large-amplitude tumours can be under-covered on end-inspiration phases; always cycle all phases and compare with the MIP.</li>
 <li><b>MIP next to soft tissue.</b> The MIP loses the tumour edge against diaphragm, heart or mediastinum (Nestle 2018); rely on the phase contours there.</li>
 <li><b>When the smallest margin is not enough</b> (Dept V4): highly mobile tumours, two separate targets matched on one CBCT, uncertain extent next to collapse, consolidation or effusion, lepidic adenocarcinoma.</li>
 <li><b>Lung DVH.</b> Subtract GTV_EVAL only, not the PTV (Dept V4; Kong 2011).</li>
 <li><b>Lower-lobe tumours</b> need a pre-treatment mock-up; check beam clearance for all patients (Dept V4).</li>
-</ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
-</section>
-
-<!-- ============================ SECTION 3 : DEFINITIVE ============================ -->
-<section class="page" id="s3">
-<div class="sechead"><span class="eyebrow">Section 3 · Scenario B</span><h2><span class="sectnum">3</span>Definitive RT / chemoRT for stage II–III NSCLC</h2></div>
-<p class="small" style="margin-top:-2px;">Primary sources: Nestle 2018 ESTRO-ACROP (recommendation grades M = mandatory, R = recommended, O = optional, D = discouraged); departmental lung protocol V4 (2024) and V3 (2021, margin rationale).</p>
-<h3>3.1  Indications and schedule</h3>
-<ul class="tight">
+</ul></article>
+</section><section class="panel" id="p-s3" data-tab="s3" data-label="3 Definitive RT / chemoRT" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 3 · Scenario B</p><h2><span class="sectnum">3</span>Definitive RT / chemoRT for stage II–III NSCLC </h2><div class="lede"><p class="small" style="margin-top:-2px;">Primary sources: Nestle 2018 ESTRO-ACROP (recommendation grades M = mandatory, R = recommended, O = optional, D = discouraged); departmental lung protocol V4 (2024) and V3 (2021, margin rationale).</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Indications and schedule"><h3>3.1  Indications and schedule</h3><ul class="tight">
 <li><b>Stage II–III, fit:</b> 60 Gy/30 # with concurrent chemotherapy, ideally both starting day 1 (chemo at least within week 1). Sequential chemoRT if the volume is too large to treat safely, toxicity is a concern or the patient is not fit for concurrent (Dept V4).</li>
 <li><b>Not for concurrent chemo</b> (or consolidation RT for mediastinal oligoprogression): 55 Gy/20 # (Dept V4).</li>
 <li><b>Too large for radical dose:</b> induction systemic therapy, an isotoxic approach (highest dose that meets constraints, 40–50 Gy/20–25 # with chemo in the departmental table) or adaptive replanning if constraints are only just exceeded (Dept V4).</li>
 <li>Consolidation immunotherapy after chemoRT: re-image about 4 weeks after RT to confirm eligibility (Dept V4 follow-up table).</li>
-</ul>
-<h3>3.2  Which nodes go into the GTV</h3>
-<table>
+</ul></article><article class="card" data-title="Which nodes go into the GTV"><h3>3.2  Which nodes go into the GTV</h3><div class="tw"><table>
 <thead><tr><th style="width:30%">Finding</th><th>Action (Nestle 2018)</th></tr></thead>
 <tbody>
 <tr><td class="b">Biopsy-positive node</td><td>GTVn.</td></tr>
@@ -414,12 +265,9 @@
 <tr><td class="b">PET-positive with a clear benign explanation, or negative mediastinoscopy</td><td>May be omitted (e.g. symmetrical avid nodes with anthracosis or granulomatous disease after full EBUS mapping).</td></tr>
 <tr><td class="b">Uninvolved stations</td><td>No elective nodal irradiation (D). Hilum or stations between two involved stations optional (O).</td></tr>
 </tbody>
-</table>
-<p class="src">Station names follow the TNM 8th edition (IASLC) map, ideally with a 3D illustrated atlas (Nestle "R"); Section 4 gives the CT borders.</p>
-<h3>3.3  Volumes <span class="pill p-gtv">GTV</span> <span class="pill p-itv">ITV</span> <span class="pill p-ptv">PTV</span></h3>
-<div class="grid2">
+</table></div><p class="src">Station names follow the TNM 8th edition (IASLC) map, ideally with a 3D illustrated atlas (Nestle "R"); Section 4 gives the CT borders.</p></article><article class="card" data-title="Volumes GTV ITV PTV"><h3>3.3  Volumes <span class="pill p-gtv">GTV</span> <span class="pill p-itv">ITV</span> <span class="pill p-ptv">PTV</span></h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <caption>4D-CT route (department default).</caption>
 <thead><tr><th style="width:30%">Name</th><th>Definition (Dept V4)</th></tr></thead>
 <tbody>
@@ -432,10 +280,10 @@
 <tr><td class="b">ITVDOSE</td><td>ITVp ∪ ITVn, checked in cine; soft-tissue match volume.</td></tr>
 <tr><td class="b">PTVDOSE</td><td>ITVDOSE + 5 mm.</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <div>
-<table>
+<div class="tw"><table>
 <caption>3D-CT route (no usable 4D-CT).</caption>
 <thead><tr><th style="width:30%">Name</th><th>Definition (Dept V4)</th></tr></thead>
 <tbody>
@@ -446,14 +294,9 @@
 <tr><td class="b">PTVDOSE</td><td>ITVDOSE + 5 mm.</td></tr>
 <tr><td class="b">Optional</td><td>GTVp_PET / GTVn_PET (PET-only aids); GTVp_PRECX / GTVn_PRECX (pre-chemo extent from fused diagnostic imaging).</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
-</div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
-</section>
-<section class="page">
-<h3>3.4  Microscopic margin: guideline against department</h3>
-<table>
+</div></article><article class="card" data-title="Microscopic margin: guideline against department"><h3>3.4  Microscopic margin: guideline against department</h3><div class="tw"><table>
 <thead><tr><th style="width:18%">Item</th><th>ESTRO-ACROP (Nestle 2018)</th><th>Department V4 (V3 rationale)</th><th style="width:22%">This page follows</th></tr></thead>
 <tbody>
 <tr><td class="b">Primary CTV</td><td>GTV + 5–8 mm, manually edited off natural barriers such as bone and heart (M).</td><td>5 mm, folded into the ITV. V3: 4 mm for squamous and 7 mm for adenocarcinoma (Meynard), up to 8 mm for other histologies or unclear edges.</td><td>Department 5 mm; edit off bone, heart and great vessels unless invaded (Nestle M).</td></tr>
@@ -462,45 +305,37 @@
 <tr><td class="b">Motion</td><td>ITV from all phases or MIP, or mid-ventilation / mid-position, or gating; anisotropic margins because primary and nodes move differently (R).</td><td>Separate iGTVp and iGTVn propagated from the 50% phase.</td><td>Department.</td></tr>
 <tr><td class="b">PTV</td><td>Per ICRU from local set-up data; do not edit the PTV (D).</td><td>5 mm.</td><td>Department; no manual PTV editing.</td></tr>
 </tbody>
-</table>
-<figure>
-<svg viewBox="0 0 560 190" role="img" aria-label="Two options for nodal CTV: whole involved station versus geometric expansion">
-<rect width="560" height="190" fill="#fff"/>
+</table></div><figure>
+<svg aria-label="Two options for nodal CTV: whole involved station versus geometric expansion" role="img" viewbox="0 0 560 190">
+<rect fill="#fff" height="190" width="560"></rect>
 <g>
-<text x="20" y="18" font-size="10" font-weight="700" fill="#10243f">Option 1 — involved station</text>
-<path d="M40 40 L230 40 L250 150 L60 165 Z" fill="rgba(47,111,176,.10)" stroke="#2f6fb0" stroke-width="1.6"/>
-<text x="46" y="56" font-size="8.5" fill="#2f6fb0">whole station (e.g. 4R) as CTVn</text>
-<ellipse cx="160" cy="105" rx="26" ry="20" fill="rgba(29,79,145,.30)" stroke="#1d4f91" stroke-width="1.6"/>
-<ellipse cx="160" cy="105" rx="40" ry="34" fill="none" stroke="#1d4f91" stroke-dasharray="3 2"/>
-<text x="140" y="108" font-size="8.5" fill="#fff" font-weight="700">GTVn</text>
-<text x="206" y="88" font-size="8" fill="#1d4f91">≥5–8 mm</text>
+<text fill="#10243f" font-size="10" font-weight="700" x="20" y="18">Option 1 — involved station</text>
+<path d="M40 40 L230 40 L250 150 L60 165 Z" fill="rgba(47,111,176,.10)" stroke="#2f6fb0" stroke-width="1.6"></path>
+<text fill="#2f6fb0" font-size="8.5" x="46" y="56">whole station (e.g. 4R) as CTVn</text>
+<ellipse cx="160" cy="105" fill="rgba(29,79,145,.30)" rx="26" ry="20" stroke="#1d4f91" stroke-width="1.6"></ellipse>
+<ellipse cx="160" cy="105" fill="none" rx="40" ry="34" stroke="#1d4f91" stroke-dasharray="3 2"></ellipse>
+<text fill="#fff" font-size="8.5" font-weight="700" x="140" y="108">GTVn</text>
+<text fill="#1d4f91" font-size="8" x="206" y="88">≥5–8 mm</text>
 </g>
 <g transform="translate(290,0)">
-<text x="20" y="18" font-size="10" font-weight="700" fill="#10243f">Option 2 — geometric (department)</text>
-<path d="M40 40 L230 40 L250 150 L60 165 Z" fill="none" stroke="#9db4cc" stroke-dasharray="4 3"/>
-<text x="46" y="56" font-size="8.5" fill="#5b6b7c">station outline (not treated)</text>
-<ellipse cx="160" cy="105" rx="40" ry="34" fill="rgba(160,122,0,.14)" stroke="#a07a00" stroke-width="1.6"/>
-<ellipse cx="160" cy="105" rx="26" ry="20" fill="rgba(29,79,145,.30)" stroke="#1d4f91" stroke-width="1.6"/>
-<text x="140" y="108" font-size="8.5" fill="#fff" font-weight="700">iGTVn</text>
-<text x="206" y="88" font-size="8" fill="#a07a00">ITVn = +5 mm</text>
-<rect x="196" y="120" width="40" height="22" rx="8" fill="#f0e2d0" stroke="#c69a5f"/>
-<text x="200" y="134" font-size="7.5" fill="#8a6a3a">oesoph.</text>
-<text x="120" y="160" font-size="8" fill="#5b6b7c">edit off oesophagus</text>
+<text fill="#10243f" font-size="10" font-weight="700" x="20" y="18">Option 2 — geometric (department)</text>
+<path d="M40 40 L230 40 L250 150 L60 165 Z" fill="none" stroke="#9db4cc" stroke-dasharray="4 3"></path>
+<text fill="#5b6b7c" font-size="8.5" x="46" y="56">station outline (not treated)</text>
+<ellipse cx="160" cy="105" fill="rgba(160,122,0,.14)" rx="40" ry="34" stroke="#a07a00" stroke-width="1.6"></ellipse>
+<ellipse cx="160" cy="105" fill="rgba(29,79,145,.30)" rx="26" ry="20" stroke="#1d4f91" stroke-width="1.6"></ellipse>
+<text fill="#fff" font-size="8.5" font-weight="700" x="140" y="108">iGTVn</text>
+<text fill="#a07a00" font-size="8" x="206" y="88">ITVn = +5 mm</text>
+<rect fill="#f0e2d0" height="22" rx="8" stroke="#c69a5f" width="40" x="196" y="120"></rect>
+<text fill="#8a6a3a" font-size="7.5" x="200" y="134">oesoph.</text>
+<text fill="#5b6b7c" font-size="8" x="120" y="160">edit off oesophagus</text>
 </g>
 </svg>
 <figcaption>Original schematic of the two ESTRO-ACROP nodal CTV options (Nestle 2018, Fig. 2 concept). The department uses option 2 with a 5 mm margin inside the ITV.</figcaption>
-</figure>
-<h3>3.5  After induction chemotherapy</h3>
-<ul class="tight">
+</figure></article><article class="card" data-title="After induction chemotherapy"><h3>3.5  After induction chemotherapy</h3><ul class="tight">
 <li><b>Primary:</b> contour the current (post-chemo) extent on the new CT, with the pre-chemo imaging alongside (Nestle "R"). Department helper: GTVp_PRECX from fused diagnostic PET/CT (Dept V4).</li>
 <li><b>Nodes:</b> include every initially involved node or station from pre-chemo clinical, pathological and imaging information, even if the node has disappeared (Nestle "M"). Helper: GTVn_PRECX.</li>
 <li>The same principle (post-chemo primary, pre-chemo nodes) applies to limited-stage SCLC (Dept V4).</li>
-</ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
-</section>
-<section class="page">
-<h3>3.6  Step by step, cranial → caudal</h3>
-<div class="stepbox"><ol class="steps">
+</ul></article><article class="card" data-title="Step by step, cranial → caudal"><h3>3.6  Step by step, cranial → caudal</h3><div class="stepbox"><ol class="steps">
 <li><b>Thoracic inlet (cricoid to manubrium):</b> mediastinal window. Look for station 1 and 2 nodes on PET; separate them from thyroid, vessels and oesophagus. For apical tumours, draw the ipsilateral brachial plexus first (Section 8).</li>
 <li><b>Upper mediastinum (manubrium to top of aortic arch):</b> stations 2R/2L, 3a, 3p. Check the left brachiocephalic vein is not drawn as node.</li>
 <li><b>Aortic arch to carina:</b> 4R (to lower azygos border), 4L, 5 and 6. Use a sagittal view to place the arch and azygos landmarks.</li>
@@ -510,33 +345,23 @@
 <li>Propagate GTVp_EX and GTVn_EX separately to make iGTVp and iGTVn; check every phase.</li>
 <li>Expand each by 5 mm to ITVp and ITVn, edit off bone, heart, great vessels and oesophagus unless invaded, union to ITVDOSE, check in cine, expand 5 mm to PTVDOSE.</li>
 <li>Write the matching priority (primary, mediastinum, OAR, or ranked) in the prescription notes (Dept V4).</li>
-</ol></div>
-<h3>3.7  Pitfalls (definitive)</h3>
-<ul class="tight">
+</ol></div></article><article class="card" data-title="Pitfalls (definitive)"><h3>3.7  Pitfalls (definitive)</h3><ul class="tight">
 <li><b>Stale PET.</b> Tumours progress if the scan is more than about a month old; repeat PET in treatment position (Dept V4).</li>
 <li><b>Co-registering a diagnostic PET acquired arms-down.</b> View it side by side rather than fusing it (Nestle "R").</li>
 <li><b>Dropping a node that shrank after chemo.</b> Pre-chemo involvement defines the nodal GTV (Nestle "M").</li>
 <li><b>Contouring with one window.</b> Lung window under-draws mediastinal invasion; mediastinal window over-draws spiculated lung edges.</li>
 <li><b>Primary and nodes move differently.</b> One combined propagation can under-cover one of them; propagate separately (Nestle "R"; Dept V4).</li>
 <li><b>Manual PTV edits</b> to meet constraints are discouraged (Nestle "D"); use isotoxic dose or replanning instead.</li>
-</ul>
-<h3>3.8  Superior sulcus (Pancoast)</h3>
-<ul class="tight">
+</ul></article><article class="card" data-title="Superior sulcus (Pancoast)"><h3>3.8  Superior sulcus (Pancoast)</h3><ul class="tight">
 <li>Mask immobilisation; 4D-CT not required; MRI in treatment position if chest wall, plexus or vertebra is involved (Dept V4).</li>
 <li>Neoadjuvant 46 Gy/23 # for stage II–III (Dept V4). Draw the ipsilateral brachial plexus (Section 8.1) and the vertebral body.</li>
 <li>Hypofractionated 60 Gy/15 # is not used when the brachial plexus would receive the full dose (Dept V4).</li>
-</ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
-</section>
-
-<!-- ============================ SECTION 4 : NODAL STATIONS ============================ -->
-<section class="page" id="s4">
-<div class="sechead"><span class="eyebrow">Section 4 · Shared by Scenarios B and C</span><h2><span class="sectnum">4</span>Mediastinal and hilar nodal stations: CT borders and landmarks</h2></div>
-<p class="small" style="margin-top:-2px;">Primary source: Lynch R, Pitson G, Ball D, Claude L, Sarrut D. CT atlas for the IASLC lymph node map, a radiation oncologist perspective (Pract Radiat Oncol 2013). Where the IASLC text was ambiguous the authors set reproducible CT rules, several borrowed from Chapet 2005; those choices are marked "atlas". Organs and vessels are excluded from every station. Mediastinal window W 400 / L 20; stations 9 and 11 also on lung window.</p>
-<h3>4.1  Landmark ladder (cranial → caudal)</h3>
-<div class="grid2">
+</ul></article>
+</section><section class="panel" id="p-s4" data-tab="s4" data-label="4 Mediastinal" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 4 · Shared by Scenarios B and C</p><h2><span class="sectnum">4</span>Mediastinal and hilar nodal stations: CT borders and landmarks </h2><div class="lede"><p class="small" style="margin-top:-2px;">Primary source: Lynch R, Pitson G, Ball D, Claude L, Sarrut D. CT atlas for the IASLC lymph node map, a radiation oncologist perspective (Pract Radiat Oncol 2013). Where the IASLC text was ambiguous the authors set reproducible CT rules, several borrowed from Chapet 2005; those choices are marked "atlas". Organs and vessels are excluded from every station. Mediastinal window W 400 / L 20; stations 9 and 11 also on lung window.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Landmark ladder (cranial → caudal)"><h3>4.1  Landmark ladder (cranial → caudal)</h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:44%">Landmark</th><th>Stations that start (↓) or stop (■) here</th></tr></thead>
 <tbody>
 <tr><td class="b">Lower margin of cricoid</td><td>↓ 1R/1L</td></tr>
@@ -552,80 +377,67 @@
 <tr><td class="b">Inferior pulmonary vein</td><td>↓ 9 (ligament begins just below it)</td></tr>
 <tr><td class="b">Diaphragm</td><td>■ 8, 9</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="src">Order of the middle landmarks (arch, brachiocephalic vein, azygos, LPA, carina) varies between patients; place each on a sagittal or coronal view.</p>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 330" role="img" aria-label="Original ladder diagram of mediastinal nodal station extents">
-<rect width="300" height="330" fill="#fff"/>
-<g font-size="7.5" fill="#5b6b7c">
-<line x1="10" y1="20" x2="290" y2="20" stroke="#d6dde6"/><text x="12" y="17">cricoid</text>
-<line x1="10" y1="52" x2="290" y2="52" stroke="#d6dde6"/><text x="12" y="49">lung apex</text>
-<line x1="10" y1="72" x2="290" y2="72" stroke="#d6dde6"/><text x="12" y="69">manubrium top</text>
-<line x1="10" y1="108" x2="290" y2="108" stroke="#d6dde6"/><text x="12" y="105">arch top / BCV</text>
-<line x1="10" y1="136" x2="290" y2="136" stroke="#d6dde6"/><text x="12" y="133">arch bottom</text>
-<line x1="10" y1="158" x2="290" y2="158" stroke="#d6dde6"/><text x="12" y="155">azygos / LPA</text>
-<line x1="10" y1="176" x2="290" y2="176" stroke="#d6dde6"/><text x="12" y="173">carina</text>
-<line x1="10" y1="214" x2="290" y2="214" stroke="#d6dde6"/><text x="12" y="211">BI / LLL bronchus</text>
-<line x1="10" y1="240" x2="290" y2="240" stroke="#d6dde6"/><text x="12" y="237">inf. pulm. vein</text>
-<line x1="10" y1="310" x2="290" y2="310" stroke="#d6dde6"/><text x="12" y="307">diaphragm</text>
+<svg aria-label="Original ladder diagram of mediastinal nodal station extents" role="img" viewbox="0 0 300 330">
+<rect fill="#fff" height="330" width="300"></rect>
+<g fill="#5b6b7c" font-size="7.5">
+<line stroke="#d6dde6" x1="10" x2="290" y1="20" y2="20"></line><text x="12" y="17">cricoid</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="52" y2="52"></line><text x="12" y="49">lung apex</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="72" y2="72"></line><text x="12" y="69">manubrium top</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="108" y2="108"></line><text x="12" y="105">arch top / BCV</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="136" y2="136"></line><text x="12" y="133">arch bottom</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="158" y2="158"></line><text x="12" y="155">azygos / LPA</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="176" y2="176"></line><text x="12" y="173">carina</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="214" y2="214"></line><text x="12" y="211">BI / LLL bronchus</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="240" y2="240"></line><text x="12" y="237">inf. pulm. vein</text>
+<line stroke="#d6dde6" x1="10" x2="290" y1="310" y2="310"></line><text x="12" y="307">diaphragm</text>
 </g>
-<g font-size="8" font-weight="700" fill="#fff">
-<rect x="88" y="20" width="18" height="52" fill="#6b3fa8"/><text x="90" y="50">1</text>
-<rect x="110" y="52" width="18" height="56" fill="#2f6fb0"/><text x="111" y="84">2L</text>
-<rect x="132" y="52" width="18" height="56" fill="#1d4f91"/><text x="133" y="84">2R</text>
-<rect x="154" y="72" width="18" height="104" fill="#a07a00"/><text x="156" y="130">3a</text>
-<rect x="176" y="52" width="18" height="124" fill="#8a6a3a"/><text x="177" y="130">3p</text>
-<rect x="110" y="108" width="18" height="50" fill="#14756b"/><text x="111" y="138">4L</text>
-<rect x="132" y="108" width="18" height="50" fill="#2b7a3e"/><text x="133" y="138">4R</text>
-<rect x="198" y="108" width="18" height="28" fill="#c0721c"/><text x="203" y="126">6</text>
-<rect x="198" y="136" width="18" height="40" fill="#b03a2e"/><text x="203" y="160">5</text>
-<rect x="220" y="176" width="18" height="38" fill="#9b1c3f"/><text x="225" y="198">7</text>
-<rect x="242" y="214" width="18" height="96" fill="#4f5f74"/><text x="247" y="266">8</text>
-<rect x="264" y="240" width="18" height="70" fill="#7a5c00"/><text x="269" y="280">9</text>
-<rect x="110" y="158" width="40" height="56" fill="#006f8e"/><text x="118" y="190">10 → 11</text>
+<g fill="#fff" font-size="8" font-weight="700">
+<rect fill="#6b3fa8" height="52" width="18" x="88" y="20"></rect><text x="90" y="50">1</text>
+<rect fill="#2f6fb0" height="56" width="18" x="110" y="52"></rect><text x="111" y="84">2L</text>
+<rect fill="#1d4f91" height="56" width="18" x="132" y="52"></rect><text x="133" y="84">2R</text>
+<rect fill="#a07a00" height="104" width="18" x="154" y="72"></rect><text x="156" y="130">3a</text>
+<rect fill="#8a6a3a" height="124" width="18" x="176" y="52"></rect><text x="177" y="130">3p</text>
+<rect fill="#14756b" height="50" width="18" x="110" y="108"></rect><text x="111" y="138">4L</text>
+<rect fill="#2b7a3e" height="50" width="18" x="132" y="108"></rect><text x="133" y="138">4R</text>
+<rect fill="#c0721c" height="28" width="18" x="198" y="108"></rect><text x="203" y="126">6</text>
+<rect fill="#b03a2e" height="40" width="18" x="198" y="136"></rect><text x="203" y="160">5</text>
+<rect fill="#9b1c3f" height="38" width="18" x="220" y="176"></rect><text x="225" y="198">7</text>
+<rect fill="#4f5f74" height="96" width="18" x="242" y="214"></rect><text x="247" y="266">8</text>
+<rect fill="#7a5c00" height="70" width="18" x="264" y="240"></rect><text x="269" y="280">9</text>
+<rect fill="#006f8e" height="56" width="40" x="110" y="158"></rect><text x="118" y="190">10 → 11</text>
 </g>
-<text x="96" y="326" font-size="7.5" fill="#5b6b7c">bars show cranio-caudal extent only, not position</text>
+<text fill="#5b6b7c" font-size="7.5" x="96" y="326">bars show cranio-caudal extent only, not position</text>
 </svg>
 <figcaption>Original schematic. Station 5 is shown to the carina (atlas extension; IASLC stops at the upper rim of the LPA). 10R starts at the lower azygos border and 10L at the upper LPA rim, so their tops differ by side.</figcaption>
 </figure>
 </div>
-</div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
-</section>
-<section class="page">
-<h3>4.2  Border table, stations 1–6</h3>
-<table>
+</div></article><article class="card" data-title="Border table, stations 1–6"><h3>4.2  Border table, stations 1–6</h3><div class="tw"><table>
 <thead><tr><th style="width:9%">Station</th><th>Cranial</th><th>Caudal</th><th>Anterior</th><th>Posterior</th><th>Medial / lateral</th></tr></thead>
 <tbody>
-<tr><td class="b">1R / 1L<br><span class="small">low cervical, supraclavicular, sternal notch</span></td><td>Lower margin of cricoid</td><td>Clavicles laterally; upper border of manubrium in the midline (moves with arm position)</td><td>Deep surface of sternocleidomastoid and deep cervical fascia; posterior parts of ribs and clavicle; strap muscles excluded lower down</td><td>Posterolateral: anterior and lateral edge of anterior scalene, then medial-anterior edge of subclavian artery. Posteromedial: anterior edges of subclavian artery, vertebral vessels and oesophagus, extending medially to include carotid and IJV. Against 3p: line along the posterior tracheal wall (atlas)</td><td>1R and 1L divided by the tracheal midline; thyroid excluded</td></tr>
-<tr><td class="b">2R / 2L<br><span class="small">upper paratracheal</span></td><td>Lung apex and pleural space; upper manubrium in the midline</td><td>2R: caudal margin of brachiocephalic vein where it crosses the trachea (can be oblique). 2L: top of aortic arch (best seen sagittal)</td><td>Above the sternal notch: horizontal line from the most anterior pleura (atlas). Below it: behind the great vessels, at a line through their AP midpoints, where 2 meets 3a (atlas)</td><td>Horizontal line along the posterior tracheal wall</td><td>2R/2L divide at the <b>left lateral tracheal border</b>, not the midline. Thyroid excluded</td></tr>
-<tr><td class="b">3a<br><span class="small">prevascular</span></td><td>Chest apex (IASLC); upper manubrium used in the atlas to avoid overlap with 1</td><td>Carina</td><td>Retrosternal (prevascular space)</td><td>Against 2R/2L: line through the AP midpoints of the great vessels. Against 6 (arch level): horizontal line from the front of the arch. Against 5 (below arch): horizontal line from the front of the ascending aorta</td><td>Great vessels excluded; left brachiocephalic vein included until it joins the right (atlas)</td></tr>
-<tr><td class="b">3p<br><span class="small">retrotracheal</span></td><td>Chest apex; use the lower apex if the two differ (atlas)</td><td>Carina (meets 7)</td><td>Horizontal line along the posterior tracheal wall</td><td>Along the anterior and lateral vertebral body to a line 1 cm behind its anterior surface (Chapet)</td><td>Pleura laterally; on the right, the medial edge of the azygos where it arches forward. Oesophagus excluded</td></tr>
-<tr><td class="b">4R<br><span class="small">right lower paratracheal</span></td><td>Caudal margin of brachiocephalic vein at the trachea (continues from 2R)</td><td>Lower border of azygos vein (sagittal)</td><td>SVC and aorta; between them, halfway (atlas)</td><td>Line along the posterior tracheal wall</td><td>Medial: vertical line at the left lateral tracheal border. Lateral: pleura above, medial to the azygos arch below</td></tr>
-<tr><td class="b">4L<br><span class="small">left lower paratracheal</span></td><td>Top of aortic arch (continues from 2L)</td><td>Upper margin of left main pulmonary artery</td><td>Aortic arch, then ascending aorta</td><td>Line along the posterior tracheal wall</td><td>Left of the left tracheal border. Lateral: medial arch wall, then the ligamentum arteriosum, drawn as a line from the back of the ascending aorta to the front of the descending aorta (meets 5)</td></tr>
-<tr><td class="b">5<br><span class="small">aorto-pulmonary window</span></td><td>Lower border of aortic arch</td><td>Upper rim of LPA (IASLC); extended to the <b>carina</b> in the atlas</td><td>Horizontal line from the front of the ascending aorta (meets 3a)</td><td>—</td><td>Medial: ascending-to-descending aorta line (ligamentum, rarely seen on CT). Lateral: pleura</td></tr>
-<tr><td class="b">6<br><span class="small">para-aortic</span></td><td>Top of aortic arch</td><td>Lower border of aortic arch (meets 5)</td><td>Horizontal line from the front of the arch (meets 3a)</td><td>Between the arch and the pleura</td><td>Nodes in front of and lateral to the ascending aorta and arch</td></tr>
+<tr><td class="b">1R / 1L<br/><span class="small">low cervical, supraclavicular, sternal notch</span></td><td>Lower margin of cricoid</td><td>Clavicles laterally; upper border of manubrium in the midline (moves with arm position)</td><td>Deep surface of sternocleidomastoid and deep cervical fascia; posterior parts of ribs and clavicle; strap muscles excluded lower down</td><td>Posterolateral: anterior and lateral edge of anterior scalene, then medial-anterior edge of subclavian artery. Posteromedial: anterior edges of subclavian artery, vertebral vessels and oesophagus, extending medially to include carotid and IJV. Against 3p: line along the posterior tracheal wall (atlas)</td><td>1R and 1L divided by the tracheal midline; thyroid excluded</td></tr>
+<tr><td class="b">2R / 2L<br/><span class="small">upper paratracheal</span></td><td>Lung apex and pleural space; upper manubrium in the midline</td><td>2R: caudal margin of brachiocephalic vein where it crosses the trachea (can be oblique). 2L: top of aortic arch (best seen sagittal)</td><td>Above the sternal notch: horizontal line from the most anterior pleura (atlas). Below it: behind the great vessels, at a line through their AP midpoints, where 2 meets 3a (atlas)</td><td>Horizontal line along the posterior tracheal wall</td><td>2R/2L divide at the <b>left lateral tracheal border</b>, not the midline. Thyroid excluded</td></tr>
+<tr><td class="b">3a<br/><span class="small">prevascular</span></td><td>Chest apex (IASLC); upper manubrium used in the atlas to avoid overlap with 1</td><td>Carina</td><td>Retrosternal (prevascular space)</td><td>Against 2R/2L: line through the AP midpoints of the great vessels. Against 6 (arch level): horizontal line from the front of the arch. Against 5 (below arch): horizontal line from the front of the ascending aorta</td><td>Great vessels excluded; left brachiocephalic vein included until it joins the right (atlas)</td></tr>
+<tr><td class="b">3p<br/><span class="small">retrotracheal</span></td><td>Chest apex; use the lower apex if the two differ (atlas)</td><td>Carina (meets 7)</td><td>Horizontal line along the posterior tracheal wall</td><td>Along the anterior and lateral vertebral body to a line 1 cm behind its anterior surface (Chapet)</td><td>Pleura laterally; on the right, the medial edge of the azygos where it arches forward. Oesophagus excluded</td></tr>
+<tr><td class="b">4R<br/><span class="small">right lower paratracheal</span></td><td>Caudal margin of brachiocephalic vein at the trachea (continues from 2R)</td><td>Lower border of azygos vein (sagittal)</td><td>SVC and aorta; between them, halfway (atlas)</td><td>Line along the posterior tracheal wall</td><td>Medial: vertical line at the left lateral tracheal border. Lateral: pleura above, medial to the azygos arch below</td></tr>
+<tr><td class="b">4L<br/><span class="small">left lower paratracheal</span></td><td>Top of aortic arch (continues from 2L)</td><td>Upper margin of left main pulmonary artery</td><td>Aortic arch, then ascending aorta</td><td>Line along the posterior tracheal wall</td><td>Left of the left tracheal border. Lateral: medial arch wall, then the ligamentum arteriosum, drawn as a line from the back of the ascending aorta to the front of the descending aorta (meets 5)</td></tr>
+<tr><td class="b">5<br/><span class="small">aorto-pulmonary window</span></td><td>Lower border of aortic arch</td><td>Upper rim of LPA (IASLC); extended to the <b>carina</b> in the atlas</td><td>Horizontal line from the front of the ascending aorta (meets 3a)</td><td>—</td><td>Medial: ascending-to-descending aorta line (ligamentum, rarely seen on CT). Lateral: pleura</td></tr>
+<tr><td class="b">6<br/><span class="small">para-aortic</span></td><td>Top of aortic arch</td><td>Lower border of aortic arch (meets 5)</td><td>Horizontal line from the front of the arch (meets 3a)</td><td>Between the arch and the pleura</td><td>Nodes in front of and lateral to the ascending aorta and arch</td></tr>
 </tbody>
-</table>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
-</section>
-<section class="page">
-<h3>4.3  Border table, stations 7–11</h3>
-<table>
+</table></div></article><article class="card" data-title="Border table, stations 7–11"><h3>4.3  Border table, stations 7–11</h3><div class="tw"><table>
 <thead><tr><th style="width:9%">Station</th><th>Cranial</th><th>Caudal</th><th>Anterior</th><th>Posterior</th><th>Medial / lateral</th></tr></thead>
 <tbody>
-<tr><td class="b">7<br><span class="small">subcarinal</span></td><td>Carina</td><td>Left: upper border of lower-lobe bronchus. Right: lower border of bronchus intermedius (coronal, lung window)</td><td>—</td><td>Line 1 cm behind the anterior vertebral body (Chapet); 7 now extends posteriorly because 8 starts only below 7</td><td>Vertical lines along the medial walls of the right and left main bronchi (meets 10)</td></tr>
-<tr><td class="b">8<br><span class="small">para-oesophageal</span></td><td>Left: upper border of lower-lobe bronchus. Right: lower border of bronchus intermedius</td><td>Diaphragm</td><td>Heart and inferior pulmonary vein</td><td>Vertebral body to a line 1 cm behind its anterior surface</td><td>Pleura laterally. Oesophagus, descending aorta and azygos excluded</td></tr>
-<tr><td class="b">9<br><span class="small">pulmonary ligament</span></td><td>Inferior pulmonary vein (contrast helps)</td><td>Diaphragm; the ligament may end higher and differ by side</td><td colspan="3">Drawn as a half-ellipse on lung window: 1.5 cm wide at the mediastinum, centred on the ligament (soft-tissue beak lateral to the oesophagus), extending 1.5 cm into lung (atlas)</td></tr>
-<tr><td class="b">10R / 10L<br><span class="small">hilar</span></td><td>Right: lower rim of azygos. Left: upper rim of LPA</td><td>Lynch gives no separate caudal rule; 11 takes over between the lobar bronchi</td><td colspan="2">Includes nodes next to the main bronchus and hilar vessels, including the proximal pulmonary veins and main pulmonary artery</td><td>Above the carina 10R/10L split at the tracheal midline. Below it, medial border is a vertical line at the medial main-bronchus wall (meets 7). Lateral: right, vertical line at the lateral wall of the right main bronchus; left, LPA and pleura, then from the upper-lobe bronchus origin a line at the lateral main-bronchus wall</td></tr>
-<tr><td class="b">11R / 11L<br><span class="small">interlobar</span></td><td colspan="2">Between the origins of the lobar bronchi</td><td colspan="2">Lung window for anterior, posterior and lateral edges</td><td>Medial: lateral wall of the main bronchus (meets 10). Lateral: lung–soft tissue interface. 11R includes lobar bronchi and vessels; 11L excludes segmental bronchi</td></tr>
+<tr><td class="b">7<br/><span class="small">subcarinal</span></td><td>Carina</td><td>Left: upper border of lower-lobe bronchus. Right: lower border of bronchus intermedius (coronal, lung window)</td><td>—</td><td>Line 1 cm behind the anterior vertebral body (Chapet); 7 now extends posteriorly because 8 starts only below 7</td><td>Vertical lines along the medial walls of the right and left main bronchi (meets 10)</td></tr>
+<tr><td class="b">8<br/><span class="small">para-oesophageal</span></td><td>Left: upper border of lower-lobe bronchus. Right: lower border of bronchus intermedius</td><td>Diaphragm</td><td>Heart and inferior pulmonary vein</td><td>Vertebral body to a line 1 cm behind its anterior surface</td><td>Pleura laterally. Oesophagus, descending aorta and azygos excluded</td></tr>
+<tr><td class="b">9<br/><span class="small">pulmonary ligament</span></td><td>Inferior pulmonary vein (contrast helps)</td><td>Diaphragm; the ligament may end higher and differ by side</td><td colspan="3">Drawn as a half-ellipse on lung window: 1.5 cm wide at the mediastinum, centred on the ligament (soft-tissue beak lateral to the oesophagus), extending 1.5 cm into lung (atlas)</td></tr>
+<tr><td class="b">10R / 10L<br/><span class="small">hilar</span></td><td>Right: lower rim of azygos. Left: upper rim of LPA</td><td>Lynch gives no separate caudal rule; 11 takes over between the lobar bronchi</td><td colspan="2">Includes nodes next to the main bronchus and hilar vessels, including the proximal pulmonary veins and main pulmonary artery</td><td>Above the carina 10R/10L split at the tracheal midline. Below it, medial border is a vertical line at the medial main-bronchus wall (meets 7). Lateral: right, vertical line at the lateral wall of the right main bronchus; left, LPA and pleura, then from the upper-lobe bronchus origin a line at the lateral main-bronchus wall</td></tr>
+<tr><td class="b">11R / 11L<br/><span class="small">interlobar</span></td><td colspan="2">Between the origins of the lobar bronchi</td><td colspan="2">Lung window for anterior, posterior and lateral edges</td><td>Medial: lateral wall of the main bronchus (meets 10). Lateral: lung–soft tissue interface. 11R includes lobar bronchi and vessels; 11L excludes segmental bronchi</td></tr>
 </tbody>
-</table>
-<div class="flag"><span class="lbl">Ambiguities flagged by the atlas authors</span> The clavicle is a mobile landmark for stations 1 and 2 (arms-up position shifts it), and the medial extent of station 10 is uncertain. Both sit on N3/N2 and N2/N1 boundaries, so record the reasoning when a node lies near them (Lynch 2013; Pitson 2012).</div>
-<h3>4.4  Which stations the surgeon should have sampled, by lobe</h3>
-<table>
+</table></div><div class="flag"><span class="lbl">Ambiguities flagged by the atlas authors</span> The clavicle is a mobile landmark for stations 1 and 2 (arms-up position shifts it), and the medial extent of station 10 is uncertain. Both sit on N3/N2 and N2/N1 boundaries, so record the reasoning when a node lies near them (Lynch 2013; Pitson 2012).</div></article><article class="card" data-title="Which stations the surgeon should have sampled, by lobe"><h3>4.4  Which stations the surgeon should have sampled, by lobe</h3><div class="tw"><table>
 <thead><tr><th>Primary lobe</th><th>Mediastinal stations required (Lung ART protocol)</th></tr></thead>
 <tbody>
 <tr><td class="b">Right upper and middle</td><td>7, plus stations from the upper (2R) and lower (4R) paratracheal group (protocol text: "2 of the following 3 stations")</td></tr>
@@ -633,22 +445,13 @@
 <tr><td class="b">Left upper</td><td>7, 5 and 6</td></tr>
 <tr><td class="b">Left lower</td><td>7, 8 and 9</td></tr>
 </tbody>
-</table>
-<p class="src">Lung ART wording, following the IASLC minimum: at least 3 hilar/intrapulmonary nodes and at least 3 mediastinal stations. Use this to judge whether the pathology report explored the stations at risk before building a station-based PORT CTV (Section 5). Lung ART also required stations 11–13 removed en bloc and each station submitted separately.</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 11</span></div>
-</section>
-
-<!-- ============================ SECTION 5 : PORT ============================ -->
-<section class="page" id="s5">
-<div class="sechead"><span class="eyebrow">Section 5 · Scenario C</span><h2><span class="sectnum">5</span>Post-operative RT: R1/R2 and pN2</h2></div>
-<p class="small" style="margin-top:-2px;">Primary sources: departmental lung protocol V4 (adjuvant); Nestle 2018 (PORT CTV); Lung ART protocol v10, §8.2 (published as the Lancet Oncol 2022 supplement).</p>
-<h3>5.1  Indications</h3>
-<ul class="tight">
+</table></div><p class="src">Lung ART wording, following the IASLC minimum: at least 3 hilar/intrapulmonary nodes and at least 3 mediastinal stations. Use this to judge whether the pathology report explored the stations at risk before building a station-based PORT CTV (Section 5). Lung ART also required stations 11–13 removed en bloc and each station submitted separately.</p></article>
+</section><section class="panel" id="p-s5" data-tab="s5" data-label="5 Post-operative RT" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 5 · Scenario C</p><h2><span class="sectnum">5</span>Post-operative RT: R1/R2 and pN2 </h2><div class="lede"><p class="small" style="margin-top:-2px;">Primary sources: departmental lung protocol V4 (adjuvant); Nestle 2018 (PORT CTV); Lung ART protocol v10, §8.2 (published as the Lancet Oncol 2022 supplement).</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Indications"><h3>5.1  Indications</h3><ul class="tight">
 <li><b>R1 or R2 resection:</b> adjuvant RT, considering concurrent chemotherapy (Dept V4). Dose 54–60 Gy/27–30 # for R1 and 60 Gy/30 # for R2.</li>
 <li><b>Completely resected pN2 (R0):</b> not routine. In Lung ART (54 Gy/27–30 #, mostly 3D-CRT) PORT did not improve disease-free survival (3-year DFS 47% vs 44%, HR 0.86, p=0.18), mediastinal relapse fell, and late grade 3–4 cardiopulmonary toxicity was higher (11% vs 5%) (Le Péchoux 2022). Reserve for selected cases after MDT discussion. <span class="chk">CHECK</span> results from the published abstract; the folder holds the protocol supplement only.</li>
-</ul>
-<h3>5.2  R1/R2 volumes (department) <span class="pill p-port">post-op</span></h3>
-<table>
+</ul></article><article class="card" data-title="R1/R2 volumes (department) post-op"><h3>5.2  R1/R2 volumes (department) <span class="pill p-port">post-op</span></h3><div class="tw"><table>
 <thead><tr><th style="width:18%">Name</th><th>Definition (Dept V4)</th></tr></thead>
 <tbody>
 <tr><td class="b">GTV_EX</td><td>Residual tumour or tumour bed on the 50% phase.</td></tr>
@@ -657,10 +460,7 @@
 <tr><td class="b">PTVDOSE</td><td>ITVDOSE + 0.5–1 cm.</td></tr>
 <tr><td class="b">GTVp_PREOP / GTVn_PREOP</td><td>Optional, for close or positive margins: the pre-operative primary and nodes from fused PET or CT, to guide the bed contour.</td></tr>
 </tbody>
-</table>
-<p class="src">Run the MIM "Adjuvant lung contours" workflow (from page 1) to load the adjuvant names (MIM work instruction).</p>
-<h3>5.3  Station-based CTV for pN2: two sources compared</h3>
-<table>
+</table></div><p class="src">Run the MIM "Adjuvant lung contours" workflow (from page 1) to load the adjuvant names (MIM work instruction).</p></article><article class="card" data-title="Station-based CTV for pN2: two sources compared"><h3>5.3  Station-based CTV for pN2: two sources compared</h3><div class="tw"><table>
 <thead><tr><th style="width:18%">Item</th><th>Nestle 2018 (ESTRO-ACROP)</th><th>Lung ART protocol</th></tr></thead>
 <tbody>
 <tr><td class="b">Core volume</td><td>Resected involved mediastinal stations, bronchial stump, ipsilateral hilum, and stations 4 and 7.</td><td><b>rCTV:</b> pathologically involved stations (initially involved stations included even if downstaged by pre-op chemo), bronchial stump, ipsilateral hilar region, and any mediastinal pleura next to the resected tumour bed.</td></tr>
@@ -670,15 +470,9 @@
 <tr><td class="b">Supraclavicular</td><td>—</td><td>Ipsilateral supraclavicular region not routinely included.</td></tr>
 <tr><td class="b">PTV</td><td>Per local set-up data.</td><td>At least 0.5 cm laterally, anteriorly and posteriorly, 1 cm superiorly and inferiorly; may be individualised with 4D-CT and set-up data.</td></tr>
 </tbody>
-</table>
-<div class="callout"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">Lung ART station selection, rCTV and CTV (they contain the Nestle set), drawn on the IASLC borders in Section 4; motion handled by the department 4D approach, with the PTV set from 4D-CT and IGRT data (department adjuvant range 0.5–1 cm).</p></div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 12</span></div>
-</section>
-<section class="page">
-<h3>5.4  CTV stations and limits by involved station (Lung ART)</h3>
-<div class="grid2">
+</table></div><div class="callout"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">Lung ART station selection, rCTV and CTV (they contain the Nestle set), drawn on the IASLC borders in Section 4; motion handled by the department 4D approach, with the PTV set from 4D-CT and IGRT data (department adjuvant range 0.5–1 cm).</p></div></article><article class="card" data-title="CTV stations and limits by involved station (Lung ART)"><h3>5.4  CTV stations and limits by involved station (Lung ART)</h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:24%">Involved</th><th>Stations in CTV</th><th>Maximum upper limit</th><th>Maximum lower limit*</th></tr></thead>
 <tbody>
 <tr><td class="b">1–2R</td><td>1–2R, 4R, 7, 10R</td><td>1 cm above sternal notch (ipsilateral subclavicular station may be added)</td><td>4 cm below carina</td></tr>
@@ -694,64 +488,55 @@
 <tr><td class="b">8, right tumour</td><td>4R, 7, 8, 10R</td><td>Top of aortic arch</td><td>Gastro-oesophageal junction</td></tr>
 <tr><td class="b">8, left tumour</td><td>4L, 7, 8, 10L</td><td>Top of aortic arch</td><td>Gastro-oesophageal junction</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="src">*Unless other nodes are involved. Lung ART used the older Mountain–Dresler station names via the Chapet 2005 atlas (single station 3); with the IASLC map apply the rule to 3a or 3p as involved.</p>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 330" role="img" aria-label="Coronal schematic of a right-sided PORT CTV for station 4R involvement">
-<rect width="300" height="330" fill="#fff"/>
-<line x1="10" y1="40" x2="290" y2="40" stroke="#b03a2e" stroke-dasharray="5 3"/>
-<text x="12" y="34" font-size="8" fill="#b03a2e">max upper limit: sternal notch</text>
-<line x1="10" y1="252" x2="290" y2="252" stroke="#b03a2e" stroke-dasharray="5 3"/>
-<text x="12" y="264" font-size="8" fill="#b03a2e">max lower limit: 4 cm below carina</text>
-<rect x="143" y="18" width="14" height="150" rx="5" fill="#d8e9e5" stroke="#5b8f86"/>
-<path d="M150 166 L150 172 M146 170 L104 206 L92 236 M154 170 L196 206 L212 240" stroke="#5b8f86" stroke-width="7" fill="none" stroke-linecap="round"/>
-<text x="160" y="60" font-size="8" fill="#5b6b7c">trachea</text>
-<text x="153" y="186" font-size="7.5" fill="#5b6b7c">carina</text>
-<path d="M112 92 L143 92 L143 150 L110 150 Q100 120 112 92 Z" fill="rgba(29,79,145,.30)" stroke="#1d4f91" stroke-width="1.5"/>
-<text x="114" y="124" font-size="8.5" font-weight="700" fill="#1d4f91">4R</text>
-<path d="M134 178 L166 178 L172 214 L128 214 Z" fill="rgba(29,79,145,.18)" stroke="#1d4f91" stroke-width="1.2"/>
-<text x="143" y="202" font-size="8.5" font-weight="700" fill="#1d4f91">7</text>
-<path d="M92 160 L122 168 L114 200 L86 196 Z" fill="rgba(29,79,145,.18)" stroke="#1d4f91" stroke-width="1.2"/>
-<text x="90" y="186" font-size="8.5" font-weight="700" fill="#1d4f91">10R</text>
-<line x1="78" y1="224" x2="96" y2="214" stroke="#8a2f23" stroke-width="3"/>
-<text x="34" y="232" font-size="8" fill="#8a2f23">stump (staples)</text>
-<path d="M98 76 L160 76 L182 168 L184 230 L114 236 L72 226 L74 156 Q84 110 98 76 Z" fill="rgba(20,117,107,.07)" stroke="#14756b" stroke-width="2" stroke-dasharray="7 3"/>
-<text x="178" y="100" font-size="8.5" fill="#14756b">CTV = rCTV + 1 cm</text>
-<text x="178" y="110" font-size="8" fill="#14756b">clipped to limits,</text>
-<text x="178" y="120" font-size="8" fill="#14756b">vertebral body out</text>
-<text x="20" y="310" font-size="8" fill="#5b6b7c">Example: right upper lobectomy, pN2 at 4R.</text>
-<text x="20" y="321" font-size="8" fill="#5b6b7c">rCTV = 4R + 7 + 10R + bronchial stump.</text>
+<svg aria-label="Coronal schematic of a right-sided PORT CTV for station 4R involvement" role="img" viewbox="0 0 300 330">
+<rect fill="#fff" height="330" width="300"></rect>
+<line stroke="#b03a2e" stroke-dasharray="5 3" x1="10" x2="290" y1="40" y2="40"></line>
+<text fill="#b03a2e" font-size="8" x="12" y="34">max upper limit: sternal notch</text>
+<line stroke="#b03a2e" stroke-dasharray="5 3" x1="10" x2="290" y1="252" y2="252"></line>
+<text fill="#b03a2e" font-size="8" x="12" y="264">max lower limit: 4 cm below carina</text>
+<rect fill="#d8e9e5" height="150" rx="5" stroke="#5b8f86" width="14" x="143" y="18"></rect>
+<path d="M150 166 L150 172 M146 170 L104 206 L92 236 M154 170 L196 206 L212 240" fill="none" stroke="#5b8f86" stroke-linecap="round" stroke-width="7"></path>
+<text fill="#5b6b7c" font-size="8" x="160" y="60">trachea</text>
+<text fill="#5b6b7c" font-size="7.5" x="153" y="186">carina</text>
+<path d="M112 92 L143 92 L143 150 L110 150 Q100 120 112 92 Z" fill="rgba(29,79,145,.30)" stroke="#1d4f91" stroke-width="1.5"></path>
+<text fill="#1d4f91" font-size="8.5" font-weight="700" x="114" y="124">4R</text>
+<path d="M134 178 L166 178 L172 214 L128 214 Z" fill="rgba(29,79,145,.18)" stroke="#1d4f91" stroke-width="1.2"></path>
+<text fill="#1d4f91" font-size="8.5" font-weight="700" x="143" y="202">7</text>
+<path d="M92 160 L122 168 L114 200 L86 196 Z" fill="rgba(29,79,145,.18)" stroke="#1d4f91" stroke-width="1.2"></path>
+<text fill="#1d4f91" font-size="8.5" font-weight="700" x="90" y="186">10R</text>
+<line stroke="#8a2f23" stroke-width="3" x1="78" x2="96" y1="224" y2="214"></line>
+<text fill="#8a2f23" font-size="8" x="34" y="232">stump (staples)</text>
+<path d="M98 76 L160 76 L182 168 L184 230 L114 236 L72 226 L74 156 Q84 110 98 76 Z" fill="rgba(20,117,107,.07)" stroke="#14756b" stroke-dasharray="7 3" stroke-width="2"></path>
+<text fill="#14756b" font-size="8.5" x="178" y="100">CTV = rCTV + 1 cm</text>
+<text fill="#14756b" font-size="8" x="178" y="110">clipped to limits,</text>
+<text fill="#14756b" font-size="8" x="178" y="120">vertebral body out</text>
+<text fill="#5b6b7c" font-size="8" x="20" y="310">Example: right upper lobectomy, pN2 at 4R.</text>
+<text fill="#5b6b7c" font-size="8" x="20" y="321">rCTV = 4R + 7 + 10R + bronchial stump.</text>
 </svg>
 <figcaption>Original schematic (coronal) of the Lung ART rule for an involved 4R station.</figcaption>
 </figure>
 </div>
-</div>
-<h3>5.5  Step by step</h3>
-<div class="stepbox"><ol class="steps">
+</div></article><article class="card" data-title="Step by step"><h3>5.5  Step by step</h3><div class="stepbox"><ol class="steps">
 <li>Read the operation note and pathology station by station (Section 4.4): which stations were dissected or only sampled, which were positive, extranodal extension, margin status, pre-op chemo and initial nodal stage.</li>
 <li>Fuse the pre-operative PET/CT (GTVn_PREOP) to locate originally involved nodes and the original tumour position.</li>
 <li>On the planning CT (mediastinal window, contrast), find the bronchial stump from the staple line and contour it with the ipsilateral hilum (10).</li>
 <li>Contour each required station on the Section 4 borders, cranial → caudal, including 4 (ipsilateral) and 7, the involved stations, any station between two involved stations, and the adjacent stations if nodes were only sampled. Add mediastinal pleura next to the resected bed if relevant. Union = rCTV.</li>
 <li>Expand 1 cm to CTV, remove vertebral body, then clip to the maximum upper and lower limits in 5.4.</li>
 <li>Check motion on the 4D-CT and add the PTV (0.5–1 cm; Lung ART at least 0.5 cm axially and 1 cm cranio-caudally).</li>
-</ol></div>
-<h3>5.6  Pitfalls (PORT)</h3>
-<ul class="tight">
+</ol></div></article><article class="card" data-title="Pitfalls (PORT)"><h3>5.6  Pitfalls (PORT)</h3><ul class="tight">
 <li><b>Inter-observer variation is large</b> for PORT volumes (Spoelstra 2010, cited by Lynch 2013); use the station rules and peer review at the lung audit meeting (Dept V4).</li>
 <li><b>Heart dose.</b> In Lung ART the PORT arm had mean heart dose 13.4 Gy overall and 17.0 Gy for left-sided tumours (supplement, App. 11) alongside excess cardiopulmonary toxicity; keep the CTV inside the limits and the heart as low as possible.</li>
 <li><b>After pneumonectomy</b> the remaining lung tolerates much less: departmental V20 &lt;10% and MLD &lt;8 Gy against &lt;30% and &lt;15 Gy after lobectomy (Section 8).</li>
 <li><b>Downstaged nodes.</b> Stations involved before neoadjuvant chemo stay in the rCTV (Lung ART).</li>
-</ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 13</span></div>
-</section>
-
-<!-- ============================ SECTION 6 : PEARLS ============================ -->
-<section class="page" id="s6">
-<div class="sechead"><span class="eyebrow">Section 6</span><h2><span class="sectnum">6</span>Pearls and common errors</h2></div>
-<p class="small" style="margin-top:-2px;">Teaching points drawn from the supplied sources; each names where it comes from.</p>
-<table>
+</ul></article>
+</section><section class="panel" id="p-s6" data-tab="s6" data-label="6 Pearls" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 6</p><h2><span class="sectnum">6</span>Pearls and common errors </h2><div class="lede"><p class="small" style="margin-top:-2px;">Teaching points drawn from the supplied sources; each names where it comes from.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Pearls and common errors"><h3>Pearls and common errors</h3><div class="tw"><table>
 <thead><tr><th style="width:28%">Common error</th><th>What to do instead</th><th style="width:16%">Source</th></tr></thead>
 <tbody>
 <tr><td class="b">Trusting the lung autocontour</td><td>Thresholds pull in airways, atelectasis, bronchiectasis, scar and large vessels, or miss parenchyma between tumour and vessels. Always review and edit; exclude the PBT and trachea; keep small vessels (&lt;1 cm, beyond the hilum).</td><td>Kong 2011</td></tr>
@@ -768,9 +553,7 @@
 <tr><td class="b">Editing the PTV to meet constraints</td><td>Discouraged; change dose (isotoxic), technique or replan instead.</td><td>Nestle 2018</td></tr>
 <tr><td class="b">Fusing an arms-down diagnostic PET</td><td>Co-register only scans acquired in planning position; otherwise view side by side and check the registration before contouring.</td><td>Nestle 2018</td></tr>
 </tbody>
-</table>
-<h3>Where sources disagree on OAR definitions</h3>
-<table>
+</table></div></article><article class="card" data-title="Where sources disagree on OAR definitions"><h3>Where sources disagree on OAR definitions</h3><div class="tw"><table>
 <thead><tr><th style="width:18%">OAR</th><th>Versions</th><th style="width:28%">This page follows</th></tr></thead>
 <tbody>
 <tr><td class="b">Lungs</td><td>Kong 2011: air-inflated lung only, without fluid or atelectasis. NRG template: all inflated <i>and</i> collapsed lung.</td><td>Kong 2011 (department uses RTOG/Kong definitions). <span class="chk">CHECK</span> with physics for trial patients.</td></tr>
@@ -778,14 +561,10 @@
 <tr><td class="b">Chest wall</td><td>Kong 2011: lung expanded 2 cm laterally, anteriorly and posteriorly, intercostal muscles in, other muscles and skin out. NRG: 2 cm rind of each hemithorax, sternum to vertebral body. Dept V4: ring from parietal pleura through intercostals and ribs, 2 cm above and below the PTV.</td><td>Dept V4 for departmental limits; NRG/UK names for trial-based limits.</td></tr>
 <tr><td class="b">Spinal canal extent</td><td>Kong 2011: from the level of the cricoid to the bottom of L2 (RTOG trials used 10 cm beyond the PTV). Dept V4: "10 mm" above and below the PTV.</td><td>Whole canal through the CT range. <span class="chk">CHECK</span> departmental "10 mm" (likely 10 cm).</td></tr>
 </tbody>
-</table>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 14</span></div>
-</section>
-<!-- ============================ SECTION 7 : DOSE / MARGINS / IGRT ============================ -->
-<section class="page" id="s7">
-<div class="sechead"><span class="eyebrow">Section 7</span><h2><span class="sectnum">7</span>Dose, fractionation, CTV–PTV margins, plan evaluation and IGRT</h2></div>
-<h3>7.1  Dose by scenario (department V4)</h3>
-<table>
+</table></div></article>
+</section><section class="panel" id="p-s7" data-tab="s7" data-label="7 Dose" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 7</p><h2><span class="sectnum">7</span>Dose, fractionation, CTV–PTV margins, plan evaluation and IGRT </h2><div class="jump"></div></div>
+  <article class="card" data-title="Dose by scenario (department V4)"><h3>7.1  Dose by scenario (department V4)</h3><div class="tw"><table>
 <thead><tr><th style="width:24%">Scenario</th><th>Dose</th><th>Notes</th></tr></thead>
 <tbody>
 <tr><td class="b">SABR peripheral</td><td>54 Gy/3 # or 30 Gy/1 #</td><td>Second-daily or 2–3 days apart.</td></tr>
@@ -800,9 +579,7 @@
 <tr><td class="b">Oligometastatic consolidation</td><td>SABR first; else 55 Gy/20 # or 60 Gy/15 #</td><td>—</td></tr>
 <tr><td class="b">SCLC limited stage</td><td>45 Gy/30 # twice daily, or 60 Gy/30 #, or 40.05 Gy/15 #</td><td>Post-chemo primary, pre-chemo nodes. Extensive-stage consolidation 30 Gy/10 #–40.05 Gy/15 #; PCI 25 Gy/10 # (hippocampal avoidance ± memantine).</td></tr>
 </tbody>
-</table>
-<h3>7.2  Margins by scenario</h3>
-<table>
+</table></div></article><article class="card" data-title="Margins by scenario"><h3>7.2  Margins by scenario</h3><div class="tw"><table>
 <thead><tr><th style="width:24%">Scenario</th><th>GTV → CTV</th><th>Motion (ITV)</th><th>PTV</th><th style="width:14%">Source</th></tr></thead>
 <tbody>
 <tr><td class="b">SABR and 60/15</td><td>None (GTV = CTV)</td><td>iGTVp ∪ GTVp_MIP</td><td>5 mm (NRG: up to +2 mm)</td><td>Dept V4; NRG</td></tr>
@@ -813,14 +590,9 @@
 <tr><td class="b">PORT pN2 (station)</td><td>rCTV + 1 cm, within limits</td><td>Individualise with 4D-CT</td><td>≥0.5 cm axial, 1 cm cranio-caudal</td><td>Lung ART</td></tr>
 <tr><td class="b">Palliative</td><td colspan="2">ITVDOSE = GTV + 8–10 mm</td><td>5–10 mm</td><td>Dept V4</td></tr>
 </tbody>
-</table>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 15</span></div>
-</section>
-<section class="page">
-<h3>7.3  Plan evaluation</h3>
-<div class="grid2">
+</table></div></article><article class="card" data-title="Plan evaluation"><h3>7.3  Plan evaluation</h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <caption>Conventional RT targets (Dept V4).</caption>
 <thead><tr><th>Parameter</th><th>ITV</th><th>PTV</th></tr></thead>
 <tbody>
@@ -831,8 +603,8 @@
 <tr><td class="b">V100</td><td>95%</td><td>90%</td></tr>
 <tr><td class="b">V105</td><td>10%</td><td>7%</td></tr>
 </tbody>
-</table>
-<table>
+</table></div>
+<div class="tw"><table>
 <caption>SABR targets and conformity (Dept V4; CI tables from Hurkmans 2009, ROSEL QA).</caption>
 <thead><tr><th>Parameter</th><th>Aim</th><th>Minor variation</th></tr></thead>
 <tbody>
@@ -842,10 +614,10 @@
 <tr><td class="b">CI50 = V(50% Rx) / V(PTV)</td><td>≤20 cc &lt;12; 20–40 cc &lt;9; &gt;40 cc &lt;6</td><td>12–14; 9–11; 6–8</td></tr>
 <tr><td class="b">High-dose spill</td><td colspan="2">Tissue outside PTV receiving &gt;105% &lt;15% of PTV volume</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <div>
-<table>
+<div class="tw"><table>
 <caption>Intermediate dose spill by PTV size (NRG SBRT template, Table 5.2.6D; per protocol / variation acceptable).</caption>
 <thead><tr><th>PTV (cc)</th><th>R50%</th><th>D2cm (% Rx)</th></tr></thead>
 <tbody>
@@ -861,12 +633,10 @@
 <tr><td>126.0</td><td>&lt;3.1 / &lt;4.0</td><td>&lt;73 / &lt;91</td></tr>
 <tr><td>163.0</td><td>&lt;2.9 / &lt;3.7</td><td>&lt;77 / &lt;94</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="src">NRG also asks for R100% &lt;1.2. The department refers to RTOG 0915 for low-dose spill; the NRG table is the same family of limits.</p>
 </div>
-</div>
-<h3>7.4  Image guidance (department V4)</h3>
-<table>
+</div></article><article class="card" data-title="Image guidance (department V4)"><h3>7.4  Image guidance (department V4)</h3><div class="tw"><table>
 <thead><tr><th style="width:20%">Setting</th><th>Before treatment</th><th>Each fraction</th></tr></thead>
 <tbody>
 <tr><td class="b">SABR</td><td>Mock-up for all lower-lobe tumours (and on request, e.g. 4D-CT artefact); check beam clearance; 4D-CBCT at mock-up to confirm tumour appearance and position.</td><td>4D-CBCT before every fraction, soft-tissue match on the ITV; intrafraction imaging. RO present for single fraction or its mock-up.</td></tr>
@@ -874,15 +644,10 @@
 <tr><td class="b">Palliative ≥30 Gy</td><td>—</td><td>Daily 3D-CBCT.</td></tr>
 <tr><td class="b">Replanning</td><td colspan="2">For tumour shrinkage, atelectasis change or effusion: deform the original contours in MIM, edit, old contours prefixed PREV; new prescription RP1, RP2 (Dept V4). Adaptive replanning advised case by case for baseline shifts or intrathoracic change (Nestle 2018).</td></tr>
 </tbody>
-</table>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 16</span></div>
-</section>
-
-<!-- ============================ SECTION 8 : OARS ============================ -->
-<section class="page" id="s8">
-<div class="sechead"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>Organs at risk and dose constraints</h2></div>
-<h3>8.1  Which OARs and how to draw them</h3>
-<table>
+</table></div></article>
+</section><section class="panel" id="p-s8" data-tab="s8" data-label="8 Organs at risk" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 8</p><h2><span class="sectnum">8</span>Organs at risk and dose constraints </h2><div class="jump"></div></div>
+  <article class="card" data-title="Which OARs and how to draw them"><h3>8.1  Which OARs and how to draw them</h3><div class="tw"><table>
 <thead><tr><th style="width:16%">OAR (dept name)</th><th style="width:13%">When</th><th>Definition</th><th style="width:15%">Source</th></tr></thead>
 <tbody>
 <tr><td class="b">LUNG_R, LUNG_L, COMBLUNG, COMBLUNG-GTV</td><td>All</td><td>Autocontour each lung, then edit; lungs together; lungs minus GTV_EVAL for DVHs. Lungs minus PTV optional for optimisation.</td><td>Dept V4; Kong 2011; Nestle 2018</td></tr>
@@ -897,13 +662,7 @@
 <tr><td class="b">SKIN, LIVER, STOMACH, VB_THORACIC, CARINA</td><td>SABR, 60/15</td><td>Skin = 5 mm inner rind; liver per RTOG; vertebra if near tolerance; carina for matching.</td><td>Dept V4</td></tr>
 <tr><td class="b">Ribs</td><td>Optional</td><td>Bone and marrow only, no intercostal space; or within 3 cm of the PTV.</td><td>NRG; Kong 2011</td></tr>
 </tbody>
-</table>
-<p class="src">For conventional and moderately hypofractionated RT the mandatory OARs are lungs (separately and together, minus GTV), whole heart, oesophagus and spinal canal; trachea, PBT, great vessels and chest wall are not needed (Nestle 2018). OARs are drawn by RTs on the average scan except where the department assigns them to the RO (Dept V4).</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 17</span></div>
-</section>
-<section class="page">
-<h3>8.2  SABR constraints (department V4, eviQ-based)</h3>
-<table>
+</table></div><p class="src">For conventional and moderately hypofractionated RT the mandatory OARs are lungs (separately and together, minus GTV), whole heart, oesophagus and spinal canal; trachea, PBT, great vessels and chest wall are not needed (Nestle 2018). OARs are drawn by RTs on the average scan except where the department assigns them to the RO (Dept V4).</p></article><article class="card" data-title="SABR constraints (department V4, eviQ-based)"><h3>8.2  SABR constraints (department V4, eviQ-based)</h3><div class="tw"><table>
 <caption>Aim / major deviation. Max = 0.03 cc (from SAFRON II). Lung = total lung minus GTV_EVAL.</caption>
 <thead><tr><th style="width:15%">OAR</th><th>30 Gy/1 #</th><th>54 Gy/3 #</th><th>48 Gy/4 #</th><th>50 Gy/5 #</th></tr></thead>
 <tbody>
@@ -918,9 +677,7 @@
 <tr><td class="b">Skin</td><td>&lt;10 cc 20 / 23; max &lt;23 / &lt;26</td><td>&lt;10 cc 30 / 33</td><td>&lt;10 cc 30 / 33</td><td>Max ≤29 / ≤32; 10 cc &lt;27 / &lt;30</td></tr>
 <tr><td class="b">Stomach</td><td>10 cc &lt;9 / &lt;11.2; max 10 / 12.4</td><td>Max ≤27 / ≤30</td><td>Max ≤24 / ≤27.2</td><td>Max ≤27 / ≤30</td></tr>
 </tbody>
-</table>
-<h3>8.3  UK 2022 thoracic SABR constraints (D0.1cc unless stated; optimal / mandatory)</h3>
-<table>
+</table></div></article><article class="card" data-title="UK 2022 thoracic SABR constraints (D0.1cc unless stated; optimal / mandatory)"><h3>8.3  UK 2022 thoracic SABR constraints (D0.1cc unless stated; optimal / mandatory)</h3><div class="tw"><table>
 <thead><tr><th style="width:15%">Structure</th><th>1 #</th><th>3 #</th><th>5 #</th><th>8 #</th></tr></thead>
 <tbody>
 <tr><td class="b">BrachialPlex</td><td>— / 15</td><td>— / 24</td><td>30.5 / 32</td><td>35 / 39</td></tr>
@@ -932,15 +689,9 @@
 <tr><td class="b">Lungs (minus ITV for lung lesions)</td><td colspan="4">V20Gy 10% optimal / 15% mandatory; mean 8 Gy optimal (all schedules)</td></tr>
 <tr><td class="b">Skin</td><td>— / 26; D10cc 23</td><td>33; D10cc 30</td><td>39.5; D10cc 36.5</td><td>48; D10cc 44</td></tr>
 </tbody>
-</table>
-<p class="src">Diez 2022, Table 2. *If not achievable, drop 60 Gy to 50 Gy. Chest-wall and skin limits are optimal only; consent for higher risk if not met. <span class="chk">CHECK</span> skin column placement against the original table (transcribed from a two-column PDF).</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 18</span></div>
-</section>
-<section class="page">
-<h3>8.4  Conventional and hypofractionated constraints (department V4; per protocol / major variation)</h3>
-<div class="grid2">
+</table></div><p class="src">Diez 2022, Table 2. *If not achievable, drop 60 Gy to 50 Gy. Chest-wall and skin limits are optimal only; consent for higher risk if not met. <span class="chk">CHECK</span> skin column placement against the original table (transcribed from a two-column PDF).</p></article><article class="card" data-title="Conventional and hypofractionated constraints (department V4; per protocol / major variation)"><h3>8.4  Conventional and hypofractionated constraints (department V4; per protocol / major variation)</h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <caption>60 Gy/30 # radical (lung = total − GTV_EVAL)</caption>
 <tbody>
 <tr><td class="b">Spinal canal max</td><td>&lt;45 / &gt;50 Gy (PRV03 &lt;48 / &gt;53; PRV05 &lt;50 / &gt;55)</td></tr>
@@ -950,8 +701,8 @@
 <tr><td class="b">LAD</td><td>V15 &lt;8% / ≥10%</td></tr>
 <tr><td class="b">Brachial plexus</td><td>≤60 / &gt;63 Gy</td></tr>
 </tbody>
-</table>
-<table>
+</table></div>
+<div class="tw"><table>
 <caption>55 Gy/20 #</caption>
 <tbody>
 <tr><td class="b">Spinal canal max</td><td>&lt;41 / &gt;44 Gy <span class="chk">CHECK</span> (minor range printed "41–454"); PRV03 &lt;43 / &gt;47; PRV05 &lt;45 / &gt;49</td></tr>
@@ -960,18 +711,18 @@
 <tr><td class="b">Heart</td><td>Mean &lt;10 / &gt;18 Gy; V5 &lt;50% / &gt;60%; V30 &lt;35% / &gt;40%; V46 &lt;20% / &gt;25%</td></tr>
 <tr><td class="b">LAD; plexus</td><td>V14 &lt;8% / ≥10%; plexus ≤55 / &gt;57 Gy</td></tr>
 </tbody>
-</table>
-<table>
+</table></div>
+<div class="tw"><table>
 <caption>Palliative 30–39 Gy/10–13 #</caption>
 <tbody>
 <tr><td class="b">Spinal canal max</td><td>&lt;36 / &gt;39 Gy</td></tr>
 <tr><td class="b">Lung MLD; V17</td><td>&lt;15 / &gt;17 Gy; &lt;30% / &gt;35%</td></tr>
 <tr><td class="b">Oesophagus max</td><td>&lt;60% / &gt;80% of TD (if &gt;5 cm oesophagus in field)</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <div>
-<table>
+<div class="tw"><table>
 <caption>60 Gy/15 # (from NCIC BR.25)</caption>
 <tbody>
 <tr><td class="b">Spinal canal max</td><td>&lt;34 / &gt;36 Gy (PRV03 &lt;36 / &gt;38; PRV05 &lt;38 / &gt;40)</td></tr>
@@ -983,8 +734,8 @@
 <tr><td class="b">Chest wall</td><td>Max &lt;60 / &gt;63 Gy; V30 &lt;30 cc</td></tr>
 <tr><td class="b">Skin; stomach</td><td>Skin &lt;40 / &gt;50 Gy; stomach max &lt;45 / &gt;50 Gy, V48 &lt;5 cc, V45 &lt;10 cc</td></tr>
 </tbody>
-</table>
-<table>
+</table></div>
+<div class="tw"><table>
 <caption>Adjuvant 54–60 Gy/27–30 # (lung = total lung)</caption>
 <thead><tr><th></th><th>Post lobectomy</th><th>Post pneumonectomy</th></tr></thead>
 <tbody>
@@ -996,15 +747,10 @@
 <tr><td class="b">Heart; LAD</td><td colspan="2">Mean &lt;10 / &gt;20 Gy; V50 &lt;20% / &gt;25%; V5 &lt;50% / &gt;60%; LAD V15 &lt;8% / ≥10%</td></tr>
 <tr><td class="b">Brachial plexus</td><td colspan="2">≤54 Gy (54 Gy course) or ≤60 Gy (60 Gy course)</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="src">Lung ART limits for comparison: cord max 45 Gy; lung V20 (lungs minus PTV) ≤31% after lobectomy, ≤22% after pneumonectomy; heart V35 ≤30%; record mean and maximum oesophageal dose.</p>
 </div>
-</div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 19</span></div>
-</section>
-<section class="page">
-<h3>8.5  Radical re-irradiation (department V4, from Rulach 2021 survey)</h3>
-<table>
+</div></article><article class="card" data-title="Radical re-irradiation (department V4, from Rulach 2021 survey)"><h3>8.5  Radical re-irradiation (department V4, from Rulach 2021 survey)</h3><div class="tw"><table>
 <thead><tr><th style="width:22%">OAR</th><th>Aim (cumulative EQD2)</th><th>Minor variation</th><th>Notes</th></tr></thead>
 <tbody>
 <tr><td class="b">Lung</td><td colspan="3">No cumulative limit recommended (anatomy and function change after RT).</td></tr>
@@ -1016,17 +762,10 @@
 <tr><td class="b">PBT max</td><td>80 Gy (α/β 3)</td><td>105 Gy</td><td>—</td></tr>
 <tr><td class="b">Heart, skin</td><td colspan="3">No good data; as low as reasonably achievable.</td></tr>
 </tbody>
-</table>
-<p class="src">Limits assume a 6–12 month interval and OARs at tolerance after the first course. Convert the first-course OAR maximum to EQD2, subtract from the cumulative limit, then convert what remains to the new fractionation; record the calculation in MOSAIQ and check the combined EQD2 plan in RayStation with physics (Dept V4). Worked example in the department protocol: cord max 35 Gy in 30 # (EQD2 27.7 Gy) leaves 32.3 Gy; 30 Gy/10 # with cord max 27 Gy gives EQD2 31.7 Gy.</p>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 20</span></div>
-</section>
-
-<!-- ============================ SECTION 9 : IMPLEMENTATION ============================ -->
-<section class="page" id="s9">
-<div class="sechead"><span class="eyebrow">Section 9</span><h2><span class="sectnum">9</span>RayStation / MIM implementation and TG-263 names</h2></div>
-<p>The departmental workflow contours targets in MIM (4D propagation) and plans in RayStation. Department names are preloaded in MIM; the TG-263-style names below are for trial export and for departments that contour in RayStation. Dose suffixes are in cGy, as in the prostate protocol.</p>
-<h3>9.1  Name map</h3>
-<table>
+</table></div><p class="src">Limits assume a 6–12 month interval and OARs at tolerance after the first course. Convert the first-course OAR maximum to EQD2, subtract from the cumulative limit, then convert what remains to the new fractionation; record the calculation in MOSAIQ and check the combined EQD2 plan in RayStation with physics (Dept V4). Worked example in the department protocol: cord max 35 Gy in 30 # (EQD2 27.7 Gy) leaves 32.3 Gy; 30 Gy/10 # with cord max 27 Gy gives EQD2 31.7 Gy.</p></article>
+</section><section class="panel" id="p-s9" data-tab="s9" data-label="9 RayStation / MIM implementation" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 9</p><h2><span class="sectnum">9</span>RayStation / MIM implementation and TG-263 names </h2><div class="lede"><p>The departmental workflow contours targets in MIM (4D propagation) and plans in RayStation. Department names are preloaded in MIM; the TG-263-style names below are for trial export and for departments that contour in RayStation. Dose suffixes are in cGy, as in the prostate protocol.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Name map"><h3>9.1  Name map</h3><div class="tw"><table>
 <thead><tr><th>Department (MIM)</th><th>TG-263 / NRG / UK style</th><th>Notes</th></tr></thead>
 <tbody>
 <tr><td class="mono">GTVp_EX, GTVn_EX</td><td class="mono">GTVp, GTVn</td><td>State the phase (50%) in the structure comment.</td></tr>
@@ -1044,10 +783,7 @@
 <tr><td class="mono">GREAT_VES; V_SVC; A_AORTA; A/V_PULMONARY</td><td class="mono">GreatVes; V_Venacava_S; A_Aorta; A_Pulmonary; V_Pulmonary</td><td>—</td></tr>
 <tr><td class="mono">SKIN; LIVER; STOMACH; CARINA</td><td class="mono">Skin; Liver; Stomach; Carina</td><td>—</td></tr>
 </tbody>
-</table>
-<p class="src">TG-263 spellings: Mayo 2018 and the NRG template. Confirm against the local naming list (your folder's FMA-based "Planning_StandardNames" 2021 uses Oesophagus, BrachialPlexus_L/R, ChestWall, Aorta). <span class="chk">CHECK</span> final names with physics before building templates.</p>
-<h3>9.2  ROI algebra and helper structures</h3>
-<table>
+</table></div><p class="src">TG-263 spellings: Mayo 2018 and the NRG template. Confirm against the local naming list (your folder's FMA-based "Planning_StandardNames" 2021 uses Oesophagus, BrachialPlexus_L/R, ChestWall, Aorta). <span class="chk">CHECK</span> final names with physics before building templates.</p></article><article class="card" data-title="ROI algebra and helper structures"><h3>9.2  ROI algebra and helper structures</h3><div class="tw"><table>
 <thead><tr><th style="width:26%">Structure</th><th>Recipe</th><th style="width:16%">Source</th></tr></thead>
 <tbody>
 <tr><td class="b">ITV (SABR)</td><td>IGTVp ∪ GTVp_MIP (union, 0 mm)</td><td>Dept V4</td></tr>
@@ -1061,22 +797,16 @@
 <tr><td class="b">E-PTV_Ev20 (spill control)</td><td>External − (PTV + 20 mm); use with a PTV + 20 mm ring to drive R50% and D2cm</td><td>NRG</td></tr>
 <tr><td class="b">PRV_HEART, PRV_GREAT_VES</td><td>Drawn on the 50% phase and propagated to all phases, then unioned (not a geometric expansion)</td><td>Dept V4</td></tr>
 </tbody>
-</table>
-<h3>9.3  Registration and QA</h3>
-<ul class="tight">
+</table></div></article><article class="card" data-title="Registration and QA"><h3>9.3  Registration and QA</h3><ul class="tight">
 <li>PET (± MRI) fused to the planning CT only if acquired in treatment position; check the fusion at the tumour and carina before contouring (Nestle 2018).</li>
 <li>All 10 phases (0–90%) imported; OARs on the average scan; doses calculated on the average scan (Dept V4).</li>
 <li>Save MIM sessions with the planning CT as the associated series; RO_DRAFT / RO_FINAL / REG_DRAFT naming; delete REG structures before approval (MIM work instruction; Dept V4).</li>
 <li>All definitive, adjuvant and SABR volumes peer reviewed at the weekly lung audit with live RANZCR audit-tool entry; SABR plans peer reviewed before treatment (Dept V4).</li>
 <li>If contouring in RayStation instead of MIM, reproduce the same steps: contour on the 50% phase, deformably propagate to every phase, union, and check each phase. <span class="chk">CHECK</span> the local RayStation 4D workflow with physics.</li>
-</ul>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 21</span></div>
-</section>
-<!-- ============================ SECTION 10 : REFERENCES ============================ -->
-<section class="page" id="s10">
-<div class="sechead"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>References</h2></div>
-<h3>10.1  Supplied sources (your OneDrive folder)</h3>
-<ol class="ref">
+</ul></article>
+</section><section class="panel" id="p-s10" data-tab="s10" data-label="10 References" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 10</p><h2><span class="sectnum">10</span>References </h2><div class="jump"></div></div>
+  <article class="card" data-title="Supplied sources (your OneDrive folder)"><h3>10.1  Supplied sources (your OneDrive folder)</h3><ol class="ref">
 <li>Liverpool &amp; Macarthur Cancer Therapy Centres (SWSLHD). Lung radiotherapy contouring protocol, version 4.0 (2024); version 3.0 (RT 4.267.2, 2021) for margin rationale; RO 4D ITV creation work instruction (2018); Lung SABR contouring protocol RT 4.185.4 (2018, archived).</li>
 <li>Nestle U, De Ruysscher D, Ricardi U, <i>et al.</i> ESTRO ACROP guidelines for target volume definition in the treatment of locally advanced non-small cell lung cancer. <i>Radiother Oncol</i> 2018;127:1–5. doi:10.1016/j.radonc.2018.02.023. <a href="https://pubmed.ncbi.nlm.nih.gov/29605476/">PMID 29605476</a>.</li>
 <li>Lynch R, Pitson G, Ball D, Claude L, Sarrut D. Computed tomographic atlas for the new international lymph node map for lung cancer: a radiation oncologist perspective. <i>Pract Radiat Oncol</i> 2013;3:54–66. doi:10.1016/j.prro.2012.01.007. <a href="https://pubmed.ncbi.nlm.nih.gov/24674264/">PMID 24674264</a>.</li>
@@ -1089,9 +819,7 @@
 <li>NRG Oncology. SBRT lung protocol physics template, 1 March 2022.</li>
 <li>Chapet O, Kong FM, Quint LE, <i>et al.</i> CT-based definition of thoracic lymph node stations: an atlas from the University of Michigan. <i>Int J Radiat Oncol Biol Phys</i> 2005;63:170–8 (used by Lung ART; superseded by Lynch 2013 for IASLC names).</li>
 <li>Rulach R, Ball D, Chua KLM, <i>et al.</i> An international expert survey on the indications and practice of radical thoracic re-irradiation for NSCLC. <i>Adv Radiat Oncol</i> 2021. doi:10.1016/j.adro.2021.100653.</li>
-</ol>
-<h3>10.2  Additional guidelines and trials (not in the folder)</h3>
-<ol class="ref">
+</ol></article><article class="card" data-title="Additional guidelines and trials (not in the folder)"><h3>10.2  Additional guidelines and trials (not in the folder)</h3><ol class="ref">
 <li>Giuliani ME, Filion E, Faria S, <i>et al.</i> Stereotactic radiation for ultra-central NSCLC: a safety and efficacy trial (SUNSET). <i>Int J Radiat Oncol Biol Phys</i> 2024;120:669–77. doi:10.1016/j.ijrobp.2024.03.050. <a href="https://pubmed.ncbi.nlm.nih.gov/38614279/">PMID 38614279</a>. Protocol: <i>Clin Lung Cancer</i> 2018;19:e529–32, doi:10.1016/j.cllc.2018.04.001.</li>
 <li>Swaminath A, Parpia S, Wierzbicki M, <i>et al.</i> Stereotactic vs hypofractionated radiotherapy for inoperable stage I NSCLC (LUSTRE). <i>JAMA Oncol</i> 2024. doi:10.1001/jamaoncol.2024.3089.</li>
 <li>Cheung P, Faria S, Ahmed S, <i>et al.</i> Accelerated hypofractionated 3D-CRT for T1–3 N0 M0 NSCLC (NCIC CTG BR.25). <i>J Natl Cancer Inst</i> 2014;106. doi:10.1093/jnci/dju164.</li>
@@ -1101,17 +829,14 @@
 <li>Guckenberger M, <i>et al.</i> ESTRO ACROP consensus guideline on implementation and practice of SBRT for peripherally located early-stage NSCLC. <i>Radiother Oncol</i> 2017 (not reviewed for this page).</li>
 <li>Levy A, <i>et al.</i> ESTRO-EORTC guideline on target delineation for stage I–III SCLC. <i>Radiother Oncol</i> 2026. <a href="https://pubmed.ncbi.nlm.nih.gov/41932500/">PMID 41932500</a>.</li>
 <li>Mayo CS, Moran JM, Bosch W, <i>et al.</i> AAPM Task Group 263: standardizing nomenclatures in radiation oncology. <i>Int J Radiat Oncol Biol Phys</i> 2018;100:1057–66.</li>
-</ol>
-<h3>10.3  eviQ protocols (links only)</h3>
-<ul class="ref">
+</ol></article><article class="card" data-title="eviQ protocols (links only)"><h3>10.3  eviQ protocols (links only)</h3><ul class="ref">
 <li><a href="https://www.eviq.org.au/radiation-oncology/respiratory/3389-respiratory-non-small-cell-lung-cancer-defini">ID 3389 NSCLC definitive stereotactic EBRT, peripheral tumours</a></li>
 <li><a href="https://www.eviq.org.au/radiation-oncology/respiratory/4018-respiratory-non-small-cell-lung-cancer-defini">ID 4018 NSCLC definitive stereotactic EBRT, central tumours</a></li>
 <li><a href="https://www.eviq.org.au/radiation-oncology/respiratory/3697-respiratory-non-small-cell-lung-cancer-defini">ID 3697 NSCLC definitive EBRT, hypofractionation</a></li>
 <li><a href="https://www.eviq.org.au/radiation-oncology/respiratory/1871-respiratory-non-small-cell-lung-cancer-defini">ID 1871 NSCLC definitive EBRT with or without chemotherapy</a></li>
 <li><a href="https://www.eviq.org.au/radiation-oncology/respiratory/1873-respiratory-non-small-cell-lung-cancer-adjuva">ID 1873 NSCLC adjuvant EBRT, post-operative</a></li>
 <li><a href="https://www.eviq.org.au/radiation-oncology/respiratory/1880-respiratory-nsclc-superior-sulcus-pancoast">ID 1880 NSCLC superior sulcus (Pancoast) neoadjuvant chemoradiation</a></li>
-</ul>
-<div class="callout" style="margin-top:1em;">
+</ul><div class="callout" style="margin-top:1em;">
 <span class="lbl">Items marked CHECK on this page</span>
 <ul class="tight" style="margin-top:4px;">
 <li>SUNSET 60 Gy/8 # result (web abstract, not departmental policy).</li>
@@ -1120,8 +845,11 @@
 <li>Lung definition (Kong: inflated lung only; NRG: include collapsed lung).</li>
 <li>UK 2022 skin column placement; final TG-263 names with physics; local RayStation 4D workflow.</li>
 </ul>
-</div>
-<div class="foot"><span>Lung RT Delineation Protocol · v1.0</span><span>Page 22</span></div>
+</div></article>
 </section>
+</main>
+</div>
+<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
+<script src="../assets/site.js"></script>
 </body>
 </html>

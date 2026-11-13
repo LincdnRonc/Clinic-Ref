@@ -1,170 +1,74 @@
 <!DOCTYPE html>
-
-<html lang="en-AU">
+<html lang="en-AU" data-site="gi">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Oesophagus and GOJ Target Volume Delineation Protocol</title>
-<style>
-  :root{
-    --navy:#10243f; --navy2:#1d3a5f;
-    --teal:#14756b; --teal-bg:#e7f3f1;
-    --amber:#9a5a00; --amber-bg:#fdf3e3;
-    --rust:#8a2f23; --rust-bg:#fbeae7;
-    --paper:#ffffff;
-    --ink:#1c2530;
-    --muted:#5b6b7c;
-    --rule:#d6dde6;
-    --rule-strong:#14756b;
-    --dose-elective:#2f6fb0;
-    --dose-bed:#9a5a00;
-    --dose-sib:#c0721c;
-    --dose-boost:#8a2f23;
-    --dose-prostate:#b03a2e;
-    --flag:#8a2f23; --flag-bg:#fbeae7;
-    --key-bg:#e7f3f1;
-    --petrol:#10243f;
-    --petrol-2:#14756b;
-  }
-  *{box-sizing:border-box;}
-  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  body{
-    margin:0;background:#e6ebf0;color:var(--ink);
-    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
-    font-size:10.3px;line-height:1.5;
-  }
-  .page{
-    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
-    padding:16mm 17mm 14mm;position:relative;
-    box-shadow:0 1px 8px rgba(16,36,63,.16);
-    display:flex;flex-direction:column;
-  }
-  @page{size:A4;margin:13mm;}
-  @media print{
-    body{background:#fff;}
-    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
-    .page + .page{page-break-before:always;}
-    h2,h3{page-break-after:avoid;}
-    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
-  }
-  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
-  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
-  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
-  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
-  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
-  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
-  p{margin:.35em 0;}
-  a{color:var(--teal);}
-  .lead{font-size:11px;color:var(--muted);}
-  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
-  .sechead{margin:0 0 .5em;}
-  .sechead .eyebrow{display:block;margin-bottom:3px;}
-  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
-  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
-  .masthead h1{color:#fff;}
-  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
-  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
-  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
-  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
-  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
-  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
-  tbody tr:nth-child(even){background:#eef2f6;}
-  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
-  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
-  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
-  .p-elect{background:var(--dose-elective);}
-  .p-bed{background:var(--dose-bed);}
-  .p-sib{background:var(--dose-sib);}
-  .p-boost{background:var(--dose-boost);}
-  .p-pros{background:var(--dose-prostate);}
-  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
-  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
-  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
-  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
-  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
-  .flag .lbl:before{content:"\26A0  ";}
-  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
-  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
-  ol.steps li{margin:.28em 0;padding-left:.15em;}
-  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
-  ul.tight{margin:.25em 0;padding-left:1.15em;}
-  ul.tight li{margin:.18em 0;}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .grid2>div{min-width:0;}
-  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
-  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
-  svg{display:block;width:100%;height:auto;}
-  .kv{font-size:9.3px;}
-  .kv b{color:var(--navy);}
-  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
-  .ref{font-size:8.6px;line-height:1.4;}
-  .ref li{margin:.2em 0;}
-  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
-  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
-  .named .pos{font-weight:700;color:var(--amber);}
-  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
-  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
-  .toc a{color:var(--ink);text-decoration:none;}
-  .toc td{border:none;padding:2px 4px;}
-  .toc .n{color:var(--teal);font-weight:700;width:24px;}
-  .toc .pg{text-align:right;color:var(--muted);width:32px;}
-  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
-  .small{font-size:8.6px;color:var(--muted);}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oesophagus and GOJ contouring protocol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/protocol.css">
+<style>.p-elect{background:var(--dose-elective);}
+.p-bed{background:var(--dose-bed);}
+.p-sib{background:var(--dose-sib);}
+.p-boost{background:var(--dose-boost);}
+.p-pros{background:var(--dose-prostate);}
+.p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
 
-<style id="oes-extra">
   .p-gtv{background:#1d4f91;}
   .p-hi{background:#b03a2e;}
   .p-lo{background:#2f6fb0;}
   .p-ctv{background:#14756b;}
   .p-ptv{background:#a07a00;}
-  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
-  .src{font-size:8.4px;color:var(--muted);}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:12.0px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:12.6px;color:var(--muted);}
   .follow{border-left:4px solid #a14a0b;}
 </style>
-<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #a14a0b}</style></head>
-<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gi-oesophagus-gastric.html" style="color:#9fe0d6;text-decoration:none">Oesophagus &amp; gastric page</a><a href="../ctr-upper-gi.html" style="color:#9fe0d6;text-decoration:none">Upper GI quick protocol</a><a href="pancreas-stomach.html" style="color:#9fe0d6;text-decoration:none">Stomach protocol</a><a href="lung.html#s4" style="color:#9fe0d6;text-decoration:none">IASLC station borders</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
-<section class="page">
-<div class="masthead">
-<span class="eyebrow">Departmental Contouring Protocol · Upper GI Radiation Oncology</span>
-<h1>Oesophagus and Gastro-oesophageal Junction — Target Volume Delineation Protocol</h1>
-<p class="sub">Target volumes for <b>oesophageal cancer</b> (squamous cell and adenocarcinoma) treated with <b>neoadjuvant</b> or <b>definitive chemoradiation</b>, for <b>GOJ tumours</b> (Siewert I–II), for <b>cervical and upper-third tumours</b> including involved supraclavicular nodes, and for <b>adjuvant RT</b> after a positive margin. Siewert III and gastric cancer are in the <a href="pancreas-stomach.html#s6" style="color:#9fe0d6">stomach protocol</a>.</p>
-<div class="pillrow">
+</head>
+<body class="proto">
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>Oesophagus and GOJ contouring protocol</span></nav>
+    <div class="title-row">
+      <h1>Oesophagus &amp; GOJ <span>Contouring protocol</span></h1>
+      <div class="meta">Full protocol · Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this protocol</label>
+      <input id="q" type="search" placeholder="Search this protocol: border, margin, dose, trial" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="side"><details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary><nav class="tree" aria-label="All pages"><a class="home" href="../index.html">Home</a><details data-site="breast"><summary>Breast</summary><a href="../breast-early.html">DCIS &amp; early breast</a><a href="../breast-nodes-pmrt.html">Nodes &amp; PMRT</a><a href="../breast-planning.html">Breast planning &amp; consent</a></details><details data-site="cns"><summary>CNS &amp; Paediatrics</summary><a href="../cns-glioma.html">Glioma</a><a href="../cns-benign.html">Benign &amp; functional</a><a href="../cns-vs.html">Vestibular schwannoma</a><a href="../cns-general.html">Eye &amp; tolerances</a><a href="../peds-cns.html">Paediatric CNS</a><a href="../peds-solid.html">Paediatric solid tumours</a><a href="../peds-late.html">Paediatric late effects</a></details><details data-site="gi"><summary>Gastrointestinal</summary><a href="../gi-oesophagus-gastric.html">Oesophagus &amp; gastric</a><a href="../gi-pancreas.html">Pancreas</a><a href="../gi-hepatobiliary.html">Liver &amp; biliary</a><a href="../gi-rectum-colon.html">Rectum &amp; colon</a><a href="../gi-anal.html">Anal</a><a href="../gi-general.html">General GI</a></details><details data-site="gu"><summary>Genitourinary</summary><a href="../gu-prostate.html">Prostate</a><a href="../gu-bladder.html">Bladder</a><a href="../gu-kidney.html">Kidney</a><a href="../gu-testis.html">Testis</a><a href="../gu-other.html">UTUC, urethra &amp; penile</a></details><details data-site="gyn"><summary>Gynaecological</summary><a href="../gyn-cervix.html">Cervix</a><a href="../gyn-endometrial.html">Endometrial</a><a href="../gyn-vulva-vagina.html">Vulva &amp; vagina</a><a href="../gyn-general.html">General gynae</a></details><details data-site="heme"><summary>Haematology</summary><a href="../heme-hodgkin.html">Hodgkin</a><a href="../heme-nhl.html">Non-Hodgkin</a><a href="../heme-other.html">Myeloma, TBI &amp; skin</a></details><details data-site="hn"><summary>Head and neck &amp; Skin</summary><a href="../hn-general.html">H&amp;N general</a><a href="../hn-oropharynx.html">Oropharynx</a><a href="../hn-larynx.html">Larynx &amp; hypopharynx</a><a href="../hn-oral-salivary.html">Oral cavity &amp; salivary</a><a href="../hn-npc-sinonasal.html">Nasopharynx &amp; sinonasal</a><a href="../hn-thyroid-cup.html">Thyroid &amp; unknown primary</a><a href="../skin.html">Skin</a></details><details data-site="sarcoma"><summary>Sarcoma</summary><a href="../sarcoma-sts.html">Soft tissue &amp; bone sarcoma</a><a href="../benign.html">Benign MSK</a></details><details data-site="thorax"><summary>Thorax</summary><a href="../thorax-early.html">Early NSCLC (SABR)</a><a href="../thorax-stage3.html">Stage III NSCLC</a><a href="../thorax-sclc.html">Small cell</a><a href="../thorax-other.html">Thymic, meso &amp; other</a></details><details data-site="pall"><summary>Palliative &amp; oligometastases</summary><a href="../pall-brain.html">Brain metastases</a><a href="../pall-wbrt.html">WBRT principles</a><a href="../pall-bone-spine.html">Bone, cord &amp; spine SBRT</a><a href="../pall-oligo.html">Oligomets &amp; palliation</a></details><details data-site="mrl"><summary>MR-linac</summary><a href="../mrl-images.html">Sequences &amp; signal</a><a href="../mrl-liver-gi.html">Liver &amp; upper GI</a><a href="../mrl-tumour-nodes.html">Tumours &amp; nodes</a><a href="../mrl-pelvis.html">Pelvis</a><a href="../mrl-workflow.html">Adaptive workflow</a></details><details data-site="exam"><summary>Phase 2 exam summary</summary><a href="../exam-overview.html">Epi &amp; memory aids</a><a href="../exam-breast.html">Breast</a><a href="../exam-cns.html">CNS</a><a href="../exam-peds.html">Paediatrics</a><a href="../exam-ugi.html">Upper GI</a><a href="../exam-lgi.html">Lower GI</a><a href="../exam-gu.html">Bladder, kidney, testis, penis</a><a href="../exam-prostate.html">Prostate</a><a href="../exam-gyn.html">Gynae</a><a href="../exam-heme.html">Haematology</a><a href="../exam-hn.html">Head and neck</a><a href="../exam-skin.html">Skin</a><a href="../exam-endocrine-benign.html">Endocrine &amp; benign</a><a href="../exam-sarcoma.html">Sarcoma</a><a href="../exam-thorax.html">Thorax</a><a href="../exam-pall.html">Palliative</a><a href="../exam-clinonc.html">Clinical oncology</a><a href="../exam-viva.html">Viva templates</a></details><details data-site="contouring" open><summary>Contouring</summary><a href="../ctr-library.html">Library</a><a href="../ctr-breast.html">Breast</a><a href="../ctr-thorax.html">Thorax</a><a href="../ctr-hn.html">H&amp;N</a><a href="../ctr-cns.html">CNS</a><a href="../ctr-upper-gi.html">Upper GI</a><a href="../ctr-anal.html">Anal</a><a href="../ctr-gyn.html">Gynae</a><a href="../ctr-heme.html">Lymphoma</a><a href="../ctr-sarcoma.html">Sarcoma</a><a href="../ctr-bladder.html">Bladder</a><a href="../ctr-kidney-liver.html">Kidney &amp; liver</a><a href="../ctr-skin.html">Skin</a><a href="../ctr-peds.html">Paeds</a><a href="../ctr-spine.html">Spine &amp; bone</a><a href="../contouring/breast.html">Breast</a><a href="../contouring/cns.html">CNS</a><a href="../contouring/gynae.html">Gynae</a><a href="../contouring/spine-bone.html">Spine &amp; bone SBRT</a><a href="../contouring/head-neck.html">Head &amp; neck</a><a href="../contouring/lymphoma.html">Lymphoma ISRT</a><a href="../contouring/lung.html">Lung</a><a href="../contouring/prostate.html">Prostate</a><a href="../contouring/bladder.html">Bladder</a><a href="../contouring/rectal-long-course.html">Rectum</a><a href="../contouring/anal.html">Anal canal</a><a href="../contouring/oesophagus.html" aria-current="page">Oesophagus &amp; GOJ</a><a href="../contouring/pancreas-stomach.html">Pancreas &amp; stomach</a><a href="../contouring/biliary.html">Biliary</a><a href="../contouring/liver-sbrt.html">Liver SBRT OARs</a><a href="../ctr-mim.html">MIM shortcuts</a><a href="../ctr-monaco.html">Monaco shortcuts</a></details></nav></details></aside>
+<main id="main">
+<p class="xref"><b>Related:</b> <a href="../gi-oesophagus-gastric.html">Oesophagus &amp; gastric page</a> · <a href="../ctr-upper-gi.html">Upper GI quick protocol</a> · <a href="pancreas-stomach.html">Stomach protocol</a> · <a href="lung.html#s4">IASLC station borders</a></p>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a structure, a margin (5 mm) or a trial name.</div>
+<section class="panel" id="p-overview" data-tab="overview" data-label="Overview">
+  <div class="panel-head"><p class="eyebrow">Departmental Contouring Protocol · Upper GI Radiation Oncology</p><h2>Oesophagus and GOJ contouring protocol</h2><p class="lede">Target volumes for <b>oesophageal cancer</b> (squamous cell and adenocarcinoma) treated with <b>neoadjuvant</b> or <b>definitive chemoradiation</b>, for <b>GOJ tumours</b> (Siewert I–II), for <b>cervical and upper-third tumours</b> including involved supraclavicular nodes, and for <b>adjuvant RT</b> after a positive margin. Siewert III and gastric cancer are in the <a href="pancreas-stomach.html#s6" style="color:#9fe0d6">stomach protocol</a>.</p><div class="pillrow">
 <span class="pill p-gtv">GTVp / GTVn</span>
 <span class="pill p-hi">CTV (involved field)</span>
 <span class="pill p-lo">Elective nodal CTV</span>
 <span class="pill p-ctv">Post-op CTV</span>
 <span class="pill p-ptv">ITV / PTV</span>
-</div>
-<div class="meta">SCOPE2 / South West RT ODN 2023 · SCOPE2 upper-third nodal protocol (Nicholas 2020) · Wu 2015 expert consensus (IJROBP) · AGITG/TROG oesophageal trial RT protocol v4 · ARS 2025 cervical oesophagus · IFI vs ENI meta-analysis (Wang 2022) · CROSS, ARTDECO, ESOPEC — Version 1.0 · Nov 2026</div>
-</div>
-<div class="callout">
-<span class="lbl">Governing principles of this protocol</span>
-<ul class="tight" style="margin-top:4px;">
-<li><b>Involved field is the default.</b> The CTV is the gross tumour and involved nodes plus a margin along the oesophagus and a 1 cm radial margin into the mediastinum (SCOPE2, as adopted by the SW RT ODN 2023). No elective nodes for N0 disease (SCOPE2; AGITG/TROG). A 2022 meta-analysis of 23 studies (4120 patients, mostly squamous) found involved-field RT gave less acute oesophagitis and no loss of survival compared with elective nodal RT (Wang 2022).</li>
-<li><b>The longitudinal margin follows the lumen,</b> not a geometric expansion (SW ODN; Wu 2015; AGITG/TROG). Edit the radial margin off bone, lung, heart and great vessels, but never closer than 5 mm to the GTV (SW ODN).</li>
-<li><b>Distal and GOJ tumours move.</b> Use 4D-CT (or fluoroscopy) for every lower-third and GOJ case, and the same fasting-and-drink routine at simulation and every treatment (SW ODN; Wu 2015).</li>
-<li><b>Dose is not escalated.</b> 50 Gy in 25 fractions definitive; 41.4 Gy/23 or 45 Gy/25 neoadjuvant (SW ODN). ARTDECO (61.6 Gy) and at least five other randomised trials found no gain from higher doses (Hulshof 2021; ARS 2025).</li>
-<li>No departmental (Liverpool) oesophageal protocol was in the folder. Departmental items are marked <span class="chk">CHECK</span>.</li>
-</ul>
-</div>
-<h3 style="margin-top:1.1em;">Contents</h3>
-<table class="toc">
-<tr><td class="n">1</td><td><a href="#s1">Scope, simulation, imaging and GTV</a></td><td class="pg">2</td></tr>
-<tr><td class="n">2</td><td><a href="#s2">Guideline comparison and what this page follows</a></td><td class="pg">3</td></tr>
-<tr><td class="n">3</td><td><a href="#s3">Scenario A — Thoracic oesophagus: neoadjuvant and definitive (core build)</a></td><td class="pg">4</td></tr>
-<tr><td class="n">4</td><td><a href="#s4">Scenario B — Distal oesophagus and GOJ (Siewert I–II)</a></td><td class="pg">5</td></tr>
-<tr><td class="n">5</td><td><a href="#s5">Scenario C — Cervical and upper-third oesophagus, supraclavicular nodes</a></td><td class="pg">6</td></tr>
-<tr><td class="n">6</td><td><a href="#s6">Scenario D — Adjuvant RT after resection</a></td><td class="pg">7</td></tr>
-<tr><td class="n">7</td><td><a href="#s7">Nodal regions by tumour level</a></td><td class="pg">7</td></tr>
-<tr><td class="n">8</td><td><a href="#s8">Pearls and common errors</a></td><td class="pg">8</td></tr>
-<tr><td class="n">9</td><td><a href="#s9">Dose, fractionation, margins and IGRT</a></td><td class="pg">8</td></tr>
-<tr><td class="n">10</td><td><a href="#s10">Organs at risk and constraints</a></td><td class="pg">10</td></tr>
-<tr><td class="n">11</td><td><a href="#s11">RayStation implementation and names</a></td><td class="pg">10</td></tr>
-<tr><td class="n">12</td><td><a href="#s12">References and further guidelines</a></td><td class="pg">11</td></tr>
-</table>
-<h3>Sources used</h3>
-<table>
+</div><p class="note">SCOPE2 / South West RT ODN 2023 · SCOPE2 upper-third nodal protocol (Nicholas 2020) · Wu 2015 expert consensus (IJROBP) · AGITG/TROG oesophageal trial RT protocol v4 · ARS 2025 cervical oesophagus · IFI vs ENI meta-analysis (Wang 2022) · CROSS, ARTDECO, ESOPEC — Version 1.0 · Nov 2026</p><div class="jump"></div></div>
+  <article class="card key" data-title="Governing principles of this protocol"><h3>Governing principles of this protocol</h3><div class="callout"></div></article><article class="card" data-title="Contents"><h3>Contents</h3><div class="tw"><table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, simulation, imaging and GTV</a></td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Guideline comparison and what this page follows</a></td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario A — Thoracic oesophagus: neoadjuvant and definitive (core build)</a></td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario B — Distal oesophagus and GOJ (Siewert I–II)</a></td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Scenario C — Cervical and upper-third oesophagus, supraclavicular nodes</a></td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Scenario D — Adjuvant RT after resection</a></td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Nodal regions by tumour level</a></td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Pearls and common errors</a></td></tr>
+<tr><td class="n">9</td><td><a href="#s9">Dose, fractionation, margins and IGRT</a></td></tr>
+<tr><td class="n">10</td><td><a href="#s10">Organs at risk and constraints</a></td></tr>
+<tr><td class="n">11</td><td><a href="#s11">RayStation implementation and names</a></td></tr>
+<tr><td class="n">12</td><td><a href="#s12">References and further guidelines</a></td></tr>
+</table></div></article><article class="card" data-title="Sources used"><h3>Sources used</h3><div class="tw"><table>
 <thead><tr><th style="width:36%">Source</th><th>Used for</th></tr></thead>
 <tbody>
 <tr><td class="b">South West RT ODN regional oesophagus guideline v1 (2023), built on the SCOPE2 protocol</td><td>Simulation, GTV, CTV_A/B/C construction, lower-third rules, ITV, PTV, adjuvant tumour bed, OAR definitions, constraints, doses, IGRT, peer review.</td></tr>
@@ -174,15 +78,10 @@
 <tr><td class="b">ARS 2025 appropriate use criteria, cervical oesophagus SCC</td><td>Cervical margins, PTV ranges, elective neck regions, dose evidence.</td></tr>
 <tr><td class="b">Wang 2022 meta-analysis (Front Oncol)</td><td>Involved-field versus elective nodal RT evidence.</td></tr>
 </tbody>
-</table>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
-</section>
-
-<!-- ============================ S1 ============================ -->
-<section class="page" id="s1">
-<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, simulation, imaging and GTV</h2></div>
-<h3>1.1  Simulation</h3>
-<table>
+</table></div></article>
+</section><section class="panel" id="p-s1" data-tab="s1" data-label="1 Scope" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 1</p><h2><span class="sectnum">1</span>Scope, simulation, imaging and GTV </h2><div class="jump"></div></div>
+  <article class="card" data-title="Simulation"><h3>1.1  Simulation</h3><div class="tw"><table>
 <thead><tr><th style="width:17%">Item</th><th>Upper third / cervical (SW ODN 2023)</th><th>Middle and lower thirds, GOJ (SW ODN 2023)</th><th>Other sources</th></tr></thead>
 <tbody>
 <tr><td class="b">Position</td><td>Supine, arms down, thermoplastic head-and-neck shell</td><td>Supine, arms up, upper-body immobilisation</td><td>AGITG/TROG: supine, arms above head, indexed devices</td></tr>
@@ -191,10 +90,7 @@
 <tr><td class="b">Slices / limits</td><td>≤3 mm; skull base to L4, lung bases covered</td><td>≤3 mm; lung apex to L4</td><td>—</td></tr>
 <tr><td class="b">Motion</td><td>—</td><td>4D-CT where available, ± abdominal compression or other motion control, for lower thoracic and GOJ tumours</td><td>Wu 2015: at least 4D-CT or fluoroscopy for distal/GOJ; gating or compression if motion &gt;1 cm</td></tr>
 </tbody>
-</table>
-<p class="src">Departmental: immobilisation devices, scan limits and whether every GOJ patient gets 4D-CT <span class="chk">CHECK</span>.</p>
-<h3>1.2  GTV</h3>
-<div class="grid2">
+</table></div><p class="src">Departmental: immobilisation devices, scan limits and whether every GOJ patient gets 4D-CT <span class="chk">CHECK</span>.</p></article><article class="card" data-title="GTV"><h3>1.2  GTV</h3><div class="grid2">
 <div>
 <ul class="tight">
 <li><b>GTVp</b>: the primary tumour, contoured on the contrast-enhanced planning CT. Include the <b>whole circumference of the oesophageal wall</b> at every involved level, including the wall beside nodes that lie away from the primary (SW ODN).</li>
@@ -213,10 +109,7 @@
 </ol>
 </div>
 </div>
-</div>
-<p class="src">Cranio-caudal GTV extent is where observers disagree most; adding PET reduced that variation in some cases (Nowee 2019, Dutch multicentre study). Tumour location by distance from incisors (cervical, upper, middle, lower thoracic) follows the AJCC definitions <span class="chk">CHECK</span> with the current AJCC edition.</p>
-<h3>1.3  Situations covered</h3>
-<table>
+</div><p class="src">Cranio-caudal GTV extent is where observers disagree most; adding PET reduced that variation in some cases (Nowee 2019, Dutch multicentre study). Tumour location by distance from incisors (cervical, upper, middle, lower thoracic) follows the AJCC definitions <span class="chk">CHECK</span> with the current AJCC edition.</p></article><article class="card" data-title="Situations covered"><h3>1.3  Situations covered</h3><div class="tw"><table>
 <thead><tr><th style="width:30%">Situation</th><th>Usual chemo with RT (SW ODN)</th><th>Section</th></tr></thead>
 <tbody>
 <tr><td class="b">Neoadjuvant chemoRT (SCC or adenocarcinoma)</td><td>Carboplatin–paclitaxel (41.4/23); cisplatin–capecitabine/5FU or carboplatin–paclitaxel (45/25)</td><td><a href="#s3">3</a>, <a href="#s4">4</a></td></tr>
@@ -225,15 +118,10 @@
 <tr><td class="b">RT alone (not fit for chemo)</td><td>—</td><td><a href="#s9">9</a></td></tr>
 <tr><td class="b">Adjuvant RT for R1/R2 resection</td><td>Cisplatin–capecitabine or carboplatin–paclitaxel</td><td><a href="#s6">6</a></td></tr>
 </tbody>
-</table>
-<p class="src">SW ODN usual limits: primary up to 10 cm long and no more than 2 cm into the stomach, adaptable if OAR constraints are met; ECOG 0–1.</p>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
-</section>
-
-<!-- ============================ S2 ============================ -->
-<section class="page" id="s2">
-<div class="sechead"><span class="eyebrow">Section 2</span><h2><span class="sectnum">2</span>Guideline comparison and what this page follows</h2></div>
-<table>
+</table></div><p class="src">SW ODN usual limits: primary up to 10 cm long and no more than 2 cm into the stomach, adaptable if OAR constraints are met; ECOG 0–1.</p></article>
+</section><section class="panel" id="p-s2" data-tab="s2" data-label="2 Guideline comparison" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 2</p><h2><span class="sectnum">2</span>Guideline comparison and what this page follows </h2><div class="jump"></div></div>
+  <article class="card" data-title="Guideline comparison and what this page follows"><h3>Guideline comparison and what this page follows</h3><div class="tw"><table>
 <thead><tr><th style="width:15%">Item</th><th>SCOPE2 / SW ODN 2023</th><th>Wu 2015 (US expert consensus)</th><th>AGITG/TROG trial v4</th><th>CROSS (van Hagen 2012)</th></tr></thead>
 <tbody>
 <tr><td class="b">Margin along the oesophagus</td><td>GTVp + 20 mm; GTVn + 10 mm</td><td>3–4 cm above and below GTV along the mucosa; 1 cm above the highest periesophageal node</td><td>3 cm along the oesophagus (and stomach); 1 cm beyond nodes or 3 cm beyond primary, whichever is further</td><td rowspan="3">PTV = GTV + 4 cm cranio-caudal (3 cm into the stomach) and 1.5 cm radial; no separate CTV <span class="chk">CHECK</span> against the trial paper</td></tr>
@@ -243,29 +131,20 @@
 <tr><td class="b">PTV</td><td>Upper/middle: 10 mm SI, 5 mm radial. Lower: 10 mm sup, 15 mm inf, 5 mm radial. ITV + 5 mm with 4D</td><td>CTV + 0.5–1 cm, plus measured motion</td><td>CTV + 1 cm</td><td>Included above</td></tr>
 <tr><td class="b">Dose</td><td>50/25 definitive; 45/25 or 41.4/23 neoadjuvant</td><td>45–50.4 Gy</td><td>50.4/28 pre-op</td><td>41.4/23 with carboplatin–paclitaxel</td></tr>
 </tbody>
-</table>
-<p class="src">Cervical oesophagus (ARS 2025): CTV 2–5 cm longitudinal and 1–2 cm radial; nodes + 0.5–1 cm; elective neck III, IV, VI, SCF, upper mediastinal and subcarinal regions may be included, benefit uncertain. See <a href="#s5">Section 5</a>.</p>
-<div class="callout follow"><span class="lbl">This page follows</span>
+</table></div><p class="src">Cervical oesophagus (ARS 2025): CTV 2–5 cm longitudinal and 1–2 cm radial; nodes + 0.5–1 cm; elective neck III, IV, VI, SCF, upper mediastinal and subcarinal regions may be included, benefit uncertain. See <a href="#s5">Section 5</a>.</p><div class="callout follow"><span class="lbl">This page follows</span>
 <ul class="tight" style="margin-top:4px;">
 <li><b>SCOPE2 / SW ODN 2023 for building the CTV and PTV in every intact scenario</b>: involved field, 20 mm along the lumen, 1 cm radial, the lower-third rules and the published constraint set. It is the most recent complete, protocol-based method in the folder and matches the IFI evidence (Wang 2022).</li>
 <li><b>Wu 2015 for anatomy</b>: where the heart, liver and vertebra edits go, how far into the stomach, and the borders of the coeliac, gastrohepatic and SCF regions when they are treated.</li>
 <li><b>Elective coeliac/gastrohepatic coverage</b> (Wu) is an option for node-positive GOJ adenocarcinoma at neoadjuvant doses; decide case by case and document it <span class="chk">CHECK</span> departmental practice.</li>
 <li><b>SCOPE2 nodal protocol</b> for supraclavicular node-positive upper-third disease; ARS 2025 and the head-and-neck team for cervical SCC dose.</li>
 </ul>
-</div>
-<h3>2.1  Why involved field?</h3>
-<ul class="tight">
+</div></article><article class="card" data-title="Why involved field?"><h3>2.1  Why involved field?</h3><ul class="tight">
 <li>Wang 2022 meta-analysis (23 studies, 4120 patients): IFI had better 5-year OS than ENI (pooled RR 0.78, 95% CI 0.68–0.90) but no difference at 1–3 years, and less grade ≥2 (RR 0.79) and grade ≥3 (RR 0.51) acute oesophagitis. No difference in grade ≥3 pneumonitis or late toxicity. Mostly Chinese, mostly squamous, many non-randomised studies — read it as "IFI is safe", not "ENI harms".</li>
 <li>Wu 2015 itself notes that only periesophageal nodes are regional in AJCC 7, and that routinely adding all mediastinal stations gives much larger lung doses; for distal tumours, superior mediastinal stations need not be added beyond the 1 cm radial margin.</li>
-</ul>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
-</section>
-
-<!-- ============================ S3 ============================ -->
-<section class="page" id="s3">
-<div class="sechead"><span class="eyebrow">Section 3 · Scenario A</span><h2><span class="sectnum">3</span>Thoracic oesophagus: neoadjuvant and definitive <span class="pill p-hi">core build</span></h2></div>
-<p>The same volumes are used for neoadjuvant and definitive treatment; only the dose differs (SW ODN). Build the CTV in three helper steps, as SCOPE2 does.</p>
-<div class="grid2">
+</ul></article>
+</section><section class="panel" id="p-s3" data-tab="s3" data-label="3 Thoracic oesophagus" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 3 · Scenario A</p><h2><span class="sectnum">3</span>Thoracic oesophagus: neoadjuvant and definitive <span class="pill p-hi">core build</span></h2><div class="lede"><p>The same volumes are used for neoadjuvant and definitive treatment; only the dose differs (SW ODN). Build the CTV in three helper steps, as SCOPE2 does.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Step by step (SCOPE2 / SW ODN)"><div class="grid2">
 <div>
 <h3>3.1  Step by step (SCOPE2 / SW ODN)</h3>
 <ol class="steps">
@@ -278,41 +157,39 @@
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 300" role="img" aria-label="Coronal schematic of the oesophageal CTV built along the lumen">
-<rect width="300" height="300" fill="#fff"/>
-<path d="M140 10 C138 80 136 150 146 200 C152 235 168 262 196 286" fill="none" stroke="#c6a25f" stroke-width="16" stroke-linecap="round" opacity=".55"/>
-<text x="100" y="22" font-size="8" fill="#8a6a3a">oesophagus</text>
-<path d="M118 30 C116 90 114 150 124 205 C130 240 150 268 182 292 L214 280 C188 256 172 228 168 196 C160 150 162 90 162 30 Z" fill="rgba(176,58,46,.10)" stroke="#b03a2e" stroke-width="1.6" stroke-dasharray="6 3"/>
-<rect x="131" y="100" width="20" height="58" rx="6" fill="rgba(29,79,145,.55)" stroke="#1d4f91"/>
-<text x="133" y="132" font-size="7.5" fill="#fff" font-weight="700">GTVp</text>
-<circle cx="182" cy="120" r="7" fill="rgba(29,79,145,.55)" stroke="#1d4f91"/>
-<text x="192" y="118" font-size="7.5" fill="#1d4f91">GTVn</text>
-<path d="M170 106 L194 106 L194 134 L170 134 Z" fill="none" stroke="#b03a2e" stroke-width="1.2" stroke-dasharray="3 2"/>
-<line x1="230" y1="100" x2="230" y2="80" stroke="#333" stroke-width=".8"/>
-<line x1="230" y1="158" x2="230" y2="178" stroke="#333" stroke-width=".8"/>
-<line x1="152" y1="80" x2="234" y2="80" stroke="#999" stroke-width=".5" stroke-dasharray="2 2"/>
-<line x1="152" y1="178" x2="234" y2="178" stroke="#999" stroke-width=".5" stroke-dasharray="2 2"/>
-<line x1="152" y1="100" x2="234" y2="100" stroke="#999" stroke-width=".5" stroke-dasharray="2 2"/>
-<line x1="152" y1="158" x2="234" y2="158" stroke="#999" stroke-width=".5" stroke-dasharray="2 2"/>
-<text x="236" y="93" font-size="7.5" fill="#333">+20 mm</text>
-<text x="236" y="171" font-size="7.5" fill="#333">+20 mm</text>
-<text x="236" y="76" font-size="7" fill="#333">along lumen</text>
-<text x="20" y="66" font-size="7.5" fill="#b03a2e">CTV_B: CTV_A</text>
-<text x="20" y="76" font-size="7.5" fill="#b03a2e">+1 cm radial,</text>
-<text x="20" y="86" font-size="7.5" fill="#b03a2e">off bone/lung/</text>
-<text x="20" y="96" font-size="7.5" fill="#b03a2e">heart/vessels</text>
-<text x="196" y="146" font-size="7" fill="#b03a2e">node +10 mm</text>
-<text x="196" y="226" font-size="7.5" fill="#8a6a3a">GOJ</text>
-<text x="20" y="260" font-size="7.5" fill="#555">Distal CTV follows the</text>
-<text x="20" y="270" font-size="7.5" fill="#555">curve of the oesophagus;</text>
-<text x="20" y="280" font-size="7.5" fill="#555">a straight expansion misses it.</text>
+<svg aria-label="Coronal schematic of the oesophageal CTV built along the lumen" role="img" viewbox="0 0 300 300">
+<rect fill="#fff" height="300" width="300"></rect>
+<path d="M140 10 C138 80 136 150 146 200 C152 235 168 262 196 286" fill="none" opacity=".55" stroke="#c6a25f" stroke-linecap="round" stroke-width="16"></path>
+<text fill="#8a6a3a" font-size="8" x="100" y="22">oesophagus</text>
+<path d="M118 30 C116 90 114 150 124 205 C130 240 150 268 182 292 L214 280 C188 256 172 228 168 196 C160 150 162 90 162 30 Z" fill="rgba(176,58,46,.10)" stroke="#b03a2e" stroke-dasharray="6 3" stroke-width="1.6"></path>
+<rect fill="rgba(29,79,145,.55)" height="58" rx="6" stroke="#1d4f91" width="20" x="131" y="100"></rect>
+<text fill="#fff" font-size="7.5" font-weight="700" x="133" y="132">GTVp</text>
+<circle cx="182" cy="120" fill="rgba(29,79,145,.55)" r="7" stroke="#1d4f91"></circle>
+<text fill="#1d4f91" font-size="7.5" x="192" y="118">GTVn</text>
+<path d="M170 106 L194 106 L194 134 L170 134 Z" fill="none" stroke="#b03a2e" stroke-dasharray="3 2" stroke-width="1.2"></path>
+<line stroke="#333" stroke-width=".8" x1="230" x2="230" y1="100" y2="80"></line>
+<line stroke="#333" stroke-width=".8" x1="230" x2="230" y1="158" y2="178"></line>
+<line stroke="#999" stroke-dasharray="2 2" stroke-width=".5" x1="152" x2="234" y1="80" y2="80"></line>
+<line stroke="#999" stroke-dasharray="2 2" stroke-width=".5" x1="152" x2="234" y1="178" y2="178"></line>
+<line stroke="#999" stroke-dasharray="2 2" stroke-width=".5" x1="152" x2="234" y1="100" y2="100"></line>
+<line stroke="#999" stroke-dasharray="2 2" stroke-width=".5" x1="152" x2="234" y1="158" y2="158"></line>
+<text fill="#333" font-size="7.5" x="236" y="93">+20 mm</text>
+<text fill="#333" font-size="7.5" x="236" y="171">+20 mm</text>
+<text fill="#333" font-size="7" x="236" y="76">along lumen</text>
+<text fill="#b03a2e" font-size="7.5" x="20" y="66">CTV_B: CTV_A</text>
+<text fill="#b03a2e" font-size="7.5" x="20" y="76">+1 cm radial,</text>
+<text fill="#b03a2e" font-size="7.5" x="20" y="86">off bone/lung/</text>
+<text fill="#b03a2e" font-size="7.5" x="20" y="96">heart/vessels</text>
+<text fill="#b03a2e" font-size="7" x="196" y="146">node +10 mm</text>
+<text fill="#8a6a3a" font-size="7.5" x="196" y="226">GOJ</text>
+<text fill="#555" font-size="7.5" x="20" y="260">Distal CTV follows the</text>
+<text fill="#555" font-size="7.5" x="20" y="270">curve of the oesophagus;</text>
+<text fill="#555" font-size="7.5" x="20" y="280">a straight expansion misses it.</text>
 </svg>
 <figcaption>Original schematic (coronal). CTV_A runs 20 mm along the lumen beyond GTVp and 10 mm beyond GTVn; CTV_B adds the 1 cm radial margin.</figcaption>
 </figure>
 </div>
-</div>
-<h3>3.2  CTV borders (thoracic tumour)</h3>
-<table>
+</div></article><article class="card" data-title="CTV borders (thoracic tumour)"><h3>3.2  CTV borders (thoracic tumour)</h3><div class="tw"><table>
 <thead><tr><th style="width:14%">Border</th><th>This page (SCOPE2 / SW ODN)</th><th>Anatomical guidance (Wu 2015)</th></tr></thead>
 <tbody>
 <tr><td class="b">Cranial</td><td>20 mm above GTVp along the lumen, or 10 mm above the highest GTVn if that is higher</td><td>Do not go above the cricoid unless there is disease there</td></tr>
@@ -322,29 +199,19 @@
 <tr><td class="b">Lateral</td><td>1 cm radial; edit off lung and aorta</td><td>The 1 cm margin covers the periesophageal nodes (station 8)</td></tr>
 <tr><td class="b">Liver (distal)</td><td>Edit off uninvolved organs, min 5 mm from GTVp</td><td>No more than 0.5 cm into uninvolved liver; zero is reasonable with robust motion management</td></tr>
 </tbody>
-</table>
-<h3>3.3  Walkthrough, cranial to caudal (mid-thoracic tumour)</h3>
-<ol class="steps">
+</table></div></article><article class="card" data-title="Walkthrough, cranial to caudal (mid-thoracic tumour)"><h3>3.3  Walkthrough, cranial to caudal (mid-thoracic tumour)</h3><ol class="steps">
 <li>Above the GTV: start 20 mm above GTVp (or 10 mm above the highest node). Contour the oesophagus plus 1 cm of periesophageal fat; trim lung.</li>
 <li>At the GTV: GTVp + 1 cm. Trim off the vertebral body, aorta and heart, keeping at least 5 mm around GTVp. The airway is not on the SW ODN edit list; keep the 1 cm margin there unless clearly uninvolved <span class="chk">CHECK</span>.</li>
 <li>At node levels (stations 7, 8): GTVn + 10 mm cranio-caudally and 1 cm radially; include the oesophageal wall at that level (SW ODN). Join node and primary volumes where they lie close together, rather than leaving a gap along the oesophagus.</li>
 <li>Below the GTV: continue 20 mm along the lumen, following its curve.</li>
 <li>Check that CTV_C (5 mm) sits inside the final CTV on every slice; smooth in all three planes.</li>
-</ol>
-<h3>3.4  Neoadjuvant points</h3>
-<ul class="tight">
+</ol></article><article class="card" data-title="Neoadjuvant points"><h3>3.4  Neoadjuvant points</h3><ul class="tight">
 <li>CROSS used 41.4 Gy/23 with carboplatin–paclitaxel (van Hagen 2012). In ESOPEC, perioperative FLOT gave longer survival than CROSS for resectable adenocarcinoma (3-year OS 57.4% vs 50.7%, HR 0.70; Hoeppner 2025). Neoadjuvant chemoRT for adenocarcinoma is now mainly for patients who cannot have FLOT; it remains a standard for SCC.</li>
 <li>Plan with the surgeon: stomach that will become the conduit and the planned anastomosis site should not get unnecessary dose <span class="chk">CHECK</span> local surgical preference.</li>
-</ul>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
-</section>
-
-<!-- ============================ S4 ============================ -->
-<section class="page" id="s4">
-<div class="sechead"><span class="eyebrow">Section 4 · Scenario B</span><h2><span class="sectnum">4</span>Distal oesophagus and GOJ (Siewert I–II)</h2></div>
-<p>Build the CTV as in Section 3, then apply the lower-third rules. Siewert III tumours, and tumours extending more than 5 cm into the stomach, are outside the scope of Wu 2015; contour them with gastric guidelines (<a href="pancreas-stomach.html#s6">stomach protocol</a>; Matzinger 2009).</p>
-<h3>4.1  Lower-third rules compared</h3>
-<table>
+</ul></article>
+</section><section class="panel" id="p-s4" data-tab="s4" data-label="4 Distal oesophagus" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 4 · Scenario B</p><h2><span class="sectnum">4</span>Distal oesophagus and GOJ (Siewert I–II) </h2><div class="lede"><p>Build the CTV as in Section 3, then apply the lower-third rules. Siewert III tumours, and tumours extending more than 5 cm into the stomach, are outside the scope of Wu 2015; contour them with gastric guidelines (<a href="pancreas-stomach.html#s6">stomach protocol</a>; Matzinger 2009).</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Lower-third rules compared"><h3>4.1  Lower-third rules compared</h3><div class="tw"><table>
 <thead><tr><th style="width:18%">Item</th><th>SCOPE2 / SW ODN (followed)</th><th>Wu 2015</th><th>AGITG/TROG v4</th></tr></thead>
 <tbody>
 <tr><td class="b">Nodes below the diaphragm</td><td>Contour separately (not next to the oesophagus); add 5 mm circumferentially</td><td>Include gastrohepatic (lesser curve/left gastric), paracardial and para-aortic nodes between GOJ and coeliac, and coeliac nodes to the coeliac origin (≈T12)</td><td>No elective nodes</td></tr>
@@ -352,11 +219,10 @@
 <tr><td class="b">Splenic hilum, greater curve</td><td>Not included</td><td>Not regional for oesophageal cancer; may be included for Siewert II at lower doses (physician choice)</td><td>Not included</td></tr>
 <tr><td class="b">PTV</td><td>CTV + 10 mm superior, 15 mm inferior, 5 mm radial; with 4D: ITV + 5 mm</td><td>0.5–1 cm plus measured motion</td><td>1 cm</td></tr>
 </tbody>
-</table>
-<div class="grid2">
+</table></div><div class="grid2">
 <div>
 <h3>4.2  Coeliac and upper-abdominal nodal CTV (when treated; Wu 2015)</h3>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:24%">Border</th><th>Definition</th></tr></thead>
 <tbody>
 <tr><td class="b">Cranial</td><td>Continuous with the GOJ CTV</td></tr>
@@ -367,63 +233,51 @@
 <tr><td class="b">Anterior</td><td>Coeliac level: pancreatic body. GOJ–coeliac: the fat between lesser curve and liver (paracardial and gastrohepatic nodes)</td></tr>
 <tr><td class="b">Exclude</td><td>Kidneys</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 272" role="img" aria-label="Axial schematic at the coeliac axis showing the elective coeliac CTV borders">
-<rect width="300" height="250" fill="#fff"/>
-<rect x="120" y="186" width="60" height="50" rx="12" fill="#eef0f2" stroke="#b8c2cc"/>
-<text x="133" y="214" font-size="8" fill="#5b6b7c">vertebra</text>
-<circle cx="164" cy="168" r="14" fill="#f0c9c4" stroke="#b03a2e"/><text x="158" y="171" font-size="7.5" fill="#8a2f23">Ao</text>
-<path d="M164 154 L166 128" stroke="#b03a2e" stroke-width="5"/>
-<text x="126" y="142" font-size="7" fill="#8a2f23">coeliac</text>
-<ellipse cx="118" cy="168" rx="11" ry="9" fill="#d3e2f2" stroke="#5a7fa8"/><text x="111" y="171" font-size="7" fill="#1d4f91">IVC</text>
-<ellipse cx="62" cy="200" rx="22" ry="30" fill="#f2e6d8" stroke="#b08a60"/><text x="48" y="204" font-size="7.5" fill="#8a6a3a">R kidney</text>
-<ellipse cx="238" cy="200" rx="22" ry="30" fill="#f2e6d8" stroke="#b08a60"/><text x="224" y="204" font-size="7.5" fill="#8a6a3a">L kidney</text>
-<path d="M10 40 Q40 20 110 60 Q118 110 100 150 Q60 160 10 140 Z" fill="#f1d9d4" stroke="#b0786b"/><text x="30" y="96" font-size="8" fill="#8a4a3e">liver</text>
-<path d="M200 30 Q270 40 285 100 Q270 140 220 120 Q196 90 200 30 Z" fill="#efe3c6" stroke="#b39552"/><text x="226" y="82" font-size="8" fill="#8a6a3a">stomach</text>
-<path d="M140 112 Q190 100 240 128 L236 142 Q190 124 142 126 Z" fill="#f6e7c9" stroke="#c6a25f"/><text x="200" y="152" font-size="7" fill="#8a6a3a">pancreas body</text>
-<path d="M120 128 L182 126 L186 150 L182 184 L124 186 L118 160 Z" fill="rgba(47,111,176,.15)" stroke="#2f6fb0" stroke-width="1.8" stroke-dasharray="6 3"/>
-<text x="20" y="254" font-size="7.5" fill="#2f6fb0">elective coeliac CTV: right = lateral vertebral body;</text>
-<text x="20" y="265" font-size="7.5" fill="#2f6fb0">left = aorta + 0.5–1 cm; back = vertebra; front = pancreas</text>
+<svg aria-label="Axial schematic at the coeliac axis showing the elective coeliac CTV borders" role="img" viewbox="0 0 300 272">
+<rect fill="#fff" height="250" width="300"></rect>
+<rect fill="#eef0f2" height="50" rx="12" stroke="#b8c2cc" width="60" x="120" y="186"></rect>
+<text fill="#5b6b7c" font-size="8" x="133" y="214">vertebra</text>
+<circle cx="164" cy="168" fill="#f0c9c4" r="14" stroke="#b03a2e"></circle><text fill="#8a2f23" font-size="7.5" x="158" y="171">Ao</text>
+<path d="M164 154 L166 128" stroke="#b03a2e" stroke-width="5"></path>
+<text fill="#8a2f23" font-size="7" x="126" y="142">coeliac</text>
+<ellipse cx="118" cy="168" fill="#d3e2f2" rx="11" ry="9" stroke="#5a7fa8"></ellipse><text fill="#1d4f91" font-size="7" x="111" y="171">IVC</text>
+<ellipse cx="62" cy="200" fill="#f2e6d8" rx="22" ry="30" stroke="#b08a60"></ellipse><text fill="#8a6a3a" font-size="7.5" x="48" y="204">R kidney</text>
+<ellipse cx="238" cy="200" fill="#f2e6d8" rx="22" ry="30" stroke="#b08a60"></ellipse><text fill="#8a6a3a" font-size="7.5" x="224" y="204">L kidney</text>
+<path d="M10 40 Q40 20 110 60 Q118 110 100 150 Q60 160 10 140 Z" fill="#f1d9d4" stroke="#b0786b"></path><text fill="#8a4a3e" font-size="8" x="30" y="96">liver</text>
+<path d="M200 30 Q270 40 285 100 Q270 140 220 120 Q196 90 200 30 Z" fill="#efe3c6" stroke="#b39552"></path><text fill="#8a6a3a" font-size="8" x="226" y="82">stomach</text>
+<path d="M140 112 Q190 100 240 128 L236 142 Q190 124 142 126 Z" fill="#f6e7c9" stroke="#c6a25f"></path><text fill="#8a6a3a" font-size="7" x="200" y="152">pancreas body</text>
+<path d="M120 128 L182 126 L186 150 L182 184 L124 186 L118 160 Z" fill="rgba(47,111,176,.15)" stroke="#2f6fb0" stroke-dasharray="6 3" stroke-width="1.8"></path>
+<text fill="#2f6fb0" font-size="7.5" x="20" y="254">elective coeliac CTV: right = lateral vertebral body;</text>
+<text fill="#2f6fb0" font-size="7.5" x="20" y="265">left = aorta + 0.5–1 cm; back = vertebra; front = pancreas</text>
 </svg>
 <figcaption>Original schematic at the coeliac origin. Kidneys stay outside the CTV.</figcaption>
 </figure>
 </div>
-</div>
-<h3>4.3  Walkthrough, GOJ tumour</h3>
-<ol class="steps">
+</div></article><article class="card" data-title="Walkthrough, GOJ tumour"><h3>4.3  Walkthrough, GOJ tumour</h3><ol class="steps">
 <li>Thoracic part as Section 3 (20 mm along the lumen above GTVp).</li>
 <li>Through the hiatus, follow the oesophagus into the cardia. Cover gastric mucosa below GTVp up to the SW ODN limit (≤20 mm; ≥2 cm per Wu at 50.4 Gy — in practice 20 mm).</li>
 <li>Contour involved subdiaphragmatic nodes separately (+5 mm). Extend the CTV down to 1 cm below the lowest node.</li>
 <li>If elective coverage is chosen (Section 2), add the gastrohepatic/paracardial fat and para-aortic tissue down to the coeliac origin, with the borders above.</li>
 <li>Contour the CTV on the reference, MaxIn and MaxEx phases; union = ITV. Expand each slice as needed so the CTV is covered through the whole cycle (SW ODN).</li>
-</ol>
-<h3>4.4  Pitfalls</h3>
-<ul class="tight">
+</ol></article><article class="card" data-title="Pitfalls"><h3>4.4  Pitfalls</h3><ul class="tight">
 <li>Under-estimating motion: GOJ tumours often move more than 1 cm; use gating or compression above that (Wu 2015).</li>
 <li>Variable gastric filling moves the perigastric nodes and changes the stomach dose; keep the same fasting-and-drink routine every day (Wu 2015; SW ODN).</li>
 <li>Spleen dose: keep Dmean &lt;10 Gy. If higher, treat as at risk of hyposplenism: pneumococcal, Hib and meningococcal vaccines at least 2 weeks before RT, prophylactic antibiotics from the start of RT and an emergency supply (SW ODN, after BCSH guidance) <span class="chk">CHECK</span> Australian equivalent.</li>
-</ul>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
-</section>
-
-<!-- ============================ S5 ============================ -->
-<section class="page" id="s5">
-<div class="sechead"><span class="eyebrow">Section 5 · Scenario C</span><h2><span class="sectnum">5</span>Cervical and upper-third oesophagus, supraclavicular nodes</h2></div>
-<p>Cervical SCC is uncommon (&lt;5% of oesophageal cancers) and is treated much like head-and-neck SCC: larynx preservation with definitive chemoRT is preferred where possible (ARS 2025). Simulate in a head-and-neck shell, arms down (SW ODN), and plan with the head-and-neck team.</p>
-<h3>5.1  Volumes compared</h3>
-<table>
+</ul></article>
+</section><section class="panel" id="p-s5" data-tab="s5" data-label="5 Cervical" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 5 · Scenario C</p><h2><span class="sectnum">5</span>Cervical and upper-third oesophagus, supraclavicular nodes </h2><div class="lede"><p>Cervical SCC is uncommon (&lt;5% of oesophageal cancers) and is treated much like head-and-neck SCC: larynx preservation with definitive chemoRT is preferred where possible (ARS 2025). Simulate in a head-and-neck shell, arms down (SW ODN), and plan with the head-and-neck team.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Volumes compared"><h3>5.1  Volumes compared</h3><div class="tw"><table>
 <thead><tr><th style="width:17%">Item</th><th>SCOPE2 / SW ODN (followed for thoracic upper third)</th><th>Wu 2015 (proximal tumours)</th><th>ARS 2025 (cervical SCC)</th></tr></thead>
 <tbody>
 <tr><td class="b">Primary CTV</td><td>GTVp + 20 mm along lumen, 1 cm radial</td><td>3–4 cm along mucosa; not above cricoid unless disease there; 1 cm radial</td><td>2–5 cm longitudinal, 1–2 cm radial</td></tr>
 <tr><td class="b">Nodal CTV</td><td>GTVn + 10 mm along lumen; N0: no elective nodes. SCF N+: see 5.2</td><td>Tumours above the carina: bilateral SCF. Proximal tumours: whole trachea and paratracheal stations 2 and 4; above the arch, prevascular station 3 towards sternum and clavicular heads. Above the thoracic inlet, exclude the trachea except as the 1 cm margin needs</td><td>Involved nodes + 0.5–1 cm. Elective neck III, IV, VI, SCF, upper mediastinal and subcarinal regions may be included; benefit uncertain</td></tr>
 <tr><td class="b">PTV</td><td>10 mm SI, 5 mm radial</td><td>0.5–1 cm</td><td>IMRT: 1–2 cm CC, 0.5–1 cm circumferential. 3D: 0.5–1 cm CC, 0.5–2 cm circumferential</td></tr>
 </tbody>
-</table>
-<div class="callout follow"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">Upper thoracic: SCOPE2 / SW ODN involved field, adding the whole bilateral SCF only for SCF node-positive disease (SCOPE2 nodal protocol). Cervical SCC treated to head-and-neck doses: discuss elective neck levels (ARS 2025, Wu 2015) with the head-and-neck team and record the decision <span class="chk">CHECK</span>.</p></div>
-<div class="grid2">
+</table></div><div class="callout follow"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">Upper thoracic: SCOPE2 / SW ODN involved field, adding the whole bilateral SCF only for SCF node-positive disease (SCOPE2 nodal protocol). Cervical SCC treated to head-and-neck doses: discuss elective neck levels (ARS 2025, Wu 2015) with the head-and-neck team and record the decision <span class="chk">CHECK</span>.</p></div><div class="grid2">
 <div>
 <h3>5.2  SCF node-positive disease (SCOPE2 nodal protocol)</h3>
 <ol class="steps">
@@ -432,7 +286,7 @@
 <li><b>CTVscf</b> = CTVn + the whole SCF region on <b>both</b> sides (lymph from the proximal third drains to both deep cervical chains).</li>
 <li><b>PTVscf</b> = CTVscf + 5 mm (6 mm SI on 3 mm slices); join to the primary PTV for the 50 Gy/25 PTV.</li>
 </ol>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:24%">SCF border</th><th>Definition (SCOPE2, adapted from RTOG breast and H&amp;N atlases)</th></tr></thead>
 <tbody>
 <tr><td class="b">Cranial</td><td>Just below the cricoid cartilage; exclude thyroid and thyroid cartilage</td></tr>
@@ -442,57 +296,50 @@
 <tr><td class="b">Lateral</td><td>Cranially: lateral edge of SCM. Caudally: junction of first rib and clavicle</td></tr>
 <tr><td class="b">Medial</td><td>Excludes thyroid and trachea</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="src">Wu 2015 describes the SCF like head-and-neck level IV: cranial border at the cricoid, SCM borders, inferiorly into the thoracic inlet.</p>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 340 300" role="img" aria-label="Coronal schematic of the bilateral supraclavicular CTV for upper-third oesophageal cancer">
-<rect width="300" height="300" fill="#fff"/>
-<rect x="138" y="20" width="24" height="270" rx="10" fill="#e3edf7" stroke="#8aa7c6"/>
-<text x="120" y="16" font-size="7.5" fill="#1d4f91">trachea / oesophagus</text>
-<line x1="40" y1="70" x2="258" y2="70" stroke="#777" stroke-dasharray="4 3"/>
-<text x="262" y="73" font-size="7.5" fill="#555">cricoid</text>
-<ellipse cx="128" cy="96" rx="9" ry="18" fill="#f5dfe6" stroke="#b07a8b"/><ellipse cx="172" cy="96" rx="9" ry="18" fill="#f5dfe6" stroke="#b07a8b"/>
-<line x1="178" y1="100" x2="258" y2="112" stroke="#b07a8b" stroke-width=".6"/><text x="260" y="115" font-size="7" fill="#8a4a5e">thyroid (excl.)</text>
-<path d="M98 40 L118 170" stroke="#c98d6e" stroke-width="7" opacity=".7"/><path d="M202 40 L182 170" stroke="#c98d6e" stroke-width="7" opacity=".7"/>
-<text x="62" y="44" font-size="7.5" fill="#8a5a3e">SCM</text>
-<path d="M30 168 Q90 150 132 172" fill="none" stroke="#9aa3ad" stroke-width="8" stroke-linecap="round"/>
-<path d="M270 168 Q210 150 168 172" fill="none" stroke="#9aa3ad" stroke-width="8" stroke-linecap="round"/>
-<text x="30" y="186" font-size="7.5" fill="#5b6b7c">clavicle</text>
-<path d="M40 190 Q80 176 132 196" fill="none" stroke="#c4cad1" stroke-width="5"/>
-<text x="36" y="206" font-size="7" fill="#5b6b7c">1st rib</text>
-<line x1="40" y1="160" x2="260" y2="160" stroke="#777" stroke-dasharray="4 3"/>
-<text x="262" y="163" font-size="7" fill="#555">top of SC joint</text>
-<path d="M60 74 L122 74 L130 158 L56 158 Q46 118 60 74 Z" fill="rgba(47,111,176,.16)" stroke="#2f6fb0" stroke-width="1.6" stroke-dasharray="6 3"/>
-<path d="M240 74 L178 74 L170 158 L244 158 Q254 118 240 74 Z" fill="rgba(47,111,176,.16)" stroke="#2f6fb0" stroke-width="1.6" stroke-dasharray="6 3"/>
-<circle cx="88" cy="118" r="8" fill="rgba(29,79,145,.6)" stroke="#1d4f91"/><text x="66" y="104" font-size="7" fill="#1d4f91">GTVn</text>
-<circle cx="88" cy="118" r="13" fill="none" stroke="#2f6fb0" stroke-width="1"/>
-<rect x="141" y="200" width="18" height="50" rx="5" fill="rgba(29,79,145,.55)" stroke="#1d4f91"/><text x="164" y="228" font-size="7.5" fill="#1d4f91">GTVp</text>
-<text x="20" y="276" font-size="7.5" fill="#2f6fb0">CTVscf = GTVn + 5 mm plus both whole SCF regions,</text>
-<text x="20" y="286" font-size="7.5" fill="#2f6fb0">cricoid to top of SC joint (SCOPE2)</text>
+<svg aria-label="Coronal schematic of the bilateral supraclavicular CTV for upper-third oesophageal cancer" role="img" viewbox="0 0 340 300">
+<rect fill="#fff" height="300" width="300"></rect>
+<rect fill="#e3edf7" height="270" rx="10" stroke="#8aa7c6" width="24" x="138" y="20"></rect>
+<text fill="#1d4f91" font-size="7.5" x="120" y="16">trachea / oesophagus</text>
+<line stroke="#777" stroke-dasharray="4 3" x1="40" x2="258" y1="70" y2="70"></line>
+<text fill="#555" font-size="7.5" x="262" y="73">cricoid</text>
+<ellipse cx="128" cy="96" fill="#f5dfe6" rx="9" ry="18" stroke="#b07a8b"></ellipse><ellipse cx="172" cy="96" fill="#f5dfe6" rx="9" ry="18" stroke="#b07a8b"></ellipse>
+<line stroke="#b07a8b" stroke-width=".6" x1="178" x2="258" y1="100" y2="112"></line><text fill="#8a4a5e" font-size="7" x="260" y="115">thyroid (excl.)</text>
+<path d="M98 40 L118 170" opacity=".7" stroke="#c98d6e" stroke-width="7"></path><path d="M202 40 L182 170" opacity=".7" stroke="#c98d6e" stroke-width="7"></path>
+<text fill="#8a5a3e" font-size="7.5" x="62" y="44">SCM</text>
+<path d="M30 168 Q90 150 132 172" fill="none" stroke="#9aa3ad" stroke-linecap="round" stroke-width="8"></path>
+<path d="M270 168 Q210 150 168 172" fill="none" stroke="#9aa3ad" stroke-linecap="round" stroke-width="8"></path>
+<text fill="#5b6b7c" font-size="7.5" x="30" y="186">clavicle</text>
+<path d="M40 190 Q80 176 132 196" fill="none" stroke="#c4cad1" stroke-width="5"></path>
+<text fill="#5b6b7c" font-size="7" x="36" y="206">1st rib</text>
+<line stroke="#777" stroke-dasharray="4 3" x1="40" x2="260" y1="160" y2="160"></line>
+<text fill="#555" font-size="7" x="262" y="163">top of SC joint</text>
+<path d="M60 74 L122 74 L130 158 L56 158 Q46 118 60 74 Z" fill="rgba(47,111,176,.16)" stroke="#2f6fb0" stroke-dasharray="6 3" stroke-width="1.6"></path>
+<path d="M240 74 L178 74 L170 158 L244 158 Q254 118 240 74 Z" fill="rgba(47,111,176,.16)" stroke="#2f6fb0" stroke-dasharray="6 3" stroke-width="1.6"></path>
+<circle cx="88" cy="118" fill="rgba(29,79,145,.6)" r="8" stroke="#1d4f91"></circle><text fill="#1d4f91" font-size="7" x="66" y="104">GTVn</text>
+<circle cx="88" cy="118" fill="none" r="13" stroke="#2f6fb0" stroke-width="1"></circle>
+<rect fill="rgba(29,79,145,.55)" height="50" rx="5" stroke="#1d4f91" width="18" x="141" y="200"></rect><text fill="#1d4f91" font-size="7.5" x="164" y="228">GTVp</text>
+<text fill="#2f6fb0" font-size="7.5" x="20" y="276">CTVscf = GTVn + 5 mm plus both whole SCF regions,</text>
+<text fill="#2f6fb0" font-size="7.5" x="20" y="286">cricoid to top of SC joint (SCOPE2)</text>
 </svg>
 <figcaption>Original schematic (coronal). Both SCF regions are treated once any SCF node is involved; no elective SCF for N0.</figcaption>
 </figure>
 </div>
-</div>
-<h3>5.3  Pitfalls</h3>
-<ul class="tight">
+</div></article><article class="card" data-title="Pitfalls"><h3>5.3  Pitfalls</h3><ul class="tight">
 <li>Arms-up set-up for an upper-third tumour pushes the shoulders into the beam path and makes the neck irreproducible; use arms down and a shell (SW ODN).</li>
 <li>Cervical dose escalation brings laryngeal oedema and fatal oesophagitis (ARS 2025); keep the larynx and pharyngeal constrictors as OARs (contour as in head-and-neck practice).</li>
 <li>Thoracic inlet: the CTV should step smoothly from the mediastinal to the SCF volume; extending the anterior border towards the clavicular heads above the arch helps (Wu 2015).</li>
-</ul>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
-</section>
-
-<!-- ============================ S6 + S7 ============================ -->
-<section class="page" id="s6">
-<div class="sechead"><span class="eyebrow">Section 6 · Scenario D</span><h2><span class="sectnum">6</span>Adjuvant RT after resection <span class="pill p-ctv">post-op</span></h2></div>
-<ul class="tight">
+</ul></article>
+</section><section class="panel" id="p-s6" data-tab="s6" data-label="6 Adjuvant RT" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 6 · Scenario D</p><h2><span class="sectnum">6</span>Adjuvant RT after resection <span class="pill p-ctv">post-op</span></h2><div class="jump"></div></div>
+  <article class="card" data-title="Adjuvant RT after resection"><h3>Adjuvant RT after resection</h3><ul class="tight">
 <li><b>Indication (SW ODN):</b> a macroscopically or microscopically positive resection margin where the risk of local recurrence is judged to exceed the risk of distant relapse. ARS 2025 also lists pT3–4, perineural invasion and a positive circumferential margin as recurrence risk factors after resection of cervical SCC.</li>
 <li><b>Systemic context:</b> after neoadjuvant chemoRT and resection with residual disease, adjuvant nivolumab improved disease-free survival (CheckMate 577; Kelly 2021) <span class="chk">CHECK</span> current PBS listing.</li>
-</ul>
-<table>
+</ul><div class="tw"><table>
 <thead><tr><th style="width:18%">Step / border</th><th>Tumour-bed CTV (SW ODN 2023)</th></tr></thead>
 <tbody>
 <tr><td class="b">Locate the bed</td><td>Fuse the planning CT with the pre-operative CT or PET-CT; mark the original tumour site and the sites of highest relapse risk from the surgeon's notes and the histopathology report</td></tr>
@@ -503,64 +350,59 @@
 <tr><td class="b">Nodal bed (cervical, ARS 2025)</td><td>Tumour bed and resected involved nodal bed, considering elective periesophageal and SCF nodes</td></tr>
 <tr><td class="b">PTV</td><td>As for intact disease (Section 9)</td></tr>
 </tbody>
-</table>
-<p class="src">SW ODN strongly recommends contouring with the surgeon (screen sharing or screenshots). Post-oesophagectomy nodal anatomy and the conduit: Wo 2013 gastric atlas (Ivor Lewis) in the site library. Dose 45–50 Gy/25 with chemotherapy (SW ODN).</p>
-
-<div class="sechead" id="s7" style="margin-top:1.1em"><span class="eyebrow">Section 7</span><h2><span class="sectnum">7</span>Nodal regions by tumour level</h2></div>
-<div class="grid2">
+</table></div><p class="src">SW ODN strongly recommends contouring with the surgeon (screen sharing or screenshots). Post-oesophagectomy nodal anatomy and the conduit: Wo 2013 gastric atlas (Ivor Lewis) in the site library. Dose 45–50 Gy/25 with chemotherapy (SW ODN).</p></article>
+</section><section class="panel" id="p-s7" data-tab="s7" data-label="7 Nodal regions by tumour level" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 7</p><h2><span class="sectnum">7</span>Nodal regions by tumour level </h2><div class="jump"></div></div>
+  <article class="card" data-title="Nodal regions by tumour level"><h3>Nodal regions by tumour level</h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:26%">Tumour level</th><th>Involved-field (followed)</th><th>When elective cover is chosen (Wu 2015)</th></tr></thead>
 <tbody>
 <tr><td class="b">Cervical / above carina</td><td>Periesophageal (1 cm radial); GTVn + margins; whole bilateral SCF if SCF N+</td><td>Bilateral SCF; paratracheal 2R/2L, 4R/4L; prevascular 3 above the arch</td></tr>
 <tr><td class="b">Mid thoracic</td><td>Periesophageal (station 8) via the 1 cm radial margin; involved nodes only</td><td>Not specified; superior mediastinal stations not mandatory</td></tr>
 <tr><td class="b">Distal / GOJ</td><td>Periesophageal; lesser curve, left gastric, coeliac only if within 20 mm below GTV; involved subdiaphragmatic nodes + 5 mm</td><td>Paracardial, gastrohepatic, para-aortic to the coeliac origin (≈T12). Splenic hilum and greater curve optional for Siewert II at lower doses</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="src">For the CT borders of each IASLC station (2, 3, 4, 7, 8), use the station tables in the <a href="lung.html#s4">lung protocol</a> (Huang 2015 atlas, built for oesophageal cancer). ESTRO-ACROP upper GI node atlas (Valentini 2021) gives station borders for the abdomen; it was not in the folder.</p>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 300" role="img" aria-label="Landmark ladder from cricoid to coeliac with nodal regions by tumour level">
-<rect width="300" height="300" fill="#fff"/>
-<line x1="70" y1="20" x2="70" y2="285" stroke="#c6a25f" stroke-width="12" opacity=".5" stroke-linecap="round"/>
-<g font-size="7.5" fill="#333">
-<line x1="56" y1="30" x2="84" y2="30" stroke="#333"/><text x="4" y="33">cricoid (C6)</text>
-<line x1="56" y1="70" x2="84" y2="70" stroke="#333"/><text x="4" y="66">thoracic</text><text x="4" y="76">inlet</text>
-<line x1="56" y1="105" x2="84" y2="105" stroke="#333"/><text x="4" y="108">aortic arch</text>
-<line x1="56" y1="140" x2="84" y2="140" stroke="#333"/><text x="4" y="143">carina</text>
-<line x1="56" y1="225" x2="84" y2="225" stroke="#333"/><text x="4" y="228">GOJ</text>
-<line x1="56" y1="270" x2="84" y2="270" stroke="#333"/><text x="4" y="266">coeliac</text><text x="4" y="276">(≈T12)</text>
+<svg aria-label="Landmark ladder from cricoid to coeliac with nodal regions by tumour level" role="img" viewbox="0 0 300 300">
+<rect fill="#fff" height="300" width="300"></rect>
+<line opacity=".5" stroke="#c6a25f" stroke-linecap="round" stroke-width="12" x1="70" x2="70" y1="20" y2="285"></line>
+<g fill="#333" font-size="7.5">
+<line stroke="#333" x1="56" x2="84" y1="30" y2="30"></line><text x="4" y="33">cricoid (C6)</text>
+<line stroke="#333" x1="56" x2="84" y1="70" y2="70"></line><text x="4" y="66">thoracic</text><text x="4" y="76">inlet</text>
+<line stroke="#333" x1="56" x2="84" y1="105" y2="105"></line><text x="4" y="108">aortic arch</text>
+<line stroke="#333" x1="56" x2="84" y1="140" y2="140"></line><text x="4" y="143">carina</text>
+<line stroke="#333" x1="56" x2="84" y1="225" y2="225"></line><text x="4" y="228">GOJ</text>
+<line stroke="#333" x1="56" x2="84" y1="270" y2="270"></line><text x="4" y="266">coeliac</text><text x="4" y="276">(≈T12)</text>
 </g>
-<rect x="100" y="24" width="190" height="112" rx="6" fill="rgba(47,111,176,.08)" stroke="#2f6fb0"/>
-<text x="106" y="38" font-size="8" font-weight="700" fill="#1d4f91">Above the carina</text>
-<text x="106" y="52" font-size="7.5" fill="#2f6fb0">bilateral SCF (cricoid → inlet)</text>
-<text x="106" y="64" font-size="7.5" fill="#2f6fb0">paratracheal 2R/2L, 4R/4L</text>
-<text x="106" y="76" font-size="7.5" fill="#2f6fb0">prevascular 3 above the arch</text>
-<text x="106" y="90" font-size="7.5" fill="#555">IFI default: SCF only if SCF N+</text>
-<rect x="100" y="142" width="190" height="74" rx="6" fill="rgba(176,58,46,.06)" stroke="#b03a2e"/>
-<text x="106" y="156" font-size="8" font-weight="700" fill="#8a2f23">Mid / lower thoracic</text>
-<text x="106" y="170" font-size="7.5" fill="#8a2f23">periesophageal (8) by 1 cm radial</text>
-<text x="106" y="182" font-size="7.5" fill="#8a2f23">subcarinal (7) if involved</text>
-<text x="106" y="194" font-size="7.5" fill="#555">no mandatory superior mediastinal</text>
-<rect x="100" y="222" width="190" height="70" rx="6" fill="rgba(20,117,107,.07)" stroke="#14756b"/>
-<text x="106" y="236" font-size="8" font-weight="700" fill="#14756b">Distal / GOJ</text>
-<text x="106" y="250" font-size="7.5" fill="#14756b">paracardial, gastrohepatic</text>
-<text x="106" y="262" font-size="7.5" fill="#14756b">para-aortic → coeliac origin</text>
-<text x="106" y="274" font-size="7.5" fill="#555">IFI default: only within 20 mm</text>
-<text x="106" y="286" font-size="7.5" fill="#555">below GTV (SW ODN)</text>
+<rect fill="rgba(47,111,176,.08)" height="112" rx="6" stroke="#2f6fb0" width="190" x="100" y="24"></rect>
+<text fill="#1d4f91" font-size="8" font-weight="700" x="106" y="38">Above the carina</text>
+<text fill="#2f6fb0" font-size="7.5" x="106" y="52">bilateral SCF (cricoid → inlet)</text>
+<text fill="#2f6fb0" font-size="7.5" x="106" y="64">paratracheal 2R/2L, 4R/4L</text>
+<text fill="#2f6fb0" font-size="7.5" x="106" y="76">prevascular 3 above the arch</text>
+<text fill="#555" font-size="7.5" x="106" y="90">IFI default: SCF only if SCF N+</text>
+<rect fill="rgba(176,58,46,.06)" height="74" rx="6" stroke="#b03a2e" width="190" x="100" y="142"></rect>
+<text fill="#8a2f23" font-size="8" font-weight="700" x="106" y="156">Mid / lower thoracic</text>
+<text fill="#8a2f23" font-size="7.5" x="106" y="170">periesophageal (8) by 1 cm radial</text>
+<text fill="#8a2f23" font-size="7.5" x="106" y="182">subcarinal (7) if involved</text>
+<text fill="#555" font-size="7.5" x="106" y="194">no mandatory superior mediastinal</text>
+<rect fill="rgba(20,117,107,.07)" height="70" rx="6" stroke="#14756b" width="190" x="100" y="222"></rect>
+<text fill="#14756b" font-size="8" font-weight="700" x="106" y="236">Distal / GOJ</text>
+<text fill="#14756b" font-size="7.5" x="106" y="250">paracardial, gastrohepatic</text>
+<text fill="#14756b" font-size="7.5" x="106" y="262">para-aortic → coeliac origin</text>
+<text fill="#555" font-size="7.5" x="106" y="274">IFI default: only within 20 mm</text>
+<text fill="#555" font-size="7.5" x="106" y="286">below GTV (SW ODN)</text>
 </svg>
 <figcaption>Original landmark ladder. Coloured boxes show what Wu 2015 covers when elective nodes are treated; grey text shows the involved-field default.</figcaption>
 </figure>
 </div>
-</div>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
-</section>
-
-<!-- ============================ S8 ============================ -->
-<section class="page" id="s8">
-<div class="sechead"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>Pearls and common errors</h2></div>
-<table>
+</div></article>
+</section><section class="panel" id="p-s8" data-tab="s8" data-label="8 Pearls" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 8</p><h2><span class="sectnum">8</span>Pearls and common errors </h2><div class="jump"></div></div>
+  <article class="card" data-title="Pearls and common errors"><h3>Pearls and common errors</h3><div class="tw"><table>
 <thead><tr><th style="width:30%">Error</th><th>Why it matters / what to do</th><th style="width:16%">Source</th></tr></thead>
 <tbody>
 <tr><td class="b">Geometric SI expansion of the GTV</td><td>The oesophagus curves forward and left below the carina and into the abdomen; a straight expansion overshoots into lung and heart and misses the lumen. Draw the longitudinal margin along the lumen.</td><td>SW ODN; Wu; AGITG/TROG</td></tr>
@@ -577,11 +419,10 @@
 <tr><td class="b">Dense oral contrast in the dose calculation</td><td>Contrast changes calculated density; override or scan without it.</td><td>AGITG/TROG</td></tr>
 <tr><td class="b">No peer review</td><td>All curative and adjuvant volumes should be peer reviewed before treatment, ideally before planning; record changes.</td><td>SW ODN</td></tr>
 </tbody>
-</table>
-
-<div class="sechead" id="s9" style="margin-top:1.1em"><span class="eyebrow">Section 9</span><h2><span class="sectnum">9</span>Dose, fractionation, margins and IGRT</h2></div>
-<h3>9.1  Dose by scenario</h3>
-<table>
+</table></div></article>
+</section><section class="panel" id="p-s9" data-tab="s9" data-label="9 Dose" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 9</p><h2><span class="sectnum">9</span>Dose, fractionation, margins and IGRT </h2><div class="jump"></div></div>
+  <article class="card" data-title="Dose by scenario"><h3>9.1  Dose by scenario</h3><div class="tw"><table>
 <thead><tr><th style="width:30%">Scenario</th><th>Dose</th><th>Notes and source</th></tr></thead>
 <tbody>
 <tr><td class="b">Neoadjuvant chemoRT</td><td>41.4 Gy/23 or 45 Gy/25</td><td>41.4/23 with carboplatin–paclitaxel (CROSS); 45/25 with cisplatin–capecitabine/5FU or carboplatin–paclitaxel (SW ODN). AGITG/TROG trial: 50.4/28 after induction chemo</td></tr>
@@ -591,14 +432,7 @@
 <tr><td class="b">Adjuvant</td><td>45–50 Gy/25</td><td>SW ODN, with chemotherapy</td></tr>
 <tr><td class="b">Palliative</td><td>40/15; 30/10 or 20/5; 27/6 (twice weekly); 6–8 Gy/1; brachytherapy</td><td>SW ODN</td></tr>
 </tbody>
-</table>
-<p class="src">Interruptions: category 1 (RCR) — compensate for gaps (SW ODN). eviQ 1861 (neoadjuvant) and 1865 (definitive) are the Australian protocol references (links in Section 12).</p>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
-</section>
-
-<section class="page">
-<h3>9.2  CTV/ITV → PTV margins</h3>
-<table>
+</table></div><p class="src">Interruptions: category 1 (RCR) — compensate for gaps (SW ODN). eviQ 1861 (neoadjuvant) and 1865 (definitive) are the Australian protocol references (links in Section 12).</p></article><article class="card" data-title="CTV/ITV → PTV margins"><h3>9.2  CTV/ITV → PTV margins</h3><div class="tw"><table>
 <thead><tr><th style="width:26%">Situation</th><th>SW ODN (followed)</th><th>Other sources</th></tr></thead>
 <tbody>
 <tr><td class="b">Upper and middle thirds</td><td>10 mm SI, 5 mm radial</td><td>Wu: 0.5–1 cm. AGITG/TROG: 1 cm. ARS (IMRT): 1–2 cm CC, 0.5–1 cm circumferential</td></tr>
@@ -607,9 +441,7 @@
 <tr><td class="b">SCF (SCOPE2)</td><td>CTVscf + 5 mm (6 mm SI on 3 mm slices)</td><td>—</td></tr>
 <tr><td class="b">Departmental</td><td colspan="2">Liverpool margins for oesophagus not supplied <span class="chk">CHECK</span></td></tr>
 </tbody>
-</table>
-<h3>9.3  Plan evaluation</h3>
-<table>
+</table></div></article><article class="card" data-title="Plan evaluation"><h3>9.3  Plan evaluation</h3><div class="tw"><table>
 <thead><tr><th style="width:26%">Parameter</th><th>SW ODN 2023 (optimal / mandatory)</th><th>AGITG/TROG v4</th></tr></thead>
 <tbody>
 <tr><td class="b">PTV V95%</td><td>&gt;95% / ≥90%</td><td>Minimum dose ≥95% of prescription</td></tr>
@@ -617,22 +449,15 @@
 <tr><td class="b">PTV D99% / D1%</td><td>D99% ≥95%; D1% ≤107%</td><td>Max (≥2 cm³) ≤107%</td></tr>
 <tr><td class="b">ICRU maximum</td><td>Reported as D1.8 cc</td><td>ICRU reference point</td></tr>
 </tbody>
-</table>
-<h3>9.4  Technique and IGRT</h3>
-<ul class="tight">
+</table></div></article><article class="card" data-title="Technique and IGRT"><h3>9.4  Technique and IGRT</h3><ul class="tight">
 <li>IMRT/VMAT (or helical) for curative treatment, prescribed and reported per ICRU 83; conformal for 40/15 palliative; simple fields for low-dose palliation (cord ≤100% for 30/10) (SW ODN).</li>
 <li><b>Daily CBCT with online correction, matched to the PTV</b> unless the clinician specifies an OAR-priority match; daily kV if CBCT is unavailable (SW ODN). Departmental match region and tolerance <span class="chk">CHECK</span>.</li>
 <li>For GOJ: check stomach filling and diaphragm position on each CBCT; if filling differs, apply the drink routine again rather than shifting.</li>
 <li>Weekly on-treatment review, weekly bloods and weight for radical patients, early dietitian input (SW ODN).</li>
-</ul>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
-</section>
-
-<!-- ============================ S10 + S11 ============================ -->
-<section class="page" id="s10">
-<div class="sechead"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>Organs at risk and constraints</h2></div>
-<h3>10.1  Contouring (SW ODN 2023)</h3>
-<table>
+</ul></article>
+</section><section class="panel" id="p-s10" data-tab="s10" data-label="10 Organs at risk" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 10</p><h2><span class="sectnum">10</span>Organs at risk and constraints </h2><div class="jump"></div></div>
+  <article class="card" data-title="Contouring (SW ODN 2023)"><h3>10.1  Contouring (SW ODN 2023)</h3><div class="tw"><table>
 <thead><tr><th style="width:20%">OAR</th><th>Definition</th></tr></thead>
 <tbody>
 <tr><td class="b">SpinalCanal</td><td>Every slice in or within 20 mm above and below the PTV</td></tr>
@@ -644,10 +469,7 @@
 <tr><td class="b">Stomach</td><td>Whole stomach if it overlaps the PTV level; also make Stomach_excl_PTV</td></tr>
 <tr><td class="b">Spleen</td><td>As per RCR incidental splenic irradiation guidance</td></tr>
 </tbody>
-</table>
-<p class="src">Atlases: Jabbour 2014 RTOG upper abdominal atlas (SW ODN reference); Kong 2011 thoracic OARs and Feng 2011 cardiac atlas (see the <a href="lung.html">lung protocol</a>). Cervical tumours: larynx, pharyngeal constrictors and brachial plexus as in head-and-neck practice.</p>
-<h3>10.2  Constraints</h3>
-<table>
+</table></div><p class="src">Atlases: Jabbour 2014 RTOG upper abdominal atlas (SW ODN reference); Kong 2011 thoracic OARs and Feng 2011 cardiac atlas (see the <a href="lung.html">lung protocol</a>). Cervical tumours: larynx, pharyngeal constrictors and brachial plexus as in head-and-neck practice.</p></article><article class="card" data-title="Constraints"><h3>10.2  Constraints</h3><div class="tw"><table>
 <thead><tr><th style="width:20%">OAR</th><th>SW ODN 2023 optimal</th><th>SW ODN mandatory</th><th>AGITG/TROG v4 (50.4/28)</th></tr></thead>
 <tbody>
 <tr><td class="b">SpinalCanal_PRV</td><td>D0.1 cc &lt;40 Gy</td><td>&lt;42 Gy</td><td>Cord max 45 Gy (absolute)</td></tr>
@@ -658,11 +480,10 @@
 <tr><td class="b">Each kidney</td><td>V20 &lt;25%</td><td>≤30%</td><td>V20 ≤30%</td></tr>
 <tr><td class="b">Spleen</td><td>Dmean &lt;10 Gy</td><td>&lt;10 Gy (else vaccinate)</td><td>—</td></tr>
 </tbody>
-</table>
-<p class="src">This page uses the SW ODN 2023 set (50 Gy/25 era, IMRT). Departmental (Liverpool) and eviQ constraints for oesophagus not compared here <span class="chk">CHECK</span>.</p>
-
-<div class="sechead" id="s11" style="margin-top:1.1em"><span class="eyebrow">Section 11</span><h2><span class="sectnum">11</span>RayStation implementation and names</h2></div>
-<table>
+</table></div><p class="src">This page uses the SW ODN 2023 set (50 Gy/25 era, IMRT). Departmental (Liverpool) and eviQ constraints for oesophagus not compared here <span class="chk">CHECK</span>.</p></article>
+</section><section class="panel" id="p-s11" data-tab="s11" data-label="11 RayStation implementation" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 11</p><h2><span class="sectnum">11</span>RayStation implementation and names </h2><div class="jump"></div></div>
+  <article class="card" data-title="RayStation implementation and names"><h3>RayStation implementation and names</h3><div class="tw"><table>
 <thead><tr><th style="width:22%">Structure</th><th>Name (TG-263 style)</th><th>Recipe</th></tr></thead>
 <tbody>
 <tr><td class="b">Primary / nodes</td><td class="mono">GTVp; GTVn1, GTVn2…</td><td>Planning CT with PET/EUS/endoscopy</td></tr>
@@ -674,25 +495,17 @@
 <tr><td class="b">Adjuvant</td><td class="mono">CTV_TB_5000; PTV_5000</td><td>Section 6 borders; PTV as above</td></tr>
 <tr><td class="b">OAR helpers</td><td class="mono">SpinalCanal_PRV05; Stomach_excl_PTV; Lungs-GTV</td><td>SpinalCanal ⊕ 5 mm; Stomach − PTV; Lungs − GTV (AGITG evaluation)</td></tr>
 </tbody>
-</table>
-<p class="src">Name helpers with a "z" prefix so they sort last and are not exported for evaluation <span class="chk">CHECK</span> local naming convention. Plan on the 3D reference or the 4D average/reference phase with all OARs present (SW ODN).</p>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
-</section>
-
-<!-- ============================ S12 REFS ============================ -->
-<section class="page" id="s12">
-<div class="sechead"><span class="eyebrow">Section 12</span><h2><span class="sectnum">12</span>References and further guidelines</h2></div>
-<h3>12.1  Supplied sources</h3>
-<ol class="ref">
+</table></div><p class="src">Name helpers with a "z" prefix so they sort last and are not exported for evaluation <span class="chk">CHECK</span> local naming convention. Plan on the 3D reference or the 4D average/reference phase with all OARs present (SW ODN).</p></article>
+</section><section class="panel" id="p-s12" data-tab="s12" data-label="12 References" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 12</p><h2><span class="sectnum">12</span>References and further guidelines </h2><div class="jump"></div></div>
+  <article class="card" data-title="Supplied sources"><h3>12.1  Supplied sources</h3><ol class="ref">
 <li>South West Radiotherapy Operational Delivery Network. Regional clinical guidelines — oesophagus, version 1 (July 2023), based on the SCOPE2 trial RT protocol.</li>
 <li>Nicholas OJ, Radhakrishna G, Banner R, <i>et al.</i> A new nodal delineation protocol for upper third oesophageal cancers in the SCOPE 2 trial. ESTRO 2020 poster PO-1037.</li>
 <li>Wu AJ, Bosch WR, Chang DT, <i>et al.</i> Expert consensus contouring guidelines for intensity modulated radiation therapy in esophageal and gastroesophageal junction cancer. <i>Int J Radiat Oncol Biol Phys</i> 2015;92(4):911–20. doi:10.1016/j.ijrobp.2015.03.030. <a href="https://pubmed.ncbi.nlm.nih.gov/26104943/">PMID 26104943</a>.</li>
 <li>AGITG/TROG. Oesophageal cancer trial radiotherapy guidelines, version 4 (pre-operative 50.4 Gy/28 after induction DCF ± cetuximab).</li>
 <li>Williams VM, Hallemeier CL, Jethwa KR, <i>et al.</i> Executive summary of the American Radium Society appropriate use criteria for management of squamous cell carcinoma of the cervical esophagus. <i>Am J Clin Oncol</i> 2025;48(4):163–79. doi:10.1097/COC.0000000000001165.</li>
 <li>Wang H, Song C, Zhao X, <i>et al.</i> The role of involved field irradiation versus elective nodal irradiation in definitive radiotherapy or chemoradiotherapy for esophageal cancer: a systematic review and meta-analysis. <i>Front Oncol</i> 2022;12:1034656. doi:10.3389/fonc.2022.1034656.</li>
-</ol>
-<h3>12.2  Additional guidelines and trials worth knowing (not in the folder)</h3>
-<ol class="ref">
+</ol></article><article class="card" data-title="Additional guidelines and trials worth knowing (not in the folder)"><h3>12.2  Additional guidelines and trials worth knowing (not in the folder)</h3><ol class="ref">
 <li>van Hagen P, Hulshof MC, van Lanschot JJ, <i>et al.</i> Preoperative chemoradiotherapy for esophageal or junctional cancer (CROSS). <i>N Engl J Med</i> 2012;366:2074–84. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=van+Hagen+preoperative+chemoradiotherapy+esophageal+junctional+cancer+2012">PubMed search</a>. Volumes quoted in Section 2 need checking against the paper <span class="chk">CHECK</span>.</li>
 <li>Hoeppner J, Brunner T, Schmoor C, <i>et al.</i> Perioperative chemotherapy or preoperative chemoradiotherapy in esophageal cancer (ESOPEC). <i>N Engl J Med</i> 2025;392:323–35. doi:10.1056/NEJMoa2409408. Recurrence patterns: <i>J Clin Oncol</i> 2025;43:3451–6 (locoregional recurrence similar; fewer distant recurrences with FLOT).</li>
 <li>Hulshof MCCM, Geijsen ED, Rozema T, <i>et al.</i> Randomized study on dose escalation in definitive chemoradiation for patients with locally advanced esophageal cancer (ARTDECO). <i>J Clin Oncol</i> 2021;39:2816–24. doi:10.1200/JCO.20.03697.</li>
@@ -703,23 +516,22 @@
 <li>Huang W, <i>et al.</i> Atlas of thoracic lymph-node delineation for oesophageal cancer (IASLC stations). <i>Radiother Oncol</i> 2015. <a href="https://pubmed.ncbi.nlm.nih.gov/26142269/">PMID 26142269</a>.</li>
 <li>Matzinger O, <i>et al.</i> EORTC-ROG guidelines for neoadjuvant RT of GOJ and gastric adenocarcinoma. <i>Radiother Oncol</i> 2009;92:164–75. <a href="https://pubmed.ncbi.nlm.nih.gov/19375186/">PMID 19375186</a> — Siewert III.</li>
 <li>Jabbour SK, <i>et al.</i> Upper abdominal normal organ contouring guidelines and atlas (RTOG). <i>Pract Radiat Oncol</i> 2014;4:82–9. <a href="https://pubmed.ncbi.nlm.nih.gov/24890348/">PMID 24890348</a>.</li>
-</ol>
-<h3>12.3  eviQ protocols (links only)</h3>
-<ul class="ref">
+</ol></article><article class="card" data-title="eviQ protocols (links only)"><h3>12.3  eviQ protocols (links only)</h3><ul class="ref">
 <li><a href="https://www.eviq.org.au/radiation-oncology/upper-gastrointestinal/1861-oesophageal-neoadjuvant-ebrt-chemoradiation">ID 1861 Oesophageal neoadjuvant EBRT chemoradiation</a></li>
 <li><a href="https://www.eviq.org.au/radiation-oncology/upper-gastrointestinal/1865-oesophageal-definitive-ebrt-chemoradiation">ID 1865 Oesophageal definitive EBRT chemoradiation</a></li>
 <li><a href="https://www.eviq.org.au/Radiation-oncology/Upper-gastrointestinal">All eviQ upper GI radiation oncology protocols</a></li>
-</ul>
-<div class="callout" style="margin-top:1em;"><span class="lbl">Items marked CHECK</span>
+</ul><div class="callout" style="margin-top:1em;"><span class="lbl">Items marked CHECK</span>
 <ul class="tight" style="margin-top:4px;">
 <li>Departmental (Liverpool) simulation, 4D policy, PTV margins, IGRT match and constraints — no Liverpool oesophageal protocol supplied.</li>
 <li>CROSS volume definitions (Section 2) — need the CROSS paper or protocol.</li>
 <li>Elective coeliac/gastrohepatic coverage for node-positive GOJ adenocarcinoma; cervical elective neck levels (decide with H&amp;N team).</li>
 <li>Airway edit, adjuvant cranio-caudal extent, conduit dose, splenic vaccination pathway in Australia, adjuvant nivolumab funding, AJCC location definitions.</li>
 </ul>
-</div>
-<p class="small" style="margin-top:1em;">Written from the sources above in our own words; schematics are original. Review by a colleague before clinical use.</p>
-<div class="foot"><span>Oesophagus &amp; GOJ RT Delineation Protocol · v1.0</span><span>Page 11</span></div>
+</div><p class="small" style="margin-top:1em;">Written from the sources above in our own words; schematics are original. Review by a colleague before clinical use.</p></article>
 </section>
+</main>
+</div>
+<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
+<script src="../assets/site.js"></script>
 </body>
 </html>

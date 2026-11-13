@@ -96,8 +96,18 @@
   q.addEventListener('input', run);
   document.getElementById('clear').addEventListener('click', function(){ q.value=''; run(); q.focus(); });
   document.getElementById('searchForm').addEventListener('submit', function(e){ e.preventDefault(); q.blur(); });
-  window.addEventListener('hashchange', function(){ var h=(location.hash||'').slice(1); if(tabs.indexOf(h)>=0){ clearSearch(); show(h,false);} });
+  // A hash naming an element inside a panel (e.g. a figure or sub-section) opens that panel
+  function openId(h){
+    if(!h) return false;
+    var el = document.getElementById(h); if(!el) return false;
+    var p = el.closest('.panel'); if(!p) return false;
+    clearSearch(); show(p.dataset.tab, false);
+    setTimeout(function(){ el.scrollIntoView({block:'start'}); }, 0);
+    return true;
+  }
+  window.addEventListener('hashchange', function(){ var h=(location.hash||'').slice(1); if(tabs.indexOf(h)>=0){ clearSearch(); show(h,false); window.scrollTo({top:0}); } else openId(h); });
 
   var start = (location.hash||'').slice(1);
-  show(tabs.indexOf(start)>=0 ? start : (stored() || tabs[0]), false);
+  if(tabs.indexOf(start)>=0) show(start, false);
+  else if(!openId(start)) show(stored() || tabs[0], false);
 })();

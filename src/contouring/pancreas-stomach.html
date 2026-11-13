@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pancreas and Stomach Target Volume Delineation Protocol</title>
+<style>
+  :root{
+    --navy:#10243f; --navy2:#1d3a5f;
+    --teal:#14756b; --teal-bg:#e7f3f1;
+    --amber:#9a5a00; --amber-bg:#fdf3e3;
+    --rust:#8a2f23; --rust-bg:#fbeae7;
+    --paper:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6b7c;
+    --rule:#d6dde6;
+    --rule-strong:#14756b;
+    --dose-elective:#2f6fb0;
+    --dose-bed:#9a5a00;
+    --dose-sib:#c0721c;
+    --dose-boost:#8a2f23;
+    --dose-prostate:#b03a2e;
+    --flag:#8a2f23; --flag-bg:#fbeae7;
+    --key-bg:#e7f3f1;
+    --petrol:#10243f;
+    --petrol-2:#14756b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;background:#e6ebf0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:10.3px;line-height:1.5;
+  }
+  .page{
+    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
+    padding:16mm 17mm 14mm;position:relative;
+    box-shadow:0 1px 8px rgba(16,36,63,.16);
+    display:flex;flex-direction:column;
+  }
+  @page{size:A4;margin:13mm;}
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .page + .page{page-break-before:always;}
+    h2,h3{page-break-after:avoid;}
+    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
+  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
+  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
+  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
+  p{margin:.35em 0;}
+  a{color:var(--teal);}
+  .lead{font-size:11px;color:var(--muted);}
+  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
+  .sechead{margin:0 0 .5em;}
+  .sechead .eyebrow{display:block;margin-bottom:3px;}
+  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
+  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
+  .masthead h1{color:#fff;}
+  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
+  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
+  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
+  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
+  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
+  tbody tr:nth-child(even){background:#eef2f6;}
+  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
+  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
+  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
+  .p-elect{background:var(--dose-elective);}
+  .p-bed{background:var(--dose-bed);}
+  .p-sib{background:var(--dose-sib);}
+  .p-boost{background:var(--dose-boost);}
+  .p-pros{background:var(--dose-prostate);}
+  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
+  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
+  .flag .lbl:before{content:"\26A0  ";}
+  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
+  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
+  ol.steps li{margin:.28em 0;padding-left:.15em;}
+  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
+  ul.tight{margin:.25em 0;padding-left:1.15em;}
+  ul.tight li{margin:.18em 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid2>div{min-width:0;}
+  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
+  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  svg{display:block;width:100%;height:auto;}
+  .kv{font-size:9.3px;}
+  .kv b{color:var(--navy);}
+  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
+  .ref{font-size:8.6px;line-height:1.4;}
+  .ref li{margin:.2em 0;}
+  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
+  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
+  .named .pos{font-weight:700;color:var(--amber);}
+  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc td{border:none;padding:2px 4px;}
+  .toc .n{color:var(--teal);font-weight:700;width:24px;}
+  .toc .pg{text-align:right;color:var(--muted);width:32px;}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
+  .small{font-size:8.6px;color:var(--muted);}
+</style>
+
+<style id="ugi-extra">
+  .p-gtv{background:#1d4f91;}
+  .p-hi{background:#b03a2e;}
+  .p-lo{background:#2f6fb0;}
+  .p-ctv{background:#14756b;}
+  .p-ptv{background:#a07a00;}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:8.4px;color:var(--muted);}
+</style>
+<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #a14a0b}</style></head>
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gi-pancreas.html" style="color:#9fe0d6;text-decoration:none">Pancreas page</a><a href="../gi-oesophagus-gastric.html" style="color:#9fe0d6;text-decoration:none">Oesophagus &amp; gastric page</a><a href="../ctr-upper-gi.html" style="color:#9fe0d6;text-decoration:none">Upper GI quick protocol</a><a href="liver-sbrt.html" style="color:#9fe0d6;text-decoration:none">Abdominal OARs</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<section class="page">
+<div class="masthead">
+<span class="eyebrow">Departmental Contouring Protocol · Upper GI Radiation Oncology</span>
+<h1>Pancreas and Stomach — Target Volume Delineation Protocol</h1>
+<p class="sub">Target volumes for <b>pancreatic cancer</b> — neoadjuvant and definitive chemoRT, dose-escalated RT and SBRT, and adjuvant RT after resection — and for <b>gastric cancer</b> (nodal anatomy, post-op and definitive volumes). Oesophagus and GOJ are in a separate protocol. Abdominal OAR definitions and SABR constraints are in the <a href="liver-sbrt.html" style="color:#9fe0d6">Liver SBRT OAR protocol</a>.</p>
+<div class="pillrow">
+<span class="pill p-gtv">GTV</span>
+<span class="pill p-hi">High-dose CTV</span>
+<span class="pill p-lo">Low-dose / elective CTV</span>
+<span class="pill p-ctv">Post-op CTV</span>
+<span class="pill p-ptv">ITV / PTV</span>
+</div>
+<div class="meta">ESTRO-ACROP pancreas (Brunner 2021) · NRG international consensus (Sanford 2025) · RTOG post-op (Goodman 2012) · ASTRO 2019 · NRG template 2021 · gastric atlas (Wo 2013) · TROG 03.02 · TOPGEAR — Version 1.0 · Nov 2026</div>
+</div>
+<div class="callout">
+<span class="lbl">Governing principles of this protocol</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>Locally advanced pancreas: treat the gross tumour, not elective nodes</b> (ESTRO-ACROP). The newer dose-escalated approach (NRG 2025) adds a low-dose CTV built around the arteries and nerve plexuses (the "triangle"), not around nodal stations.</li>
+<li><b>Motion is the biggest margin.</b> Assess it for every patient (4D-CT or cine-MRI) and manage it when tumour motion exceeds 5 mm (NRG 2025). Without 4D information the PTV has to be large (1.5 cm axially, 2 cm cranio-caudally; ESTRO-ACROP).</li>
+<li><b>After resection the CTV is built from vessels and anastomoses</b> that can be seen on CT (RTOG; Goodman 2012), with an asymmetric para-aortic volume.</li>
+<li><b>Duodenum, stomach and small bowel set the dose.</b> Fast, use the same oral-contrast routine every day, and contour luminal OARs fully around the PTV.</li>
+<li>No departmental (Liverpool) upper GI protocol was in the folder; departmental items are marked <span class="chk">CHECK</span>.</li>
+</ul>
+</div>
+<h3 style="margin-top:1.1em;">Contents</h3>
+<table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, simulation and imaging</a></td><td class="pg">2</td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Scenario A — Pancreas: neoadjuvant and definitive conventional chemoRT</a></td><td class="pg">3</td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario B — Pancreas: dose-escalated RT and SBRT</a></td><td class="pg">4</td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario C — Pancreas: adjuvant RT after resection</a></td><td class="pg">5</td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Peripancreatic nodal regions</a></td><td class="pg">5</td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Scenario D — Stomach</a></td><td class="pg">6</td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Pearls and common errors</a></td><td class="pg">7</td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Dose, fractionation, margins and IGRT</a></td><td class="pg">7</td></tr>
+<tr><td class="n">9</td><td><a href="#s9">Organs at risk and constraints</a></td><td class="pg">8</td></tr>
+<tr><td class="n">10</td><td><a href="#s10">RayStation implementation and names</a></td><td class="pg">8</td></tr>
+<tr><td class="n">11</td><td><a href="#s11">References and further guidelines</a></td><td class="pg">9</td></tr>
+</table>
+<h3>Sources used</h3>
+<table>
+<thead><tr><th style="width:36%">Source</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td class="b">Brunner 2021 ESTRO-ACROP pancreas (+ supplements)</td><td>Simulation, GTV, ITV, CTV by size, ENI policy, nodal lists by tumour site, PTV table, long-course constraints, JPS station definitions.</td></tr>
+<tr><td class="b">Sanford 2025 NRG international consensus</td><td>High- and low-dose CTV step by step; 5/15/25 fraction doses; luminal OAR limits; PRV, hot spot and reporting.</td></tr>
+<tr><td class="b">Goodman 2012 RTOG post-op guideline</td><td>Post-op vessel ROIs, expansions and aortic volume.</td></tr>
+<tr><td class="b">ASTRO 2019 pancreas guideline (slides); NRG RT template 2021</td><td>Indications and dose ranges; GTV → CTV 0.5–1.5 cm for conventional chemoRT.</td></tr>
+<tr><td class="b">Wo 2013 gastric nodal atlas; TROG 03.02 protocol; TOPGEAR talk; WM upper GI protocol</td><td>Gastric nodal anatomy, post-op technique and dose, trial context, regional constraints.</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
+</section>
+<!-- ============================ S1 ============================ -->
+<section class="page" id="s1">
+<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, simulation and imaging</h2></div>
+<h3>1.1  Simulation for pancreas</h3>
+<table>
+<thead><tr><th style="width:20%">Item</th><th>ESTRO-ACROP (Brunner 2021)</th><th>NRG consensus (Sanford 2025)</th></tr></thead>
+<tbody>
+<tr><td class="b">Position</td><td>Supine, arms up on a support, knee/foot support; dedicated immobilisation (± abdominal compression) for SBRT</td><td>—</td></tr>
+<tr><td class="b">Preparation</td><td>Fast &gt;2 hours; oral water ± a little oral contrast, especially for SBRT, to separate pancreas from stomach and duodenum</td><td>Small oral load (about 100 cc contrast or water on the table, wait ≥15 min for duodenal transit); avoid overfilling</td></tr>
+<tr><td class="b">IV contrast</td><td>Triple phase (arterial, pancreatic, portal venous ≈25, 40, 70 s; ≥3 mL/s; bolus-tracking ROI in descending aorta); GTV on pancreatic phase, vessels on portal phase</td><td>IV contrast for all CT-based plans; triple phase where possible, otherwise a single scan at 40–50 s</td></tr>
+<tr><td class="b">Breathing</td><td>Planning CT in exhale breath-hold; 4D-CT (or cine-MRI) mandatory to individualise motion</td><td>Motion assessed in all; manage it (breath-hold, compression) if &gt;5 mm</td></tr>
+<tr><td class="b">Slices</td><td>≤3 mm</td><td>≤2 mm in the target region</td></tr>
+<tr><td class="b">Markers</td><td>Fiducials if no reliable IGRT surrogate (clips)</td><td>Fiducials highly recommended; metal stents usable as a surrogate but move more day to day, so consider larger margins</td></tr>
+<tr><td class="b">MRI</td><td>Same day as CT, matched filling and breathing phase; GTV on T1 with and without contrast</td><td>Fuse diagnostic MRI (or PET) for CT-based plans</td></tr>
+</tbody>
+</table>
+<p class="src">Do not directly fuse diagnostic scans not taken in treatment position (ESTRO-ACROP). The West Midlands upper GI protocol uses 2 h fasting then 200 mL 30 min before CT and every treatment for oesophagogastric cases.</p>
+<h3>1.2  Simulation for stomach</h3>
+<ul class="tight">
+<li>Supine, arms up, body cradle; scan from above the sternal notch (if lung DVH needed) to about L3 (TROG 03.02).</li>
+<li>TROG 03.02 avoided oral contrast in the planning scan because dense contrast distorts the dose calculation; if needed, scan twice and fuse. Modern practice: fast and use a fixed small drink to reproduce gastric filling <span class="chk">CHECK</span> local.</li>
+</ul>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
+</section>
+<!-- ============================ S2 ============================ -->
+<section class="page" id="s2">
+<div class="sechead"><span class="eyebrow">Section 2 · Scenario A</span><h2><span class="sectnum">2</span>Pancreas: neoadjuvant and definitive conventional chemoRT</h2></div>
+<h3>2.1  Indications (ASTRO 2019, conditional unless stated)</h3>
+<ul class="tight">
+<li><b>Resectable:</b> neoadjuvant therapy conditionally recommended.</li>
+<li><b>Borderline resectable or selected LAPC for downstaging:</b> chemotherapy then conventional chemoRT, or chemotherapy then multifraction SBRT.</li>
+<li><b>LAPC not for surgery:</b> chemotherapy then conventional chemoRT, dose-escalated chemoRT, or multifraction SBRT without chemotherapy.</li>
+<li><b>After resection:</b> adjuvant conventional chemoRT for selected high-risk patients (node-positive, margin-positive); adjuvant SBRT only on a trial or registry.</li>
+</ul>
+<h3>2.2  Volumes <span class="pill p-gtv">GTV</span> <span class="pill p-ptv">ITV/PTV</span></h3>
+<table>
+<thead><tr><th style="width:15%">Volume</th><th>Neoadjuvant chemoRT</th><th>Definitive chemoRT (LAPC / recurrence)</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV</td><td colspan="2">Primary on the pancreatic phase plus nodes ≥1 cm short axis or PET-avid, using all diagnostic imaging. After induction chemo, review baseline imaging but draw the GTV on current imaging (ESTRO-ACROP).</td></tr>
+<tr><td class="b">Primary CTV</td><td colspan="2">Tumours ≥3 cm: no extra CTV needed. Tumours &lt;3 cm (especially head): consider a CTV margin, because CT under-calls small tumours (median about 2–6.5 mm) (ESTRO-ACROP). NRG trial template: GTV (or IGTV) + 0.5–1.5 cm.</td></tr>
+<tr><td class="b">ex-GTV</td><td>Optional CTV = pre-induction GTV (as in CONKO-007); evidence supports either approach</td><td>—</td></tr>
+<tr><td class="b">Elective nodes</td><td>Optional: weak recommendation for BRPC, moderate for resectable; if used, as for post-op (Section 4)</td><td><b>Not recommended</b></td></tr>
+<tr><td class="b">ITV</td><td colspan="2">Tumour (or CTV) on all 4D phases — commonly the 3D scan plus maximum inhale and exhale, checked in cine</td></tr>
+<tr><td class="b">PTV</td><td colspan="2">With 4D: ITV + 0.5–1 cm (department set-up data). Without 4D or gating: GTV/CTV + 1.5 cm axially and 2 cm cranio-caudally (ESTRO-ACROP Table 3).</td></tr>
+</tbody>
+</table>
+<h3>2.3  Step by step</h3>
+<div class="stepbox"><ol class="steps">
+<li>Open the pancreatic-phase planning CT with MRI and the portal-venous phase alongside. Identify celiac axis, CHA, SMA, SMV, portal vein and splenic vessels first.</li>
+<li>From the top of the tumour downward, draw the hypodense mass and any soft-tissue cuff around vessels; include involved nodes.</li>
+<li>Decide the primary CTV by size and site (above), crop off duodenum, stomach and bowel unless invaded.</li>
+<li>Contour the GTV on inhale and exhale (or all phases), union to ITV, play cine.</li>
+<li>Add the PTV from department data; contour duodenum and stomach completely and other bowel at least at PTV level.</li>
+</ol></div>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
+</section>
+<!-- ============================ S3 ============================ -->
+<section class="page" id="s3">
+<div class="sechead"><span class="eyebrow">Section 3 · Scenario B</span><h2><span class="sectnum">3</span>Pancreas: dose-escalated RT and SBRT</h2></div>
+<h3>3.1  Two schools</h3>
+<table>
+<thead><tr><th style="width:18%">Item</th><th>ESTRO-ACROP SBRT (Brunner 2021)</th><th>NRG consensus dose-escalated RT (Sanford 2025)</th></tr></thead>
+<tbody>
+<tr><td class="b">Target</td><td>Tumour volume only; ITV usually taken as CTV; no elective nodes; often no CTV around nodes</td><td><span class="pill p-hi">high-dose</span> GTV/CTV plus <span class="pill p-lo">low-dose</span> elective CTV ("triangle") wherever dosimetrically feasible</td></tr>
+<tr><td class="b">PTV</td><td>ITV + 0–5 mm (institutional)</td><td>5 mm non-adaptive; 3 mm adaptive</td></tr>
+<tr><td class="b">Fractionation</td><td>Mostly 5 # (North America); up to 12 # in Europe, risk-adapted (more fractions the closer the PTV to stomach/duodenum)</td><td>5 #: 50 Gy / 33 Gy; 15 #: 67.5 Gy / 37.5 Gy; 25 #: 75 Gy / 45 Gy (high / low, BED<sub>10</sub> ≈100 / 47–55)</td></tr>
+</tbody>
+</table>
+<div class="callout"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">NRG 2025 for dose-escalated or MR-guided adaptive SBRT (it matches the MR-linac workflow), and ESTRO-ACROP GTV-only SBRT when the low-dose volume cannot be fitted around bowel. ASTRO 2019 doses (Section 8) for standard SBRT.</p></div>
+<h3>3.2  High-dose GTV/CTV — all tumours (NRG 2025)</h3>
+<ol class="steps">
+<li>All gross disease (primary and nodes &gt;1 cm or with malignant enhancement) from MRI, CT and PET.</li>
+<li>Any of celiac artery, SMA, SMV or portal vein within 5 mm of gross disease: include the whole vessel diameter on that slice and extend 5 mm along it, full circumference (tail tumours: also the splenic artery).</li>
+<li>Include the hazy soft tissue opacifying fat around the tumour.</li>
+</ol>
+<div class="grid2">
+<div>
+<h3>3.3  Low-dose CTV — head, neck and proximal body</h3>
+<ol class="steps">
+<li><b>Part A:</b> GTV (primary + nodes) + 10 mm isotropic, consider pre-chemo extent; crop off stomach and bowel unless invaded or at risk. Add the whole pancreatic head.</li>
+<li><b>Part B</b> starts 10 mm above the celiac take-off: cover the celiac artery from aorta to its bifurcation + 5–10 mm.</li>
+<li>Cover the CHA to at least the gastroduodenal artery + 5–10 mm; consider the portal vein at that level. Extend back to the anterior aorta and IVC (fat with the nerve plexuses), about 5–10 mm lateral to the aorta.</li>
+<li>Laterally include the portal vein through the portosplenic confluence; keep the left border 5–10 mm from celiac and SMA; exclude stomach and bowel.</li>
+<li>Anteriorly the SMA + 5–10 mm (SMV optional at that level); the posterior border can move forward off the aorta here.</li>
+<li>Stop at the first jejunal branch of the SMA. Union A + B.</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 250" role="img" aria-label="Axial schematic of the NRG low-dose triangle volume for pancreatic head tumours">
+<rect width="300" height="250" fill="#fff"/>
+<rect x="128" y="196" width="60" height="44" rx="10" fill="#eef0f2" stroke="#b8c2cc"/>
+<text x="140" y="222" font-size="8" fill="#5b6b7c">vertebra</text>
+<circle cx="168" cy="176" r="13" fill="#f0c9c4" stroke="#b03a2e"/><text x="162" y="179" font-size="7.5" fill="#8a2f23">Ao</text>
+<ellipse cx="124" cy="176" rx="15" ry="11" fill="#d3e2f2" stroke="#5a7fa8"/><text x="116" y="179" font-size="7.5" fill="#1d4f91">IVC</text>
+<circle cx="166" cy="140" r="6" fill="#f0c9c4" stroke="#b03a2e"/><text x="174" y="137" font-size="7.5" fill="#8a2f23">SMA</text>
+<ellipse cx="140" cy="132" rx="8" ry="7" fill="#d3e2f2" stroke="#5a7fa8"/><text x="118" y="122" font-size="7.5" fill="#1d4f91">SMV</text>
+<path d="M60 120 Q90 100 132 116 Q150 150 120 160 Q80 162 60 140 Z" fill="#f6e7c9" stroke="#c6a25f"/>
+<text x="66" y="134" font-size="8" fill="#8a6a3a">pancreatic head</text>
+<path d="M78 128 Q96 118 112 130 Q104 146 86 144 Z" fill="rgba(29,79,145,.35)" stroke="#1d4f91"/>
+<text x="86" y="140" font-size="7.5" fill="#fff" font-weight="700">GTV</text>
+<path d="M54 112 Q96 88 150 112 L180 128 L184 160 L150 170 L112 168 Q64 166 50 140 Z" fill="rgba(47,111,176,.10)" stroke="#2f6fb0" stroke-width="1.8" stroke-dasharray="6 3"/>
+<path d="M140 132 L166 140 L168 163 L124 165 Z" fill="rgba(47,111,176,.18)" stroke="none"/>
+<text x="186" y="112" font-size="8" fill="#2f6fb0">low-dose CTV:</text>
+<text x="186" y="122" font-size="7.5" fill="#2f6fb0">head + GTV+10 mm +</text>
+<text x="186" y="132" font-size="7.5" fill="#2f6fb0">SMA/celiac/CHA +5–10 mm</text>
+<text x="186" y="142" font-size="7.5" fill="#2f6fb0">back to aorta and IVC</text>
+<text x="128" y="156" font-size="7" fill="#1d4f91">"triangle"</text>
+</svg>
+<figcaption>Original schematic at SMA level. The darker wedge between SMV, SMA, aorta and IVC is the nerve-plexus "triangle" the NRG low-dose CTV is built to cover.</figcaption>
+</figure>
+</div>
+</div>
+<h3>3.4  Low-dose CTV — distal body and tail (NRG 2025)</h3>
+<ul class="tight">
+<li>Part A: GTV + 10 mm (crop off kidney and spleen unless invaded) plus the whole body (body tumours) or whole tail (tail tumours).</li>
+<li>Part B from the celiac take-off: splenic artery + 15–20 mm circumferentially; celiac axis + 5–10 mm optional (half the panel included it); join celiac and splenic volumes through intervening pancreas if appropriate; stop at the first jejunal branch of the SMA.</li>
+</ul>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
+</section>
+
+<!-- ============================ S4 POST-OP ============================ -->
+<section class="page" id="s4">
+<div class="sechead"><span class="eyebrow">Section 4 · Scenario C</span><h2><span class="sectnum">4</span>Pancreas: adjuvant RT after resection <span class="pill p-ctv">post-op</span></h2></div>
+<p class="small" style="margin-top:-2px;">Primary source: Goodman 2012 RTOG consensus (built for RTOG 0848); endorsed for resected pancreatic head cancer by ASTRO 2019 and summarised in ESTRO-ACROP Table 2a.</p>
+<h3>4.1  Regions of interest (draw these first)</h3>
+<table>
+<thead><tr><th style="width:24%">ROI</th><th>Definition</th><th style="width:20%">Expansion to CTV</th></tr></thead>
+<tbody>
+<tr><td class="b">Celiac artery (CA)</td><td>Proximal 1.0–1.5 cm from the aortic take-off, up to the first branching</td><td>1.0–1.5 cm (usually 1.0 cm)</td></tr>
+<tr><td class="b">SMA</td><td>Proximal 2.5–3.0 cm from the take-off</td><td>1.0–1.5 cm</td></tr>
+<tr><td class="b">Portal vein (PV)</td><td>From just above the SMV (or splenic) junction, crossing in front of the IVC, up to (not including) the bifurcation; covers the hepatico-/choledochojejunostomy and porta hepatis nodes</td><td>1.0–1.5 cm</td></tr>
+<tr><td class="b">Pancreaticojejunostomy (PJ)</td><td>Follow the remnant medially and anteriorly to the jejunal loop. A pancreaticogastrostomy is <i>not</i> included</td><td>0.5–1.0 cm</td></tr>
+<tr><td class="b">Pre-operative tumour volume</td><td>Pre-op tumour transferred from fused diagnostic CT; surgical clips marking close margins (if the operation note says so)</td><td>0–1.0 cm</td></tr>
+<tr><td class="b">Aorta</td><td>From the highest of CA, PV or PJ (or their expansions) to the bottom of L2; to L3 if the pre-op tumour reached L2</td><td>Right 2.5–3.0 cm, left 1.0 cm, anterior 2.0–2.5 cm, posterior 0.2 cm; exclude kidneys</td></tr>
+</tbody>
+</table>
+<h3>4.2  Building the CTV</h3>
+<ul class="tight">
+<li>Union of all expansions; posterior edge follows the front of the vertebral body, at most 0.5 cm into it.</li>
+<li>If the PJ cannot be found, build the CTV without it. Edit the CTV off liver or stomach where it protrudes.</li>
+<li>ESTRO-ACROP adds, from post-resection relapse mapping (Dholakia), a volume around CA and SMA of 2–3 cm to the right and 1–2 cm in other directions, with particular care for the space bounded by CA/SMA (medial), portal vein (anterior) and IVC (lateral).</li>
+<li>PTV: department set-up data (NRG template example: CTV expanded with an institution-specific margin) <span class="chk">CHECK</span>.</li>
+</ul>
+<h3>4.3  Which nodal regions if elective nodes are treated (ESTRO-ACROP)</h3>
+<table>
+<thead><tr><th style="width:22%">Tumour site</th><th>Regions (modified JPS numbers, Section 5)</th></tr></thead>
+<tbody>
+<tr><td class="b">Head</td><td>Common hepatic (8), celiac (9), hepatoduodenal (12), anterior and posterior pancreaticoduodenal (17, 13), superior mesenteric (14), para-aortic from the celiac trunk to the lower border of the left renal vein (16a2), superior and inferior head nodes</td></tr>
+<tr><td class="b">Body and tail</td><td>Common hepatic (8), celiac (9), hepatoduodenal (12), superior mesenteric (14), para-aortic (16a2), subpancreatic (18), splenic artery (11)</td></tr>
+</tbody>
+</table>
+<!-- ============================ S5 NODES ============================ -->
+<div class="sechead" id="s5" style="margin-top:1.1em"><span class="eyebrow">Section 5 · Shared</span><h2><span class="sectnum">5</span>Peripancreatic nodal regions</h2></div>
+<div class="grid2">
+<div>
+<table>
+<caption>Modified Japanese classification used by ESTRO-ACROP (supplement table 2).</caption>
+<thead><tr><th style="width:24%">Region</th><th>Where</th></tr></thead>
+<tbody>
+<tr><td class="b">sh / ih</td><td>Superior pancreatic head (incl. infrapyloric) / inferior pancreatic head</td></tr>
+<tr><td class="b">8 common hepatic</td><td>Around the CHA</td></tr>
+<tr><td class="b">9 celiac</td><td>Around the celiac axis</td></tr>
+<tr><td class="b">10 splenic hilar</td><td>Splenic hilum</td></tr>
+<tr><td class="b">11 splenic artery</td><td>Around the splenic artery, above body/tail</td></tr>
+<tr><td class="b">12 hepatoduodenal</td><td>Around CBD, portal vein and proper hepatic artery in the ligament (upper border: cystic duct branch)</td></tr>
+<tr><td class="b">13 / 17</td><td>Posterior / anterior to the pancreatic head</td></tr>
+<tr><td class="b">14 SMA</td><td>Around the SMA</td></tr>
+<tr><td class="b">16 para-aortic</td><td>Around the aorta from the celiac axis to the IMA, including between aorta and IVC</td></tr>
+<tr><td class="b">18 subpancreatic</td><td>Below body/tail</td></tr>
+<tr><td class="b">pc paracaval</td><td>In front of the IVC, same cranio-caudal extent as para-aortic</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 220" role="img" aria-label="Axial schematic of the asymmetric aortic expansion for post-operative pancreas CTV">
+<rect width="300" height="220" fill="#fff"/>
+<rect x="124" y="150" width="60" height="50" rx="10" fill="#eef0f2" stroke="#b8c2cc"/>
+<text x="138" y="180" font-size="8" fill="#5b6b7c">vertebra</text>
+<ellipse cx="98" cy="130" rx="15" ry="11" fill="#d3e2f2" stroke="#5a7fa8"/><text x="90" y="133" font-size="7.5" fill="#1d4f91">IVC</text>
+<circle cx="164" cy="130" r="13" fill="#f0c9c4" stroke="#b03a2e"/><text x="158" y="133" font-size="7.5" fill="#8a2f23">Ao</text>
+<ellipse cx="190" cy="152" rx="20" ry="13" fill="#efe3d7" stroke="#c6a25f"/><text x="182" y="155" font-size="7" fill="#8a6a3a">L kid</text>
+<path d="M70 86 L190 86 L190 118 Q190 150 178 150 L151 150 L70 150 Z" fill="rgba(20,117,107,.08)" stroke="#14756b" stroke-width="1.8" stroke-dasharray="6 3"/>
+<line x1="151" y1="130" x2="72" y2="130" stroke="#14756b" marker-end="url(#a3)"/>
+<text x="74" y="78" font-size="8" fill="#14756b">R 2.5–3 cm</text>
+<line x1="177" y1="130" x2="189" y2="130" stroke="#14756b"/>
+<text x="196" y="112" font-size="8" fill="#14756b">L 1 cm</text>
+<line x1="164" y1="117" x2="164" y2="88" stroke="#14756b" marker-end="url(#a3)"/>
+<text x="168" y="100" font-size="8" fill="#14756b">A 2–2.5 cm</text>
+<text x="196" y="136" font-size="8" fill="#14756b">P 0.2 cm</text>
+<defs><marker id="a3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#14756b"/></marker></defs>
+<text x="14" y="212" font-size="8" fill="#5b6b7c">Aorta from top of CA/PV/PJ to bottom of L2 (Goodman 2012)</text>
+</svg>
+<figcaption>Original schematic: the RTOG post-op para-aortic volume is weighted to the right to cover aortocaval and paracaval nodes while sparing the left kidney.</figcaption>
+</figure>
+</div>
+</div>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
+</section>
+<!-- ============================ S6 GASTRIC ============================ -->
+<section class="page" id="s6">
+<div class="sechead"><span class="eyebrow">Section 6 · Scenario D</span><h2><span class="sectnum">6</span>Stomach</h2></div>
+<h3>6.1  Where gastric RT stands</h3>
+<ul class="tight">
+<li><b>Pre-operative chemoRT is not standard.</b> In TOPGEAR (AGITG/TROG/EORTC/CCTG, 574 patients), adding pre-op chemoRT to perioperative chemotherapy raised pCR (17% vs 8%) but not survival (median OS 46 vs 49 months, HR 1.05; 5-year survival about 45% in both arms) (Leong 2024).</li>
+<li><b>Post-operative chemoRT</b> (INT-0116 era) remains an option after inadequate (e.g. D0/D1) surgery or R1 resection without peri-operative chemotherapy; 45 Gy/25 # to the tumour bed, anastomoses and stumps, and regional nodes, individualised to primary site, nodes and operation (Leong 2003, following INT-0116).</li>
+<li><b>Palliation</b> (bleeding, obstruction) and definitive chemoRT for unresectable disease use the same nodal anatomy without anastomoses (Leong 2003).</li>
+</ul>
+<h3>6.2  Gastric nodal regions on CT (Wo 2013), cranial → caudal</h3>
+<table>
+<thead><tr><th style="width:20%">Region</th><th>Boundaries</th></tr></thead>
+<tbody>
+<tr><td class="b">Left paracardial</td><td>Medial: gastric fundus; anterolateral: visceral peritoneum; posterior: spleen; superior: hemidiaphragm; inferior: greater-curvature nodes</td></tr>
+<tr><td class="b">Right paracardial</td><td>Narrow space between cardia and liver, back to the aorta, down to the lesser-curvature nodes at gastric body level</td></tr>
+<tr><td class="b">Greater curvature</td><td>Along short gastric and gastroepiploic vessels; medial: gastric body; anterolateral: ribs; posterior: spleen and splenic hilar nodes</td></tr>
+<tr><td class="b">Splenic hilum</td><td>Between spleen and gastric body; posterolateral: spleen; medial: kidney; down to cover all hilar vessels</td></tr>
+<tr><td class="b">Lesser curvature</td><td>Superior: right paracardial; anteromedial: liver; inferomedial: suprapyloric; lateral: gastric body; posterior: kidney</td></tr>
+<tr><td class="b">Splenic artery</td><td>Around the splenic artery; anterior: back of gastric body; posterior: left kidney; lateral: splenic hilar; medial: celiac</td></tr>
+<tr><td class="b">Left gastric</td><td>Around the left gastric artery from the celiac origin up along the upper lesser curvature; medial: liver; superolateral: splenic artery basin; inferolateral: celiac</td></tr>
+<tr><td class="b">Hepatoduodenal</td><td>Along proper hepatic artery, CBD and portal vein, from the liver undersurface to the upper duodenum</td></tr>
+<tr><td class="b">Para-aortic</td><td>Between and next to aorta and IVC; superior: 5 mm below the celiac origin; inferior: duodenal sweep; medial: vertebral body; lateral: 2 mm left of the aorta</td></tr>
+<tr><td class="b">Common hepatic</td><td>Around the CHA; posterior: para-aortic; posteromedial: celiac; anterior: liver; anteroinferior: suprapyloric; lateral: hepatoduodenal</td></tr>
+<tr><td class="b">Celiac</td><td>Celiac artery from the aorta to its trifurcation (CHA, left gastric, splenic)</td></tr>
+<tr><td class="b">Suprapyloric</td><td>Directly above the pylorus; anterior: left lobe of liver; posterior: pancreatic body; left: lower lesser-curvature nodes</td></tr>
+<tr><td class="b">Infrapyloric / posterior pancreatic / superior mesenteric</td><td>Below the pylorus in front of the pancreatic head and SM vessels / behind the pancreatic head in front of the para-aortic nodes / along the front of the pancreatic head and neck, SMA–SMV junction to the duodenal sweep</td></tr>
+</tbody>
+</table>
+<h3>6.3  After surgery: what is left to target (Wo 2013)</h3>
+<table>
+<thead><tr><th style="width:24%">Operation</th><th>Usually dissected</th><th>Still identifiable</th></tr></thead>
+<tbody>
+<tr><td class="b">Total gastrectomy (Roux-en-Y)</td><td>Paracardial, lesser and greater curvature</td><td>Supra- and infrapyloric and left gastric (variable); splenic, splenic hilar, celiac, hepatoduodenal, common hepatic, pancreatic, SM, para-aortic as for intact anatomy</td></tr>
+<tr><td class="b">Subtotal gastrectomy</td><td>Supra- and infrapyloric; left gastric divided at its base (clips mark it)</td><td>Paracardial and parts of lesser/greater curvature (proximal stomach left); other basins as intact</td></tr>
+<tr><td class="b">Ivor Lewis</td><td>Paracardial (may be transposed into the chest)</td><td>A Kocher manoeuvre shifts supra-/infrapyloric nodes medially and upwards; clips mark the left gastric artery</td></tr>
+</tbody>
+</table>
+<p class="src">Site-specific nodal selection for pre-op gastric and GOJ volumes is set out in the EORTC-ROG expert opinion (Matzinger 2009), which uses the Japanese gastric classification and tumour sub-sites; it is not in the folder <span class="chk">CHECK</span> before using station lists by tumour location.</p>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
+</section>
+<!-- ============================ S7 PEARLS ============================ -->
+<section class="page" id="s7">
+<div class="sechead"><span class="eyebrow">Section 7</span><h2><span class="sectnum">7</span>Pearls and common errors</h2></div>
+<table>
+<thead><tr><th style="width:28%">Common error</th><th>What to do instead</th><th style="width:16%">Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Drawing the GTV on the portal-venous phase</td><td>Tumour conspicuity is best on the pancreatic (late arterial) phase; use portal phase for vessels.</td><td>ESTRO-ACROP</td></tr>
+<tr><td class="b">Trusting the CT size of a small head tumour</td><td>CT under-calls tumours &lt;3 cm and often misses duodenal infiltration; consider a CTV margin.</td><td>ESTRO-ACROP</td></tr>
+<tr><td class="b">Missing tumour around vessels</td><td>Hazy soft tissue in fat near the celiac bifurcation or SMA is disease: include it in the high-dose volume.</td><td>NRG 2025</td></tr>
+<tr><td class="b">Adding elective nodes in LAPC</td><td>Not recommended: larger volumes cost toxicity and chemo dose, and nodal failure is rare.</td><td>ESTRO-ACROP</td></tr>
+<tr><td class="b">One 4D-CT for the whole course</td><td>Baseline 4D-CT may not predict later pancreatic motion; image daily and adapt.</td><td>ESTRO-ACROP</td></tr>
+<tr><td class="b">Stent as the only surrogate</td><td>Stents shift more day to day than fiducials: larger margins.</td><td>NRG 2025</td></tr>
+<tr><td class="b">Under-covering the para-aortic area after Whipple</td><td>Use the asymmetric aortic volume; aorto-caval and paracaval nodes are right of the aorta.</td><td>Goodman 2012</td></tr>
+<tr><td class="b">Including a pancreaticogastrostomy</td><td>Leave it out (toxicity); include a pancreaticojejunostomy.</td><td>Goodman 2012</td></tr>
+<tr><td class="b">Trimming the PTV off bowel on an adaptive MR-linac plan</td><td>Do not trim; contour OARs as seen and let optimisation push dose away (use a PTV-optimise structure).</td><td>NRG 2025</td></tr>
+<tr><td class="b">5-fraction SBRT for tumours ulcerating into duodenum or stomach</td><td>Not recommended; long-segment abutment (&gt;3–5 cm, &gt;180°) is a relative contraindication; consider 15–25 #.</td><td>NRG 2025</td></tr>
+<tr><td class="b">Contrast-dense stomach in the dose calculation</td><td>Avoid dense oral contrast in the planning scan, or override density.</td><td>TROG 03.02</td></tr>
+</tbody>
+</table>
+<!-- ============================ S8 DOSE ============================ -->
+<div class="sechead" id="s8" style="margin-top:1.1em"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>Dose, fractionation, margins and IGRT</h2></div>
+<table>
+<thead><tr><th style="width:30%">Scenario</th><th>Dose</th><th style="width:22%">Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Pancreas adjuvant chemoRT</td><td>45–54 Gy in 1.8–2.0 Gy with 5-FU-based chemo (recommended)</td><td>ASTRO 2019</td></tr>
+<tr><td class="b">BRPC neoadjuvant chemoRT</td><td>45–50.4 Gy in 1.8–2.0 Gy</td><td>ASTRO 2019</td></tr>
+<tr><td class="b">LAPC definitive / dose-escalated chemoRT</td><td>50.4–56 Gy in 1.75–2.2 Gy with chemo; long-course range 30–55 Gy in 1.8–3.0 Gy (e.g. 25–30 × 1.8 Gy or 10–12 × 3 Gy), capecitabine preferred</td><td>ASTRO 2019; ESTRO-ACROP</td></tr>
+<tr><td class="b">BRPC SBRT</td><td>30–33 Gy/5 # (6–6.6 Gy), SIB up to 40 Gy to the tumour–vessel interface</td><td>ASTRO 2019</td></tr>
+<tr><td class="b">LAPC SBRT</td><td>33–40 Gy/5 # (6.6–8 Gy) (recommended)</td><td>ASTRO 2019</td></tr>
+<tr><td class="b">Dose-escalated (high / low)</td><td>50/33 Gy in 5 #; 67.5/37.5 Gy in 15 #; 75/45 Gy in 25 #; hot spot 120–140% inside GTV minus 5 mm luminal PRV; aim ≥70% PTV coverage (adaptive: PTV-optimise ≥90–95%)</td><td>NRG 2025</td></tr>
+<tr><td class="b">Gastric post-op / definitive</td><td>45 Gy/25 # with fluoropyrimidine</td><td>TROG 03.02; Leong 2003</td></tr>
+</tbody>
+</table>
+<ul class="tight">
+<li><b>Margins:</b> Section 2–4. GI OAR PRV 1–5 mm outside trials depending on technology (NRG 2025).</li>
+<li><b>IGRT:</b> daily volumetric imaging is mandatory; markers help; reproduce fasting and the oral routine every day; image again during SBRT if delivery exceeds 15 minutes or uses non-coplanar beams (ESTRO-ACROP). Consider adaptive replanning from daily CBCT for hypofractionated courses (NRG 2025).</li>
+<li><b>PPI:</b> ESTRO-ACROP recommends PPI during and for at least 3 months after treatment.</li>
+</ul>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
+</section>
+<!-- ============================ S9 OAR ============================ -->
+<section class="page" id="s9">
+<div class="sechead"><span class="eyebrow">Section 9</span><h2><span class="sectnum">9</span>Organs at risk and constraints</h2></div>
+<p>Contour stomach and duodenum completely, other bowel at least at PTV level, both kidneys separately, liver and spinal canal; follow the RTOG upper-abdominal atlas (Jabbour 2014) as in the <a href="liver-sbrt.html">Liver SBRT OAR protocol</a>, which also holds the UK 2022 3- and 5-fraction SABR limits. Stomach/duodenum internal risk volumes from 4D-CT are optional (ESTRO-ACROP).</p>
+<div class="grid2">
+<div>
+<table>
+<caption>Long-course chemoRT, 1.8–2 Gy/# (ESTRO-ACROP Table 4a, from NCCN, RTOG 0848/0936/1102, SCALOP-2). Optimal values in italics.</caption>
+<tbody>
+<tr><td class="b">Duodenum</td><td>Dmax ≤55 Gy; circumferential ≤50 Gy; V50 ≤10%, V45 ≤15%; <i>V50 ≤10 cc</i></td></tr>
+<tr><td class="b">Stomach</td><td>Dmax ≤55 Gy; V50 ≤10%, V45 ≤15%; <i>V45 ≤75 cc</i></td></tr>
+<tr><td class="b">Small bowel</td><td>Dmax ≤55 Gy; V50 ≤10%, V45 ≤15%; <i>V50 ≤10 cc, V15 ≤120 cc</i></td></tr>
+<tr><td class="b">Liver</td><td>Mean ≤25 Gy</td></tr>
+<tr><td class="b">Kidneys (summed)</td><td>Mean ≤18 Gy; V20 ≤32%</td></tr>
+<tr><td class="b">Spinal cord</td><td>D0.1cc ≤45 Gy</td></tr>
+</tbody>
+</table>
+<p class="src">"Circumferential" = the whole circumference of a bowel segment, not just the wall next to the PTV. Row assignment read from a two-column PDF <span class="chk">CHECK</span>.</p>
+</div>
+<div>
+<table>
+<caption>Dose-escalated RT (NRG 2025 Table 1, non-adaptive). Column order 5 # / 15 # / 25 #.</caption>
+<tbody>
+<tr><td class="b">Duodenum, stomach, small bowel</td><td>5 #: D0.5cc ≤33, D5cc ≤30 · 15 #: D0.035cc ≤45, D40cc ≤37.5 · 25 #: D0.035cc ≤60, D40cc ≤50 Gy</td></tr>
+<tr><td class="b">Same + 5 mm PRV</td><td>5 #: D0.035cc ≤36 · 15 #: D0.035cc ≤51 · 25 #: D2cc ≤60 Gy</td></tr>
+<tr><td class="b">Large bowel</td><td>5 #: D0.035cc ≤40, D5cc ≤33 · 15 #: D0.035cc 64.5, D20cc 47 · 25 #: D0.035cc ≤68, D20cc ≤52 Gy</td></tr>
+<tr><td class="b">Liver mean</td><td>≤15 / ≤20 / ≤25 Gy</td></tr>
+<tr><td class="b">Spinal cord D0.035cc</td><td>≤22 / ≤42 / ≤50 Gy</td></tr>
+</tbody>
+</table>
+<p class="src">More permissive luminal limits, or no bowel PRV, may be used with online adaptation (NRG 2025). Column assignment read from the PDF table <span class="chk">CHECK</span>.</p>
+</div>
+</div>
+<p>Gastric (TROG 03.02, from Emami TD5/5): kidney 1/3 50 Gy, 2/3 30 Gy; liver 1/3 50 Gy, 2/3 35 Gy; cord 50 Gy — historic; prefer the modern limits above and the West Midlands table in the <a href="biliary.html#s8">biliary protocol</a>.</p>
+<!-- ============================ S10 ============================ -->
+<div class="sechead" id="s10" style="margin-top:1.1em"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>RayStation implementation and names</h2></div>
+<table>
+<thead><tr><th>Structure</th><th>Name (NRG template / TG-263 style)</th><th>Recipe</th></tr></thead>
+<tbody>
+<tr><td class="b">Gross tumour</td><td class="mono">GTV_5040 (or GTV_5000)</td><td>Pancreatic-phase CT ± MRI</td></tr>
+<tr><td class="b">Motion envelope</td><td class="mono">IGTV_5040</td><td>Union of phases</td></tr>
+<tr><td class="b">CTV</td><td class="mono">CTV_5040; CTV_HD / CTV_LD (dose-escalated)</td><td>IGTV + 0.5–1.5 cm (template) or NRG 2025 steps</td></tr>
+<tr><td class="b">PTV / evaluation PTV</td><td class="mono">PTV_5040; PTV_Eval_5040</td><td>PTV_Eval = PTV minus OAR overlap (template)</td></tr>
+<tr><td class="b">Adaptive optimisation</td><td class="mono">PTV_Optimize</td><td>High-dose PTV − (luminal OARs + 5 mm) (NRG 2025)</td></tr>
+<tr><td class="b">Luminal PRVs</td><td class="mono">Duodenum_PRV05, Stomach_PRV05, Bowel_Small_PRV05</td><td>OAR + 1–5 mm</td></tr>
+<tr><td class="b">Post-op ROIs</td><td class="mono">A_Celiac, A_SMA, V_Portal, PJ, A_Aorta (<span class="chk">CHECK</span> local names)</td><td>Section 4 expansions, union, crop</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
+</section>
+<!-- ============================ S11 REFS ============================ -->
+<section class="page" id="s11">
+<div class="sechead"><span class="eyebrow">Section 11</span><h2><span class="sectnum">11</span>References and further guidelines</h2></div>
+<h3>11.1  Supplied sources</h3>
+<ol class="ref">
+<li>Brunner TB, Haustermans K, Huguet F, <i>et al.</i> ESTRO ACROP guidelines for target volume definition in pancreatic cancer. <i>Radiother Oncol</i> 2021;154:60–9 (with supplementary tables 1–2 and SBRT constraint table).</li>
+<li>Sanford NN, Narang AK, Aguilera TA, <i>et al.</i> NRG Oncology international consensus contouring atlas on target volumes and dosing strategies for dose-escalated pancreatic cancer radiation therapy. <i>Int J Radiat Oncol Biol Phys</i> 2025;121(4) (with supplement). <a href="https://pubmed.ncbi.nlm.nih.gov/39510320/">PMID 39510320</a>.</li>
+<li>Goodman KA, Regine WF, Dawson LA, <i>et al.</i> RTOG consensus panel guidelines for the delineation of the CTV in the postoperative treatment of pancreatic head cancer. <i>Int J Radiat Oncol Biol Phys</i> 2012;83:901–8. <a href="https://pubmed.ncbi.nlm.nih.gov/22483737/">PMID 22483737</a>.</li>
+<li>Palta M, Godfrey D, Goodman KA, <i>et al.</i> Radiation therapy for pancreatic cancer: executive summary of an ASTRO clinical practice guideline. <i>Pract Radiat Oncol</i> 2019 (September issue; slide set in folder).</li>
+<li>NRG Oncology. Pancreatic cancer RT protocol template, version 1 (2021).</li>
+<li>Wo JY, Yoon SS, Guimaraes AR, <i>et al.</i> Gastric lymph node contouring atlas: a tool to aid in CTV definition in 3D treatment planning for gastric cancer. <i>Pract Radiat Oncol</i> 2013;3:e11–9.</li>
+<li>TROG 03.02 protocol (Leong): adjuvant chemoradiotherapy for gastric cancer, 2003; TOPGEAR (TROG 08.08) ASM 2015 presentation.</li>
+<li>West Midlands Radiotherapy ODN upper GI clinical protocol v1.0 (2021).</li>
+</ol>
+<h3>11.2  Additional guidelines and trials worth knowing (not in the folder)</h3>
+<ol class="ref">
+<li>Leong T, Smithers BM, Michael M, <i>et al.</i> Preoperative chemoradiotherapy for resectable gastric cancer (TOPGEAR). <i>N Engl J Med</i> 2024. doi:10.1056/NEJMoa2405195.</li>
+<li>Matzinger O, Gerber E, Bernstein Z, <i>et al.</i> EORTC-ROG expert opinion: radiotherapy volume and treatment guidelines for neoadjuvant radiation of adenocarcinomas of the GOJ and the stomach. <i>Radiother Oncol</i> 2009;92:164–75. <a href="https://pubmed.ncbi.nlm.nih.gov/19375186/">PMID 19375186</a>. Use for gastric/GOJ nodal selection by sub-site.</li>
+<li>Leong T, <i>et al.</i> Adjuvant and neoadjuvant therapy for gastric cancer using ECF before and after chemoradiation (Peter Mac series). <i>Br J Cancer</i> 2003 (PMC2394354) — volumes and 45 Gy/25 # after INT-0116.</li>
+<li>Valentini V, <i>et al.</i> ESTRO-ACROP delineation of lymph-node areas in upper GI malignancies (oesophagus, stomach, pancreas, biliary). <i>Radiother Oncol</i> 2021 — the current pan-upper-GI nodal atlas (in the site library).</li>
+<li>Oar A, <i>et al.</i> AGITG/TROG guidelines for pancreatic SBRT. <i>Pract Radiat Oncol</i> 2020. <a href="https://pubmed.ncbi.nlm.nih.gov/31761541/">PMID 31761541</a> — Australasian SBRT volumes and constraints; starred on the sources checklist but not in the folder, so not used here <span class="chk">CHECK</span>.</li>
+<li>Diez P, <i>et al.</i> UK 2022 consensus on SABR normal tissue constraints. <i>Clin Oncol</i> 2022. PMID 35272913 (luminal GI limits in the liver protocol).</li>
+</ol>
+<h3>11.3  eviQ (links only)</h3>
+<ul class="ref">
+<li><a href="https://www.eviq.org.au/radiation-oncology/upper-gastrointestinal/3581-pancreas-definitive-neoadjuvant-ebrt-chemorad">ID 3581 Pancreas definitive/neoadjuvant EBRT chemoradiation</a></li>
+<li><a href="https://www.eviq.org.au/Radiation-oncology/Upper-gastrointestinal">All eviQ upper GI radiation oncology protocols</a></li>
+</ul>
+<div class="callout" style="margin-top:1em;"><span class="lbl">Items marked CHECK</span>
+<ul class="tight" style="margin-top:4px;">
+<li>Departmental simulation, oral routine and PTV margins (no Liverpool upper GI protocol supplied).</li>
+<li>Row/column assignment in the ESTRO-ACROP and NRG constraint tables.</li>
+<li>Gastric nodal selection by sub-site (Matzinger 2009 not in folder); Oar 2020 pancreas SBRT consensus not reviewed.</li>
+</ul></div>
+<div class="foot"><span>Pancreas &amp; Stomach RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
+</section>
+</body>
+</html>

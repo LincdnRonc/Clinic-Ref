@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Head and Neck Target Volume Delineation Protocol</title>
+<style>
+  :root{
+    --navy:#10243f; --navy2:#1d3a5f;
+    --teal:#14756b; --teal-bg:#e7f3f1;
+    --amber:#9a5a00; --amber-bg:#fdf3e3;
+    --rust:#8a2f23; --rust-bg:#fbeae7;
+    --paper:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6b7c;
+    --rule:#d6dde6;
+    --rule-strong:#14756b;
+    --dose-elective:#2f6fb0;
+    --dose-bed:#9a5a00;
+    --dose-sib:#c0721c;
+    --dose-boost:#8a2f23;
+    --dose-prostate:#b03a2e;
+    --flag:#8a2f23; --flag-bg:#fbeae7;
+    --key-bg:#e7f3f1;
+    --petrol:#10243f;
+    --petrol-2:#14756b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;background:#e6ebf0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:10.3px;line-height:1.5;
+  }
+  .page{
+    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
+    padding:16mm 17mm 14mm;position:relative;
+    box-shadow:0 1px 8px rgba(16,36,63,.16);
+    display:flex;flex-direction:column;
+  }
+  @page{size:A4;margin:13mm;}
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .page + .page{page-break-before:always;}
+    h2,h3{page-break-after:avoid;}
+    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
+  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
+  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
+  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
+  p{margin:.35em 0;}
+  a{color:var(--teal);}
+  .lead{font-size:11px;color:var(--muted);}
+  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
+  .sechead{margin:0 0 .5em;}
+  .sechead .eyebrow{display:block;margin-bottom:3px;}
+  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
+  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
+  .masthead h1{color:#fff;}
+  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
+  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
+  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
+  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
+  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
+  tbody tr:nth-child(even){background:#eef2f6;}
+  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
+  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
+  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
+  .p-elect{background:var(--dose-elective);}
+  .p-bed{background:var(--dose-bed);}
+  .p-sib{background:var(--dose-sib);}
+  .p-boost{background:var(--dose-boost);}
+  .p-pros{background:var(--dose-prostate);}
+  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
+  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
+  .flag .lbl:before{content:"\26A0  ";}
+  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
+  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
+  ol.steps li{margin:.28em 0;padding-left:.15em;}
+  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
+  ul.tight{margin:.25em 0;padding-left:1.15em;}
+  ul.tight li{margin:.18em 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid2>div{min-width:0;}
+  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
+  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  svg{display:block;width:100%;height:auto;}
+  .kv{font-size:9.3px;}
+  .kv b{color:var(--navy);}
+  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
+  .ref{font-size:8.6px;line-height:1.4;}
+  .ref li{margin:.2em 0;}
+  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
+  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
+  .named .pos{font-weight:700;color:var(--amber);}
+  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc td{border:none;padding:2px 4px;}
+  .toc .n{color:var(--teal);font-weight:700;width:24px;}
+  .toc .pg{text-align:right;color:var(--muted);width:32px;}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
+  .small{font-size:8.6px;color:var(--muted);}
+</style>
+
+<style id="site-extra">
+  .p-gtv{background:#1d4f91;}
+  .p-hi{background:#b03a2e;}
+  .p-lo{background:#2f6fb0;}
+  .p-ctv{background:#14756b;}
+  .p-ptv{background:#a07a00;}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:8.4px;color:var(--muted);}
+  .follow{border-left:4px solid #006f8e;}
+</style>
+<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #006f8e}</style></head>
+
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../hn-general.html" style="color:#a6e4f2;text-decoration:none">H&amp;N general page</a><a href="../hn-oropharynx.html" style="color:#a6e4f2;text-decoration:none">Oropharynx</a><a href="../hn-npc-sinonasal.html" style="color:#a6e4f2;text-decoration:none">NPC &amp; sinonasal</a><a href="../skin.html" style="color:#a6e4f2;text-decoration:none">Skin</a><a href="../ctr-hn.html" style="color:#a6e4f2;text-decoration:none">H&amp;N quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<section class="page">
+<div class="masthead">
+<span class="eyebrow">Contouring Protocol · Head and Neck Radiation Oncology</span>
+<h1>Head and Neck — Target Volume Delineation Protocol</h1>
+<p class="sub">Target volumes for <b>definitive mucosal SCC</b> (primary "5 + 5 mm" CTV-P1/P2, nodal CTV-N-HR and elective levels by subsite and N stage), <b>post-operative</b> volumes (DAHANCA; TORS/PATHOS risk groups; flaps), <b>nasopharynx</b> (2024 international dose-level guideline), <b>cutaneous SCC</b> (HNCIG) and <b>perineural spread</b>, with the full neck node level border tables, doses, constraints and names.</p>
+<div class="pillrow">
+<span class="pill p-gtv">GTV-P / GTV-N</span>
+<span class="pill p-hi">CTV1 / CTV-P1 (high dose)</span>
+<span class="pill p-ctv">CTV2 / CTV-P2 (intermediate)</span>
+<span class="pill p-lo">CTV3 / CTV-N-LR (elective)</span>
+<span class="pill p-ptv">PTV</span>
+</div>
+<div class="meta">Grégoire 2014 neck node levels · Grégoire 2018 primary CTV ("5 + 5 mm") · Biau 2019 nodal selection · DAHANCA 2018 guidelines · Lin 2025 international NPC guideline (2024 version) · Porceddu 2020 HNCIG cSCC · Ko 2014 perineural invasion · PATHOS protocol (TORS) · Brouwer 2015 and eviQ OAR atlases · flap delineation 2020 — Version 1.0 · Nov 2026</div>
+</div>
+<div class="callout">
+<span class="lbl">Governing principles of this protocol</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>No departmental head and neck protocol is in the folder</b>; the page follows the DAHANCA/Grégoire international framework (GTV → CTV1 +5 mm → CTV2 +10 mm total, elective CTV3), Biau 2019 for which levels, and Grégoire 2014 for level borders. Local PTV and IGRT need confirming <span class="chk">CHECK</span>.</li>
+<li><b>Geometric then anatomic</b>: grow the GTV, then edit for air, uninvolved bone (mandible, maxilla, spine, hyoid), fascia and non-contiguous mucosa — unless infiltrated (Grégoire 2018).</li>
+<li><b>Total GTV to CTV2 margin ≤12 mm</b> (DAHANCA).</li>
+<li><b>Elective nodes are whole levels</b>, chosen by subsite and N stage; add the next level, and muscle/skin/parotid next to an involved node with ENE.</li>
+<li><b>Use post-induction volumes with care</b>: primary and nodal high-risk CTVs keep the pre-chemotherapy extent at lower dose (Biau; Lin 2025).</li>
+</ul>
+</div>
+<h3 style="margin-top:1.1em;">Contents</h3>
+<table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Simulation and imaging</a></td><td class="pg">2</td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Neck node levels: border tables (Grégoire 2014)</a></td><td class="pg">2</td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario A — Definitive: primary CTV (5 + 5 mm)</a></td><td class="pg">3</td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario A (cont.) — Nodal CTVs and level selection by subsite</a></td><td class="pg">4</td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Scenario B — Post-operative, TORS and flaps</a></td><td class="pg">5</td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Scenario C — Nasopharynx (2024 international guideline)</a></td><td class="pg">6</td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Scenario D — Cutaneous SCC and perineural spread</a></td><td class="pg">7</td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Pearls and common errors</a></td><td class="pg">8</td></tr>
+<tr><td class="n">9</td><td><a href="#s9">Dose, fractionation, margins and IGRT</a></td><td class="pg">8</td></tr>
+<tr><td class="n">10</td><td><a href="#s10">Organs at risk and constraints</a></td><td class="pg">9</td></tr>
+<tr><td class="n">11</td><td><a href="#s11">Names and RayStation implementation</a></td><td class="pg">10</td></tr>
+<tr><td class="n">12</td><td><a href="#s12">References</a></td><td class="pg">10</td></tr>
+</table>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
+</section>
+
+<!-- S1 + S2 -->
+<section class="page" id="s1">
+<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Simulation and imaging</h2></div>
+<ul class="tight">
+<li>Supine, thermoplastic head-and-shoulder mask; mouth bite/tongue depressor as needed; planning CT from a few cm above the skull base to a few cm below the clavicles, 2–3 mm slices (preferably 2 mm) with IV contrast (Biau 2019).</li>
+<li>Fuse diagnostic MRI (oral cavity, oropharynx, nasopharynx, sinonasal, PNI) and FDG-PET; re-look at nodes on the planning CT, since disease may have changed since staging (Biau).</li>
+<li>Pathological node criteria (Biau): short axis &gt;10 mm (5–8 mm for retropharyngeal; 12–15 mm for upper level II), necrosis, round shape, clusters, ENE signs (skin, muscle or adjacent structure fixation, nerve palsy).</li>
+<li>After induction chemotherapy: co-register the pre-chemotherapy imaging (Biau; Lin 2025).</li>
+<li>Post-op: wire scars; use the operative note, pathology (margins, ENE, PNI) and pre-op imaging; delineate flaps from the operative report (flap guideline 2020).</li>
+</ul>
+<hr class="soft"/>
+<div class="sechead" id="s2"><span class="eyebrow">Section 2</span><h2><span class="sectnum">2</span>Neck node levels (Grégoire 2014)</h2></div>
+<table>
+<thead><tr><th style="width:9%">Level</th><th>Cranial</th><th>Caudal</th><th>Anterior</th><th>Posterior</th><th>Lateral</th><th>Medial</th></tr></thead>
+<tbody>
+<tr><td class="b">Ia submental</td><td>Mylohyoid</td><td>Platysma (caudal edge of anterior bellies of digastric)</td><td>Symphysis menti</td><td>Body of hyoid / mylohyoid</td><td>Medial edge of anterior belly of digastric</td><td>—</td></tr>
+<tr><td class="b">Ib submandibular</td><td>Cranial edge of submandibular gland; anteriorly mylohyoid</td><td>Plane through caudal hyoid and caudal mandible, or caudal submandibular gland (whichever lower) / platysma</td><td>Symphysis menti</td><td>Posterior edge of submandibular gland (caudally) / posterior belly of digastric (cranially)</td><td>Inner mandible to its lower edge / platysma / medial pterygoid (posteriorly)</td><td>Lateral edge of anterior belly of digastric (caudally) / posterior belly of digastric (cranially)</td></tr>
+<tr><td class="b">II upper jugular</td><td>Caudal edge of the lateral process of C1</td><td>Caudal edge of body of hyoid</td><td>Posterior edge of submandibular gland / posterior belly of digastric</td><td>Posterior edge of SCM</td><td>Deep surface of SCM / platysma / parotid / posterior belly of digastric</td><td>Medial edge of internal carotid / scalenes</td></tr>
+<tr><td class="b">III mid jugular</td><td>Caudal edge of body of hyoid</td><td>Caudal edge of cricoid</td><td>Anterior edge of SCM / posterior third of thyrohyoid</td><td>Posterior edge of SCM</td><td>Deep surface of SCM</td><td>Medial edge of common carotid / scalenes</td></tr>
+<tr><td class="b">IVa lower jugular</td><td>Caudal edge of cricoid</td><td>2 cm cranial to the sternal manubrium</td><td>Anterior edge of SCM (cranially) / body of SCM (caudally)</td><td>Posterior edge of SCM (cranially) / scalenes (caudally)</td><td>Deep SCM (cranially) / lateral edge of SCM (caudally)</td><td>Medial common carotid / lateral thyroid / scalenes (cranially); medial SCM (caudally)</td></tr>
+<tr><td class="b">IVb medial SCF</td><td>Caudal border of IVa</td><td>Cranial edge of sternal manubrium</td><td>Deep SCM / deep clavicle</td><td>Anterior scalenes (cranially); lung apex, brachiocephalic vein/trunk (R), CCA and subclavian (L)</td><td>Lateral edge of scalenes</td><td>Level VI (pretracheal) / medial edge of CCA</td></tr>
+<tr><td class="b">V (Va, Vb)</td><td>Cranial edge of body of hyoid</td><td>Plane just below transverse cervical vessels</td><td>Posterior edge of SCM</td><td>Anterior border of trapezius</td><td>Platysma / skin</td><td>Levator scapulae / scalenes (caudally)</td></tr>
+<tr><td class="b">Vc lateral SCF</td><td>Below transverse cervical vessels</td><td>2 cm cranial to manubrium</td><td>Skin</td><td>Anterior trapezius (cranially) / ±1 cm in front of serratus anterior (caudally)</td><td>Trapezius (cranially) / clavicle (caudally)</td><td>Scalenes / lateral SCM / level IVa</td></tr>
+<tr><td class="b">VIa anterior jugular</td><td>Caudal hyoid or caudal submandibular gland (lower)</td><td>Cranial edge of manubrium</td><td>Skin / platysma</td><td>Infrahyoid (strap) muscles</td><td>Anterior edges of both SCMs</td><td>—</td></tr>
+<tr><td class="b">VIb pre-/paratracheal</td><td>Caudal edge of thyroid cartilage (caudal hyoid for anterior floor of mouth, tongue tip, lower lip)</td><td>Cranial edge of manubrium</td><td>Back of strap muscles</td><td>Prevertebral (R) / oesophagus (L)</td><td>Common carotid arteries</td><td>Lateral trachea and oesophagus (caudally)</td></tr>
+<tr><td class="b">VIIa retropharyngeal</td><td>Upper edge of C1 / hard palate</td><td>Cranial edge of body of hyoid</td><td>Posterior edge of superior/middle constrictor</td><td>Longus capitis / longus colli</td><td>Medial edge of internal carotid</td><td>Line parallel to lateral edge of longus capitis (lateral group only)</td></tr>
+<tr><td class="b">VIIb retro-styloid</td><td>Skull base (jugular foramen)</td><td>Caudal edge of lateral process of C1 (top of II)</td><td>Posterior edge of prestyloid parapharyngeal space</td><td>C1 body, skull base</td><td>Styloid / deep parotid</td><td>Medial edge of internal carotid</td></tr>
+<tr><td class="b">VIII parotid</td><td colspan="6">Subcutis laterally to styloid medially; posterior masseter/pterygoids anteriorly to anterior SCM and posterior digastric posteriorly; from the lower orbit down to the lower mandible (meets Ib)</td></tr>
+<tr><td class="b">IX bucco-facial</td><td colspan="6">Subcutis over buccinator, from anterior masseter/Bichat's fat pad to the anterior face; lower orbit to lower mandible</td></tr>
+<tr><td class="b">Xa / Xb</td><td colspan="6">Xa retro- and subauricular: on the mastoid from the top of the external auditory canal to the mastoid tip. Xb occipital: from posterior SCM to anterior trapezius, up to the external occipital protuberance</td></tr>
+</tbody>
+</table>
+<p class="src">Level II splits into IIa/IIb at the posterior edge of the internal jugular vein. Va/Vb split at the cricoid (surgical). Grégoire 2014 Tables 2–6 and text.</p>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
+</section>
+
+<!-- S3 -->
+<section class="page" id="s3">
+<div class="sechead"><span class="eyebrow">Section 3 · Scenario A</span><h2><span class="sectnum">3</span>Definitive: primary CTV (Grégoire 2018; DAHANCA 2018)</h2></div>
+<table>
+<thead><tr><th style="width:15%">Volume</th><th>Definition</th><th>Dose (DAHANCA SIB)</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV-T / GTV-N</td><td>All gross tumour and involved nodes from examination, endoscopy, CT, MRI and PET</td><td>—</td></tr>
+<tr><td class="b">CTV1 (CTV-P1)</td><td>GTV + 5 mm isotropic; larger if poorly defined, smaller into air, uninvolved bone or natural borders. Uninvolved bone not included</td><td><span class="pill p-hi">66–68 Gy</span> in 33–34</td></tr>
+<tr><td class="b">CTV2 (CTV-P2)</td><td>GTV + 10 mm (i.e. CTV1 + 5 mm), edited for air, bone, fascia and non-contiguous mucosa; may add a high-risk anatomical subregion. GTV to CTV2 ≤12 mm</td><td><span class="pill p-ctv">60 Gy</span></td></tr>
+<tr><td class="b">CTV3</td><td>CTV2 + elective nodal levels without margin (section 4)</td><td><span class="pill p-lo">50 Gy</span></td></tr>
+<tr><td class="b">PTV1–3</td><td>CTV + set-up margin from departmental data; PTVs may be split near surfaces or OARs</td><td>—</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>3.1  Edits to the geometric expansion</h3>
+<ul class="tight">
+<li><b>Air</b>: always remove pharyngeal, laryngeal, oral, nasal and sinus air.</li>
+<li><b>Complex anatomy</b>: a soft palate GTV expansion is edited off the mobile tongue; an interarytenoid GTV off the post-cricoid area.</li>
+<li><b>Barriers</b>: mandible, maxilla, cervical spine, hyoid and muscular fascia — edit unless likely infiltrated.</li>
+<li><b>Small tumours after endoscopic/TORS surgery</b> did well with smaller margins (selected patients).</li>
+<li>Pathology: 4–5 mm microscopic spread beyond the GTV covers most tumours; one series saw up to 15 mm after induction therapy (Grégoire 2018 review).</li>
+</ul>
+<h3>3.2  Walkthrough</h3>
+<ol class="steps">
+<li>GTV on fused MRI/PET/CT with the endoscopy drawing.</li>
+<li>zGTV+5 → CTV1; zGTV+10 → CTV2; edit both for air and barriers.</li>
+<li>Check CTV2 on coronal and sagittal for submucosal routes (e.g. pre-epiglottic space, parapharyngeal space, base of tongue).</li>
+<li>Add elective levels (CTV3) and nodal CTVs (section 4).</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 230" role="img" aria-label="Axial schematic of the 5 plus 5 mm expansion from a base of tongue GTV">
+<rect width="300" height="230" fill="#fff"/>
+<path d="M60 40 Q150 10 240 40 L250 120 Q150 150 50 120 Z" fill="#f2f2f2" stroke="#9aa3ad" stroke-width="8"/><text x="122" y="28" font-size="7" fill="#5b6b7c">mandible (barrier)</text>
+<ellipse cx="150" cy="166" rx="60" ry="26" fill="#e8f2f7" stroke="#9fc2d2"/><text x="126" y="188" font-size="7" fill="#5b6b7c">oropharyngeal air</text>
+<ellipse cx="150" cy="166" rx="40" ry="12" fill="#fff" stroke="#9fc2d2" stroke-dasharray="2 2"/>
+<rect x="128" y="198" width="44" height="20" rx="6" fill="#c9ced4"/><text x="136" y="211" font-size="7" fill="#5b6b7c">C2/C3</text>
+<path d="M150 92 Q182 96 186 120 Q170 136 150 134 Q128 132 124 114 Q130 94 150 92 Z" fill="rgba(29,79,145,.6)" stroke="#1d4f91"/><text x="140" y="116" font-size="7.5" fill="#fff">GTV</text>
+<path d="M150 84 Q190 88 194 120 Q188 140 176 140 L126 140 Q116 112 124 96 Q134 86 150 84 Z" fill="none" stroke="#b03a2e" stroke-width="1.8"/><text x="198" y="110" font-size="7" fill="#b03a2e">CTV1 (+5)</text>
+<path d="M150 76 Q198 80 202 120 Q198 140 190 140 L110 140 Q106 110 116 90 Q130 78 150 76 Z" fill="none" stroke="#14756b" stroke-width="1.6" stroke-dasharray="5 3"/><text x="206" y="134" font-size="7" fill="#14756b">CTV2 (+10,</text><text x="206" y="143" font-size="7" fill="#14756b">air removed)</text>
+<text x="8" y="228" font-size="7" fill="#555">Expansion stops at bone and air unless infiltrated</text>
+</svg>
+<figcaption>Original schematic (axial, base of tongue). CTV1 = GTV + 5 mm; CTV2 = GTV + 10 mm, both edited out of air and off the mandible.</figcaption>
+</figure>
+</div>
+</div>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
+</section>
+
+<!-- S4 -->
+<section class="page" id="s4">
+<div class="sechead"><span class="eyebrow">Section 4 · Scenario A (cont.)</span><h2><span class="sectnum">4</span>Nodal CTVs and level selection by subsite (Biau 2019)</h2></div>
+<ul class="tight">
+<li><b>CTV-N-HR</b> (involved node) = GTV-N + 5 mm: ENE extends &lt;5 mm beyond the capsule in 96–97% of nodes. After induction chemotherapy, use the pre-chemotherapy node + 5 mm.</li>
+<li><b>Node abutting muscle, skin or parotid, or with clear ENE</b>: include those structures near the node in the elective CTV for at least the whole invaded level and at least 1 cm in all directions.</li>
+<li><b>cN+</b>: add the adjacent level (e.g. bulky upper II → VIIb; II abutting the submandibular gland → Ib). IIb may be omitted in a node-negative ipsilateral neck. IVb if IVa involved.</li>
+</ul>
+<table>
+<thead><tr><th style="width:12%">Subsite</th><th style="width:12%">N</th><th>Ipsilateral CTV-N-LR</th><th>Contralateral</th></tr></thead>
+<tbody>
+<tr><td class="b" rowspan="3">Oral cavity</td><td>N0–1</td><td>I, II, III (+IVa for anterior tongue or spread to oropharynx; +IX buccal mucosa)</td><td>I, II, III (+IVa as ipsilateral)</td></tr>
+<tr><td>N2a–b</td><td>I, II, III, IVa, Va–b (+IX)</td><td>I, II, III (+IVa)</td></tr>
+<tr><td>N3</td><td>I, II, III, IVa, Va–b, +VIIb, +IX</td><td>I, II, III (+IVa)</td></tr>
+<tr><td class="b" rowspan="3">Oropharynx</td><td>N0–1</td><td>(Ib if oral cavity spread or anterior II), II, III, IVa; +VIIa for posterior wall</td><td>II, III, IVa; +VIIa for posterior wall</td></tr>
+<tr><td>N2a–b</td><td>Ib, II, III, IVa, Va–b, +VIIa, +VIIb</td><td>II, III, IVa (+VIIa posterior wall)</td></tr>
+<tr><td>N3</td><td>Ib, II, III, IVa, Va–b, +VIIa, +VIIb</td><td>II, III, IVa (+VIIa posterior wall)</td></tr>
+<tr><td class="b" rowspan="2">Hypopharynx</td><td>N0</td><td>II, III, IVa; +VIIa posterior wall; +VI for apex of piriform sinus, postcricoid or oesophageal extension</td><td>II, III, IVa (+VIIa, +VI as needed)</td></tr>
+<tr><td>N1–N3</td><td>Ib, II, III, IVa, Va–b, +VIIa, +VIIb, +VI as above</td><td>II, III, IVa (+VIIa, +VI)</td></tr>
+<tr><td class="b" rowspan="3">Larynx (not T1 glottic)</td><td>N0–1</td><td>II, III, IVa; +VI for trans/subglottic extension</td><td>II, III, IVa (+VI)</td></tr>
+<tr><td>N2a–b</td><td>II, III, IVa, Va–b (+VI); Ib if anterior II involved</td><td>II, III, IVa (+VI)</td></tr>
+<tr><td>N3</td><td>Ib, II, III, IVa, Va–b, +VIIb, +VI</td><td>II, III, IVa (+VI)</td></tr>
+</tbody>
+</table>
+<p class="src">N2c: select each side by its own N category. Unilateral treatment: N0–N2a lateralised alveolar ridge, lateral floor of mouth and buccal mucosa (discuss N2b); lateral tongue N0–1 more than 1 cm from midline; N0–N2a tonsillar fossa not involving soft palate or base of tongue; small lateral-wall piriform sinus tumours. p16+ oropharynx: use node number, size and side rather than AJCC 8 N alone (Biau Tables 1–4). Nasopharynx and sinonasal tables: see section 6 and Biau Tables 5–6.</p>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
+</section>
+
+<!-- S5 -->
+<section class="page" id="s5">
+<div class="sechead"><span class="eyebrow">Section 5 · Scenario B</span><h2><span class="sectnum">5</span>Post-operative, TORS and flaps</h2></div>
+<table>
+<thead><tr><th style="width:16%">Volume</th><th>DAHANCA 2018 post-operative</th><th>Dose</th></tr></thead>
+<tbody>
+<tr><td class="b">CTV1</td><td>Only after R1/R2 resection or for ENE: the pre-operative tumour (non-radical area) + 5 mm, more if ill-defined, edited for air and uninvolved bone</td><td>66–68 Gy</td></tr>
+<tr><td class="b">CTV2</td><td>After R0: pre-operative GTV + 10 mm. After R1/R2: CTV1 + 5 mm. May be enlarged to a whole level or region (e.g. base of tongue) for poorly defined nodes or extensive ENE</td><td>60 Gy</td></tr>
+<tr><td class="b">CTV3</td><td>CTV2 + surgical bed outside pre-op GTV + 10 mm + elective nodal regions</td><td>50 Gy</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>5.1  TORS oropharynx — PATHOS risk groups</h3>
+<table>
+<thead><tr><th>Group</th><th>Pathology</th><th>Trial arms</th></tr></thead>
+<tbody>
+<tr><td class="b">A</td><td>No adverse features</td><td>No adjuvant treatment</td></tr>
+<tr><td class="b">B</td><td>T3 (or T1–2 with risk factors), N2a/N2b, PNI or LVI, close margins 1–5 mm, no ECS</td><td>60 Gy/30 vs 50 Gy/25</td></tr>
+<tr><td class="b">C</td><td>Positive margin (&lt;1 mm) and/or nodal ECS</td><td>60 Gy/30 + cisplatin vs 60 Gy/30 alone</td></tr>
+</tbody>
+</table>
+<p class="src">PATHOS (Owadally 2015, BMC Cancer): HPV+ OPSCC T1–T3 N0–N2b treated with transoral surgery and neck dissection.</p>
+</div>
+<div>
+<h3>5.2  Flaps (2020 guideline)</h3>
+<ul class="tight">
+<li>Identify the flap type, size and position from the operative report (FAMM, pectoralis, radial forearm, anterolateral thigh, fibula, scapula).</li>
+<li>Delineate the flap body and the vascular pedicle separately; split into fat, fascia/muscle, skin and bone components where possible.</li>
+<li>The flap is not the tumour bed: the CTV is the interface where tumour was, not the whole flap; record flap dose for future dose–effect work.</li>
+</ul>
+<h3>5.3  Pitfalls</h3>
+<ul class="tight">
+<li>Drawing the post-op CTV on altered anatomy without the pre-op GTV.</li>
+<li>Missing the neck dissection bed or scar when ENE was present.</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
+</section>
+
+<!-- S6 -->
+<section class="page" id="s6">
+<div class="sechead"><span class="eyebrow">Section 6 · Scenario C</span><h2><span class="sectnum">6</span>Nasopharynx (Lin 2025, international guideline 2024 version)</h2></div>
+<table>
+<thead><tr><th style="width:16%">Volume</th><th>2024 recommendation</th><th>Dose</th></tr></thead>
+<tbody>
+<tr><td class="b">GTVp</td><td>After induction chemotherapy: post-induction GTVp (IG-2018 used pre-induction)</td><td>—</td></tr>
+<tr><td class="b">CTVp_70</td><td>GTVp + 0–5 mm (panel split: 53% 0 mm, 47% 3–5 mm)</td><td><span class="pill p-hi">70 Gy</span></td></tr>
+<tr><td class="b">CTVp_60</td><td>GTVp + 8–10 mm; include the whole nasopharynx; the pre-induction GTV receives ≥60 Gy</td><td><span class="pill p-ctv">60 Gy</span></td></tr>
+<tr><td class="b">CTVp_50</td><td>Stepwise elective anatomical structures by tumour extent; contralateral structures may be spared for eccentric tumours not reaching the midline</td><td><span class="pill p-lo">50 Gy</span></td></tr>
+<tr><td class="b">GTVn</td><td>Post-induction volume; pre-induction if advanced ENE (e.g. muscle infiltration)</td><td>—</td></tr>
+<tr><td class="b">CTVn_70</td><td>GTVn + 3 mm (0–5 mm) without ENE; + 8 mm with advanced ENE</td><td>70 Gy</td></tr>
+<tr><td class="b">CTVn_50</td><td>Encompass CTVn_70 and the corresponding nodal level (no fixed 5 mm ring)</td><td>50 Gy</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>6.1  Elective nodal coverage</h3>
+<ul class="tight">
+<li>Bilateral lateral retropharyngeal nodes in all (medial group rarely involved) — 50 Gy.</li>
+<li>Bilateral level II (up to skull base) in all — 50 Gy.</li>
+<li>Bilateral III and Va in all — 50 Gy.</li>
+<li>IV and Vb–c only if III/Va on that side is involved (upper neck irradiation was non-inferior in N0–1: 3-y R-FFS 97.7% vs 96.3%, Tang trial); extend to the clavicle and ≥2 cm below the lowest GTVn on an involved side.</li>
+<li>Ib only with specific indications (e.g. Ib nodes) — see paper.</li>
+</ul>
+</div>
+<div>
+<h3>6.2  Pitfalls</h3>
+<ul class="tight">
+<li>Using the post-induction GTV but forgetting that the pre-induction extent needs ≥60 Gy.</li>
+<li>Covering medial retropharyngeal nodes increases dysphagia without benefit (Mao data cited).</li>
+<li>Example CTVp_50 structures for an eccentric T1 tumour: vomer, lower 5 mm of sphenoid sinus, both foramina lacerum, ipsilateral foramen ovale, anterior third of clivus (paper Fig. 1).</li>
+<li>2017 international NPC CTV guideline (Lee) is also in the folder for the older approach.</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
+</section>
+
+<!-- S7 -->
+<section class="page" id="s7">
+<div class="sechead"><span class="eyebrow">Section 7 · Scenario D</span><h2><span class="sectnum">7</span>Cutaneous SCC (HNCIG) and perineural spread (Ko 2014)</h2></div>
+<table>
+<thead><tr><th style="width:18%">Volume (HNCIG 2020)</th><th>Definition</th><th>Dose</th></tr></thead>
+<tbody>
+<tr><td class="b">HRTVp / HRTVn</td><td>Site of the primary / involved nodes before excision (pre-op imaging, photos, operative note, pathology)</td><td>—</td></tr>
+<tr><td class="b">CTVp_HR / CTVn_HR</td><td>HRTV + ≥5 mm isotropic; may include the whole surgical/graft site, or the whole involved level, neck dissection or parotidectomy bed; edited to anatomic barriers (uninvolved bone)</td><td>60 Gy/30</td></tr>
+<tr><td class="b">CTVp_LR / CTVn_LR</td><td>Rest of the surgical site and elective nodal/intraparotid regions at risk (e.g. ipsilateral undissected levels Ib–III or parotid)</td><td>54–56 Gy</td></tr>
+<tr><td class="b">CTV_Boost</td><td>Positive or close (&lt;2 mm) margin, or ENE: HRTV_Boost + ≥5 mm</td><td>~66 Gy</td></tr>
+</tbody>
+</table>
+<p class="src">Bolus as needed over scars and superficial targets; IGRT recommended for IMRT (HNCIG). N0 undissected neck levels follow Grégoire 2014 with skin-specific modifications (e.g. Xa, Xb, VIII for scalp/periauricular primaries).</p>
+<div class="grid2">
+<div>
+<h3>7.1  Perineural invasion (Ko 2014)</h3>
+<ul class="tight">
+<li>Follow the named nerve back from the tumour bed toward the skull base along its foramina: e.g. infraorbital nerve → infraorbital foramen → orbit floor → foramen rotundum (V2); inferior alveolar/mental → mandibular foramen → foramen ovale (V3); facial nerve → stylomastoid foramen → internal acoustic meatus.</li>
+<li>Include interconnections (auriculotemporal nerve links V3 and VII; greater superficial petrosal via the pterygopalatine ganglion).</li>
+<li>Doses: microscopic PNI, negative nerve margin ≥54 Gy to the nerve course; gross PNI, negative margin 60 Gy; gross PNI with positive margin 66 Gy to the bed and 60 Gy along the nerve, within brainstem tolerance.</li>
+</ul>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 180" role="img" aria-label="Schematic of a trigeminal V2 perineural pathway to the skull base">
+<rect width="300" height="180" fill="#fff"/>
+<path d="M20 150 Q150 170 280 150" fill="none" stroke="#9aa3ad" stroke-width="6"/><text x="214" y="170" font-size="7" fill="#5b6b7c">maxilla</text>
+<ellipse cx="80" cy="60" rx="34" ry="26" fill="#eef3f7" stroke="#9aa3ad"/><text x="62" y="62" font-size="7" fill="#5b6b7c">orbit</text>
+<rect x="210" y="20" width="70" height="40" fill="#f2eef8" stroke="#9a7fb0"/><text x="222" y="44" font-size="7" fill="#6b4f80">skull base</text>
+<circle cx="50" cy="124" r="10" fill="rgba(29,79,145,.6)" stroke="#1d4f91"/><text x="12" y="146" font-size="7" fill="#1d4f91">cheek SCC</text>
+<path d="M58 118 Q80 100 100 92 Q150 80 196 60 L214 44" fill="none" stroke="#b03a2e" stroke-width="3"/>
+<circle cx="72" cy="108" r="3" fill="#333"/><text x="78" y="118" font-size="6.5" fill="#333">infraorbital foramen</text>
+<circle cx="150" cy="80" r="3" fill="#333"/><text x="120" y="96" font-size="6.5" fill="#333">orbital floor canal</text>
+<circle cx="196" cy="60" r="3" fill="#333"/><text x="150" y="54" font-size="6.5" fill="#333">pterygopalatine fossa</text>
+<circle cx="214" cy="44" r="3" fill="#333"/><text x="226" y="70" font-size="6.5" fill="#333">foramen rotundum</text>
+<path d="M54 114 Q80 92 100 84 Q150 72 196 52 L222 34 L232 42 L204 68 Q150 92 104 100 Q80 110 62 132 Z" fill="rgba(0,111,142,.12)" stroke="#006f8e" stroke-dasharray="4 2"/>
+<text x="10" y="20" font-size="7" fill="#006f8e">CTV along V2 to the foramen rotundum</text>
+</svg>
+<figcaption>Original schematic. Trace the named nerve through each foramen; extend to the ganglion/skull base for gross PNS.</figcaption>
+</figure>
+</div>
+</div>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
+</section>
+
+<!-- S8 + S9 -->
+<section class="page" id="s8">
+<div class="sechead"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>Pearls and common errors</h2></div>
+<div class="grid2">
+<div>
+<ul class="tight">
+<li>Level IVa ends 2 cm above the manubrium; IVb (medial SCF) is added only when IVa is involved (Biau).</li>
+<li>Level V starts at the hyoid, not at the SCM–trapezius convergence; upper "V" above the hyoid belongs to Xb (Grégoire 2014).</li>
+<li>VIIa covers lateral retropharyngeal nodes only; VIIb (retro-styloid) is for bulky upper II.</li>
+<li>Retropharyngeal node threshold is small (5–8 mm short axis).</li>
+</ul>
+</div>
+<div>
+<ul class="tight">
+<li>CTV expansions across bone or air look large but deliver dose for nothing; edit them.</li>
+<li>Do not edit CTV off muscle when a node with ENE abuts it — include ≥1 cm of the muscle (Biau).</li>
+<li>Pre-epiglottic and paraglottic spaces, parapharyngeal fat and the base of tongue are the routes most often under-drawn on axial CT; check sagittal.</li>
+</ul>
+</div>
+</div>
+<hr class="soft"/>
+<div class="sechead" id="s9"><span class="eyebrow">Section 9</span><h2><span class="sectnum">9</span>Dose, fractionation, margins and IGRT</h2></div>
+<table>
+<thead><tr><th style="width:24%">Schedule (DAHANCA SIB)</th><th>CTV1</th><th>CTV2</th><th>CTV3</th></tr></thead>
+<tbody>
+<tr><td class="b">Conventional / accelerated (5–6 fx/week)</td><td>66 Gy/33 (2.0)</td><td>60 Gy (1.82)</td><td>50 Gy (1.52)</td></tr>
+<tr><td class="b">Conventional / accelerated</td><td>68 Gy/34 (2.0)</td><td>60 Gy (1.76)</td><td>50 Gy (1.47)</td></tr>
+<tr><td class="b">Accelerated hyperfractionated (10 fx/week)</td><td>76 Gy/56 (1.36)</td><td>66 Gy (1.18)</td><td>56 Gy (1.0)</td></tr>
+</tbody>
+</table>
+<ul class="tight">
+<li>DAHANCA coverage: CTV1 95–107%; CTV2 and CTV3 ≥95%; ≤1.8 cc of the patient &gt;107% of the CTV1 dose; ≥6 h between fractions on 6-fraction weeks.</li>
+<li>PTV: from departmental set-up data (DAHANCA); no protons PTV. NPC: doses 70/60/50 Gy. cSCC: 60/54–56/66 Gy (HNCIG). TORS: 50–60 Gy (PATHOS arms).</li>
+<li>Planning priority (DAHANCA): cord and brainstem → GTV/CTV1 → chiasm, eyes → CTV2/3 and PTVs → other OARs.</li>
+<li>Local PTV margin and IGRT schedule not in the folder <span class="chk">CHECK</span>.</li>
+</ul>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
+</section>
+
+<!-- S10 -->
+<section class="page" id="s10">
+<div class="sechead"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>Organs at risk and constraints</h2></div>
+<p>Delineate OARs with the Brouwer 2015 CT-based consensus (the basis for DAHANCA's appendix) or the eviQ head and neck critical structures atlas (lenses, globes, optic nerves, lacrimal glands, chiasm, pituitary, temporal lobes, posterior fossa, brainstem, inner ear, parotid, oral cavity, base of tongue, mandible, lips, TMJ, submandibular glands, thyroid, larynx, pharyngeal constrictors, brachial plexus).</p>
+<table>
+<thead><tr><th style="width:24%">OAR (DAHANCA 2018)</th><th>OAR limit</th><th>PRV limit</th></tr></thead>
+<tbody>
+<tr><td class="b">Spinal cord</td><td>Dmax ≤45 Gy</td><td>≤50 Gy</td></tr>
+<tr><td class="b">Brainstem</td><td>Dmax ≤54 Gy</td><td>≤60 Gy</td></tr>
+<tr><td class="b">Chiasm / optic nerves</td><td>Dmax ≤54 Gy</td><td>≤60 Gy</td></tr>
+<tr><td class="b">Eye back (retina) / eye front</td><td>≤45 / ≤30 Gy</td><td>≤50 / ≤35 Gy</td></tr>
+<tr><td class="b">Lacrimal gland</td><td>Dmean ≤25 Gy</td><td>≤30 Gy</td></tr>
+<tr><td class="b">Brain</td><td>D1cc &lt;58 Gy</td><td>—</td></tr>
+<tr><td class="b">Parotids</td><td>Contralateral Dmean ≤20 Gy, or both Dmean ≤26 Gy</td><td>—</td></tr>
+<tr><td class="b">Submandibular gland</td><td>Dmean ≤35 Gy</td><td>—</td></tr>
+<tr><td class="b">Oral cavity (extended, Brouwer)</td><td>Dmean ≤30 Gy (non-oral cavity primaries)</td><td>—</td></tr>
+<tr><td class="b">Pharyngeal constrictors (up, mid, low); larynx (supraglottic, glottic)</td><td>PCM Dmean &lt;55 Gy; larynx Dmean &lt;40 Gy</td><td>—</td></tr>
+<tr><td class="b">Oesophagus; thyroid; pituitary</td><td>Dmean ≤30; &lt;40; ≤20 Gy</td><td>—</td></tr>
+<tr><td class="b">Cochlea; mandible</td><td>D5% ≤55 Gy; Dmax ≤72 Gy</td><td>—</td></tr>
+</tbody>
+</table>
+<p class="src">Dmax = D0.027 cc. Constraints apply to ≤2 Gy fractions, adults, not hypofractionation. Every 10 Gy less to a parotid lowers xerostomia risk (e.g. 50 → 40 Gy: 75% → 50%).</p>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
+</section>
+
+<!-- S11 + S12 -->
+<section class="page" id="s11">
+<div class="sechead"><span class="eyebrow">Section 11</span><h2><span class="sectnum">11</span>Names and RayStation implementation</h2></div>
+<table>
+<thead><tr><th style="width:30%">Target (DAHANCA)</th><th>Suggested TG-263 style</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV-T, GTV-N</td><td>GTVp, GTVn1, GTVn2 …</td></tr>
+<tr><td class="b">CTV1, CTV2, CTV3</td><td>CTV_7000 (or 6600/6800), CTV_6000, CTV_5000</td></tr>
+<tr><td class="b">PTV1–3</td><td>PTV_7000, PTV_6000, PTV_5000 (+ skin-cropped evaluation copies)</td></tr>
+<tr><td class="b">Elective levels</td><td>CTVn_L2_L, CTVn_L3_R … (build per level, then union)</td></tr>
+<tr><td class="b">OARs</td><td>SpinalCord, Brainstem, OpticChiasm, OpticNrv_L/R, Parotid_L/R, Glnd_Submand_L/R, Cavity_Oral, Musc_Constrict_S/M/I, Larynx_SG/Glottic, Esophagus, Glnd_Thyroid, Cochlea_L/R, Bone_Mandible, Lips, BrachialPlex_L/R (DAHANCA names: PCM_Up/Mid/Low, LarynxSG, LarynxG, OralCavity)</td></tr>
+</tbody>
+</table>
+<div class="stepbox"><b>ROI algebra (definitive)</b>
+<ol class="steps">
+<li><code>CTV1</code> = (GTVp + 5 mm) ∪ (GTVn + 5 mm) − air − uninvolved bone</li>
+<li><code>CTV2</code> = (GTVp + 10 mm) − air − bone − barriers ∪ CTV1 (check ≤12 mm from GTV)</li>
+<li><code>CTV3</code> = CTV2 ∪ elective levels</li>
+<li>PTVs = CTV + departmental margin; <code>PTV_6000only</code> = PTV_6000 − PTV_7000; <code>PTV_5000only</code> = PTV_5000 − PTV_6000</li>
+</ol></div>
+<p class="src">Local template not in the folder <span class="chk">CHECK</span>.</p>
+<hr class="soft"/>
+<div class="sechead" id="s12"><span class="eyebrow">Section 12</span><h2><span class="sectnum">12</span>References</h2></div>
+<ol class="ref">
+<li>Grégoire V, Ang K, Budach W, et al. Delineation of the neck node levels for head and neck tumors: a 2013 update. Radiother Oncol 2014;110:172–181.</li>
+<li>Grégoire V, Evans M, Le QT, et al. Delineation of the primary tumour CTV (CTV-P) in laryngeal, hypopharyngeal, oropharyngeal and oral cavity squamous cell carcinoma. Radiother Oncol 2018;126:3–24.</li>
+<li>Biau J, Lapeyre M, Troussier I, et al. Selection of lymph node target volumes for definitive head and neck radiation therapy: a 2019 update. Radiother Oncol 2019;134:1–9.</li>
+<li>DAHANCA Radiotherapy Guidelines 2018 (September 2018).</li>
+<li>Lin SJ, Guo QJ, Liu Q, et al. International consensus guideline on delineation of the clinical target volumes at different dose levels for nasopharyngeal carcinoma (2024 version). Int J Radiat Oncol Biol Phys 2025;123:415–431.</li>
+<li>Porceddu SV, Daniels C, Yom SS, et al. HNCIG consensus guidelines for the delivery of postoperative radiation therapy in complex cutaneous SCC of the head and neck. Int J Radiat Oncol Biol Phys 2020;107:641–651.</li>
+<li>Ko HC, Gupta V, et al. A contouring guide for head and neck cancers with perineural invasion. Pract Radiat Oncol 2014;4:e247–e258.</li>
+<li>Owadally W, et al. PATHOS: risk-stratified reduced intensity adjuvant treatment after TORS for HPV+ OPSCC. BMC Cancer 2015;15:602.</li>
+<li>Brouwer CL, Steenbakkers RJ, Bourhis J, et al. CT-based delineation of organs at risk in the head and neck region. Radiother Oncol 2015;117:83–90. eviQ head and neck critical structures contouring atlas (2008).</li>
+<li>Le Guevelou J, Bastit V, Marcy PY, et al. Flap delineation guidelines in postoperative head and neck radiation therapy. Radiother Oncol 2020;151:256–265. Lee AW, et al. International guideline for the delineation of the CTVs for NPC (2017/2018).</li>
+</ol>
+<p class="ref"><b>In folder, not yet used:</b> trigeminal nerve atlas (2018), PNS clinical guideline (2018), parotid extension pathways (2022), ESTRO base of skull (2021), ASTRO oropharynx guideline, SPECT-guided ENI (2020), Yang 2018 NPC volume reduction, Italian guidelines. <b>Not in folder:</b> Evans 2025 ESTRO post-op oral cavity; departmental H&amp;N protocol. <b>eviQ:</b> see the eviQ tabs on the head and neck pages.</p>
+<div class="flag"><span class="lbl">Before clinical use</span> Schematics are original and not to scale. Have a colleague review this page and confirm items marked CHECK.</div>
+<div class="foot"><span>H&amp;N RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
+</section>
+</body>
+</html>

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Liver SBRT Organs at Risk Contouring Protocol</title>
+<style>
+  :root{
+    --navy:#10243f; --navy2:#1d3a5f;
+    --teal:#14756b; --teal-bg:#e7f3f1;
+    --amber:#9a5a00; --amber-bg:#fdf3e3;
+    --rust:#8a2f23; --rust-bg:#fbeae7;
+    --paper:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6b7c;
+    --rule:#d6dde6;
+    --rule-strong:#14756b;
+    --dose-elective:#2f6fb0;
+    --dose-bed:#9a5a00;
+    --dose-sib:#c0721c;
+    --dose-boost:#8a2f23;
+    --dose-prostate:#b03a2e;
+    --flag:#8a2f23; --flag-bg:#fbeae7;
+    --key-bg:#e7f3f1;
+    --petrol:#10243f;
+    --petrol-2:#14756b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;background:#e6ebf0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:10.3px;line-height:1.5;
+  }
+  .page{
+    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
+    padding:16mm 17mm 14mm;position:relative;
+    box-shadow:0 1px 8px rgba(16,36,63,.16);
+    display:flex;flex-direction:column;
+  }
+  @page{size:A4;margin:13mm;}
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .page + .page{page-break-before:always;}
+    h2,h3{page-break-after:avoid;}
+    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
+  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
+  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
+  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
+  p{margin:.35em 0;}
+  a{color:var(--teal);}
+  .lead{font-size:11px;color:var(--muted);}
+  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
+  .sechead{margin:0 0 .5em;}
+  .sechead .eyebrow{display:block;margin-bottom:3px;}
+  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
+  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
+  .masthead h1{color:#fff;}
+  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
+  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
+  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
+  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
+  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
+  tbody tr:nth-child(even){background:#eef2f6;}
+  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
+  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
+  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
+  .p-elect{background:var(--dose-elective);}
+  .p-bed{background:var(--dose-bed);}
+  .p-sib{background:var(--dose-sib);}
+  .p-boost{background:var(--dose-boost);}
+  .p-pros{background:var(--dose-prostate);}
+  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
+  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
+  .flag .lbl:before{content:"\26A0  ";}
+  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
+  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
+  ol.steps li{margin:.28em 0;padding-left:.15em;}
+  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
+  ul.tight{margin:.25em 0;padding-left:1.15em;}
+  ul.tight li{margin:.18em 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid2>div{min-width:0;}
+  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
+  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  svg{display:block;width:100%;height:auto;}
+  .kv{font-size:9.3px;}
+  .kv b{color:var(--navy);}
+  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
+  .ref{font-size:8.6px;line-height:1.4;}
+  .ref li{margin:.2em 0;}
+  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
+  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
+  .named .pos{font-weight:700;color:var(--amber);}
+  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc td{border:none;padding:2px 4px;}
+  .toc .n{color:var(--teal);font-weight:700;width:24px;}
+  .toc .pg{text-align:right;color:var(--muted);width:32px;}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
+  .small{font-size:8.6px;color:var(--muted);}
+
+  .p-liver{background:#a14a0b;}
+  .p-gi{background:#c0721c;}
+  .p-hbt{background:#6b3fa8;}
+  .p-mrl{background:#0d7366;}
+  .p-chk{background:#fff;color:#8a2f23;border:1.2px solid #8a2f23;font-size:7.6px;padding:0 5px;}
+</style>
+<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}svg,img{max-width:100%;height:auto}.grid2{grid-template-columns:1fr!important}}</style><style id="site-band">body{border-top:6px solid #a14a0b}</style></head>
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gi-hepatobiliary.html" style="color:#9fe0d6;text-decoration:none">Liver &amp; biliary page</a><a href="../mrl-liver-gi.html" style="color:#9fe0d6;text-decoration:none">MR-linac liver &amp; upper GI</a><a href="biliary.html" style="color:#9fe0d6;text-decoration:none">Biliary target protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<!-- ============================ PAGE 1 : COVER ============================ -->
+<section class="page">
+<div class="masthead">
+<span class="eyebrow">Departmental Contouring Protocol · Upper GI / Hepatobiliary Radiation Oncology</span>
+<h1>Liver SBRT — Organs at Risk Delineation Protocol</h1>
+<p class="sub">Organ-at-risk delineation for stereotactic radiotherapy to <b>hepatocellular carcinoma, cholangiocarcinoma and liver metastases</b>, on <b>CT simulation</b> and on the <b>MR-linac with daily online adaptation</b>. Built on the RTOG upper abdominal CT atlas, the MRI upper abdominal OAR atlas, the central hepatobiliary tract (cHBT) literature and UK SABR Consortium 2022 constraints, with RayStation implementation.</p>
+<div class="pillrow">
+<span class="pill p-liver">Parallel: liver, kidneys</span>
+<span class="pill p-gi">Serial luminal GI</span>
+<span class="pill p-hbt">Central hepatobiliary tract</span>
+<span class="pill p-mrl">MR-linac online re-contour</span>
+<span class="pill p-chk">check = verify against source</span>
+</div>
+<div class="meta">RTOG atlas · MRI OAR atlas · Osmundson / Toesca cHBT · UK SABR 2022 · HyTEC · SMART · TG-263 · eviQ  —  Version 1.1 (Nov 2026)</div>
+</div>
+<div class="callout">
+<span class="lbl">Governing principles of this protocol</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>Target volumes are out of scope.</b> GTV, ITV and PTV rules for liver SBRT are on the <a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick protocol</a> (cholangiocarcinoma: <a href="biliary.html">biliary protocol</a>); dose and patient selection are on the <a href="../gi-hepatobiliary.html">Liver and biliary page</a>. This document is about what to protect and how to draw it.</li>
+<li><b>Liver is a parallel organ, so the GTV comes out of it.</b> Much of the liver dose–volume and NTCP work used liver minus GTV, and leaving the tumour in overstates the dose to functioning liver (Miften, HyTEC 2021).</li>
+<li><b>Luminal GI organs are serial and mobile.</b> Their near-maximum doses drive most liver SBRT plans, and on the MR-linac they are re-contoured every fraction near the PTV.</li>
+<li><b>Central and primary liver tumours get a cHBT.</b> The 15 mm portal-vein expansion is the best-studied surrogate for biliary toxicity, a main late risk of central SBRT in primary liver cancer.</li>
+<li>Where sources disagree (re-contouring extent, cHBT definition), both are shown as <b>named positions</b> with the default this page follows. Items needing <b>departmental physics or governance sign-off</b> are flagged.</li>
+</ul>
+</div>
+<h3 style="margin-top:1.1em;">Contents</h3>
+<table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, simulation &amp; imaging for OARs</a></td><td class="pg">2</td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Which OARs, and how much of each</a></td><td class="pg">3</td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Organ-by-organ definitions (CT and MRI)</a></td><td class="pg">4</td></tr>
+<tr><td class="n">3b</td><td><a href="#s3b">Cranio-caudal walkthrough for a liver case</a></td><td class="pg">6</td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Central hepatobiliary tract (cHBT) and bile duct</a></td><td class="pg">7</td></tr>
+<tr><td class="n">5</td><td><a href="#s5">MR-linac: online re-contouring</a></td><td class="pg">9</td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Pearls &amp; common errors</a></td><td class="pg">11</td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Dose, margins &amp; IGRT: where to find them</a></td><td class="pg">12</td></tr>
+<tr><td class="n">8</td><td><a href="#s8">OAR dose constraints</a></td><td class="pg">12</td></tr>
+<tr><td class="n">9</td><td><a href="#s9">RayStation implementation &amp; TG-263 names</a></td><td class="pg">14</td></tr>
+<tr><td class="n">10</td><td><a href="#s10">References</a></td><td class="pg">15</td></tr>
+</table>
+<div class="flag">
+<span class="lbl">Source status for version 1.1</span>
+<p style="margin:3px 0 0;">Section 3 is now taken from the full RTOG atlas text (Jabbour 2014 author manuscript). The MRI atlas (Lukovic 2020), the UK 2022 published tables and Osmundson 2015 were still read from abstracts or author manuscripts only, so the MRI-specific details, some constraint columns and the cHBT cropping rule remain <span class="pill p-chk">check</span>. Every number elsewhere is cited; open items are listed in <code>notes/figures-to-verify.md</code>.</p>
+</div>
+<p class="small" style="margin-top:14px;">Version 1.0 · Educational departmental reference. Clinical judgement, institutional policy, eviQ protocols 4024 / 4026 and current guideline versions take precedence. Not a substitute for the source publications, which hold the full image sets. To be peer-reviewed by a colleague before clinical use.</p>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 1</span></div>
+</section>
+
+<!-- ============================ PAGE 2 : SCOPE / IMAGING ============================ -->
+<section class="page" id="s1">
+<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, simulation &amp; imaging for OARs</h2></div>
+<p>This protocol covers OAR delineation for photon SBRT/SABR to the liver in 1–5 (occasionally 8) fractions: HCC, intrahepatic cholangiocarcinoma and liver metastases, planned on CT (C-arm linac) or on MRI with daily online adaptation (MR-linac). The same OAR set applies to both; Section 5 adds the online-adaptive rules.</p>
+<h3>1.1  Simulation details that change the OARs</h3>
+<ul class="tight">
+<li><b>Motion management sets which anatomy you contour.</b> Contour OARs on the same breathing state that the plan is delivered in: end-exhale breath-hold or gated scan for gated delivery; the average (or MidV) dataset for free-breathing ITV delivery. On the MR-linac, T2 navigator images show the exhale position, and 3D Vane is closer to the time-averaged position (see <a href="../mrl-images.html">MR-linac sequences and signal</a>).</li>
+<li><b>Stomach filling.</b> Simulate and treat with the same fasting instruction so that stomach and duodenal position is reproducible; the site's liver technique card recommends an empty stomach (<a href="../gi-hepatobiliary.html">Liver and biliary page</a>). Fasting duration is departmental <span class="pill p-chk">check</span>.</li>
+<li><b>On the MR-linac,</b> a glass of water shortly before each fraction makes the stomach and duodenum bright on TrueFISP and T2 images, and an antiperistaltic (e.g. butylscopolamine) reduces motion artefact (MR-guided liver RT review, <i>Front Oncol</i> 2021). In a pilot pancreatic MRgOART study, interobserver agreement (Dice) for luminal OARs was higher when butylscopolamine was given (Chiba group, <i>Front Oncol</i> 2024). Use only within a departmental protocol <span class="pill p-chk">check</span>.</li>
+</ul>
+<h3>1.2  CT</h3>
+<ul class="tight">
+<li>Contrast-enhanced, multiphase planning CT (arterial, portal venous and delayed) per the site's <a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick protocol</a>. The portal venous phase is the phase to draw the <b>portal vein</b> (cHBT seed, Section 4), IVC and bowel wall from.</li>
+<li>The RTOG CT atlas (Jabbour 2014) was written for RTOG 1112 (SBRT then sorafenib vs sorafenib in HCC) on a breath-hold, portal venous phase CT with 3 mm slices, IV contrast and 1000 mL of oral water. Agreement (κ) between expert contours: liver 0.94, stomach 0.90, duodenum 0.87, oesophagus 0.62, CBD 0.42, GOJ 0.41. Expect the most variation, and spend the most care, on the <b>GOJ and CBD</b>, and on the caudate and D4, which were often missed.</li>
+</ul>
+<h3>1.3  MRI (diagnostic fusion and MR-linac)</h3>
+<ul class="tight">
+<li>The MRI upper abdominal OAR atlas (Lukovic 2020, Princess Margaret–led international panel) was contoured on two diagnostic sequences — <b>gadoxetic acid T1 in the hepatobiliary phase</b> and axial <b>balanced steady-state free precession</b> (TrueFISP type) — plus two clinical sequences from commercial MR-linac systems.</li>
+<li>Compared with CT, MRI showed the <b>liver and biliary tree</b> best on hepatobiliary-phase gadoxetic T1, and intrahepatic and upper abdominal <b>vessels</b> more clearly. The bile duct and biliary tree are highlighted as structures better seen on MRI than CT.</li>
+<li>The full DICOM and DICOM-RT data sets (diagnostic and MR-linac) are free for teaching at <a href="https://econtour.org/" target="_blank" rel="noopener">econtour.org</a>. Use them to calibrate new contourers and RTTs.</li>
+<li>Register diagnostic MRI to the planning scan on the <b>liver</b>, not bone, in the matching breathing phase.</li>
+</ul>
+<div class="callout">
+<span class="lbl">Structure-naming convention used throughout</span>
+<p style="margin:4px 0 0;">OAR names follow AAPM <b>TG-263</b> (Section 9): capitalised first letter, no spaces, underscores between categories, at most 16 characters, and a <code>z</code> prefix for planning helpers that are not clinical structures (e.g. <code>z_cHBT15</code>).</p>
+</div>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 2</span></div>
+</section>
+
+<!-- ============================ PAGE 3 : OAR SET ============================ -->
+<section class="page" id="s2">
+<div class="sechead"><span class="eyebrow">Section 2</span><h2><span class="sectnum">2</span>Which OARs, and how much of each</h2></div>
+<p class="small" style="margin-top:-2px;">Organ extents from the RTOG atlas (Jabbour 2014); constraint types from the UK SABR Consortium 2022 consensus (Diez 2022); liver volume rules from HyTEC (Miften 2021); neighbours by segment from the site's <a href="../mrl-liver-gi.html">MR-linac liver page</a>.</p>
+<h3>2.1  Core OAR set</h3>
+<table>
+<thead><tr><th style="width:17%">OAR</th><th style="width:17%">Contour when</th><th style="width:16%">Extent</th><th>Why it matters / metric type</th></tr></thead>
+<tbody>
+<tr><td class="b">Liver; Liver−GTV</td><td>Always</td><td>Whole organ</td><td>Parallel organ: mean dose and the critical volume spared (D≥700 cc). Exclude the GTV (sum of all GTVs when several are treated) — HyTEC. Report absolute as well as relative volumes, because total-liver contours vary between observers, especially in cirrhosis.</td></tr>
+<tr><td class="b">Stomach</td><td>Always</td><td>Whole organ</td><td>Serial: D0.1cc and D10cc. Usually close to segment 2/3, 4 and caudate lesions.</td></tr>
+<tr><td class="b">Duodenum</td><td>Always</td><td>Whole organ, pylorus to ligament of Treitz (Jabbour 2014)</td><td>Serial: D0.1cc and D10cc. Usually close to segment 4, 5/6 and hilar lesions.</td></tr>
+<tr><td class="b">Small bowel</td><td>Always</td><td>Loops in the dose region <span class="pill p-chk">check</span></td><td>Serial: D0.1cc, D5cc / D10cc. Inferior right lobe lesions (segments 5/6).</td></tr>
+<tr><td class="b">Large bowel</td><td>Lesions near the hepatic flexure or transverse colon</td><td>Loops in the dose region <span class="pill p-chk">check</span></td><td>Serial: D0.1cc.</td></tr>
+<tr><td class="b">Oesophagus</td><td>Left lobe, caudate, dome</td><td>At least the abdominal oesophagus and GOJ <span class="pill p-chk">check</span></td><td>Serial: D0.1cc. The GOJ is one of the least reproducible structures in the RTOG atlas.</td></tr>
+<tr><td class="b">Heart</td><td>Dome (segments 2, 4a, 7, 8)</td><td>Whole organ</td><td>D0.1cc.</td></tr>
+<tr><td class="b">Kidneys (L, R)</td><td>Always (or at least ipsilateral)</td><td>Whole organs</td><td>Parallel: combined-kidney D≥200 cc; V10Gy for a solitary or contralateral kidney. Segment 6/7 lesions.</td></tr>
+<tr><td class="b">Spinal canal</td><td>Always</td><td>Bony canal across the dose region</td><td>For non-spinal targets the UK consensus uses the bony canal (excluding foramina) as the cord surrogate, D0.035cc, with no PRV.</td></tr>
+<tr><td class="b">Chest wall; skin</td><td>Peripheral lesions</td><td>Liver + lung expanded 2 cm (Section 3)</td><td>D0.1cc (and D10cc for skin); UK values are optimal, not mandatory.</td></tr>
+<tr><td class="b">Great vessels (IVC, aorta)</td><td>Caudate, segments 7/8, hilar</td><td>Region near PTV</td><td>D0.1cc.</td></tr>
+<tr><td class="b">Bile duct; cHBT</td><td>Central lesions, primary liver cancer, biliary stent</td><td>See Section 4</td><td>Common bile duct D0.1cc; cHBT V40 / V37.7 (5 fx). The cHBT constraint was predictive in primary liver cancer, not metastases.</td></tr>
+<tr><td class="b">Spleen</td><td>When in the dose region</td><td>Whole organ</td><td>No limit set; UK 2022 asks for the mean dose to be reported.</td></tr>
+<tr><td class="b">Lungs</td><td>Dome lesions</td><td>Whole organs</td><td>Use the thoracic SABR constraint set <span class="pill p-chk">check</span>.</td></tr>
+</tbody>
+</table>
+<h3>2.2  Which OARs sit near which segments</h3>
+<div class="grid2">
+<div>
+<table>
+<thead><tr><th style="width:36%">Lesion location</th><th>OARs most likely within 2 cm</th></tr></thead>
+<tbody>
+<tr><td class="b">Segments 2/3</td><td>Stomach, oesophagus/GOJ, heart</td></tr>
+<tr><td class="b">Segment 4 / hilum</td><td>Central biliary tree, portal vein, D1, antrum</td></tr>
+<tr><td class="b">Segments 5/6</td><td>Duodenum (bulb, D2), hepatic flexure, gallbladder, right kidney</td></tr>
+<tr><td class="b">Segment 7</td><td>Right kidney, adrenal, chest wall, IVC</td></tr>
+<tr><td class="b">Segment 8 / dome</td><td>Heart, right lung base, chest wall, IVC</td></tr>
+<tr><td class="b">Caudate (1)</td><td>IVC, portal vein, biliary tree, stomach, oesophagus</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<div class="flag">
+<span class="lbl">Departmental decision</span>
+<p style="margin:3px 0 0;">The RTOG panel recommends contouring the <b>entire duodenum</b>, because partial contours make dose–volume limits hard to compare. For example, the Stanford pancreatic SBRT duodenal model contoured only 1 cm beyond the PTV cranio-caudally and 3 cm radially. The extent for small and large bowel and the oesophagus is not fixed by the sources: set a departmental rule so D5cc/D10cc metrics are comparable between patients.</p>
+</div>
+<div class="callout">
+<span class="lbl">Two lesions, one liver</span>
+<p style="margin:3px 0 0;">When two liver GTVs are treated in one course, assess constraints on the <b>summed</b> plan. UK 2022 recommends 5 fractions for multiple liver lesions, meeting the single-lesion constraints, with at least 40 hours between treatments.</p>
+</div>
+</div>
+</div>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 3</span></div>
+</section>
+
+<!-- ============================ PAGE 4 : ORGAN DEFINITIONS ============================ -->
+<section class="page" id="s3">
+<div class="sechead"><span class="eyebrow">Section 3</span><h2><span class="sectnum">3</span>Organ-by-organ definitions — liver and luminal GI</h2></div>
+<p class="small" style="margin-top:-2px;">Source: RTOG upper abdominal atlas (Jabbour 2014). The consensus definitions are in the text, not a table: 12 radiation oncologists and an abdominal radiologist, one breath-hold portal-venous-phase CT (3 mm slices, 100 mL IV contrast, 1000 mL oral water). The axial atlas images are on the NRG/RTOG contouring atlas site. MRI tips are from Lukovic 2020 and the site's MR-linac pages.</p>
+<table>
+<thead><tr><th style="width:12%">OAR</th><th style="width:15%">Cranial / start</th><th style="width:15%">Caudal / end</th><th>Include / exclude (Jabbour 2014)</th><th style="width:25%">Tips</th></tr></thead>
+<tbody>
+<tr><td class="b">Liver</td><td>Dome</td><td>Tip of the right lobe</td><td>Include segment I (caudate) completely, and intrahepatic branches of the portal vein and other vessels. <b>Exclude the gallbladder.</b> Exclude the IVC where it is discrete and separate from the liver. <b>Portal vein rule:</b> exclude the main PV only where the caudate process ("caudate tail") lies posterior to it; include the PV where segment I lies to its left. Then make Liver−GTV.</td><td>Segment I was completely missed by 27% and partly covered by 36% of the expert contours. Identify the three hepatic veins and the main PV before contouring.</td></tr>
+<tr><td class="b">Stomach</td><td>Fundus, abutting the left hemidiaphragm</td><td>Pylorus</td><td>One organ: cardia (begins caudal to the GOJ), fundus, body, antrum and pylorus. Outer wall with contents.</td><td>Oral contrast is recommended to show the gastric wall. Near-perfect agreement (κ 0.90).</td></tr>
+<tr><td class="b">Duodenum</td><td>Immediately caudal to the pylorus (D1)</td><td>Duodenojejunal junction at the ligament of Treitz</td><td><b>Contour the entire duodenum</b> so dose–volume limits can be compared. D1 (about 5 cm, the only intraperitoneal part) has the CBD, PV and IVC behind it. D2 descends right of L1–L3, lateral to the IVC, attached to the pancreatic head (ampulla medially). D3 turns medially at L3 and crosses left, anterior to the aorta and IVC and posterior to the SMA/SMV. D4 ascends left of L3 to the inferior pancreatic body.</td><td>D4 was often missed. Use coronal views for an under-distended D3. The <b>IMV</b> marks the duodenum–jejunum transition. κ 0.87.</td></tr>
+<tr><td class="b">Small bowel</td><td>First loop beyond the ligament of Treitz</td><td>Caudal edge of the dose region <span class="pill p-chk">check</span></td><td>Jejunum and ileum as individual loops, tracked slice by slice from proximal to distal without the intervening mesentery. A bowel bag is <b>not</b> routinely recommended for upper abdominal planning, because maximum bowel dose is what matters clinically.</td><td>Bowel bag is acceptable only without oral contrast or when little large bowel is in the upper abdomen.</td></tr>
+<tr><td class="b">Large bowel</td><td>Hepatic flexure / transverse colon near the PTV</td><td>Caudal edge of the dose region <span class="pill p-chk">check</span></td><td>Tracked slice by slice and kept separate from small bowel, as above.</td><td>Haustra and stool; the hepatic flexure lies against segments V/VI.</td></tr>
+<tr><td class="b">Oesophagus</td><td>Through the dose region <span class="pill p-chk">check</span></td><td>GOJ</td><td>Outer wall. Jabbour gives consensus contours (κ 0.62, substantial) but no written border rule; use the RTOG thoracic atlas convention (Kong 2011) <span class="pill p-chk">check</span>.</td><td>Follow the thick-walled tube through the hiatus in sagittal view.</td></tr>
+<tr><td class="b">GOJ (optional)</td><td>Most distal oesophagus</td><td>Cardia of the stomach</td><td>Wedge-shaped contour overlapping the distal oesophagus and cardia. The Z-line lies 3–5 cm below the phrenoesophageal ligament insertion; on axial CT the GOJ may look thickened at the lower oesophageal sphincter. Not routinely contoured.</td><td>Lowest agreement of all organs (κ 0.41). Attached to the liver at the fissure for the ligamentum venosum.</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>3.1  Liver contour rules that change the numbers</h3>
+<ul class="tight">
+<li><b>GTV out.</b> Liver−GTV (or liver minus the sum of GTVs) is the structure for mean dose and D≥700 cc; much of the liver dose–volume and NTCP work used it (HyTEC).</li>
+<li><b>Caudate in, gallbladder out.</b> These are the two commonest liver contour errors (Jabbour 2014).</li>
+<li><b>Simple vessel rule.</b> Keep intrahepatic vessels inside the liver. Remove the main PV only where the caudate tail separates it from the IVC (Jabbour Fig 1).</li>
+<li><b>Same phase as the dose calculation.</b> Draw the liver on the dataset used for dose, not the arterial phase used to define an HCC.</li>
+<li><b>Cirrhosis.</b> Small inconsistencies in the liver contour matter more when the spared volume is close to 700 cc (HyTEC).</li>
+</ul>
+</div>
+<div>
+<h3>3.2  Couinaud planes (Jabbour 2014)</h3>
+<ul class="tight">
+<li><b>Right vs left lobe:</b> vertical plane through the gallbladder fossa and middle hepatic vein.</li>
+<li><b>Right anterior (V, VIII) vs posterior (VI, VII):</b> vertical plane through the right hepatic vein.</li>
+<li><b>Left lateral (II, III) vs medial (IV):</b> left hepatic vein and falciform ligament.</li>
+<li><b>Superior (VII, VIII) vs inferior (V, VI):</b> plane of the main right and left portal veins.</li>
+<li>Segment I (caudate) is part of the left lobe and sits between the PV and IVC.</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 4</span></div>
+</section>
+
+<!-- ============================ PAGE 5 : ORGAN DEFINITIONS cont ============================ -->
+<section class="page">
+<div class="sechead"><span class="eyebrow">Section 3 (cont.)</span><h2><span class="sectnum">3</span>Organ-by-organ definitions — other OARs</h2></div>
+<table>
+<thead><tr><th style="width:14%">OAR</th><th style="width:20%">Extent</th><th>Include / exclude</th><th style="width:28%">Tips / source</th></tr></thead>
+<tbody>
+<tr><td class="b">Common bile duct</td><td>From the first bifurcation (or its entry into the portal triad) down past D1 to the ampulla in D2</td><td>Duct wall and lumen. Formed by the cystic duct and the common hepatic duct (about 4 cm); typically 8–10 cm long and 5–6 mm wide. Passes posterior and medial to the duodenum and joins the pancreatic duct at the ampulla of Vater. The consensus contour had to be extended down to D2.</td><td>κ 0.42 (moderate); only 9 of 12 experts completed it on CT. Draw on fused MRI (Section 4). Caudate tumours can put high dose on the CBD (Jabbour 2014).</td></tr>
+<tr><td class="b">Portal vein</td><td>Splenic confluence to first bifurcation</td><td>Formed behind the pancreatic neck by the SMV and splenic vein; lies posterior to the CBD and hepatic artery. Seed for the cHBT (Section 4).</td><td>The bifurcation is extrahepatic in 26%, at the capsule in 26% and intrahepatic in 48% (Jabbour 2014), so find it in coronal view.</td></tr>
+<tr><td class="b">Kidneys</td><td>Whole organ, upper to lower pole</td><td>Each kidney separately; <b>include the renal pelvis</b> (Jabbour 2014). Make a combined structure for D≥200 cc.</td><td>Easy on CT and both MR-linac sequences.</td></tr>
+<tr><td class="b">Chest wall</td><td>Region near the PTV</td><td>2 cm auto-expansion of the liver and lung anteriorly, posteriorly and laterally, taking in the ribs and chest wall soft tissue but <b>excluding the sternum and vertebral bodies</b> (Jabbour 2014, following the RTOG lung atlas).</td><td>Peripheral segment VI/VII/VIII lesions; UK limits are optimal only. ROI algebra in Section 9.</td></tr>
+<tr><td class="b">Spinal canal</td><td>Through the dose region</td><td>Bony spinal canal as the cord surrogate for non-spinal targets; exclude neural foramina; no PRV (UK 2022). Use the cord with a 1–3 mm PRV only if the department follows the spinal-SABR convention.</td><td>Canal edges are clearest on CT bone window.</td></tr>
+<tr><td class="b">Heart <span class="pill p-chk">check</span></td><td>Near the PTV</td><td>Jabbour shows consensus heart contours but no written rule; use the RTOG thoracic convention (Kong 2011).</td><td>Dome lesions only; the inferior wall sits on segments II, IVA and VIII.</td></tr>
+<tr><td class="b">Great vessels <span class="pill p-chk">check</span></td><td>Near the PTV</td><td>IVC and aorta, outer wall. The IVC leaves the liver contour where it is discrete from the liver (Jabbour 2014).</td><td>Caudate and segment VII/VIII lesions abut the IVC.</td></tr>
+<tr><td class="b">Spleen</td><td>Whole organ</td><td>Report mean dose only (UK 2022).</td><td>Brighter than liver on T2, darker on T1.</td></tr>
+</tbody>
+</table>
+<figure>
+<svg aria-label="Schematic axial slice at the liver hilum showing OARs" role="img" viewBox="0 0 320 220">
+<rect fill="#fff" height="220" width="320" x="0" y="0"></rect>
+<ellipse cx="160" cy="112" fill="#f4f1ea" rx="150" ry="98" stroke="#e3ddcf"></ellipse>
+<path d="M28 96 Q40 36 120 30 Q170 30 182 62 Q170 92 150 110 Q120 150 70 160 Q30 150 28 96 Z" fill="rgba(161,74,11,.10)" stroke="#a14a0b" stroke-width="2"></path>
+<text fill="#7a3a0a" font-size="9" font-weight="700" x="52" y="80">Liver</text>
+<circle cx="120" cy="118" fill="#e7f0fa" r="10" stroke="#3a6296" stroke-width="1.6"></circle>
+<text fill="#3a6296" font-size="7.5" text-anchor="middle" x="120" y="121">PV</text>
+<circle cx="120" cy="118" fill="none" r="26" stroke="#6b3fa8" stroke-dasharray="4 3" stroke-width="1.6"></circle>
+<text fill="#6b3fa8" font-size="7.5" x="80" y="152">z_cHBT15</text>
+<circle cx="104" cy="106" fill="#fff" r="4" stroke="#0d7366" stroke-width="1.4"></circle>
+<text fill="#0d7366" font-size="7" x="64" y="102">CBD</text>
+<ellipse cx="146" cy="150" fill="#f0e2d0" rx="15" ry="10" stroke="#c69a5f" stroke-width="1.6"></ellipse>
+<text fill="#8a6a3a" font-size="7.5" text-anchor="middle" x="146" y="153">D1</text>
+<path d="M190 60 Q232 44 266 70 Q280 100 252 122 Q218 132 196 112 Q182 90 190 60 Z" fill="#f6e9dc" stroke="#c69a5f" stroke-width="1.6"></path>
+<text fill="#8a6a3a" font-size="8.5" text-anchor="middle" x="230" y="94">Stomach</text>
+<circle cx="168" cy="168" fill="#e7f0fa" r="9" stroke="#3a6296"></circle>
+<text fill="#3a6296" font-size="7" text-anchor="middle" x="168" y="170">IVC</text>
+<circle cx="196" cy="172" fill="#fbeae7" r="8" stroke="#8a2f23"></circle>
+<text fill="#8a2f23" font-size="7" text-anchor="middle" x="196" y="174">Ao</text>
+<ellipse cx="102" cy="190" fill="#eef2f6" rx="20" ry="14" stroke="#5b6b7c"></ellipse>
+<text fill="#5b6b7c" font-size="7.5" text-anchor="middle" x="102" y="193">R kidney</text>
+<rect fill="#eef2f6" height="14" rx="3" stroke="#5b6b7c" width="16" x="174" y="196"></rect>
+<text fill="#5b6b7c" font-size="6.5" text-anchor="middle" x="182" y="206">canal</text>
+<path d="M262 128 Q290 140 284 170 Q262 182 248 160 Q246 140 262 128 Z" fill="#f4eef8" stroke="#6b3fa8" stroke-width="1"></path>
+<text fill="#6b3fa8" font-size="7.5" text-anchor="middle" x="266" y="158">Spleen</text>
+</svg>
+<figcaption>Schematic axial slice just below the portal bifurcation (anterior at top, patient's right on the left). Liver (Liver−GTV for dose), portal vein with its 15 mm cHBT expansion (dashed), CBD anterolateral to the portal vein, duodenal bulb, stomach, IVC, aorta, right kidney, spleen and bony canal. Original diagram, not to scale; not copied from any atlas.</figcaption>
+</figure>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 5</span></div>
+</section>
+
+<!-- ============================ PAGE 6 : WALKTHROUGH ============================ -->
+<section class="page" id="s3b">
+<div class="sechead"><span class="eyebrow">Section 3b</span><h2><span class="sectnum">3b</span>Cranio-caudal walkthrough for a liver case</h2></div>
+<p>Scroll the whole liver once before drawing anything, orienting on vessels rather than the outline. On T2 nav the hepatic and portal veins are black and the ducts white; together they define every Couinaud segment (site <a href="../mrl-liver-gi.html">MR-linac liver page</a>).</p>
+<table>
+<thead><tr><th style="width:20%">Level</th><th style="width:30%">Landmarks</th><th>OARs to start or finish here</th></tr></thead>
+<tbody>
+<tr><td class="b">1. Dome</td><td>Right hemidiaphragm; heart sits on segments 2, 4a and 8</td><td>Start <b>Heart</b> (dome lesions), <b>Lungs</b>, <b>Chestwall</b>. Liver begins.</td></tr>
+<tr><td class="b">2. Hepatic vein confluence</td><td>Right, middle and left hepatic veins entering the IVC</td><td><b>Esophagus</b> passing through the hiatus; <b>GreatVes</b> (IVC). Fundus of the <b>Stomach</b> begins on the left.</td></tr>
+<tr><td class="b">3. GOJ</td><td>Tubular oesophagus widening into the stomach</td><td>End <b>Esophagus</b>; check the GOJ in sagittal and coronal.</td></tr>
+<tr><td class="b">4. Portal bifurcation</td><td>Horizontal plane splitting superior (2, 4a, 7, 8) from inferior (3, 4b, 5, 6) segments</td><td>Cranial end of the <b>PortalVein</b> seed and the cHBT. Intrahepatic ducts run alongside the portal branches.</td></tr>
+<tr><td class="b">5. Hilum</td><td>CBD anterolateral, portal vein posterior, hepatic artery anteromedial; gallbladder fossa marks Cantlie's line</td><td><b>Bile_Duct_Common</b> starts; portal vein runs caudally and medially; antrum and pylorus of the <b>Stomach</b>; <b>Duodenum</b> D1 begins.</td></tr>
+<tr><td class="b">6. Splenic confluence</td><td>Splenic vein joining the SMV behind the pancreatic neck</td><td>Caudal end of the <b>PortalVein</b> seed. Pancreatic head in the duodenal C-loop.</td></tr>
+<tr><td class="b">7. Renal hila</td><td>D2 right of L1–L3, lateral to the IVC and attached to the pancreatic head; ampulla on its medial wall</td><td><b>Kidney_L/R</b>; end <b>Bile_Duct_Common</b> at the ampulla; hepatic flexure of the <b>Bowel_Large</b>.</td></tr>
+<tr><td class="b">8. D3 / tip of the right lobe</td><td>D3 turns medially at L3 and crosses between the SMA/SMV (in front) and aorta/IVC (behind); D4 ascends left of L3 to the inferior pancreatic body; the IMV marks the duodenojejunal junction</td><td>End <b>Duodenum</b>; <b>Bowel_Small</b> loops below the mesocolon; end the liver.</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<figure>
+<svg aria-label="Sagittal level map of the liver walkthrough" role="img" viewBox="0 0 240 260">
+<rect fill="#fff" height="260" width="240" x="0" y="0"></rect>
+<path d="M40 40 Q120 10 200 40" fill="none" stroke="#5b6b7c" stroke-width="2"></path>
+<text fill="#5b6b7c" font-size="7.5" x="150" y="24">diaphragm</text>
+<path d="M44 46 Q120 24 196 48 Q200 120 150 170 Q100 196 56 160 Q36 100 44 46 Z" fill="rgba(161,74,11,.10)" stroke="#a14a0b" stroke-width="1.8"></path>
+<g font-size="7.5" fill="#10243f">
+<line stroke="#14756b" stroke-dasharray="3 2" x1="20" x2="225" y1="40" y2="40"></line><text x="2" y="38">1</text>
+<line stroke="#14756b" stroke-dasharray="3 2" x1="20" x2="225" y1="62" y2="62"></line><text x="2" y="65">2</text>
+<line stroke="#14756b" stroke-dasharray="3 2" x1="20" x2="225" y1="80" y2="80"></line><text x="2" y="83">3</text>
+<line stroke="#14756b" stroke-dasharray="3 2" x1="20" x2="225" y1="100" y2="100"></line><text x="2" y="103">4</text>
+<line stroke="#14756b" stroke-dasharray="3 2" x1="20" x2="225" y1="120" y2="120"></line><text x="2" y="123">5</text>
+<line stroke="#14756b" stroke-dasharray="3 2" x1="20" x2="225" y1="140" y2="140"></line><text x="2" y="143">6</text>
+<line stroke="#14756b" stroke-dasharray="3 2" x1="20" x2="225" y1="168" y2="168"></line><text x="2" y="171">7</text>
+<line stroke="#14756b" stroke-dasharray="3 2" x1="20" x2="225" y1="200" y2="200"></line><text x="2" y="203">8</text>
+</g>
+<path d="M118 100 L128 140" stroke="#3a6296" stroke-width="5" stroke-linecap="round"></path>
+<path d="M118 100 L128 140" stroke="#6b3fa8" stroke-dasharray="4 3" stroke-opacity=".7" stroke-width="22" stroke-linecap="round" fill="none"></path>
+<text fill="#6b3fa8" font-size="7.5" x="146" y="128">cHBT</text>
+<path d="M150 116 Q166 150 150 178 Q140 196 118 200" fill="none" stroke="#c69a5f" stroke-width="5"></path>
+<text fill="#8a6a3a" font-size="7.5" x="160" y="186">duodenum</text>
+</svg>
+<figcaption>Schematic sagittal map of the eight walkthrough levels. Portal vein (blue) from bifurcation (level 4) to splenic confluence (level 6) with the cHBT halo; duodenal C-loop below. Original diagram, not to scale.</figcaption>
+</figure>
+</div>
+<div>
+<div class="callout">
+<span class="lbl">Order of work</span>
+<ol class="steps" style="margin-top:4px;">
+<li>Liver first (auto-contour allowed, then edit), then Liver−GTV by ROI algebra.</li>
+<li>Stomach and duodenum as one continuous tube from GOJ to DJ flexure, then split at the pylorus.</li>
+<li>Bowel loops in the dose region, tracing each loop slice to slice.</li>
+<li>Portal vein seed → cHBT (if indicated) → CBD on fused MRI.</li>
+<li>Kidneys, canal, heart, chest wall, vessels as indicated by lesion position (Section 2.2).</li>
+<li>Review every luminal OAR in coronal and sagittal before sign-off.</li>
+</ol>
+</div>
+<div class="flag">
+<span class="lbl">Auto-contours</span>
+<p style="margin:3px 0 0;">Auto-contours must be checked manually for every patient (UK 2022). Luminal GI organs and the duodenum–jejunum boundary are where auto-segmentation most often needs editing.</p>
+</div>
+</div>
+</div>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 6</span></div>
+</section>
+
+<!-- ============================ PAGE 7 : cHBT ============================ -->
+<section class="page" id="s4">
+<div class="sechead"><span class="eyebrow">Section 4</span><h2><span class="sectnum">4</span>Central hepatobiliary tract (cHBT) and bile duct</h2></div>
+<p class="small" style="margin-top:-2px;">Sources: Osmundson 2015 (<i>IJROBP</i> 91:986–94; 96 patients); Toesca 2017 (<i>Radiother Oncol</i> 122:130–6; 130 patients); Courtney 2025 (ASTRO abstract, MR-guided SBRT); Thawani 2022 (ASCO GI abstract); UK SABR 2022 (bile duct).</p>
+<h3>4.1  Definition <span class="pill p-hbt">cHBT</span></h3>
+<div class="grid2">
+<div>
+<table>
+<thead><tr><th style="width:32%">Step</th><th>Rule</th></tr></thead>
+<tbody>
+<tr><td class="b">Seed</td><td>Portal vein from the <b>splenic confluence</b> to the <b>first bifurcation</b> into left and right portal veins (Osmundson 2015).</td></tr>
+<tr><td class="b">Expansion</td><td><b>15 mm isotropic</b> (cHBT15). Toesca tested 5, 10, 15, 20 and 25 mm and found 15 mm the most appropriate surrogate.</td></tr>
+<tr><td class="b">Image</td><td>CT portal venous phase, or the portal vein (black) on T2 nav. Draw the seed on the dataset used for dose.</td></tr>
+<tr><td class="b">Cropping</td><td>Published definition is a pure expansion. Whether to subtract the GTV/PTV from the cHBT for evaluation is not stated in the abstracts <span class="pill p-chk">check</span> Osmundson methods.</td></tr>
+<tr><td class="b">Who needs it</td><td>Central lesions near the hilum; primary liver cancer (HCC, cholangiocarcinoma); patients with a biliary stent or prior biliary intervention.</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<figure>
+<svg aria-label="Coronal schematic of the central hepatobiliary tract" role="img" viewBox="0 0 280 230">
+<rect fill="#fff" height="230" width="280" x="0" y="0"></rect>
+<path d="M20 60 Q70 14 170 22 Q240 30 262 64 Q246 92 200 100 Q170 120 150 170 Q100 196 50 170 Q14 130 20 60 Z" fill="rgba(161,74,11,.08)" stroke="#a14a0b" stroke-width="1.8"></path>
+<text fill="#7a3a0a" font-size="9" font-weight="700" x="40" y="70">Liver</text>
+<path d="M150 186 L136 108" fill="none" stroke="#6b3fa8" stroke-linecap="round" stroke-opacity=".22" stroke-width="44"></path>
+<path d="M150 186 L136 108" fill="none" stroke="#2f5d94" stroke-linecap="round" stroke-width="10"></path>
+<path d="M136 108 Q108 92 78 96" fill="none" stroke="#2f5d94" stroke-width="7"></path>
+<path d="M136 108 Q164 90 196 84" fill="none" stroke="#2f5d94" stroke-width="7"></path>
+<path d="M150 186 Q196 192 238 182" fill="none" stroke="#2f5d94" stroke-width="7"></path>
+<text fill="#2f5d94" font-size="7.5" x="200" y="200">splenic vein</text>
+<path d="M150 186 L156 222" fill="none" stroke="#2f5d94" stroke-width="7"></path>
+<text fill="#2f5d94" font-size="7.5" x="160" y="222">SMV</text>
+<circle cx="136" cy="108" fill="#fff" r="3" stroke="#10243f"></circle>
+<text fill="#10243f" font-size="7.5" x="52" y="124">1st bifurcation</text>
+<line stroke="#10243f" stroke-width=".6" x1="104" x2="133" y1="121" y2="110"></line>
+<circle cx="150" cy="186" fill="#fff" r="3" stroke="#10243f"></circle>
+<text fill="#10243f" font-size="7.5" x="62" y="198">splenic confluence</text>
+<line stroke="#10243f" stroke-width=".6" x1="130" x2="147" y1="194" y2="188"></line>
+<path d="M128 112 L120 170" fill="none" stroke="#0d7366" stroke-width="3"></path>
+<text fill="#0d7366" font-size="7.5" x="94" y="158">CBD</text>
+<text fill="#6b3fa8" font-size="8" font-weight="700" x="168" y="140">cHBT15</text>
+<text fill="#6b3fa8" font-size="7" x="168" y="150">PV seed + 15 mm</text>
+</svg>
+<figcaption>Coronal schematic. The portal vein seed (dark blue) runs from the splenic confluence to the first bifurcation; the shaded band is the 15 mm isotropic expansion (cHBT15), which takes in the hilar bile ducts and proximal CBD. Original diagram, not to scale.</figcaption>
+</figure>
+</div>
+</div>
+<h3>4.2  Evidence and constraints</h3>
+<table>
+<thead><tr><th style="width:18%">Source</th><th style="width:30%">Population / structure</th><th>Finding / suggested limit</th></tr></thead>
+<tbody>
+<tr><td class="b">Osmundson 2015</td><td>96 patients (53% primary); cHBT15; BED<sub>10</sub></td><td>18.8% grade 3+ hepatobiliary toxicity. Predictors: VBED<sub>10</sub>72 ≥21 cc (RR 11.6), VBED<sub>10</sub>66 ≥24 cc (RR 10.5), mean BED<sub>10</sub> ≥14 Gy (RR 9.2); also cholangiocarcinoma, primary tumour and biliary stent. Suggested: <b>5 fx V40 &lt;21 cc and V37.7 &lt;24 cc; 3 fx V33.8 &lt;21 cc and V32 &lt;24 cc</b>.</td></tr>
+<tr><td class="b">Toesca 2017</td><td>130 patients; cHBT 5–25 mm</td><td>cHBT dose predicted toxicity only in <b>primary liver cancer</b>. Grade 3+ toxicity: 50% cholangiocarcinoma, 17.5% HCC, 11.7% metastases. Suggested: <b>VBED<sub>10</sub>40 &lt;37 cc and VBED<sub>10</sub>30 &lt;45 cc</b> (primary liver cancer).</td></tr>
+<tr><td class="b">Courtney 2025 (MR-linac)</td><td>41 patients, 44 tumours; MR-guided SBRT (median 50 Gy/5); cHBT15 contoured retrospectively</td><td>Exceeding the Osmundson V40 constraint: OR 11 for a hepatobiliary event; V37.7: OR 19. All events were in patients with baseline liver dysfunction (CP-B/C or raised bilirubin/ALP). Conference abstract.</td></tr>
+<tr><td class="b">Thawani 2022</td><td>40 patients (31 HCC); CBD planned to max &lt;50 Gy; cHBT retrospectively</td><td>No Dmax correlation; all grade 4 events had portal vein thrombosis or hilar disease. Conference abstract.</td></tr>
+<tr><td class="b">UK SABR 2022</td><td>Common bile duct</td><td>D0.1cc <b>50 Gy</b> in 3 and 5 fractions <span class="pill p-chk">check</span> optimal vs mandatory column in Table 3.</td></tr>
+</tbody>
+</table>
+<div class="named"><span class="pos">This page follows:</span> contour <b>z_cHBT15</b> (Osmundson definition) for central lesions and all primary liver cancers, and evaluate the Osmundson physical-dose limits for the fractionation used (V40 &lt;21 cc / V37.7 &lt;24 cc at 5 fx). Also contour the <b>CBD</b> on fused MRI and apply the UK D0.1cc limit. Treat the cHBT limits as strong objectives in metastases, where the association was not seen. Departmental sign-off required.</div>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 7–8</span></div>
+</section>
+
+<!-- ============================ PAGE 9 : MR-LINAC ============================ -->
+<section class="page" id="s5">
+<div class="sechead"><span class="eyebrow">Section 5</span><h2><span class="sectnum">5</span>MR-linac: online re-contouring</h2></div>
+<p>There is no consensus MR-linac contouring guideline for liver OARs. The MRI atlas (Lukovic 2020) defines the organs; how much to re-contour each day comes from trial protocols and planning studies. ESTRO-ACROP's MR-linac implementation recommendations (Corradini 2021) note that re-contouring time is limited with the patient on the table and that departments should supply contouring guidelines and train RTTs on the online tools.</p>
+<h3>5.1  How far from the PTV to re-contour — named positions</h3>
+<table>
+<thead><tr><th style="width:24%">Source</th><th style="width:22%">Setting</th><th>Re-contouring zone</th></tr></thead>
+<tbody>
+<tr><td class="b">SMART pancreas trial (Kim 2020 abstract)</td><td>Multi-institutional, up to 50 Gy/5</td><td>All OARs within <b>3 cm of the PTV</b> on the daily MRI; plan adapted if &gt;1 cc of an OAR was inside the 33 Gy isodose.</td></tr>
+<tr><td class="b">Bohoudi 2017</td><td>Locally advanced pancreas, MRIdian</td><td>OARs within <b>3 cm of the PTV surface</b>; far fewer optimisations than full re-contouring (4 vs 18) with identical PTV coverage.</td></tr>
+<tr><td class="b">Single-fraction SMART protocol (NCT04939246)</td><td>Abdominal SMART in one fraction</td><td>Critical structures within <b>3 cm radially and 2 cm cranio-caudally</b> from the PTV surface.</td></tr>
+<tr><td class="b">Korean pancreas SMART (Radiat Oncol J 2022)</td><td>Pancreas; 2 cm CC (or 3 cm) vs full OAR</td><td>Full re-contouring found more constraint violations (43.6% vs 10.6% of fractions, p=0.075), but <b>none occurred beyond 2 cm</b> from the PTV.</td></tr>
+<tr><td class="b">Chiba pilot (Front Oncol 2024)</td><td>Pancreas MRgOART interobserver study</td><td>Contoured within <b>±2 cm cranio-caudally</b> of the PTV.</td></tr>
+</tbody>
+</table>
+<div class="named"><span class="pos">This page follows:</span> re-contour luminal GI OARs (stomach, duodenum, small and large bowel, oesophagus) and the CBD inside <code>z_Recontour</code> = PTV + <b>3 cm radial and 2 cm cranio-caudal</b> (single-fraction SMART protocol). Outside the zone, accept the propagated contour. For parallel organs, edit Liver−GTV and kidneys only where the edge has moved near the PTV. Evidence comes from pancreas SMART, so the liver default needs departmental sign-off.</div>
+<div class="grid2">
+<div>
+<figure>
+<svg aria-label="Coronal schematic of the online re-contouring zone" role="img" viewBox="0 0 285 220">
+<rect fill="#fff" height="220" width="285" x="0" y="0"></rect>
+<rect fill="rgba(13,115,102,.07)" height="120" rx="14" stroke="#0d7366" stroke-dasharray="5 4" stroke-width="1.6" width="170" x="45" y="50"></rect>
+<text fill="#0d7366" font-size="8" font-weight="700" x="50" y="44">z_Recontour (PTV + 3 cm radial, 2 cm CC)</text>
+<ellipse cx="130" cy="110" fill="rgba(176,58,46,.14)" rx="38" ry="32" stroke="#b03a2e" stroke-width="2"></ellipse>
+<text fill="#8a2f23" font-size="8.5" font-weight="700" text-anchor="middle" x="130" y="113">PTV</text>
+<path d="M200 70 Q236 90 228 140 Q222 176 196 194" fill="none" stroke="#c69a5f" stroke-width="12" stroke-linecap="round"></path>
+<path d="M200 70 Q220 82 215 110" fill="none" stroke="#8a2f23" stroke-width="12" stroke-linecap="round" stroke-opacity=".35"></path>
+<text fill="#8a6a3a" font-size="7.5" x="176" y="214">stomach / duodenum</text>
+<text fill="#8a2f23" font-size="7" x="218" y="72">re-contour</text>
+<text fill="#5b6b7c" font-size="7" x="214" y="196">propagate</text>
+<line stroke="#10243f" stroke-width=".7" x1="130" x2="130" y1="78" y2="50"></line>
+<text fill="#10243f" font-size="7" x="134" y="66">2 cm</text>
+<line stroke="#10243f" stroke-width=".7" x1="168" x2="215" y1="110" y2="110"></line>
+<text fill="#10243f" font-size="7" x="178" y="106">3 cm</text>
+</svg>
+<figcaption>Coronal schematic of the daily re-contouring zone. Luminal OARs are edited where they enter the dashed box; outside it the propagated contour is kept. Original diagram, not to scale.</figcaption>
+</figure>
+</div>
+<div>
+<h3>5.2  Practical online rules</h3>
+<ul class="tight">
+<li><b>Start from the reference.</b> Rigid registration on the liver, not bone, then edit the propagated contours.</li>
+<li><b>Match the image to the delivery.</b> For gated exhale delivery edit on T2 nav; for free-breathing ITV delivery check position on 3D Vane (site <a href="../mrl-images.html">sequences page</a>).</li>
+<li><b>Gas and bulk density.</b> Daily gas in stomach and bowel changes dose; follow the departmental bulk-density override rule (site <a href="../mrl-workflow.html">adaptive workflow page</a>).</li>
+<li><b>Know what drives adaptation.</b> In the SMART trial, a plan was adapted when &gt;1 cc of OAR fell inside the 33 Gy isodose (5 fx).</li>
+<li><b>RTTs can contour online</b> after structured training; in one Unity prostate study, certified MR-linac RTTs trained offline and online for 4–6 weeks.</li>
+</ul>
+<div class="flag">
+<span class="lbl">Physics / clinical review</span>
+<p style="margin:3px 0 0;">Confirm the zone size, which OARs are always re-contoured (e.g. duodenum even beyond the zone in hilar lesions) and the bulk-density convention before adopting this section.</p>
+</div>
+</div>
+</div>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 9–10</span></div>
+</section>
+
+<!-- ============================ PAGE 11 : PEARLS ============================ -->
+<section class="page" id="s6">
+<div class="sechead"><span class="eyebrow">Section 6</span><h2><span class="sectnum">6</span>Pearls &amp; common errors</h2></div>
+<table>
+<thead><tr><th style="width:30%">Error</th><th>Why it matters / fix</th><th style="width:16%">Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Leaving the GTV inside the liver contour</td><td>Overstates dose to functioning liver; constraints were derived on liver minus GTV. Use Liver−GTV (sum of GTVs for multiple lesions).</td><td>HyTEC (Miften 2021)</td></tr>
+<tr><td class="b">Judging the liver by relative volume only</td><td>Total-liver volume varies between observers; check absolute critical volume (D≥700 cc) as well as percentages.</td><td>HyTEC</td></tr>
+<tr><td class="b">Missing the caudate (segment I)</td><td>27% of expert contours missed it and 36% covered it only partly. Include it completely; it sits between the PV and IVC.</td><td>Jabbour 2014</td></tr>
+<tr><td class="b">Stopping the duodenum at D3</td><td>D4 was often missed. Follow it up left of L3 to the ligament of Treitz; the IMV marks the junction.</td><td>Jabbour 2014</td></tr>
+<tr><td class="b">Drawing the CBD on CT alone</td><td>Only moderate agreement on CT (κ 0.42), with 3 of 12 experts not completing it; MRI (hepatobiliary-phase gadoxetic T1, T2) shows the biliary tree better.</td><td>Jabbour 2014; Lukovic 2020</td></tr>
+<tr><td class="b">No cHBT for a hilar HCC or cholangiocarcinoma</td><td>Biliary toxicity is the main late risk of central SBRT in primary liver cancer; biliary stent and cholangiocarcinoma histology add risk.</td><td>Osmundson 2015; Toesca 2017</td></tr>
+<tr><td class="b">Calling D3 "small bowel"</td><td>The loop between the SMA/SMV and the aorta/IVC is D3; jejunum starts at the ligament of Treitz. Mislabelled loops get the wrong constraint.</td><td>Jabbour 2014</td></tr>
+<tr><td class="b">Using a bowel bag for SBRT</td><td>Not routinely recommended in the upper abdomen; maximum bowel dose is what matters, so contour loops.</td><td>Jabbour 2014</td></tr>
+<tr><td class="b">Placing the GOJ by eye on one axial slice</td><td>Lowest agreement in the RTOG atlas (κ 0.41); it may look thickened at the lower oesophageal sphincter, and the Z-line is 3–5 cm below the phrenoesophageal ligament. Check in sagittal and coronal.</td><td>Jabbour 2014</td></tr>
+<tr><td class="b">Using the cord with a PRV for a liver target</td><td>For non-spinal targets the UK consensus applies the cord constraint to the bony canal, with no PRV. Do not mix conventions within a department.</td><td>UK SABR 2022</td></tr>
+<tr><td class="b">Contouring OARs on a different breathing state from the plan</td><td>Luminal OARs move with breathing and filling; draw on the dataset used for dose (exhale vs average).</td><td>Site MR-linac sequences page</td></tr>
+<tr><td class="b">Trusting auto-contours</td><td>Must be checked manually for every patient; peer review encouraged.</td><td>UK SABR 2022</td></tr>
+<tr><td class="b">Treating two lesions as separate plans</td><td>Sum the doses; use 5 fractions for multiple liver lesions and keep ≥40 h between treatments.</td><td>UK SABR 2022</td></tr>
+</tbody>
+</table>
+<div class="callout">
+<span class="lbl">Teaching set</span>
+<p style="margin:3px 0 0;">The Lukovic MRI atlas DICOM sets (diagnostic and MR-linac sequences) on econtour.org are the best calibration exercise for new registrars and MR-linac RTTs: contour stomach, duodenum, CBD and portal vein, then compare.</p>
+</div>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 11</span></div>
+</section>
+
+<!-- ============================ PAGE 12 : DOSE / CONSTRAINTS ============================ -->
+<section class="page" id="s7">
+<div class="sechead"><span class="eyebrow">Section 7</span><h2><span class="sectnum">7</span>Dose, margins &amp; IGRT: where to find them</h2></div>
+<p>Dose selection depends on liver function (Child-Pugh, ALBI) and tumour type and is kept in one place on the site to avoid two versions drifting apart.</p>
+<table>
+<thead><tr><th style="width:32%">Topic</th><th>Where</th></tr></thead>
+<tbody>
+<tr><td class="b">HCC dose by liver function; RTOG 1112 mean-liver de-escalation</td><td><a href="../gi-hepatobiliary.html">Liver and biliary page</a>, HCC tab</td></tr>
+<tr><td class="b">Liver metastases dose; technique, motion management, CTV and PTV margins</td><td><a href="../gi-hepatobiliary.html">Liver and biliary page</a>, Liver mets tab</td></tr>
+<tr><td class="b">GTV, ITV and PTV definitions</td><td><a href="../ctr-kidney-liver.html">Kidney and liver SBRT quick protocol</a></td></tr>
+<tr><td class="b">Conventional-fraction liver and GI constraints (QUANTEC, TG-101)</td><td><a href="../gi-general.html">General GI page</a></td></tr>
+<tr><td class="b">eviQ</td><td>4024 hepatic primary stereotactic EBRT; 4026 hepatic metastases stereotactic EBRT (links in Section 10)</td></tr>
+</tbody>
+</table>
+<p class="small">PTV margins and IGRT method (CBCT with fiducials, breath-hold, gating, or MR-linac adaptation) are departmental <span class="pill p-chk">check</span>.</p>
+
+<section id="s8" style="margin-top:1.2em">
+<div class="sechead"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>OAR dose constraints</h2></div>
+<p class="small" style="margin-top:-2px;">Source: UK 2022 consensus on normal tissue dose-volume constraints for oligometastatic, primary lung and HCC SABR (Diez 2022), Tables 2–5, read from the accepted manuscript. Values are ≤ the figure shown. "opt" and "mand" are given where the paper's text confirms the column; otherwise the column is marked <span class="pill p-chk">check</span>. eviQ 4024/4026 and departmental protocols take precedence.</p>
+<table>
+<thead><tr><th style="width:18%">OAR</th><th style="width:14%">Metric</th><th>3 fractions</th><th>5 fractions</th></tr></thead>
+<tbody>
+<tr><td class="b" rowspan="2">Liver−GTV</td><td>D≥700 cc</td><td>15 Gy opt; 17 Gy mand</td><td>15 Gy opt</td></tr>
+<tr><td>Dmean</td><td>13 Gy opt; 15 Gy mand</td><td>13 Gy; 15.2 Gy <span class="pill p-chk">check</span></td></tr>
+<tr><td class="b" rowspan="2">Stomach</td><td>D0.1cc</td><td>22.2 Gy <span class="pill p-chk">check</span></td><td>33 Gy; 35 Gy mand</td></tr>
+<tr><td>D10cc</td><td>16.5 Gy <span class="pill p-chk">check</span></td><td>25 Gy opt</td></tr>
+<tr><td class="b" rowspan="2">Duodenum</td><td>D0.1cc</td><td>22.2 Gy <span class="pill p-chk">check</span></td><td>33 Gy opt; 35 Gy mand</td></tr>
+<tr><td>D10cc</td><td>11.4 Gy <span class="pill p-chk">check</span></td><td>25 Gy <span class="pill p-chk">check</span></td></tr>
+<tr><td class="b" rowspan="2">Small bowel</td><td>D0.1cc</td><td>25.2 Gy <span class="pill p-chk">check</span></td><td>30 Gy; 35 Gy <span class="pill p-chk">check</span></td></tr>
+<tr><td>D5cc / D10cc</td><td>D5cc 17.7 Gy <span class="pill p-chk">check</span></td><td>D10cc 25 Gy opt</td></tr>
+<tr><td class="b">Large bowel</td><td>D0.1cc</td><td>28.2 Gy <span class="pill p-chk">check</span></td><td>38 Gy mand</td></tr>
+<tr><td class="b">Oesophagus</td><td>D0.1cc</td><td>25.2 Gy <span class="pill p-chk">check</span></td><td>35 Gy mand</td></tr>
+<tr><td class="b">Common bile duct</td><td>D0.1cc</td><td>50 Gy <span class="pill p-chk">check</span></td><td>50 Gy <span class="pill p-chk">check</span></td></tr>
+<tr><td class="b">Kidneys (combined)</td><td>D≥200 cc</td><td>16 Gy <span class="pill p-chk">check</span></td><td>17.5 Gy <span class="pill p-chk">check</span></td></tr>
+<tr><td class="b">Heart</td><td>D0.1cc</td><td>26 Gy opt; 30 Gy <span class="pill p-chk">check</span></td><td>29 Gy opt; 38 Gy <span class="pill p-chk">check</span></td></tr>
+<tr><td class="b">Great vessels</td><td>D0.1cc</td><td>45 Gy mand</td><td>53 Gy mand</td></tr>
+<tr><td class="b">Chest wall</td><td>D0.1cc</td><td>36.9 Gy opt</td><td>43 Gy opt</td></tr>
+<tr><td class="b" rowspan="2">Skin</td><td>D0.1cc</td><td>33 Gy opt</td><td>39.5 Gy opt</td></tr>
+<tr><td>D10cc</td><td>30 Gy opt</td><td>36.5 Gy opt</td></tr>
+<tr><td class="b">Spinal canal (bony)</td><td>D0.035cc</td><td>20.3 Gy <span class="pill p-chk">check</span></td><td>25.3 Gy <span class="pill p-chk">check</span></td></tr>
+<tr><td class="b">Spleen</td><td>Dmean</td><td colspan="2">No limit; report the mean</td></tr>
+<tr><td class="b">cHBT15</td><td>Vx</td><td>V33.8 &lt;21 cc; V32 &lt;24 cc</td><td>V40 &lt;21 cc; V37.7 &lt;24 cc (Osmundson 2015)</td></tr>
+</tbody>
+</table>
+<div class="flag">
+<span class="lbl">Liver-specific conditions (UK 2022)</span>
+<p style="margin:3px 0 0;">Liver constraints apply only to Child-Pugh A6 or better. For HCC, treat the 3-fraction optimal mean liver dose as mandatory. Constraints apply to SABR alone (not re-irradiation); recent or concurrent anti-angiogenic, small-molecule or immunotherapy may raise toxicity risk.</p>
+</div>
+</section>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 12–13</span></div>
+</section>
+
+<!-- ============================ PAGE 14 : RAYSTATION ============================ -->
+<section class="page" id="s9">
+<div class="sechead"><span class="eyebrow">Section 9</span><h2><span class="sectnum">9</span>RayStation implementation &amp; TG-263 names</h2></div>
+<h3>9.1  OAR names (AAPM TG-263)</h3>
+<table>
+<thead><tr><th style="width:30%">Structure</th><th style="width:28%">Name</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>Liver; liver minus GTV</td><td><code>Liver</code>; <code>Liver-GTV</code></td><td>Liver-GTV made by ROI algebra.</td></tr>
+<tr><td>Stomach; duodenum</td><td><code>Stomach</code>; <code>Duodenum</code></td><td></td></tr>
+<tr><td>Small bowel; large bowel</td><td><code>Bowel_Small</code>; <code>Bowel_Large</code></td><td>Loops, not a bag.</td></tr>
+<tr><td>Oesophagus; heart</td><td><code>Esophagus</code>; <code>Heart</code></td><td>TG-263 uses US spelling.</td></tr>
+<tr><td>Kidneys</td><td><code>Kidney_L</code>, <code>Kidney_R</code>, <code>Kidneys</code></td><td><code>Kidneys</code> = union, for D≥200 cc.</td></tr>
+<tr><td>Spinal canal</td><td><code>SpinalCanal</code></td><td>Bony canal surrogate.</td></tr>
+<tr><td>Chest wall; skin; spleen</td><td><code>Chestwall</code>; <code>Skin</code>; <code>Spleen</code></td><td><span class="pill p-chk">check</span> against the TG-263 worksheet.</td></tr>
+<tr><td>Great vessels</td><td><code>GreatVes</code> (or <code>A_Aorta</code>, <code>V_Venacava_I</code>)</td><td><span class="pill p-chk">check</span> worksheet names.</td></tr>
+<tr><td>Common bile duct; portal vein</td><td><code>Bile_Duct_Common</code>; <code>V_Portal</code></td><td><span class="pill p-chk">check</span> worksheet names; use a local name if absent.</td></tr>
+<tr><td>Central hepatobiliary tract</td><td><code>z_cHBT15</code></td><td>Not a TG-263 anatomical structure; <code>z</code> prefix marks a derived helper.</td></tr>
+</tbody>
+</table>
+<h3>9.2  ROI algebra</h3>
+<table>
+<thead><tr><th style="width:26%">ROI</th><th>Operation</th></tr></thead>
+<tbody>
+<tr><td><code>Liver-GTV</code></td><td><code>Liver</code> minus (union of all <code>GTV</code>s), margin 0.</td></tr>
+<tr><td><code>Kidneys</code></td><td><code>Kidney_L</code> ∪ <code>Kidney_R</code> (renal pelvis included in each).</td></tr>
+<tr><td><code>Chestwall</code></td><td>(<code>Liver</code> ∪ <code>Lungs</code>) expanded 2.0 cm A/P/R/L (0 cm S/I), minus (<code>Liver</code> ∪ <code>Lungs</code>), cropped to <code>External</code>; then manually remove the sternum and vertebral bodies (Jabbour 2014 definition; subtraction and cropping are our implementation).</td></tr>
+<tr><td><code>z_cHBT15</code></td><td><code>V_Portal</code> (splenic confluence → first bifurcation) expanded 1.5 cm isotropic. Crop to <code>External</code>. Do not subtract targets unless the department decides to <span class="pill p-chk">check</span>.</td></tr>
+<tr><td><code>z_Recontour</code></td><td><code>PTV</code> expanded 3.0 cm R/L/A/P and 2.0 cm S/I (MR-linac editing zone, Section 5). Display only; not used for optimisation.</td></tr>
+<tr><td><code>z_PTV_opt</code></td><td>Optional: <code>PTV</code> minus a PRV of the limiting luminal OAR, for SIB or coverage compromise, per departmental planning protocol <span class="pill p-chk">check</span>.</td></tr>
+</tbody>
+</table>
+<h3>9.3  Registration &amp; QA</h3>
+<ul class="tight">
+<li>Diagnostic MRI → planning CT: rigid registration on the liver in the matching breathing phase; check at the hilum (portal vein and CBD) and at the lesion.</li>
+<li>Peer review of OARs (with targets) before planning; auto-contours always edited and approved by a clinician (UK 2022).</li>
+<li>On the MR-linac, keep the reference plan's OAR names identical to the online template so that propagation and DVH evaluation work.</li>
+<li>Record in the plan which constraint set was used (UK 2022, eviQ, trial) and whether a cHBT was evaluated.</li>
+</ul>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 14</span></div>
+</section>
+
+<!-- ============================ PAGE 15 : REFERENCES ============================ -->
+<section class="page" id="s10">
+<div class="sechead"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>References</h2></div>
+<h3>10.1  Core sources</h3>
+<ol class="ref">
+<li>Jabbour SK, Hashem SA, Bosch W, <i>et al.</i> Upper abdominal normal organ contouring guidelines and atlas: a Radiation Therapy Oncology Group consensus. <i>Pract Radiat Oncol</i> 2014;4(2):82–9. doi:10.1016/j.prro.2013.06.004. <a href="https://pubmed.ncbi.nlm.nih.gov/24890348/" target="_blank" rel="noopener">PMID 24890348</a>; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4285338/" target="_blank" rel="noopener">PMC4285338</a> (author manuscript used for Section 3).</li>
+<li>Lukovic J, Henke L, Gani C, <i>et al.</i> MRI-based upper abdominal organs-at-risk atlas for radiation oncology. <i>Int J Radiat Oncol Biol Phys</i> 2020;106:743–53. <a href="https://pubmed.ncbi.nlm.nih.gov/31953061/" target="_blank" rel="noopener">PMID 31953061</a>. DICOM sets at econtour.org.</li>
+<li>Osmundson EC, <i>et al.</i> Predictors of toxicity associated with stereotactic body radiation therapy to the central hepatobiliary tract. <i>Int J Radiat Oncol Biol Phys</i> 2015;91:986–94. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Predictors+of+toxicity+associated+with+stereotactic+body+radiation+therapy+to+the+central+hepatobiliary+tract" target="_blank" rel="noopener">PubMed search</a></li>
+<li>Toesca DAS, Osmundson EC, von Eyben R, <i>et al.</i> Central liver toxicity after SBRT: an expanded analysis and predictive nomogram. <i>Radiother Oncol</i> 2017;122:130–6. <a href="https://pubmed.ncbi.nlm.nih.gov/27865544/" target="_blank" rel="noopener">PMID 27865544</a></li>
+<li>Diez P, Hanna GG, Aitken KL, <i>et al.</i> UK 2022 consensus on normal tissue dose-volume constraints for oligometastatic, primary lung and hepatocellular carcinoma stereotactic ablative radiotherapy. <i>Clin Oncol</i> 2022;34:288–300. <a href="https://pubmed.ncbi.nlm.nih.gov/35272913/" target="_blank" rel="noopener">PMID 35272913</a></li>
+<li>Miften M, Vinogradskiy Y, Moiseenko V, <i>et al.</i> Radiation dose-volume effects for liver SBRT (HyTEC). <i>Int J Radiat Oncol Biol Phys</i> 2021;110:196–205. <a href="https://pubmed.ncbi.nlm.nih.gov/29482870/" target="_blank" rel="noopener">PMID 29482870</a></li>
+</ol>
+<h3>10.2  MR-linac and online adaptation</h3>
+<ol class="ref" start="7">
+<li>Corradini S, Alongi F, Andratschke N, <i>et al.</i> ESTRO-ACROP recommendations on the clinical implementation of hybrid MR-linac systems in radiation oncology. <i>Radiother Oncol</i> 2021;159:146–54. <a href="https://doi.org/10.1016/j.radonc.2021.03.025" target="_blank" rel="noopener">DOI</a></li>
+<li>Bohoudi O, <i>et al.</i> Fast and robust online adaptive planning in stereotactic MR-guided adaptive radiation therapy (SMART) for pancreatic cancer. <i>Radiother Oncol</i> 2017;125:439–44. <a href="https://pubmed.ncbi.nlm.nih.gov/28811038/" target="_blank" rel="noopener">PMID 28811038</a></li>
+<li>Kim J, Bassetti MF, Raldow A, <i>et al.</i> Focus on adaptive treatments for the first multi-institutional online adaptive RT trial (SMART) in pancreas cancer. <i>Int J Radiat Oncol Biol Phys</i> 2020;108(3):e575–6 (abstract).</li>
+<li>Stereotactic MRI-guided adaptive radiation therapy (SMART) in one fraction: protocol, <a href="https://clinicaltrials.gov/study/NCT04939246" target="_blank" rel="noopener">NCT04939246</a>.</li>
+<li>Dosimetric evaluation of MRI-guided adaptive RT in pancreatic cancer by extent of re-contouring of organs-at-risk. <i>Radiat Oncol J</i> 2022;40:242–50. <a href="https://doi.org/10.3857/roj.2022.00332" target="_blank" rel="noopener">DOI</a></li>
+<li>A pilot study on interobserver variability in OAR contours in MRI-guided online adaptive RT for pancreatic cancer. <i>Front Oncol</i> 2024;14:1335623. <a href="https://doi.org/10.3389/fonc.2024.1335623" target="_blank" rel="noopener">DOI</a></li>
+<li>MR-guided radiotherapy for liver malignancies (review). <i>Front Oncol</i> 2021. <a href="https://doi.org/10.3389/fonc.2021.616027" target="_blank" rel="noopener">DOI</a></li>
+<li>Courtney PT, Deng J, Ghafarian M, <i>et al.</i> Association of central hepatobiliary tract radiation dose and hepatobiliary outcomes after MRI-guided liver SBRT. ASTRO 2025, abstract 3413. <a href="https://am25.astro.org/sessions/pqa-08-21641/association-of-central-hepatobiliary-tract-radiation-dose-and-hepatobiliary-outcomes-after-mr-108205" target="_blank" rel="noopener">Abstract</a></li>
+<li>Thawani N, Tan N, Pinnaduwage D, <i>et al.</i> Central hepatobiliary toxicity in patients treated with SBRT for liver malignancies. <i>J Clin Oncol</i> 2022;40(4 suppl):409 (abstract). <a href="https://doi.org/10.1200/JCO.2022.40.4_suppl.409" target="_blank" rel="noopener">DOI</a></li>
+</ol>
+<h3>10.3  Naming and earlier constraints</h3>
+<ol class="ref" start="16">
+<li>Mayo CS, Moran JM, Bosch W, <i>et al.</i> American Association of Physicists in Medicine Task Group 263: standardizing nomenclatures in radiation oncology. <i>Int J Radiat Oncol Biol Phys</i> 2018;100:1057–66. <a href="https://pubmed.ncbi.nlm.nih.gov/29485047/" target="_blank" rel="noopener">PMID 29485047</a></li>
+<li>Hanna GG, Murray L, Patel R, <i>et al.</i> UK consensus on normal tissue dose constraints for stereotactic radiotherapy. <i>Clin Oncol</i> 2018;30:5–14. <a href="https://doi.org/10.1016/j.clon.2017.09.007" target="_blank" rel="noopener">DOI</a> (superseded by ref 5).</li>
+</ol>
+<h3>10.4  eviQ (Cancer Institute NSW) protocols — links only</h3>
+<ul class="ref">
+<li><a href="https://www.eviq.org.au/radiation-oncology/upper-gastrointestinal/4024-hepatic-primary-stereotactic-ebrt" target="_blank" rel="noopener">4024 Hepatic primary (HCC, intrahepatic cholangiocarcinoma) stereotactic EBRT</a></li>
+<li><a href="https://www.eviq.org.au/radiation-oncology/upper-gastrointestinal/4026-hepatic-metastases-stereotactic-ebrt" target="_blank" rel="noopener">4026 Hepatic metastases stereotactic EBRT</a></li>
+</ul>
+<div class="callout" style="margin-top:1em;">
+<span class="lbl">Items flagged for local governance / physics sign-off</span>
+<ul class="tight" style="margin-top:4px;">
+<li>MRI-specific organ details (Section 3 tips, Section 1.3) until checked against the Lukovic 2020 full text; oesophagus and heart borders against the RTOG thoracic atlas (Kong 2011).</li>
+<li>Bowel and oesophagus contouring extent on the planning scan; fasting and antiperistaltic use.</li>
+<li>cHBT use, cropping and limits in metastases; CBD limit column.</li>
+<li>MR-linac re-contouring zone (Section 5) and bulk-density convention.</li>
+<li>UK 2022 values marked check (optimal vs mandatory column).</li>
+</ul>
+</div>
+<p class="small">Not affiliated with or endorsed by NRG/RTOG, ESTRO, the UK SABR Consortium, AAPM or eviQ. Written in our own words; schematics are original.</p>
+<div class="foot"><span>Liver SBRT OAR Protocol · v1.1</span><span>Page 15</span></div>
+</section>
+</body>
+</html>

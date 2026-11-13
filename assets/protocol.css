@@ -1,0 +1,91 @@
+/* Full contouring protocols (contouring/*.html): content styles in the site's look.
+   Loaded after site.css; everything is scoped to body.proto. */
+.proto{
+  --p-navy:#10243f; --p-blue:#2f6fb0; --p-rust:#8a2f23; --p-amber:#9a5a00;
+}
+.proto .panel-head .eyebrow{margin:0;font-family:var(--font-display);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.proto .panel-head h2{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.proto .panel-head .lede p{margin:0 0 4px}
+.proto .sectnum{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;padding:0 .35em;border-radius:7px;background:var(--accent);color:var(--panel);font-size:.95rem;font-weight:700}
+.proto .pillrow{display:flex;flex-wrap:wrap;gap:6px}
+
+/* Cards */
+.proto .card{scroll-margin-top:170px}
+.proto .card h3{color:var(--ink)}
+.proto .card h4{font-family:var(--font-display);font-size:1rem;font-weight:600;margin:10px 0 2px;color:var(--accent)}
+.proto .card p{max-width:none}
+.proto .card > p:first-child{margin-top:0}
+
+/* Pills (dose / volume colour keys) */
+.proto .pill{display:inline-block;padding:1px 9px 2px;border-radius:999px;color:#fff;font-size:.74rem;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;font-family:var(--font-body)}
+.proto .p-elect{background:#2f6fb0}.proto .p-bed{background:#9a5a00}.proto .p-sib{background:#c0721c}
+.proto .p-boost{background:#8a2f23}.proto .p-pros{background:#b03a2e}
+.proto .p-out{background:var(--panel);color:var(--ink);border:1.3px solid var(--ink)}
+.proto .p-gtv{background:#1d4f91}.proto .p-hi{background:#b03a2e}.proto .p-lo{background:#2f6fb0}
+.proto .p-ctv{background:#14756b}.proto .p-ptv{background:#a07a00}
+.proto .pill.d45{background:#e9f1f9;color:#2f6fb0;border:1px solid #bcd6ee}
+.proto .pill.d50{background:#fceae7;color:#b03a2e;border:1px solid #eec0b9}
+.proto .pill.gtv{background:#fbe8e6;color:#a3271a;border:1px solid #eec0b9}
+
+/* Tables */
+.proto .tw{background:var(--panel)}
+.proto th{white-space:normal}
+.proto thead th{vertical-align:bottom}
+.proto td.b,.proto th.b{font-weight:700;background:var(--accent-soft)}
+.proto td:first-child{min-width:6em}
+.proto table.toc td{border-bottom:1px dashed var(--line)}
+.proto table.toc td:first-child{min-width:2em;width:2.5em;color:var(--accent)}
+.proto table.toc a{color:var(--ink);text-decoration:none;font-weight:700}
+.proto table.toc a:hover{color:var(--accent);text-decoration:underline}
+.proto caption{caption-side:top;text-align:left;font-size:.85rem;color:var(--muted);padding:6px 9px;font-style:italic}
+
+/* Callouts and boxes */
+.proto .callout,.proto .box{background:var(--accent-soft);border:1px solid var(--line);border-left:4px solid var(--accent);padding:9px 13px;margin:10px 0;border-radius:0 8px 8px 0}
+.proto .callout .lbl,.proto .box .t{display:block;font-family:var(--font-display);font-size:.84rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.proto .box.warn{background:var(--dose-bg);border-left-color:var(--dose-ink)}
+.proto .box.warn .t{color:var(--dose-ink)}
+.proto .box.crit{background:var(--warn-soft);border-left-color:var(--warn)}
+.proto .box.crit .t{color:var(--warn)}
+.proto div.flag{display:block;font-size:inherit;font-weight:400;text-transform:none;letter-spacing:normal;background:var(--warn-soft);color:var(--ink);border-left:4px solid var(--warn);padding:9px 13px;margin:10px 0;border-radius:0 8px 8px 0;vertical-align:baseline}
+.proto div.flag .lbl{display:block;font-family:var(--font-display);font-size:.84rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--warn)}
+.proto div.flag .lbl:before{content:"\26A0  "}
+.proto .named{border:1px solid var(--line);border-left:4px solid var(--dose-ink);padding:8px 12px;margin:8px 0;border-radius:0 8px 8px 0;background:var(--dose-bg)}
+.proto .named .pos{font-weight:700;color:var(--dose-ink)}
+.proto .stepbox{border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:8px;padding:8px 12px 10px;margin:10px 0;background:var(--panel)}
+.proto ol.steps{margin:4px 0;padding-left:1.6em}
+.proto ol.steps li{margin:5px 0;padding-left:.15em}
+.proto ol.steps li::marker{color:var(--accent);font-weight:700}
+.proto ul.tight{margin:4px 0;padding-left:1.15em}
+.proto ul.tight li{margin:3px 0}
+
+/* Check badges and small print */
+.proto .chk{display:inline-block;background:var(--warn-soft);color:var(--warn);border:1px solid currentColor;border-radius:4px;font-size:.68rem;font-weight:700;letter-spacing:.04em;padding:0 5px;vertical-align:1px;white-space:nowrap}
+.proto .src,.proto .small,.proto .kv{font-size:.86rem;color:var(--muted)}
+.proto .tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;background:var(--accent);color:var(--panel);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+.proto .ref{font-size:.9rem;line-height:1.45}
+.proto ol.ref,.proto ul.ref{padding-left:1.4em}
+.proto .ref li{margin:4px 0}
+.proto p.ref{padding-left:22px;text-indent:-22px;color:var(--ink)}
+.proto code{background:var(--accent-soft);border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:.88em}
+.proto .mono,.proto td.mono{font-family:ui-monospace,"SFMono-Regular",Consolas,Menlo,monospace;font-size:.85rem}
+.proto hr.soft{border:none;border-top:1px dashed var(--line);margin:10px 0}
+
+/* Figures: keep a white backing so the original schematics read in dark mode */
+.proto figure,.proto .fig{margin:10px 0;border:1px solid var(--line);border-radius:10px;padding:10px 10px 6px;background:#fff;color:#16212b}
+.proto figure figcaption,.proto .fig .cap{font-size:.84rem;color:#596773;margin-top:4px;line-height:1.4}
+.proto .figttl{font-family:var(--font-display);font-size:.84rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0d5d78;margin-bottom:6px}
+.proto svg{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+.proto .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:8px 0 2px;font-size:.88rem}
+.proto .legend span{display:inline-flex;align-items:center;gap:6px}
+.proto .sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.25)}
+
+/* Two-column blocks collapse on narrow screens */
+.proto .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+.proto .grid2>div{min-width:0}
+.proto .twocol{display:flex;gap:16px}
+.proto .twocol>div{flex:1;min-width:0}
+@media (max-width:760px){
+  .proto .grid2{grid-template-columns:minmax(0,1fr)}
+  .proto .twocol{flex-direction:column}
+}
+.proto em{font-style:italic}

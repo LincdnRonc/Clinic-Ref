@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Anal Canal Target Volume Delineation Protocol</title>
+<style>
+  :root{
+    --navy:#10243f; --navy2:#1d3a5f;
+    --teal:#14756b; --teal-bg:#e7f3f1;
+    --amber:#9a5a00; --amber-bg:#fdf3e3;
+    --rust:#8a2f23; --rust-bg:#fbeae7;
+    --paper:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6b7c;
+    --rule:#d6dde6;
+    --rule-strong:#14756b;
+    --dose-elective:#2f6fb0;
+    --dose-bed:#9a5a00;
+    --dose-sib:#c0721c;
+    --dose-boost:#8a2f23;
+    --dose-prostate:#b03a2e;
+    --flag:#8a2f23; --flag-bg:#fbeae7;
+    --key-bg:#e7f3f1;
+    --petrol:#10243f;
+    --petrol-2:#14756b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;background:#e6ebf0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:10.3px;line-height:1.5;
+  }
+  .page{
+    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
+    padding:16mm 17mm 14mm;position:relative;
+    box-shadow:0 1px 8px rgba(16,36,63,.16);
+    display:flex;flex-direction:column;
+  }
+  @page{size:A4;margin:13mm;}
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .page + .page{page-break-before:always;}
+    h2,h3{page-break-after:avoid;}
+    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
+  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
+  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
+  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
+  p{margin:.35em 0;}
+  a{color:var(--teal);}
+  .lead{font-size:11px;color:var(--muted);}
+  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
+  .sechead{margin:0 0 .5em;}
+  .sechead .eyebrow{display:block;margin-bottom:3px;}
+  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
+  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
+  .masthead h1{color:#fff;}
+  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
+  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
+  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
+  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
+  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
+  tbody tr:nth-child(even){background:#eef2f6;}
+  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
+  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
+  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
+  .p-elect{background:var(--dose-elective);}
+  .p-bed{background:var(--dose-bed);}
+  .p-sib{background:var(--dose-sib);}
+  .p-boost{background:var(--dose-boost);}
+  .p-pros{background:var(--dose-prostate);}
+  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
+  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
+  .flag .lbl:before{content:"\26A0  ";}
+  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
+  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
+  ol.steps li{margin:.28em 0;padding-left:.15em;}
+  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
+  ul.tight{margin:.25em 0;padding-left:1.15em;}
+  ul.tight li{margin:.18em 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid2>div{min-width:0;}
+  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
+  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  svg{display:block;width:100%;height:auto;}
+  .kv{font-size:9.3px;}
+  .kv b{color:var(--navy);}
+  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
+  .ref{font-size:8.6px;line-height:1.4;}
+  .ref li{margin:.2em 0;}
+  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
+  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
+  .named .pos{font-weight:700;color:var(--amber);}
+  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc td{border:none;padding:2px 4px;}
+  .toc .n{color:var(--teal);font-weight:700;width:24px;}
+  .toc .pg{text-align:right;color:var(--muted);width:32px;}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
+  .small{font-size:8.6px;color:var(--muted);}
+</style>
+
+<style id="site-extra">
+  .p-gtv{background:#1d4f91;}
+  .p-hi{background:#b03a2e;}
+  .p-lo{background:#2f6fb0;}
+  .p-ctv{background:#14756b;}
+  .p-ptv{background:#a07a00;}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:8.4px;color:var(--muted);}
+  .follow{border-left:4px solid #a14a0b;}
+</style>
+<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #a14a0b}</style></head>
+
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gi-anal.html" style="color:#ffd2b0;text-decoration:none">Anal cancer page</a><a href="rectal-long-course.html" style="color:#ffd2b0;text-decoration:none">Rectal atlas</a><a href="../ctr-anal.html" style="color:#ffd2b0;text-decoration:none">Anal quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<section class="page">
+<div class="masthead">
+<span class="eyebrow">Departmental Contouring Protocol · Lower GI Radiation Oncology</span>
+<h1>Anal Canal SCC — Target Volume Delineation Protocol</h1>
+<p class="sub">Definitive chemoradiation with VMAT and a simultaneous integrated boost for <b>T1N0</b> (including excised T1) and <b>T2–4 or node-positive</b> anal canal and perianal squamous cell carcinoma: primary and nodal GTV/CTV, every elective nodal region with border tables, the ischiorectal fossa decision, risk-adapted options (NOAC), doses, constraints and names.</p>
+<div class="pillrow">
+<span class="pill p-gtv">GTVp / GTVn</span>
+<span class="pill p-hi">CTV54 / CTV50.4 (high dose)</span>
+<span class="pill p-lo">CTV45 / CTV42 (elective)</span>
+<span class="pill p-ptv">PTV</span>
+</div>
+<div class="meta">SWSLHD (Liverpool &amp; Macarthur) anal canal SCC contouring protocol (1 Sept 2020) · UK National Guidance for IMRT in Anal Cancer v4 (Dec 2016) · AGITG atlas (Ng 2012) · RTOG anorectal atlas (Myerson 2009) · ECOG-ACRIN EA2182 guideline (2022) · NOAC risk-adapted CTVe (Nilsson 2023) · Shakir 2020 patterns of relapse — Version 1.0 · Nov 2026</div>
+</div>
+<div class="callout">
+<span class="lbl">Governing principles of this protocol</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>The departmental standard is the SWSLHD protocol</b>: primary CTV built the UK way (GTV + 10 mm for T1N0, + 15 mm for T2–4/N+, then the whole anal canal and sphincters); elective regions chosen and bordered the AGITG way; two-level SIB; PTV = CTV + 10 mm.</li>
+<li><b>Always include the whole anal canal</b>, from the anorectal junction (about 4 cm above the verge) to the anal verge, lumen, wall and both sphincters, at the level of the tumour and above and below it.</li>
+<li><b>Elective nodes follow the vessels</b> (vessels + 7 mm) with landmark-based borders; include all visible small nodes and lymphocoeles even outside the standard borders.</li>
+<li><b>Allow for bladder filling</b>: the anterior elective CTV extends 10 mm into the bladder, vagina, uterus, seminal vesicles or prostate.</li>
+<li><b>Keep treatment time short</b>: book as category 1, treat on machine down days; most relapses are at the primary site (Shakir 2020).</li>
+</ul>
+</div>
+<h3 style="margin-top:1.1em;">Contents</h3>
+<table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, preparation, simulation and imaging</a></td><td class="pg">2</td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Which volumes for which patient; guidelines compared</a></td><td class="pg">3</td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario A — T1N0 (including excised T1)</a></td><td class="pg">4</td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario B — T2–4 N0 and any node-positive</a></td><td class="pg">5</td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Elective nodal regions: border tables</a></td><td class="pg">6</td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Ischiorectal fossa, mesorectum, cranial border and risk-adapted options</a></td><td class="pg">8</td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Special situations</a></td><td class="pg">9</td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Pearls and common errors</a></td><td class="pg">9</td></tr>
+<tr><td class="n">9</td><td><a href="#s9">Dose, fractionation, margins and IGRT</a></td><td class="pg">10</td></tr>
+<tr><td class="n">10</td><td><a href="#s10">Organs at risk and constraints</a></td><td class="pg">10</td></tr>
+<tr><td class="n">11</td><td><a href="#s11">Names and RayStation implementation</a></td><td class="pg">11</td></tr>
+<tr><td class="n">12</td><td><a href="#s12">References and further guidelines</a></td><td class="pg">12</td></tr>
+</table>
+<h3>Sources used</h3>
+<table>
+<thead><tr><th style="width:38%">Source</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td class="b">SWSLHD anal canal SCC RT contouring protocol, 1 Sept 2020 (N Collier; reviewed M Lee, M Johnston, K Wong, K Nguyen, R Chelvarajah, G Dinsdale)</td><td>Departmental work-up, simulation, bolus, structure definitions, CTV borders, elective nodal border table, doses, follow-up.</td></tr>
+<tr><td class="b">UK National Guidance for IMRT in Anal Cancer v4 (Muirhead et al., Dec 2016)</td><td>Primary CTV margins, CTV_E build steps, mesorectum (lower 50 mm), ischiorectal fossa rule, PTV margins, doses, planning sheet constraints.</td></tr>
+<tr><td class="b">AGITG contouring atlas (Ng 2012)</td><td>Elective nodal borders, CTV for gross disease (20 mm), doses, PTV, OAR definitions.</td></tr>
+<tr><td class="b">RTOG anorectal atlas (Myerson 2009); ECOG-ACRIN EA2182 (Damico 2022); NOAC (Nilsson 2023)</td><td>Vessel margins, inguinal caudal limit, step-by-step CTVn build, early-stage constraints; risk-adapted cranial borders and external iliac omission.</td></tr>
+<tr><td class="b">Shakir 2020 (UK IMRT patterns of relapse); Brooks 2015 genitalia atlas (BJR)</td><td>Where relapses occur; genitalia OAR.</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
+</section>
+
+<!-- ============================ S1 ============================ -->
+<section class="page" id="s1">
+<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, preparation, simulation and imaging</h2></div>
+<h3>1.1  Before simulation (department)</h3>
+<ul class="tight">
+<li>Stage with examination/DRE, EUA or anoscopy ± endoscopic ultrasound, biopsy with p16, CT chest/abdomen/pelvis. Consider pelvic MRI and strongly consider FDG-PET (neither is Medicare-rebated for anal SCC). If no PET and groin nodes are equivocal, ultrasound and FNA.</li>
+<li>Cervical screening if not up to date (do not delay CRT). Test for HIV if at risk; if positive, plan with infectious diseases.</li>
+<li>Bowel/sphincter function: consider a defunctioning colostomy for severe obstruction, fistula or severe incontinence. UK guidance: stoma for tumours infiltrating the posterior vagina or with significant incontinence from sphincter invasion.</li>
+<li>Chemotherapy: mitomycin-C with infusional 5-FU or capecitabine. Book category 1 (5 days a week, machine down days, no BD catch-up): anal cancer is technically category 2 but longer treatment time is harmful.</li>
+</ul>
+<h3>1.2  Simulation and imaging</h3>
+<table>
+<thead><tr><th style="width:16%">Item</th><th>Department</th><th>Guidelines</th></tr></thead>
+<tbody>
+<tr><td class="b">Position</td><td>Supine in a vac-bag (prone is non-standard, case by case)</td><td>UK: avoid prone. AGITG: supine or prone; prone needs daily IGRT</td></tr>
+<tr><td class="b">Bowel / bladder</td><td>No specific bowel preparation; aperients for a week before CT if constipated; Benefiber less suitable (obstruction). Bladder per departmental sim guide</td><td>ECOG-ACRIN: comfortably full bladder; anterior CTV margin into bladder accounts for filling</td></tr>
+<tr><td class="b">Bolus</td><td>Most tumours with limited perianal extension self-bolus with buttocks held together in the vac-bag. RO attends sim if uncertain; control scan to adjust position or apply bolus</td><td>UK: need 5 mm of tissue around the GTV; otherwise wax or sheet bolus. Groin bolus only for visible skin infiltration</td></tr>
+<tr><td class="b">Markers</td><td>Anal verge marker (RO discretion; RT can place). Wiring visible gross tumour needs the RO or registrar at sim</td><td>UK and ECOG: radio-opaque marker at the verge; wire perianal skin disease</td></tr>
+<tr><td class="b">MRI</td><td>MR simulation unless contraindicated (T1 and T2), at Liverpool for LCTC and MCTC patients; usually non-contrast</td><td>UK: diagnostic MRI recommended; ECOG: MRI best for the anal complex and depth of invasion</td></tr>
+<tr><td class="b">Contrast</td><td>IV and oral CT contrast at RO discretion; if both CT and MRI contrast are needed, 72 hours apart</td><td>—</td></tr>
+<tr><td class="b">PET</td><td>Rigid fusion of PET-CT and MRI to the planning CT; view PET with a linear colour scale (Rainbow 2), window from 0, liver mid blue-green</td><td>UK: PET for ≥T2; nodes on PET discussed at MDT for the high-dose volume</td></tr>
+</tbody>
+</table>
+<div class="flag"><span class="lbl">Check</span> The department document refers to Pinnacle and a SharePoint simulation guide; confirm current software (RayStation) and the simulation guide (bladder filling, scan limits) <span class="chk">CHECK</span>.</div>
+<h3>1.3  Contouring order</h3>
+<ol class="steps">
+<li>Find the anal verge (marker or MRI) and the anorectal junction (levators meet the external sphincter; mesorectal fat disappears) on the sagittal.</li>
+<li>GTVp on T2 MRI and PET, transferred to CT with the examination and wires (GTVp MRI, GTVp PET → GTVp). GTVn on CT/MRI/PET.</li>
+<li>High-dose CTV (CTV50.4 or CTV54): GTVp + margin, then edit in the whole anal canal and sphincters; add CTVn.</li>
+<li>Elective CTV (CTV42 or CTV45): regions in section 5, joined, with the anterior 10 mm into organs.</li>
+<li>Small bowel loops individually (RO) to 1.5 cm above the PTV; other OARs by radiation therapists.</li>
+<li>Registrar contours prefixed <code>REG_</code>; replan structures <code>RP_</code>.</li>
+</ol>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
+</section>
+
+<!-- ============================ S2 ============================ -->
+<section class="page" id="s2">
+<div class="sechead"><span class="eyebrow">Section 2</span><h2><span class="sectnum">2</span>Which volumes for which patient; guidelines compared</h2></div>
+<table>
+<thead><tr><th style="width:18%">Stage (department)</th><th>High-dose volume</th><th>Elective regions</th><th>Dose (SIB)</th></tr></thead>
+<tbody>
+<tr><td class="b">T1 (&lt;2 cm) N0, including excised T1</td><td>CTV50.4 = GTVp + 10 mm + whole anal canal</td><td>CTV42: mesorectum, internal iliac, presacral, obturator, ischiorectal fossa. <b>No external iliac or inguinal.</b> Top at the upper mesorectum</td><td><span class="pill p-hi">50.4 Gy/28</span> <span class="pill p-lo">42 Gy/28</span></td></tr>
+<tr><td class="b">T2–4 N0, any N+, or T1N1</td><td>CTV54 = GTVp + 15 mm + whole anal canal; GTVn + 5–10 mm</td><td>CTV45: as above + external iliac + inguinal. Top at the common iliac bifurcation or ≥20 mm above the highest GTV</td><td><span class="pill p-hi">54 Gy/30</span> <span class="pill p-lo">45 Gy/30</span></td></tr>
+<tr><td class="b">Limited M1</td><td colspan="3">Radical-dose CRT can be considered for local control (department).</td></tr>
+</tbody>
+</table>
+<h3>2.1  Guidelines side by side</h3>
+<table>
+<thead><tr><th style="width:15%">Item</th><th>Department</th><th>UK v4 (2016)</th><th>AGITG 2012</th><th>ECOG-ACRIN 2022 (early)</th><th>NOAC 2023</th></tr></thead>
+<tbody>
+<tr><td class="b">Primary CTV</td><td>GTV + 10 mm (T1N0) or 15 mm, + whole canal and sphincters; off muscle and bone</td><td>Same (10 mm early, 15 mm locally advanced); GTV not the whole lumen</td><td>GTV + whole canal + sphincters, then + 20 mm; 20 mm radial and caudal for verge/perianal tumours</td><td>GTV + 10 mm (not into bone, air, outside skin) + anal complex incl. puborectalis; + mesorectum at rectal levels</td><td>10–15 mm GTVp → CTVp</td></tr>
+<tr><td class="b">Nodal CTV</td><td>GTVn + 5–10 mm</td><td>GTVn + 5 mm</td><td>Node or region + 10–20 mm</td><td>—</td><td>—</td></tr>
+<tr><td class="b">Elective regions</td><td>T1N0: no ext iliac / inguinal. Otherwise all + IRF</td><td>All except IRF (unless &gt;5 mm infiltration); lower 50 mm mesorectum only if no mesorectal disease</td><td>All seven incl. IRF for all stages; select T1N0 may omit above caudal SIJ and inguinals</td><td>Int/ext iliac, obturator, inguinal, mesorectal, presacral; IRF only if &gt;5 mm infiltration</td><td>Option B: omit ext iliac for T1–2N0; include inguinal (except rectal SCC)</td></tr>
+<tr><td class="b">Cranial border</td><td>T1N0: top of mesorectum. Others: CIA bifurcation or ≥20 mm above GTV</td><td>20 mm above the inferior SIJ or 15 mm above the highest gross tumour</td><td>CIA bifurcation (L5/S1)</td><td>CIA bifurcation</td><td>Option A: CIA bifurcation. Option B: six risk levels (section 6)</td></tr>
+<tr><td class="b">PTV</td><td>10 mm all</td><td>PTV_A 10 mm; PTV_N and PTV_E 5 mm (daily online imaging)</td><td>10 mm; 5–7 mm with daily IGRT</td><td>5–10 mm</td><td>—</td></tr>
+<tr><td class="b">Dose</td><td>50.4/42 in 28; 54/45 in 30</td><td>Early 50.4/40 in 28; LA 53.2/40 in 28, nodes 50.4 (&lt;3 cm) or 53.2 (&gt;3 cm)</td><td>54/30 (elective 45); T1 and non-bulky T2 50.4/28 (elective 42)</td><td>50.4/28 primary, 42/28 nodes (standard arm)</td><td>—</td></tr>
+</tbody>
+</table>
+<div class="callout follow"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">The department: UK primary CTV, AGITG elective regions and borders, IRF included, 10 mm PTV. The UK and NOAC options (smaller IRF and mesorectum, lower cranial border, external iliac omission) are listed so they can be chosen deliberately, not drifted into.</p></div>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
+</section>
+
+<!-- ============================ S3 ============================ -->
+<section class="page" id="s3">
+<div class="sechead"><span class="eyebrow">Section 3 · Scenario A</span><h2><span class="sectnum">3</span>T1N0 (including excised T1)</h2></div>
+<table>
+<thead><tr><th style="width:18%">Structure</th><th>Department definition</th></tr></thead>
+<tbody>
+<tr><td class="b">GTVp MRI / GTVp PET</td><td>Primary on T2 MRI; primary on PET</td></tr>
+<tr><td class="b">GTVp</td><td>Primary on CT using examination, GTVp MRI and GTVp PET. If well seen on MRI and PET, contour the tumour alone. If CT only or poor fusion, include the whole circumference of the anal canal. <b>After excision</b>: site of the primary and the excision scar</td></tr>
+<tr><td class="b">CTV50.4</td><td>GTVp + 10 mm isotropic, edited off muscle and bone only; then enlarge by hand to the whole anal canal (lumen ± rectal lumen and outer wall at the level of the GTV) with internal and external sphincters</td></tr>
+<tr><td class="b">CTV42</td><td>CTV50.4 + mesorectum + internal iliac + presacral + obturator + ischiorectal fossa. <b>Superior:</b> top of the mesorectum. <b>Inferior:</b> 10 mm below GTV or the anal verge, whichever is lower. <b>Anterior:</b> front of CTV50.4 or 10 mm into the anterior organ (bladder, vagina, uterus, seminal vesicles, prostate), whichever is more anterior. Exclude small bowel, muscle, bone</td></tr>
+<tr><td class="b">PTV50.4 / PTV42</td><td>CTV + 10 mm</td></tr>
+</tbody>
+</table>
+<p class="src">Anal canal borders (department, UK): superior at the anorectal junction (about 4 cm above the verge); inferior at the anal verge (marker or MRI); circumferentially the lumen and outer wall.</p>
+<div class="grid2">
+<div>
+<h3>3.1  Walkthrough (sagittal first, then axial cranial to caudal)</h3>
+<ol class="steps">
+<li>Sagittal: mark the verge and the anorectal junction; draw GTVp on MRI.</li>
+<li>Axial: GTVp + 10 mm; trim off levator/gluteal muscle and bone only (not off fat or the IRF).</li>
+<li>From the anorectal junction to the verge, add the whole canal and both sphincters on every slice; at the GTV level include the full lumen and wall.</li>
+<li>Elective: mesorectum from its top, presacral strip, internal iliac and obturator, IRF; join; extend 10 mm into bladder/vagina/prostate anteriorly.</li>
+<li>Carry CTV42 down to 10 mm below the GTV or the verge.</li>
+</ol>
+<h3>3.2  Options for selected T1N0 (not department routine)</h3>
+<ul class="tight">
+<li>UK v4: small good-prognosis tumours may have the primary plus a margin only.</li>
+<li>AGITG: select T1N0 with major comorbidity may omit nodes above the caudal SIJ and the inguinal nodes (&lt;5% failure).</li>
+<li>NOAC: &lt;1 cm perianal T1N0 not involving the canal — ENI probably omissible; awaiting ACT3.</li>
+</ul>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 260" role="img" aria-label="Sagittal schematic of the anal canal CTV">
+<rect width="300" height="260" fill="#fff"/>
+<path d="M250 14 Q276 110 248 186 Q238 206 222 214" fill="none" stroke="#c9ced4" stroke-width="16"/><text x="238" y="230" font-size="7.5" fill="#5b6b7c">coccyx</text>
+<rect x="28" y="140" width="22" height="50" rx="6" fill="#eef0f2" stroke="#b8c2cc"/><text x="18" y="204" font-size="7.5" fill="#5b6b7c">symphysis</text>
+<ellipse cx="88" cy="112" rx="36" ry="28" fill="#fff6d6" stroke="#c9a400"/><text x="70" y="115" font-size="8" fill="#8a6d00">bladder</text>
+<path d="M150 150 Q140 92 200 70 Q250 110 236 180 Q214 196 176 192 Z" fill="rgba(160,74,11,.10)" stroke="#a14a0b" stroke-dasharray="3 2"/><text x="152" y="140" font-size="7" fill="#a14a0b">mesorectum</text>
+<path d="M214 24 Q220 100 196 150 Q182 176 164 188" fill="none" stroke="#c48a7a" stroke-width="18"/><text x="196" y="14" font-size="7.5" fill="#8a4a3e">rectum</text>
+<path d="M164 188 L186 234" stroke="#d6a28f" stroke-width="22" stroke-linecap="round"/>
+<line x1="134" y1="174" x2="214" y2="208" stroke="#555" stroke-dasharray="4 2"/><text x="214" y="216" font-size="6.5" fill="#555">anorectal junction</text>
+<circle cx="190" cy="244" r="3" fill="#333"/><text x="198" y="250" font-size="6.5" fill="#555">verge marker</text>
+<ellipse cx="174" cy="212" rx="9" ry="11" fill="rgba(29,79,145,.65)" stroke="#1d4f91"/><line x1="165" y1="212" x2="118" y2="222" stroke="#1d4f91" stroke-width=".6"/><text x="92" y="225" font-size="7" fill="#1d4f91">GTVp</text>
+<path d="M148 180 Q170 166 190 186 Q206 230 196 252 Q170 258 160 240 Q146 210 148 180 Z" fill="none" stroke="#b03a2e" stroke-width="1.8"/><line x1="150" y1="196" x2="118" y2="196" stroke="#b03a2e" stroke-width=".6"/><text x="64" y="194" font-size="7" fill="#b03a2e">CTV high dose:</text><text x="64" y="203" font-size="7" fill="#b03a2e">GTV + margin +</text><text x="64" y="212" font-size="7" fill="#b03a2e">whole canal</text>
+<path d="M126 58 Q170 30 226 40 Q252 120 244 190 Q226 222 204 258 L150 258 Q132 220 136 180 Q128 140 118 110 Z" fill="rgba(47,111,176,.06)" stroke="#2f6fb0" stroke-width="1.4" stroke-dasharray="6 3"/>
+<text x="6" y="30" font-size="7" fill="#2f6fb0">elective CTV: mesorectum, presacral,</text><text x="6" y="39" font-size="7" fill="#2f6fb0">10 mm into bladder anteriorly</text>
+<text x="108" y="246" font-size="7" fill="#8a4a3e">anal canal</text>
+</svg>
+<figcaption>Original schematic (sagittal). The high-dose CTV always covers the whole canal from the anorectal junction to the verge.</figcaption>
+</figure>
+</div>
+</div>
+<h3>3.3  Pitfalls</h3>
+<ul class="tight">
+<li>Drawing only the tumour plus margin and leaving out the rest of the canal; the department and UK both require the whole canal.</li>
+<li>Trimming CTV off the ischiorectal fat: only muscle and bone are edited off the primary CTV.</li>
+<li>After excision there is no gross disease; the scar and excision site define GTVp (department), so wire the scar.</li>
+</ul>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
+</section>
+
+<!-- ============================ S4 ============================ -->
+<section class="page" id="s4">
+<div class="sechead"><span class="eyebrow">Section 4 · Scenario B</span><h2><span class="sectnum">4</span>T2–4 N0 and any node-positive (and T1N1)</h2></div>
+<table>
+<thead><tr><th style="width:18%">Structure</th><th>Department definition</th></tr></thead>
+<tbody>
+<tr><td class="b">GTVp</td><td>As section 3, also using wires placed at simulation</td></tr>
+<tr><td class="b">GTVn</td><td>Nodes on CT/MRI/PET and examination, with wires from sim to include any skin involvement</td></tr>
+<tr><td class="b">CTV54</td><td>GTVp + 15 mm isotropic, off muscle and bone only, then enlarged to the whole anal canal (lumen ± rectal lumen and wall at the GTV level) with both sphincters; plus GTVn + 5–10 mm, cropped to muscle, bone and skin</td></tr>
+<tr><td class="b">CTV45</td><td>CTV54 + mesorectum + internal iliac + presacral + obturator + <b>external iliac</b> + <b>inguinal</b> (all visible nodes and lymphocoeles) + ischiorectal fossa. <b>Superior:</b> common iliac bifurcation or at least 20 mm above the highest GTV, whichever is higher. <b>Inferior:</b> 15 mm below GTV or the anal verge, whichever is lower. <b>Anterior:</b> front of CTV54 or 10 mm into the anterior organ, whichever is more anterior. Exclude small bowel, muscle, bone</td></tr>
+<tr><td class="b">PTV54 / PTV45</td><td>CTV + 10 mm</td></tr>
+</tbody>
+</table>
+<h3>4.1  Nodal high-dose volume compared</h3>
+<table>
+<thead><tr><th style="width:18%">Source</th><th>Nodal CTV</th><th>Nodal dose</th></tr></thead>
+<tbody>
+<tr><td class="b">Department</td><td>GTVn + 5–10 mm, cropped to muscle, bone, skin</td><td>54 Gy/30 (same as primary)</td></tr>
+<tr><td class="b">UK v4</td><td>CTV_N = GTV_N + 5 mm; PTV_N = CTV_N + 5 mm</td><td>&lt;3 cm: 50.4 Gy/28; &gt;3 cm: 53.2 Gy/28</td></tr>
+<tr><td class="b">AGITG</td><td>Involved node(s) or nodal region + 10–20 mm (ECE)</td><td>50.4–54 Gy depending on size</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>4.2  Walkthrough</h3>
+<ol class="steps">
+<li>GTVp and GTVn on MRI/PET → CT; check wires for skin disease.</li>
+<li>CTV54: GTVp + 15 mm (muscle and bone off), whole canal and sphincters added; GTVn + 5–10 mm.</li>
+<li>CTV45, cranial to caudal: common iliac bifurcation (or 20 mm above the highest GTV) → internal and external iliac + presacral → obturator → mesorectum (whole) → IRF → inguinal compartments from where the external iliac leaves the pelvis down to the bottom of the ischial tuberosities.</li>
+<li>Anterior edge 10 mm into bladder/uterus/vagina/seminal vesicles/prostate at the levels of those organs.</li>
+<li>Inferiorly to 15 mm below GTV or the verge; for perianal disease, the skin is in the CTV and bolus/self-bolus must bring dose to it.</li>
+</ol>
+</div>
+<div>
+<h3>4.3  Pitfalls</h3>
+<ul class="tight">
+<li>Perianal or anal margin tumours: cover the skin with a radial and caudal margin (AGITG asks for 20 mm) and check self-bolus; UK wants 5 mm of tissue around the GTV.</li>
+<li>Inguinal nodes: include every visible node or lymphocoele even outside the compartment borders (department, AGITG, ECOG).</li>
+<li>Nodes in the mesorectum or upper pelvis may need a higher cranial border (NOAC; section 6).</li>
+<li>PTVs not involving skin are edited to 5 mm inside the body contour for optimisation (UK); ECOG names these PTV_xxxx-xx.</li>
+<li>Tumour invading the posterior vagina: consider a stoma (UK); include 10 mm into the vagina anteriorly and use the vaginal dilator rules if one is used (ECOG).</li>
+</ul>
+</div>
+</div>
+<h3>4.4  Patterns of relapse with the UK approach (Shakir 2020)</h3>
+<p>385 consecutive patients in 5 UK centres treated with UK-guidance IMRT/SIB: 86.7% complete response within 6 months; 3-year DFS 75.6% and OS 85.6%. 83.4% of relapses were at the primary site and only 2 were isolated relapses in nodes not involved at the start, supporting the UK elective volumes and elective dose. Male sex, higher N stage and not completing RT predicted recurrence.</p>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
+</section>
+
+<!-- ============================ S5 ============================ -->
+<section class="page" id="s5">
+<div class="sechead"><span class="eyebrow">Section 5</span><h2><span class="sectnum">5</span>Elective nodal regions: border tables</h2></div>
+<p>Department borders (based on AGITG, Ng 2012). Anterior organs: penile bulb, prostate, seminal vesicles, bladder (male); bladder, vagina, cervix, uterus (female).</p>
+<table>
+<thead><tr><th style="width:11%">Region</th><th>Superior</th><th>Inferior</th><th>Lateral</th><th>Medial</th><th>Anterior</th><th>Posterior</th></tr></thead>
+<tbody>
+<tr><td class="b">Internal iliac</td><td>T1N0: top of mesorectum. T2–4/N+: CIA bifurcation (≈L5/S1)</td><td>Levator ani insertion into obturator fascia/internus (≈obturator canal)</td><td>Upper: iliopsoas. Lower: obturator internus (or bone)</td><td>Upper: 7 mm from vessels. Lower: mesorectum and presacral space</td><td>Upper: 7 mm in front of vessels. Lower: obturator internus or bone</td><td>Bony pelvis</td></tr>
+<tr><td class="b">External iliac</td><td>As internal iliac</td><td>Where vessels leave the bony pelvis (between acetabular roof and superior pubic ramus)</td><td>Iliopsoas</td><td>Upper: 7 mm from vessels. Lower: crop to bladder wall (unless bladder large)</td><td>7 mm in front of vessels, including visible benign nodes</td><td>Internal iliac group</td></tr>
+<tr><td class="b">Obturator</td><td>3–5 mm above the obturator canal</td><td>Obturator artery has left the pelvis</td><td>Obturator internus</td><td>10 mm medial to obturator internus, cropped to bladder</td><td>Front of obturator internus</td><td>Internal iliac group</td></tr>
+<tr><td class="b">Presacral</td><td>As internal iliac</td><td>Inferior edge of coccyx</td><td>Sacro-iliac joints</td><td>—</td><td>10 mm in front of the sacrum, including nodes and presacral vessels</td><td>Anterior sacrum; sacral hollows only if continuous with the anterior border</td></tr>
+<tr><td class="b">Mesorectum</td><td>Rectosigmoid junction (rectum turns forward); use MRI</td><td>Anorectal junction (levators meet sphincter; mesorectal fat gone)</td><td>Mesorectal fascia and levator ani; if fascia not seen, internal iliac group</td><td>—</td><td>Back of the anterior organs + 10 mm into them (bladder filling)</td><td>Presacral space</td></tr>
+<tr><td class="b">Ischiorectal fossa</td><td>Apex between levator ani, gluteus maximus, obturator internus</td><td>Anal verge</td><td>Upper: obturator internus and gluteus maximus. Lower: 20 mm of IRF fat from the sphincters</td><td>Levator ani or sphincter complex</td><td>Upper: where obturator internus and levator/sphincter fuse. Lower: 10 mm in front of the sphincters</td><td>Plane joining the front of the medial walls of gluteus maximus</td></tr>
+<tr><td class="b">Inguinal</td><td>External iliac group (where the artery leaves the pelvis)</td><td>Lower edge of the ischial tuberosities</td><td>Medial edge of sartorius or iliopsoas</td><td>Upper: 7 mm around femoral vessels. Lower: medial ⅓–½ of pectineus or adductor longus. All visible nodes</td><td>At least 7 mm in front of the femoral vessels; all visible nodes or lymphocoeles</td><td>Pectineus, adductor longus, iliopsoas (floor of femoral triangle)</td></tr>
+</tbody>
+</table>
+<div class="flag"><span class="lbl">Check</span> The department inguinal anterior border is "minimum 7 mm" in front of the femoral vessels; AGITG says "minimum 20 mm"; NOAC 20 mm but ≥5 mm from skin; UK 5 mm from skin. This page uses <b>about 20 mm (to within 5 mm of skin) plus all visible nodes</b> until the department confirms the 7 mm figure <span class="chk">CHECK</span>.</div>
+<h3>5.1  Where other guidelines differ</h3>
+<table>
+<thead><tr><th style="width:14%">Region</th><th>UK v4</th><th>NOAC 2023</th><th>RTOG 2009 / ECOG-ACRIN 2022</th></tr></thead>
+<tbody>
+<tr><td class="b">Iliac build</td><td>Vessels from the cranial border + 7 mm (not superiorly), joined by a 10 mm "rollerball" along iliopsoas/obturator internus and in front of the sacrum; up to 10 mm into bladder or bowel</td><td>Vessels + 5–7 mm; external iliac 10–15 mm anterolaterally in the lower pelvis if nodes are seen; internal iliac anterior limit = back of external iliac vein</td><td>RTOG: ≥7–8 mm, ≥10 mm anterolaterally. ECOG: 7 mm, sidewall strip 15 mm, external iliac 15–17 mm anterolaterally once iliopsoas forms</td></tr>
+<tr><td class="b">Internal iliac end</td><td>—</td><td>Levator insertion; posterolateral sacrospinous ligament</td><td>ECOG: bottom of piriformis, then obturator strip (10 mm) to the canal</td></tr>
+<tr><td class="b">Inguinal</td><td>Medial: spermatic cord (men) or medial ⅓–½ pectineus/adductor; anterior 5 mm from skin; no subcutis between muscles</td><td>Down to the lesser trochanter (lower if ipsilateral nodes); posterolateral part excluded; medial 10–20 mm (upper) / ≥5–7 mm medial to great saphenous (lower)</td><td>RTOG: 2 cm below the saphenofemoral junction; inguinal/external iliac transition at the caudal obturator vessels (top of superior pubic rami)</td></tr>
+<tr><td class="b">Presacral</td><td>Out of sacral hollows</td><td>Hollows not included unless tumour infiltration or close</td><td>AGITG: hollows included</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
+</section>
+
+<section class="page" id="s5b">
+<div class="sechead"><span class="eyebrow">Section 5 (cont.)</span><h2><span class="sectnum">5</span>Elective regions on axial slices</h2></div>
+<div class="grid2">
+<div>
+<figure>
+<svg viewBox="0 0 300 220" role="img" aria-label="Axial schematic of elective regions in the mid pelvis">
+<rect width="300" height="220" fill="#fff"/>
+<path d="M24 40 Q12 130 70 196" fill="none" stroke="#c9ced4" stroke-width="12"/><path d="M276 40 Q288 130 230 196" fill="none" stroke="#c9ced4" stroke-width="12"/>
+<path d="M46 60 Q40 130 84 178" fill="none" stroke="#e8c7b8" stroke-width="12"/><path d="M254 60 Q260 130 216 178" fill="none" stroke="#e8c7b8" stroke-width="12"/>
+<text x="50" y="196" font-size="6.5" fill="#8a4a3e">obturator internus</text>
+<path d="M110 206 Q150 178 190 206" fill="#c9ced4"/><text x="134" y="216" font-size="7" fill="#5b6b7c">sacrum</text>
+<ellipse cx="150" cy="62" rx="44" ry="26" fill="#fff6d6" stroke="#c9a400"/><text x="134" y="65" font-size="7.5" fill="#8a6d00">bladder</text>
+<ellipse cx="150" cy="140" rx="18" ry="15" fill="#f2d7cf" stroke="#c48a7a"/><text x="139" y="143" font-size="7" fill="#8a4a3e">rectum</text>
+<path d="M114 140 Q150 104 186 140 Q186 170 150 174 Q114 170 114 140 Z" fill="rgba(160,74,11,.10)" stroke="#a14a0b" stroke-width="1.4"/>
+<path d="M114 128 Q150 76 186 128" fill="none" stroke="#a14a0b" stroke-dasharray="3 2"/><text x="190" y="104" font-size="6.5" fill="#a14a0b">+10 mm into bladder</text>
+<path d="M118 178 Q150 166 182 178 L180 190 Q150 182 120 190 Z" fill="rgba(47,111,176,.25)" stroke="#2f6fb0"/><text x="196" y="186" font-size="6.5" fill="#2f6fb0">presacral (10 mm)</text>
+<circle cx="76" cy="62" r="6" fill="#b03a2e"/><circle cx="86" cy="70" r="7" fill="#2f6fb0"/><circle cx="224" cy="62" r="6" fill="#b03a2e"/><circle cx="214" cy="70" r="7" fill="#2f6fb0"/>
+<circle cx="92" cy="128" r="5" fill="#b03a2e"/><circle cx="208" cy="128" r="5" fill="#b03a2e"/>
+<path d="M62 54 Q70 44 96 56 Q102 70 94 82 Q88 100 104 116 Q110 134 96 140 Q78 138 72 122 Q62 100 64 82 Q56 66 62 54 Z" fill="rgba(47,111,176,.14)" stroke="#2f6fb0" stroke-width="1.4"/>
+<path d="M238 54 Q230 44 204 56 Q198 70 206 82 Q212 100 196 116 Q190 134 204 140 Q222 138 228 122 Q238 100 236 82 Q244 66 238 54 Z" fill="rgba(47,111,176,.14)" stroke="#2f6fb0" stroke-width="1.4"/>
+<text x="4" y="30" font-size="6.5" fill="#2f6fb0">external iliac + 7 mm</text><text x="4" y="110" font-size="6.5" fill="#2f6fb0">obturator</text><text x="4" y="150" font-size="6.5" fill="#2f6fb0">internal iliac</text>
+<text x="128" y="125" font-size="6.5" fill="#a14a0b">mesorectum</text>
+</svg>
+<figcaption>Original schematic (axial, mid pelvis, T2–4/N+). The mesorectum's anterior edge goes 10 mm into the bladder for filling.</figcaption>
+</figure>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 220" role="img" aria-label="Axial schematic of the low pelvis with ischiorectal fossae and inguinal regions">
+<rect width="300" height="220" fill="#fff"/>
+<ellipse cx="62" cy="40" rx="30" ry="16" fill="rgba(47,111,176,.14)" stroke="#2f6fb0"/><circle cx="56" cy="44" r="5" fill="#b03a2e"/><circle cx="68" cy="45" r="6" fill="#2f6fb0"/><text x="30" y="16" font-size="7" fill="#2f6fb0">inguinal</text>
+<ellipse cx="238" cy="40" rx="30" ry="16" fill="rgba(47,111,176,.14)" stroke="#2f6fb0"/><circle cx="244" cy="44" r="5" fill="#b03a2e"/><circle cx="232" cy="45" r="6" fill="#2f6fb0"/>
+<ellipse cx="92" cy="96" rx="18" ry="30" fill="#c9ced4"/><line x1="208" y1="110" x2="250" y2="140" stroke="#5b6b7c" stroke-width=".6"/><text x="232" y="150" font-size="6.5" fill="#5b6b7c">ischial</text><text x="232" y="158" font-size="6.5" fill="#5b6b7c">tuberosity</text>
+<ellipse cx="208" cy="96" rx="18" ry="30" fill="#c9ced4"/>
+<path d="M80 170 Q150 214 220 170 L238 200 Q150 230 62 200 Z" fill="#e8c7b8" stroke="#b0786b"/><text x="122" y="214" font-size="7" fill="#8a4a3e">gluteus maximus</text>
+<circle cx="150" cy="120" r="20" fill="#d6a28f" stroke="#8a4a3e"/><circle cx="150" cy="120" r="7" fill="#f2d7cf"/><text x="136" y="152" font-size="6.5" fill="#8a4a3e">sphincters</text>
+<path d="M108 84 Q128 94 130 120 Q128 150 112 170 Q96 150 104 120 Z" fill="rgba(160,74,11,.12)" stroke="#a14a0b"/>
+<path d="M192 84 Q172 94 170 120 Q172 150 188 170 Q204 150 196 120 Z" fill="rgba(160,74,11,.12)" stroke="#a14a0b"/>
+<line x1="108" y1="128" x2="40" y2="160" stroke="#a14a0b" stroke-width=".6"/><text x="6" y="168" font-size="6.5" fill="#a14a0b">ischiorectal fossa</text>
+<ellipse cx="150" cy="78" rx="14" ry="9" fill="#fbe7ef" stroke="#c9a2b4"/><text x="168" y="70" font-size="6.5" fill="#a0476a">vagina / prostate</text>
+<path d="M126 104 Q150 92 174 104 Q182 138 150 148 Q118 138 126 104 Z" fill="none" stroke="#b03a2e" stroke-width="1.6"/><text x="6" y="110" font-size="6.5" fill="#b03a2e">high-dose CTV:</text><text x="6" y="119" font-size="6.5" fill="#b03a2e">canal + sphincters</text>
+</svg>
+<figcaption>Original schematic (axial, low pelvis). The IRF is in the department elective CTV for all stages; UK, ECOG and NOAC include it only with infiltration.</figcaption>
+</figure>
+</div>
+</div>
+<h3>5.2  Slice landmarks, cranial to caudal</h3>
+<table>
+<thead><tr><th style="width:24%">Level</th><th>What changes</th></tr></thead>
+<tbody>
+<tr><td class="b">CIA bifurcation (≈L5/S1)</td><td>Start internal and external iliac (T2–4/N+) and presacral; T1N0 starts lower, at the top of the mesorectum</td></tr>
+<tr><td class="b">Rectosigmoid junction</td><td>Mesorectum begins (rectum turns forward to sigmoid)</td></tr>
+<tr><td class="b">Acetabular roof → superior pubic ramus</td><td>External iliac ends as vessels leave the pelvis; inguinal begins</td></tr>
+<tr><td class="b">Just above the obturator canal</td><td>Obturator region (3–5 mm cranio-caudal) until the artery exits</td></tr>
+<tr><td class="b">Levator insertion into obturator fascia</td><td>Internal iliac ends; IRF apex appears below</td></tr>
+<tr><td class="b">Anorectal junction</td><td>Mesorectum ends; anal canal (about 4 cm) begins</td></tr>
+<tr><td class="b">Coccyx tip</td><td>Presacral ends</td></tr>
+<tr><td class="b">Lower ischial tuberosity</td><td>Inguinal ends</td></tr>
+<tr><td class="b">Anal verge (marker)</td><td>IRF ends; CTV continues 10–15 mm below GTV if the tumour is lower</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
+</section>
+
+<!-- ============================ S6 ============================ -->
+<section class="page" id="s6">
+<div class="sechead"><span class="eyebrow">Section 6</span><h2><span class="sectnum">6</span>Ischiorectal fossa, mesorectum, cranial border and risk-adapted options</h2></div>
+<h3>6.1  Ischiorectal fossa</h3>
+<table>
+<thead><tr><th style="width:22%">Source</th><th>When the IRF is in the elective CTV</th></tr></thead>
+<tbody>
+<tr><td class="b">Department / AGITG</td><td>Always (all stages). AGITG: no data that it is at risk, but the old 2D fields covered it</td></tr>
+<tr><td class="b">UK v4; ECOG-ACRIN</td><td>Only with tumour infiltration &gt;5 mm beyond the levators, puborectalis, external sphincter or verge (clinically or on imaging); otherwise only the part inside the primary CTV</td></tr>
+<tr><td class="b">NOAC</td><td>Whole IRF if tumour extends beyond levator ani or external sphincter; 2 cm into the IRF if into but not beyond them; otherwise only the 10–15 mm GTV-to-CTV margin. No PET-positive IRF nodes in two mapping studies</td></tr>
+</tbody>
+</table>
+<h3>6.2  Mesorectum</h3>
+<ul class="tight">
+<li>Department, AGITG, ECOG: whole mesorectum for all stages (ECOG includes it in the primary CTV at rectal levels).</li>
+<li>UK v4: lower 50 mm of mesorectum (from the anorectal junction) when there is no tumour or nodes in the mesorectum; whole mesorectum if there is.</li>
+</ul>
+<h3>6.3  Cranial border of the elective CTV</h3>
+<table>
+<thead><tr><th style="width:22%">Source</th><th>Cranial border</th></tr></thead>
+<tbody>
+<tr><td class="b">Department</td><td>T1N0: top of the mesorectum. T2–4/N+: CIA bifurcation or ≥20 mm above the highest GTV</td></tr>
+<tr><td class="b">AGITG, RTOG, ECOG; NOAC option A</td><td>CIA bifurcation (≈L5/S1) for all; if the bifurcation is well above the promontory, the promontory is acceptable (NOAC)</td></tr>
+<tr><td class="b">UK v4</td><td>20 mm above the inferior SIJ or 15 mm above the highest gross tumour</td></tr>
+</tbody>
+</table>
+<h3>6.4  NOAC option B: risk-adapted cranial border (Nilsson 2023 Table 1)</h3>
+<table>
+<thead><tr><th style="width:12%">Level</th><th>Patients</th><th>Cranial border</th></tr></thead>
+<tbody>
+<tr><td class="b">Very low</td><td>T1–2N0 not extending into the rectum</td><td>Inferior SIJ</td></tr>
+<tr><td class="b">Low</td><td>T1–2N0 extending &lt;1 cm into the rectum (above puborectalis)</td><td>2 cm above the inferior SIJ</td></tr>
+<tr><td class="b">Intermediate</td><td>Not meeting any other criterion</td><td>CIA bifurcation</td></tr>
+<tr><td class="b">High</td><td>Nodes in ≥3 of 7 pelvic/inguinal regions, or external/internal iliac nodes in the upper half of those regions</td><td>Aortic bifurcation</td></tr>
+<tr><td class="b">Very high</td><td>Common iliac nodes</td><td>IMA take-off (≈top of L3)</td></tr>
+<tr><td class="b">Ultra high</td><td>Para-aortic nodes</td><td>Left renal vein or 3 cm above the highest node</td></tr>
+</tbody>
+</table>
+<p class="src">Superior rectal nodes in the upper pelvis: ≥3 cm above the node; above the promontory: IMA take-off. Option B also omits the external iliac region for T1–2N0 and T1–2N1a with nodes only in the mesorectal/superior rectal/presacral regions; its internal iliac region already covers the space behind the external iliac vein (Nilsson 2023). Both options were judged acceptable; the department uses neither formally.</p>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
+</section>
+
+<!-- ============================ S7 + S8 ============================ -->
+<section class="page" id="s7">
+<div class="sechead"><span class="eyebrow">Section 7</span><h2><span class="sectnum">7</span>Special situations</h2></div>
+<table>
+<thead><tr><th style="width:22%">Situation</th><th>What to do</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Excised T1 (positive or close margins)</td><td>GTVp = tumour site + excision scar (wire it); CTV50.4 as T1N0</td><td>Department; ECOG case 1</td></tr>
+<tr><td class="b">Anal margin / perianal skin</td><td>Leave ≥20 mm between perianal GTV and the edge of the buttock tissue at simulation, or use bolus; GTV includes marked skin</td><td>ECOG; UK (5 mm tissue); AGITG (20 mm radial/caudal)</td></tr>
+<tr><td class="b">Extension into the rectum</td><td>Whole lumen and wall at GTV levels; NOAC raises the cranial border (low level) and makes rectal SCC without canal extension inguinal-negative</td><td>Department; NOAC</td></tr>
+<tr><td class="b">Posterior vaginal invasion</td><td>Consider a stoma; 10 mm into the vagina anteriorly; trim CTV off a vaginal dilator only on slices without bladder or rectum</td><td>UK; ECOG</td></tr>
+<tr><td class="b">Common iliac or para-aortic nodes</td><td>Raise the cranial border (aortic bifurcation, IMA, or left renal vein / 3 cm above the node); common iliac 5–7 mm (+3 mm at mid-chain); para-aortic left to psoas, right 3–5 mm off IVC</td><td>NOAC Tables 1–2</td></tr>
+<tr><td class="b">HIV</td><td>Standard CRT if viral load low on ART, CD4 &gt;200 and no other comorbidity; otherwise individualise with ID</td><td>UK; department</td></tr>
+<tr><td class="b">Limited M1</td><td>Radical-dose CRT may be considered for local control</td><td>Department</td></tr>
+</tbody>
+</table>
+<hr class="soft"/>
+<div class="sechead" id="s8"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>Pearls and common errors</h2></div>
+<div class="grid2">
+<div>
+<ul class="tight">
+<li><b>Anorectal junction</b>: where levators fuse with the external sphincter and mesorectal fat tapers away; on CT a plane from the lower edge of the symphysis to the coccyx crosses the rectum here (AGITG Fig. 1).</li>
+<li><b>Obturator region is short</b>: only 3–5 mm cranio-caudally above the canal (AGITG).</li>
+<li><b>External iliac to inguinal transition</b>: between the acetabular roof and the superior pubic ramus, where the artery leaves the pelvis; RTOG places it at the caudal obturator vessels.</li>
+<li><b>Don't remove bowel blindly</b> from the nodal CTV: anal guidelines allow up to 10 mm into bowel or bladder because their daily position varies (UK; ECOG).</li>
+</ul>
+</div>
+<div>
+<ul class="tight">
+<li><b>Circumflex iliac and superolateral groin nodes</b>: include visible nodes along the circumflex iliac vessels when the ipsilateral groin is involved (NOAC).</li>
+<li><b>Lymph node ECE</b>: AGITG's 10 mm minimum nodal margin came from head and neck ECE data.</li>
+<li><b>Most failures are local</b>: 83% of relapses at the primary (Shakir 2020); spend effort on the GTV and the canal, and on finishing treatment on time.</li>
+<li><b>Sacral hollows</b>: AGITG includes them; UK and NOAC leave them out unless infiltrated.</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
+</section>
+
+<!-- ============================ S9 + S10 ============================ -->
+<section class="page" id="s9">
+<div class="sechead"><span class="eyebrow">Section 9</span><h2><span class="sectnum">9</span>Dose, fractionation, margins and IGRT</h2></div>
+<table>
+<thead><tr><th style="width:18%">Stage</th><th>Department (VMAT SIB)</th><th>UK v4 (28 fractions)</th><th>AGITG</th></tr></thead>
+<tbody>
+<tr><td class="b">T1N0 / early</td><td>PTV50.4 50.4 Gy/28 (1.8); PTV42 42 Gy/28 (1.5)</td><td>PTV_Anal 50.4 Gy (T1N0 needing ENI, T2N0); PTV_Elec 40 Gy</td><td>T1 and non-bulky T2: 50.4/28, elective 42</td></tr>
+<tr><td class="b">T2–4 or N+</td><td>PTV54 54 Gy/30 (1.8) to primary and nodes; PTV45 45 Gy/30 (1.5)</td><td>PTV_Anal 53.2 Gy; nodes &lt;3 cm 50.4 Gy, &gt;3 cm 53.2 Gy; PTV_Elec 40 Gy</td><td>54/30, elective 45; sequential option 30–36 Gy then boost to 50.4–60 Gy</td></tr>
+</tbody>
+</table>
+<p class="src">Tomotherapy may be considered for complex volumes (department). UK prescribes to the median PTV dose (ICRU 83).</p>
+<table>
+<thead><tr><th style="width:18%">Item</th><th>Department</th><th>Guidelines</th></tr></thead>
+<tbody>
+<tr><td class="b">CTV → PTV</td><td>10 mm for all CTVs</td><td>UK: PTV_A 10 mm, PTV_N and PTV_E 5 mm with daily online imaging. AGITG: 10 mm, 5–7 mm with daily IGRT. ECOG: 5–10 mm. RTOG: 7–10 mm, trimmed 2–5 mm inside skin</td></tr>
+<tr><td class="b">IGRT</td><td>Not stated <span class="chk">CHECK</span></td><td>UK: CBCT days 1–5 then at least weekly, paired kV/MV other days; daily online imaging needed for 5 mm margins</td></tr>
+<tr><td class="b">Skin</td><td>Bolus or self-bolus for skin disease</td><td>UK: PTVs not involving skin edited 5 mm inside the body</td></tr>
+</tbody>
+</table>
+<hr class="soft"/>
+<div class="sechead" id="s10"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>Organs at risk and constraints</h2></div>
+<div class="grid2">
+<div>
+<h3>10.1  OAR definitions</h3>
+<table>
+<thead><tr><th style="width:28%">OAR</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td class="b">Small bowel</td><td>Department: individual loops (not a bowel bag) to 1.5 cm above the PTV, by the RO. UK: loops to ≥20 mm above both PTVs. AGITG: small and large bowel from 15 mm above the PTV down to the rectosigmoid</td></tr>
+<tr><td class="b">Bladder</td><td>Whole outer wall (RTs)</td></tr>
+<tr><td class="b">Femoral heads</td><td>Department: RT guideline. AGITG: head and neck to the top of the lesser trochanter. UK: to the bottom of the ischial tuberosities</td></tr>
+<tr><td class="b">External genitalia</td><td>Penis and scrotum, or clitoris and labia, out to the inguinal creases; top mid-symphysis (UK) or lower edge of symphysis (AGITG); Brooks 2015 atlas</td></tr>
+<tr><td class="b">Bone marrow / iliac crests</td><td>AGITG: iliac crests from the top down to the acetabular roof, both sides as one. ECOG: sacrum, crests, acetabula, femoral heads to the ischial tuberosities</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>10.2  UK v4 planning sheet (optimal / mandatory)</h3>
+<table>
+<thead><tr><th>Structure</th><th>Optimal</th><th>Mandatory</th></tr></thead>
+<tbody>
+<tr><td class="b">PTV (high)</td><td>D99 &gt;90%, D95 &gt;95%, D50 99–101%, D5 &lt;105%, D2 &lt;107%</td><td>D50 97–101%, D5 &lt;107%, D2 &lt;110%</td></tr>
+<tr><td class="b">Lower-dose PTVs</td><td>D99 &gt;90%, D95 &gt;95%, D50 &lt;110%</td><td>D50 &lt;125%</td></tr>
+<tr><td class="b">Small bowel</td><td>D200cc &lt;30, D150cc &lt;35, D20cc &lt;45, D5cc &lt;50 Gy</td><td>&lt;35, &lt;40, &lt;50, &lt;55 Gy</td></tr>
+<tr><td class="b">Femoral heads</td><td>D50 &lt;30, D35 &lt;40, D5 &lt;50 Gy</td><td>&lt;45, &lt;50, &lt;55 Gy</td></tr>
+<tr><td class="b">Genitalia</td><td>D50 &lt;20, D35 &lt;30, D5 &lt;40 Gy</td><td>&lt;35, &lt;40, &lt;55 Gy</td></tr>
+<tr><td class="b">Bladder</td><td>D50 &lt;35, D35 &lt;40, D5 &lt;50 Gy</td><td>&lt;45, &lt;50, &lt;58 Gy</td></tr>
+</tbody>
+</table>
+<p class="src">Planning priority: PTVs, then small bowel, femoral heads, genitalia, bladder (UK). The department document gives no constraint table <span class="chk">CHECK</span>.</p>
+</div>
+</div>
+<h3>10.3  ECOG-ACRIN EA2182 early-stage (per protocol / acceptable)</h3>
+<p>Bowel space − PTV: D30% ≤34/42 Gy, D0.03cc ≤52/54 Gy, V42 ≤100/200 cc. Bone marrow: mean ≤25/27 Gy, V10 ≤80/90%, V20 ≤66/75%. Femoral heads: D15% ≤30/50 Gy, D0.03cc ≤50/55 Gy. Bladder: D50% ≤35/42 Gy, D0.03cc ≤54/56 Gy. Genitalia D50% ≤20/35 Gy; gluteal cleft − PTV D50% ≤20/35 Gy; vaginal wall − PTV (5 mm around a dilator) D50% ≤30/40 Gy.</p>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
+</section>
+
+<!-- ============================ S11 ============================ -->
+<section class="page" id="s11">
+<div class="sechead"><span class="eyebrow">Section 11</span><h2><span class="sectnum">11</span>Names and RayStation implementation</h2></div>
+<p>Department names come from the SWSLHD protocol; TG-263-style equivalents are suggested for a RayStation template and need matching to the local template <span class="chk">CHECK</span>.</p>
+<table>
+<thead><tr><th style="width:28%">Department</th><th style="width:26%">Suggested TG-263 style</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="b">GTVp MRI / GTVp PET / GTVp</td><td>GTVp_MR, GTVp_PET, GTVp</td><td>GTVp is the composite on CT</td></tr>
+<tr><td class="b">GTVn</td><td>GTVn1, GTVn2 …</td><td>Number by side and region</td></tr>
+<tr><td class="b">CTV50.4 / CTV54</td><td>CTV_5040 / CTV_5400</td><td>UK name CTV_A; ECOG CTV_5040</td></tr>
+<tr><td class="b">CTV42 / CTV45</td><td>CTV_4200 / CTV_4500</td><td>UK CTV_E</td></tr>
+<tr><td class="b">PTV50.4, PTV42, PTV54, PTV45</td><td>PTV_5040, PTV_4200, PTV_5400, PTV_4500</td><td>Skin-cropped evaluation copies: PTV_5040-03 etc. (ECOG/NRG style)</td></tr>
+<tr><td class="b">Nodal regions</td><td>CTVn_IntIliac_L/R, CTVn_ExtIliac_L/R, CTVn_Obt_L/R, CTVn_PreSacral, CTVn_Mesorectum, CTVn_IRF_L/R, CTVn_Ing_L/R</td><td>Build separately so stage-based selection is easy</td></tr>
+<tr><td class="b">SMALLBOWEL, bladder, femoral heads, iliac crests, genitalia</td><td>Bowel_Small, Bladder, Femur_Head_L/R, BoneMarrow (or Bone_Ilium_L/R), Genitals</td><td>UK planning sheet names in brackets: Small Bowel, Femoral Heads, Genitalia</td></tr>
+</tbody>
+</table>
+<h3>11.1  ROI algebra</h3>
+<div class="grid2">
+<div>
+<div class="stepbox"><b>T1N0</b>
+<ol class="steps">
+<li><code>zGTVp+10</code> = GTVp + 10 mm − muscle − bone</li>
+<li><code>CTV_5040</code> = zGTVp+10 ∪ AnalCanal (manual: lumen, wall, sphincters)</li>
+<li><code>CTV_4200</code> = CTV_5040 ∪ Mesorectum ∪ IntIliac ∪ PreSacral ∪ Obt ∪ IRF, + anterior 10 mm into organs, − Bowel_Small − muscle − bone; check inferior limit (10 mm below GTV or verge)</li>
+<li><code>PTV_5040</code> = CTV_5040 + 10 mm; <code>PTV_4200</code> = CTV_4200 + 10 mm</li>
+</ol></div>
+</div>
+<div>
+<div class="stepbox"><b>T2–4 / N+</b>
+<ol class="steps">
+<li><code>CTV_5400</code> = (GTVp + 15 mm − muscle − bone) ∪ AnalCanal ∪ (GTVn + 5–10 mm − muscle − bone − skin)</li>
+<li><code>CTV_4500</code> = CTV_5400 ∪ all seven regions, cranial limit = max(CIA bifurcation, highest GTV + 20 mm), inferior = min(GTV − 15 mm, verge)</li>
+<li><code>PTV_5400</code>, <code>PTV_4500</code> = CTV + 10 mm; optimise on <code>PTV_4500</code> − (PTV_5400 + 3–5 mm) ring</li>
+</ol></div>
+</div>
+</div>
+<ul class="tight">
+<li>Registration: MRI (T1, T2) and PET rigid to CT on pelvic bone; check the anal canal and verge marker.</li>
+<li>Peer review the GTV and elective selection before planning; record the stage-based volume choice in the plan notes.</li>
+</ul>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 11</span></div>
+</section>
+
+<!-- ============================ S12 ============================ -->
+<section class="page" id="s12">
+<div class="sechead"><span class="eyebrow">Section 12</span><h2><span class="sectnum">12</span>References and further guidelines</h2></div>
+<h3>Provided sources (in the folder)</h3>
+<ol class="ref">
+<li>Collier N, et al. SWSLHD Anal Canal Squamous Cell Carcinoma Radiotherapy Contouring Protocol. 1 September 2020. Departmental document.</li>
+<li>Muirhead R, Adams RA, Gilbert DC, Harrison M, Glynne-Jones R, Sebag-Montefiore D, Hawkins MA. National guidance for IMRT in anal cancer, version 4 (7 Dec 2016). analimrtguidance.co.uk.</li>
+<li>Ng M, Leong T, Chander S, et al. Australasian Gastrointestinal Trials Group (AGITG) contouring atlas and planning guidelines for intensity-modulated radiotherapy in anal cancer. Int J Radiat Oncol Biol Phys 2012;83:1455–1462. doi:10.1016/j.ijrobp.2011.12.058.</li>
+<li>Myerson RJ, Garofalo MC, El Naqa I, et al. Elective clinical target volumes for conformal therapy in anorectal cancer: an RTOG consensus panel contouring atlas. Int J Radiat Oncol Biol Phys 2009;74:824–830. doi:10.1016/j.ijrobp.2008.08.070.</li>
+<li>Damico N, et al. ECOG-ACRIN guideline for contouring and treatment of early stage anal cancer using IMRT/IGRT. Pract Radiat Oncol 2022;12:335–347. doi:10.1016/j.prro.2022.01.015.</li>
+<li>Nilsson MP, Undseth C, Albertsson P, et al. Nordic anal cancer (NOAC) group consensus guidelines for risk-adapted delineation of the elective clinical target volume in anal cancer. Acta Oncol 2023;62:897–906. doi:10.1080/0284186X.2023.2240490.</li>
+<li>Shakir R, Adams R, Cooper R, et al. Patterns and predictors of relapse following radical chemoradiation therapy delivered using IMRT with a simultaneous integrated boost in anal squamous cell carcinoma. Int J Radiat Oncol Biol Phys 2020;106:329–339. doi:10.1016/j.ijrobp.2019.10.016.</li>
+<li>Brooks C, Hansen VN, Riddell A, Harris VA, Tait DM. Proposed genitalia contouring guidelines in anal cancer intensity-modulated radiotherapy. Br J Radiol 2015;88:20150032. doi:10.1259/bjr.20150032.</li>
+<li>DECREASE (EA2182) delineation document (eContour case set); ARRO anal canal case (Bhavsar).</li>
+</ol>
+<h3>Trials referred to</h3>
+<p class="ref">ACT II; PLATO (ACT3, ACT4, ACT5); RTOG 0529; ECOG-ACRIN EA2182 (DECREASE); ANCARAD. ANZ: AGITG atlas (Ng 2012).</p>
+<h3>eviQ protocols (links only)</h3>
+<p class="ref">See the "eviQ protocols" tab on the <a href="../gi-anal.html">anal cancer page</a>.</p>
+<div class="flag"><span class="lbl">Before clinical use</span> This protocol condenses the sources above in our own words; schematics are original and not to scale. Have a colleague review it, and confirm items marked CHECK against the original document.</div>
+<div class="foot"><span>Anal RT Delineation Protocol · v1.0</span><span>Page 12</span></div>
+</section>
+</body>
+</html>

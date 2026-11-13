@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gynaecological Target Volume Delineation Protocol</title>
+<style>
+  :root{
+    --navy:#10243f; --navy2:#1d3a5f;
+    --teal:#14756b; --teal-bg:#e7f3f1;
+    --amber:#9a5a00; --amber-bg:#fdf3e3;
+    --rust:#8a2f23; --rust-bg:#fbeae7;
+    --paper:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6b7c;
+    --rule:#d6dde6;
+    --rule-strong:#14756b;
+    --dose-elective:#2f6fb0;
+    --dose-bed:#9a5a00;
+    --dose-sib:#c0721c;
+    --dose-boost:#8a2f23;
+    --dose-prostate:#b03a2e;
+    --flag:#8a2f23; --flag-bg:#fbeae7;
+    --key-bg:#e7f3f1;
+    --petrol:#10243f;
+    --petrol-2:#14756b;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;background:#e6ebf0;color:var(--ink);
+    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:10.3px;line-height:1.5;
+  }
+  .page{
+    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
+    padding:16mm 17mm 14mm;position:relative;
+    box-shadow:0 1px 8px rgba(16,36,63,.16);
+    display:flex;flex-direction:column;
+  }
+  @page{size:A4;margin:13mm;}
+  @media print{
+    body{background:#fff;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .page + .page{page-break-before:always;}
+    h2,h3{page-break-after:avoid;}
+    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
+  }
+  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
+  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
+  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
+  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
+  p{margin:.35em 0;}
+  a{color:var(--teal);}
+  .lead{font-size:11px;color:var(--muted);}
+  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
+  .sechead{margin:0 0 .5em;}
+  .sechead .eyebrow{display:block;margin-bottom:3px;}
+  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
+  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
+  .masthead h1{color:#fff;}
+  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
+  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
+  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
+  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
+  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
+  tbody tr:nth-child(even){background:#eef2f6;}
+  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
+  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
+  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
+  .p-elect{background:var(--dose-elective);}
+  .p-bed{background:var(--dose-bed);}
+  .p-sib{background:var(--dose-sib);}
+  .p-boost{background:var(--dose-boost);}
+  .p-pros{background:var(--dose-prostate);}
+  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
+  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
+  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
+  .flag .lbl:before{content:"\26A0  ";}
+  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
+  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
+  ol.steps li{margin:.28em 0;padding-left:.15em;}
+  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
+  ul.tight{margin:.25em 0;padding-left:1.15em;}
+  ul.tight li{margin:.18em 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid2>div{min-width:0;}
+  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
+  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  svg{display:block;width:100%;height:auto;}
+  .kv{font-size:9.3px;}
+  .kv b{color:var(--navy);}
+  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
+  .ref{font-size:8.6px;line-height:1.4;}
+  .ref li{margin:.2em 0;}
+  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
+  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
+  .named .pos{font-weight:700;color:var(--amber);}
+  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc td{border:none;padding:2px 4px;}
+  .toc .n{color:var(--teal);font-weight:700;width:24px;}
+  .toc .pg{text-align:right;color:var(--muted);width:32px;}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
+  .small{font-size:8.6px;color:var(--muted);}
+</style>
+
+<style id="site-extra">
+  .p-gtv{background:#1d4f91;}
+  .p-hi{background:#b03a2e;}
+  .p-lo{background:#2f6fb0;}
+  .p-ctv{background:#14756b;}
+  .p-ptv{background:#a07a00;}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:8.4px;color:var(--muted);}
+  .follow{border-left:4px solid #0d7366;}
+</style>
+<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #0d7366}</style></head>
+
+<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gyn-cervix.html" style="color:#9fe3d6;text-decoration:none">Cervix page</a><a href="../gyn-endometrial.html" style="color:#9fe3d6;text-decoration:none">Endometrial page</a><a href="../gyn-vulva-vagina.html" style="color:#9fe3d6;text-decoration:none">Vulva &amp; vagina page</a><a href="../gyn-general.html" style="color:#9fe3d6;text-decoration:none">General gynae page</a><a href="../ctr-gyn.html" style="color:#9fe3d6;text-decoration:none">Gynae quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
+<section class="page">
+<div class="masthead">
+<span class="eyebrow">Departmental Contouring Protocol · Gynaecological Radiation Oncology</span>
+<h1>Gynaecological Cancers — Target Volume Delineation Protocol</h1>
+<p class="sub">Target volumes for <b>definitive cervix EBRT</b> (EMBRACE II concept with full- and empty-bladder ITV and nodal SIB), <b>MRI-guided cervix brachytherapy</b> (GTVres, CTV<sub>HR</sub>, CTV<sub>IR</sub>), <b>post-operative cervix and endometrium</b> (vaginal and parametrial ITV, pelvic and para-aortic nodes), <b>vaginal vault brachytherapy, salvage and primary vaginal cancer</b>, and <b>vulva</b> (definitive and post-operative, inguinofemoral nodes).</p>
+<div class="pillrow">
+<span class="pill p-gtv">GTV</span>
+<span class="pill p-hi">CTV-T HR / boost</span>
+<span class="pill p-ctv">CTV-T LR / vaginal CTV</span>
+<span class="pill p-lo">Nodal CTV</span>
+<span class="pill p-ptv">ITV / PTV</span>
+</div>
+<div class="meta">SSWAHS (Liverpool &amp; Macarthur) gynae RT contouring protocol (22 June 2020, incl. EMBRACE II) · EMBRACE II protocol · Lim 2011 (intact cervix) · Small 2008 and 2021 (post-op, NRG/RTOG) · Gaffney 2016 (vulva) and its LN appendix · RANZCR GOROC IGBT position paper 2017 · Brower 2023 (nodal boost) — Version 1.0 · Nov 2026</div>
+</div>
+<div class="callout">
+<span class="lbl">Governing principles of this protocol</span>
+<ul class="tight" style="margin-top:4px;">
+<li><b>The departmental standard is the SSWAHS gynae protocol</b>, which adopts the <b>EMBRACE II</b> target concept for definitive cervix EBRT: CTV-T HR and CTV-T LR on MRI with a full and an empty bladder, an ITV for uterine motion, PTV45 = ITV45 + 5 mm, and SIB to involved nodes.</li>
+<li><b>Contour on MRI in the treatment position</b> (all patients with a uterus at Liverpool), fused on bone to the planning CT; nodes and OARs on CT. Use the clinical drawing from the examination under anaesthesia alongside the MRI.</li>
+<li><b>Nodal fields follow risk</b>: small pelvis, large pelvis or large pelvis plus para-aortic (EMBRACE II Table 9.1). Nodal CTVs are the vessels plus 7 mm, edited off bone, muscle and bowel.</li>
+<li><b>Post-hysterectomy, the vaginal cuff moves</b> with bladder and rectal filling: contour the vagina and parametria on full- and empty-bladder scans and join them into an ITV (department; Small 2021).</li>
+<li><b>Brachytherapy is part of definitive treatment</b> for cervix cancer; aim for CTV<sub>HR</sub> D90 90–95 Gy EQD2 within an overall time of 50 days (EMBRACE II; department).</li>
+</ul>
+</div>
+<h3 style="margin-top:1.1em;">Contents</h3>
+<table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, preparation, simulation and imaging</a></td><td class="pg">2</td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Which volumes for which patient; nodal risk groups</a></td><td class="pg">3</td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario A — Intact cervix EBRT: primary tumour targets and ITV</a></td><td class="pg">4</td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario A (cont.) — Pelvic, para-aortic and inguinal nodal CTVs; nodal boost</a></td><td class="pg">5</td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Scenario B — Cervix image-guided adaptive brachytherapy</a></td><td class="pg">6</td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Scenario C — Post-operative cervix and endometrium</a></td><td class="pg">7</td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Scenario D — Vaginal vault brachytherapy, salvage and primary vaginal cancer</a></td><td class="pg">8</td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Scenario E — Vulva, definitive</a></td><td class="pg">9</td></tr>
+<tr><td class="n">9</td><td><a href="#s9">Scenario F — Vulva, post-operative</a></td><td class="pg">10</td></tr>
+<tr><td class="n">10</td><td><a href="#s10">Pearls and common errors</a></td><td class="pg">11</td></tr>
+<tr><td class="n">11</td><td><a href="#s11">Dose, fractionation, margins and IGRT</a></td><td class="pg">11</td></tr>
+<tr><td class="n">12</td><td><a href="#s12">Organs at risk and constraints</a></td><td class="pg">12</td></tr>
+<tr><td class="n">13</td><td><a href="#s13">Names and RayStation implementation</a></td><td class="pg">13</td></tr>
+<tr><td class="n">14</td><td><a href="#s14">References and further guidelines</a></td><td class="pg">14</td></tr>
+</table>
+<h3>Sources used</h3>
+<table>
+<thead><tr><th style="width:38%">Source</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td class="b">SSWAHS (LCTC &amp; MCTC) gynae RT contouring protocol, 22 June 2020 (K Lim; incl. EMBRACE II)</td><td>Departmental preparation, simulation, structure names and definitions, expansions, doses, brachytherapy workflow and planning aims.</td></tr>
+<tr><td class="b">EMBRACE II protocol (Pötter et al.)</td><td>Target concept (CTV-T HR/LR, ITV-T LR, ITV45, PTV45), nodal risk groups (Table 9.1), pathological node definition (Table 9.2), nodal SIB, EBRT planning aims (Table 9.4), brachytherapy targets and aims (Table 10.1), vaginal dose de-escalation (Table 10.2).</td></tr>
+<tr><td class="b">Lim 2011 (Gyn IMRT Consortium, RTOG)</td><td>Intact cervix CTV components (Table 2) and parametrial borders (Table 3).</td></tr>
+<tr><td class="b">Small 2008 and Small 2021 (NRG/RTOG update)</td><td>Post-operative vaginal, parametrial and nodal CTVs, para-aortic borders, ITV and PTV advice (Table 2).</td></tr>
+<tr><td class="b">Gaffney 2016 vulva consensus and Appendix 1 (LN groups); post-op vulva contouring aide (RCR 2024 + Gaffney)</td><td>Vulval CTV rules, inguinofemoral radial margins, nodal selection by primary site, bolus, post-op vulva.</td></tr>
+<tr><td class="b">RANZCR GOROC IGBT position paper (2017); Brower 2023 PRO</td><td>Australian IGBT standards; nodal boost dose context.</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
+</section>
+
+<!-- ============================ S1 ============================ -->
+<section class="page" id="s1">
+<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, preparation, simulation and imaging</h2></div>
+<h3>1.1  Before simulation (department)</h3>
+<ul class="tight">
+<li>Stage with FIGO 2018 and TNM 8; record the date and type of surgery. A clinical drawing of the EUA findings, by the gynae-oncologist or RO, is scanned into MOSAIQ (repeat it at every brachytherapy insertion).</li>
+<li>Discuss at the gynae MDT; consider a trial; check chemotherapy suitability (pre-chemo bloods include FBC, EUC, CMP, LFT and hepatitis B serology ± HIV).</li>
+<li>Radical cervix chemoRT + brachytherapy is booked as category A: 5 days a week, treat on machine down days, no twice-daily catch-up.</li>
+<li>All gynae patients follow the bladder and bowel protocol (Benefiber started 3 days before CT; low-gas diet; empty bladder and bowel, then drink 500 mL within 10 minutes, 1 hour before CT and each treatment).</li>
+</ul>
+<h3>1.2  Simulation and imaging</h3>
+<table>
+<thead><tr><th style="width:16%">Item</th><th>Department</th><th>Guidelines</th></tr></thead>
+<tbody>
+<tr><td class="b">Position</td><td>Supine, knee and ankle supports, hands above head. Scan T12 to mid-femur. Vulva: frog-leg for the primary, or legs together if skin folds give self-bolus</td><td>Small 2021: supine, comfortably full bladder that can be reproduced. Vulva aide: frog-leg preferred, vac-bag</td></tr>
+<tr><td class="b">Bladder / rectum</td><td>CT with bladder <b>full</b> and rectum <b>empty</b>. If rectal diameter is ≥4 cm on the scout, void and rescan; if still large, call the RO</td><td>Gaffney 2016: repeat simulation after more bowel preparation if the rectum is &gt;3.5 cm</td></tr>
+<tr><td class="b">Second scan</td><td>Adjuvant pelvic RT: empty-bladder MRI (Liverpool) or empty-bladder CT (Macarthur, or no MRI). Definitive cervix: second MRI with empty bladder, same day</td><td>Small 2021 Table 2: consider full- and empty-bladder scans when making a vaginal ITV. EMBRACE II: intermediate IGRT uses multiple pre-treatment image sets with different filling</td></tr>
+<tr><td class="b">Contrast</td><td>Oral contrast unless contraindicated; IV contrast for vessel identification if no pelvic MRI</td><td>Small 2021: IV contrast distends the IVC; draw the para-aortic CTV on a non-contrast scan or allow for it</td></tr>
+<tr><td class="b">Markers</td><td>Tampon or wire at the introitus; wire on gross vulval tumour and on scars (RO present)</td><td>Small 2021: thin vaginal marker, placed without displacing the cuff. Gaffney: wires on gross disease and scars</td></tr>
+<tr><td class="b">MRI</td><td>Liverpool: MR simulation with bladder full for all with a uterus in situ; T2 axial</td><td>Lim 2011: T2 MRI fused to CT, ideally in treatment position. EMBRACE II: MRI and clinical examination mandatory</td></tr>
+<tr><td class="b">PET</td><td>Fuse and view with a linear colour scale (Rainbow 2), window from 0, liver mid blue-green</td><td>EMBRACE II: PET for overall guidance on nodes, not for exact node edges</td></tr>
+<tr><td class="b">Fusion</td><td>All contouring in MIM; CT, MRI ± PET fused on bone</td><td>EMBRACE II: if diagnostic MRI is used, match the pelvis first and use CT anatomy outside it</td></tr>
+</tbody>
+</table>
+<div class="flag"><span class="lbl">Check</span> The department document predates the move to RayStation and refers to MIM and Pinnacle; confirm the current fusion and contouring software and the SharePoint simulation guide <span class="chk">CHECK</span>.</div>
+<h3>1.3  Contouring workflow (EMBRACE II figure 9.10)</h3>
+<ol class="steps">
+<li>On the MRI (full bladder, then empty bladder): GTV-T, normal cervix, uterus, vagina, parametria, ± mesorectum; then CTV-T HR and CTV-T LR for each scan.</li>
+<li>On the planning CT (full bladder): copy GTV-N to CTV-N and adjust to the CT node; draw CTV-E; build ITV-T LR from both CTV-T LRs plus margin.</li>
+<li>Join ITV-T LR and CTV-E as ITV45; grow PTV45 (5 mm) and PTV-N (5 mm).</li>
+<li>OARs on CT (radiation therapists, auto-contours edited), plus the whole vagina for PIBS points.</li>
+<li>Registrar contours are prefixed <code>REG_</code>; replan structures <code>RP_</code>.</li>
+</ol>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
+</section>
+
+<!-- ============================ S2 ============================ -->
+<section class="page" id="s2">
+<div class="sechead"><span class="eyebrow">Section 2</span><h2><span class="sectnum">2</span>Which volumes for which patient; nodal risk groups</h2></div>
+<table>
+<thead><tr><th style="width:20%">Scenario</th><th>Primary / bed volume</th><th>Nodal volume</th><th>Department dose</th></tr></thead>
+<tbody>
+<tr><td class="b">A–B. Cervix, definitive (FIGO IB–IVA)</td><td>GTV-T, cervix, uterus, parametria, vagina 2 cm below GTV ± mesorectum → CTV-T HR, CTV-T LR, ITV-T LR</td><td>By EMBRACE II risk group (below) ± inguinal</td><td><span class="pill p-lo">45 Gy/25</span> + SIB nodes 55–57.5 Gy; brachy 7.75 Gy × 4</td></tr>
+<tr><td class="b">C. Cervix, post-op</td><td>Upper ½ vagina + parametria (full and empty bladder) → ITV</td><td>Int/ext iliac + presacral; one echelon above any involved node</td><td>45 Gy/25 ± VBT 10 Gy/2 at 5 mm</td></tr>
+<tr><td class="b">C. Endometrium, post-op</td><td>Upper ½ vagina + parametria → ITV</td><td>Int/ext iliac; presacral if cervical stromal invasion; next station up if nodes involved</td><td>45 Gy/25 ± VBT 10 Gy/2</td></tr>
+<tr><td class="b">D. Vaginal vault only</td><td>Vaginal applicator (prescribed at 5 mm)</td><td>None</td><td>VBT alone 21 Gy/3 at 5 mm, 7 days apart</td></tr>
+<tr><td class="b">D. Salvage uterus (vault recurrence)</td><td>GTV (full and empty) + upper ½ vagina + parametria</td><td>Pelvic nodes as post-op</td><td>45 Gy/25 + VBT 21 Gy/3</td></tr>
+<tr><td class="b">D. Vagina, definitive</td><td>GTV + whole remaining vagina to introitus + parametria</td><td>All pelvic nodes incl. common iliac and presacral; inguinal if distal ½ involved</td><td>59.4–66.6 Gy/33–37; nodes 54–59.4 Gy</td></tr>
+<tr><td class="b">E. Vulva, definitive</td><td>GTVp (wired) + margin + skin bridge</td><td>T1–2 N0: both groins. T3–4 or N+: also iliac to one station above involved nodes</td><td>59.4–66.6 Gy/33–37; nodes 54–59.4 Gy</td></tr>
+<tr><td class="b">F. Vulva, post-op</td><td>Tumour bed or whole vulva; CTV_HI_RISK for positive margin or ECE</td><td>Groins, iliac and obturator; next echelon if node-positive</td><td>45–50.4 Gy; high risk 54–59.4 Gy</td></tr>
+</tbody>
+</table>
+<h3>2.1  Nodal risk groups for definitive cervix EBRT (EMBRACE II Table 9.1; department)</h3>
+<table>
+<thead><tr><th style="width:16%">Risk group</th><th>Definition</th><th>Elective nodal regions</th><th>Upper border of CTV-E (department)</th></tr></thead>
+<tbody>
+<tr><td class="b">Low</td><td>Tumour ≤4 cm AND stage IA/IB1/IIA1 AND N0 AND squamous AND no uterine invasion</td><td><b>Small pelvis</b>: internal iliac, external iliac, obturator, presacral</td><td>One slice below the common iliac bifurcation</td></tr>
+<tr><td class="b">Intermediate</td><td>Not low risk, no high-risk features</td><td><b>Large pelvis</b>: small pelvis + common iliac (including the aortic bifurcation); + inguinal if distal vaginal involvement; + mesorectum if mesorectal nodes and advanced local disease</td><td>One slice below the aortic bifurcation</td></tr>
+<tr><td class="b">High</td><td>≥1 pathological node at common iliac or above, OR ≥3 pathological nodes</td><td><b>Large pelvis + para-aortic</b></td><td>EMBRACE II: at least the renal veins (usually including L2) and ≥3 cm above the highest involved para-aortic node. Department: top of L1 (risk table says top of L2), ≥3 cm above the highest node</td></tr>
+</tbody>
+</table>
+<div class="flag"><span class="lbl">Check</span> The department document gives two upper borders for the high-risk group (top of L2 in the risk table; top of L1 in the expansions table; CTVn_PA "from L1"). EMBRACE II anchors it to the renal veins. This page uses <b>renal veins / top of L1, whichever is higher, and ≥3 cm above the highest node</b> until the department confirms <span class="chk">CHECK</span>.</div>
+<h3>2.2  What counts as a pathological node (EMBRACE II Table 9.2)</h3>
+<ul class="tight">
+<li>FDG-PET positive; and/or short axis ≥1 cm on CT or MRI; and/or short axis 0.5–1.0 cm on MRI with an irregular border, high signal or round shape.</li>
+<li>Contour each as GTV-N1, GTV-N2 … (numbered clockwise starting in the pelvis and moving up to the para-aortic region — department), even if no boost is planned.</li>
+</ul>
+<h3>2.3  Nodal echelon rules</h3>
+<table>
+<thead><tr><th style="width:24%">Setting</th><th>Rule</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Post-op cervix, node-positive</td><td>Include the group one echelon above: external or internal iliac positive → add common iliac; common iliac positive → extend 2–3 cm into the lower para-aortic region; para-aortic positive → whole para-aortic chain</td><td>Department</td></tr>
+<tr><td class="b">Post-op cervix, node-negative</td><td>Pelvic RT if ≥2 of: tumour &gt;4 cm, deep stromal invasion (&gt;⅓), LVSI; or GOG score ≥120 (Sedlis)</td><td>Department</td></tr>
+<tr><td class="b">Endometrium</td><td>Presacral nodes with cervical stromal invasion; next station superiorly if pelvic nodes positive</td><td>Department; Small 2008, 2021</td></tr>
+<tr><td class="b">Vulva</td><td>Treat the echelon above the highest involved node; if one groin is involved treat both; same regions both sides</td><td>Gaffney 2016</td></tr>
+</tbody>
+</table>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
+</section>
+
+<!-- ============================ S3 ============================ -->
+<section class="page" id="s3">
+<div class="sechead"><span class="eyebrow">Section 3 · Scenario A</span><h2><span class="sectnum">3</span>Intact cervix EBRT: primary tumour targets and ITV</h2></div>
+<h3>3.1  Primary tumour structures (on each MRI: _FB full bladder, _EB empty bladder)</h3>
+<table>
+<thead><tr><th style="width:18%">Structure</th><th>Department / EMBRACE II</th><th>Lim 2011 (RTOG consensus)</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV-T</td><td>High T2 signal tumour on MRI, inside and outside the cervix, supported by examination and PET (separate GTV-T_PET)</td><td>Intermediate/high T2 signal</td></tr>
+<tr><td class="b">CERVIX</td><td>Uninvolved cervix: low-signal (black) stroma around the bright endocervical glands and mucus</td><td>Whole cervix if not already in the GTV</td></tr>
+<tr><td class="b">UTERUS</td><td>Entire uterus</td><td>Entire uterus (excluding the fundus may be revisited in future)</td></tr>
+<tr><td class="b">VAGINA</td><td><b>2 cm of vagina below the GTV</b>, measured from the lowest point of the initial CTV-T HR along the vaginal axis, not from the fornix (EMBRACE II)</td><td>No or minimal vaginal extension: upper ½. Upper vaginal involvement: upper ⅔. Extensive: whole vagina</td></tr>
+<tr><td class="b">PARAMETRIA</td><td>Bilateral; borders below</td><td>Entire parametrium including the ovaries</td></tr>
+<tr><td class="b">MESORECTUM</td><td>Only if the uterosacral ligament is involved (EUA or imaging) or a mesorectal node ≥5 mm</td><td>Whole mesorectum if uterosacral ligaments are involved (consider in FIGO ≥IIIB or extensive nodes)</td></tr>
+<tr><td class="b">CTV-T HR</td><td>GTV-T + any remaining normal cervix</td><td>—</td></tr>
+<tr><td class="b">CTV-T LR</td><td>CTV-T HR + whole uterus + 2 cm vagina below + both parametria ± ovaries (excessive uterine/parametrial invasion). EMBRACE II also adds ~5 mm from CTV-T HR towards bladder and rectum (not into uninvolved walls) and 20 mm into any involved pelvic wall, uterosacral ligament or mesorectum</td><td>GTV + cervix + uterus + parametria + ovaries + vagina (as above)</td></tr>
+</tbody>
+</table>
+<h3>3.2  Parametrial borders</h3>
+<table>
+<thead><tr><th style="width:12%">Border</th><th>Department (PARA_FB / PARA_EB)</th><th>Lim 2011 Table 3</th><th>Mesorectum (department, if needed)</th></tr></thead>
+<tbody>
+<tr><td class="b">Anterior</td><td>Posterior bladder wall or external iliac vessels</td><td>Posterior bladder wall or posterior border of external iliac vessels (small bladder)</td><td>Vagina, bladder, ureters</td></tr>
+<tr><td class="b">Posterior</td><td>Uterosacral ligaments and mesorectal fascia</td><td>Uterosacral ligaments and mesorectal fascia</td><td>Sacrum and coccyx</td></tr>
+<tr><td class="b">Lateral</td><td><b>Medial edge of the internal iliac and obturator vessels</b></td><td>Medial edge of obturator internus / ischial ramus (pelvic sidewall)</td><td>Obturator internus, internal iliac region</td></tr>
+<tr><td class="b">Superior</td><td>Top of fallopian tube / broad ligament / uterine arteries</td><td>Top of fallopian tube / broad ligament; stop once bowel loops lie beside the uterus. Very anteverted uterus: stop where cervix appears</td><td>Bifurcation of the superior rectal artery (S3)</td></tr>
+<tr><td class="b">Inferior</td><td>Top of the urogenital diaphragm (last slice before levator ani appears)</td><td>Urogenital diaphragm</td><td>Urogenital diaphragm (levator ani)</td></tr>
+</tbody>
+</table>
+<p class="src">The department stops the parametrium at the vessels because the nodal CTV covers the sidewall; Lim 2011 takes it to the sidewall and accepts the overlap with the obturator CTV. The combined ITV45 covers the same region either way.</p>
+<div class="grid2">
+<div>
+<h3>3.3  ITV-T LR and PTV (EMBRACE II; department)</h3>
+<ol class="steps">
+<li>CTV-T LR = CTV-T LR_FB ∪ CTV-T LR_EB.</li>
+<li>ITV-T LR = CTV-T LR + individualised margin; the department example is <b>10 mm anterior, 10 mm posterior, 10 mm superior, 5 mm lateral, 0 mm inferior</b> (EMBRACE II standard margins: 10 mm AP, 10 mm SI, 5 mm lateral, none along the vagina inferiorly).</li>
+<li>Edit off pelvic muscle and bone (especially the lateral parametria). Add 5 mm in all directions around the uterine body if the upper, mobile uterus is involved.</li>
+<li>Minimum margin 5 mm AP and SI. Reducing one direction usually means adding to the opposite side; judge whether bladder and rectum are in their average positions.</li>
+<li>Check that ITV-T LR covers the CT-defined uterus and cervix and the PET GTV, and that its inferior slices match the lower edge of CTV-T LR.</li>
+<li>ITV45 = ITV-T LR ∪ CTV-E (which already contains every CTV-N). <b>PTV45 = ITV45 + 5 mm.</b> No ITV is made for CTV-E.</li>
+<li>Helper: CTV-T HR_FB ∪ CTV-T HR_EB + 10 mm; keep dose below 103% of 45 Gy inside it (EMBRACE II 9.6).</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 250" role="img" aria-label="Sagittal schematic of cervix EBRT targets">
+<rect width="300" height="250" fill="#fff"/>
+<path d="M250 20 Q268 120 240 235" fill="none" stroke="#c9ced4" stroke-width="16"/><text x="252" y="245" font-size="7.5" fill="#5b6b7c">sacrum</text>
+<rect x="30" y="160" width="22" height="50" rx="6" fill="#eef0f2" stroke="#b8c2cc"/><text x="22" y="222" font-size="7.5" fill="#5b6b7c">symphysis</text>
+<ellipse cx="85" cy="150" rx="38" ry="30" fill="#fff6d6" stroke="#c9a400"/><text x="66" y="153" font-size="8" fill="#8a6d00">bladder</text>
+<path d="M205 70 Q228 140 212 232" fill="none" stroke="#c48a7a" stroke-width="15"/><text x="222" y="140" font-size="7.5" fill="#8a4a3e">rectum</text>
+<path d="M150 150 L135 228" stroke="#d98aa3" stroke-width="9" stroke-linecap="round"/><text x="104" y="240" font-size="7.5" fill="#a0476a">vagina</text>
+<path d="M118 60 Q100 30 140 22 Q185 26 178 72 L172 140 L140 150 Z" fill="#f3e8f8" stroke="#9a7fb0"/><text x="128" y="50" font-size="7.5" fill="#6b4f80">uterus</text>
+<path d="M140 120 L174 116 L172 160 L146 162 Z" fill="rgba(29,79,145,.55)" stroke="#1d4f91"/><line x1="168" y1="140" x2="196" y2="132" stroke="#1d4f91" stroke-width=".6"/><text x="198" y="134" font-size="7" fill="#1d4f91">GTV-T</text>
+<path d="M136 114 L178 108 L176 166 L142 168 Z" fill="none" stroke="#b03a2e" stroke-width="1.8"/><line x1="176" y1="160" x2="198" y2="160" stroke="#b03a2e" stroke-width=".6"/><text x="200" y="162" font-size="7" fill="#b03a2e">CTV-T HR</text>
+<path d="M108 58 Q94 22 140 14 Q192 18 186 74 L182 170 L148 192 L132 190 L130 170 Q118 130 108 58 Z" fill="rgba(20,117,107,.10)" stroke="#14756b" stroke-width="1.6"/>
+<line x1="132" y1="190" x2="150" y2="192" stroke="#14756b" stroke-width="1.2"/>
+<text x="4" y="80" font-size="7" fill="#14756b">CTV-T LR: HR + uterus</text><text x="4" y="89" font-size="7" fill="#14756b">+ parametria + 2 cm</text><text x="4" y="98" font-size="7" fill="#14756b">vagina</text>
+<path d="M96 48 Q80 6 140 2 Q204 8 198 74 L194 176 L150 196 L128 196 L118 172 Q104 130 96 48 Z" fill="none" stroke="#a07a00" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="196" y="18" font-size="7.5" fill="#a07a00">ITV-T LR (+10 mm AP/SI)</text>
+<line x1="150" y1="168" x2="150" y2="192" stroke="#555" stroke-width=".8" marker-end="url(#ar)"/><text x="156" y="200" font-size="6.5" fill="#555">20 mm</text>
+<defs><marker id="ar" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#555"/></marker></defs>
+</svg>
+<figcaption>Original schematic (sagittal). Vaginal extent is measured 20 mm along the vagina from the lowest point of CTV-T HR; no extra ITV margin inferiorly.</figcaption>
+</figure>
+</div>
+</div>
+<h3>3.4  Walkthrough (MRI, cranial to caudal)</h3>
+<ol class="steps">
+<li>Fundus: whole uterus; stop the parametria once bowel loops sit beside the uterus (top of broad ligament / uterine arteries).</li>
+<li>Corpus and isthmus: parametria from the uterus out to the internal iliac and obturator vessels; anterior edge at the bladder wall; posterior edge at the uterosacral ligaments and mesorectal fascia.</li>
+<li>Cervix: GTV-T (bright on T2) and the black stromal ring of uninvolved cervix → CTV-T HR. Look for parametrial spiculation and uterosacral ligament thickening (add mesorectum if involved).</li>
+<li>Vagina: follow the canal down 2 cm below the lowest CTV-T HR slice, measured along the vaginal axis on the sagittal; include paravaginal tissue in the parametria down to the levator ani.</li>
+<li>Repeat on the empty-bladder MRI; the uterus usually tilts back and drops.</li>
+</ol>
+<h3>3.5  Pitfalls</h3>
+<ul class="tight">
+<li>Measuring the 2 cm vaginal margin from the fornix rather than from the lowest tumour point under-covers tumours that extend into the vagina (EMBRACE II).</li>
+<li>Couch shifts on IGRT must use bone, not the uterus; matching to the uterus can move nodes and CTV-E out of the field (EMBRACE II 9.8).</li>
+<li>Average bladder volume falls during treatment, so the full-bladder position at simulation may not be the average (EMBRACE II 9.3.6).</li>
+</ul>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
+</section>
+
+<!-- ============================ S4 ============================ -->
+<section class="page" id="s4">
+<div class="sechead"><span class="eyebrow">Section 4 · Scenario A (cont.)</span><h2><span class="sectnum">4</span>Pelvic, para-aortic and inguinal nodal CTVs; nodal boost</h2></div>
+<p>Contour on the full-bladder CT. Every nodal CTV is the vessels plus at least 7 mm of perivascular tissue, including clips, lymphocysts and visible nodes, edited off bone, muscle and bowel (EMBRACE II 9.3.4; department). The same nodal definitions are used for post-op, vaginal and vulval cases.</p>
+<table>
+<thead><tr><th style="width:13%">Region</th><th>Department</th><th>Small 2021 (NRG/RTOG post-op update)</th></tr></thead>
+<tbody>
+<tr><td class="b">Para-aortic</td><td>From L1 to the aortic bifurcation; laterally to psoas; aorta and IVC (and visible nodes) with at least 7 mm, excluding kidneys</td><td>Cervix: top at the left renal vein (raise if high PET-avid nodes). Endometrium: 1–1.5 cm above the left renal vessels. Not a uniform expansion: left side to the medial edge of left psoas (1–2 cm lateral to the aorta); right side 3–5 mm around the IVC; the intercavo-aortic space straight, not concave. Draw on a non-contrast scan</td></tr>
+<tr><td class="b">Common iliac</td><td>Aortic bifurcation to iliac bifurcation; 7 mm circle touching the vessel edge; extend posterolaterally into fat between psoas and vertebral body</td><td>7 mm around artery and vein, increasing to 1 cm anterolaterally at the mid-chain along iliopsoas; ends at the common iliac bifurcation</td></tr>
+<tr><td class="b">Presacral</td><td><b>10 mm</b> strip joining the common iliac CTVs in front of the vertebral bodies down to S2/3, excluding exit foramina (vaginal section of the department document says 15 mm)</td><td>1–1.5 cm strip in front of S1–S2 from the aortic bifurcation; may include a few mm of bowel; ends where piriformis first appears. Check on the midline sagittal</td></tr>
+<tr><td class="b">External + internal iliac (CTVn_ILIAC)</td><td>Iliac bifurcation to top of acetabulum (contour every 1 cm and interpolate); 7 mm circle around each vessel; extend posterolaterally to the sidewall; join the two with a ~17 mm strip along the sidewall, or use the peritoneal reflection as the medial edge</td><td>External: uniform 7 mm, up to 10 mm anteriorly; ends where the deep circumflex iliac artery branches / vessels turn laterally to leave the pelvis (circumflex node not routinely included). Internal: 7 mm; ends where the vessels turn laterally before leaving the pelvis</td></tr>
+<tr><td class="b">Obturator</td><td>Superior: obturator artery origin from the internal iliac. Inferior: where the obturator artery leaves the pelvis. Anterior: most anterior obturator internus. Posterior: internal iliac group. Lateral: obturator internus. Medial: bladder</td><td>15–18 mm strip between the external and internal iliac CTVs from the internal/external bifurcation to the obturator canal; consider an obturator ITV for bladder filling</td></tr>
+<tr><td class="b">Inguinal (CTVn_ING)</td><td>Superior: where the external iliac artery leaves the bony pelvis (femoral artery). Inferior: lower edge of ischial tuberosity. Posterior: pectineus, iliopsoas, adductor longus. Anterior: 20 mm on the vessels including visible nodes or lymphocoeles. Lateral: medial sartorius or iliopsoas. Medial: medial ⅓–½ of pectineus or adductor longus, giving 10–20 mm around the vessels</td><td>Not covered. See vulva section 8 (Gaffney appendix radial margins)</td></tr>
+<tr><td class="b">Seroma</td><td>Post-PLND seromas; included (+7 mm in the expansion recipe)</td><td>Include lymphocysts and clips</td></tr>
+</tbody>
+</table>
+<p class="src">Inguinal nodes are included for cervix cancers reaching the lower third / distal half of the vagina, or PET-positive inguinal nodes (department; EMBRACE II).</p>
+<div class="grid2">
+<div>
+<figure>
+<svg viewBox="0 0 300 200" role="img" aria-label="Axial schematic of pelvic nodal CTV at the level of the acetabular roof">
+<rect width="300" height="200" fill="#fff"/>
+<path d="M20 40 Q10 120 60 180" fill="none" stroke="#c9ced4" stroke-width="14"/><path d="M280 40 Q290 120 240 180" fill="none" stroke="#c9ced4" stroke-width="14"/>
+<text x="6" y="30" font-size="7" fill="#5b6b7c">ilium</text>
+<path d="M40 60 Q34 120 70 160" fill="none" stroke="#e8c7b8" stroke-width="12"/><text x="40" y="172" font-size="6.5" fill="#8a4a3e">obturator int.</text>
+<path d="M260 60 Q266 120 230 160" fill="none" stroke="#e8c7b8" stroke-width="12"/>
+<path d="M120 180 Q150 150 180 180" fill="#c9ced4"/><text x="134" y="194" font-size="7" fill="#5b6b7c">sacrum</text>
+<ellipse cx="150" cy="70" rx="40" ry="28" fill="#fff6d6" stroke="#c9a400"/><text x="134" y="73" font-size="7.5" fill="#8a6d00">bladder</text>
+<ellipse cx="150" cy="140" rx="18" ry="14" fill="#f2d7cf" stroke="#c48a7a"/><text x="138" y="143" font-size="7" fill="#8a4a3e">rectum</text>
+<circle cx="72" cy="58" r="6" fill="#b03a2e"/><circle cx="82" cy="66" r="7" fill="#2f6fb0"/>
+<circle cx="228" cy="58" r="6" fill="#b03a2e"/><circle cx="218" cy="66" r="7" fill="#2f6fb0"/>
+<circle cx="88" cy="118" r="5" fill="#b03a2e"/><circle cx="212" cy="118" r="5" fill="#b03a2e"/>
+<path d="M58 50 Q66 40 92 52 Q98 66 90 78 Q80 96 98 110 Q104 126 90 132 Q74 130 70 116 Q58 96 60 80 Q52 64 58 50 Z" fill="rgba(47,111,176,.15)" stroke="#2f6fb0" stroke-width="1.6"/>
+<path d="M242 50 Q234 40 208 52 Q202 66 210 78 Q220 96 202 110 Q196 126 210 132 Q226 130 230 116 Q242 96 240 80 Q248 64 242 50 Z" fill="rgba(47,111,176,.15)" stroke="#2f6fb0" stroke-width="1.6"/>
+<text x="96" y="46" font-size="7" fill="#2f6fb0">ext iliac + 7 mm</text>
+<text x="96" y="100" font-size="7" fill="#2f6fb0">obturator strip</text>
+<text x="100" y="128" font-size="7" fill="#2f6fb0">int iliac</text>
+<text x="196" y="30" font-size="7" fill="#b03a2e">artery</text><text x="196" y="40" font-size="7" fill="#2f6fb0">vein</text>
+</svg>
+<figcaption>Original schematic (axial, acetabular roof). Vessel circles plus 7 mm, joined along the sidewall (about 17 mm wide), edited off bladder, bone and muscle.</figcaption>
+</figure>
+</div>
+<div>
+<h3>4.1  Nodal boost (EMBRACE II 9.3.3, 9.7; department)</h3>
+<ul class="tight">
+<li><b>GTV-N</b>: outer edge of each node plus visible extracapsular spread, drawn on MRI where it is in the field of view, otherwise on PET-CT and planning CT.</li>
+<li><b>CTV-N</b>: copy of GTV-N adjusted to cover the node on both CT and MRI; typical extra margin 0–3 mm, off bone and muscle.</li>
+<li><b>PTV-N</b> = CTV-N + 5 mm. If PTV-N is not inside PTV45, use a larger margin (e.g. 10 mm) from CTV-E in that region.</li>
+<li><b>Dose (SIB, 25 fractions):</b> PTV55 (2.2 Gy) for external/internal iliac and obturator nodes; PTV57.5 (2.3 Gy) for common iliac, para-aortic and inguinal nodes. Brachytherapy adds about 3–4 Gy EQD2 inside the true pelvis and almost nothing outside it; aim for 55–65 Gy EQD2 total (EMBRACE II).</li>
+<li>Plan with coverage probability: centre &gt;100%, edge cooled to 90%; large nodes may have GTV-N D50 &gt;102%, max 107%.</li>
+<li>Poorly responding nodes may need ≥58 Gy; one series had 100% control at ≥58 Gy versus 44% below it (Brower 2023 review).</li>
+</ul>
+</div>
+</div>
+<h3>4.2  Pitfalls</h3>
+<ul class="tight">
+<li>A contrast-distended IVC makes the para-aortic CTV too wide on the right and raises kidney dose (Small 2021).</li>
+<li>Presacral width differs within the department document (10 mm vs 15 mm); Small 2021 recommends 1–1.5 cm. This page uses 10–15 mm, judged on the sagittal <span class="chk">CHECK</span>.</li>
+<li>The external iliac CTV should stop where the vessels leave the pelvis; going to the acetabular roof every time can over-treat the groin (department uses top of acetabulum; Small 2021 the circumflex origin).</li>
+<li>Number nodes the same way on GTV-N, CTV-N and PTV-N so dose reporting matches.</li>
+</ul>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
+</section>
+
+<!-- ============================ S5 ============================ -->
+<section class="page" id="s5">
+<div class="sechead"><span class="eyebrow">Section 5 · Scenario B</span><h2><span class="sectnum">5</span>Cervix image-guided adaptive brachytherapy</h2></div>
+<h3>5.1  Department workflow</h3>
+<ul class="tight">
+<li>All definitive cervix patients have brachytherapy unless contraindicated; MR-based planning unless contraindicated. Four consecutive Wednesdays from week 4 or 5 of EBRT; 7.75 Gy × 4 (31 Gy) after 45 Gy, aiming for CTV<sub>HR</sub> D90 ≈ 85–95 Gy EQD2. Patients who cannot have brachytherapy may have an IMRT boost (25.2 Gy/14), which is unlikely to be curative.</li>
+<li>EUA drawing at each insertion; IDC, bladder emptied then filled with 200 mL saline and clamped for MRI and treatment; empty rectum (consider a Microlax enema before later fractions if the rectum was full).</li>
+<li>Interstitial needles: prophylactic cefazolin 2 g IV + metronidazole within 60 min (clindamycin 600 mg if penicillin-allergic). Uterine perforation and post-removal bleeding pathways are in the department document.</li>
+<li>CTV<sub>HR</sub> contoured by the RO or fellow and reviewed with a radiologist; OARs and vaginal points by radiation therapists. Dose and DVH entered in MOSAIQ.</li>
+</ul>
+<div class="grid2">
+<div>
+<h3>5.2  Targets (GEC-ESTRO / ICRU 88 via EMBRACE II 3.2, 10.5)</h3>
+<table>
+<thead><tr><th style="width:24%">Volume</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV<sub>res</sub></td><td>Residual macroscopic tumour at brachytherapy: high T2 signal mass plus palpable or visible residual</td></tr>
+<tr><td class="b">CTV<sub>HR</sub></td><td>GTV<sub>res</sub> + whole cervix + adjacent residual pathological tissue ("grey zones": intermediate-signal tissue in parametria, vagina, uterus, bladder or rectum)</td></tr>
+<tr><td class="b">CTV<sub>IR</sub></td><td>The initial GTV extent superimposed on the anatomy at brachytherapy, plus a margin around CTV<sub>HR</sub> where there was no initial tumour; always contains CTV<sub>HR</sub></td></tr>
+<tr><td class="b">CTV<sub>LR</sub> (adaptive)</td><td>Whole parametria, uterus, upper vagina, spaces towards bladder and rectum; covered mainly by EBRT</td></tr>
+</tbody>
+</table>
+<p class="src">The NRG GYN protocol template (2018) defines CTV<sub>IR</sub> as CTV<sub>HR</sub> + 5–15 mm at brachytherapy. The direction-by-direction rules are in GEC-ESTRO I (Haie-Meder 2005) and ICRU 88, which are not in the folder <span class="chk">CHECK</span>.</p>
+<h3>5.3  How to contour</h3>
+<ol class="steps">
+<li>Have at the station: the diagnostic MRI, the EBRT MRI, the brachytherapy MRI with applicator, and the drawings from diagnosis and today's EUA.</li>
+<li>Contour on the para-axial T2 (perpendicular to the tandem); check on para-sagittal and para-coronal.</li>
+<li>GTV<sub>res</sub> first, then the whole cervix and grey zones as CTV<sub>HR</sub>, then CTV<sub>IR</sub> using the diagnostic MRI so it covers the original tumour extent.</li>
+<li>OARs from at least 2 cm below CTV<sub>IR</sub> to 2 cm above the uterus: bladder (outer wall incl. neck), rectum (sphincter to sigmoid), sigmoid (to ≥2 cm above parametria and uterus), bowel loops within 3–4 cm of uterus and applicator. Urethra if there is significant vaginal involvement.</li>
+<li>If the recto-sigmoid junction sits next to the applicator, move the transition up or down so neither organ's D2cc is falsely low.</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 270" role="img" aria-label="Coronal schematic of brachytherapy targets with tandem and ring">
+<rect width="300" height="270" fill="#fff"/>
+<path d="M150 20 Q110 24 108 80 L114 150 L186 150 L192 80 Q190 24 150 20 Z" fill="#f3e8f8" stroke="#9a7fb0"/><text x="158" y="40" font-size="7.5" fill="#6b4f80">uterus</text>
+<path d="M60 150 L240 150" stroke="#e8c7b8" stroke-width="2" stroke-dasharray="3 3"/><text x="10" y="146" font-size="7" fill="#8a4a3e">parametria</text>
+<rect x="124" y="150" width="52" height="56" rx="8" fill="#fbe7ef" stroke="#c9a2b4"/><text x="212" y="206" font-size="7" fill="#a0476a">cervix</text>
+<path d="M134 206 L134 262 M166 206 L166 262" stroke="#d98aa3" stroke-width="3"/><text x="170" y="258" font-size="7" fill="#a0476a">vagina</text>
+<path d="M118 150 Q86 160 70 184 Q90 212 124 200 Z" fill="rgba(29,79,145,.18)" stroke="#1d4f91" stroke-dasharray="3 2"/><text x="6" y="200" font-size="7" fill="#1d4f91">initial GTV</text><text x="6" y="209" font-size="7" fill="#1d4f91">(left parametrium)</text>
+<path d="M132 164 Q150 158 168 166 Q172 182 160 196 Q142 200 132 188 Z" fill="rgba(29,79,145,.6)" stroke="#1d4f91"/><line x1="166" y1="180" x2="210" y2="186" stroke="#1d4f91" stroke-width=".6"/><text x="212" y="189" font-size="7" fill="#1d4f91">GTV res</text>
+<path d="M120 148 L182 148 L182 210 L120 210 Q106 190 102 178 Z" fill="none" stroke="#b03a2e" stroke-width="2"/><line x1="182" y1="166" x2="210" y2="168" stroke="#b03a2e" stroke-width=".6"/><text x="212" y="170" font-size="7.5" fill="#b03a2e">CTV HR</text>
+<path d="M110 130 L194 130 L198 222 L104 222 Q76 210 64 182 Q84 152 110 130 Z" fill="none" stroke="#14756b" stroke-width="1.6" stroke-dasharray="6 3"/><text x="204" y="226" font-size="7.5" fill="#14756b">CTV IR</text>
+<line x1="150" y1="40" x2="150" y2="214" stroke="#333" stroke-width="3"/><text x="154" y="104" font-size="7" fill="#333">tandem</text>
+<ellipse cx="150" cy="214" rx="24" ry="5" fill="none" stroke="#333" stroke-width="3"/><text x="20" y="250" font-size="7" fill="#333">ring / ovoids at the fornices</text>
+<line x1="94" y1="176" x2="94" y2="150" stroke="#555" stroke-width="1"/><circle cx="94" cy="176" r="2" fill="#555"/><text x="66" y="146" font-size="6.5" fill="#555">needle</text>
+</svg>
+<figcaption>Original schematic (para-coronal). Grey zone in the left parametrium sits in CTV<sub>HR</sub>; the initial tumour extent sets CTV<sub>IR</sub>. No PTV orthogonal to the tandem.</figcaption>
+</figure>
+<h3>5.4  Planning aims (EMBRACE II Table 10.1 = department)</h3>
+<table>
+<thead><tr><th>Structure (EQD2, incl. 45/25 EBRT)</th><th>Planning aim</th><th>Limit</th></tr></thead>
+<tbody>
+<tr><td class="b">CTV<sub>HR</sub> D90 (α/β 10)</td><td>&gt;90 and &lt;95 Gy</td><td>&gt;85 Gy</td></tr>
+<tr><td class="b">CTV<sub>HR</sub> D98</td><td>&gt;75 Gy</td><td>—</td></tr>
+<tr><td class="b">GTV<sub>res</sub> D98</td><td>&gt;95 Gy</td><td>&gt;90 Gy</td></tr>
+<tr><td class="b">CTV<sub>IR</sub> D98</td><td>&gt;60 Gy</td><td>—</td></tr>
+<tr><td class="b">Point A</td><td>&gt;65 Gy</td><td>—</td></tr>
+<tr><td class="b">Bladder D2cc (α/β 3)</td><td>&lt;80 Gy</td><td>&lt;90 Gy</td></tr>
+<tr><td class="b">Rectum D2cc</td><td>&lt;65 Gy</td><td>&lt;75 Gy</td></tr>
+<tr><td class="b">ICRU recto-vaginal point</td><td>&lt;65 Gy</td><td>&lt;75 Gy</td></tr>
+<tr><td class="b">Sigmoid / bowel D2cc</td><td>&lt;70 Gy</td><td>&lt;75 Gy</td></tr>
+</tbody>
+</table>
+<p class="src">Sigmoid/bowel limits assume the same part of the bowel is the hot spot each fraction. The department lists the CTV<sub>HR</sub>, bladder, rectum, sigmoid and bowel aims; the GTV<sub>res</sub>, CTV<sub>IR</sub>, point A and recto-vaginal aims come from EMBRACE II.</p>
+</div>
+</div>
+<h3>5.5  Pearls</h3>
+<ul class="tight">
+<li><b>No PTV around CTV<sub>HR</sub></b> orthogonal to the tandem (it escalates dose everywhere); a 1 cm cranial margin above CTV<sub>HR</sub> along the tandem is advised where OAR doses allow (EMBRACE II 10.6.6).</li>
+<li><b>Vaginal dose de-escalation</b>: recto-vaginal point &lt;65 Gy (primary aim); vaginal TRAK &lt;30–40% of total; lateral vaginal points at 5 mm &lt;85 Gy; keep the 140% isodose inside the applicator where possible (EMBRACE II Table 10.2).</li>
+<li>Large or poorly responding tumours: plan for intracavitary + interstitial; EMBRACE II expects at least 20% of patients to need needles.</li>
+<li>Australia: GOROC (RANZCR 2017) regards MRI-based IGBT as the gold standard; CT-based planning is acceptable where MRI is unavailable, using the pre-brachytherapy MRI and examination to limit CTV<sub>HR</sub> width, since CT overestimates it. Formal CT-based HR-CTV rules (Viswanathan 2014) are not in the folder <span class="chk">CHECK</span>.</li>
+</ul>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
+</section>
+
+<!-- ============================ S6 ============================ -->
+<section class="page" id="s6">
+<div class="sechead"><span class="eyebrow">Section 6 · Scenario C</span><h2><span class="sectnum">6</span>Post-operative cervix and endometrium</h2></div>
+<h3>6.1  Indications (department)</h3>
+<ul class="tight">
+<li><b>Cervix</b> after radical hysterectomy + PLND: any of positive nodes, parametrial invasion or positive margins (with concurrent cisplatin); node-negative with ≥2 Sedlis factors (size &gt;4 cm, deep stromal invasion &gt;⅓, LVSI) or GOG score ≥120. Add vaginal brachytherapy (10 Gy/2 at 5 mm) for deep stromal invasion, LVSI, close margins or simple hysterectomy.</li>
+<li><b>Endometrium</b>: pelvic RT 45 Gy/25; add VBT for any cervical stromal invasion, LVSI or high-risk histology (clear cell, serous, carcinosarcoma). VBT alone 21 Gy/3 for high-intermediate risk (≥2 of age &gt;50, grade 2–3, LVSI, outer-half invasion; PORTEC-2).</li>
+</ul>
+<h3>6.2  Vaginal and parametrial CTV</h3>
+<table>
+<thead><tr><th style="width:12%">Item</th><th>Department (VAG / PARA on FB and EB scans)</th><th>Small 2021 (NRG/RTOG update)</th><th>Small 2008</th></tr></thead>
+<tbody>
+<tr><td class="b">Length</td><td>Upper ½ of the vagina</td><td>3.5–4 cm of proximal vagina from the apex; longer with extensive LVSI, positive vaginal margin or adverse pathology</td><td>Cuff + 3 cm of vagina; inferior border 3 cm below the cuff or 1 cm above the bottom of the obturator foramen, whichever is lower</td></tr>
+<tr><td class="b">Paravaginal / parametria</td><td>Tissue lateral to the vagina to the pelvic sidewall, including clips at the vault; includes the obturator region by default (cervix and salvage)</td><td>Paravaginal and retracted parametrial tissue, including the lateral "ears" of the cuff, which can rise above the apex (coronal view)</td><td>Cuff to medial obturator internus / ischial ramus</td></tr>
+<tr><td class="b">Anterior</td><td>—</td><td>Posterior bladder wall</td><td>—</td></tr>
+<tr><td class="b">Posterior</td><td>—</td><td>Anterior rectal wall, including about the anterior ⅓ of the mesorectum; more mesorectum or residual uterosacral ligament for cervix cancer or endometrial with parametrial/gross cervical involvement; less if no cervical involvement</td><td>—</td></tr>
+<tr><td class="b">Lateral</td><td>Pelvic sidewall</td><td>Medial edge of the obturator CTV or obturator internus; inferiorly the medial urogenital diaphragm</td><td>—</td></tr>
+<tr><td class="b">Urethra</td><td>—</td><td>Visible urethra not at risk in routine cases; exclude it</td><td>—</td></tr>
+<tr><td class="b">Superior nodal limit</td><td>One echelon above any involved node; otherwise int/ext iliac (+ presacral)</td><td>Common iliac included; para-aortic top by disease (section 4)</td><td>7 mm below the L4–5 interspace</td></tr>
+</tbody>
+</table>
+<div class="callout follow"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">The department for structures and PTV margins, using Small 2021 to set the borders of the vaginal CTV (posterior ⅓ mesorectum, lateral cuff "ears", urethra excluded) and to measure the length (upper half, usually 3.5–4 cm).</p></div>
+<div class="grid2">
+<div>
+<h3>6.3  ITV and PTV</h3>
+<table>
+<thead><tr><th>Step</th><th>Department</th><th>Small 2021</th></tr></thead>
+<tbody>
+<tr><td class="b">ITV</td><td>VAG_EB ∪ PARA_EB ∪ VAG_FB ∪ PARA_FB (0 mm); consider +5 mm posteriorly if the rectum was very full at CT</td><td>Full- and empty-bladder scans; if the rectum was distended, include the anterior ⅓–½ of the rectum. Consider an obturator nodal ITV</td></tr>
+<tr><td class="b">PTVp</td><td>ITV + 10 mm</td><td>6–8 mm with an ITV and daily CBCT; 1.5–2.0 cm or more without an ITV and with little IGRT</td></tr>
+<tr><td class="b">CTVn</td><td>Nodal CTVs (0 mm) + seroma + 7 mm, clipped at bone and muscle</td><td>—</td></tr>
+<tr><td class="b">PTVn</td><td>CTVn + 10 mm</td><td>5–10 mm (TIME-C used 7 mm)</td></tr>
+<tr><td class="b">PTV45</td><td>PTVp ∪ PTVn</td><td>—</td></tr>
+</tbody>
+</table>
+<p class="src">Vaginal cuff fiducials moved up to about 1.5 cm during post-op IMRT despite a bladder protocol (Small 2021).</p>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 210" role="img" aria-label="Axial schematic of post-operative vaginal CTV">
+<rect width="300" height="210" fill="#fff"/>
+<path d="M30 50 Q20 130 70 190" fill="none" stroke="#c9ced4" stroke-width="12"/><path d="M270 50 Q280 130 230 190" fill="none" stroke="#c9ced4" stroke-width="12"/>
+<path d="M50 70 Q46 130 82 172" fill="none" stroke="#e8c7b8" stroke-width="12"/><path d="M250 70 Q254 130 218 172" fill="none" stroke="#e8c7b8" stroke-width="12"/><text x="56" y="186" font-size="6.5" fill="#8a4a3e">obturator internus</text>
+<ellipse cx="150" cy="58" rx="46" ry="26" fill="#fff6d6" stroke="#c9a400"/><text x="134" y="61" font-size="7.5" fill="#8a6d00">bladder</text>
+<ellipse cx="150" cy="160" rx="22" ry="17" fill="#f2d7cf" stroke="#c48a7a"/><text x="138" y="163" font-size="7" fill="#8a4a3e">rectum</text>
+<path d="M118 160 Q150 128 182 160 Q182 178 150 182 Q118 178 118 160 Z" fill="none" stroke="#c48a7a" stroke-dasharray="2 2"/><text x="186" y="190" font-size="6.5" fill="#8a4a3e">mesorectal fascia</text>
+<ellipse cx="150" cy="104" rx="26" ry="9" fill="#fbe7ef" stroke="#d98aa3"/><text x="138" y="107" font-size="7" fill="#a0476a">vagina</text>
+<circle cx="120" cy="100" r="2.5" fill="#333"/><circle cx="180" cy="100" r="2.5" fill="#333"/><text x="186" y="96" font-size="6.5" fill="#333">clips</text>
+<path d="M104 86 Q150 80 196 86 Q232 98 238 112 Q210 124 182 130 Q164 146 150 146 Q136 146 118 130 Q90 124 62 112 Q68 98 104 86 Z" fill="rgba(20,117,107,.16)" stroke="#14756b" stroke-width="1.8"/>
+<text x="196" y="142" font-size="7" fill="#14756b">vaginal + paravaginal CTV</text>
+<text x="20" y="20" font-size="7" fill="#555">Anterior: back wall of bladder · Posterior: anterior ⅓ mesorectum</text>
+<text x="20" y="30" font-size="7" fill="#555">Lateral: obturator CTV / obturator internus</text>
+</svg>
+<figcaption>Original schematic (axial, vaginal cuff). Include paravaginal tissue and clips; the ITV adds the empty-bladder position.</figcaption>
+</figure>
+<h3>6.4  Walkthrough</h3>
+<ol class="steps">
+<li>Find the vault on the sagittal using clips and the vaginal marker; mark the apex and measure 3.5–4 cm down (or half the vaginal length).</li>
+<li>Axially, draw vagina + paravaginal tissue from bladder to anterior mesorectum, out to obturator internus; include the cuff "ears" on the slices above the apex.</li>
+<li>Draw nodal CTVs (section 4). Endometrium without cervical involvement: no presacral.</li>
+<li>Repeat the vaginal/parametrial CTV on the empty-bladder scan; union = ITV.</li>
+</ol>
+</div>
+</div>
+<h3>6.5  Pitfalls</h3>
+<ul class="tight">
+<li>A distended rectum at CT pushes the vagina forward; on treatment days with an empty rectum the vagina falls back out of the PTV. Rescan or include the anterior rectal wall (Small 2021).</li>
+<li>Stopping at the vaginal apex misses the lateral cuff tissue that rises above it.</li>
+<li>Para-aortic RT for endometrium: top 1–1.5 cm above the left renal vessels, higher than for cervix (Small 2021).</li>
+</ul>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
+</section>
+
+<!-- ============================ S7 ============================ -->
+<section class="page" id="s7">
+<div class="sechead"><span class="eyebrow">Section 7 · Scenario D</span><h2><span class="sectnum">7</span>Vaginal vault brachytherapy, salvage and primary vaginal cancer</h2></div>
+<h3>7.1  Vaginal vault brachytherapy (department)</h3>
+<table>
+<thead><tr><th style="width:30%">Indication</th><th>Dose</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="b">After pelvic EBRT (cervix or endometrium, risk factors as section 6)</td><td>10 Gy/2 at 5 mm depth, 3 days apart</td><td>Size the cylinder at the first RO visit, in the first 1–2 weeks of EBRT, or in the brachytherapy suite; record diameter and length in MOSAIQ</td></tr>
+<tr><td class="b">Alone (high-intermediate risk endometrium)</td><td>21 Gy/3 at 5 mm, 7 days apart</td><td>PORTEC-2 population</td></tr>
+<tr><td class="b">Salvage uterus (vault recurrence) after 45 Gy</td><td>21 Gy/3 at 5 mm, 7 days apart</td><td>Thicker or larger recurrences may need interstitial planning on MRI</td></tr>
+</tbody>
+</table>
+<div class="flag"><span class="lbl">Check</span> Treatment length (whole vs upper vagina), applicator choice and CT/MRI-based contouring for vault brachytherapy are not set out in the department document, and the ABS cuff guideline (Small 2012) is not in the folder <span class="chk">CHECK</span>.</div>
+<h3>7.2  Salvage uterus (vault recurrence, no prior RT) — department</h3>
+<table>
+<thead><tr><th style="width:18%">Structure</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV_FB / GTV_EB</td><td>Tumour on T2 MRI ± PET, on both full- and empty-bladder scans</td></tr>
+<tr><td class="b">VAG_FB / VAG_EB</td><td>Upper ½ of the vagina</td></tr>
+<tr><td class="b">PARA_FB / PARA_EB</td><td>Parametrial tissue lateral to the vagina to the sidewall (includes the obturator region)</td></tr>
+<tr><td class="b">ITV</td><td>VAG + PARA (both scans) ± [GTV_EB ∪ GTV_FB] + 5 mm; consider +5 mm posteriorly if the rectum was full</td></tr>
+<tr><td class="b">PTVp / PTVn / PTV45</td><td>ITV + 10 mm; CTVn (iliac, presacral ± common iliac, PA, inguinal, seroma +7 mm) + 10 mm; union</td></tr>
+</tbody>
+</table>
+<h3>7.3  Primary vaginal cancer — department</h3>
+<div class="grid2">
+<div>
+<table>
+<thead><tr><th style="width:30%">Structure</th><th>Definitive</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV_FB / GTV_EB</td><td>T2 MRI ± PET tumour</td></tr>
+<tr><td class="b">VAG</td><td>Remaining normal vagina down to the introitus (both scans)</td></tr>
+<tr><td class="b">PARA</td><td>Paravaginal / parametrial tissue to the sidewall</td></tr>
+<tr><td class="b">ITV</td><td>[GTV_EB ∪ GTV_FB] + 5 mm, joined with VAG + PARA (0 mm); +5 mm posteriorly if rectum full</td></tr>
+<tr><td class="b">CTV_HI_RISK</td><td>GTVn + 7 mm (off muscle and bone)</td></tr>
+<tr><td class="b">Nodes</td><td>All pelvic: iliac, obturator, common iliac, presacral (15 mm strip in this section); inguinal if the distal half is involved</td></tr>
+<tr><td class="b">PTVs</td><td>PTVp = ITV + 10 mm; PTV_HI_RISK = CTV_HI_RISK + 10 mm; PTVn = CTVn + 10 mm</td></tr>
+<tr><td class="b">Dose</td><td>PTV45–50.4 elective; PTVp 59.4–66.6 Gy; PTV_HI_RISK 54–59.4 Gy</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>Post-op vagina (department)</h3>
+<ul class="tight">
+<li>As post-op cervix/uterus, with full- and empty-bladder scans for the ITV.</li>
+<li>VAG = remaining vagina to the introitus; PARA as above.</li>
+<li>Pelvic nodes (iliac, obturator, common iliac, presacral) ± inguinal.</li>
+<li>PTVp = ITV + 10 mm; PTVn = CTVn + 10 mm; 45 Gy/25. Vaginal brachytherapy if the cuff margin is positive.</li>
+</ul>
+<h3>Pitfalls</h3>
+<ul class="tight">
+<li>Whole-vagina targets reach the introitus: include the inguinal nodes when the distal half is involved, and expect vulval skin reaction.</li>
+<li>Urethra and anus lie close to a whole-vagina CTV; contour them for dose reporting.</li>
+<li>Vaginal recurrence of endometrial cancer and primary vaginal cancer guidelines (Schmid 2020; Kamrava 2023) are not in the folder <span class="chk">CHECK</span>.</li>
+</ul>
+</div>
+</div>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
+</section>
+
+<!-- ============================ S8 ============================ -->
+<section class="page" id="s8">
+<div class="sechead"><span class="eyebrow">Section 8 · Scenario E</span><h2><span class="sectnum">8</span>Vulva, definitive</h2></div>
+<h3>8.1  Set-up (department; Gaffney 2016)</h3>
+<ul class="tight">
+<li>RO at simulation to wire gross disease. Frog-leg for the primary, or legs together if skin folds self-bolus. Concurrent chemotherapy if comorbidities allow.</li>
+<li>Department: <b>1 cm bolus over vulva/mons and inguinal regions</b>, with RO or registrar at day 1 set-up. Gaffney 2016: tailor bolus to the area of concern; scan with and without bolus; groin bolus not routine (use for large or superficial nodes or skin involvement).</li>
+<li>Gaffney 2016: ITV bladder and rectal contours for locally advanced or inoperable cases (vaginal, urethral or anal involvement).</li>
+</ul>
+<h3>8.2  Primary CTV</h3>
+<table>
+<thead><tr><th style="width:20%">Situation</th><th>Department</th><th>Gaffney 2016</th></tr></thead>
+<tbody>
+<tr><td class="b">Any primary</td><td>CTVp = GTVp_FB + 0.5–1.0 cm, + GTVn + 1.0 cm, + SKIN_BRIDGE (skin and subcutis between primary and groins)</td><td>Whole vulva for all primaries; if GTV extends beyond the vulva, that region + 1 cm. Add skin/subcutis for satellite lesions, extensive LVSI or dermal lymphatic invasion; a rim of muscle if invaded or abutting</td></tr>
+<tr><td class="b">Vaginal extension (above the hymenal ring)</td><td>—</td><td>GTV + 3 cm of vagina; whole vagina if the proximal extent is uncertain or LVSI</td></tr>
+<tr><td class="b">Anus / anal canal / bladder</td><td>—</td><td>GTV + at least 2 cm of anorectum (or bladder)</td></tr>
+<tr><td class="b">Periurethral</td><td>—</td><td>GTV + at least 2 cm of urethra; mid or proximal urethra involved → whole urethra and bladder neck</td></tr>
+<tr><td class="b">Periclitoral</td><td>—</td><td>GTV + at least 2 cm; usually include the suspensory ligament to the pubic bone</td></tr>
+<tr><td class="b">PTV</td><td>CTVp + 10 mm; CTVn + 10 mm</td><td>CTV (or ITV) to PTV 7–10 mm</td></tr>
+</tbody>
+</table>
+<div class="callout follow"><span class="lbl">This page follows</span><p style="margin:4px 0 0;">Gaffney 2016 for the primary CTV (whole vulva + extension rules), which is broader than the department's GTV + 0.5–1 cm; the department for skin bridge, PTV and bolus. Discuss with the treating consultant where they differ.</p></div>
+<div class="grid2">
+<div>
+<h3>8.3  Inguinofemoral nodes</h3>
+<table>
+<thead><tr><th style="width:18%">Border</th><th>Department</th><th>Gaffney 2016 appendix</th></tr></thead>
+<tbody>
+<tr><td class="b">Superior</td><td>External iliac artery leaves the bony pelvis</td><td>Same</td></tr>
+<tr><td class="b">Inferior</td><td>Lower edge of ischial tuberosity</td><td>2 cm below the saphenofemoral junction, or the lesser trochanter (plane perpendicular to the femur)</td></tr>
+<tr><td class="b">Radial</td><td>Anterior 20 mm on the vessels; medial 10–20 mm (medial ⅓–½ of pectineus / adductor longus); lateral medial sartorius / iliopsoas; posterior pectineus, iliopsoas, adductor longus</td><td>Around the nearest femoral vessel: anteromedial 35 mm, anterior 23 mm, anterolateral 25 mm, medial 22 mm; none posterior or lateral (no recurrences there)</td></tr>
+</tbody>
+</table>
+<p class="src">Adjust for vessel angle in frog-leg versus legs-together positions (Gaffney appendix).</p>
+</div>
+<div>
+<figure>
+<svg viewBox="0 0 300 200" role="img" aria-label="Axial schematic of the right groin with radial margins around the femoral vessels">
+<rect width="300" height="200" fill="#fff"/>
+<path d="M10 40 Q150 10 290 40" fill="none" stroke="#e0c9b9" stroke-width="2"/><text x="240" y="30" font-size="7" fill="#8a4a3e">skin</text>
+<ellipse cx="80" cy="150" rx="40" ry="26" fill="#e8c7b8" stroke="#b0786b"/><text x="60" y="153" font-size="7" fill="#8a4a3e">iliopsoas</text>
+<ellipse cx="190" cy="150" rx="40" ry="24" fill="#e8c7b8" stroke="#b0786b"/><text x="168" y="153" font-size="7" fill="#8a4a3e">pectineus</text>
+<ellipse cx="40" cy="95" rx="16" ry="22" fill="#e8c7b8" stroke="#b0786b"/><text x="22" y="128" font-size="7" fill="#8a4a3e">sartorius</text>
+<circle cx="130" cy="115" r="7" fill="#b03a2e"/><circle cx="148" cy="117" r="8" fill="#2f6fb0"/>
+<path d="M104 118 Q100 70 140 64 Q190 62 196 104 Q190 126 156 128 Q130 132 104 118 Z" fill="rgba(47,111,176,.15)" stroke="#2f6fb0" stroke-width="1.6"/>
+<line x1="148" y1="110" x2="176" y2="74" stroke="#555" marker-end="url(#ar2)"/><text x="178" y="72" font-size="6.5" fill="#555">anteromedial 35</text>
+<line x1="139" y1="108" x2="139" y2="66" stroke="#555" marker-end="url(#ar2)"/><text x="112" y="58" font-size="6.5" fill="#555">anterior 23</text>
+<line x1="128" y1="110" x2="108" y2="80" stroke="#555" marker-end="url(#ar2)"/><text x="62" y="74" font-size="6.5" fill="#555">anterolateral 25</text>
+<line x1="156" y1="118" x2="194" y2="112" stroke="#555" marker-end="url(#ar2)"/><text x="200" y="110" font-size="6.5" fill="#555">medial 22</text>
+<defs><marker id="ar2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#555"/></marker></defs>
+<text x="10" y="190" font-size="7" fill="#555">Distances in mm from the nearest femoral vessel (Gaffney appendix)</text>
+</svg>
+<figcaption>Original schematic (axial, right groin). No margin behind or lateral to the vessels.</figcaption>
+</figure>
+</div>
+</div>
+<h3>8.4  Nodal regions by primary site (Gaffney 2016; department)</h3>
+<table>
+<thead><tr><th style="width:24%">Primary</th><th>Nodal CTV</th></tr></thead>
+<tbody>
+<tr><td class="b">T1–2 N0 (department)</td><td>Both inguinofemoral regions</td></tr>
+<tr><td class="b">T3–4 or N1–2 (department)</td><td>Both groins + internal and external iliac (+ obturator) to one station above the highest involved node</td></tr>
+<tr><td class="b">Vulva ± distal vagina, periurethral, periclitoral</td><td>Both inguinofemoral, obturator, internal and external iliac. Proximal half of the posterior vaginal wall: consider presacral (S1–S3)</td></tr>
+<tr><td class="b">Anus / anal canal</td><td>As above + perirectal (mesorectum) + presacral (S1–S3)</td></tr>
+</tbody>
+</table>
+<p class="src">Appendix definitions: external iliac from inside the bony pelvis up to just below the common iliac bifurcation (≈L5/S1); internal iliac from where levator ani inserts into obturator internus to the same top; obturator from the obturator canal to about 5 mm above it; presacral S1 top to S3 bottom, between the SI joints; perirectal from the rectosigmoid to the anorectal junction. Curative-intent RT is reasonable with inguinofemoral, external/internal iliac or obturator nodes; common iliac or low para-aortic involvement is a case-by-case decision (Gaffney 2016).</p>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
+</section>
+
+<!-- ============================ S9 ============================ -->
+<section class="page" id="s9">
+<div class="sechead"><span class="eyebrow">Section 9 · Scenario F</span><h2><span class="sectnum">9</span>Vulva, post-operative</h2></div>
+<h3>9.1  Indications and set-up</h3>
+<ul class="tight">
+<li>Department: primary site RT for positive or inadequate margins; nodal RT for positive nodes, extracapsular extension or positive margins; boost the high-risk areas (positive margin, ECE). RO wires the scar at simulation.</li>
+<li>Post-op vulva aide (RCR 2024 + Gaffney): also close margin ≤3 mm where re-excision is not possible; &gt;1 involved node is a clear indication for chemoRT, a single node for RT; groin RT instead of completion lymphadenectomy for a sentinel micrometastasis ≤2 mm (GROINSS-V II).</li>
+</ul>
+<h3>9.2  Volumes</h3>
+<table>
+<thead><tr><th style="width:18%">Structure</th><th>Department</th><th>Gaffney 2016</th><th>Post-op aide (RCR 2024)</th></tr></thead>
+<tbody>
+<tr><td class="b">Vulval CTV</td><td>CTVp: tumour bed (wired) or entire vulva</td><td>Entire operative bed; selective bolus</td><td>Whole remaining vulva (labia, clitoris, vestibule, meatus, introitus, perineum) or tumour bed + ≥5 mm; whole vulva and mons if PNI or LVSI</td></tr>
+<tr><td class="b">High risk</td><td>CTV_HI_RISK: positive margin / ECE sites (wired if possible)</td><td>Close or positive margin well inside the CTV, about 2 cm; wire for the boost</td><td>CTV boost for close/positive margin and involved nodal bed</td></tr>
+<tr><td class="b">Mons</td><td>—</td><td>—</td><td>Include when both primary and nodes are treated; up to about mid-symphysis</td></tr>
+<tr><td class="b">Groin bed</td><td>CTVn: inguinal, iliac, obturator ± next echelon ± seroma</td><td>Extensive nodes or ECE: whole operative bed — clips, seroma, vessels + radial margins, scar + ≥3 cm on skin, and the subcutis between them. Without these, the whole seroma need not be included</td><td>Whole seroma if the positive node was where the seroma now lies</td></tr>
+<tr><td class="b">PTV</td><td>PTVp, PTV_HI_RISK, PTVn = CTV + 10 mm</td><td>7–10 mm</td><td>—</td></tr>
+<tr><td class="b">Dose</td><td>PTV45–50.4; PTV_HI_RISK 54–59.4 Gy</td><td>45–50 Gy elective (GOG 37)</td><td>—</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>9.3  Adjacent structures (aide, from the original tumour)</h3>
+<table>
+<thead><tr><th>Original involvement</th><th>Add to vulval CTV</th></tr></thead>
+<tbody>
+<tr><td class="b">Vagina</td><td>≥3 cm of caudal vagina; whole vagina if extent uncertain or LVSI</td></tr>
+<tr><td class="b">Anus / rectum, no mesorectal nodes</td><td>Whole anus + caudal 5 cm of mesorectum</td></tr>
+<tr><td class="b">Anus / rectum with rectal or mesorectal nodes</td><td>Anus + whole mesorectum</td></tr>
+<tr><td class="b">Urethra (meatus / distal ⅓)</td><td>≥2 cm of urethra</td></tr>
+<tr><td class="b">Urethra (mid / proximal ⅓)</td><td>Whole urethra + bladder neck</td></tr>
+<tr><td class="b">Periclitoral</td><td>Clitoral crus to the pubic bone</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3>9.4  Walkthrough and editing</h3>
+<ol class="steps">
+<li>Read the operative note and pathology (margins, nodes, ECE); fuse the pre-op MRI/PET to reconstruct where the tumour was.</li>
+<li>Tumour bed (CTV_TB) from scar wire, clips and pre-op imaging; then vulval CTV.</li>
+<li>Edit to about 5 mm under the skin where there is no skin involvement and no bolus; to the surface where bolus is used or skin is involved (aide).</li>
+<li>Off bone and muscle except inside a tumour-bed expansion; 5 mm of bone may be included where the bed lies on it (aide).</li>
+<li>Groin and pelvic nodal CTVs (sections 4 and 8); join the mons and groins so there is no skin gap.</li>
+<li>Exclude thigh soft tissue and skin creases unless treated on purpose; check the coronal for the vulva–thigh fold.</li>
+</ol>
+</div>
+</div>
+<h3>9.5  Pitfalls</h3>
+<ul class="tight">
+<li>Leg and vulval oedema change shape during treatment; consider adaptive replanning or soft-tissue IGRT (Gaffney 2016).</li>
+<li>Asymmetric nodal fields are not recommended outside a trial (Gaffney 2016).</li>
+<li>Frog-leg and legs-together positions move the groin vessels: draw radial margins on the actual vessel angle.</li>
+</ul>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
+</section>
+
+<!-- ============================ S10 + S11 ============================ -->
+<section class="page" id="s10">
+<div class="sechead"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>Pearls and common errors</h2></div>
+<div class="grid2">
+<div>
+<h3>Cervix (EBRT and brachytherapy)</h3>
+<ul class="tight">
+<li>Uterus: include it all; isolated uterine recurrence is rare but myometrial invasion is hard to judge on imaging (Lim 2011).</li>
+<li>Parametrial top: stop when bowel loops sit beside the uterus; with a very anteverted uterus, stop where the cervix appears (Lim 2011).</li>
+<li>Lim 2011 kappas: GTV 0.68, but uterus, vagina and parametria only 0.42–0.57 — the parametrium is where observers disagree most; use the coronal.</li>
+<li>Uterosacral ligament involvement → mesorectum in CTV-T LR; posterior spread is easy to miss on axial slices alone.</li>
+<li>IGRT: daily bony match; soft-tissue (uterus) review only to decide on replanning (EMBRACE II).</li>
+<li>Non-involved uterus may get 10% less than prescribed (≈40 Gy EBRT); brachytherapy usually adds &gt;5–10 Gy (EMBRACE II 9.8).</li>
+<li>Brachytherapy: contour GTV<sub>res</sub> on today's MRI but CTV<sub>IR</sub> from the diagnostic tumour extent.</li>
+</ul>
+</div>
+<div>
+<h3>Post-op, vagina and vulva</h3>
+<ul class="tight">
+<li>Obturator and presacral regions had the lowest agreement in the NRG update (kappa 0.36 and 0.21) — check them on coronal and sagittal (Small 2021).</li>
+<li>Common iliac region had the best agreement (kappa 0.64) (Small 2021).</li>
+<li>The circumflex iliac node is often enlarged but rarely malignant; do not chase it (Small 2021).</li>
+<li>Vulva: look at coronal and sagittal to find the fold between vulva and thigh/buttock; leave thigh tissue out unless treated deliberately (Gaffney 2016).</li>
+<li>Bolus: scan with and without, or use virtual bolus, so the plan still works if bolus is stopped (Gaffney 2016).</li>
+<li>Groin: the femoral vessels move with leg position; draw margins on the planning position.</li>
+</ul>
+</div>
+</div>
+<hr class="soft"/>
+<div class="sechead" id="s11"><span class="eyebrow">Section 11</span><h2><span class="sectnum">11</span>Dose, fractionation, margins and IGRT</h2></div>
+<table>
+<thead><tr><th style="width:18%">Scenario</th><th>Dose (department)</th><th>CTV → PTV</th><th>IGRT</th></tr></thead>
+<tbody>
+<tr><td class="b">Cervix definitive</td><td>PTV45 45 Gy/25; PTV55 (pelvic nodes) and PTV57.5 (common iliac, PA, inguinal) SIB; brachy 7.75 Gy × 4 weekly; overall time ideally ≤50–52 days</td><td>ITV-T LR (10 AP, 10 SI, 5 lateral, 0 inferior) then ITV45 + 5 mm; PTV-N = CTV-N + 5 mm</td><td>Daily CBCT/kV, bony match, couch correction (EMBRACE II). Soft-tissue check of uterus for replanning</td></tr>
+<tr><td class="b">Cervix / endometrium post-op</td><td>45 Gy/25 ± VBT 10 Gy/2 at 5 mm</td><td>ITV + 10 mm; CTVn + 10 mm</td><td>Department method not stated <span class="chk">CHECK</span>; Small 2021: 6–8 mm vaginal PTV only with ITV + daily CBCT</td></tr>
+<tr><td class="b">Endometrium VBT alone</td><td>21 Gy/3 at 5 mm, weekly</td><td>—</td><td>—</td></tr>
+<tr><td class="b">Salvage uterus</td><td>45 Gy/25 + VBT 21 Gy/3</td><td>ITV + 10 mm; CTVn + 10 mm</td><td><span class="chk">CHECK</span></td></tr>
+<tr><td class="b">Vulva definitive</td><td>59.4–66.6 Gy/33–37; involved nodes 54–59.4 Gy; elective 45–50.4 Gy</td><td>+10 mm (Gaffney 7–10 mm)</td><td>NRG vulva template: daily IGRT required for IMRT</td></tr>
+<tr><td class="b">Vulva post-op</td><td>45–50.4 Gy; high risk 54–59.4 Gy</td><td>+10 mm</td><td>As above</td></tr>
+<tr><td class="b">Vagina definitive</td><td>59.4–66.6 Gy/33–37; nodes 54–59.4 Gy</td><td>ITV + 10 mm; CTV_HI_RISK + 10 mm</td><td><span class="chk">CHECK</span></td></tr>
+<tr><td class="b">Palliative pelvis</td><td>Good ECOG 30–35 Gy/12–14, up to 50 Gy/25; poor ECOG 8 Gy/1 or 21 Gy/3 on days 0, 7, 21</td><td>3DCRT</td><td>—</td></tr>
+</tbody>
+</table>
+<p class="src">Gaffney 2016: 45–50 Gy for elective and post-op nodal volumes; 60–70 Gy for gross primary and unresected nodes in definitive treatment. Unplanned EBRT breaks &gt;2 days may be compensated with two fractions a day 6 hours apart, no more than once a week (EMBRACE II) — note the department books radical cervix as "no BD".</p>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 11</span></div>
+</section>
+
+<!-- ============================ S12 ============================ -->
+<section class="page" id="s12">
+<div class="sechead"><span class="eyebrow">Section 12</span><h2><span class="sectnum">12</span>Organs at risk and constraints</h2></div>
+<h3>12.1  OAR definitions (department; EMBRACE II 9.4)</h3>
+<table>
+<thead><tr><th style="width:18%">OAR</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td class="b">Bladder (FB, EB)</td><td>Whole organ including the neck (solid)</td></tr>
+<tr><td class="b">Rectum</td><td>Solid organ from the anorectal sphincter (bottom of pubic rami) to the rectosigmoid junction (where it leaves the sacrum, ~S2/3)</td></tr>
+<tr><td class="b">Sigmoid</td><td>Rectosigmoid junction to the left iliac fossa</td></tr>
+<tr><td class="b">Bowel</td><td>Outer contour of bowel loops including mesentery; from the lowest loop in the pelvis to 2 cm above the PTV</td></tr>
+<tr><td class="b">Femoral heads</td><td>Head and neck to the lesser trochanter (department auto-contours extend to the lowest ischial tuberosity)</td></tr>
+<tr><td class="b">Kidneys, spinal cord, duodenum</td><td>Kidneys excluding renal pelvis; cord to 2 cm above PTV; duodenum whole organ (para-aortic RT)</td></tr>
+<tr><td class="b">Ovary</td><td>Outer contour (transposition)</td></tr>
+<tr><td class="b">Vagina</td><td>Whole length (check on full-bladder MRI) for PIBS, PIBS ± 2 cm points</td></tr>
+<tr><td class="b">Other (department)</td><td>Pelvic bones, cauda equina, iliac crests (MIM auto-contours, edited)</td></tr>
+<tr><td class="b">Vulva (Gaffney appendix)</td><td>Bowel space in the peritoneal cavity to 2 cm above the highest PTV, excluding rectum and anal canal; also anus</td></tr>
+</tbody>
+</table>
+<h3>12.2  Definitive cervix EBRT (EMBRACE II Table 9.4)</h3>
+<table>
+<thead><tr><th style="width:18%">Structure</th><th>Hard constraint</th><th>Soft constraint (optimisation; met by ~70–80%)</th></tr></thead>
+<tbody>
+<tr><td class="b">PTV45</td><td>V95% &gt;95%; Dmax &lt;107%</td><td>—</td></tr>
+<tr><td class="b">ITV45</td><td>Dmin &gt;95%</td><td>—</td></tr>
+<tr><td class="b">PTV-N / CTV-N</td><td>PTV-N D98 &gt;90%, Dmax &lt;107% of node dose; CTV-N D98 &gt;100%</td><td>CTV-N D50 &gt;102%</td></tr>
+<tr><td class="b">CTV-HR + 10 mm helper</td><td>—</td><td>Dmax &lt;103%</td></tr>
+<tr><td class="b">Bowel</td><td>Dmax &lt;105% (47.3 Gy) if no node boost</td><td>No boost: V40 &lt;100 cc, V30 &lt;350 cc. Node boost or PA: V40 &lt;250 cc, V30 &lt;500 cc; Dmax &lt;57.5 Gy</td></tr>
+<tr><td class="b">Sigmoid</td><td>Dmax &lt;105% if no boost</td><td>Dmax &lt;57.5 Gy</td></tr>
+<tr><td class="b">Bladder</td><td>Dmax &lt;105% if no boost</td><td>V40 &lt;75%, V30 &lt;85%; Dmax &lt;57.5 Gy</td></tr>
+<tr><td class="b">Rectum</td><td>Dmax &lt;105% if no boost</td><td>V40 &lt;85%, V30 &lt;95%; Dmax &lt;57.5 Gy</td></tr>
+<tr><td class="b">Spinal cord / femoral heads</td><td>Dmax &lt;48 Gy / &lt;50 Gy</td><td>—</td></tr>
+<tr><td class="b">Kidney</td><td>Dmean &lt;15 Gy</td><td>Dmean &lt;10 Gy</td></tr>
+<tr><td class="b">Vagina (not involved)</td><td>—</td><td>PIBS −2 cm &lt;5 Gy</td></tr>
+<tr><td class="b">Ovaries / duodenum</td><td>—</td><td>Ovaries &lt;5–8 Gy; duodenum V55 &lt;15 cc</td></tr>
+</tbody>
+</table>
+<div class="grid2">
+<div>
+<h3>12.3  Post-op pelvis (NRG GYN template 2018, example)</h3>
+<table>
+<thead><tr><th>Structure</th><th>Per protocol</th><th>Variation</th></tr></thead>
+<tbody>
+<tr><td class="b">Rectum</td><td>D50% ≤45; D0.03cc ≤50</td><td>≤54; ≤55</td></tr>
+<tr><td class="b">Bladder</td><td>D50% ≤45; D0.03cc ≤50</td><td>≤57.5; ≤55</td></tr>
+<tr><td class="b">Bowel</td><td>D30% ≤40; D0.03cc ≤54; V45 ≤200 cc</td><td>≤50; ≤57.5; ≤250 cc</td></tr>
+<tr><td class="b">Femurs</td><td>D15% ≤30; D0.03cc ≤50</td><td>≤50; ≤55</td></tr>
+<tr><td class="b">Bone marrow</td><td>Mean ≤15; V10 ≤80%; V20 ≤66%</td><td>≤25; ≤90%; ≤75%</td></tr>
+</tbody>
+</table>
+<p class="src">Template values "may be changed depending on variations in the protocol"; the department document gives no EBRT OAR table for post-op cases <span class="chk">CHECK</span>.</p>
+</div>
+<div>
+<h3>12.4  Vulva (NRG vulva template, composite plan)</h3>
+<table>
+<thead><tr><th>Structure</th><th>Per protocol</th><th>Variation</th></tr></thead>
+<tbody>
+<tr><td class="b">Rectum</td><td>D60% ≤45; D0.03cc ≤60</td><td>≤50; ≤65</td></tr>
+<tr><td class="b">Bladder</td><td>D35% ≤45; D0.03cc ≤60</td><td>≤50; ≤65</td></tr>
+<tr><td class="b">Femurs</td><td>D15% ≤30; D5% ≤40; D0.03cc ≤50</td><td>≤35; ≤44; ≤55</td></tr>
+<tr><td class="b">Anus</td><td>D50% ≤40; D0.03cc ≤50</td><td>≤45; ≤55</td></tr>
+<tr><td class="b">Bowel space</td><td>D30% ≤40; D0.03cc ≤55; V45 ≤190 cc</td><td>≤45; ≤60; ≤300 cc</td></tr>
+<tr><td class="b">Bone marrow</td><td>Mean ≤30; V10 ≤85%</td><td>≤35; ≤90%</td></tr>
+</tbody>
+</table>
+<p class="src">Gaffney appendix: bowel V40 &lt;30% (RTOG 0921 minor deviation if V40 &gt;30% but V45 &lt;30%).</p>
+</div>
+</div>
+<h3>12.5  Brachytherapy (EQD2 α/β 3, including EBRT)</h3>
+<p>Bladder D2cc &lt;80 Gy (limit 90); rectum D2cc &lt;65 (75); sigmoid and bowel D2cc &lt;70 (75); ICRU recto-vaginal point &lt;65 (75) — EMBRACE II Table 10.1, adopted by the department. Same values in the NRG GYN template for volume-directed HDR.</p>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 12</span></div>
+</section>
+
+<!-- ============================ S13 ============================ -->
+<section class="page" id="s13">
+<div class="sechead"><span class="eyebrow">Section 13</span><h2><span class="sectnum">13</span>Names and RayStation implementation</h2></div>
+<p>Department names come from the SSWAHS protocol (written for MIM/Pinnacle). The TG-263-style names are suggested equivalents for a RayStation template and should be matched to the local template before use <span class="chk">CHECK</span>.</p>
+<table>
+<thead><tr><th style="width:28%">Department</th><th style="width:26%">Suggested TG-263 style</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV-T_FB / GTV-T_EB / GTV-T_PET</td><td>GTVp_FB, GTVp_EB, GTVp_PET</td><td>Suffix records the scan</td></tr>
+<tr><td class="b">CTV-T-HR_FB / _EB</td><td>CTVp_HR_FB, CTVp_HR_EB</td><td>GTV + cervix</td></tr>
+<tr><td class="b">CTV-T-LR_FB / _EB; CTV-T-LR</td><td>CTVp_LR_FB, CTVp_LR_EB, CTVp_LR</td><td>Union of both</td></tr>
+<tr><td class="b">ITV-T-LR; ITV45</td><td>ITVp_LR; ITV_4500</td><td>—</td></tr>
+<tr><td class="b">PTV45; PTV55; PTV57,5</td><td>PTV_4500; PTVn_5500; PTVn_5750</td><td>NRG vulva template adds PTV_4500-03 for skin-cropped PTVs</td></tr>
+<tr><td class="b">GTV-N1…; CTV-N1…; PTV-N1…</td><td>GTVn1, CTVn1, PTVn1</td><td>Same numbering throughout</td></tr>
+<tr><td class="b">CTV-E</td><td>CTVn_Elective (or CTVn_4500)</td><td>Contains all CTV-N</td></tr>
+<tr><td class="b">CTVn_R/L_COM_ILIAC, CTVn_R/L_ILIAC, CTVn_R/L_OBT, CTVn_PRESAC, CTVn_R/L_ING, CTVn_PA</td><td>CTVn_CIA_R/L, CTVn_IliacIE_R/L, CTVn_Obt_R/L, CTVn_PreSacral, CTVn_Ing_R/L, CTVn_PA</td><td>Build individually, then union</td></tr>
+<tr><td class="b">VAG_FB/_EB, PARA_FB/_EB, CERVIX, UTERUS, MESO</td><td>Vagina_FB, Parametrium_FB, Cervix, Uterus, Mesorectum</td><td>Components of CTV-T LR</td></tr>
+<tr><td class="b">CTVp, CTV_HI_RISK, PTVp, PTV_HI_RISK (vulva, vagina)</td><td>CTVp, CTV_High, PTVp, PTV_High</td><td>Dose suffix once the prescription is fixed</td></tr>
+<tr><td class="b">BLADDER_FB/_EB, RECTUM, SIGMOID, BOWEL, DUODENUM, KIDNEY_L/R, SPINAL CORD, FEMUR_L/R, OVARY, CAUDA_EQUINA</td><td>Bladder, Rectum, Colon_Sigmoid, Bowel, Duodenum, Kidney_L/R, SpinalCord, Femur_Head_L/R, Ovary_L/R, CaudaEquina</td><td>NRG uses Spc_Bowel for the bowel space and Femur_L/R</td></tr>
+<tr><td class="b">HELP_contour</td><td>zCTVp_HR+10</td><td>Helper prefix z keeps it out of reports</td></tr>
+</tbody>
+</table>
+<h3>13.1  ROI algebra</h3>
+<div class="grid2">
+<div>
+<div class="stepbox"><b>Definitive cervix (EMBRACE II)</b>
+<ol class="steps">
+<li><code>CTVp_HR_x</code> = GTVp_x ∪ Cervix_x (x = FB, EB)</li>
+<li><code>CTVp_LR_x</code> = CTVp_HR_x ∪ Uterus_x ∪ Vagina_x ∪ Parametrium_x (∪ Mesorectum_x, ovaries)</li>
+<li><code>CTVp_LR</code> = CTVp_LR_FB ∪ CTVp_LR_EB</li>
+<li><code>ITVp_LR</code> = CTVp_LR + asymmetric margin (A 10, P 10, S 10, I 0, R/L 5) − bone − muscle; edit by hand</li>
+<li><code>CTVn_Elective</code> = ∪ nodal CTVs ∪ CTVn#</li>
+<li><code>ITV_4500</code> = ITVp_LR ∪ CTVn_Elective → <code>PTV_4500</code> = ITV_4500 + 5 mm</li>
+<li><code>PTVn#</code> = CTVn# + 5 mm; <code>zCTVp_HR+10</code> = (CTVp_HR_FB ∪ CTVp_HR_EB) + 10 mm</li>
+</ol></div>
+</div>
+<div>
+<div class="stepbox"><b>Post-op cervix / endometrium (department)</b>
+<ol class="steps">
+<li><code>ITVp</code> = Vagina_EB ∪ Parametrium_EB ∪ Vagina_FB ∪ Parametrium_FB (+5 mm posterior if rectum full)</li>
+<li><code>CTVn</code> = ∪ nodal CTVs ∪ (Seroma + 7 mm) − bone − muscle</li>
+<li><code>PTVp</code> = ITVp + 10 mm; <code>PTVn</code> = CTVn + 10 mm</li>
+<li><code>PTV_4500</code> = PTVp ∪ PTVn</li>
+</ol></div>
+<div class="stepbox"><b>Vulva definitive (department)</b>
+<ol class="steps">
+<li><code>CTVp</code> = (GTVp + 5–10 mm) ∪ (GTVn + 10 mm) ∪ SkinBridge</li>
+<li><code>PTVp</code> = CTVp + 10 mm; <code>PTVn</code> = CTVn + 10 mm</li>
+<li>Skin-cropped evaluation PTVs if no bolus (NRG: PTV_4500-03)</li>
+</ol></div>
+</div>
+</div>
+<h3>13.2  Registration and QA</h3>
+<ul class="tight">
+<li>MRI (FB and EB) and PET rigidly registered to CT on pelvic bone; check the match around the cervix and the sacrum.</li>
+<li>Peer review before planning; brachytherapy CTV<sub>HR</sub> reviewed with a radiologist (department).</li>
+<li>EBRT reporting (EMBRACE II 9.10): volumes of GTV-T, CTV-T HR, CTV-T LR; ITV45 and PTV45 D98; CTV-N D98; bowel V15–V50 (cc); bladder, rectum and sigmoid V30–V50 (%); body V43 and V50; PIBS points.</li>
+</ul>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 13</span></div>
+</section>
+
+<!-- ============================ S14 ============================ -->
+<section class="page" id="s14">
+<div class="sechead"><span class="eyebrow">Section 14</span><h2><span class="sectnum">14</span>References and further guidelines</h2></div>
+<h3>Provided sources (in the folder)</h3>
+<ol class="ref">
+<li>Lim K, Do V. SSWAHS (LCTC &amp; MCTC) Gynae Radiotherapy Contouring Protocol, incl. EMBRACE II. 22 June 2020. Departmental document.</li>
+<li>Pötter R, Tanderup K, Kirisits C, et al. EMBRACE II study protocol (image-guided intensity-modulated EBRT and MRI-based adaptive brachytherapy in locally advanced cervical cancer). Summary paper: Clin Transl Radiat Oncol 2018;9:48–60.</li>
+<li>Lim K, Small W Jr, Portelance L, et al. Consensus guidelines for delineation of clinical target volume for intensity-modulated pelvic radiotherapy for the definitive treatment of cervix cancer. Int J Radiat Oncol Biol Phys 2011;79:348–355. doi:10.1016/j.ijrobp.2009.10.075.</li>
+<li>Small W Jr, Mell LK, Anderson P, et al. Consensus guidelines for delineation of clinical target volume for intensity-modulated pelvic radiotherapy in postoperative treatment of endometrial and cervical cancer. Int J Radiat Oncol Biol Phys 2008;71:428–434. doi:10.1016/j.ijrobp.2007.09.042.</li>
+<li>Small W Jr, Bosch WR, Harkenrider MM, et al. NRG Oncology/RTOG consensus guidelines for delineation of clinical target volume for intensity modulated pelvic radiation therapy in postoperative treatment of endometrial and cervical cancer: an update. Int J Radiat Oncol Biol Phys 2021;109:413–424. doi:10.1016/j.ijrobp.2020.08.061.</li>
+<li>Gaffney DK, King B, Viswanathan AN, et al. Consensus recommendations for radiation therapy contouring and treatment of vulvar carcinoma. Int J Radiat Oncol Biol Phys 2016;95:1191–1200 (with Appendix 1, definition of LN groups).</li>
+<li>Postoperative vulvar carcinoma step-by-step contouring protocol and atlas (working aide synthesising the RCR expert panel recommendations, Feb 2024, and Gaffney 2016). In folder.</li>
+<li>RANZCR Faculty of Radiation Oncology. GOROC position paper on image guided brachytherapy for cervical cancer, v1.0. 2017.</li>
+<li>Brower JV, Bradley KA, Russo AL. Management of radiographically positive pelvic and/or para-aortic lymph nodes during primary chemoradiation therapy for cervix cancer. Pract Radiat Oncol 2023;13:246–250.</li>
+<li>NRG Oncology protocol radiation therapy templates: GYN cervix/uterine (2018) and GYN vulva.</li>
+</ol>
+<h3>Not in the folder (needed to clear "check" items)</h3>
+<ol class="ref" start="11">
+<li>Fields EC, et al. Updated NRG/RTOG consensus CTV guideline for the intact cervix (2025).</li>
+<li>Haie-Meder C, et al. GEC-ESTRO Working Group I: concepts and terms in 3D image-based brachytherapy (GTV/CTV). Radiother Oncol 2005;74:235–245. ICRU Report 88 (2016).</li>
+<li>Viswanathan AN, et al. Comparison and consensus guidelines for delineation of CTV for CT- and MR-based brachytherapy in cervical cancer. Int J Radiat Oncol Biol Phys 2014;90:320–328.</li>
+<li>Small W Jr, et al. ABS consensus: vaginal cuff brachytherapy after hysterectomy (2012); Schmid 2020 (vaginal); Kamrava 2023 (vaginal recurrence).</li>
+</ol>
+<h3>Trials referred to</h3>
+<p class="ref">EMBRACE I / retroEMBRACE; PORTEC-1 and -2; Sedlis (GOG 92); GOG 37, 101, 205 (vulva); GROINSS-V II; TIME-C; RTOG 0418; RTOG 0921. ANZ: GOROC / RANZCR; Liverpool participation in EMBRACE II.</p>
+<h3>eviQ protocols (links only)</h3>
+<p class="ref">See the "eviQ protocols" tab on the <a href="../gyn-cervix.html">cervix</a>, <a href="../gyn-endometrial.html">endometrial</a> and <a href="../gyn-vulva-vagina.html">vulva &amp; vagina</a> pages.</p>
+<div class="flag"><span class="lbl">Before clinical use</span> This protocol condenses the sources above in our own words; schematics are original and not to scale. Have a colleague review it, and confirm items marked CHECK against the original document.</div>
+<div class="foot"><span>Gynae RT Delineation Protocol · v1.0</span><span>Page 14</span></div>
+</section>
+</body>
+</html>

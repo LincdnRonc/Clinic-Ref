@@ -1,187 +1,82 @@
 <!DOCTYPE html>
-
-<html lang="en-AU">
+<html lang="en-AU" data-site="gu">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Bladder Target Volume Delineation Protocol</title>
-<style>
-  :root{
-    --navy:#10243f; --navy2:#1d3a5f;
-    --teal:#14756b; --teal-bg:#e7f3f1;
-    --amber:#9a5a00; --amber-bg:#fdf3e3;
-    --rust:#8a2f23; --rust-bg:#fbeae7;
-    --paper:#ffffff;
-    --ink:#1c2530;
-    --muted:#5b6b7c;
-    --rule:#d6dde6;
-    --rule-strong:#14756b;
-    --dose-elective:#2f6fb0;
-    --dose-bed:#9a5a00;
-    --dose-sib:#c0721c;
-    --dose-boost:#8a2f23;
-    --dose-prostate:#b03a2e;
-    --flag:#8a2f23; --flag-bg:#fbeae7;
-    --key-bg:#e7f3f1;
-    --petrol:#10243f;
-    --petrol-2:#14756b;
-  }
-  *{box-sizing:border-box;}
-  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  body{
-    margin:0;background:#e6ebf0;color:var(--ink);
-    font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
-    font-size:10.3px;line-height:1.5;
-  }
-  .page{
-    width:210mm;min-height:297mm;margin:10px auto;background:var(--paper);
-    padding:16mm 17mm 14mm;position:relative;
-    box-shadow:0 1px 8px rgba(16,36,63,.16);
-    display:flex;flex-direction:column;
-  }
-  @page{size:A4;margin:13mm;}
-  @media print{
-    body{background:#fff;}
-    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
-    .page + .page{page-break-before:always;}
-    h2,h3{page-break-after:avoid;}
-    table,figure,.callout,.flag,.named,.stepbox{page-break-inside:avoid;}
-  }
-  h1,h2,h3,h4{font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;font-weight:700;color:var(--navy);}
-  .eyebrow{font-size:8.2px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;}
-  h1{font-size:26px;line-height:1.1;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
-  h2{font-size:16px;margin:0 0 .4em;color:var(--navy);border-bottom:2px solid var(--rule-strong);padding-bottom:5px;}
-  h3{font-size:12.3px;margin:1.1em 0 .3em;color:var(--teal);}
-  h4{font-size:10.6px;margin:.9em 0 .2em;color:var(--ink);font-weight:700;letter-spacing:.02em;}
-  p{margin:.35em 0;}
-  a{color:var(--teal);}
-  .lead{font-size:11px;color:var(--muted);}
-  .sectnum{display:inline-block;background:var(--teal);color:#fff;border-radius:5px;font-size:.62em;font-weight:700;padding:2px 7px;margin-right:.55em;vertical-align:middle;letter-spacing:.02em;}
-  .sechead{margin:0 0 .5em;}
-  .sechead .eyebrow{display:block;margin-bottom:3px;}
-  .masthead{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:22px 24px 18px;border-radius:6px;margin:0 0 14px;}
-  .masthead .eyebrow{display:block;color:#8fbfb8;margin-bottom:9px;}
-  .masthead h1{color:#fff;}
-  .masthead .sub{font-size:11px;color:#cdd9e6;margin:0;max-width:70ch;}
-  .masthead .pillrow{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;}
-  .masthead .meta{margin-top:13px;font-size:8px;color:#8fbfb8;border-top:1px solid rgba(255,255,255,.18);padding-top:9px;letter-spacing:.05em;text-transform:uppercase;}
-  table{width:100%;border-collapse:collapse;margin:.5em 0 .7em;font-size:9.5px;}
-  th,td{border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;}
-  thead th{background:var(--navy);color:#fff;font-weight:600;font-size:9.2px;letter-spacing:.01em;}
-  tbody tr:nth-child(even){background:#eef2f6;}
-  td.b,th.b{font-weight:700;color:var(--navy);background:#e7f3f1;}
-  caption{caption-side:top;text-align:left;font-size:8.6px;color:var(--muted);margin-bottom:3px;font-style:italic;}
-  .pill{display:inline-block;padding:1px 7px 1.5px;border-radius:9px;color:#fff;font-size:8.4px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:baseline;}
-  .p-elect{background:var(--dose-elective);}
-  .p-bed{background:var(--dose-bed);}
-  .p-sib{background:var(--dose-sib);}
-  .p-boost{background:var(--dose-boost);}
-  .p-pros{background:var(--dose-prostate);}
-  .p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
-  .callout{background:var(--key-bg);border-left:4px solid var(--teal);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
-  .callout .lbl{font-size:8px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--teal);}
-  .flag{background:var(--flag-bg);border-left:4px solid var(--rust);padding:8px 12px;margin:.7em 0;border-radius:0 4px 4px 0;}
-  .flag .lbl{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);}
-  .flag .lbl:before{content:"\26A0  ";}
-  .stepbox{border:1px solid var(--rule);border-top:3px solid var(--dose-elective);border-radius:4px;padding:6px 10px 8px;margin:.6em 0;background:#fff;}
-  ol.steps{margin:.2em 0 .2em 0;padding-left:1.5em;}
-  ol.steps li{margin:.28em 0;padding-left:.15em;}
-  ol.steps li::marker{color:var(--dose-elective);font-weight:700;}
-  ul.tight{margin:.25em 0;padding-left:1.15em;}
-  ul.tight li{margin:.18em 0;}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .grid2>div{min-width:0;}
-  figure{margin:.6em 0;border:1px solid var(--rule);border-radius:5px;padding:8px 8px 4px;background:#fff;}
-  figure figcaption{font-size:8.4px;color:var(--muted);margin-top:3px;line-height:1.35;}
-  svg{display:block;width:100%;height:auto;}
-  .kv{font-size:9.3px;}
-  .kv b{color:var(--navy);}
-  .foot{margin-top:auto;padding-top:5px;display:flex;justify-content:space-between;font-size:7.6px;color:var(--muted);border-top:1px solid var(--rule);}
-  .ref{font-size:8.6px;line-height:1.4;}
-  .ref li{margin:.2em 0;}
-  .tag{font-size:8px;font-weight:700;color:var(--teal);letter-spacing:.03em;}
-  .named{border:1px solid var(--rule);border-left:4px solid var(--amber);padding:6px 10px;margin:.4em 0;border-radius:0 4px 4px 0;background:var(--amber-bg);}
-  .named .pos{font-weight:700;color:var(--amber);}
-  code{background:#eef4f3;border:1px solid var(--rule);border-radius:3px;padding:0 3px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.8px;color:var(--navy);}
-  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:8.7px;}
-  .toc a{color:var(--ink);text-decoration:none;}
-  .toc td{border:none;padding:2px 4px;}
-  .toc .n{color:var(--teal);font-weight:700;width:24px;}
-  .toc .pg{text-align:right;color:var(--muted);width:32px;}
-  hr.soft{border:none;border-top:1px solid var(--rule);margin:.8em 0;}
-  .small{font-size:8.6px;color:var(--muted);}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bladder contouring protocol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/protocol.css">
+<style>.p-elect{background:var(--dose-elective);}
+.p-bed{background:var(--dose-bed);}
+.p-sib{background:var(--dose-sib);}
+.p-boost{background:var(--dose-boost);}
+.p-pros{background:var(--dose-prostate);}
+.p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
 
-<style id="site-extra">
   .p-gtv{background:#1d4f91;}
   .p-hi{background:#b03a2e;}
   .p-lo{background:#2f6fb0;}
   .p-ctv{background:#14756b;}
   .p-ptv{background:#a07a00;}
-  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:8px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
-  .src{font-size:8.4px;color:var(--muted);}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:12.0px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:12.6px;color:var(--muted);}
   .follow{border-left:4px solid #1d5fb0;}
 </style>
-<style id="qr-mobile">@media (max-width:820px){html,body{overflow-x:hidden}section.page{width:auto!important;min-width:0!important;max-width:100%!important;margin:0!important;box-sizing:border-box;padding:16px!important;height:auto!important;min-height:0!important}.masthead,.masthead *{max-width:100%;box-sizing:border-box}.masthead{width:auto!important}h1{word-wrap:break-word}table{display:block;overflow-x:auto;max-width:100%}.grid2{grid-template-columns:1fr!important}svg,img{max-width:100%;height:auto}}</style><style id="site-band">body{border-top:6px solid #1d5fb0}</style></head>
-
-<body><div style="position:sticky;top:0;z-index:999;background:#10243f;color:#fff;font:600 14px/1.3 system-ui,-apple-system,Segoe UI,sans-serif;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center"><a href="../index.html" style="color:#fff;text-decoration:none">← Radiation Oncology Quick Reference</a><a href="../gu-bladder.html" style="color:#cfe0f7;text-decoration:none">Bladder cancer page</a><a href="prostate.html" style="color:#cfe0f7;text-decoration:none">Prostate protocol</a><a href="../ctr-bladder.html" style="color:#cfe0f7;text-decoration:none">Bladder quick protocol</a><span style="opacity:.7;font-weight:400">Contouring protocol</span></div>
-<section class="page">
-<div class="masthead">
-<span class="eyebrow">Departmental Contouring Protocol · Genitourinary Radiation Oncology</span>
-<h1>Bladder Cancer — Target Volume Delineation Protocol</h1>
-<p class="sub">Bladder preservation (chemoradiation or radiotherapy alone) for <b>muscle-invasive bladder cancer</b>: whole-bladder CTV and what to add to it, the high-risk CTV for an integrated boost, involved and elective pelvic nodes, plan of the day and PTV; and <b>adjuvant radiotherapy after radical cystectomy</b> with the international consensus cystectomy bed and nodal borders. Doses, constraints and names.</p>
-<div class="pillrow">
+</head>
+<body class="proto">
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>Bladder contouring protocol</span></nav>
+    <div class="title-row">
+      <h1>Bladder <span>Contouring protocol</span></h1>
+      <div class="meta">Full protocol · Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this protocol</label>
+      <input id="q" type="search" placeholder="Search this protocol: border, margin, dose, trial" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="side"><details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary><nav class="tree" aria-label="All pages"><a class="home" href="../index.html">Home</a><details data-site="breast"><summary>Breast</summary><a href="../breast-early.html">DCIS &amp; early breast</a><a href="../breast-nodes-pmrt.html">Nodes &amp; PMRT</a><a href="../breast-planning.html">Breast planning &amp; consent</a></details><details data-site="cns"><summary>CNS &amp; Paediatrics</summary><a href="../cns-glioma.html">Glioma</a><a href="../cns-benign.html">Benign &amp; functional</a><a href="../cns-vs.html">Vestibular schwannoma</a><a href="../cns-general.html">Eye &amp; tolerances</a><a href="../peds-cns.html">Paediatric CNS</a><a href="../peds-solid.html">Paediatric solid tumours</a><a href="../peds-late.html">Paediatric late effects</a></details><details data-site="gi"><summary>Gastrointestinal</summary><a href="../gi-oesophagus-gastric.html">Oesophagus &amp; gastric</a><a href="../gi-pancreas.html">Pancreas</a><a href="../gi-hepatobiliary.html">Liver &amp; biliary</a><a href="../gi-rectum-colon.html">Rectum &amp; colon</a><a href="../gi-anal.html">Anal</a><a href="../gi-general.html">General GI</a></details><details data-site="gu"><summary>Genitourinary</summary><a href="../gu-prostate.html">Prostate</a><a href="../gu-bladder.html">Bladder</a><a href="../gu-kidney.html">Kidney</a><a href="../gu-testis.html">Testis</a><a href="../gu-other.html">UTUC, urethra &amp; penile</a></details><details data-site="gyn"><summary>Gynaecological</summary><a href="../gyn-cervix.html">Cervix</a><a href="../gyn-endometrial.html">Endometrial</a><a href="../gyn-vulva-vagina.html">Vulva &amp; vagina</a><a href="../gyn-general.html">General gynae</a></details><details data-site="heme"><summary>Haematology</summary><a href="../heme-hodgkin.html">Hodgkin</a><a href="../heme-nhl.html">Non-Hodgkin</a><a href="../heme-other.html">Myeloma, TBI &amp; skin</a></details><details data-site="hn"><summary>Head and neck &amp; Skin</summary><a href="../hn-general.html">H&amp;N general</a><a href="../hn-oropharynx.html">Oropharynx</a><a href="../hn-larynx.html">Larynx &amp; hypopharynx</a><a href="../hn-oral-salivary.html">Oral cavity &amp; salivary</a><a href="../hn-npc-sinonasal.html">Nasopharynx &amp; sinonasal</a><a href="../hn-thyroid-cup.html">Thyroid &amp; unknown primary</a><a href="../skin.html">Skin</a></details><details data-site="sarcoma"><summary>Sarcoma</summary><a href="../sarcoma-sts.html">Soft tissue &amp; bone sarcoma</a><a href="../benign.html">Benign MSK</a></details><details data-site="thorax"><summary>Thorax</summary><a href="../thorax-early.html">Early NSCLC (SABR)</a><a href="../thorax-stage3.html">Stage III NSCLC</a><a href="../thorax-sclc.html">Small cell</a><a href="../thorax-other.html">Thymic, meso &amp; other</a></details><details data-site="pall"><summary>Palliative &amp; oligometastases</summary><a href="../pall-brain.html">Brain metastases</a><a href="../pall-wbrt.html">WBRT principles</a><a href="../pall-bone-spine.html">Bone, cord &amp; spine SBRT</a><a href="../pall-oligo.html">Oligomets &amp; palliation</a></details><details data-site="mrl"><summary>MR-linac</summary><a href="../mrl-images.html">Sequences &amp; signal</a><a href="../mrl-liver-gi.html">Liver &amp; upper GI</a><a href="../mrl-tumour-nodes.html">Tumours &amp; nodes</a><a href="../mrl-pelvis.html">Pelvis</a><a href="../mrl-workflow.html">Adaptive workflow</a></details><details data-site="exam"><summary>Phase 2 exam summary</summary><a href="../exam-overview.html">Epi &amp; memory aids</a><a href="../exam-breast.html">Breast</a><a href="../exam-cns.html">CNS</a><a href="../exam-peds.html">Paediatrics</a><a href="../exam-ugi.html">Upper GI</a><a href="../exam-lgi.html">Lower GI</a><a href="../exam-gu.html">Bladder, kidney, testis, penis</a><a href="../exam-prostate.html">Prostate</a><a href="../exam-gyn.html">Gynae</a><a href="../exam-heme.html">Haematology</a><a href="../exam-hn.html">Head and neck</a><a href="../exam-skin.html">Skin</a><a href="../exam-endocrine-benign.html">Endocrine &amp; benign</a><a href="../exam-sarcoma.html">Sarcoma</a><a href="../exam-thorax.html">Thorax</a><a href="../exam-pall.html">Palliative</a><a href="../exam-clinonc.html">Clinical oncology</a><a href="../exam-viva.html">Viva templates</a></details><details data-site="contouring" open><summary>Contouring</summary><a href="../ctr-library.html">Library</a><a href="../ctr-breast.html">Breast</a><a href="../ctr-thorax.html">Thorax</a><a href="../ctr-hn.html">H&amp;N</a><a href="../ctr-cns.html">CNS</a><a href="../ctr-upper-gi.html">Upper GI</a><a href="../ctr-anal.html">Anal</a><a href="../ctr-gyn.html">Gynae</a><a href="../ctr-heme.html">Lymphoma</a><a href="../ctr-sarcoma.html">Sarcoma</a><a href="../ctr-bladder.html">Bladder</a><a href="../ctr-kidney-liver.html">Kidney &amp; liver</a><a href="../ctr-skin.html">Skin</a><a href="../ctr-peds.html">Paeds</a><a href="../ctr-spine.html">Spine &amp; bone</a><a href="../contouring/breast.html">Breast</a><a href="../contouring/cns.html">CNS</a><a href="../contouring/gynae.html">Gynae</a><a href="../contouring/spine-bone.html">Spine &amp; bone SBRT</a><a href="../contouring/head-neck.html">Head &amp; neck</a><a href="../contouring/lymphoma.html">Lymphoma ISRT</a><a href="../contouring/lung.html">Lung</a><a href="../contouring/prostate.html">Prostate</a><a href="../contouring/bladder.html" aria-current="page">Bladder</a><a href="../contouring/rectal-long-course.html">Rectum</a><a href="../contouring/anal.html">Anal canal</a><a href="../contouring/oesophagus.html">Oesophagus &amp; GOJ</a><a href="../contouring/pancreas-stomach.html">Pancreas &amp; stomach</a><a href="../contouring/biliary.html">Biliary</a><a href="../contouring/liver-sbrt.html">Liver SBRT OARs</a><a href="../ctr-mim.html">MIM shortcuts</a><a href="../ctr-monaco.html">Monaco shortcuts</a></details></nav></details></aside>
+<main id="main">
+<p class="xref"><b>Related:</b> <a href="../gu-bladder.html">Bladder cancer page</a> · <a href="prostate.html">Prostate protocol</a> · <a href="../ctr-bladder.html">Bladder quick protocol</a></p>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a structure, a margin (5 mm) or a trial name.</div>
+<section class="panel" id="p-overview" data-tab="overview" data-label="Overview">
+  <div class="panel-head"><p class="eyebrow">Departmental Contouring Protocol · Genitourinary Radiation Oncology</p><h2>Bladder contouring protocol</h2><p class="lede">Bladder preservation (chemoradiation or radiotherapy alone) for <b>muscle-invasive bladder cancer</b>: whole-bladder CTV and what to add to it, the high-risk CTV for an integrated boost, involved and elective pelvic nodes, plan of the day and PTV; and <b>adjuvant radiotherapy after radical cystectomy</b> with the international consensus cystectomy bed and nodal borders. Doses, constraints and names.</p><div class="pillrow">
 <span class="pill p-gtv">GTVp / GTVn</span>
 <span class="pill p-hi">CTV high risk (boost)</span>
 <span class="pill p-lo">CTV whole bladder / nodes</span>
 <span class="pill p-ptv">PTV (anisotropic)</span>
-</div>
-<div class="meta">FROGG patterns of practice survey and consensus recommendations on radiotherapy for MIBC (Cardoso et al., JMIRO 2020;64:882–893; lead author Liverpool) · International consensus contouring guidelines for adjuvant RT after radical cystectomy, adopted for NRG-GU001 (Baumann et al., IJROBP 2016;96:78–86) — Version 1.0 · Nov 2026</div>
-</div>
-<div class="callout">
-<span class="lbl">Governing principles of this protocol</span>
-<ul class="tight" style="margin-top:4px;">
-<li><b>The standard for bladder preservation is FROGG 2020</b> (the ANZ consensus, led from Liverpool): CTV = whole bladder including GTV, + 5 mm only on gross extravesical extension; single phase (uniform or simultaneous integrated boost) with IMRT/VMAT; 55 Gy/20 or 64 Gy/32; daily CBCT soft-tissue match.</li>
-<li><b>Reproducible bladder filling matters more than the volume chosen</b>: empty or comfortably full, the same every day. Restrict fluids and diuretics in the 2–4 hours before simulation and each fraction.</li>
-<li><b>Extend the CTV only for a reason</b>: proximal urethra, prostatic urethra, prostate or distal ureter are added by named rules (section 3).</li>
-<li><b>No elective nodes in node-negative patients by default</b> (FROGG: more toxicity, no proven benefit). Involved nodes receive the GTV dose.</li>
-<li><b>After cystectomy the target follows margin status</b> (Baumann 2016): negative margins → pelvic nodes; positive margins → pelvic nodes + presacral nodes + cystectomy bed. Never crop the nodal CTV out of bowel.</li>
-</ul>
-</div>
-<h3 style="margin-top:1.1em;">Contents</h3>
-<table class="toc">
-<tr><td class="n">1</td><td><a href="#s1">Scope, preparation, simulation and imaging</a></td><td class="pg">2</td></tr>
-<tr><td class="n">2</td><td><a href="#s2">Which volumes for which patient; guidelines compared</a></td><td class="pg">3</td></tr>
-<tr><td class="n">3</td><td><a href="#s3">Scenario A — whole-bladder CTV (bladder preservation)</a></td><td class="pg">4</td></tr>
-<tr><td class="n">4</td><td><a href="#s4">Scenario B — high-risk CTV, integrated boost and dose escalation</a></td><td class="pg">5</td></tr>
-<tr><td class="n">5</td><td><a href="#s5">Scenario C — pelvic nodes (involved and elective)</a></td><td class="pg">6</td></tr>
-<tr><td class="n">6</td><td><a href="#s6">Scenario D — adjuvant RT after radical cystectomy</a></td><td class="pg">7</td></tr>
-<tr><td class="n">7</td><td><a href="#s7">Pearls and common errors</a></td><td class="pg">9</td></tr>
-<tr><td class="n">8</td><td><a href="#s8">Dose, fractionation, PTV margins, IGRT and adaptive RT</a></td><td class="pg">10</td></tr>
-<tr><td class="n">9</td><td><a href="#s9">Organs at risk and constraints</a></td><td class="pg">11</td></tr>
-<tr><td class="n">10</td><td><a href="#s10">Names and RayStation implementation</a></td><td class="pg">12</td></tr>
-<tr><td class="n">11</td><td><a href="#s11">References and further guidelines</a></td><td class="pg">13</td></tr>
-</table>
-<h3>Sources used</h3>
-<table>
+</div><p class="note">FROGG patterns of practice survey and consensus recommendations on radiotherapy for MIBC (Cardoso et al., JMIRO 2020;64:882–893; lead author Liverpool) · International consensus contouring guidelines for adjuvant RT after radical cystectomy, adopted for NRG-GU001 (Baumann et al., IJROBP 2016;96:78–86) — Version 1.0 · Nov 2026</p><div class="jump"></div></div>
+  <article class="card key" data-title="Governing principles of this protocol"><h3>Governing principles of this protocol</h3><div class="callout"></div></article><article class="card" data-title="Contents"><h3>Contents</h3><div class="tw"><table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Scope, preparation, simulation and imaging</a></td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Which volumes for which patient; guidelines compared</a></td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario A — whole-bladder CTV (bladder preservation)</a></td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario B — high-risk CTV, integrated boost and dose escalation</a></td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Scenario C — pelvic nodes (involved and elective)</a></td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Scenario D — adjuvant RT after radical cystectomy</a></td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Pearls and common errors</a></td></tr>
+<tr><td class="n">8</td><td><a href="#s8">Dose, fractionation, PTV margins, IGRT and adaptive RT</a></td></tr>
+<tr><td class="n">9</td><td><a href="#s9">Organs at risk and constraints</a></td></tr>
+<tr><td class="n">10</td><td><a href="#s10">Names and RayStation implementation</a></td></tr>
+<tr><td class="n">11</td><td><a href="#s11">References and further guidelines</a></td></tr>
+</table></div></article><article class="card" data-title="Sources used"><h3>Sources used</h3><div class="tw"><table>
 <thead><tr><th style="width:38%">Source</th><th>Used for</th></tr></thead>
 <tbody>
 <tr><td class="b">FROGG consensus recommendations for MIBC (Cardoso, Choudhury, Christie, Eade et al., JMIRO 2020; doi:10.1111/1754-9485.13120)</td><td>Patient selection, staging, simulation and fluid advice, GTV/CTV/high-risk CTV definitions and inclusion rules, PTV example, doses and dose-escalation levels, rectum/large bowel/femoral head and small-bowel overlap constraints, IGRT and adaptive RT, nodal management, surveillance; ANZ survey results.</td></tr>
 <tr><td class="b">International consensus contouring for adjuvant RT after radical cystectomy (Baumann, Bosch, Bahl … Christodouleas; IJROBP 2016; NRG-GU001 contours; slide set)</td><td>Target selection by margin status, cystectomy bed border table, nodal CTV (iliac, presacral, obturator), urinary diversion, ostomy bag, bowel, rectum and pelvic bone OAR definitions, inter-observer agreement (κ). Also cited by FROGG as the nodal guideline for elective nodes in bladder preservation.</td></tr>
 <tr><td class="b">Site pages on this website</td><td>Trial-protocol CTV/PTV margins and constraints (BC2001, BCON) on the <a href="../gu-bladder.html">bladder cancer page</a>; not from the folder, so quoted here only for comparison and marked CHECK.</td></tr>
 </tbody>
-</table>
-<div class="flag"><span class="lbl">No departmental bladder document in the folder</span> The folder holds no SWSLHD or St George bladder protocol, so departmental bladder-filling instructions, PTV margins, plan-of-the-day library size and structure names are marked <span class="chk">CHECK</span> throughout. FROGG is used as the local standard because it is the ANZ consensus and was written from Liverpool.</div>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 1</span></div>
-</section>
-
-<!-- ============================ S1 ============================ -->
-<section class="page" id="s1">
-<div class="sechead"><span class="eyebrow">Section 1</span><h2><span class="sectnum">1</span>Scope, preparation, simulation and imaging</h2></div>
-<h3>1.1  Scope</h3>
-<p>Muscle-invasive urothelial bladder cancer treated with curative bladder preservation (trimodality therapy: maximal safe TURBT, then chemoradiation or radiotherapy with a radiosensitiser) and adjuvant pelvic radiotherapy after radical cystectomy. Palliative bladder radiotherapy is outside the scope; see the <a href="../gu-bladder.html">bladder cancer page</a>.</p>
-<h3>1.2  Before simulation (FROGG Guidelines 1–3)</h3>
-<table>
+</table></div><div class="flag"><span class="lbl">No departmental bladder document in the folder</span> The folder holds no SWSLHD or St George bladder protocol, so departmental bladder-filling instructions, PTV margins, plan-of-the-day library size and structure names are marked <span class="chk">CHECK</span> throughout. FROGG is used as the local standard because it is the ANZ consensus and was written from Liverpool.</div></article>
+</section><section class="panel" id="p-s1" data-tab="s1" data-label="1 Scope" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 1</p><h2><span class="sectnum">1</span>Scope, preparation, simulation and imaging </h2><div class="jump"></div></div>
+  <article class="card" data-title="Scope"><h3>1.1  Scope</h3><p>Muscle-invasive urothelial bladder cancer treated with curative bladder preservation (trimodality therapy: maximal safe TURBT, then chemoradiation or radiotherapy with a radiosensitiser) and adjuvant pelvic radiotherapy after radical cystectomy. Palliative bladder radiotherapy is outside the scope; see the <a href="../gu-bladder.html">bladder cancer page</a>.</p></article><article class="card" data-title="Before simulation (FROGG Guidelines 1–3)"><h3>1.2  Before simulation (FROGG Guidelines 1–3)</h3><div class="tw"><table>
 <thead><tr><th style="width:26%">Step</th><th>FROGG recommendation</th></tr></thead>
 <tbody>
 <tr><td class="b">MDT and consults</td><td>Every MIBC case at an MDT; the patient sees a urologist, radiation oncologist and medical oncologist so that bladder preservation and cystectomy (± neoadjuvant chemotherapy) are both offered. In the ANZ survey only 37% said new MIBC is always discussed at MDT, and only 10% were referred fit, operable patients "most of the time".</td></tr>
@@ -190,9 +85,7 @@
 <tr><td class="b">Who suits preservation</td><td>Favourable: no or limited CIS, unifocal tumour, minimal macroscopic tumour after TURBT. Cystectomy preferred with widespread CIS, multifocal tumours or gross residual disease after TURBT, poor baseline bladder function, or relative contraindications to RT or chemotherapy. Preservation preferred with high operative risk or patient preference.</td></tr>
 <tr><td class="b">Medical oncology</td><td>All preservation patients seen for concurrent chemotherapy (fluorouracil + mitomycin C, or cisplatin). Neoadjuvant chemotherapy when RT will be delayed or disease is locally advanced. Carbogen and nicotinamide if chemotherapy is contraindicated.</td></tr>
 </tbody>
-</table>
-<h3>1.3  Simulation (FROGG Guidelines 4 and 5)</h3>
-<div class="grid2">
+</table></div></article><article class="card" data-title="Simulation (FROGG Guidelines 4 and 5)"><h3>1.3  Simulation (FROGG Guidelines 4 and 5)</h3><div class="grid2">
 <div>
 <ul class="tight">
 <li><b>Position and immobilisation</b>: supine with knee and foot support as for prostate <span class="chk">CHECK</span> (not specified in the sources).</li>
@@ -211,14 +104,10 @@
 <li><b>Post-cystectomy</b>: simulate and treat with an <b>empty ostomy bag</b> where possible (Baumann 2016).</li>
 </ul>
 </div>
-</div>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 2</span></div>
-</section>
-
-<!-- ============================ S2 ============================ -->
-<section class="page" id="s2">
-<div class="sechead"><span class="eyebrow">Section 2</span><h2><span class="sectnum">2</span>Which volumes for which patient; guidelines compared</h2></div>
-<table>
+</div></article>
+</section><section class="panel" id="p-s2" data-tab="s2" data-label="2 Which volumes" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 2</p><h2><span class="sectnum">2</span>Which volumes for which patient; guidelines compared </h2><div class="jump"></div></div>
+  <article class="card" data-title="Which volumes for which patient; guidelines compared"><h3>Which volumes for which patient; guidelines compared</h3><div class="tw"><table>
 <thead><tr><th style="width:22%">Situation</th><th>Target volumes</th><th style="width:26%">Dose</th></tr></thead>
 <tbody>
 <tr><td class="b">A. Bladder preservation, cN0, uniform dose</td><td>GTVp; CTV = whole bladder + extensions (section 3); PTV anisotropic. No elective nodes.</td><td><span class="pill p-lo">55 Gy/20</span> or <span class="pill p-lo">64 Gy/32</span></td></tr>
@@ -228,9 +117,7 @@
 <tr><td class="b">D1. Post-cystectomy, negative margins</td><td>Pelvic nodes alone: distal common iliac, internal iliac, external iliac, obturator (Baumann)</td><td>Not in the supplied slides <span class="chk">CHECK</span></td></tr>
 <tr><td class="b">D2. Post-cystectomy, positive margins</td><td>Pelvic nodes + presacral nodes + cystectomy bed (Baumann)</td><td>Not in the supplied slides <span class="chk">CHECK</span></td></tr>
 </tbody>
-</table>
-<h3>2.1  Guidelines and practice side by side</h3>
-<table>
+</table></div></article><article class="card" data-title="Guidelines and practice side by side"><h3>2.1  Guidelines and practice side by side</h3><div class="tw"><table>
 <thead><tr><th style="width:18%">Item</th><th>FROGG 2020 (followed here)</th><th>FROGG 2012 (Hindson)</th><th>UK trials (BC2001/BCON) as quoted on the bladder page</th></tr></thead>
 <tbody>
 <tr><td class="b">CTV</td><td>Whole bladder incl. GTV; + 5 mm on gross extravesical extension; urethra, prostate, ureter by rule</td><td>Superseded (2011 consensus); details not in the folder</td><td>Bladder + 6 mm (10 mm with extravesical extension) <span class="chk">CHECK</span></td></tr>
@@ -239,16 +126,10 @@
 <tr><td class="b">Nodes</td><td>Not for cN0 by default; involved nodes to GTV dose</td><td>—</td><td>No intentional nodes; whole bladder + 15 mm covered low pelvic and obturator nodes (FROGG)</td></tr>
 <tr><td class="b">Constraints</td><td>Rectum and large bowel V44 &lt;50% (55/20), V50 &lt;50% (64/32); femoral heads V44 or V50 &lt;10%; small bowel by overlap</td><td>Femoral heads V50 &lt;30%; rectum V50 &lt;50%, V60 &lt;35%</td><td>See bladder page</td></tr>
 </tbody>
-</table>
-<p class="note">ANZ practice in the FROGG survey: 85% used IMRT/VMAT, 49% adaptive RT, 82% conventional fractionation, 82% a daily soft-tissue CBCT match, and 20% escalated above 55 Gy/20 or 64 Gy/32. RTOG preservation trials used a "mini-pelvis" with the superior border at S2–S3 to spare bowel for a future diversion.</p>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 3</span></div>
-</section>
-
-<!-- ============================ S3 ============================ -->
-<section class="page" id="s3">
-<div class="sechead"><span class="eyebrow">Section 3</span><h2><span class="sectnum">3</span>Scenario A — whole-bladder CTV (bladder preservation)</h2></div>
-<h3>3.1  Definitions (FROGG Table 5)</h3>
-<table>
+</table></div><p class="note">ANZ practice in the FROGG survey: 85% used IMRT/VMAT, 49% adaptive RT, 82% conventional fractionation, 82% a daily soft-tissue CBCT match, and 20% escalated above 55 Gy/20 or 64 Gy/32. RTOG preservation trials used a "mini-pelvis" with the superior border at S2–S3 to spare bowel for a future diversion.</p></article>
+</section><section class="panel" id="p-s3" data-tab="s3" data-label="3 whole-bladder CTV" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 3</p><h2><span class="sectnum">3</span>Scenario A — whole-bladder CTV (bladder preservation) </h2><div class="jump"></div></div>
+  <article class="card" data-title="Definitions (FROGG Table 5)"><h3>3.1  Definitions (FROGG Table 5)</h3><div class="tw"><table>
 <thead><tr><th style="width:20%">Volume</th><th>Definition</th></tr></thead>
 <tbody>
 <tr><td class="b">GTVp</td><td>Residual tumour after TURBT on CT ± MRI, plus any gross extravesical spread.</td></tr>
@@ -262,11 +143,10 @@
 </ul></td></tr>
 <tr><td class="b">PTV</td><td>CTV + an institution- and IGRT-specific anisotropic margin (section 8).</td></tr>
 </tbody>
-</table>
-<div class="grid2">
+</table></div><div class="grid2">
 <div>
 <h3>3.2  Borders of the whole-bladder CTV</h3>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:24%">Border</th><th>Description (anatomy of "whole bladder")</th></tr></thead>
 <tbody>
 <tr><td class="b">Cranial</td><td>Outer wall of the dome on the planning CT; filling changes are handled by the PTV or plan library, not the CTV.</td></tr>
@@ -275,50 +155,43 @@
 <tr><td class="b">Posterior</td><td>Outer posterior wall and trigone; seminal vesicles, rectum, vagina or uterus only if invaded (then they are GTV + 5 mm).</td></tr>
 <tr><td class="b">Lateral</td><td>Outer lateral walls; perivesical fat only around gross extravesical extension.</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="note">FROGG defines the CTV by organ, not by a border table; this table spells out the outer-wall rule.</p>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 260" role="img" aria-label="Sagittal schematic of the whole bladder CTV with urethral, prostatic and ureteric extensions and an anisotropic PTV">
-<rect width="300" height="260" fill="#fff"/>
-<path d="M258 14 Q284 110 256 186 Q246 206 230 214" fill="none" stroke="#c9ced4" stroke-width="16"/><text x="246" y="232" font-size="7.5" fill="#5b6b7c">sacrum</text>
-<rect x="28" y="150" width="20" height="48" rx="6" fill="#eef0f2" stroke="#b8c2cc"/><text x="14" y="212" font-size="7.5" fill="#5b6b7c">symphysis</text>
-<path d="M222 18 Q232 110 206 170 Q192 200 180 238" fill="none" stroke="#c48a7a" stroke-width="16"/><text x="226" y="124" font-size="7.5" fill="#8a4a3e">rectum</text>
-<ellipse cx="117.5" cy="122.5" rx="72.5" ry="56.5" fill="none" stroke="#a07a00" stroke-width="1.2" stroke-dasharray="5 3"/>
-<ellipse cx="120" cy="125" rx="58" ry="42" fill="#fff6d6" stroke="#1d5fb0" stroke-width="2.2"/>
-<ellipse cx="120" cy="190" rx="20" ry="15" fill="#f1e6ee" stroke="#9a7a90"/><text x="142" y="204" font-size="7" fill="#6e4f66">prostate</text>
-<line x1="120" y1="167" x2="120" y2="244" stroke="#8a6d9a" stroke-width="2"/>
-<line x1="120" y1="167" x2="120" y2="181" stroke="#1d5fb0" stroke-width="5"/>
-<path d="M196 40 Q186 100 166 142" fill="none" stroke="#7a8a99" stroke-width="2" stroke-dasharray="3 2"/>
-<path d="M172 130 L166 142" stroke="#1d5fb0" stroke-width="5"/>
-<ellipse cx="156" cy="150" rx="13" ry="10" fill="rgba(29,79,145,.75)" stroke="#1d4f91"/>
-<text x="92" y="122" font-size="8" fill="#1d5fb0" font-weight="700">CTV =</text><text x="78" y="132" font-size="8" fill="#1d5fb0" font-weight="700">whole bladder</text>
-<line x1="156" y1="150" x2="190" y2="176" stroke="#1d4f91" stroke-width=".7"/><text x="160" y="184" font-size="7" fill="#1d4f91">GTV (trigone)</text>
-<line x1="190" y1="70" x2="168" y2="36" stroke="#555" stroke-width=".7"/><text x="120" y="32" font-size="6.5" fill="#555">ureter: distal 1 cm</text>
-<line x1="124" y1="174" x2="66" y2="232" stroke="#555" stroke-width=".7"/><text x="36" y="242" font-size="6.5" fill="#555">proximal 1–2 cm urethra</text>
-<text x="44" y="60" font-size="7" fill="#a07a00">PTV: larger superior</text><text x="44" y="69" font-size="7" fill="#a07a00">and anterior</text>
-<text x="10" y="18" font-size="7" fill="#5b6b7c">anterior ←</text><text x="250" y="252" font-size="7" fill="#5b6b7c">→ posterior</text>
+<svg aria-label="Sagittal schematic of the whole bladder CTV with urethral, prostatic and ureteric extensions and an anisotropic PTV" role="img" viewbox="0 0 300 260">
+<rect fill="#fff" height="260" width="300"></rect>
+<path d="M258 14 Q284 110 256 186 Q246 206 230 214" fill="none" stroke="#c9ced4" stroke-width="16"></path><text fill="#5b6b7c" font-size="7.5" x="246" y="232">sacrum</text>
+<rect fill="#eef0f2" height="48" rx="6" stroke="#b8c2cc" width="20" x="28" y="150"></rect><text fill="#5b6b7c" font-size="7.5" x="14" y="212">symphysis</text>
+<path d="M222 18 Q232 110 206 170 Q192 200 180 238" fill="none" stroke="#c48a7a" stroke-width="16"></path><text fill="#8a4a3e" font-size="7.5" x="226" y="124">rectum</text>
+<ellipse cx="117.5" cy="122.5" fill="none" rx="72.5" ry="56.5" stroke="#a07a00" stroke-dasharray="5 3" stroke-width="1.2"></ellipse>
+<ellipse cx="120" cy="125" fill="#fff6d6" rx="58" ry="42" stroke="#1d5fb0" stroke-width="2.2"></ellipse>
+<ellipse cx="120" cy="190" fill="#f1e6ee" rx="20" ry="15" stroke="#9a7a90"></ellipse><text fill="#6e4f66" font-size="7" x="142" y="204">prostate</text>
+<line stroke="#8a6d9a" stroke-width="2" x1="120" x2="120" y1="167" y2="244"></line>
+<line stroke="#1d5fb0" stroke-width="5" x1="120" x2="120" y1="167" y2="181"></line>
+<path d="M196 40 Q186 100 166 142" fill="none" stroke="#7a8a99" stroke-dasharray="3 2" stroke-width="2"></path>
+<path d="M172 130 L166 142" stroke="#1d5fb0" stroke-width="5"></path>
+<ellipse cx="156" cy="150" fill="rgba(29,79,145,.75)" rx="13" ry="10" stroke="#1d4f91"></ellipse>
+<text fill="#1d5fb0" font-size="8" font-weight="700" x="92" y="122">CTV =</text><text fill="#1d5fb0" font-size="8" font-weight="700" x="78" y="132">whole bladder</text>
+<line stroke="#1d4f91" stroke-width=".7" x1="156" x2="190" y1="150" y2="176"></line><text fill="#1d4f91" font-size="7" x="160" y="184">GTV (trigone)</text>
+<line stroke="#555" stroke-width=".7" x1="190" x2="168" y1="70" y2="36"></line><text fill="#555" font-size="6.5" x="120" y="32">ureter: distal 1 cm</text>
+<line stroke="#555" stroke-width=".7" x1="124" x2="66" y1="174" y2="232"></line><text fill="#555" font-size="6.5" x="36" y="242">proximal 1–2 cm urethra</text>
+<text fill="#a07a00" font-size="7" x="44" y="60">PTV: larger superior</text><text fill="#a07a00" font-size="7" x="44" y="69">and anterior</text>
+<text fill="#5b6b7c" font-size="7" x="10" y="18">anterior ←</text><text fill="#5b6b7c" font-size="7" x="250" y="252">→ posterior</text>
 </svg>
 <figcaption>Original schematic (sagittal, male). The CTV is the whole bladder; urethra, prostatic urethra, prostate and distal ureter are added only by the named rules. Not to scale.</figcaption>
 </figure>
 </div>
-</div>
-<h3>3.3  Slice by slice (cranial to caudal)</h3>
-<ol class="steps">
+</div></article><article class="card" data-title="Slice by slice (cranial to caudal)"><h3>3.3  Slice by slice (cranial to caudal)</h3><ol class="steps">
 <li><b>Above the dome</b>: confirm the top of the bladder on sagittal and coronal views; bowel loops lying on the dome are the main OAR (section 9).</li>
 <li><b>Dome and body</b>: outline the outer wall. Where the GTV breaches the wall, draw the extravesical tumour as GTV and add 5 mm into the perivesical fat only there.</li>
 <li><b>Ureteric orifices and trigone</b>: if the tumour involves an orifice, follow the ureter 1 cm proximally (it runs posterolaterally and upward from the trigone).</li>
 <li><b>Bladder neck</b>: stop at the internal urethral orifice unless the neck/trigone is involved or there is CIS or multifocal disease (then add 1–2 cm of urethra); in men the prostatic urethra or prostate by biopsy and staging.</li>
-</ol>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 4</span></div>
-</section>
-
-<!-- ============================ S4 ============================ -->
-<section class="page" id="s4">
-<div class="sechead"><span class="eyebrow">Section 4</span><h2><span class="sectnum">4</span>Scenario B — high-risk CTV, integrated boost and dose escalation</h2></div>
-<p>FROGG recommends a <b>single phase</b> with IMRT/VMAT, either uniform dose or a simultaneous integrated boost. Dose escalation is <b>investigational</b> (prospective data collection or a trial, e.g. the ICR/TROG RAIDER trial of adaptive standard-dose or escalated RT), and is reserved for patients without widespread field change or multifocal tumours.</p>
-<table>
+</ol></article>
+</section><section class="panel" id="p-s4" data-tab="s4" data-label="4 high-risk CTV" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 4</p><h2><span class="sectnum">4</span>Scenario B — high-risk CTV, integrated boost and dose escalation </h2><div class="lede"><p>FROGG recommends a <b>single phase</b> with IMRT/VMAT, either uniform dose or a simultaneous integrated boost. Dose escalation is <b>investigational</b> (prospective data collection or a trial, e.g. the ICR/TROG RAIDER trial of adaptive standard-dose or escalated RT), and is reserved for patients without widespread field change or multifocal tumours.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Scenario B — high-risk CTV, integrated boost and dose escalation"><h3>Scenario B — high-risk CTV, integrated boost and dose escalation</h3><div class="tw"><table>
 <thead><tr><th style="width:22%">Volume</th><th>Definition (FROGG 5.3)</th></tr></thead>
 <tbody>
 <tr><td class="b">GTVp</td><td>Residual tumour on CT and MRI (T1, T2, DWI help) plus gross extravesical disease.</td></tr>
@@ -326,49 +199,33 @@
 <tr><td class="b">CTV intermediate risk</td><td>The whole bladder CTV of section 3.</td></tr>
 <tr><td class="b">PTVs</td><td>High-risk and whole-bladder PTVs with institution-specific margins <span class="chk">CHECK</span> (the high-risk PTV margin is not given in the sources).</td></tr>
 </tbody>
-</table>
-<h3>4.1  Example dose levels for escalation (FROGG Table 12)</h3>
-<table>
+</table></div></article><article class="card" data-title="Example dose levels for escalation (FROGG Table 12)"><h3>4.1  Example dose levels for escalation (FROGG Table 12)</h3><div class="tw"><table>
 <thead><tr><th>Fractions</th><th>Gross disease</th><th>CTV high risk</th><th>PTV high risk</th><th>CTV and PTV intermediate (whole bladder)</th></tr></thead>
 <tbody>
 <tr><td class="b">20</td><td>60 Gy</td><td>57 Gy</td><td>55 Gy</td><td>50 Gy</td></tr>
 <tr><td class="b">32</td><td>70 Gy</td><td>67 Gy</td><td>64 Gy</td><td>60 Gy</td></tr>
 </tbody>
-</table>
-<p class="note">So in an escalated plan the whole bladder drops to 50 Gy/20 (60 Gy/32) and the standard prescription moves to the high-risk PTV.</p>
-<h3>4.2  The small-bowel question decides whether escalation is possible</h3>
-<p>FROGG set small-bowel limits by how close bowel lies to the escalated volume (expert opinion at the 2019 meeting, aimed at about a 5% risk of grade ≥3 toxicity at 5 years). If anatomy is unfavourable and small-bowel dose is high, rediscuss cystectomy with the patient.</p>
-<table>
+</table></div><p class="note">So in an escalated plan the whole bladder drops to 50 Gy/20 (60 Gy/32) and the standard prescription moves to the high-risk PTV.</p></article><article class="card" data-title="The small-bowel question decides whether escalation is possible"><h3>4.2  The small-bowel question decides whether escalation is possible</h3><p>FROGG set small-bowel limits by how close bowel lies to the escalated volume (expert opinion at the 2019 meeting, aimed at about a 5% risk of grade ≥3 toxicity at 5 years). If anatomy is unfavourable and small-bowel dose is high, rediscuss cystectomy with the patient.</p><div class="tw"><table>
 <thead><tr><th style="width:36%">Overlap of small bowel with the escalated area</th><th>55 Gy/20: dose / volume</th><th>64 Gy/32: dose / volume</th></tr></thead>
 <tbody>
 <tr><td class="b">No overlap</td><td>V50 &lt;5 cc; V55 &lt;1 cc</td><td>V58 &lt;5 cc; V64 &lt;1 cc</td></tr>
 <tr><td class="b">High-risk PTV close (e.g. lateral wall GTV)</td><td>V50 &lt;10 cc; V55 &lt;5 cc</td><td>V58 &lt;10 cc; V64 &lt;5 cc</td></tr>
 <tr><td class="b">GTV or high-risk CTV close, or high-risk PTV overlaps (e.g. dome GTV)</td><td>V50 &lt;40 cc; V55 &lt;10 cc</td><td>V58 &lt;40 cc; V64 &lt;10 cc</td></tr>
 </tbody>
-</table>
-<p class="note">FROGG Tables 13 and 14. The text calls Table 14 "64 Gy in 34 fractions" while the table title says 32 fractions <span class="chk">CHECK</span>; this page uses 32, matching the standard schedule.</p>
-<h3>4.3  Pitfalls</h3>
-<ul class="tight">
+</table></div><p class="note">FROGG Tables 13 and 14. The text calls Table 14 "64 Gy in 34 fractions" while the table title says 32 fractions <span class="chk">CHECK</span>; this page uses 32, matching the standard schedule.</p></article><article class="card" data-title="Pitfalls"><h3>4.3  Pitfalls</h3><ul class="tight">
 <li>Drawing the high-risk CTV on the post-TURBT CT alone when the tumour has been resected: the bed must come from pre-TURBT imaging and the cystoscopy map.</li>
 <li>Escalating with multifocal disease or CIS: FROGG limits escalation to unifocal disease without field change.</li>
 <li>Letting the boost PTV run into a bowel loop at the dome: apply the overlap table and accept lower coverage, or do not escalate.</li>
-</ul>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 5</span></div>
-</section>
-
-<!-- ============================ S5 ============================ -->
-<section class="page" id="s5">
-<div class="sechead"><span class="eyebrow">Section 5</span><h2><span class="sectnum">5</span>Scenario C — pelvic nodes (involved and elective)</h2></div>
-<h3>5.1  When to treat nodes (FROGG Guideline 10)</h3>
-<ul class="tight">
+</ul></article>
+</section><section class="panel" id="p-s5" data-tab="s5" data-label="5 pelvic nodes" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 5</p><h2><span class="sectnum">5</span>Scenario C — pelvic nodes (involved and elective) </h2><div class="jump"></div></div>
+  <article class="card" data-title="When to treat nodes (FROGG Guideline 10)"><h3>5.1  When to treat nodes (FROGG Guideline 10)</h3><ul class="tight">
 <li><b>Node-positive, confined to the pelvis</b>: bladder preservation can be offered to fit patients (5-year survival about 29% historically). Treat involved nodes to the GTV dose where tolerances allow, plus elective bilateral pelvic nodes with concurrent radiosensitising therapy; neoadjuvant chemotherapy can be considered.</li>
 <li><b>Clinically node-negative</b>: elective nodal irradiation adds toxicity with no proven benefit (a 230-patient randomised trial showed no effect on disease-free or overall survival or bladder preservation). It remains optional.</li>
 <li><b>If nodes are treated</b>: presacral nodes and bilateral distal common iliac, external iliac, internal iliac and obturator nodes, contoured as in the post-cystectomy consensus (Baumann 2016), which mirrors the RTOG pelvic nodal atlas for high-risk prostate cancer (Lawton 2009).</li>
-</ul>
-<h3>5.2  Nodal CTV build (Baumann 2016)</h3>
-<div class="grid2">
+</ul></article><article class="card" data-title="Nodal CTV build (Baumann 2016)"><h3>5.2  Nodal CTV build (Baumann 2016)</h3><div class="grid2">
 <div>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:26%">Region</th><th>Definition and borders</th></tr></thead>
 <tbody>
 <tr><td class="b">Iliac vessels (contour first)</td><td>Common, external and internal iliac vessels from <b>L5–S1</b>. External iliac down to the <b>top of the femoral heads</b>. Internal iliac down until no longer visible on CT or until it leaves the true pelvis through the greater sciatic notch.</td></tr>
@@ -378,61 +235,53 @@
 <tr><td class="b">Combined CTVn</td><td>Union of iliac, presacral and obturator volumes. Trim out of muscle and bone and keep it inside the true pelvis. <b>Do not crop it out of bowel</b>: the pelvic side wall is the main site of failure.</td></tr>
 <tr><td class="b">Involved node (GTVn)</td><td>Visible node on CT/PET; treated to the GTV dose (FROGG 10.3). Margin from GTVn to CTV not given <span class="chk">CHECK</span>.</td></tr>
 </tbody>
-</table>
+</table></div>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 260" role="img" aria-label="Coronal schematic of the pelvic nodal CTV for bladder cancer">
-<rect width="300" height="260" fill="#fff"/>
-<rect x="128" y="8" width="44" height="22" rx="4" fill="#eef0f2" stroke="#b8c2cc"/><text x="140" y="23" font-size="7.5" fill="#5b6b7c">L5</text>
-<path d="M126 34 L174 34 L162 128 L138 128 Z" fill="#eef0f2" stroke="#b8c2cc"/><text x="140" y="70" font-size="7" fill="#5b6b7c">sacrum</text>
-<line x1="96" y1="32" x2="206" y2="32" stroke="#555" stroke-dasharray="4 2"/><text x="208" y="35" font-size="6.5" fill="#555">L5–S1: top</text>
-<line x1="118" y1="98" x2="182" y2="98" stroke="#555" stroke-dasharray="2 2"/><text x="186" y="101" font-size="6.5" fill="#555">top of S3</text>
-<rect x="134" y="34" width="32" height="64" fill="rgba(47,111,176,.22)" stroke="#2f6fb0" stroke-dasharray="3 2"/>
-<path d="M98 40 Q66 120 72 230" fill="none" stroke="#d9c8b4" stroke-width="10"/><path d="M202 40 Q234 120 228 230" fill="none" stroke="#d9c8b4" stroke-width="10"/>
-<circle cx="58" cy="196" r="22" fill="#eef0f2" stroke="#b8c2cc"/><circle cx="242" cy="196" r="22" fill="#eef0f2" stroke="#b8c2cc"/>
-<line x1="34" y1="174" x2="104" y2="174" stroke="#555" stroke-dasharray="4 2"/><text x="6" y="170" font-size="6.5" fill="#555">top of femoral heads</text>
-<g fill="none" stroke="rgba(47,111,176,.28)" stroke-width="16" stroke-linecap="round">
-<path d="M150 32 L120 76 L94 172"/><path d="M120 76 L128 140"/>
-<path d="M150 32 L180 76 L206 172"/><path d="M180 76 L172 140"/>
+<svg aria-label="Coronal schematic of the pelvic nodal CTV for bladder cancer" role="img" viewbox="0 0 300 260">
+<rect fill="#fff" height="260" width="300"></rect>
+<rect fill="#eef0f2" height="22" rx="4" stroke="#b8c2cc" width="44" x="128" y="8"></rect><text fill="#5b6b7c" font-size="7.5" x="140" y="23">L5</text>
+<path d="M126 34 L174 34 L162 128 L138 128 Z" fill="#eef0f2" stroke="#b8c2cc"></path><text fill="#5b6b7c" font-size="7" x="140" y="70">sacrum</text>
+<line stroke="#555" stroke-dasharray="4 2" x1="96" x2="206" y1="32" y2="32"></line><text fill="#555" font-size="6.5" x="208" y="35">L5–S1: top</text>
+<line stroke="#555" stroke-dasharray="2 2" x1="118" x2="182" y1="98" y2="98"></line><text fill="#555" font-size="6.5" x="186" y="101">top of S3</text>
+<rect fill="rgba(47,111,176,.22)" height="64" stroke="#2f6fb0" stroke-dasharray="3 2" width="32" x="134" y="34"></rect>
+<path d="M98 40 Q66 120 72 230" fill="none" stroke="#d9c8b4" stroke-width="10"></path><path d="M202 40 Q234 120 228 230" fill="none" stroke="#d9c8b4" stroke-width="10"></path>
+<circle cx="58" cy="196" fill="#eef0f2" r="22" stroke="#b8c2cc"></circle><circle cx="242" cy="196" fill="#eef0f2" r="22" stroke="#b8c2cc"></circle>
+<line stroke="#555" stroke-dasharray="4 2" x1="34" x2="104" y1="174" y2="174"></line><text fill="#555" font-size="6.5" x="6" y="170">top of femoral heads</text>
+<g fill="none" stroke="rgba(47,111,176,.28)" stroke-linecap="round" stroke-width="16">
+<path d="M150 32 L120 76 L94 172"></path><path d="M120 76 L128 140"></path>
+<path d="M150 32 L180 76 L206 172"></path><path d="M180 76 L172 140"></path>
 </g>
 <g fill="none" stroke="#b03a2e" stroke-width="2.4">
-<path d="M150 32 L120 76 L94 172"/><path d="M120 76 L128 140"/>
-<path d="M150 32 L180 76 L206 172"/><path d="M180 76 L172 140"/>
+<path d="M150 32 L120 76 L94 172"></path><path d="M120 76 L128 140"></path>
+<path d="M150 32 L180 76 L206 172"></path><path d="M180 76 L172 140"></path>
 </g>
-<rect x="84" y="140" width="12" height="70" fill="rgba(47,111,176,.30)" stroke="#2f6fb0"/><rect x="204" y="140" width="12" height="70" fill="rgba(47,111,176,.30)" stroke="#2f6fb0"/>
-<rect x="128" y="212" width="44" height="30" rx="6" fill="#eef0f2" stroke="#b8c2cc"/><text x="134" y="231" font-size="7" fill="#5b6b7c">symphysis</text>
-<line x1="100" y1="212" x2="200" y2="212" stroke="#555" stroke-dasharray="2 2"/>
-<text x="196" y="66" font-size="6.5" fill="#2f6fb0">vessels + 7 mm</text><text x="196" y="74" font-size="6.5" fill="#2f6fb0">(not sup/inf)</text>
-<line x1="128" y1="142" x2="132" y2="154" stroke="#555" stroke-width=".6"/><text x="110" y="162" font-size="6.5" fill="#555">int. iliac: to sciatic notch</text>
-<line x1="216" y1="190" x2="236" y2="166" stroke="#555" stroke-width=".6"/><text x="218" y="150" font-size="6.5" fill="#555">obturator:</text><text x="218" y="158" font-size="6.5" fill="#555">1 cm strip</text>
-<text x="102" y="252" font-size="6.5" fill="#555">obturator stops at top of symphysis</text>
-<line x1="150" y1="60" x2="104" y2="60" stroke="#555" stroke-width=".6"/><text x="30" y="52" font-size="6.5" fill="#2f6fb0">presacral 1–1.5 cm</text><text x="30" y="60" font-size="6.5" fill="#2f6fb0">anterior to sacrum</text>
+<rect fill="rgba(47,111,176,.30)" height="70" stroke="#2f6fb0" width="12" x="84" y="140"></rect><rect fill="rgba(47,111,176,.30)" height="70" stroke="#2f6fb0" width="12" x="204" y="140"></rect>
+<rect fill="#eef0f2" height="30" rx="6" stroke="#b8c2cc" width="44" x="128" y="212"></rect><text fill="#5b6b7c" font-size="7" x="134" y="231">symphysis</text>
+<line stroke="#555" stroke-dasharray="2 2" x1="100" x2="200" y1="212" y2="212"></line>
+<text fill="#2f6fb0" font-size="6.5" x="196" y="66">vessels + 7 mm</text><text fill="#2f6fb0" font-size="6.5" x="196" y="74">(not sup/inf)</text>
+<line stroke="#555" stroke-width=".6" x1="128" x2="132" y1="142" y2="154"></line><text fill="#555" font-size="6.5" x="110" y="162">int. iliac: to sciatic notch</text>
+<line stroke="#555" stroke-width=".6" x1="216" x2="236" y1="190" y2="166"></line><text fill="#555" font-size="6.5" x="218" y="150">obturator:</text><text fill="#555" font-size="6.5" x="218" y="158">1 cm strip</text>
+<text fill="#555" font-size="6.5" x="102" y="252">obturator stops at top of symphysis</text>
+<line stroke="#555" stroke-width=".6" x1="150" x2="104" y1="60" y2="60"></line><text fill="#2f6fb0" font-size="6.5" x="30" y="52">presacral 1–1.5 cm</text><text fill="#2f6fb0" font-size="6.5" x="30" y="60">anterior to sacrum</text>
 </svg>
 <figcaption>Original schematic (coronal projection, not to scale): iliac vessels (red) with 7 mm expansion, presacral region to the top of S3, and the obturator strips down to the top of the symphysis.</figcaption>
 </figure>
 </div>
-</div>
-<p class="note">For bladder preservation FROGG names the <b>distal</b> common iliac nodes; the Baumann vessel contours start at L5–S1, which in practice is the distal common iliac segment. FROGG does not give a separate cranial border for preservation <span class="chk">CHECK</span>.</p>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 6</span></div>
-</section>
-
-<!-- ============================ S6 ============================ -->
-<section class="page" id="s6">
-<div class="sechead"><span class="eyebrow">Section 6</span><h2><span class="sectnum">6</span>Scenario D — adjuvant RT after radical cystectomy</h2></div>
-<p>The international consensus (Baumann 2016; 15 institutions in 5 countries; contours adopted for NRG-GU001) chose the targets from a prior patterns-of-failure analysis (Baumann 2013): failures after cystectomy cluster in the pelvic side-wall nodes and, when margins are positive, the cystectomy bed. The language was validated externally by a third group of six radiation oncologists.</p>
-<table>
+</div><p class="note">For bladder preservation FROGG names the <b>distal</b> common iliac nodes; the Baumann vessel contours start at L5–S1, which in practice is the distal common iliac segment. FROGG does not give a separate cranial border for preservation <span class="chk">CHECK</span>.</p></article>
+</section><section class="panel" id="p-s6" data-tab="s6" data-label="6 adjuvant RT" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 6</p><h2><span class="sectnum">6</span>Scenario D — adjuvant RT after radical cystectomy </h2><div class="lede"><p>The international consensus (Baumann 2016; 15 institutions in 5 countries; contours adopted for NRG-GU001) chose the targets from a prior patterns-of-failure analysis (Baumann 2013): failures after cystectomy cluster in the pelvic side-wall nodes and, when margins are positive, the cystectomy bed. The language was validated externally by a third group of six radiation oncologists.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Scenario D — adjuvant RT after radical cystectomy"><h3>Scenario D — adjuvant RT after radical cystectomy</h3><div class="tw"><table>
 <thead><tr><th style="width:24%">Surgical margins</th><th>Recommended CTV</th></tr></thead>
 <tbody>
 <tr><td class="b">Negative</td><td>Pelvic lymph nodes alone: distal common iliac, internal iliac, external iliac and obturator.</td></tr>
 <tr><td class="b">Positive</td><td>Pelvic lymph nodes + presacral nodes + cystectomy bed.</td></tr>
 </tbody>
-</table>
-<p class="note">The slides list presacral nodes only for positive margins, yet describe the nodal CTV as the union of iliac, presacral and obturator volumes. Confirm against the full paper or the NRG-GU001 protocol whether presacral nodes are included with negative margins <span class="chk">CHECK</span>.</p>
-<div class="grid2">
+</table></div><p class="note">The slides list presacral nodes only for positive margins, yet describe the nodal CTV as the union of iliac, presacral and obturator volumes. Confirm against the full paper or the NRG-GU001 protocol whether presacral nodes are included with negative margins <span class="chk">CHECK</span>.</p><div class="grid2">
 <div>
 <h3>6.1  Cystectomy bed CTV borders</h3>
-<table>
+<div class="tw"><table>
 <thead><tr><th style="width:20%">Border</th><th>Definition</th></tr></thead>
 <tbody>
 <tr><td class="b">Superior</td><td><b>2 cm</b> above the top of the pubic symphysis.</td></tr>
@@ -441,40 +290,34 @@
 <tr><td class="b">Lateral</td><td>Medial border of obturator internus on both sides. Below obturator internus: the vaginal wall (women) or the prostate bed (men).</td></tr>
 <tr><td class="b">Inferior</td><td>Men: 2–3 mm (one CT slice) above the penile bulb. Women: 1 cm below the lower pole of the obturator foramen.</td></tr>
 </tbody>
-</table>
+</table></div>
 <p class="note">Plane 2: the border table says it starts from the posterior aspect of the symphysis, while the figure caption on the slides says the anterior border. Confirm with the IJROBP paper's figure before adopting.</p>
 </div>
 <div>
 <figure>
-<svg viewBox="0 0 300 260" role="img" aria-label="Sagittal schematic of the cystectomy bed CTV with planes 1 to 3">
-<rect width="300" height="260" fill="#fff"/>
-<path d="M262 14 Q288 110 260 186 Q250 206 234 214" fill="none" stroke="#c9ced4" stroke-width="16"/>
-<circle cx="110" cy="60" r="13" fill="#f3eadf" stroke="#c9b28f"/><circle cx="140" cy="48" r="13" fill="#f3eadf" stroke="#c9b28f"/><circle cx="168" cy="70" r="13" fill="#f3eadf" stroke="#c9b28f"/><circle cx="84" cy="82" r="12" fill="#f3eadf" stroke="#c9b28f"/>
-<text x="96" y="30" font-size="7" fill="#8a6f4a">small bowel / conduit</text>
-<path d="M226 18 Q236 110 208 172 Q194 204 182 240" fill="none" stroke="#c48a7a" stroke-width="18"/><text x="234" y="44" font-size="7.5" fill="#8a4a3e">rectum</text>
-<rect x="40" y="140" width="20" height="56" rx="6" fill="#eef0f2" stroke="#b8c2cc"/><text x="8" y="168" font-size="7" fill="#5b6b7c">symph.</text>
-<line x1="60" y1="100" x2="60" y2="140" stroke="#555" stroke-dasharray="3 2"/><text x="40" y="96" font-size="6.5" fill="#555">plane 1</text>
-<line x1="60" y1="196" x2="60" y2="236" stroke="#555" stroke-dasharray="3 2"/><text x="28" y="246" font-size="6.5" fill="#555">plane 2</text>
-<line x1="196" y1="100" x2="196" y2="152" stroke="#555" stroke-dasharray="3 2"/><text x="186" y="96" font-size="6.5" fill="#555">plane 3</text>
-<line x1="40" y1="117" x2="210" y2="117" stroke="#555" stroke-dasharray="1 2"/><text x="92" y="112" font-size="6.5" fill="#555">top of symphysis + 2 cm</text>
-<path d="M61 117 L196 117 L196 152 Q192 186 176 222 L61 222 Z" fill="rgba(176,58,46,.16)" stroke="#b03a2e" stroke-width="1.6"/>
-<text x="96" y="176" font-size="8" fill="#b03a2e" font-weight="700">cystectomy bed CTV</text>
-<ellipse cx="110" cy="238" rx="20" ry="9" fill="#f1e6ee" stroke="#9a7a90"/><text x="134" y="252" font-size="6.5" fill="#6e4f66">penile bulb: stop 1 slice above</text>
-<text x="10" y="18" font-size="7" fill="#5b6b7c">anterior ←</text><text x="244" y="252" font-size="7" fill="#5b6b7c">→ posterior</text>
+<svg aria-label="Sagittal schematic of the cystectomy bed CTV with planes 1 to 3" role="img" viewbox="0 0 300 260">
+<rect fill="#fff" height="260" width="300"></rect>
+<path d="M262 14 Q288 110 260 186 Q250 206 234 214" fill="none" stroke="#c9ced4" stroke-width="16"></path>
+<circle cx="110" cy="60" fill="#f3eadf" r="13" stroke="#c9b28f"></circle><circle cx="140" cy="48" fill="#f3eadf" r="13" stroke="#c9b28f"></circle><circle cx="168" cy="70" fill="#f3eadf" r="13" stroke="#c9b28f"></circle><circle cx="84" cy="82" fill="#f3eadf" r="12" stroke="#c9b28f"></circle>
+<text fill="#8a6f4a" font-size="7" x="96" y="30">small bowel / conduit</text>
+<path d="M226 18 Q236 110 208 172 Q194 204 182 240" fill="none" stroke="#c48a7a" stroke-width="18"></path><text fill="#8a4a3e" font-size="7.5" x="234" y="44">rectum</text>
+<rect fill="#eef0f2" height="56" rx="6" stroke="#b8c2cc" width="20" x="40" y="140"></rect><text fill="#5b6b7c" font-size="7" x="8" y="168">symph.</text>
+<line stroke="#555" stroke-dasharray="3 2" x1="60" x2="60" y1="100" y2="140"></line><text fill="#555" font-size="6.5" x="40" y="96">plane 1</text>
+<line stroke="#555" stroke-dasharray="3 2" x1="60" x2="60" y1="196" y2="236"></line><text fill="#555" font-size="6.5" x="28" y="246">plane 2</text>
+<line stroke="#555" stroke-dasharray="3 2" x1="196" x2="196" y1="100" y2="152"></line><text fill="#555" font-size="6.5" x="186" y="96">plane 3</text>
+<line stroke="#555" stroke-dasharray="1 2" x1="40" x2="210" y1="117" y2="117"></line><text fill="#555" font-size="6.5" x="92" y="112">top of symphysis + 2 cm</text>
+<path d="M61 117 L196 117 L196 152 Q192 186 176 222 L61 222 Z" fill="rgba(176,58,46,.16)" stroke="#b03a2e" stroke-width="1.6"></path>
+<text fill="#b03a2e" font-size="8" font-weight="700" x="96" y="176">cystectomy bed CTV</text>
+<ellipse cx="110" cy="238" fill="#f1e6ee" rx="20" ry="9" stroke="#9a7a90"></ellipse><text fill="#6e4f66" font-size="6.5" x="134" y="252">penile bulb: stop 1 slice above</text>
+<text fill="#5b6b7c" font-size="7" x="10" y="18">anterior ←</text><text fill="#5b6b7c" font-size="7" x="244" y="252">→ posterior</text>
 </svg>
 <figcaption>Original schematic (sagittal, male, not to scale). Planes 1 and 2 extend from the symphysis, plane 3 from the anterior rectal wall. In women the inferior border is 1 cm below the obturator foramen.</figcaption>
 </figure>
 </div>
-</div>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 7</span></div>
-</section>
-
-<section class="page" id="s6b">
-<div class="sechead"><span class="eyebrow">Section 6 (continued)</span><h2>Post-cystectomy nodes, organs at risk and reproducibility</h2></div>
-<h3>6.2  Nodal CTV</h3>
-<p>Exactly as section 5.2: iliac vessels from L5–S1 + 7 mm (not superior or inferior), presacral L5–S1 to the top of S3 (1–1.5 cm in front of the sacrum), obturator strip 1 cm wide down to the top of the symphysis. Trim to the true pelvis, out of muscle and bone; <b>not</b> out of bowel.</p>
-<h3>6.3  OARs specific to cystectomy (Baumann 2016)</h3>
-<table>
+</div></article>
+</section><section class="panel" id="p-s6b" data-tab="s6b" data-label="Post-cystectomy nodes" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 6 (continued)</p><h2>Post-cystectomy nodes, organs at risk and reproducibility </h2><div class="jump"></div></div>
+  <article class="card" data-title="Nodal CTV"><h3>6.2  Nodal CTV</h3><p>Exactly as section 5.2: iliac vessels from L5–S1 + 7 mm (not superior or inferior), presacral L5–S1 to the top of S3 (1–1.5 cm in front of the sacrum), obturator strip 1 cm wide down to the top of the symphysis. Trim to the true pelvis, out of muscle and bone; <b>not</b> out of bowel.</p></article><article class="card" data-title="OARs specific to cystectomy (Baumann 2016)"><h3>6.3  OARs specific to cystectomy (Baumann 2016)</h3><div class="tw"><table>
 <thead><tr><th style="width:26%">Structure</th><th>How to contour</th></tr></thead>
 <tbody>
 <tr><td class="b">Urinary diversion (avoidance structure)</td><td>
@@ -488,25 +331,16 @@
 <tr><td class="b">Rectum</td><td>Rectum and anal canal, from the rectosigmoid junction down to the level of the ischial tuberosities.</td></tr>
 <tr><td class="b">Pelvic bones</td><td>From <b>1 cm above</b> the top of the nodal CTV to <b>1 cm below</b> the bottom of the cystectomy bed CTV.</td></tr>
 </tbody>
-</table>
-<h3>6.4  How reproducible are these volumes? (κ, validation round)</h3>
-<table>
+</table></div></article><article class="card" data-title="How reproducible are these volumes? (κ, validation round)"><h3>6.4  How reproducible are these volumes? (κ, validation round)</h3><div class="tw"><table>
 <thead><tr><th></th><th>Cystectomy bed</th><th>Pelvic nodes</th><th>Bowel space</th><th>Rectum</th><th>Bone marrow</th><th>Urinary diversion</th></tr></thead>
 <tbody>
 <tr><td class="b">Male</td><td>0.51</td><td>0.56</td><td>0.63</td><td>0.72</td><td>0.72</td><td>0.48</td></tr>
 <tr><td class="b">Female</td><td>0.58</td><td>0.56</td><td>0.68</td><td>0.70</td><td>0.72</td><td>0.41</td></tr>
 </tbody>
-</table>
-<p class="note">The cystectomy bed was the most debated volume and, with the diversion, the least reproducible: peer review both, and read the operation note for the diversion type.</p>
-<h3>6.5  Dose, PTV and IGRT after cystectomy</h3>
-<div class="flag"><span class="lbl">Not in the supplied sources</span> The consensus slides give targets and OARs only. Take the dose, fractionation, PTV margin and IGRT from the NRG-GU001 protocol or a departmental decision <span class="chk">CHECK</span>; the bladder cancer page summarises the BART trial.</div>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 8</span></div>
-</section>
-
-<!-- ============================ S7 ============================ -->
-<section class="page" id="s7">
-<div class="sechead"><span class="eyebrow">Section 7</span><h2><span class="sectnum">7</span>Pearls and common errors</h2></div>
-<div class="grid2">
+</table></div><p class="note">The cystectomy bed was the most debated volume and, with the diversion, the least reproducible: peer review both, and read the operation note for the diversion type.</p></article><article class="card" data-title="Dose, PTV and IGRT after cystectomy"><h3>6.5  Dose, PTV and IGRT after cystectomy</h3><div class="flag"><span class="lbl">Not in the supplied sources</span> The consensus slides give targets and OARs only. Take the dose, fractionation, PTV margin and IGRT from the NRG-GU001 protocol or a departmental decision <span class="chk">CHECK</span>; the bladder cancer page summarises the BART trial.</div></article>
+</section><section class="panel" id="p-s7" data-tab="s7" data-label="7 Pearls" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 7</p><h2><span class="sectnum">7</span>Pearls and common errors </h2><div class="jump"></div></div>
+  <article class="card" data-title="Bladder preservation"><div class="grid2">
 <div>
 <h3>Bladder preservation</h3>
 <ul class="tight">
@@ -531,9 +365,7 @@
 <li><b>Bed inferior border differs by sex</b>: penile bulb (men) versus obturator foramen + 1 cm (women).</li>
 </ul>
 </div>
-</div>
-<h3>Common errors at peer review</h3>
-<table>
+</div></article><article class="card" data-title="Common errors at peer review"><h3>Common errors at peer review</h3><div class="tw"><table>
 <thead><tr><th style="width:34%">Error</th><th>Correction</th></tr></thead>
 <tbody>
 <tr><td>Elective nodes added for cN0 without a reason</td><td>FROGG: no proven benefit and more toxicity; record the reason if nodes are treated.</td></tr>
@@ -542,15 +374,10 @@
 <tr><td>Cystectomy bed extended into the anorectum</td><td>Abut the anterior third of its outer surface only.</td></tr>
 <tr><td>Bowel bag stopping at the PTV</td><td>Start it 3 cm above the nodal CTV (post-cystectomy).</td></tr>
 </tbody>
-</table>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 9</span></div>
-</section>
-
-<!-- ============================ S8 ============================ -->
-<section class="page" id="s8">
-<div class="sechead"><span class="eyebrow">Section 8</span><h2><span class="sectnum">8</span>Dose, fractionation, PTV margins, IGRT and adaptive RT</h2></div>
-<h3>8.1  Dose and fractionation (FROGG Guideline 6)</h3>
-<table>
+</table></div></article>
+</section><section class="panel" id="p-s8" data-tab="s8" data-label="8 Dose" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 8</p><h2><span class="sectnum">8</span>Dose, fractionation, PTV margins, IGRT and adaptive RT </h2><div class="jump"></div></div>
+  <article class="card" data-title="Dose and fractionation (FROGG Guideline 6)"><h3>8.1  Dose and fractionation (FROGG Guideline 6)</h3><div class="tw"><table>
 <thead><tr><th style="width:30%">Setting</th><th>Dose</th><th>Notes</th></tr></thead>
 <tbody>
 <tr><td class="b">Chemoradiation (standard)</td><td><span class="pill p-lo">55 Gy/20</span> or <span class="pill p-lo">64 Gy/32</span></td><td>Concurrent fluorouracil (fractions 1–5 and 16–20) with mitomycin C on day 1 (BC2001: 2-year locoregional DFS 67% vs 54% with RT alone), or cisplatin; gemcitabine an alternative.</td></tr>
@@ -560,9 +387,7 @@
 <tr><td class="b">Elective pelvic nodes</td><td>About 45–50.4 Gy in 1.8 Gy fractions</td><td>FROGG quoting the cystectomy guideline; equivalent dose in a 20-fraction SIB <span class="chk">CHECK</span>.</td></tr>
 <tr><td class="b">Post-cystectomy</td><td colspan="2">Not in the supplied sources <span class="chk">CHECK</span>.</td></tr>
 </tbody>
-</table>
-<h3>8.2  PTV margins</h3>
-<table>
+</table></div></article><article class="card" data-title="PTV margins"><h3>8.2  PTV margins</h3><div class="tw"><table>
 <thead><tr><th style="width:30%">Approach</th><th>Margin</th><th>Source</th></tr></thead>
 <tbody>
 <tr><td class="b">Single plan, daily CBCT</td><td>Anisotropic: <b>15 mm superior and anterior, 10 mm elsewhere</b> (given as one safe example)</td><td>FROGG text, citing Adil 2019</td></tr>
@@ -570,22 +395,15 @@
 <tr><td class="b">Department</td><td>—</td><td><span class="chk">CHECK</span></td></tr>
 <tr><td class="b">BC2001 (bladder page)</td><td>Outer wall + 15 mm; extravesical disease + 20 mm</td><td>Not in folder <span class="chk">CHECK</span></td></tr>
 </tbody>
-</table>
-<h3>8.3  IGRT and adaptive RT (FROGG Guideline 8)</h3>
-<ul class="tight">
+</table></div></article><article class="card" data-title="IGRT and adaptive RT (FROGG Guideline 8)"><h3>8.3  IGRT and adaptive RT (FROGG Guideline 8)</h3><ul class="tight">
 <li><b>Daily CBCT with a soft-tissue match</b> before every fraction.</li>
 <li><b>Plan of the day</b>: a library of plans made in advance; the best fit is chosen on each day's CBCT. Online or offline adaptive RT is endorsed. TROG 10.01 BOLART showed online adaptive RT is feasible across centres.</li>
 <li><b>VMAT</b> to shorten beam-on time and limit filling during delivery.</li>
 <li>Fiducials (gold seeds, lipiodol) can be matched to the high-risk area.</li>
-</ul>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 10</span></div>
-</section>
-
-<!-- ============================ S9 ============================ -->
-<section class="page" id="s9">
-<div class="sechead"><span class="eyebrow">Section 9</span><h2><span class="sectnum">9</span>Organs at risk and constraints</h2></div>
-<h3>9.1  Constraints for bladder preservation (FROGG Guideline 7)</h3>
-<table>
+</ul></article>
+</section><section class="panel" id="p-s9" data-tab="s9" data-label="9 Organs at risk" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 9</p><h2><span class="sectnum">9</span>Organs at risk and constraints </h2><div class="jump"></div></div>
+  <article class="card" data-title="Constraints for bladder preservation (FROGG Guideline 7)"><h3>9.1  Constraints for bladder preservation (FROGG Guideline 7)</h3><div class="tw"><table>
 <thead><tr><th style="width:26%">Organ</th><th>55 Gy/20</th><th>64 Gy/32</th></tr></thead>
 <tbody>
 <tr><td class="b">Rectum and large bowel</td><td>V44 &lt;50%</td><td>V50 &lt;50%</td></tr>
@@ -593,10 +411,7 @@
 <tr><td class="b">Small bowel, whole bladder in one phase</td><td colspan="2">&lt;1 cc above the prescription dose</td></tr>
 <tr><td class="b">Small bowel, escalation</td><td colspan="2">By degree of overlap (section 4.2)</td></tr>
 </tbody>
-</table>
-<p class="note">FROGG 2012 (Hindson) constraints, now superseded: femoral heads V50 &lt;30%; rectum V50 &lt;50% and V60 &lt;35%. With modulated techniques keep doses as low as reasonably achievable. The trial-protocol constraints on the <a href="../gu-bladder.html">bladder cancer page</a> (BC2001/BCON style) are stricter in places; agree one set for the department <span class="chk">CHECK</span>.</p>
-<h3>9.2  OAR delineation</h3>
-<table>
+</table></div><p class="note">FROGG 2012 (Hindson) constraints, now superseded: femoral heads V50 &lt;30%; rectum V50 &lt;50% and V60 &lt;35%. With modulated techniques keep doses as low as reasonably achievable. The trial-protocol constraints on the <a href="../gu-bladder.html">bladder cancer page</a> (BC2001/BCON style) are stricter in places; agree one set for the department <span class="chk">CHECK</span>.</p></article><article class="card" data-title="OAR delineation"><h3>9.2  OAR delineation</h3><div class="tw"><table>
 <thead><tr><th style="width:24%">Organ</th><th>Definition</th><th style="width:22%">Source</th></tr></thead>
 <tbody>
 <tr><td class="b">Rectum</td><td>Rectum and anal canal from the rectosigmoid junction to the ischial tuberosities (post-cystectomy definition; use the department prostate definition for preservation <span class="chk">CHECK</span>)</td><td>Baumann 2016</td></tr>
@@ -606,21 +421,14 @@
 <tr><td class="b">Pelvic bones / marrow</td><td>1 cm above the nodal CTV to 1 cm below the bed CTV</td><td>Baumann 2016</td></tr>
 <tr><td class="b">Urinary diversion, ostomy bag</td><td>See section 6.3</td><td>Baumann 2016</td></tr>
 </tbody>
-</table>
-<h3>9.3  Follow-up after preservation (FROGG Guideline 11)</h3>
-<ul class="tight">
+</table></div></article><article class="card" data-title="Follow-up after preservation (FROGG Guideline 11)"><h3>9.3  Follow-up after preservation (FROGG Guideline 11)</h3><ul class="tight">
 <li>CT chest, abdomen and pelvis at 3, 6, 12 and 24 months.</li>
 <li>Fit for salvage cystectomy: cystoscopy every 3 months for 2 years, every 6 months for the next 2 years, then yearly.</li>
 <li>Not fit for salvage cystectomy: still follow up; superficial isolated recurrence can be managed cystoscopically. FROGG endorses the NICE follow-up guideline.</li>
-</ul>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 11</span></div>
-</section>
-
-<!-- ============================ S10 ============================ -->
-<section class="page" id="s10">
-<div class="sechead"><span class="eyebrow">Section 10</span><h2><span class="sectnum">10</span>Names and RayStation implementation</h2></div>
-<p>No departmental bladder names are in the folder; these TG-263-style names are suggestions to match against the local RayStation template <span class="chk">CHECK</span>.</p>
-<table>
+</ul></article>
+</section><section class="panel" id="p-s10" data-tab="s10" data-label="10 Names" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 10</p><h2><span class="sectnum">10</span>Names and RayStation implementation </h2><div class="lede"><p>No departmental bladder names are in the folder; these TG-263-style names are suggestions to match against the local RayStation template <span class="chk">CHECK</span>.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Names and RayStation implementation"><h3>Names and RayStation implementation</h3><div class="tw"><table>
 <thead><tr><th style="width:30%">Structure</th><th style="width:30%">Suggested name</th><th>Notes</th></tr></thead>
 <tbody>
 <tr><td class="b">Gross tumour (bladder, extravesical)</td><td>GTVp; GTVp_MR</td><td>MR copy from the pre-TURBT fusion</td></tr>
@@ -632,9 +440,7 @@
 <tr><td class="b">Cystectomy bed</td><td>CTV_CystBed</td><td>Positive margins only</td></tr>
 <tr><td class="b">OARs</td><td>Bladder, Rectum, Bowel_Small, Bowel_Large (or Bowel), Femur_Head_L/R, Bone_Pelvic, Prostate, Urethra, Ureter_L/R, Conduit_Urinary, Bag_Ostomy</td><td>Diversion and bag names are not TG-263 standard <span class="chk">CHECK</span></td></tr>
 </tbody>
-</table>
-<h3>10.1  ROI algebra</h3>
-<div class="grid2">
+</table></div></article><article class="card" data-title="ROI algebra"><h3>10.1  ROI algebra</h3><div class="grid2">
 <div>
 <div class="stepbox"><b>Bladder preservation</b>
 <ol class="steps">
@@ -655,24 +461,16 @@
 <li><code>Bowel</code> bag from 3 cm above CTVn_Pelvis</li>
 </ol></div>
 </div>
-</div>
-<ul class="tight">
+</div><ul class="tight">
 <li>Registration: pre-TURBT MRI and PET rigid to the planning CT on pelvic bone, then check the bladder outline and fiducials; bladder shape differs between scans, so draw the CTV on the planning CT.</li>
 <li>Plan of the day: label each library plan with its filling state and record the selection rule for the therapists <span class="chk">CHECK</span>.</li>
-</ul>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 12</span></div>
-</section>
-
-<!-- ============================ S11 ============================ -->
-<section class="page" id="s11">
-<div class="sechead"><span class="eyebrow">Section 11</span><h2><span class="sectnum">11</span>References and further guidelines</h2></div>
-<h3>Provided sources (in the folder)</h3>
-<ol class="ref">
+</ul></article>
+</section><section class="panel" id="p-s11" data-tab="s11" data-label="11 References" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 11</p><h2><span class="sectnum">11</span>References and further guidelines </h2><div class="jump"></div></div>
+  <article class="card" data-title="Provided sources (in the folder)"><h3>Provided sources (in the folder)</h3><ol class="ref">
 <li>Cardoso M, Choudhury A, Christie D, Eade T, et al. FROGG patterns of practice survey and consensus recommendations on radiation therapy for muscle invasive bladder cancer. J Med Imaging Radiat Oncol 2020;64:882–893. doi:10.1111/1754-9485.13120.</li>
 <li>Baumann BC, Bosch WR, Bahl A, et al. Development and validation of consensus contouring guidelines for adjuvant radiation therapy for bladder cancer after radical cystectomy. Int J Radiat Oncol Biol Phys 2016;96:78–86. (Slide set "International consensus contouring guidelines for adjuvant radiation after radical cystectomy", contours adopted for NRG-GU001.)</li>
-</ol>
-<h3>Cited within the sources</h3>
-<ol class="ref">
+</ol></article><article class="card" data-title="Cited within the sources"><h3>Cited within the sources</h3><ol class="ref">
 <li>Hindson BR, Turner SL, Millar JL, et al. Australian &amp; New Zealand Faculty of Radiation Oncology Genito-Urinary Group: 2011 consensus guidelines for curative radiotherapy for urothelial carcinoma of the bladder. J Med Imaging Radiat Oncol 2012;56:18–30.</li>
 <li>Lawton CA, Michalski J, El-Naqa I, et al. RTOG GU radiation oncology specialists reach consensus on pelvic lymph node volumes for high-risk prostate cancer. Int J Radiat Oncol Biol Phys 2009;74:383–387.</li>
 <li>Adil K, Popovic M, Cury FL, et al. Anisotropic bladder planning target volume in bladder radiation therapy. Pract Radiat Oncol 2019;9:24–28.</li>
@@ -681,15 +479,11 @@
 <li>Whalley D, Caine H, McCloud P, et al. Promising results with image guided intensity modulated radiotherapy for muscle invasive bladder cancer. Radiat Oncol 2015;10:205.</li>
 <li>Foroudi F, Pham D, Rolfo A, et al. The outcome of a multi-centre feasibility study of online adaptive radiotherapy for muscle-invasive bladder cancer: TROG 10.01 BOLART. Radiother Oncol 2014;111.</li>
 <li>Hagan MP, Winter KA, Kaufman DS, et al. RTOG 97-06: initial report of a phase I–II trial of selective bladder conservation. Int J Radiat Oncol Biol Phys 2003;57:665–672 (cited by FROGG for the urethra and ureter inclusion rules).</li>
-</ol>
-<h3>Not in the folder; would resolve CHECK items</h3>
-<p class="ref">NRG-GU001 protocol (post-cystectomy dose, PTV, IGRT); full IJROBP 2016 paper (plane 2 figure, presacral nodes with negative margins); RAIDER and BC2001 protocols (plan-of-the-day library, PTV and boost margins); a departmental bladder protocol (filling, margins, names). The IBIS post-cystectomy update quoted on the quick protocol was not supplied.</p>
-<h3>Trials referred to</h3>
-<p class="ref">BC2001; BCON; RAIDER (ICR/TROG); HYBRID; TROG 10.01 BOLART; NRG-GU001; RTOG 8802, 8903, 9506, 9706; SWOG 8710; BART. ANZ: FROGG 2012 and 2020 consensus; TROG cisplatin phase 2 trials.</p>
-<h3>eviQ protocols (links only)</h3>
-<p class="ref">eviQ Radiation Oncology › Genitourinary › Bladder protocols (eviq.org.au); the <a href="../gu-bladder.html">bladder cancer page</a> does not yet carry direct eviQ links <span class="chk">CHECK</span>.</p>
-<div class="flag"><span class="lbl">Before clinical use</span> This protocol condenses the sources above in our own words; schematics are original and not to scale. Have a colleague review it, and confirm items marked CHECK against the original document.</div>
-<div class="foot"><span>Bladder RT Delineation Protocol · v1.0</span><span>Page 13</span></div>
+</ol></article><article class="card" data-title="Not in the folder; would resolve CHECK items"><h3>Not in the folder; would resolve CHECK items</h3><p class="ref">NRG-GU001 protocol (post-cystectomy dose, PTV, IGRT); full IJROBP 2016 paper (plane 2 figure, presacral nodes with negative margins); RAIDER and BC2001 protocols (plan-of-the-day library, PTV and boost margins); a departmental bladder protocol (filling, margins, names). The IBIS post-cystectomy update quoted on the quick protocol was not supplied.</p></article><article class="card" data-title="Trials referred to"><h3>Trials referred to</h3><p class="ref">BC2001; BCON; RAIDER (ICR/TROG); HYBRID; TROG 10.01 BOLART; NRG-GU001; RTOG 8802, 8903, 9506, 9706; SWOG 8710; BART. ANZ: FROGG 2012 and 2020 consensus; TROG cisplatin phase 2 trials.</p></article><article class="card" data-title="eviQ protocols (links only)"><h3>eviQ protocols (links only)</h3><p class="ref">eviQ Radiation Oncology › Genitourinary › Bladder protocols (eviq.org.au); the <a href="../gu-bladder.html">bladder cancer page</a> does not yet carry direct eviQ links <span class="chk">CHECK</span>.</p><div class="flag"><span class="lbl">Before clinical use</span> This protocol condenses the sources above in our own words; schematics are original and not to scale. Have a colleague review it, and confirm items marked CHECK against the original document.</div></article>
 </section>
+</main>
+</div>
+<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
+<script src="../assets/site.js"></script>
 </body>
 </html>
