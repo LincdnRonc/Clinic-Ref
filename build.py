@@ -231,7 +231,7 @@ RERT = [
  ('rert-cns.html','CNS, spine & bone','Reirradiation: CNS, spine and bone','Glioblastoma (ESTRO/EANO, RTOG 1205), repeat SRS and WBRT, spine SBRT and cord limits, painful bone metastases (SC.20).'),
  ('rert-hn.html','Head & neck','Reirradiation: head and neck','MIRI RPA, dose, SBRT and carotid blowout, cumulative limits; recurrent nasopharyngeal carcinoma and hyperfractionation.'),
  ('rert-thorax-breast.html','Thorax & breast','Reirradiation: thorax and breast','ESTRO 2026 lung guideline, ARS composite constraints; second breast conservation (RTOG 1014, GEC-ESTRO), chest wall.'),
- ('rert-pelvis.html','Pelvis','Reirradiation: pelvis','Recurrent rectal cancer, pelvic SABR (UK guidance), salvage after prostate RT, gynaecological brachytherapy.'),
+ ('rert-pelvis.html','Abdomen & pelvis','Reirradiation: abdomen and pelvis','Recurrent rectal cancer (ESTRO 2026), pelvic SABR (UK guidance), liver repeat SBRT, bladder, salvage after prostate RT, gynaecological brachytherapy.'),
 ]
 FOOT_RERT = '<footer><p>Reirradiation notes built from consensus statements, guidelines and trials named on each page. Evidence is largely retrospective; cumulative limits are estimates. Items flagged Verify were entered from memory. Every case needs an individual cumulative dose assessment with physics and a multidisciplinary decision.</p></footer>'
 GROUPS = [
