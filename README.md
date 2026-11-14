@@ -32,6 +32,8 @@ This repo is the single source of truth: the built pages and the build kit that 
 Avoid pushing several times in quick succession: a newer push cancels a Pages deploy that is still running.
 
 ## Content rules
+Key trials carry their publication year in brackets inside the name: `<b>NAME <span class="yr">(YYYY)</span></b>`; first full report, plus the later update when the card quotes it (e.g. `2004; 10 y 2012`); meeting name if only presented (`ASTRO 2026`); `results pending` if not yet reported. The build warns about any trial without one.
+
 Australian spelling. Every number comes from a cited source; anything not yet checked against the original paper is marked "check". Not affiliated with or endorsed by eviQ, ESTRO, NRG or other groups. Follow departmental protocols.
 
 Naming (13 Nov 2026): the site calls its own contouring pages "contouring guides" (quick guides and full guides), not "protocols". "Protocol" is kept only for source documents (departmental, trial, eviQ).

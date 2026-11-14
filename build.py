@@ -469,6 +469,15 @@ home = f'''<!DOCTYPE html>
 </html>
 '''
 (root/'index.html').write_text(home)
+# Every key trial shows its publication year: <b>NAME <span class="yr">(YYYY)</span></b>
+_noyr = []
+for _f in sorted(root.glob('src/*.html')):
+    if _f.name in ('consent.html', 'doses.html'): continue
+    for _m in re.finditer(r'<div class="trial"><b>(.*?)</b>', _f.read_text(), re.S):
+        if 'class="yr"' not in _m.group(1): _noyr.append(f'{_f.name}: {re.sub("<[^>]+>", "", _m.group(1)).strip()}')
+if _noyr:
+    print(f'WARNING: {len(_noyr)} key trial(s) without a publication year (add <span class="yr">(YYYY)</span> inside the <b>):')
+    for _x in _noyr: print('  ' + _x)
 print('built')
 
 # ---------------- Search index and offline app files ----------------

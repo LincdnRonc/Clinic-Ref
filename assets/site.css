@@ -90,6 +90,7 @@ td:first-child{font-weight:700;min-width:7.5em}
 .trial b{font-family:var(--font-display);font-size:1.02rem}
 .trial span{font-size:.92rem}
 .trial i{font-style:normal;font-size:.82rem;color:var(--muted)}
+.trial b .yr{font-family:var(--font-body);font-weight:400;font-size:.8rem;color:var(--muted);white-space:nowrap}
 mark{background:#ffe27a;color:#16212b;border-radius:2px}
 .empty{display:none;background:var(--panel);border:1px dashed var(--line);border-radius:10px;padding:16px;color:var(--muted)}
 body.searching.noresults .empty{display:block}

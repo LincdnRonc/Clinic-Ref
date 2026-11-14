@@ -22,6 +22,7 @@ EVIDENCE = [
   [('gu-bladder.html#tmt','Bladder preservation'), ('gu-bladder.html#other-settings','Post-op, NMIBC & systemic')]),
 ]
 SITE = [
+ ('2026-11-14', 'Every key trial now shows its year of publication in brackets (first full report, plus the later update where the card quotes long-term results; meeting name where only presented).', ''),
  ('2026-11-14', 'Evidence digest edits: HypoMast-IMNI added to PMRT trials; KEYNOTE-867 and the JCO SABR vs surgery emulated trial added to early-stage NSCLC; VOLGA (perioperative durvalumab + EV) added to bladder systemic therapy.', 'thorax-early.html#sabr'),
  ('2026-11-14', 'Reirradiation: liver and bladder tabs added (abdomen and pelvis page).', 'rert-pelvis.html#liver'),
  ('2026-11-14', 'Reirradiation section updated from the full papers: head and neck consensus (Biau 2026), ESTRO rectal 2026, UK SABR pelvic method, ESTRO–ISRS spine, thoracic limits compared, Nieder cord risk score in the calculator.', 'rert-constraints.html'),
