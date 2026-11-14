@@ -10,6 +10,7 @@ SITE entry: (date, text, page or '')
 EVIDENCE = [
 ]
 SITE = [
+ ('2026-11-14', 'Reirradiation section updated from the full papers: head and neck consensus (Biau 2026), ESTRO rectal 2026, UK SABR pelvic method, ESTRO–ISRS spine, thoracic limits compared, Nieder cord risk score in the calculator.', 'rert-constraints.html'),
  ('2026-11-14', 'New Reirradiation section: ESTRO–EORTC principles and workflow, cumulative dose limits with a remaining-dose calculator and cord check, and site pages for CNS/spine/bone, head and neck, thorax and breast, pelvis.', 'rert-principles.html'),
  ('2026-11-14', 'NCCN prostate risk group calculator (prostate page, Staging & risk tab); prostate very-high-risk definition updated to NCCN 2025; disclaimer now on the home page only.', 'gu-prostate.html#staging'),
  ('2026-11-13', 'New Systemic therapy section: concurrent chemo-RT regimens, targeted and immunotherapy timing with RT, breast and prostate endocrine therapy, bone agents, supportive drugs (venlafaxine, dexamethasone and more).', 'sys-chemort.html'),
