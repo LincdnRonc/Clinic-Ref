@@ -8,6 +8,18 @@ EVIDENCE entry: (date 'YYYY-MM-DD', site, tag, title, summary, url, source, affe
 SITE entry: (date, text, page or '')
 """
 EVIDENCE = [
+ ('2026-11-04', 'Breast', 'confirms', 'HypoMast-IMNI: hypofractionated PMRT including internal mammary nodes',
+  'Randomised phase III trial in high-risk breast cancer after mastectomy comparing 16-fraction hypofractionated PMRT with conventional fractionation, both including internal mammary node irradiation. Hypofractionation was reported as noninferior for locoregional control, supporting moderate hypofractionation when the IMN chain is treated. (check)',
+  'https://pubmed.ncbi.nlm.nih.gov/42896129/', 'PubMed listing; reported by CancerNetwork and The ASCO Post',
+  [('breast-nodes-pmrt.html#pmrt','PMRT'), ('breast-nodes-pmrt.html#rni','Nodal RT')]),
+ ('2026-11-09', 'Thorax', 'confirms', 'KEYNOTE-867: pembrolizumab added to SBRT for unresected stage I–II NSCLC',
+  'Double-blind phase III trial of SBRT with pembrolizumab or placebo in medically inoperable or surgery-declining stage I–II NSCLC. Adding pembrolizumab did not improve event-free survival, so SBRT alone remains the standard outside a trial. (check)',
+  'https://ascopubs.org/doi/10.1200/JCO-26-00404', 'Journal of Clinical Oncology (PubMed 42950173); reported by Targeted Oncology, CancerNetwork, The ASCO Post',
+  [('thorax-early.html#sabr','Early-stage NSCLC: SABR')]),
+ ('2026-11-14', 'Bladder', 'watch', 'FDA approves perioperative durvalumab with enfortumab vedotin for cisplatin-ineligible MIBC',
+  'US FDA approval (announced November 2026) of neoadjuvant enfortumab vedotin plus durvalumab with radical cystectomy, then adjuvant durvalumab, for cisplatin-ineligible muscle-invasive bladder cancer. Not an RT trial, but it raises the bar for trimodality bladder preservation in this group if it reaches Australia. (check)',
+  'https://www.fda.gov/drugs/cancer-approvals/fda-approves-durvalumab-enfortumab-vedotin-ejfv-muscle-invasive-bladder-cancer', 'FDA approval notice; reported by OncoDaily and The ASCO Post',
+  [('gu-bladder.html#tmt','Bladder preservation'), ('gu-bladder.html#other-settings','Post-op, NMIBC & systemic')]),
 ]
 SITE = [
  ('2026-11-14', 'Reirradiation: liver and bladder tabs added (abdomen and pelvis page).', 'rert-pelvis.html#liver'),
