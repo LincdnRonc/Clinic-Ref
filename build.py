@@ -322,7 +322,7 @@ CNAV = CNAV[:1] + sorted(CNAV[1:], key=lambda c: c[1].lower())
 CNAV += SOFTWARE
 # ---------------- Tools: calculators, consent numbers, doses at a glance, what's new ----------------
 TOOLS = [
- ('links.html','Clinic links','Clinic quick links','Radiology PACS and pathology results logins grouped by area (St George, Liverpool, Wollongong, Sydney), referral forms and imaging anatomy references.'),
+ ('links.html','Clinic links','Clinic quick links','Radiology PACS and pathology results logins grouped by area (St George, Liverpool, Wollongong, Sydney) and referral forms.'),
  ('tools.html','Calculators','Calculators and tools','EQD2 and BED, cumulative dose across courses, treatment gap, and links to re-irradiation tools and SABR constraint tables.'),
  ('scores.html','Clinical scores','Clinical scores and nomograms','Auto-staging for 18 sites, Child-Pugh, ALBI, MELD, PSA doubling time, Roach, CAPRA, CTS5, Van Nuys, SINS, Mirels, RPA, IPI, Sedlis, brachytherapy EQD2 and more, with links to MSKCC, PREDICT, GPA and other external tools.'),
  ('consent.html','Consent numbers','Consent numbers by site','The toxicity rates to quote, gathered from every tumour-site page. Print one site as a sheet.'),

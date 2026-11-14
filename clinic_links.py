@@ -68,18 +68,10 @@ TABS = [
    ('NSW Health Pathology: results for clinicians', 'https://pathology.health.nsw.gov.au/services/healthcare-professionals/results/', 'How to get public pathology results electronically (information page)', ('new',)),
   ]),
  ]),
- ('forms', 'Forms & references', 'Referral forms and imaging anatomy references.', [
+ ('forms', 'Forms', 'Referral forms.', [
   ('Forms', '', [
    ('Liverpool PET-CT referral form', 'https://www.swslhd.health.nsw.gov.au/Liverpool/PET%5Ccontent/pdf/PET%20CT%20Referral%20Form.pdf', 'PDF', ()),
    ('Liverpool Hospital MRI screening form', 'https://swslhd-intranet.sswahs.nsw.gov.au/Liverpool/Forms/MRI_Screening.pdf', 'PDF, for patients', ('net',)),
-  ]),
-  ('Imaging anatomy and field references', '', [
-   ('The Radiology Assistant', 'https://radiologyassistant.nl/', 'Radiology teaching by topic', ()),
-   ('C-spine sagittal MRI anatomy', 'https://mrimaster.com/anatomy-spine-c-spine-sagittal/', 'MRI Master', ()),
-   ('Oesophagus imaging', 'https://radiologykey.com/esophagus-4/', 'Radiology Key', ()),
-   ('Radiation for brain metastases', 'https://radiologykey.com/radiation-for-brain-metastases/', 'Radiology Key', ()),
-   ('Traditional WBRT field definition', 'https://www.researchgate.net/figure/Schematic-illustration-of-traditional-WBRT-field-definition-a-Digitally-reconstructed_fig3_353171457', 'Schematic (ResearchGate)', ()),
-   ('Whole-brain radiotherapy overview', 'https://www.sciencedirect.com/topics/medicine-and-dentistry/whole-brain-radiotherapy', 'ScienceDirect topic page, includes field placement figure', ()),
   ]),
  ]),
 ]
