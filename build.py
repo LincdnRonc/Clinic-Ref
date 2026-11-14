@@ -322,7 +322,7 @@ CNAV = CNAV[:1] + sorted(CNAV[1:], key=lambda c: c[1].lower())
 CNAV += SOFTWARE
 # ---------------- Tools: calculators, consent numbers, doses at a glance, what's new ----------------
 TOOLS = [
- ('links.html','Clinic links','Clinic quick links','Radiology PACS and pathology results logins grouped by area (St George, Liverpool, Wollongong, Sydney) and referral forms.'),
+ ('links.html','Clinic links','Clinic quick links','Radiology PACS and pathology results logins, A to Z, and referral forms.'),
  ('tools.html','Calculators','Calculators and tools','EQD2 and BED, cumulative dose across courses, treatment gap, and links to re-irradiation tools and SABR constraint tables.'),
  ('scores.html','Clinical scores','Clinical scores and nomograms','Auto-staging for 18 sites, Child-Pugh, ALBI, MELD, PSA doubling time, Roach, CAPRA, CTS5, Van Nuys, SINS, Mirels, RPA, IPI, Sedlis, brachytherapy EQD2 and more, with links to MSKCC, PREDICT, GPA and other external tools.'),
  ('consent.html','Consent numbers','Consent numbers by site','The toxicity rates to quote, gathered from every tumour-site page. Print one site as a sheet.'),
@@ -379,7 +379,7 @@ def _links_page():
         out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <div class="jump"></div>\n  </div>')
         for title,note,links in cards_:
             lis = []
-            for name,url,n,tags in links:
+            for name,url,n,tags in sorted(links, key=lambda x: x[0].lower()):
                 fl = ''.join(f' <span class="flag {_QTAG[t][1]}">{_QTAG[t][0]}</span>' for t in tags)
                 host = re.sub(r'^https?://(www\.)?','',url).split('/')[0]
                 nn = f'<span class="qn">{html.escape(n)}</span>' if n else ''

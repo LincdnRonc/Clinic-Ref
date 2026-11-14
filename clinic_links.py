@@ -5,8 +5,8 @@
 # Do not put usernames, patient IDs or search queries in URLs: the repo is public.
 
 TABS = [
- ('radiology', 'Radiology', 'Referrer image and report portals. Each opens in a new tab at the provider login.', [
-  ('Most used', '', [
+ ('radiology', 'Radiology', 'Referrer image and report portals, A to Z. Each opens in a new tab at the provider login.', [
+  ('Radiology portals', '', [
    ('I-MED Radiology', 'https://pacs.i-med.com.au/Portal/app#/', 'InteleConnect', ()),
    ('Sectra UniView', 'https://prod.nswcloud.sectra.com.au/UniView/#/', 'NSW Health PACS (Sectra cloud)', ()),
    ('Lumus Imaging', 'https://pacs.lumusimaging.com.au/Portal/app#/', 'Healius', ()),
@@ -14,8 +14,6 @@ TABS = [
    ('Spectrum Medical Imaging', 'https://www.smipacs.com.au/Portal/app', '', ()),
    ('Bankstown Lidcombe Medical Imaging', 'https://img.blmedicalimaging.com.au/Portal/app', 'BLMI', ()),
    ('South West Radiology', 'https://images.southwestradiology.com.au/Portal/app#/', 'SWR', ()),
-  ]),
-  ('St George & Sutherland', '', [
    ('The Cross Radiology: IntelePACS', 'https://pacs.thecrossradiology.com.au/InteleBrowser/app', 'InteleBrowser', ()),
    ('The Cross Radiology: InteleConnect', 'https://pacs.thecrossradiology.com.au/Portal/app', 'Web portal', ()),
    ('Scan Medical', 'https://pacs.scanaptics.com.au/Portal/app#/', 'InteleConnect (Scanaptics)', ()),
@@ -25,18 +23,14 @@ TABS = [
    ('St George Private Nuclear Medicine', 'https://stgweb.stgeorgeprivatenucmed.com.au/portal/Login.aspx', 'SGP Nuc Med', ()),
    ('SNIG', 'https://pacs.snig.com.au/Portal/app', '', ()),
    ('Castlereagh Imaging (Kogarah)', 'https://mypatients.casimaging.com/Portal/app#/', 'Sonic Imaging; same login as IRG', ('new',)),
-   ('Dr Glenn & Partners (Kogarah, Rockdale)', 'https://pacs.drgp.com.au/Portal/app', 'May be the same group as G&P under Wollongong', ('new',)),
+   ('Dr Glenn & Partners (Kogarah, Rockdale)', 'https://pacs.drgp.com.au/Portal/app', 'May be the same group as G&P', ('new',)),
    ('Focus Radiology (Engadine, Dapto, Liverpool)', 'https://pacs.focusrad.com.au/Portal', '', ('new', 'check')),
-  ]),
-  ('Liverpool & South West Sydney', '', [
    ('NIA Imaging', 'https://images.niaimaging.com.au/ZeroFP/', '', ()),
    ('Quantum Radiology', 'https://results.quantumradiology.com.au/sign-in', 'Also Nepean Imaging', ()),
    ('Synergy Radiology', 'https://pacs.synrad.com.au/Portal/app#/', 'Campsie and other Synergy sites', ()),
    ('Truescan (G&P / BLMI)', 'https://pacs.truescan.com.au/Portal/app#/', '', ()),
    ('Clearview Medical Imaging Fairfield', 'https://pacs.cmifairfield.com.au/Portal/app', '', ('new',)),
    ('Oran Park Radiology', 'https://img.oranparkradiology.com.au/Portal/app', '', ('new',)),
-  ]),
-  ('Wollongong, South Coast & ACT', '', [
    ('Nowra Radiology', 'https://patients.nowra-radiology.com.au/Portal/app#/', '', ()),
    ('Canberra Imaging Group', 'https://cigonline.cig.com.au/sign-in', 'CIG Online; has Break Glass', ()),
    ('Qscan: InteleConnect', 'https://www.qscaniq.com.au/Portal/app#/', 'Qscan iQ', ()),
@@ -47,8 +41,6 @@ TABS = [
    ('G&P', 'https://pacs.medical-imaging.com.au/Portal/app#/', '', ()),
    ('IRG (Illawarra Radiology Group)', 'https://mypatients.casimaging.com/Portal/app#/', 'Sonic Imaging; same login as Castlereagh', ()),
    ('PRP Diagnostic Imaging', 'https://pacs.prpimaging.com.au/Portal/app#/', '', ()),
-  ]),
-  ('Sydney: other', '', [
    ('San Radiology & Nuclear Medicine', 'https://portal.sanradiology.com.au/webconnect/#/auth', 'Sydney Adventist Hospital', ()),
    ('Macquarie Medical Imaging', 'https://pacs.mqhealth.org.au/Portal/app#/', '', ()),
    ("St Vincent's Clinic Medical Imaging", 'https://pacs.svcmi.com.au/Portal/app#/', '', ()),
@@ -58,13 +50,16 @@ TABS = [
    ('Harbour Radiology', 'https://imaging.harbourradiology.com.au/Portal/app', '', ('new',)),
   ]),
  ]),
- ('pathology', 'Pathology', 'Results portals for referring doctors.', [
+ ('pathology', 'Pathology', 'Results portals for referring doctors, A to Z.', [
   ('Results portals', '', [
    ('MedWay', 'https://www.medway.com.au/Login/ReLogin', 'Laverty Pathology (Healius)', ()),
    ('Sonic Dx', 'https://www.sonicdx.com.au/#/login', 'Douglass Hanly Moir and other Sonic labs', ()),
    ('SEALS', 'http://vmsepat-mas001.nswhealth.net/sls/apl/dls/OMNI.UI.Ward.Main.cls?$AutoOpen=M-RE', 'NSW Health Pathology, South Eastern labs', ('net',)),
-   ('4Cyte Pathology', 'https://4cyte.mocloud.com.au/rest/html/explorer_online/index.html#!/app', 'Medical-Objects Explorer Online', ()),
-   ('Australian Clinical Labs', 'https://results.clinicallabs.com.au/patients', 'eResults Viewer', ()),
+   ('4Cyte.Med web results portal', 'https://app.4cyte.med', '4Cyte Pathology clinician portal and app', ('new',)),
+   ('4Cyte: Medical-Objects web results', 'https://4cyte.mocloud.com.au/rest/html/explorer_online/index.html#!/app', 'Medical-Objects Explorer Online', ()),
+   ('Australian Clinical Labs eResults', 'https://results.clinicallabs.com.au/', 'ACL eResults Viewer; MFA optional', ()),
+   ('SydPath: medical practitioners', 'https://mediweb.stvincents.com.au/mediportal/htmls/login.php', "St Vincent's Pathology (Mediweb)", ('new',)),
+   ('SydPath: hospitals and labs', 'https://sydpath-results.stvincents.com.au/', "St Vincent's Pathology hospital portal", ('new',)),
    ('NSW Health Pathology: results for clinicians', 'https://pathology.health.nsw.gov.au/services/healthcare-professionals/results/', 'How to get public pathology results electronically (information page)', ('new',)),
   ]),
  ]),

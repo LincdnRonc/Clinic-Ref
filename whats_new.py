@@ -22,7 +22,7 @@ EVIDENCE = [
   [('gu-bladder.html#tmt','Bladder preservation'), ('gu-bladder.html#other-settings','Post-op, NMIBC & systemic')]),
 ]
 SITE = [
- ('2026-11-14', 'New Clinic quick links page (Tools): radiology PACS and pathology results logins grouped by St George, Liverpool, Wollongong and Sydney, plus referral forms.', 'links.html'),
+ ('2026-11-14', 'New Clinic quick links page (Tools): radiology PACS and pathology results logins (A to Z), plus referral forms.', 'links.html'),
  ('2026-11-14', 'Every key trial now shows its year of publication in brackets (first full report, plus the later update where the card quotes long-term results; meeting name where only presented).', ''),
  ('2026-11-14', 'Evidence digest edits: HypoMast-IMNI added to PMRT trials; KEYNOTE-867 and the JCO SABR vs surgery emulated trial added to early-stage NSCLC; VOLGA (perioperative durvalumab + EV) added to bladder systemic therapy.', 'thorax-early.html#sabr'),
  ('2026-11-14', 'Reirradiation: liver and bladder tabs added (abdomen and pelvis page).', 'rert-pelvis.html#liver'),
