@@ -322,6 +322,7 @@ CNAV = CNAV[:1] + sorted(CNAV[1:], key=lambda c: c[1].lower())
 CNAV += SOFTWARE
 # ---------------- Tools: calculators, consent numbers, doses at a glance, what's new ----------------
 TOOLS = [
+ ('links.html','Clinic links','Clinic quick links','Radiology PACS and pathology results logins grouped by area (St George, Liverpool, Wollongong, Sydney), referral forms and imaging anatomy references.'),
  ('tools.html','Calculators','Calculators and tools','EQD2 and BED, cumulative dose across courses, treatment gap, and links to re-irradiation tools and SABR constraint tables.'),
  ('scores.html','Clinical scores','Clinical scores and nomograms','Auto-staging for 18 sites, Child-Pugh, ALBI, MELD, PSA doubling time, Roach, CAPRA, CTS5, Van Nuys, SINS, Mirels, RPA, IPI, Sedlis, brachytherapy EQD2 and more, with links to MSKCC, PREDICT, GPA and other external tools.'),
  ('consent.html','Consent numbers','Consent numbers by site','The toxicity rates to quote, gathered from every tumour-site page. Print one site as a sheet.'),
@@ -368,8 +369,32 @@ def _wn_page():
     return (f'<section class="panel" id="p-evidence" data-tab="evidence" data-label="Evidence"><div class="panel-head"><h2>New evidence and landmark trials</h2><p class="lede">Summaries are in our own words; open the source for the full paper. Tags are a first read, not a guideline.</p><div class="jump"></div></div>{cards_}</section>\n'
             f'<section class="panel" id="p-site" data-tab="site" data-label="Site updates" hidden><div class="panel-head"><h2>Site updates</h2><div class="jump"></div></div><article class="card" data-title="Change log"><h3>Change log</h3><ul>{site_}</ul></article></section>')
 (root/'src'/'whats-new.html').write_text(_wn_page())
+# ---------------- Clinic quick links (clinic_links.py -> src/links.html) ----------------
+import clinic_links as _cl
+_QTAG = {'net':('NSW Health network','caution'),'new':('Added Nov 2026','new'),'check':('Check URL','caution')}
+def _links_page():
+    out = []
+    for i,(tid,label,lede,cards_) in enumerate(_cl.TABS):
+        h = ' hidden' if i else ''
+        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <div class="jump"></div>\n  </div>')
+        for title,note,links in cards_:
+            lis = []
+            for name,url,n,tags in links:
+                fl = ''.join(f' <span class="flag {_QTAG[t][1]}">{_QTAG[t][0]}</span>' for t in tags)
+                host = re.sub(r'^https?://(www\.)?','',url).split('/')[0]
+                nn = f'<span class="qn">{html.escape(n)}</span>' if n else ''
+                lis.append(f'<li><a href="{html.escape(url)}" target="_blank" rel="noopener"><b>{html.escape(name)}</b>{nn}<span class="qh">{html.escape(host)}</span>{fl}</a></li>')
+            np_ = f'<p class="note">{html.escape(note)}</p>' if note else ''
+            out.append(f'  <article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3>{np_}<ul class="qlinks">{"".join(lis)}</ul></article>')
+        if tid == 'radiology':
+            out.append(f'  <article class="card" data-title="Still to add"><h3>Still to add</h3><p class="note">{html.escape(_cl.NOT_YET)}</p></article>')
+        out.append('</section>')
+    return '\n'.join(out)
+(root/'src'/'links.html').write_text(_links_page())
+
+FOOT_LINKS = '<footer><p>Links open each provider\'s own login page; nothing is stored here. Accounts, passwords and MFA are set up with each provider. Links marked "Added Nov 2026" came from provider websites and a published NSW provider list and may need a new account. Edit clinic_links.py to change them.</p></footer>'
 for g in TOOLS:
-    (root/g[0]).write_text(page(*g, TOOLS, 'Tools', 'tools', FOOT_TOOLS))
+    (root/g[0]).write_text(page(*g, TOOLS, 'Tools', 'tools', FOOT_LINKS if g[0]=='links.html' else FOOT_TOOLS))
 
 FOOT_SW = '<footer><p>Software quick references compiled from vendor user and training guides and a departmental MIM guide. Shortcuts and tool names change between versions and local configurations; check in your installed version. Not affiliated with or endorsed by MIM Software, GE HealthCare or Elekta. Follow departmental work instructions.</p></footer>'
 for f,short,long,desc in SOFTWARE:
@@ -451,7 +476,7 @@ home = f'''<!DOCTYPE html>
 <div id="gresults" hidden></div>
 <div id="homebody">
 <div id="pinned" hidden></div>
-<nav class="sitenav" aria-label="Tumour groups"><a href="#tools">Tools</a>{groupnav}<a href="#contouring">Contouring</a></nav>
+<nav class="sitenav" aria-label="Tumour groups"><a href="links.html">Clinic links</a><a href="#tools">Tools</a>{groupnav}<a href="#contouring">Contouring</a></nav>
   <h2 class="group-title" id="tools">Tools and updates</h2>
   <div class="hub">{cards(TOOLS)}</div>
 {sections}
