@@ -87,7 +87,7 @@ def tools_bar(gid):
     if gid not in _SCORETAB: return ''
     t,l = _SCORETAB[gid]
     x,xl = _SYSLINK.get(gid, ('sys-chemort.html','Concurrent chemo-RT'))
-    return f'<p class="xref"><b>Systemic therapy:</b> <a href="{x}">{xl}</a> · <a href="sys-timing.html">Targeted and immunotherapy with RT</a> · <a href="sys-supportive.html">Supportive drugs</a></p><p class="xref"><b>Calculators:</b> <a href="scores.html#{t}">{l} scores and nomograms</a> · <a href="tools.html">EQD2, BED and re-irradiation</a></p>'
+    return f'<p class="xref"><b>Systemic therapy:</b> <a href="{x}">{xl}</a> · <a href="sys-timing.html">Targeted and immunotherapy with RT</a> · <a href="sys-supportive.html">Supportive drugs</a> · <b>Reirradiation:</b> <a href="rert-principles.html">principles</a>, <a href="rert-constraints.html">limits and calculators</a></p><p class="xref"><b>Calculators:</b> <a href="scores.html#{t}">{l} scores and nomograms</a> · <a href="tools.html">EQD2, BED and re-irradiation</a></p>'
 DISCLAIMER = '<footer class="disclaimer"><p><b>Personal resource, not for distribution.</b> This site is the author\'s personal working reference. Every effort is made to keep it accurate, but it may contain errors or be out of date. Anyone else who uses it must exercise their own clinical judgement and independently verify all information, including doses, volumes, constraints, scores and calculator results, against primary sources and local protocols. It is not medical advice and not a medical device.</p></footer>'
 STAGERS = {'nccn':'Prostate NCCN risk group','breast':'Breast (AJCC 8 anatomic stage)','lung':'Lung (TNM 9th edition)','prostate':'Prostate (AJCC 8)','crc':'Colon and rectum (AJCC 8)','anal':'Anal canal (AJCC 8)',
  'oes_scc':'Oesophagus, squamous (AJCC 8 clinical)','oes_ac':'Oesophagus, adenocarcinoma (AJCC 8 clinical)','gastric':'Stomach (AJCC 8 clinical)','pancreas':'Pancreas (AJCC 8)','hcc':'Hepatocellular carcinoma (AJCC 8)',
@@ -225,6 +225,15 @@ SYS = [
  ('sys-supportive.html','Supportive drugs','Supportive and symptom drugs','Venlafaxine and alternatives for hot flushes, dexamethasone, antiemetics, mucositis, bowel, bladder, sexual health, late effects.'),
 ]
 FOOT_SYS = '<footer><p>Systemic therapy notes for a radiation oncologist, not a prescribing reference. Doses, half-lives and withholding intervals not attributed to a named source were entered from memory and are flagged Verify. Prescribe from eviQ, the product information and local protocols, with the treating medical oncologist and pharmacist.</p></footer>'
+RERT = [
+ ('rert-principles.html','Principles & workflow','Reirradiation: principles and workflow','ESTRO–EORTC definitions and decision statements, clinic checklist, dose summation, radiobiology and recovery, consent, sources still needed.'),
+ ('rert-constraints.html','Limits & calculators','Reirradiation: cumulative limits and calculators','Published cumulative dose limits by organ with sources; remaining-dose calculator; spinal cord reirradiation check (Nieder, Sahgal).'),
+ ('rert-cns.html','CNS, spine & bone','Reirradiation: CNS, spine and bone','Glioblastoma (ESTRO/EANO, RTOG 1205), repeat SRS and WBRT, spine SBRT and cord limits, painful bone metastases (SC.20).'),
+ ('rert-hn.html','Head & neck','Reirradiation: head and neck','MIRI RPA, dose, SBRT and carotid blowout, cumulative limits; recurrent nasopharyngeal carcinoma and hyperfractionation.'),
+ ('rert-thorax-breast.html','Thorax & breast','Reirradiation: thorax and breast','ESTRO 2026 lung guideline, ARS composite constraints; second breast conservation (RTOG 1014, GEC-ESTRO), chest wall.'),
+ ('rert-pelvis.html','Pelvis','Reirradiation: pelvis','Recurrent rectal cancer, pelvic SABR (UK guidance), salvage after prostate RT, gynaecological brachytherapy.'),
+]
+FOOT_RERT = '<footer><p>Reirradiation notes built from consensus statements, guidelines and trials named on each page. Evidence is largely retrospective; cumulative limits are estimates. Items flagged Verify were entered from memory. Every case needs an individual cumulative dose assessment with physics and a multidisciplinary decision.</p></footer>'
 GROUPS = [
  ('breast','Breast','Breast',BREAST,mkfoot('Breast','NCCN, ASTRO, ASCO')),
  ('cns','CNS','CNS & Paediatrics',CNS,mkfoot('CNS and Peds','NCCN, ASTRO, COG')),
@@ -237,6 +246,7 @@ GROUPS = [
  ('thorax','Thorax','Thorax',THORAX,mkfoot('Thorax','NCCN, ASTRO, ASCO')),
  ('pall','Palliative','Palliative & oligometastases',PALL,mkfoot('Brain Mets/Palliative/Oligo/Immuno','NCCN, ASTRO, ASCO')),
  ('sys','Systemic therapy','Systemic therapy & supportive drugs',SYS,FOOT_SYS),
+ ('rert','Reirradiation','Reirradiation',RERT,FOOT_RERT),
  ('mrl','MR-linac','MR-linac',MRL,FOOT_MRL),
  ('exam','Exam summary','Phase 2 exam summary',EXAM,FOOT_EXAM),
 ] + EXTRA
@@ -327,7 +337,7 @@ def _cards(body):
 def _gather(pick):
     out = []
     for i,(gid,gname,head,pages,_) in enumerate(GROUPS):
-        if gid in ('exam','mrl','sys'): continue
+        if gid in ('exam','mrl','sys','rert'): continue
         parts = []
         for g in pages:
             f, short, long = g[0], g[1], g[2]
@@ -480,7 +490,7 @@ for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.ht
             _x = re.sub(r'\s+',' ',_c.get_text(' ',strip=True))
             _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', _x])
 (root/'assets'/'search-index.js').write_text('window.QR_INDEX=' + _json.dumps(_idx, ensure_ascii=False, separators=(',',':')) + ';')
-_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
+_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/rert.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
 (root/'manifest.webmanifest').write_text(_json.dumps({'name':'Radiation Oncology Quick Reference','short_name':'RadOnc QR','start_url':'./index.html','scope':'./','display':'standalone','background_color':'#f3f5f6','theme_color':'#10243f','icons':[{'src':'assets/icon-192.png','sizes':'192x192','type':'image/png'},{'src':'assets/icon-512.png','sizes':'512x512','type':'image/png','purpose':'any maskable'}]}, indent=1))
 _ver = _hl.md5(''.join((root/x).read_text(errors='ignore') if not x.endswith('.png') else x for x in _files+_assets).encode()).hexdigest()[:10]
 (root/'sw.js').write_text("""// Generated by build.py. Network first (2.5 s), then the offline copy.

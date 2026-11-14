@@ -10,6 +10,7 @@ SITE entry: (date, text, page or '')
 EVIDENCE = [
 ]
 SITE = [
+ ('2026-11-14', 'New Reirradiation section: ESTRO–EORTC principles and workflow, cumulative dose limits with a remaining-dose calculator and cord check, and site pages for CNS/spine/bone, head and neck, thorax and breast, pelvis.', 'rert-principles.html'),
  ('2026-11-14', 'NCCN prostate risk group calculator (prostate page, Staging & risk tab); prostate very-high-risk definition updated to NCCN 2025; disclaimer now on the home page only.', 'gu-prostate.html#staging'),
  ('2026-11-13', 'New Systemic therapy section: concurrent chemo-RT regimens, targeted and immunotherapy timing with RT, breast and prostate endocrine therapy, bone agents, supportive drugs (venlafaxine, dexamethasone and more).', 'sys-chemort.html'),
  ('2026-11-13', 'Auto-staging tab on the tumour-site pages (18 staging systems; also all together on the clinical scores page).', 'scores.html#staging'),
