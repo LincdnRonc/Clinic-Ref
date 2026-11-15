@@ -20,6 +20,10 @@ EVIDENCE = [
   'US FDA approval (announced November 2026) of neoadjuvant enfortumab vedotin plus durvalumab with radical cystectomy, then adjuvant durvalumab, for cisplatin-ineligible muscle-invasive bladder cancer. Not an RT trial, but it raises the bar for trimodality bladder preservation in this group if it reaches Australia. (check)',
   'https://www.fda.gov/drugs/cancer-approvals/fda-approves-durvalumab-enfortumab-vedotin-ejfv-muscle-invasive-bladder-cancer', 'FDA approval notice; reported by OncoDaily and The ASCO Post',
   [('gu-bladder.html#tmt','Bladder preservation'), ('gu-bladder.html#other-settings','Post-op, NMIBC & systemic')]),
+ ('2026-11-11', 'Head and neck', 'watch', 'CSCO–ASCO joint guidelines on nasopharyngeal carcinoma (stage IB–III, and recurrent/metastatic)',
+  'Two joint Chinese Society of Clinical Oncology and ASCO guidelines published in JCO in November 2026: an update covering definitive treatment of stage IB to III NPC (replacing the 2021 stage II–IVA guideline on chemotherapy with RT), and a new guideline for recurrent and/or metastatic disease. Recommendations not yet read; compare with the NPC page before changing anything. (check)',
+  'https://ascopubs.org/doi/10.1200/JCO-26-02648', 'Journal of Clinical Oncology (also JCO-26-02650 for recurrent/metastatic); seen via a journal search',
+  [('hn-npc-sinonasal.html#npc','Nasopharynx')]),
 ]
 SITE = [
  ('2026-11-15', "What's new: a To verify tab lists every figure not yet checked against its original source (built from notes/figures-to-verify.md), with a count of flagged items per page.", 'whats-new.html#verify'),
