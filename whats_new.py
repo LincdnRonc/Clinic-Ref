@@ -22,6 +22,7 @@ EVIDENCE = [
   [('gu-bladder.html#tmt','Bladder preservation'), ('gu-bladder.html#other-settings','Post-op, NMIBC & systemic')]),
 ]
 SITE = [
+ ('2026-11-15', "What's new: a To verify tab lists every figure not yet checked against its original source (built from notes/figures-to-verify.md), with a count of flagged items per page.", 'whats-new.html#verify'),
  ('2026-11-15', 'Pancreas: new Pathway & evidence tab. A flow by resectability group showing where RT enters, a table of RT decision points with the trials for and against, SBRT vs chemoRT selection factors for stable locally advanced disease, and a pre-RT checklist. CONKO-007 added to Key trials (check).', 'gi-pancreas.html#pathway'),
  ('2026-11-15', 'Upper GI key trials expanded (all marked check until read from the papers): MASTERPLAN, PANDAS/PRODIGE 44 and PAULA-1 on pancreas, plus a new metastatic and oligometastatic card (MPACT, NAPOLI-3, EXTEND, SIRT); MISPHEC, ABC-07, KEYNOTE-966, Hong protons and CCTG HE1 on hepatobiliary; KEYNOTE-975, Stahl, JCOG0508, TROG 03.01, SIREC and the first- and second-line immunotherapy trials on oesophagus; RENAISSANCE and palliative gastric RT on gastric; Tang oligometastatic RCC on kidney.', 'gi-pancreas.html#trials'),
  ('2026-11-14', 'New Clinic quick links page (Tools): radiology PACS and pathology results logins (A to Z), plus referral forms.', 'links.html'),

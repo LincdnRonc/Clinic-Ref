@@ -21,7 +21,7 @@ This repo is the single source of truth: the built pages and the build kit that 
 | `exam_links.py` | Phase 2 exam-summary page list (`EXAM`) and the cross-links between clinic pages and exam-summary tabs (`XREF`). |
 | `tools/super_summary.py` | Regenerates `src/exam-*.html` from the Super Summary .docx (`python3 tools/super_summary.py Super_Summary.docx`), one tab per subsite. The .docx itself is not stored here. |
 | `tools/check.py` | Render check at phone width (Playwright): overflow, console errors. |
-| `notes/` | Working notes, e.g. figures still to verify against source papers. |
+| `notes/` | Working notes. `notes/figures-to-verify.md` is rendered as the "To verify" tab of the What's new page (one card per `
 
 ## Making a change
 1. Edit the fragment in `src/` (or the data in `contour_lib.py` / `eviq_links.py`).
