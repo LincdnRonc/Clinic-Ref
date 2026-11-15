@@ -63,8 +63,17 @@ TABS = [
    ('NSW Health Pathology: results for clinicians', 'https://pathology.health.nsw.gov.au/services/healthcare-professionals/results/', 'How to get public pathology results electronically (information page)', ('new',)),
   ]),
  ]),
- ('forms', 'Forms', 'Referral forms.', [
-  ('Forms', '', [
+ ('forms', 'Forms', 'Referral and pathology request forms. PDF links open or download the form directly.', [
+  ('SydPath general pathology request forms', 'sydpath.com.au/request-forms', [
+   ('SydPath A4 computer request form', 'https://sydpath.com.au/wp-content/uploads/2022/07/SydPath-A4-Fillable-Request-Form-A4-_-0722-V12.pdf', 'PDF, fillable', ()),
+  ]),
+  ('SydPath specialised pathology request forms', 'sydpath.com.au/request-forms', [
+   ('SydPath anatomical pathology request form', 'https://sydpath.com.au/wp-content/uploads/2023/05/SydPath-Anatomical-Pathology-Request-Form.pdf', 'PDF', ()),
+   ('SydPath anatomical pathology second opinion request form', 'https://sydpath.com.au/wp-content/uploads/2022/07/SydPath-Anatomical-Pathology-Second-Opinion-Request-Form.pdf', 'PDF', ()),
+   ('SydPath molecular oncology NGS request form', 'https://sydpath.com.au/wp-content/uploads/2026/07/SydPath-MolecularOncology-SomaticTesting-Requestform-240726.pdf', 'PDF, somatic testing (July 2026 version)', ()),
+   ('SydPath molecular haematology NGS request form', 'https://sydpath.com.au/wp-content/uploads/2025/07/SVH-SYDPATH-Molecular-Haematology-Request-Fillable-PDF-Form-v2.pdf', 'PDF, fillable', ()),
+  ]),
+  ('Imaging forms', '', [
    ('Liverpool PET-CT referral form', 'https://www.swslhd.health.nsw.gov.au/Liverpool/PET%5Ccontent/pdf/PET%20CT%20Referral%20Form.pdf', 'PDF', ()),
    ('Liverpool Hospital MRI screening form', 'https://swslhd-intranet.sswahs.nsw.gov.au/Liverpool/Forms/MRI_Screening.pdf', 'PDF, for patients', ('net',)),
   ]),
