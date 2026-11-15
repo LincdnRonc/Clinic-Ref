@@ -149,3 +149,9 @@ Sources in folder: FROGG 2020 (Cardoso, JMIRO 64:882–893) and Baumann 2016 pos
 - From memory only, verify every figure: MPACT, NAPOLI-3, KEYNOTE-966, MISPHEC, Hong proton phase II, Stahl, JCOG0508, TROG 03.01 (also confirm publication year), SIREC (complication rates), KEYNOTE-590, CheckMate 648, KEYNOTE-181, ATTRACTION-3, Tey meta-analysis, Tang 2021 (RCC).
 - MASTERPLAN: the control-arm size (about 25) is implied, not stated, in the report used.
 - Not added because details could not be confirmed: SIRCCA (closed early), EXPAND (phase III, mentioned in the EXTEND card only).
+
+## Pancreas "Pathway & evidence" tab (15 Nov 2026)
+- The flow and decision table reuse figures already on the Key trials tab; "(check)" is carried over wherever the source card has it.
+- New, from abstracts only: Korean propensity-matched SBRT vs chemoRT series (2022), Brussels isotoxic high-dose SBRT series (2022).
+- CONKO-007 card added from memory. It says R0 was not significantly higher overall, with more margin-negative resections and pCR and no OS difference. The exam summary (exam-ugi) says "RT improves LC and R0, trend to improved OS". Reconcile against the paper.
+- From general practice, no source cited: "BED10 around 100 Gy" as the ablative threshold, the "Before offering RT" checklist (including restaging within about 4 weeks), "CA 19-9 fall can outrun CT response", "most have occult metastases".
