@@ -43,7 +43,7 @@ TABS = [
    ('PRP Diagnostic Imaging', 'https://pacs.prpimaging.com.au/Portal/app#/', '', ()),
    ('San Radiology & Nuclear Medicine', 'https://portal.sanradiology.com.au/webconnect/#/auth', 'Sydney Adventist Hospital', ()),
    ('Macquarie Medical Imaging', 'https://pacs.mqhealth.org.au/Portal/app#/', '', ()),
-   ("St Vincent's Clinic Medical Imaging", 'https://pacs.svcmi.com.au/Portal/app#/', '', ()),
+   ("St Vincent's Imaging (MyVue)", 'https://myvue.imaging.svhs.org.au/portal/WebLogin.aspx?ReturnUrl=%2fportal%2fdefault.aspx', "All St Vincent's imaging (SVHS), incl. St Vincent's Clinic", ()),
    ('Alfred & Mater Imaging', 'https://iwpacs.com.au/Portal/app#/', 'I-MED: Inner West and the Mater', ()),
    ('North Shore Radiology & Nuclear Medicine', 'https://imaging.northshoreradiology.com.au/Portal/app', 'NSRNM; MFA required', ('new',)),
    ('Sydney Imaging Specialists', 'https://pacs.sydneyimaging.com.au/Portal/app', '', ('new',)),
