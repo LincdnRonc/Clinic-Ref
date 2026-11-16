@@ -355,40 +355,6 @@ def _gather(pick):
 (root/'src'/'doses.html').write_text(_gather(lambda pid,label,t: re.search(r'\bdoses?\b|fractionation|regimen', t, re.I) and not re.search(r'constraint|OAR|toxicit|limit', t, re.I)))
 import whats_new as _wn
 _TAG = {'practice':('Practice-changing','new'),'confirms':('Confirms practice','au'),'watch':('Watch','caution')}
-def _verify_panel():
-    """To verify tab: built from notes/figures-to-verify.md (newest section first) plus a count of items flagged on the pages."""
-    md = (root/'notes'/'figures-to-verify.md').read_text(encoding='utf-8')
-    secs, cur = [], None
-    for ln in md.splitlines():
-        if ln.startswith('## '):
-            cur = [ln[3:].strip(), []]; secs.append(cur)
-        elif cur is not None and ln.strip():
-            cur[1].append(ln.strip())
-    cards_ = ''
-    for head, lines in reversed(secs):
-        body, items = '', []
-        for ln in lines:
-            if ln.startswith('- '):
-                items.append(f'<li>{html.escape(ln[2:])}</li>')
-            else:
-                if items: body += '<ul>' + ''.join(items) + '</ul>'; items = []
-                body += f'<p>{html.escape(ln)}</p>'
-        if items: body += '<ul>' + ''.join(items) + '</ul>'
-        cards_ += f'<article class="card" data-title="{html.escape(head)}"><h3>{html.escape(head)}</h3>{body}</article>'
-    titles = dict(re.findall(r"\('([\w/-]+\.html)','([^']+)'", pathlib.Path(__file__).read_text(encoding='utf-8')))
-    rows = []
-    for f in sorted((root/'src').glob('*.html')):
-        if f.name in ('whats-new.html','consent.html','doses.html'): continue
-        t = f.read_text(encoding='utf-8')
-        n = len(re.findall(r'\(check\)|\bVerify\b|check before quoting', t))
-        if n: rows.append((n, f.name))
-    rows.sort(key=lambda r: (-r[0], r[1]))
-    flagged = ''.join(f'<li><a href="{name}">{html.escape(titles.get(name, name))}</a> · {n}</li>' for n, name in rows)
-    total = sum(n for n, _ in rows)
-    return (f'<section class="panel" id="p-verify" data-tab="verify" data-label="To verify" hidden><div class="panel-head"><h2>To verify</h2>'
-            f'<p class="lede">Everything on this site not yet checked against its original source. Newest first. Clear an item by checking the paper, correcting the page and deleting the line from notes/figures-to-verify.md.</p><div class="jump"></div></div>'
-            f'<article class="card key" data-title="Flagged on the pages"><h3>Flagged on the pages</h3><p>{total} items across {len(rows)} pages carry a "(check)" or "Verify" flag. Count per page:</p><ul>{flagged}</ul></article>'
-            f'{cards_}</section>')
 def _wn_page():
     ev = sorted(_wn.EVIDENCE, key=lambda e: e[0], reverse=True)
     if ev:
@@ -401,8 +367,7 @@ def _wn_page():
         cards_ = '<article class="card key" data-title="No entries yet"><h3>No entries yet</h3><p>The weekly evidence digest adds entries here: new phase III radiotherapy trials and guideline updates, each tagged practice-changing, confirms practice or watch, with the page on this site it affects.</p></article>'
     site_ = ''.join(f'<li><b>{d}</b> · {html.escape(t)}' + (f' <a href="{p}">Open</a>' if p else '') + '</li>' for d,t,p in _wn.SITE)
     return (f'<section class="panel" id="p-evidence" data-tab="evidence" data-label="Evidence"><div class="panel-head"><h2>New evidence and landmark trials</h2><p class="lede">Summaries are in our own words; open the source for the full paper. Tags are a first read, not a guideline.</p><div class="jump"></div></div>{cards_}</section>\n'
-            f'<section class="panel" id="p-site" data-tab="site" data-label="Site updates" hidden><div class="panel-head"><h2>Site updates</h2><div class="jump"></div></div><article class="card" data-title="Change log"><h3>Change log</h3><ul>{site_}</ul></article></section>\n'
-            + _verify_panel())
+            f'<section class="panel" id="p-site" data-tab="site" data-label="Site updates" hidden><div class="panel-head"><h2>Site updates</h2><div class="jump"></div></div><article class="card" data-title="Change log"><h3>Change log</h3><ul>{site_}</ul></article></section>')
 (root/'src'/'whats-new.html').write_text(_wn_page())
 # ---------------- Clinic quick links (clinic_links.py -> src/links.html) ----------------
 import clinic_links as _cl
