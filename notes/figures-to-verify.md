@@ -155,3 +155,10 @@ Sources in folder: FROGG 2020 (Cardoso, JMIRO 64:882–893) and Baumann 2016 pos
 - New, from abstracts only: Korean propensity-matched SBRT vs chemoRT series (2022), Brussels isotoxic high-dose SBRT series (2022).
 - CONKO-007 card added from memory. It says R0 was not significantly higher overall, with more margin-negative resections and pCR and no OS difference. The exam summary (exam-ugi) says "RT improves LC and R0, trend to improved OS". Reconcile against the paper.
 - From general practice, no source cited: "BED10 around 100 Gy" as the ablative threshold, the "Before offering RT" checklist (including restaging within about 4 weeks), "CA 19-9 fall can outrun CT response", "most have occult metastases".
+
+## Prostate contouring guide: 5-fraction SABR section (contouring/prostate.html#s2c, 16 Nov 2026)
+- Read from the full documents in OneDrive "01 Contouring Guidelines/Genitourinary - Prostate": Draulans 2026 ESTRO SBRT consensus (Tables 1-2 read from the page image; Table 3 tick matrix not transcribed, text used instead), PACE RT planning and delivery guidelines v2.2 (incl. Appendix B, PACE-B), departmental national prostate SBRT protocol v3.0 and MR-linac (Unity) protocol, Richardson 2021, PROMETHEUS contouring guide v2.
+- Trial one-liners in 2c.12 are as described in Draulans 2026, not read from the trial papers. PACE-A has no result line for that reason. Alayed 2018 toxicity figures are as quoted in the departmental protocol.
+- Source disagreements shown side by side, not resolved: rectum lower limit; femoral head vs proximal femur; urethra PRV 2 vs 3 mm; PTV D98 34.4 vs 34.5 Gy; PTV Dmax 48 Gy (PACE gantry) vs 42.8 Gy (departmental); bowel distance 2 cm (PACE v2.2) vs 4 cm (PACE-B); urethra V42 <50% listed as optimal in PACE and mandatory in the ESTRO table.
+- The gu-prostate.html "OAR constraints by fractionation" 5-fraction column uses a different constraint set from 2c.8 and was not reconciled.
+- Not used: NSW Ph1/Ph2 combined MRL and linac planning protocol (boost workflow, not 5-fraction monotherapy); GU Comprehensive Protocol v8 "Definitive EBRT + SBRT" (SBRT boost).

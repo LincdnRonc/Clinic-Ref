@@ -118,15 +118,16 @@
 <div class="masthead">
 <span class="eyebrow">Departmental Contouring Atlas · Genitourinary Radiation Oncology</span>
 <h1>Prostate Radiotherapy — Target Volume Delineation Guide</h1>
-<p class="sub">A unified delineation reference across the three settings of prostate cancer radiotherapy — <b>intact / definitive prostate</b>, <b>post-prostatectomy bed (adjuvant &amp; salvage)</b>, and <b>pelvic nodal irradiation</b> — integrating ESTRO ACROP, FROGG 2024, NRG Oncology and multidisciplinary MRI consensus with RayStation implementation.</p>
+<p class="sub">A unified delineation reference across the three settings of prostate cancer radiotherapy — <b>intact / definitive prostate</b> (including 5-fraction SABR), <b>post-prostatectomy bed (adjuvant &amp; salvage)</b>, and <b>pelvic nodal irradiation</b> — integrating ESTRO ACROP, FROGG 2024, NRG Oncology and multidisciplinary MRI consensus with RayStation implementation.</p>
 <div class="pillrow">
 <span class="pill p-pros">Intact prostate — high dose</span>
 <span class="pill p-sib">Intermediate SIB / proximal SV</span>
+<span class="pill p-out">SABR 36.25–40 Gy / 5#</span>
 <span class="pill p-bed">Prostate bed / elective CTV</span>
 <span class="pill p-elect">Elective pelvic nodes 45–50 Gy</span>
 <span class="pill p-boost">Gross disease / macroscopic boost</span>
 </div>
-<div class="meta">ESTRO ACROP · FROGG 2024 · NRG Oncology · GFRU · PERYTON · eviQ  —  Version 1.0</div>
+<div class="meta">ESTRO ACROP · FROGG 2024 · NRG Oncology · GFRU · PERYTON · ESTRO SBRT 2026 · PACE · eviQ  —  Version 1.2</div>
 </div>
 <div class="callout">
 <span class="lbl">Governing principles of this guide</span>
@@ -142,6 +143,7 @@
 <tr><td class="n">1</td><td><a href="#s1">Scope, simulation &amp; imaging</a></td><td class="pg">2</td></tr>
 <tr><td class="n">2</td><td><a href="#s2">Setting A — Intact / definitive prostate ± seminal vesicles</a></td><td class="pg">3</td></tr>
 <tr><td class="n">2b</td><td><a href="#s2b">CT vs MRI: apex and base pearls (McLaughlin 2010)</a></td><td class="pg">4b</td></tr>
+<tr><td class="n">2c</td><td><a href="#s2c">Prostate SABR / SBRT, 5 fractions (ESTRO 2026, PACE, departmental protocol)</a></td><td class="pg">4c</td></tr>
 <tr><td class="n">3</td><td><a href="#s3">Setting B — Prostate bed (adjuvant &amp; salvage)</a></td><td class="pg">5</td></tr>
 <tr><td class="n">4</td><td><a href="#s4">Setting C — Pelvic nodal CTV (NRG 10-step)</a></td><td class="pg">9</td></tr>
 <tr><td class="n">5</td><td><a href="#s5">Dose, fractionation, PTV margins &amp; image-guided delivery</a></td><td class="pg">11</td></tr>
@@ -285,7 +287,7 @@
 <table>
 <thead><tr><th>Tier</th><th>Structure</th><th>Typical dose</th></tr></thead>
 <tbody>
-<tr><td><span class="pill p-pros">Prostate high dose</span></td><td>CTV_Prostate (±involved SV)</td><td>74–80 Gy/37–40# · 60 Gy/20# · 70 Gy/28# · SBRT 36.25–40 Gy/5#</td></tr>
+<tr><td><span class="pill p-pros">Prostate high dose</span></td><td>CTV_Prostate (±involved SV)</td><td>74–80 Gy/37–40# · 60 Gy/20# · 70 Gy/28# · SABR 36.25 Gy/5# to PTV with 40 Gy to CTV (<a href="#s2c">Section 2c</a>)</td></tr>
 <tr><td><span class="pill p-sib">SV / intermediate</span></td><td>CTV_SV (elective portion)</td><td>Full dose, or reduced SIB per protocol</td></tr>
 <tr><td><span class="pill p-boost">DIL boost</span></td><td>GTV_DIL (optional)</td><td>up to 95 Gy/35# (FLAME)</td></tr>
 <tr><td><span class="pill p-elect">Elective nodes</span></td><td>CTVn (if indicated)</td><td>45–50.4 Gy EQD2</td></tr>
@@ -333,6 +335,239 @@
 </ul>
 <div class="flag"><span class="lbl">Practical</span><p style="margin:3px 0 0;">When MRI is available, register it on the prostate (fiducials or soft tissue) and contour on MRI, using CT for the posterior rectal interface and bladder. Without MRI, apply these level rules deliberately at the apex and base.</p></div>
 <div class="foot"><span>Prostate RT Delineation Guide &middot; v1.1</span><span>Page 4b</span></div>
+</section>
+<!-- ============================ PAGE 4c : PROSTATE SABR (5 FRACTIONS) ============================ -->
+<section class="page" id="s2c">
+<div class="sechead"><span class="eyebrow">Section 2 · Setting A · SABR</span><h2><span class="sectnum">2</span>Prostate SABR / SBRT (5 fractions)</h2></div>
+<p class="small" style="margin-top:-2px;">Sources: ESTRO clinical practice consensus on prostate SBRT (Draulans 2026); PACE radiotherapy planning and delivery guidelines v2.2 (2020, PACE-A/C, with the PACE-B procedures in its Appendix B); departmental national prostate SBRT protocol v3.0 (Feb 2025) and its MR-linac (Elekta Unity) companion; Richardson 2021 (urethra on MRI); PROMETHEUS contouring guide v2. Written in our own words; open the source for the figures.</p>
+<p>Five-fraction SABR to the intact prostate: <b>36.25 Gy to the PTV with 40 Gy to the CTV</b> (PACE-B). Delineation of the gland follows Sections 2 and 2b; this section covers what is different for SABR: selection, preparation, the seminal vesicle rule, the urethra, tighter margins, SABR constraints and motion management.</p>
+<h3>2c.1  Patient selection</h3>
+<table>
+<thead><tr><th style="width:22%">Factor</th><th>ESTRO consensus (Draulans 2026)</th><th>Departmental SBRT protocol v3.0</th></tr></thead>
+<tbody>
+<tr><td class="b">Risk group</td><td>Standard for ISUP 2–3, cT1c–cT2c, PSA &lt;20 (100% agreement). ISUP 4 or cT3a: 38% of the panel would treat off trial; ISUP 5, cT3b–4, PSA &gt;40: none</td><td>Low or intermediate risk. High risk only if not eligible for an SBRT trial (e.g. NINJA) and a longer course would cause hardship</td></tr>
+<tr><td class="b">Prostate volume</td><td>No strict cut-off (no consensus); panel median 90 cc (range 70–150). Over 80 cc, dosimetry is harder to meet</td><td>Exclude &gt;100 cc</td></tr>
+<tr><td class="b">Urinary function</td><td>Use an IPSS ceiling (consensus): panel median 17 (range 10–20). More GU toxicity with IPSS &gt;11, especially &gt;19, or large post-void residual; treat obstruction first</td><td>Exclude severe symptoms, IPSS 20+</td></tr>
+<tr><td class="b">Prior TURP / HoLEP</td><td>Selected patients only, after a waiting period (panel median 6 months, range 2–12) and allowing for the cavity (strong consensus)</td><td>Relative contraindication, more so after more than one TURP (stricture, incontinence, haematuria)</td></tr>
+<tr><td class="b">Nodes</td><td>No elective pelvic nodal RT with SBRT outside a trial (100%)</td><td>Exclude N1 or where whole-pelvis RT is indicated</td></tr>
+<tr><td class="b">Other</td><td>ECOG 0–2; life expectancy at least 5–10 years. Relative contraindication: active or recent inflammatory bowel disease. Bilateral hip prostheses: decide case by case</td><td>ECOG 0–2; life expectancy &gt;5 years. Exclude bilateral hips, prior pelvic RT, cryotherapy or HIFU, and men who cannot have fiducials. Relative: IBD, unilateral hip, no MRI</td></tr>
+<tr><td class="b">ADT</td><td>As per risk-adapted guidelines, whatever the fractionation (100%)</td><td>Six months allowed at clinician discretion</td></tr>
+</tbody>
+</table>
+<h3>2c.2  Preparation and simulation</h3>
+<table>
+<thead><tr><th style="width:22%">Step</th><th>What to do</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Fiducials</td><td>Three gold markers (about 1 mm × 3 mm), e.g. left apex, right mid-gland, left base, clear of the urethra. Mandatory for linac SBRT in the departmental protocol; strongly recommended in PACE (at least 3, ideally 2 cm or more apart); not needed for MR-guided treatment</td><td>Departmental v3.0; PACE v2.2 §2.1</td></tr>
+<tr><td class="b">Rectal spacer</td><td>Optional. Departmental protocol recommends hydrogel where possible. ESTRO panel: 85% do not use one routinely; an option when lower rectal dose is wanted (e.g. inactive ulcerative colitis)</td><td>Departmental v3.0; Draulans 2026 Q9</td></tr>
+<tr><td class="b">Timing</td><td>Planning CT and MRI at least 7 days after fiducials (and spacer) so swelling settles</td><td>PACE v2.2 §2.2; departmental v3.0</td></tr>
+<tr><td class="b">Bowel</td><td>Empty rectum. PACE: enemas for 2 days before and on the day of planning, again from 2 days before treatment and on each treatment day; aim for rectal AP diameter of 4 cm or less at mid-prostate. Departmental: aperient and modified diet for a week, 3-hour fast, enema recommended; act if rectal diameter or a gas bubble exceeds 3.5 cm. Rescan if the rectum is very full</td><td>PACE v2.2 §2.3.1; departmental v3.0; Draulans 2026 Q8</td></tr>
+<tr><td class="b">Bladder</td><td>Comfortably full and reproducible. Departmental: aim for 150–200 mL (up to 300 mL if comfortable; avoid more). PACE: empty then drink about 325 mL, at least 150 mL to proceed. ESTRO: 300–500 mL of water 30–60 minutes before; for long treatment times start half full</td><td>As left</td></tr>
+<tr><td class="b">Planning CT</td><td>Supine, pelvis immobilised, knee and foot supports indexed to the couch. Slice thickness 2 mm or less (PACE 1–1.5 mm for SBRT). Scan from L3/L4 (departmental: L4) to below the perineum</td><td>Draulans 2026; PACE v2.2 §2.2; departmental v3.0</td></tr>
+<tr><td class="b">Planning MRI</td><td>In the treatment position with the same preparation. Mandatory in the departmental protocol (essential if a spacer is in): at least 1.5 T, axial T2 without contrast, slices 2 mm or less, distortion correction, a gradient-echo sequence to show the fiducials, field of view to include the penile bulb. No endorectal coil</td><td>Departmental v3.0; PACE v2.2</td></tr>
+<tr><td class="b">Fusion</td><td>Point-to-point on the fiducials. If rectal filling differs and the gland has deformed, the CTV includes all prostate seen on either image set</td><td>Departmental v3.0</td></tr>
+</tbody>
+</table>
+<p class="small">Urethra on MRI: a 0.9 mm isotropic 3D T2 sequence (SPACE) gave much better agreement between observers for the prostatic urethra than CT or a 3 mm axial T2 (mean Dice 0.78 vs 0.47 and 0.62), and is best read in the sagittal plane (Richardson 2021, Calvary Mater Newcastle).</p>
+<h3>2c.3  Target volumes <span class="pill p-pros">CTV 40 Gy</span> <span class="pill p-sib">PTV 36.25 Gy</span></h3>
+<table>
+<thead><tr><th style="width:16%">Volume</th><th>Definition</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="b">GTV</td><td>Dominant intraprostatic lesion on MRI where it can be seen. Needed only if a focal boost is planned; contour the pre-ADT tumour using T2, DWI and contrast sequences (PSMA PET may help)</td><td>Departmental v3.0; Draulans 2026</td></tr>
+<tr><td class="b">CTV, low risk</td><td>Prostate only</td><td>PACE-B; departmental v3.0</td></tr>
+<tr><td class="b">CTV, intermediate risk</td><td>Prostate plus the <b>proximal 1 cm of seminal vesicles</b></td><td>PACE-B; departmental v3.0</td></tr>
+<tr><td class="b">Higher risk (PACE-C)</td><td>Second, lower-dose volume: prostate plus the <b>proximal 2 cm</b> of SV to <b>30 Gy in 5 fractions</b> (Gleason 4+3 or NCCN high risk). MRI-defined T3b: the visible SV disease goes in the high-dose volume</td><td>PACE v2.2 §3.1.2; Draulans 2026</td></tr>
+<tr><td class="b">PTV</td><td>CTV + <b>5 mm, 3 mm posteriorly</b>. PACE allows 4–5 mm with 3–5 mm posteriorly</td><td>PACE v2.2 §4.2; departmental v3.0</td></tr>
+</tbody>
+</table>
+<div class="callout">
+<span class="lbl">Seminal vesicle rule</span>
+<ul class="tight" style="margin-top:4px;">
+<li>Measure from where the SV inserts into the prostate, in the sagittal plane. Quick method (PACE v2.2 §3.1.4): contour the prostate, grow it by 1 cm (and 2 cm) as a ring, contour the whole SV, then keep the SV inside the ring.</li>
+<li>SV seen on the same axial slices as prostate counts towards the 1 cm (departmental v3.0).</li>
+<li>PACE-B: take the middle half to two-thirds of the SV width, not the tips.</li>
+<li>If 1 cm of SV would pull a lot of rectum into the PTV, include less, or the medial part only, at the clinician's discretion (departmental v3.0; PACE asks for the reason to be recorded).</li>
+</ul>
+</div>
+<h3>2c.4  Contouring order for SABR</h3>
+<div class="stepbox">
+<ol class="steps">
+<li><b>Check the fusion</b> at the fiducials in three planes before drawing anything.</li>
+<li><b>Prostate on axial T2</b>, apex first (Section 2b). Cover the apex generously: at its lowest point it lies behind the urethra, and shows as a symmetric triangle of bright peripheral zone above the urogenital diaphragm, medial to levator ani (Draulans 2026, after Salembier 2018).</li>
+<li><b>Base:</b> do not contour up to urine. Leave out the bladder wall, which curves over the top of the gland.</li>
+<li><b>MRI vs CT:</b> use MRI for the gland and the prostate–rectum interface; MRI is less reliable higher up at the SV level, so where the two disagree there, CT anatomy takes priority (PACE v2.2 §3.1.1).</li>
+<li><b>Seminal vesicles</b> by the 1 cm ring method (2c.3).</li>
+<li><b>Urethra</b> on MRI from bladder neck to the membranous urethra, sagittal view. It is usually seen at the bladder neck and apex; estimate the segment between if it is not visible. Then the PRV (2c.5).</li>
+<li><b>PTV</b> = CTV + 5 mm, 3 mm posteriorly. Look at how much rectum sits inside it before planning starts.</li>
+<li><b>OARs</b> (2c.5), then review in sagittal and coronal: the gland should be smooth and globular.</li>
+</ol>
+</div>
+<figure>
+<svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sagittal schematic of prostate SABR volumes">
+<rect x="0" y="0" width="560" height="300" fill="#fff"></rect>
+<!-- pubic symphysis -->
+<ellipse cx="92" cy="170" rx="20" ry="34" fill="#ece8dd" stroke="#bdb49c"></ellipse>
+<text x="92" y="222" font-size="10" fill="#7d7559" text-anchor="middle">pubic symphysis</text>
+<!-- bladder -->
+<path d="M150 118 Q160 40 250 44 Q318 50 306 112 Q270 126 228 124 Q186 124 150 118 Z" fill="#fbf3cf" stroke="#c9ae3c"></path>
+<text x="228" y="70" font-size="10" fill="#8a7417" text-anchor="middle">bladder</text>
+<!-- rectum -->
+<path d="M384 20 Q358 110 368 190 Q374 250 362 290 L416 290 Q428 240 422 190 Q414 110 436 20 Z" fill="#f0e2d0" stroke="#c69a5f"></path>
+<text x="400" y="262" font-size="10" fill="#8a6a3a" text-anchor="middle">rectum</text>
+<!-- PTV: 5 mm, 3 mm posterior -->
+<path d="M164 106 Q232 96 300 72 Q336 60 342 92 Q334 130 328 152 Q326 190 312 206 Q262 244 196 224 Q160 170 164 106 Z" fill="rgba(29,95,176,.07)" stroke="#1d5fb0" stroke-width="1.6" stroke-dasharray="6 3"></path>
+<!-- 1 cm ring guide -->
+<path d="M144 98 Q232 66 334 84 Q368 150 340 222 Q262 270 176 246 Q132 176 144 98 Z" fill="none" stroke="#7a8794" stroke-width="1" stroke-dasharray="2 3"></path>
+<!-- seminal vesicle: distal (excluded) -->
+<path d="M306 92 Q336 66 362 42 Q372 50 350 82 Q334 104 318 114 Z" fill="#eef2f6" stroke="#8fa0b3"></path>
+<!-- seminal vesicle: proximal 1 cm (included) -->
+<path d="M290 118 Q300 100 318 86 Q330 92 328 104 Q318 118 304 130 Z" fill="rgba(176,58,46,.18)" stroke="#b03a2e" stroke-width="2"></path>
+<!-- prostate CTV -->
+<path d="M184 124 Q232 116 294 122 Q318 150 304 186 Q262 222 206 204 Q178 168 184 124 Z" fill="rgba(176,58,46,.14)" stroke="#b03a2e" stroke-width="2.3"></path>
+<!-- urethra PRV and urethra -->
+<path d="M224 122 Q232 164 244 212" fill="none" stroke="#e8b54a" stroke-width="11" stroke-linecap="round" opacity=".55"></path>
+<path d="M224 118 Q232 164 246 222 Q250 246 240 268" fill="none" stroke="#8a5a00" stroke-width="1.6"></path>
+<!-- penile bulb -->
+<ellipse cx="226" cy="278" rx="26" ry="11" fill="#e4eef0" stroke="#7fa3a8"></ellipse>
+<text x="150" y="282" font-size="10" fill="#4d7378" text-anchor="middle">penile bulb</text>
+<!-- fiducials -->
+<rect x="200" y="186" width="7" height="3" fill="#333" transform="rotate(-30 203 187)"></rect>
+<rect x="272" y="160" width="7" height="3" fill="#333" transform="rotate(20 275 161)"></rect>
+<rect x="206" y="138" width="7" height="3" fill="#333" transform="rotate(50 209 139)"></rect>
+<!-- labels -->
+<text x="268" y="176" font-size="10" font-weight="700" fill="#8a2f23" text-anchor="middle">CTV 40 Gy</text>
+<text x="268" y="189" font-size="9.5" fill="#8a2f23" text-anchor="middle">prostate</text>
+<line x1="318" y1="100" x2="452" y2="72" stroke="#b03a2e" stroke-width=".7"></line>
+<text x="456" y="68" font-size="10" fill="#8a2f23">proximal 1 cm SV:</text>
+<text x="456" y="80" font-size="10" fill="#8a2f23">in CTV</text>
+<line x1="358" y1="50" x2="452" y2="34" stroke="#8fa0b3" stroke-width=".7"></line>
+<text x="456" y="30" font-size="10" fill="#5b6b7d">distal SV: out</text>
+<text x="456" y="42" font-size="10" fill="#5b6b7d">(unless involved)</text>
+<line x1="329" y1="150" x2="452" y2="130" stroke="#1d5fb0" stroke-width=".7"></line>
+<text x="456" y="126" font-size="10" fill="#1d5fb0">PTV 36.25 Gy:</text>
+<text x="456" y="138" font-size="10" fill="#1d5fb0">3 mm posterior</text>
+<line x1="163" y1="150" x2="78" y2="106" stroke="#1d5fb0" stroke-width=".7"></line>
+<text x="8" y="100" font-size="10" fill="#1d5fb0">5 mm elsewhere</text>
+<line x1="140" y1="124" x2="64" y2="60" stroke="#7a8794" stroke-width=".7"></line>
+<text x="8" y="48" font-size="10" fill="#5b6b7d">1 cm ring</text>
+<text x="8" y="60" font-size="10" fill="#5b6b7d">(SV guide)</text>
+<line x1="238" y1="240" x2="64" y2="250" stroke="#8a5a00" stroke-width=".7"></line>
+<text x="8" y="246" font-size="10" fill="#8a5a00">urethra</text>
+<text x="8" y="258" font-size="10" fill="#8a5a00">+ PRV</text>
+<text x="8" y="292" font-size="9.5" fill="#666">anterior</text>
+<text x="552" y="292" font-size="9.5" fill="#666" text-anchor="end">posterior</text>
+</svg>
+<figcaption>Sagittal schematic. CTV (red) is the prostate plus the proximal 1 cm of seminal vesicle for intermediate risk; the dotted line is the 1 cm ring used to measure it. PTV (dashed blue) is 5 mm, 3 mm towards the rectum. The urethra and its PRV (amber) run from bladder neck to apex; black marks are fiducials. Our own drawing, not to scale.</figcaption>
+</figure>
+<h3>2c.5  Organs at risk for SABR</h3>
+<table>
+<thead><tr><th style="width:17%">Structure</th><th>How to contour</th><th style="width:27%">Differences between sources</th></tr></thead>
+<tbody>
+<tr><td class="b">Rectum</td><td>Solid structure (wall and lumen) from the rectosigmoid junction, where the rectum turns forwards and laterally, down to the anorectal junction</td><td>Lower limit: lower edge of ischial tuberosities (departmental); anus (PACE); about 2 cm below the apex (ESTRO)</td></tr>
+<tr><td class="b">Bladder</td><td>Whole organ, solid</td><td>If CT and MRI differ, PROMETHEUS used the smaller bladder</td></tr>
+<tr><td class="b">Urethra</td><td>Prostatic urethra on MRI, bladder neck to membranous urethra</td><td>Optional in PACE (“if visible”); contoured in the departmental protocol</td></tr>
+<tr><td class="b">Urethra PRV</td><td>Radial expansion of the urethra</td><td><b>3 mm</b> departmental; ESTRO: at least 2 mm is typical. PROMETHEUS: 1 mm if a catheter is in for planning and treatment, 3 mm if not</td></tr>
+<tr><td class="b">Penile bulb</td><td>Bulbous spongiosum below the urogenital diaphragm, on MRI</td><td></td></tr>
+<tr><td class="b">Femurs</td><td>Left and right separately</td><td>Femoral heads only, excluding the neck (PACE); proximal femur down to the ischial tuberosity (departmental)</td></tr>
+<tr><td class="b">Bowel / sigmoid</td><td>Loops within 2 cm of the PTV. Sigmoid separately from the rectosigmoid junction if within 2 cm</td><td>PACE allows a bowel bag; its constraints apply to individual loops (ESTRO). PACE-B used 4 cm</td></tr>
+<tr><td class="b">Optional</td><td>Neurovascular bundles and internal pudendal arteries on MRI (departmental, optional). Crura; bladder trigone and any TURP cavity (ESTRO, optional)</td><td>Evidence for sparing urinary and sexual substructures is mixed</td></tr>
+<tr><td class="b">Testes</td><td>CyberKnife only: blocking structure so beams do not pass through</td><td>PACE</td></tr>
+</tbody>
+</table>
+<p class="small">Urethra, two approaches (Draulans 2026): <b>steering</b> keeps hotspots out of the urethra; <b>sparing</b> lowers the urethral dose below the CTV prescription (about 10% in the trial cited). A post hoc PACE-B analysis found no clear link between urinary substructure dose and late toxicity.</p>
+<h3>2c.6  Dose, fractionation and scheduling</h3>
+<table>
+<thead><tr><th style="width:24%">Item</th><th>Detail</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Standard</td><td><b>36.25 Gy in 5 fractions</b> (7.25 Gy) to the PTV, with <b>40 Gy to the CTV</b></td><td>PACE-B; Draulans 2026; departmental v3.0</td></tr>
+<tr><td class="b">Alternative</td><td>42.7 Gy in 7 fractions (6.1 Gy), HYPO-RT-PC</td><td>Draulans 2026</td></tr>
+<tr><td class="b">MR-linac</td><td>PTV 36.25 Gy; CTV 38 Gy to start with, up to 40 Gy with experience and if constraints are met</td><td>Departmental MR-linac protocol</td></tr>
+<tr><td class="b">SV 2 cm volume</td><td>30 Gy in 5 fractions (PACE-C higher-risk group)</td><td>PACE v2.2 Table 3</td></tr>
+<tr><td class="b">Schedule</td><td>Departmental: not on consecutive days; at least 40 hours and at most 8 days between fractions; finish within 29 days (e.g. Tue/Thu, or Mon/Wed/Fri, or weekly). PACE: daily or alternate days within 14 days. ESTRO: alternate days or longer is reasonable, as daily treatment may give more low-grade toxicity; no oncological penalty shown for stretching the course</td><td>As left</td></tr>
+<tr><td class="b">Focal boost</td><td>GTV D98% at least 42 Gy (early experience) or 45 Gy (experienced departments), with at least 40 Gy acceptable; follow the departmental DIL boost guide. ESTRO: boosting above 40–50 Gy in 5 fractions is still being tested in trials</td><td>Departmental v3.0 §2.7; Draulans 2026</td></tr>
+<tr><td class="b">Beam</td><td>6 MV FFF preferred, 6 MV minimum; robotic (6DOF) couch</td><td>Departmental v3.0 §2.8</td></tr>
+</tbody>
+</table>
+<div class="flag">
+<span class="lbl">Dose still debated</span>
+<p style="margin:3px 0 0;">HYPO-RT-PC was non-inferior with a lower biologically effective dose than PACE-B, so 40 Gy to the CTV may not be needed for everyone. NRG-GU005 (36.25 Gy in 5 fractions, preliminary report at ASTRO 2025) had fewer side effects, possibly with slightly more biochemical relapse at three years (Draulans 2026). Dose escalation above 36.25 Gy raised late GU and GI toxicity in the series quoted by the departmental protocol (35 vs 40 Gy: grade 2+ GU 5% vs 24%, GI 7.6% vs 26%; Alayed 2018).</p>
+</div>
+<h3>2c.7  Target objectives and plan quality</h3>
+<table>
+<thead><tr><th style="width:20%">Objective</th><th>PACE-B / ESTRO Table 1 (gantry)</th><th>Departmental v3.0: per protocol</th><th>Minor</th><th>Major</th></tr></thead>
+<tbody>
+<tr><td class="b">CTV 40 Gy</td><td>V40 ≥95% (optimal)</td><td>D95 ≥40 Gy</td><td>38–40 Gy</td><td>&lt;38 Gy</td></tr>
+<tr><td class="b">PTV 36.25 Gy</td><td>V36.25 ≥95% (optimal)</td><td>D95 ≥36.25 Gy</td><td>34.5–36.25 Gy</td><td>&lt;34.5 Gy</td></tr>
+<tr><td class="b">PTV near-minimum</td><td>D98% ≥34.4 Gy (mandatory)</td><td>D98 ≥34.5 Gy</td><td>32.5–34.5 Gy</td><td>&lt;32.5 Gy</td></tr>
+<tr><td class="b">PTV D2%</td><td>&lt;42.8 Gy (optimal)</td><td>≤42 Gy</td><td>42–42.8 Gy</td><td>&gt;42.8 Gy</td></tr>
+<tr><td class="b">PTV Dmax</td><td>&lt;48 Gy (mandatory)</td><td>≤42.8 Gy (0.035 cc); not in an OAR</td><td>42.8–44 Gy</td><td>&gt;44 Gy, or in an OAR</td></tr>
+</tbody>
+</table>
+<ul class="tight">
+<li>PACE variations: CTV V40 or PTV V36.25 of 90–94.9% is minor; below 90% is major. Coverage may be relaxed to meet the mandatory rectal constraint (PACE v2.2 §5.3.2, §5.5).</li>
+<li>The MR-linac protocol uses the same table with Dmax to 0.1 cc, and a 38 Gy CTV level (D95 &gt;38 Gy; minor 36.25–38 Gy).</li>
+<li>Optional departmental quality measures: conformity index (V36.25 ÷ PTV volume) &lt;1.1; gradient index (V18.13 ÷ V36.25) &lt;4; MU per cGy &lt;3; Paddick index &gt;0.9.</li>
+<li>Homogeneous or not: ESTRO finds no high-level evidence either way. Let the urethral limit and OAR sparing drive the plan. Keep beam-on time short (few arcs, high dose rate, no posterior entry through the rectum).</li>
+</ul>
+<h3>2c.8  OAR constraints for 36.25–40 Gy in 5 fractions</h3>
+<table>
+<caption>Left: PACE-B constraints as tabulated by ESTRO (Draulans 2026, Table 2) and PACE v2.2 Table 6. Right: departmental v3.0 (optimal; minor variation; major variation). Dmax is to 0.035 cc on a linac and 0.1 cc on the MR-linac.</caption>
+<thead><tr><th style="width:15%">OAR</th><th>PACE-B / ESTRO</th><th>Departmental v3.0</th></tr></thead>
+<tbody>
+<tr><td class="b">Rectum</td><td>V18.1 &lt;50% · V29 &lt;20% · V36 &lt;2 cc (all mandatory) · V36 &lt;1 cc (optimal)</td><td>Dmax ≤38 Gy (minor to 40; major &gt;40) · V36 ≤1 cc (major &gt;1 cc) · V34 ≤3 cc (minor to 4 cc) · V32 ≤10% (minor to 20%) · V20 ≤40% (minor to 50%)</td></tr>
+<tr><td class="b">Bladder</td><td>V18.1 &lt;40% · V37 &lt;10 cc (mandatory) · V37 &lt;5 cc (optimal)</td><td>Dmax ≤42 Gy · V40 ≤2 cc (minor to 3 cc) · V36 ≤5 cc (minor to 10 cc) · V32 ≤5% (minor to 10%) · V20 ≤40% (minor to 50%)</td></tr>
+<tr><td class="b">Urethra / PRV</td><td>Urethra V42 &lt;50% (PACE; ESTRO notes this may be too permissive) · PRV D0.035 cc &lt;42 Gy (optimal; mandatory in hypo-FLAME)</td><td>Urethra_PRV Dmax ≤42 Gy (major &gt;42)</td></tr>
+<tr><td class="b">Penile bulb</td><td>V29.5 &lt;50% (optimal)</td><td>Dmax ≤36.25 Gy · V20 ≤3 cc (minor to 5 cc)</td></tr>
+<tr><td class="b">Femoral heads / femurs</td><td>V14.5 &lt;5% (optimal)</td><td>Dmax ≤30 Gy · V20 ≤10 cc (minor to 15 cc)</td></tr>
+<tr><td class="b">Bowel</td><td>V18.1 &lt;5 cc · V30 ≤1 cc · D0.035 cc &lt;35 Gy (hypo-FLAME). All mandatory, per loop</td><td>Small bowel: Dmax ≤30 Gy · V25 ≤5 cc (minor to 10 cc)</td></tr>
+<tr><td class="b">Sigmoid</td><td>—</td><td>Dmax ≤38 Gy (minor to 40) · V36 ≤1 cc</td></tr>
+<tr><td class="b">Optional</td><td>Crura: Dmean &lt;4.7 Gy, D2% &lt;12 Gy (Achard 2024)</td><td>Neurovascular bundles Dmax ≤40 Gy · internal pudendal arteries Dmax ≤20 Gy</td></tr>
+</tbody>
+</table>
+<p class="small">PACE variations: rectum V36 of 1–2 cc minor, 2 cc or more major; bladder V37 of 10–20 cc minor, 20 cc or more major (PACE-B protocol, in PACE v2.2 Appendix B). Use one constraint set per plan class and have physics validate it before adopting it.</p>
+<h3>2c.9  PTV margins, IGRT and motion management</h3>
+<table>
+<thead><tr><th style="width:24%">Item</th><th>Detail</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Minimum IGRT</td><td>Daily pre-treatment CBCT soft-tissue match and/or kV/MV fiducial match, corrected online. Enough on its own for a PTV margin of 5 mm or more with short treatment times (consensus). No consensus on whether intrafraction tracking is required below 5 mm</td><td>Draulans 2026 Q10</td></tr>
+<tr><td class="b">Margin by technique</td><td>5 mm is the common margin; 4 mm is increasingly used with beam-on times of 1.5–3 minutes; 2–3 mm only with intrafraction monitoring or MRI guidance</td><td>Draulans 2026; MIRAGE</td></tr>
+<tr><td class="b">PACE delivery</td><td>Set up to fiducials; re-image after any shift over 5 mm; shift for any displacement of 2 mm or more. Under 2 minutes from image review to beam-on. FFF beam-on under 3 minutes needs no intrafraction control; if longer, re-image between arcs or every 3–4 minutes. Calypso or Clarity: pause and correct if displacement exceeds 5 mm</td><td>PACE v2.2 §6.2</td></tr>
+<tr><td class="b">Departmental linac</td><td>CBCT for soft tissue plus mandatory intrafraction tracking on the fiducials (triggered imaging or ExacTrac): image at least every 30 seconds, ideally every 15–20 seconds. Re-simulate if a seed has migrated</td><td>Departmental v3.0 §2.8</td></tr>
+<tr><td class="b">Rotations</td><td>Correct them where the couch allows; this matters more with small margins and when SV is in the CTV</td><td>Draulans 2026</td></tr>
+<tr><td class="b">QA</td><td>Measured patient-specific QA before the first fraction. ESTRO: gamma 2%/2 mm or tighter, pass rate 90% or more</td><td>Departmental v3.0; Draulans 2026</td></tr>
+</tbody>
+</table>
+<h3>2c.10  MR-linac (Unity): what changes</h3>
+<ul class="tight">
+<li>No fiducials. Hip prostheses, unilateral or bilateral, are an exclusion, along with the usual MR safety exclusions.</li>
+<li>MR simulation on the Unity on the same day as the CT, as soon after it as possible, so bladder and rectum match. Fusion is a soft-tissue match around the prostate.</li>
+<li>Same CTV and PTV definitions and the same 5 mm / 3 mm posterior margin as the linac protocol; CTV dose starts at 38 Gy.</li>
+<li>Each fraction: a planning MR sequence, then adapt-to-position or adapt-to-shape. Motion monitoring runs in three planes through the PTV; if the target moves outside the PTV, stop, re-image and re-adapt (at least adapt-to-position).</li>
+<li>All five fractions are given on the Unity; up to 8 days between fractions covers machine downtime.</li>
+<li>ESTRO: online adaptive planning takes 10–45 minutes per fraction, benefit over non-adaptive treatment is not yet proven, and the daily re-contouring step carries the highest risk of error, so review contours carefully. See also the <a href="../mrl-pelvis.html">MR-linac pelvis page</a>.</li>
+</ul>
+<h3>2c.11  Pitfalls and counselling</h3>
+<ul class="tight">
+<li><b>Apex under-covered</b> or <b>base drawn into bladder wall</b>: both matter more with 3–5 mm margins.</li>
+<li><b>Too much SV:</b> measuring 1 cm along the tips rather than from the insertion drags rectum into the PTV.</li>
+<li><b>Rectal filling differs</b> between CT and MRI: check for gland deformation before trusting the fusion.</li>
+<li><b>Hotspots in the urethra:</b> with 40 Gy to the CTV, check where the maximum sits.</li>
+<li><b>Late urinary flare:</b> frequency, urgency, weak stream and dysuria 6–18 months after treatment in about 10–20%; self-limiting. Warn patients beforehand (Draulans 2026).</li>
+<li><b>PSA bounce:</b> 10–40%, mostly in the first 12–18 months. Avoid early salvage; PACE applied the Phoenix definition only after 24 months (Draulans 2026).</li>
+<li><b>Follow-up</b> (departmental): nurse phone call at 2 weeks, clinic at 6–12 weeks, then every 6–12 months for five years.</li>
+</ul>
+<h3>2c.12  Key trials</h3>
+<ul class="tight">
+<li><b>PACE-B</b> (van As, NEJM 2024): low and intermediate risk, no ADT. SBRT 36.25 Gy in 5 fractions (40 Gy to CTV) vs 78 Gy in 39 or 62 Gy in 20. Five-fraction SBRT was non-inferior.</li>
+<li><b>PACE-A</b> (van As, Eur Urol 2024): prostatectomy vs SBRT 36.25 Gy in 5 fractions.</li>
+<li><b>PACE-C</b> (Tree, Lancet Oncol 2025): 60 Gy in 20 vs 36.25 Gy in 5, intermediate and high risk, short-term ADT for higher-risk patients. Early toxicity reported; cancer outcomes awaited.</li>
+<li><b>HYPO-RT-PC</b> (Widmark, Lancet 2019; 10-year update Nilsson, Lancet Oncol 2026): 42.7 Gy in 7 vs 78 Gy in 39, intermediate and high risk (11% high risk), no ADT. Non-inferior.</li>
+<li><b>NRG-GU005</b> (Yu, ASTRO 2025, abstract): SBRT 36.25 Gy in 5 vs hypofractionated IMRT, intermediate risk. Quality-of-life results; see the note in 2c.6.</li>
+<li><b>MIRAGE</b> (Kishan, JAMA Oncol 2023): MRI-guided 2 mm vs CT-guided 4 mm margins; less toxicity with MRI guidance.</li>
+<li><b>Urethra-sparing SBRT, alternate days vs weekly</b> (Zilli, IJROBP 2023): randomised phase 2, 5-year results.</li>
+<li><b>hypo-FLAME</b> (consensus Draulans, Radiother Oncol 2019; hypo-FLAME 2.0 De Cock, Radiother Oncol 2023): whole-gland SBRT with focal boost; source of the urethra PRV limit.</li>
+</ul>
+<div class="foot"><span>Prostate RT Delineation Guide · v1.2</span><span>Page 4c</span></div>
 </section>
 <!-- ============================ PAGE 5 : SETTING B DEFINITIONS ============================ -->
 <section class="page" id="s3">
@@ -648,7 +883,7 @@
 <thead><tr><th style="width:20%">Setting</th><th>Target</th><th>Schedules</th><th>Evidence</th></tr></thead>
 <tbody>
 <tr><td class="b" rowspan="2">Intact <span class="pill p-pros"> </span></td><td>Prostate ± involved SV</td><td>74–80 Gy/37–40# · 60 Gy/20# · 70 Gy/28# · 62 Gy/20#</td><td>CHHiP, PROFIT, dose-escalation RCTs</td></tr>
-<tr><td>Prostate (SBRT); DIL boost</td><td>36.25–40 Gy/5# ; DIL up to 95 Gy/35#</td><td>SBRT RCTs; MIRAGE (margins); FLAME (boost)</td></tr>
+<tr><td>Prostate (SABR, <a href="#s2c">Section 2c</a>); DIL boost</td><td>36.25 Gy/5# to PTV with 40 Gy to CTV; alternative 42.7 Gy/7# ; DIL up to 95 Gy/35#</td><td>PACE-B, HYPO-RT-PC; MIRAGE (margins); FLAME (boost)</td></tr>
 <tr><td class="b" rowspan="3">Prostate bed <span class="pill p-bed"> </span></td><td>Adjuvant bed</td><td>64 Gy/32#</td><td>RAVES, RADICALS-RT, GETUG-17</td></tr>
 <tr><td>Salvage bed (elective)</td><td>64–66 Gy EQD2 · moderate hypofx 52.5 Gy/20# · 62.5 Gy/25# (EQD2 70.3, α/β 2)</td><td>SAKK 09/10, Qi; RADICALS-RT/HD; NRG-GU003</td></tr>
 <tr><td>Macroscopic bed recurrence <span class="pill p-boost">boost</span></td><td>≥70–74 Gy EQD2 to gross disease</td><td>SPIDER (retrospective)</td></tr>
@@ -666,6 +901,7 @@
 <thead><tr><th style="width:22%">Setting</th><th>Recommended CTV→PTV</th></tr></thead>
 <tbody>
 <tr><td class="b">Intact (CT-guided)</td><td>5–10 mm isotropic, reduced posteriorly (e.g. 5 mm) with daily IGRT to spare rectum</td></tr>
+<tr><td class="b">Intact (SABR, linac)</td><td>5 mm, 3 mm posteriorly (PACE; departmental SBRT protocol). PACE range 4–5 mm, 3–5 mm posteriorly. See <a href="#s2c">Section 2c</a></td></tr>
 <tr><td class="b">Intact (MRI-guided SBRT)</td><td>2–3 mm (MIRAGE: 2 mm vs 4 mm reduced toxicity)</td></tr>
 <tr><td class="b">Prostate bed (FROGG)</td><td>Lower bed 5–7 mm; upper bed 5–10 mm with the larger margin AP (greatest motion). Divide upper/lower where the CTV leaves the symphysis. ESTRO: minimum 5 mm isotropic.</td></tr>
 <tr><td class="b">Nodal CTV</td><td>5–7 mm to generate nodal PTV</td></tr>
@@ -716,7 +952,7 @@
 <!-- ============================ PAGE 11 : OAR CONSTRAINTS ============================ -->
 <section class="page" id="s6">
 <div class="sechead"><span class="eyebrow">Section 6</span><h2><span class="sectnum">6</span>Organs at risk &amp; dose constraints</h2></div>
-<p class="small" style="margin-top:-2px;">Post-prostatectomy constraints from FROGG Table 8; nodal constraints from NRG Table 1. Ideal constraints illustrate what is achievable with modern technique — target coverage should not be compromised to meet <i>ideal</i> values.</p>
+<p class="small" style="margin-top:-2px;">Five-fraction SABR constraints (PACE-B / ESTRO 2026 and departmental) are in <a href="#s2c">Section 2c.8</a>. Post-prostatectomy constraints from FROGG Table 8; nodal constraints from NRG Table 1. Ideal constraints illustrate what is achievable with modern technique — target coverage should not be compromised to meet <i>ideal</i> values.</p>
 <div class="flag">
 <span class="lbl">Physics validation required</span>
 <p style="margin:3px 0 0;">These tables are a starting point for departmental plan-class definition. Rectum/bladder dose-volume relationships remain poorly defined post-prostatectomy. Local constraints, EQD2 conversions and hotspot policy near the VUA must be validated by departmental physics before adoption.</p>
@@ -772,6 +1008,8 @@
 <tr><td>Gross nodal disease</td><td class="mono">GTVn</td><td>Per node; pre- and post-ADT</td></tr>
 <tr><td>Prostate CTV (intact)</td><td class="mono">CTVp_7800</td><td>+ risk-based ECE margin</td></tr>
 <tr><td>Seminal-vesicle CTV</td><td class="mono">CTVsv</td><td>proximal 1.4/2.2 cm, or full if involved</td></tr>
+<tr><td>SABR targets (5#)</td><td class="mono">CTVp_4000 / CTVpsv_4000, PTV_3625</td><td>PACE names; departmental protocol uses <code>CTV4000</code>, <code>PTV3625</code>. PACE-C adds <code>PTVsv_3000</code></td></tr>
+<tr><td>SABR urethra</td><td class="mono">Urethra, Urethra_PRV</td><td>PRV = urethra + 3 mm (departmental); 2 mm typical (ESTRO)</td></tr>
 <tr><td>Prostate-bed CTV</td><td class="mono">CTV_ProstBed</td><td>or <code>CTVp_6600</code> (salvage)</td></tr>
 <tr><td>Nodal CTV</td><td class="mono">CTVn_4500</td><td>NRG 10-step envelope</td></tr>
 <tr><td>Composite low-dose CTV</td><td class="mono">CTV_Low</td><td>algebra (below)</td></tr>
@@ -831,9 +1069,14 @@
 <li>Hall WA, Paulson E, Davis BJ, <i>et al.</i> NRG Oncology updated international consensus atlas on pelvic lymph node volumes for intact and postoperative prostate cancer. <i>Int J Radiat Oncol Biol Phys</i> 2021;109:174–185.</li>
 <li>McLaughlin PW, Evans C, Feng M, Narayana V. Radiographic and anatomic basis for prostate contouring errors and methods to improve prostate contouring accuracy. <i>Int J Radiat Oncol Biol Phys</i> 2010;76:369–78. Pearls in Section 2b.</li>
 <li>Song Y, Dornisch AM, Dess RT, <i>et al.</i> Multidisciplinary consensus prostate contours on MRI: educational atlas and reference standard for AI benchmarking. <i>Int J Radiat Oncol Biol Phys</i> 2025;123:183–194.</li>
+<li>Draulans C, <i>et al.</i> How to optimise prostate SBRT: ESTRO clinical practice consensus recommendations. <i>Radiother Oncol</i> 2026;223:111710 (doi:10.1016/j.radonc.2026.111710). Section 2c.</li>
+<li>PACE radiotherapy planning and delivery guidelines (PACE-A and PACE-C), version 2.2, 17 August 2020; Appendix B holds the PACE-B procedures. Royal Marsden / ICR-CTSU. Section 2c.</li>
+<li>Departmental national prostate SBRT protocol, version 3.0 (February 2025), and MR-linac prostate SBRT protocol (Elekta Unity). Internal documents. Section 2c.</li>
+<li>Richardson M, Skehan K, Wilton L, <i>et al.</i> Visualising the urethra for prostate radiotherapy planning. <i>J Med Radiat Sci</i> 2021;68:282–288 (doi:10.1002/jmrs.485).</li>
+<li>PROMETHEUS contouring guide v2 (Richardson M, Sidhom M, <i>et al.</i> PROMETHEUS study protocol. <i>BMC Cancer</i> 2018;18:588).</li>
 </ol>
 <h3>8.2  Additional guidelines &amp; key trials</h3>
-<ol class="ref" start="7">
+<ol class="ref" start="12">
 <li>Robin S, Jolicoeur M, Palumbo S, <i>et al.</i> Prostate bed delineation guidelines for postoperative RT (GFRU). <i>Int J Radiat Oncol Biol Phys</i> 2021;109:1243–53.</li>
 <li>Staal FHE, Janssen J, Oprea-Lager DE, <i>et al.</i> PSMA-PET/CT-based CTV delineation guideline for post-prostatectomy salvage RT (PERYTON). <i>Int J Radiat Oncol Biol Phys</i> 2024;118:688–96.</li>
 <li>Horsley PJ, Koo CM, Eade T, <i>et al.</i> Mapping of local recurrences after radical prostatectomy using <sup>68</sup>Ga-PSMA PET/CT. <i>Int J Radiat Oncol Biol Phys</i> 2023;115:106–17.</li>
@@ -851,6 +1094,15 @@
 <li>Mayo CS, Moran JM, Bosch W, <i>et al.</i> Standardizing nomenclatures in radiation oncology: the report of AAPM Task Group 263. <i>Int J Radiat Oncol Biol Phys</i> 2018;100:1057–66.</li>
 <li>ACR Appropriateness Criteria — external-beam RT treatment planning for clinically localized prostate cancer (CTV–PTV margin guidance).</li>
 <li>Oehler C, <i>et al.</i> PTV margin definition in hypofractionated IGRT of localized prostate cancer using CBCT and orthogonal image pairs with fiducial markers. <i>Radiat Oncol</i> 2014;9:229.</li>
+<li>van As N, Griffin C, Tree A, <i>et al.</i> Phase 3 trial of stereotactic body radiotherapy in localized prostate cancer (PACE-B). <i>N Engl J Med</i> 2024;391:1413–25.</li>
+<li>van As N, Yasar B, Griffin C, <i>et al.</i> Radical prostatectomy versus stereotactic radiotherapy for clinically localised prostate cancer (PACE-A). <i>Eur Urol</i> 2024;86:566–76.</li>
+<li>Tree AC, Hinder V, Chan A, <i>et al.</i> Moderately hypofractionated IMRT versus SBRT for prostate cancer (PACE-C): early toxicity. <i>Lancet Oncol</i> 2025;26:936–47.</li>
+<li>Widmark A, Gunnlaugsson A, Beckman L, <i>et al.</i> Ultra-hypofractionated versus conventionally fractionated radiotherapy for prostate cancer (HYPO-RT-PC), 5-year outcomes. <i>Lancet</i> 2019;394:385–95. Ten-year outcomes: Nilsson P, <i>et al.</i> <i>Lancet Oncol</i> 2026.</li>
+<li>Yu JB, Pugh S, Ellis RJ, <i>et al.</i> Quality of life results from NRG-GU005. <i>Int J Radiat Oncol Biol Phys</i> 2025;123:S81 (abstract).</li>
+<li>Zilli T, Jorcano S, Bral S, <i>et al.</i> Every-other-day versus once-a-week urethra-sparing prostate SBRT: 5-year results of a randomized phase 2 trial. <i>Int J Radiat Oncol Biol Phys</i> 2023;117:791–8.</li>
+<li>Achard V, Zilli T, Lamanna G, <i>et al.</i> Urethra-sparing prostate SBRT: sexual function and dose to the penile bulb, crura and internal pudendal arteries. <i>Int J Radiat Oncol Biol Phys</i> 2024;119:1137–46.</li>
+<li>Draulans C, De Roover R, van der Heide UA, <i>et al.</i> SBRT with optional focal lesion ablative microboost in prostate cancer: topical review and multicenter consensus (hypo-FLAME). <i>Radiother Oncol</i> 2019;140:131–42.</li>
+<li>Alayed Y, Cheung P, Pang G, <i>et al.</i> Dose escalation for prostate SABR: late outcomes from two prospective clinical trials. <i>Radiother Oncol</i> 2018;127:213–8.</li>
 </ol>
 <h3>8.3  eviQ (Cancer Institute NSW) protocols</h3>
 <ul class="ref">
