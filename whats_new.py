@@ -26,6 +26,7 @@ EVIDENCE = [
   [('hn-npc-sinonasal.html#npc','Nasopharynx')]),
 ]
 SITE = [
+ ('2026-11-17', 'EXTEND prostate basket (Tang, JAMA Oncol 2023) added from the paper: intermittent hormone therapy ± metastasis-directed therapy for oligometastatic prostate cancer (PFS HR 0.25; eugonadal PFS HR 0.32). Prostate key trials and MDT card, and oligometastatic page.', 'gu-prostate.html#trials'),
  ('2026-11-17', "New Contacts page (Tools): GenesisCare St Vincent's extensions, St Vincent's Hospital numbers and other GenesisCare NSW centres, with tap-to-call. Mobile numbers are kept off the site.", 'contacts.html'),
  ('2026-11-16', "What's new: the To verify tab has been removed; the list of figures still to check is now kept off the site.", ''),
  ('2026-11-16', 'Prostate contouring guide: new section on 5-fraction SABR (selection, preparation, target volumes and the seminal vesicle rule, urethra, dose and scheduling, target objectives, OAR constraints, margins and motion management, MR-linac), from the ESTRO 2026 SBRT consensus, the PACE planning guidelines and the departmental SBRT protocols.', 'contouring/prostate.html#s2c'),
