@@ -323,6 +323,7 @@ CNAV += SOFTWARE
 # ---------------- Tools: calculators, consent numbers, doses at a glance, what's new ----------------
 TOOLS = [
  ('links.html','Clinic links','Clinic quick links','Radiology PACS and pathology results logins, A to Z, and referral forms.'),
+ ('contacts.html','Contacts','Phone and contact list',"GenesisCare St Vincent's extensions, St Vincent's Hospital numbers and other GenesisCare NSW centres."),
  ('tools.html','Calculators','Calculators and tools','EQD2 and BED, cumulative dose across courses, treatment gap, and links to re-irradiation tools and SABR constraint tables.'),
  ('scores.html','Clinical scores','Clinical scores and nomograms','Auto-staging for 18 sites, Child-Pugh, ALBI, MELD, PSA doubling time, Roach, CAPRA, CTS5, Van Nuys, SINS, Mirels, RPA, IPI, Sedlis, brachytherapy EQD2 and more, with links to MSKCC, PREDICT, GPA and other external tools.'),
  ('consent.html','Consent numbers','Consent numbers by site','The toxicity rates to quote, gathered from every tumour-site page. Print one site as a sheet.'),
@@ -392,9 +393,44 @@ def _links_page():
     return '\n'.join(out)
 (root/'src'/'links.html').write_text(_links_page())
 
+# ---------------- Phone and contact list (clinic_contacts.py -> src/contacts.html) ----------------
+import clinic_contacts as _cc
+def _num(s):
+    out = []
+    for part in [x.strip() for x in s.split(' / ')]:
+        d = re.sub(r'\D','',part)
+        if '@' in part:
+            out.append(f'<a href="mailto:{html.escape(part)}">{html.escape(part)}</a>')
+        elif re.fullmatch(r'\d{4,5}', part.replace(' ','')) or re.fullmatch(r'\d{2}', d):
+            out.append(f'<span class="ext">{html.escape(part)}</span>')
+        else:
+            if len(d) == 8: d = '02' + d
+            tel = '+61' + d[1:] if d.startswith('0') else d
+            out.append(f'<a href="tel:{tel}">{html.escape(part)}</a>')
+    return ' / '.join(out)
+def _contacts_page():
+    out = []
+    for i,(tid,label,lede,cards_) in enumerate(_cc.TABS):
+        h = ' hidden' if i else ''
+        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <div class="jump"></div>\n  </div>')
+        if tid == 'centres':
+            rows = ''.join(f'<tr><td><b>{html.escape(c)}</b><br><span class="note">{html.escape(a)}</span></td><td>' + '<br>'.join(f'{html.escape(l)}: {_num(n)}' for l,n in nums) + '</td></tr>' for c,a,nums in cards_)
+            out.append(f'  <article class="card" data-title="GenesisCare centres"><h3>GenesisCare centres</h3><table class="contacts"><thead><tr><th>Centre</th><th>Contact</th></tr></thead><tbody>{rows}</tbody></table></article>')
+        else:
+            for title,note,rows_ in cards_:
+                rows = ''.join(f'<tr><td>{html.escape(s)}' + (f'<br><span class="note">{html.escape(n)}</span>' if n else '') + f'</td><td>{_num(v)}</td></tr>' for s,v,n in rows_)
+                np_ = '<p class="note">' + re.sub(r'\b(\d{4} \d{4})\b', lambda m: _num(m.group(1)), html.escape(note)) + '</p>' if note else ''
+                out.append(f'  <article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3>{np_}<table class="contacts"><thead><tr><th>Service</th><th>Number</th></tr></thead><tbody>{rows}</tbody></table></article>')
+        if tid == 'svh':
+            out.append(f'  <article class="card" data-title="Not on this page"><h3>Not on this page</h3><p class="note">{html.escape(_cc.NOT_HERE)}</p></article>')
+        out.append('</section>')
+    return '\n'.join(out)
+(root/'src'/'contacts.html').write_text(_contacts_page())
+FOOT_CONTACTS = '<footer><p>From the SVH contact list, November 2026. Short numbers are internal extensions; tap a full number to call. Mobile numbers and staff names are deliberately left off because this site is public. Check with switch if a number no longer works. Edit clinic_contacts.py to change them.</p></footer>'
+
 FOOT_LINKS = '<footer><p>Links open each provider\'s own login page; nothing is stored here. Accounts, passwords and MFA are set up with each provider. Links marked "Added Nov 2026" came from provider websites and a published NSW provider list and may need a new account. Edit clinic_links.py to change them.</p></footer>'
 for g in TOOLS:
-    (root/g[0]).write_text(page(*g, TOOLS, 'Tools', 'tools', FOOT_LINKS if g[0]=='links.html' else FOOT_TOOLS))
+    (root/g[0]).write_text(page(*g, TOOLS, 'Tools', 'tools', FOOT_LINKS if g[0]=='links.html' else FOOT_CONTACTS if g[0]=='contacts.html' else FOOT_TOOLS))
 
 FOOT_SW = '<footer><p>Software quick references compiled from vendor user and training guides and a departmental MIM guide. Shortcuts and tool names change between versions and local configurations; check in your installed version. Not affiliated with or endorsed by MIM Software, GE HealthCare or Elekta. Follow departmental work instructions.</p></footer>'
 for f,short,long,desc in SOFTWARE:
@@ -476,7 +512,7 @@ home = f'''<!DOCTYPE html>
 <div id="gresults" hidden></div>
 <div id="homebody">
 <div id="pinned" hidden></div>
-<nav class="sitenav" aria-label="Tumour groups"><a href="links.html">Clinic links</a><a href="#tools">Tools</a>{groupnav}<a href="#contouring">Contouring</a></nav>
+<nav class="sitenav" aria-label="Tumour groups"><a href="links.html">Clinic links</a><a href="contacts.html">Contacts</a><a href="#tools">Tools</a>{groupnav}<a href="#contouring">Contouring</a></nav>
   <h2 class="group-title" id="tools">Tools and updates</h2>
   <div class="hub">{cards(TOOLS)}</div>
 {sections}

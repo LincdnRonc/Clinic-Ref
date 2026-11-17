@@ -26,6 +26,7 @@ EVIDENCE = [
   [('hn-npc-sinonasal.html#npc','Nasopharynx')]),
 ]
 SITE = [
+ ('2026-11-17', "New Contacts page (Tools): GenesisCare St Vincent's extensions, St Vincent's Hospital numbers and other GenesisCare NSW centres, with tap-to-call. Mobile numbers are kept off the site.", 'contacts.html'),
  ('2026-11-16', "What's new: the To verify tab has been removed; the list of figures still to check is now kept off the site.", ''),
  ('2026-11-16', 'Prostate contouring guide: new section on 5-fraction SABR (selection, preparation, target volumes and the seminal vesicle rule, urethra, dose and scheduling, target objectives, OAR constraints, margins and motion management, MR-linac), from the ESTRO 2026 SBRT consensus, the PACE planning guidelines and the departmental SBRT protocols.', 'contouring/prostate.html#s2c'),
  ('2026-11-15', 'Pancreas: new Pathway & evidence tab. A flow by resectability group showing where RT enters, a table of RT decision points with the trials for and against, SBRT vs chemoRT selection factors for stable locally advanced disease, and a pre-RT checklist. CONKO-007 added to Key trials (check).', 'gi-pancreas.html#pathway'),
