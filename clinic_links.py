@@ -64,6 +64,34 @@ TABS = [
   ]),
  ]),
  ('forms', 'Forms', 'Referral and pathology request forms. PDF links open or download the form directly.', [
+  ('I-MED Radiology request forms', 'i-med.com.au/resources/e-referrals/pdf', [
+   ('I-MED standard image request', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/b7baf0a8-7cd7-4f54-8522-9e05f6fc6b9b/I-MED_Radiology_Editable_PDF_Imaging_Request_Form_0626.pdf', 'PDF, editable (June 2026)', ()),
+   ('I-MED specialist MRI image request', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/eca5abb4-b864-4642-aa8c-863eba3e2f4a/VICT204_0626_Specialist_Referral_A4_Editable.pdf', 'PDF, editable (June 2026)', ()),
+   ('I-MED prostate MRI request', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/f14cedab-ecc7-4f3b-9042-afb764e1b031/VICT183_0626_Multi_MRI_ProstateReferral_Editable.pdf', 'PDF, editable (June 2026)', ()),
+   ('I-MED PET/CT image request (NSW)', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/9440104f-b337-46b7-8d28-89e3927ff07d/IMEDNSW462_0726_A4_PET_Request_Editable.pdf', 'PDF, editable (July 2026)', ()),
+  ]),
+  ('Lumus Imaging request form', 'lumusimaging.com.au', [
+   ('Lumus Imaging request / referral A4', 'https://www.lumusimaging.com.au/assets/documents/LUMREF001-0922_Referral_A4-LR-V2.pdf', 'PDF (Sept 2022 version); also valid at other radiology providers', ()),
+  ]),
+  ("St Vincent's Hospital Sydney: medical imaging", 'svhs.org.au', [
+   ("St Vincent's Medical Imaging: request an appointment", 'https://forms.svha.org.au/medical-imaging-booking/', 'Online booking page; no PDF request form is published, a copy of the referral is needed (svhs.mi@svha.org.au, 02 8382 1820)', ()),
+  ]),
+  ("St Vincent's Theranostics and Nuclear Medicine request forms", 'svhs.org.au/our-services/list-of-services/theranostics-and-nuclear-medicine/referral-information', [
+   ("St Vincent's FDG PET/CT request", 'https://www.svhs.org.au/ArticleDocuments/3976/77386%20SVH%20PET%20CT%20Patient-Request-Interactive-Form%20%28Jan%202020%29%20%28002%29.pdf.aspx', 'PDF, interactive', ()),
+   ("St Vincent's neuro PET/CT request", 'https://www.svhs.org.au/ArticleDocuments/3976/86183_StVincentsHospital-Neuro-PET-CT-Request-Interactive-2%20%28003%29.pdf.aspx', 'PDF, interactive', ()),
+   ("St Vincent's PSMA PET request", 'https://www.svhs.org.au/ArticleDocuments/3976/73857-SVH-PSMA-Request-Interactive-Forms.pdf.aspx', 'PDF, interactive', ()),
+   ("St Vincent's DOTATATE PET request", 'https://www.svhs.org.au/ArticleDocuments/3976/84998_StVincentsHospital-Dotatate-Request-Form-Interactive.pdf.aspx', 'PDF, interactive', ()),
+   ("St Vincent's general nuclear medicine request", 'https://www.svhs.org.au/ArticleDocuments/3976/77386_SVH-NuclearMedicineRequest-InteractiveForm%20%28Jan%202020%29.pdf.aspx', 'PDF, interactive', ()),
+  ]),
+  ('PRP Diagnostic Imaging request forms', 'prpimaging.com.au', [
+   ('PRP referrals: reorder and print', 'https://www.prpimaging.com.au/referrer/resources/referrals-reorder-print/', 'Web page', ()),
+   ('PRP Hunter Urology request form', 'https://www.prpimaging.com.au/wp-content/uploads/2021/04/A4-HUNTER-UROLOGY-EDITABLE-DEC-2020-ED.pdf', 'PDF, editable (Dec 2020 version)', ('check',)),
+   ('PRP Central Coast urology request form', 'https://www.prpimaging.com.au/wp-content/uploads/2021/04/A4-CC-URO-REF-DEC-2020-NT.pdf', 'PDF (Dec 2020 version)', ('check',)),
+  ]),
+  ('Laverty Pathology request forms', 'laverty.com.au', [
+   ('Laverty online pathology request form (telehealth)', 'https://www.laverty.com.au/?p=1388', 'Web page with the fillable form; Laverty accepts any provider\'s request form', ()),
+   ('Laverty telehealth eRequest form', 'https://cdn.intelligencebank.com/au/share/DXK30X/lk8v1/LBYJD/original/LAV_RF050_Telehealth_eRequests_Nov23_RE_2', 'PDF (Nov 2023 version)', ('check',)),
+  ]),
   ('SydPath general pathology request forms', 'sydpath.com.au/request-forms', [
    ('SydPath A4 computer request form', 'https://sydpath.com.au/wp-content/uploads/2022/07/SydPath-A4-Fillable-Request-Form-A4-_-0722-V12.pdf', 'PDF, fillable', ()),
   ]),
