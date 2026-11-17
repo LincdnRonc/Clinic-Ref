@@ -36,6 +36,7 @@ The live site is password-protected with StatiCrypt. On every push to `main`, `.
 - "Remember me on this device" is ticked by default and lasts 365 days, so each device logs in once.
 - Change the password: update the `SITE_PASSWORD` secret, then Actions → "Deploy password-protected site" → Run workflow. Everyone has to log in again.
 - Log out on a device: open any page with `?staticrypt_logout` on the end of the address.
+- Private contacts: mobiles and staff names for contacts.html are kept in the `CONTACTS_PRIVATE` repository secret (JSON; format in `tools/private_contacts.py`) and added at deploy, just before encryption. They are never committed. To change them, update the secret and re-run the workflow.
 - Not encrypted: the PDFs in `assets/pdf/`, the calculator scripts in `assets/`, and this repository while it is public.
 
 Avoid pushing several times in quick succession: a newer push cancels a Pages deploy that is still running.

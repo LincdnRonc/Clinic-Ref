@@ -444,7 +444,7 @@ def _contacts_page():
         out.append('</section>')
     return '\n'.join(out)
 (root/'src'/'contacts.html').write_text(_contacts_page())
-FOOT_CONTACTS = '<footer><p>From the SVH contact list, November 2026. Short numbers are internal extensions; tap a full number to call. Mobile numbers and staff names are deliberately left off because this site is public. Check with switch if a number no longer works. Edit clinic_contacts.py to change them.</p></footer>'
+FOOT_CONTACTS = '<footer><p>From the SVH contact list, November 2026. Short numbers are internal extensions; tap a full number to call. Mobile numbers and staff names are added only to the password-protected site when it deploys (GitHub secret CONTACTS_PRIVATE, see tools/private_contacts.py), never to the public repository. Check with switch if a number no longer works. Edit clinic_contacts.py for the rest.</p></footer>'
 
 FOOT_LINKS = '<footer><p>Links open each provider\'s own login page; nothing is stored here. Accounts, passwords and MFA are set up with each provider. Links marked "Added Nov 2026" came from provider websites and a published NSW provider list and may need a new account. Edit clinic_links.py to change them.</p></footer>'
 for g in TOOLS:

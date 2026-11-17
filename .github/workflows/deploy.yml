@@ -41,6 +41,11 @@ jobs:
         if: steps.check.outputs.ready == 'true'
         with:
           node-version: 20
+      - name: Add private contacts (mobiles; kept in the CONTACTS_PRIVATE secret, never in the repo)
+        if: steps.check.outputs.ready == 'true'
+        env:
+          CONTACTS_PRIVATE: ${{ secrets.CONTACTS_PRIVATE }}
+        run: python3 tools/private_contacts.py
       - name: Encrypt pages
         if: steps.check.outputs.ready == 'true'
         env:

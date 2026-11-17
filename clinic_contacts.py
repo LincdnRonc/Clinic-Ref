@@ -1,6 +1,7 @@
 # Phone and contact list (Tools > Contacts). Edit this file, then run build.py; it writes src/contacts.html.
 # Source: "Contact List - SVH" (Nov 2026).
-# The repo and site are public: no mobile numbers and no staff names here. Use service names, extensions,
+# The repo is public: no mobile numbers and no staff names here. Those are in the CONTACTS_PRIVATE secret
+# and added at deploy by tools/private_contacts.py (only onto the password-protected site). Use service names, extensions,
 # landlines, faxes and shared mailboxes only.
 # Numbers: a 4-5 digit number is shown as an internal extension; 8-digit Sydney numbers and 1300/1800 numbers
 # become tap-to-call links. Separate several numbers with " / ".
@@ -97,6 +98,5 @@ TABS = [
 ]
 
 # Shown on the page so it is clear what was left off (no numbers or names).
-NOT_HERE = ('Mobile numbers on the paper list are not on this page because the site is public: the CNCs, the CL room, '
-            'the wardsperson, the ED admitting officer, 7S, vascular access, orthopaedics and social work. '
-            'Use the printed SVH contact list for these.')
+NOT_HERE = ('Mobile numbers and staff names are added only to the password-protected site when it deploys, '
+            'so they are missing from this copy. Use the printed SVH contact list.')
