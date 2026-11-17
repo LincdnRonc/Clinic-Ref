@@ -37,6 +37,12 @@ EVIQ = {
   ('1880', 'NSCLC superior sulcus (Pancoast) neoadjuvant chemoradiation', p('respiratory/1880-respiratory-nsclc-superior-sulcus-pancoast')),
   ('1872', 'Lung primary palliative EBRT', p('respiratory/1872-respiratory-lung-primary-palliative-ebrt')),
  ],
+ 'thorax-metastatic.html': [
+  ('1872', 'Lung primary palliative EBRT', p('respiratory/1872-respiratory-lung-primary-palliative-ebrt')),
+  ('3389', 'NSCLC definitive stereotactic EBRT peripheral tumours', p('respiratory/3389-respiratory-non-small-cell-lung-cancer-defini')),
+  ('4018', 'NSCLC definitive stereotactic EBRT central tumours', p('respiratory/4018-respiratory-non-small-cell-lung-cancer-defini')),
+  ('', 'All eviQ respiratory radiation oncology protocols', CAT + 'Respiratory'),
+ ],
  'thorax-sclc.html': [
   ('4292', 'Small cell lung cancer thoracic EBRT with or without chemotherapy', p('respiratory/4292-respiratory-small-cell-lung-cancer-thoracic-e')),
   ('3679', 'Small cell lung cancer consolidative EBRT', p('respiratory/3679-respiratory-small-cell-lung-cancer-consolidat')),

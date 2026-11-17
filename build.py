@@ -112,7 +112,7 @@ STAGERS = {'nccn':'Prostate NCCN risk group','breast':'Breast (AJCC 8 anatomic s
  'oes_scc':'Oesophagus, squamous (AJCC 8 clinical)','oes_ac':'Oesophagus, adenocarcinoma (AJCC 8 clinical)','gastric':'Stomach (AJCC 8 clinical)','pancreas':'Pancreas (AJCC 8)','hcc':'Hepatocellular carcinoma (AJCC 8)',
  'hn':'Oral cavity, larynx, hypopharynx, p16-negative oropharynx (AJCC 8)','opc':'Oropharynx, p16-positive (AJCC 8 clinical)','npc':'Nasopharynx (AJCC 8)','bladder':'Bladder (AJCC 8)','kidney':'Kidney (AJCC 8)',
  'cervix':'Cervix (FIGO 2018)','endo':'Endometrium (FIGO 2009)','lugano':'Lymphoma (Lugano)'}
-STAGE_PAGES = {'breast-early.html':['breast'],'breast-nodes-pmrt.html':['breast'],'breast-planning.html':['breast'],'thorax-early.html':['lung'],'thorax-stage3.html':['lung'],'thorax-sclc.html':['lung'],
+STAGE_PAGES = {'breast-early.html':['breast'],'breast-nodes-pmrt.html':['breast'],'breast-planning.html':['breast'],'thorax-early.html':['lung'],'thorax-stage3.html':['lung'],'thorax-sclc.html':['lung'],'thorax-metastatic.html':['lung'],
  'gu-prostate.html':['nccn','prostate'],'gu-bladder.html':['bladder'],'gu-kidney.html':['kidney'],'gi-oesophagus-gastric.html':['oes_scc','oes_ac','gastric'],'gi-pancreas.html':['pancreas'],'gi-hepatobiliary.html':['hcc'],
  'gi-rectum-colon.html':['crc'],'gi-anal.html':['anal'],'gyn-cervix.html':['cervix'],'gyn-endometrial.html':['endo'],'hn-oropharynx.html':['opc','hn'],'hn-larynx.html':['hn'],'hn-oral-salivary.html':['hn'],
  'hn-npc-sinonasal.html':['npc'],'hn-general.html':['hn','opc','npc'],'heme-hodgkin.html':['lugano'],'heme-nhl.html':['lugano'],'scores.html':list(STAGERS)}
@@ -186,6 +186,7 @@ BREAST = [
 THORAX = [
  ('thorax-early.html','Early NSCLC (SABR)','Early-stage NSCLC (SABR)','Dose by location (peripheral, central, ultracentral), HILUS caution, operable vs inoperable, SABR constraints and toxicity.'),
  ('thorax-stage3.html','Stage III NSCLC','Stage III NSCLC','ChemoRT then durvalumab or osimertinib, hypofractionation for unfit, PORT, neoadjuvant chemo-IO, superior sulcus, constraints.'),
+ ('thorax-metastatic.html','Metastatic NSCLC','Metastatic NSCLC','Consolidative RT with TKIs (SINDAS, NORTHSTAR), driver-negative and IO-era trials (LU002, LONESTAR), oligoprogression (CURB), palliative thoracic doses, consent numbers.'),
  ('thorax-sclc.html','Small cell','Small cell lung cancer','45/30 BID vs 66–70 Gy, ADRIATIC, PCI vs MRI surveillance, extensive stage and CREST.'),
  ('thorax-other.html','Thymic, meso & other','Thymic, mesothelioma and other thoracic','Thymic PORT by resection, mesothelioma RT, thoracic re-irradiation, VT radioablation.'),
 ]
