@@ -1,0 +1,57 @@
+# Publishes the password-protected site to GitHub Pages on every push to main.
+# One-time setup: Settings → Pages → Source: "GitHub Actions";
+# Settings → Secrets and variables → Actions → New repository secret: SITE_PASSWORD.
+name: Deploy password-protected site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check the password secret is set
+        id: check
+        env:
+          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+        run: |
+          if [ -z "$SITE_PASSWORD" ]; then
+            echo "::warning::SITE_PASSWORD secret not set yet, so nothing was deployed. Add it under Settings → Secrets and variables → Actions."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.ready == 'true'
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.ready == 'true'
+        with:
+          node-version: 20
+      - name: Encrypt pages
+        if: steps.check.outputs.ready == 'true'
+        env:
+          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+        run: |
+          npm install --no-save --no-package-lock staticrypt@3.5.4
+          node tools/encrypt_site.js
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.check.outputs.ready == 'true'
+        with:
+          path: _site
+      - id: deployment
+        if: steps.check.outputs.ready == 'true'
+        uses: actions/deploy-pages@v4

@@ -52,13 +52,27 @@
       if(window.QR_INDEX){ if(!low) low=window.QR_INDEX.map(function(r){return (r[1]+' '+r[3]+' '+r[4]+' '+r[5]).toLowerCase();}); return cb(); }
       waiters.push(cb); if(loading) return; loading=true;
       var s=document.createElement('script'); s.src='assets/search-index.js';
-      s.onload=function(){ var w=waiters; waiters=[]; w.forEach(function(c){load(c);}); }; document.head.appendChild(s);
+      s.onload=function(){ unlock(function(){ var w=waiters; waiters=[]; w.forEach(function(c){load(c);}); }); }; document.head.appendChild(s);
+    }
+    // Live site: the index is encrypted (tools/encrypt_site.js); decrypt it with the key remembered at login.
+    function unlock(cb){
+      if(window.QR_INDEX || !window.QR_INDEX_ENC) return cb();
+      function fail(){ window.QR_INDEX=[]; window.QR_LOCKED=true; cb(); }
+      try{
+        var hp=localStorage.getItem('staticrypt_passphrase'); if(!hp || !window.crypto || !crypto.subtle) return fail();
+        var kb=new Uint8Array(hp.length/2); for(var i=0;i<kb.length;i++) kb[i]=parseInt(hp.substr(i*2,2),16);
+        var raw=atob(window.QR_INDEX_ENC), b=new Uint8Array(raw.length); for(var j=0;j<raw.length;j++) b[j]=raw.charCodeAt(j);
+        crypto.subtle.importKey('raw',kb,'AES-CBC',false,['decrypt'])
+          .then(function(k){ return crypto.subtle.decrypt({name:'AES-CBC',iv:b.slice(0,16)},k,b.slice(16)); })
+          .then(function(buf){ window.QR_INDEX=JSON.parse(new TextDecoder().decode(buf)); cb(); }, fail);
+      }catch(e){ fail(); }
     }
     function run(){
       var v=gq.value.trim().toLowerCase();
       if(v.length<2){ out.hidden=true; out.innerHTML=''; homebody.hidden=false; return; }
       load(function(){
         if(gq.value.trim().toLowerCase()!==v) return;
+        if(window.QR_LOCKED){ out.innerHTML='<p class="gcount">Search needs “Remember me on this device”. Log out (add <code>?staticrypt_logout</code> to the address), then log in again with it ticked.</p>'; out.hidden=false; homebody.hidden=true; return; }
         var terms=v.split(/\s+/), hits=[];
         for(var i=0;i<low.length;i++){
           var t=low[i]; if(!terms.every(function(x){return t.indexOf(x)>=0;})) continue;
