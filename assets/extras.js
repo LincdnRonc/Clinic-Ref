@@ -126,3 +126,15 @@
     if(new URLSearchParams(location.search).get('view')==='contour') setCN(true);
   }
 })();
+
+// Back to top: floating button, shown after scrolling down
+(function(){
+  var b=document.createElement('button'); b.type='button'; b.className='totop'; b.setAttribute('aria-label','Back to top'); b.title='Back to top';
+  b.innerHTML='<span aria-hidden="true">↑</span><span class="totop-l">Top</span>';
+  b.addEventListener('click',function(){ var r=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches; window.scrollTo({top:0,behavior:r?'auto':'smooth'}); var f=document.querySelector('h1'); if(f){ f.setAttribute('tabindex','-1'); f.focus({preventScroll:true}); } });
+  document.body.appendChild(b);
+  var tick=false;
+  function upd(){ tick=false; b.classList.toggle('show', window.scrollY>400); }
+  window.addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(upd); } },{passive:true});
+  upd();
+})();
