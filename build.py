@@ -24,6 +24,17 @@ GI = [
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">'
 FOOT = '<footer><p>Synthesised from the RadOncReview GI document (collaborative, US-centric: NCCN, ASTRO, ASCO), including 2025–26 guidelines and ASTRO \'26 abstracts. Doses are as reported in the source and its trials. Check eviQ, departmental protocols and drug availability before prescribing.</p></footer>'
 from eviq_links import EVIQ
+# Quick-launch icons in the page header (own icons, not the services' logos)
+APPLINKS = (
+ '<nav class="applinks" aria-label="Quick launch">'
+ '<a href="https://keep.google.com/" target="_blank" rel="noopener" title="Google Keep" aria-label="Google Keep" class="al al-keep">'
+ '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5a5 5 0 0 0-3 9v1.8h6v-1.8a5 5 0 0 0-3-9z" fill="#fff"/><rect x="9.6" y="16.4" width="4.8" height="2.2" rx=".8" fill="#fff"/></svg><span>Keep</span></a>'
+ '<a href="https://tasks.google.com/" target="_blank" rel="noopener" title="Google Tasks" aria-label="Google Tasks" class="al al-tasks">'
+ '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tasks</span></a>'
+ '<a href="https://anywhere.genesiscare.com.au/" target="_blank" rel="noopener" title="GenesisCare Anywhere (remote access)" aria-label="GenesisCare Anywhere" class="al al-gc">'
+ '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="10.5" rx="1.6" fill="none" stroke="#fff" stroke-width="2"/><path d="M9 19h6M12 16v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M9.3 11.6l2.1-2.1 1.5 1.5 2.1-2.1" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Genesis</span></a>'
+ '</nav>')
+
 def eviq_panel(f):
     items = EVIQ.get(f)
     if not items: return ''
@@ -130,7 +141,7 @@ def page(f, short, long, desc, group, gname, gid, foot):
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#{gid}">{html.escape(gname)}</a> › <span>{html.escape(long)}</span></nav>
     <div class="title-row">
       <h1>{html.escape(long)} <span>Quick Reference</span></h1>
-      <div class="meta">Synthesised Nov 2026</div>
+      <div class="hdr-right">{APPLINKS}<div class="meta">Synthesised Nov 2026</div></div>
     </div>
     <form class="search" role="search" id="searchForm">
       <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
@@ -387,8 +398,6 @@ def _links_page():
                 lis.append(f'<li><a href="{html.escape(url)}" target="_blank" rel="noopener"><b>{html.escape(name)}</b>{nn}<span class="qh">{html.escape(host)}</span>{fl}</a></li>')
             np_ = f'<p class="note">{html.escape(note)}</p>' if note else ''
             out.append(f'  <article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3>{np_}<ul class="qlinks">{"".join(lis)}</ul></article>')
-        if tid == 'radiology':
-            out.append(f'  <article class="card" data-title="Still to add"><h3>Still to add</h3><p class="note">{html.escape(_cl.NOT_YET)}</p></article>')
         out.append('</section>')
     return '\n'.join(out)
 (root/'src'/'links.html').write_text(_links_page())
@@ -496,7 +505,7 @@ home = f'''<!DOCTYPE html>
   <div class="top-inner" style="padding-bottom:12px">
     <div class="title-row">
       <h1>Radiation Oncology <span>Quick Reference</span></h1>
-      <div class="meta">Synthesised Nov 2026</div>
+      <div class="hdr-right">{APPLINKS}<div class="meta">Synthesised Nov 2026</div></div>
     </div>
     <p class="lede" style="margin:4px 0 0">Clinic-ready summaries by tumour site: management by stage, doses, planning volumes and constraints, consent numbers and landmark trials.</p>
     <form class="search" role="search" id="siteSearch" onsubmit="return false">

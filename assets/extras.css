@@ -89,3 +89,15 @@ table.contacts td .note{font-size:.82rem}
 .totop:hover{opacity:1}
 .totop:focus-visible{outline:3px solid var(--ink);outline-offset:2px;opacity:1}
 @media (prefers-reduced-motion:reduce){.totop{transition:none}}
+
+/* Quick-launch icons (Keep, Tasks, GenesisCare Anywhere) */
+.hdr-right{display:flex;align-items:center;gap:10px;align-self:center;flex-shrink:0}
+.applinks{display:flex;gap:6px}
+.applinks .al{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--muted);font-size:.62rem;line-height:1}
+.applinks .al svg{width:30px;height:30px;border-radius:8px;padding:3px;box-sizing:border-box;box-shadow:0 1px 2px rgba(0,0,0,.18)}
+.applinks .al:hover svg,.applinks .al:focus-visible svg{filter:brightness(1.08);transform:translateY(-1px)}
+.al-keep svg{background:#f4b400}
+.al-tasks svg{background:#2f6fde}
+.al-gc svg{background:linear-gradient(135deg,#00a86b,#007a4d)}
+@media (max-width:480px){.applinks .al span{display:none}.applinks .al svg{width:28px;height:28px}}
+@media print{.applinks{display:none!important}}

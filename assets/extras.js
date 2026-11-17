@@ -19,7 +19,7 @@
   var btns = document.createElement('div'); btns.className='hdrbtns';
   if(row && chips){
     var meta = $('.meta',row); if(meta) btns.appendChild(meta);
-    row.appendChild(btns);
+    ($('.hdr-right',row)||row).appendChild(btns);
     var pb = document.createElement('button'); pb.type='button'; pb.className='hdrbtn';
     function curTab(){ var c=$('.chip[aria-selected="true"]'); return c?{id:c.id.replace('chip-',''),label:c.textContent}:null; }
     function key(){ var t=curTab(); return rel+(t?'#'+t.id:''); }
