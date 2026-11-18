@@ -86,5 +86,13 @@ for (const p of pages) {
   const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-CBC", iv }, key, new TextEncoder().encode(m[1])));
   const b64 = Buffer.concat([Buffer.from(iv), Buffer.from(ct)]).toString("base64");
   fs.writeFileSync(idxPath, 'window.QR_INDEX_ENC="' + b64 + '";');
+
+  // 4. Tie the offline cache to the password: after a password change, every device drops
+  //    its cached pages (locked with the old password) instead of mixing old and new.
+  const swPath = path.join(OUT, "sw.js");
+  const tag = require("crypto").createHash("sha256").update(hashed).digest("hex").slice(0, 8);
+  const sw = fs.readFileSync(swPath, "utf8");
+  if (!/const V='[^']+'/.test(sw)) throw new Error("Unexpected sw.js format");
+  fs.writeFileSync(swPath, sw.replace(/const V='([^']+)'/, (_, v) => "const V='" + v + "-" + tag + "'"));
   console.log("Encrypted " + pages.length + " pages and the search index into _site/");
 })().catch(e => { console.error(e); process.exit(1); });
