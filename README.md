@@ -1,6 +1,6 @@
 # Clinic-Ref: Radiation Oncology Quick Reference
 
-Clinic resource: tumour-site quick-reference pages, a contouring guideline library and site contouring guides. Live at https://lincdnronc.github.io/Clinic-Ref/
+Clinic resource: tumour-site quick-reference pages, site contouring guides (each with a Guidelines tab) and a list of the guideline PDFs kept in OneDrive. Live at https://lincdnronc.github.io/Clinic-Ref/
 
 This repo is the single source of truth: the built pages and the build kit that makes them both live here.
 
@@ -10,7 +10,8 @@ This repo is the single source of truth: the built pages and the build kit that 
 | `*.html` (root) | Built pages, served by GitHub Pages. Do not edit by hand; edit `src/` and rebuild. |
 | `src/<page>.html` | Page body fragments (tabs, cards, tables). Edit these. |
 | `build.py` | Assembles every page: groups (`GROUPS`), home page, nav, footers, eviQ link tabs, contouring pages (`CONTOUR`), site colours (`CTR_SITE`). |
-| `contour_lib.py` | Contouring guideline library data (rendered to `src/ctr-library.html`). |
+| `contour_lib.py` | Published guideline links, rendered as the Guidelines tab of each contouring guide (GUIDE_LIB in build.py). |
+| `pdf_index.json`, `tools/pdf_index.py` | Index of the PDFs in OneDrive "01 Contouring Guidelines" (names and sizes only, no files), rendered to `src/ctr-library.html`. |
 | `eviq_links.py` | eviQ protocol links per page (links only; no eviQ content is copied). |
 | `theme.py` | Generates the tumour-site colour block in `assets/site.css`. |
 | `assets/` | Shared CSS and JS. |

@@ -129,7 +129,7 @@ def stage_panel(f):
 </section>
 <script src="assets/staging.js"></script>'''
 def page(f, short, long, desc, group, gname, gid, foot):
-    body = (root/'src'/f).read_text() + _mdt.panel(f) + stage_panel(f) + eviq_panel(f)
+    body = (root/'src'/f).read_text() + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
     title = f'{long} Quick Reference'
     site = CTR_SITE.get(f, gid)
@@ -293,34 +293,133 @@ LIB_FULL = [(f,'',n,'',t) for f,n,t in [
  ('contouring/prostate.html','Prostate contouring guide',('gu',)),('contouring/bladder.html','Bladder contouring guide',('gu',)),
  ('contouring/gynae.html','Gynaecological contouring guide',('gyn',)),('contouring/lymphoma.html','Lymphoma ISRT contouring guide',('heme',)),
  ('contouring/spine-bone.html','Spine and bone SBRT contouring guide',('sbrt',))]]
-def build_library():
-    out=[]
-    for i,(tid,label,lede,cards_) in enumerate(LIB):
-        h=' hidden' if i else ''
-        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <div class="jump"></div>\n  </div>')
-        prot = [c for c in CONTOUR if tid in c[4]] + [c for c in LIB_FULL if tid in c[4]]
-        if prot:
-            out.append('  <article class="card key" data-title="Our guides"><h3>Our guides</h3><ul class="eviq">'+''.join(f'<li><a href="{f}">{html.escape(long)}</a></li>' for f,short,long,desc,tags in prot)+'</ul></article>')
-        for title,entries in cards_:
-            lis=[]
-            for yr,t,cite,note,l,star in sorted(entries,key=lambda e:not e[5]):
-                u,kind=_link(l)
-                st='<span class="libstar">Start here</span> ' if star else ''
-                y=f'{yr} · ' if yr else ''
-                lis.append(f'<li>{st}<a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(t)}</a><span class="libmeta">{y}{html.escape(cite)} · {kind}</span><span class="libnote">{html.escape(note)}</span></li>')
-            out.append(f'  <article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3><ul class="lib">{"".join(lis)}</ul></article>')
+# Guideline links per contouring guide (from contour_lib.LIB): (tab, card title or None = all, keyword filter or None)
+GUIDE_LIB = {
+ 'contouring/breast.html': [('breast',None,None)],
+ 'contouring/thorax.html': [('thorax',None,None)],
+ 'contouring/head-neck.html': [('hn',None,None)],
+ 'contouring/cns.html': [('cns','Gliomas',None),('cns','Skull base, meningioma and metastases',r'^(?!.*(cavity|Hippocamp|HA-WBRT|Leptomening|VMAT))'),('cns','Neuro OARs',None)],
+ 'contouring/brain-mets.html': [('cns','Skull base, meningioma and metastases',r'cavity|Hippocamp|HA-WBRT|Leptomening|VMAT'),('cns','Neuro OARs',None)],
+ 'contouring/wbrt.html': [('cns','Skull base, meningioma and metastases',r'Hippocamp|HA-WBRT|Leptomening|VMAT')],
+ 'contouring/oesophagus.html': [('gi','Upper GI',r'oesoph|GEJ|SCOPE|upper GI malig|cervical')],
+ 'contouring/pancreas-stomach.html': [('gi','Upper GI',r'pancrea|gastric|GEJ|EORTC-ROG|upper GI malig|upper abdominal')],
+ 'contouring/biliary.html': [('gi','Upper GI',r'biliar|cholangio')],
+ 'contouring/liver-sbrt.html': [('gi','Liver SBRT and MRI upper abdominal OARs',None),('gi','Upper GI',r'upper abdominal')],
+ 'contouring/rectal-long-course.html': [('gi','Rectum and anus',r'rectal|anorectal')],
+ 'contouring/anal.html': [('gi','Rectum and anus',r'anal|anorectal')],
+ 'contouring/prostate.html': [('gu','Prostate and prostate bed',None),('gu','Pelvic nodes and PSMA',None),('gu','Bladder, kidney, penis and pelvic OARs',r'pelvic normal')],
+ 'contouring/bladder.html': [('gu','Bladder, kidney, penis and pelvic OARs',r'[Bb]ladder|pelvic normal')],
+ 'contouring/gynae.html': [('gyn',None,None)],
+ 'contouring/lymphoma.html': [('heme',None,None)],
+ 'contouring/spine-bone.html': [('sbrt',None,None)],
+ 'ctr-sarcoma.html': [('sarc','Sarcoma',None)],
+ 'ctr-skin.html': [('sarc','Skin',None)],
+ 'ctr-peds.html': [('peds',None,None)],
+ 'ctr-kidney-liver.html': [('gu','Bladder, kidney, penis and pelvic OARs',r'IROCK|renal')],
+}
+# PDF page tab for each guide (ctr-library.html#<tab>)
+GUIDE_PDFTAB = {'contouring/breast.html':'breast','contouring/thorax.html':'thorax','contouring/head-neck.html':'hn','contouring/cns.html':'cns','contouring/brain-mets.html':'cns','contouring/wbrt.html':'cns',
+ 'contouring/oesophagus.html':'ugi','contouring/pancreas-stomach.html':'ugi','contouring/biliary.html':'ugi','contouring/liver-sbrt.html':'oar','contouring/rectal-long-course.html':'lgi','contouring/anal.html':'lgi',
+ 'contouring/prostate.html':'gu','contouring/bladder.html':'gu','contouring/gynae.html':'gyn','contouring/lymphoma.html':'heme','contouring/spine-bone.html':'sbrt','ctr-sarcoma.html':'sarc','ctr-skin.html':'sarc','ctr-peds.html':'general','ctr-kidney-liver.html':'gu'}
+_LIBD = {tid:(label,lede,cards_) for tid,label,lede,cards_ in LIB}
+def _lib_li(e):
+    yr,t,cite,note,l,star = e
+    u,kind=_link(l)
+    st='<span class="libstar">Start here</span> ' if star else ''
+    y=f'{yr} · ' if yr else ''
+    return f'<li>{st}<a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(t)}</a><span class="libmeta">{y}{html.escape(cite)} · {kind}</span><span class="libnote">{html.escape(note)}</span></li>'
+def guide_lib_panel(f):
+    """Hidden-by-default 'Guidelines' tab for a contouring guide: published guidelines and atlases, plus the OneDrive PDFs."""
+    if f not in GUIDE_LIB: return ''
+    up = '../' if f.startswith('contouring/') else ''
+    arts = []
+    for tid,ctitle,kw in GUIDE_LIB[f]:
+        for title,entries in _LIBD[tid][2]:
+            if ctitle and title != ctitle: continue
+            es = [e for e in entries if not kw or re.search(kw, e[1]+' '+e[3])]
+            if not es: continue
+            es = sorted(es, key=lambda e: not e[5])
+            arts.append(f'<article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3><ul class="lib">{"".join(_lib_li(e) for e in es)}</ul></article>')
+    tab = GUIDE_PDFTAB.get(f)
+    if tab:
+        arts.append(f'<article class="card key" data-title="Original PDFs"><h3>Original PDFs</h3><p>The original guideline and atlas PDFs for this site are kept in OneDrive (01 Contouring Guidelines). <a href="{up}ctr-library.html#{tab}">See the list of PDFs for this site</a>.</p></article>')
+    return (f'<section class="panel" id="p-guidelines" data-tab="guidelines" data-label="Guidelines" hidden>\n  <div class="panel-head"><h2>Published guidelines and atlases</h2>'
+            f'<p class="lede">The international guidelines behind this guide, with PubMed or DOI links. "Start here" marks the current standard.</p><div class="jump"></div></div>\n' + '\n'.join(arts) + '\n</section>')
+def _inject_panel(htmltext, panel):
+    if not panel: return htmltext
+    i = htmltext.rfind('</section>', 0, htmltext.find('</main>'))
+    return htmltext[:i+10] + '\n' + panel + htmltext[i+10:]
+
+# ---- Guideline PDFs page (ctr-library.html): what is in OneDrive "01 Contouring Guidelines", by site
+PDF_TABS = [('breast','Breast',['Breast']),('thorax','Thorax',['Thoracic - Lung & Heart']),('hn','Head & neck',['Head and Neck']),
+ ('cns','CNS',['CNS & Brain']),('ugi','Upper GI',['Upper GI']),('lgi','Rectum & anus',['Lower GI - Rectal','Lower GI - Anal']),
+ ('gu','GU',['Genitourinary - Prostate','Genitourinary - Bladder & Other GU']),('gyn','Gynae',['Gynae']),('heme','Haematology',['Lymphoma & Haematological']),
+ ('sarc','Sarcoma & skin',['Sarcoma','Skin']),('sbrt','SABR & bone',['SABR - Spine & Bone','SABR - General & Constraints']),
+ ('oar','OARs & pelvis',['OARs & Normal Tissue','Pelvis - Nodal & Anatomy (multi-site)']),('general','General & books',['General & Multi-site'])]
+_JOUR = {'Green J':'Radiother Oncol','Red J':'IJROBP','PRO':'Pract Radiat Oncol','JMIRO':'J Med Imaging Radiat Oncol','ctRO':'Clin Transl Radiat Oncol','JACMP':'J Appl Clin Med Phys','JCO':'J Clin Oncol','JTO':'J Thorac Oncol'}
+def _pdf_title(p):
+    t = p['title'] or re.sub(r'\.pdf$', '', p['file'], flags=re.I)
+    t = t.replace('_', ' ').replace('  ', ' ').strip()
+    m = re.match(r'^\(?((?:19|20)\d\d)\)?\s+(.*)$', t)
+    yr, rest = (m.group(1), m.group(2)) if m else ('', t)
+    jour = ''
+    for k,v in _JOUR.items():
+        if rest.startswith(k+' '): jour, rest = v, rest[len(k)+1:]; break
+    else:
+        m2 = re.match(r'^(Acta Oncol|Clin Oncol|Front Oncol|Adv Radiat Oncol|Semin Radiat Oncol|Lancet Oncol|BJR|Anticancer Res|Oncol Lett|PLOS One|Hepatoma Res|Curr Oncol|Breast|Green|NRG)\)?\s+(.*)$', rest)
+        if m2: jour, rest = m2.group(1), m2.group(2)
+    return yr, jour, rest.strip(' -')
+_STOP = set('the and for with from into guideline guidelines consensus contouring delineation radiotherapy radiation therapy target volume volumes cancer atlas recommendations international estro acrop group'.split())
+def _words(s): return {w for w in re.findall(r'[a-z]{4,}', s.lower()) if w not in _STOP}
+def _pdf_link(p, yr, title):
+    if p['link']: return _link(p['link'])
+    best = None
+    for tid,label,lede,cards_ in LIB:
+        for _,entries in cards_:
+            for e in entries:
+                if not yr or str(e[0]) != yr: continue
+                ov = len(_words(title) & _words(e[1]+' '+e[2]))
+                if ov >= 2 and (best is None or ov > best[0]): best = (ov, e[4])
+    if best: return _link(best[1])
+    return 'https://scholar.google.com/scholar?q=' + quote_plus(title + (' ' + yr if yr else '')), 'Scholar search'
+def build_pdf_page():
+    import json as _j
+    pdfs = _j.loads((root/'pdf_index.json').read_text())
+    out = []
+    for i,(tid,label,tops) in enumerate(PDF_TABS):
+        mine = [p for p in pdfs if p['top'] in tops]
+        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{" hidden" if i else ""}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{len(mine)} PDFs in OneDrive › 01 Contouring Guidelines › {html.escape(" and ".join(tops))}. Titles link to the published version (PubMed or DOI where matched, otherwise a Google Scholar search).</p>\n    <div class="jump"></div>\n  </div>')
+        guides = [c for c in LIB_FULL + CONTOUR if GUIDE_PDFTAB.get(c[0]) == tid]
+        if guides:
+            out.append('  <article class="card key" data-title="Our guides"><h3>Our guides</h3><ul class="eviq">'+''.join(f'<li><a href="{g[0]}#guidelines">{html.escape(g[2])}</a></li>' for g in guides)+'</ul></article>')
+        groups = {}
+        for p in mine:
+            groups.setdefault((p['top'], p['sub']), []).append(p)
+        for (top,sub),ps in groups.items():
+            ctitle = (sub.split('/')[-1] if sub else (top if len(tops) > 1 else 'Main folder'))
+            lis = []
+            for p in sorted(ps, key=lambda p: (_pdf_title(p)[0] or '0000'), reverse=True):
+                yr, jour, t = _pdf_title(p)
+                u, kind = _pdf_link(p, yr, t)
+                meta = ' · '.join(x for x in [yr, jour, kind, f'{p["mb"]} MB'] if x)
+                lis.append(f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(t)}</a><span class="libmeta">{html.escape(meta)}</span><span class="libnote">OneDrive file: {html.escape(p["path"])}</span></li>')
+            out.append(f'  <article class="card" data-title="{html.escape(ctitle)}"><h3>{html.escape(ctitle)}</h3><ul class="lib">{"".join(lis)}</ul></article>')
+        if tid == 'general':
+            for title,entries in _LIBD['general'][2]:
+                out.append(f'  <article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3><ul class="lib">{"".join(_lib_li(e) for e in entries)}</ul></article>')
         out.append('</section>')
-    out.append('<p class="note">Links marked PubMed open the abstract (verified PMID); "PubMed search" runs a title search where the PMID has not been checked yet. ESTRO-ACROP guidelines and Clin Transl Radiat Oncol papers are usually free to read; many IJROBP atlases are free as PubMed Central author manuscripts.</p>')
+    out.append('<p class="note">The PDFs are not copied to this site: the repository is public, and journal articles, books and departmental protocols cannot be republished. Open the file from OneDrive, or use the title link for the publisher version. The published guideline lists with verified PubMed links are now the "Guidelines" tab of each contouring guide.</p>')
     return '\n'.join(out)
+
 # (file, short, long, desc, library tabs)
 CONTOUR = [
- ('ctr-library.html','Library','Contouring guideline library','Every major international contouring guideline and atlas by tumour site, old and new, with links.',()),
+ ('ctr-library.html','Guideline PDFs','Contouring guideline PDFs','The original guideline, atlas and protocol PDFs in OneDrive, by tumour site, with links to the published versions.',()),
  ('ctr-sarcoma.html','Sarcoma','Sarcoma contouring guide','Extremity 3 cm / 1.5 cm CTV with oedema, post-op, and retroperitoneal volumes.',('sarc',)),
  ('ctr-kidney-liver.html','Kidney SABR','Kidney SABR contouring guide','Primary kidney SABR (IROCK): GTV, ITV and PTV, motion management and OARs. Quick guide only.',('gu',)),
  ('ctr-skin.html','Skin','Skin contouring guide','BCC/cSCC clinical margins, electron and orthovoltage fields, post-op cSCC, PNI, Merkel and melanoma.',('sarc',)),
  ('ctr-peds.html','Paeds','Paediatric contouring guide','CSI CTV pitfalls, CNS boosts, pre-chemo CTV rules for RMS, Ewing, Wilms, neuroblastoma; paediatric OARs.',('peds',)),
 ]
-(root/'src'/'ctr-library.html').write_text(build_library())
+(root/'src'/'ctr-library.html').write_text(build_pdf_page())
 CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
  ('contouring/breast.html','Breast','Breast contouring guide','Whole breast, tumour bed and SIB, partial breast with trial volumes, multicatheter APBI, chest wall with and without implants, ESTRO/RTOG nodal borders, Liverpool DVH scorecards.'),
  ('contouring/cns.html','Primary CNS','Primary CNS contouring guide','Glioblastoma (ESTRO-EANO 2023), IDH-mutant glioma (2025), meningioma (RTOG 0539/EORTC), vestibular schwannoma, barrier editing, EPTN OAR constraints.'),
@@ -469,7 +568,7 @@ for f,short,long,desc in CNAV:
     srcp = root/'src'/f
     if not srcp.exists(): continue
     _qp = root/'src'/'quick'/pathlib.Path(f).name
-    (root/f).write_text(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR, _qp.read_text() if _qp.exists() else None))
+    (root/f).write_text(_inject_panel(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR, _qp.read_text() if _qp.exists() else None), guide_lib_panel(f)))
 # Retired URLs: lung protocol and thorax quick guide merged into contouring/thorax.html
 def _redirect(path, target, tabmap=None):
     tm = repr(tabmap or {}).replace("'", '"')
@@ -539,7 +638,7 @@ home = f'''<!DOCTYPE html>
   <h2 class="group-title" id="tools">Tools and updates</h2>
   <div class="hub">{cards(TOOLS)}</div>
 {sections}
-  <h2 class="group-title" id="contouring" data-site="contouring">Contouring library and guides</h2>
+  <h2 class="group-title" id="contouring" data-site="contouring">Contouring guides</h2>
   <div class="hub">{contour_cards}</div>
 {('<h2 class="group-title" id="soon">Still to add</h2><div class="hub">'+cards_soon+'</div>') if soon else ''}
 </div>
