@@ -129,8 +129,29 @@ def stage_panel(f):
   {cards_}
 </section>
 <script src="assets/staging.js"></script>'''
+# ---- Consent numbers: a "Toxicity & consent" tab on each tumour-site page ----
+# Pages without their own consent figures show the shared rates from a sibling page (copied at build, not indexed twice).
+CONSENT_FROM = {
+ 'breast-early.html':'breast-planning.html', 'breast-nodes-pmrt.html':'breast-planning.html',
+ 'hn-larynx.html':'hn-general.html', 'hn-npc-sinonasal.html':'hn-general.html', 'hn-oral-salivary.html':'hn-general.html',
+ 'hn-oropharynx.html':'hn-general.html', 'hn-thyroid-cup.html':'hn-general.html',
+ 'pall-brain.html':'pall-wbrt.html',
+}
+_PRINTBTN = '<p><button type="button" class="printbtn" onclick="window.print()">Print consent sheet</button></p>'
+def _consent_print(body):
+    return re.sub(r'(<section class="panel" id="p-consent"[^>]*>\s*<div class="panel-head">.*?<div class="jump"></div>)', lambda m: m.group(1) + _PRINTBTN, body, count=1, flags=re.S)
+def consent_panel(f):
+    src_f = CONSENT_FROM.get(f)
+    if not src_f or 'id="p-consent"' in (root/'src'/f).read_text(): return ''
+    m = re.search(r'<section class="panel" id="p-consent"[^>]*>.*?<div class="jump"></div>\s*</div>(.*?)</section>', (root/'src'/src_f).read_text(), re.S)
+    if not m: return ''
+    names = {g[0]: g[2] for _,_,_,pages,_ in GROUPS for g in pages}
+    return (f'\n<section class="panel" id="p-consent" data-tab="consent" data-label="Toxicity &amp; consent" data-borrowed="{src_f}" hidden>\n'
+            f'  <div class="panel-head">\n    <h2>Toxicity and consent numbers</h2>\n'
+            f'    <p class="lede">Shared rates from the <a href="{src_f}#consent">{html.escape(names.get(src_f, src_f))}</a> page, where sources are cited.</p>\n'
+            f'    <div class="jump"></div>{_PRINTBTN}\n  </div>\n{m.group(1).strip()}\n</section>')
 def page(f, short, long, desc, group, gname, gid, foot):
-    body = (root/'src'/f).read_text() + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f)
+    body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
     title = f'{long} Quick Reference'
     site = CTR_SITE.get(f, gid)
@@ -444,18 +465,17 @@ SOFTWARE = [
  ('ctr-monaco.html','Monaco shortcuts','Monaco contouring shortcuts','Elekta Monaco hot keys, navigation, contouring toolkit, Monaco-specific gotchas, workflow and W/L presets. Printable PDF.')]
 CNAV = CNAV[:1] + sorted(CNAV[1:], key=lambda c: c[1].lower())
 CNAV += SOFTWARE
-# ---------------- Tools: calculators, consent numbers, doses at a glance, what's new ----------------
+# ---------------- Tools: calculators, doses at a glance, what's new ----------------
 TOOLS = [
  ('mdt.html','MDT decision matrix','MDT decision matrix','Tap case details as they are presented to narrow to an evidence-based option: prostate, pancreas, upper GI (oesophagus, gastric, HCC, biliary, liver mets), rectum and lung (NSCLC, SCLC).'),
  ('links.html','Clinic links','Clinic quick links','Radiology PACS and pathology results logins, A to Z, and referral forms.'),
  ('contacts.html','Contacts','Phone and contact list',"GenesisCare St Vincent's extensions, St Vincent's Hospital numbers and other GenesisCare NSW centres."),
  ('tools.html','Calculators','Calculators and tools','EQD2 and BED, cumulative dose across courses, treatment gap, and links to re-irradiation tools and SABR constraint tables.'),
  ('scores.html','Clinical scores','Clinical scores and nomograms','Auto-staging for 18 sites, Child-Pugh, ALBI, MELD, PSA doubling time, Roach, CAPRA, CTS5, Van Nuys, SINS, Mirels, RPA, IPI, Sedlis, brachytherapy EQD2 and more, with links to MSKCC, PREDICT, GPA and other external tools.'),
- ('consent.html','Consent numbers','Consent numbers by site','The toxicity rates to quote, gathered from every tumour-site page. Print one site as a sheet.'),
  ('doses.html','Doses at a glance','Doses at a glance','Dose and fractionation cards from every tumour-site page in one place.'),
  ('whats-new.html',"What's new","What's new",'New evidence and landmark trials by tumour site, and changes to this site.'),
 ]
-FOOT_TOOLS = '<footer><p>Calculators use the linear-quadratic model and are for education and cross-checking only; they are not a medical device. Verify every result independently. Consent numbers and doses are copied from the tumour-site pages, where the sources are cited. Follow departmental protocols.</p></footer>'
+FOOT_TOOLS = '<footer><p>Calculators use the linear-quadratic model and are for education and cross-checking only; they are not a medical device. Verify every result independently. Doses are copied from the tumour-site pages, where the sources are cited. Follow departmental protocols.</p></footer>'
 def _panels(f):
     t = (root/'src'/f).read_text()
     return re.findall(r'<section class="panel" id="p-([\w-]+)" data-tab="[\w-]+" data-label="([^"]+)"[^>]*>(.*?)</section>', t, re.S)
@@ -477,7 +497,7 @@ def _gather(pick):
         if parts:
             out.append(f'<section class="panel gathered" id="p-{gid}" data-tab="{gid}" data-label="{html.escape(head)}"{" hidden" if out else ""}>\n<div class="panel-head"><h2>{html.escape(head)}</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>\n' + ''.join(parts) + '\n</section>')
     return '\n'.join(out)
-(root/'src'/'consent.html').write_text(_gather(lambda pid,label,t: pid in ('consent','toxicity') or re.search(r'consent|toxicit', t, re.I)))
+# Consent numbers now live in a 'Toxicity & consent' tab on each tumour-site page (see consent_panel); old Tools URL redirects home.
 (root/'src'/'doses.html').write_text(_gather(lambda pid,label,t: (re.search(r'\bdoses?\b|fractionation|regimen', t, re.I) and not re.search(r'constraint|OAR|toxicit|limit', t, re.I)) or re.search(r'\bboost\b|HDR schedules', t, re.I)))
 import whats_new as _wn
 _TAG = {'practice':('Practice-changing','new'),'confirms':('Confirms practice','au'),'watch':('Watch','caution')}
@@ -595,6 +615,10 @@ for gid,gname,_,pages,foot in GROUPS:
     for g in pages:
         (root/g[0]).write_text(page(*g, pages, gname, gid, foot))
 contour_cards = cards(CNAV)
+# Old Tools page: consent numbers moved to each tumour-site page
+(root/'consent.html').write_text('<!DOCTYPE html>\n<html lang="en-AU"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=index.html"><title>Moved</title>'
+  '<script>var h=location.hash.slice(1);location.replace("index.html"+(h?"#"+h:""));</script></head>'
+  '<body><p>Consent numbers are now in the Toxicity &amp; consent tab of each tumour-site page. <a href="index.html">Go to the home page</a>.</p></body></html>\n')
 # Home
 groupnav = ''.join(f'<a href="#{gid}" data-site="{gid}">{html.escape(head)}</a>' for gid,_,head,_,_ in GROUPS)
 sections = ''.join(f'\n  <h2 class="group-title" id="{gid}" data-site="{gid}">{html.escape(head)}</h2>\n  <div class="hub" data-site="{gid}">{cards(pages)}</div>' for gid,_,head,pages,_ in GROUPS)
@@ -657,7 +681,7 @@ home = f'''<!DOCTYPE html>
 # Every key trial shows its publication year: <b>NAME <span class="yr">(YYYY)</span></b>
 _noyr = []
 for _f in sorted(root.glob('src/*.html')):
-    if _f.name in ('consent.html', 'doses.html'): continue
+    if _f.name == 'doses.html': continue
     for _m in re.finditer(r'<div class="trial"><b>(.*?)</b>', _f.read_text(), re.S):
         if 'class="yr"' not in _m.group(1): _noyr.append(f'{_f.name}: {re.sub("<[^>]+>", "", _m.group(1)).strip()}')
 if _noyr:
@@ -678,13 +702,13 @@ for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.ht
     _rel = str(_p.relative_to(root))
     _t = _p.read_text()
     if 'http-equiv="refresh"' in _t or _rel in ('index.html','gu.html'): continue
-    _files.append(_rel) if _rel in ('consent.html','doses.html') else None
-    if _rel in ('consent.html','doses.html'): continue
+    _files.append(_rel) if _rel == 'doses.html' else None
+    if _rel == 'doses.html': continue
     _files.append(_rel)
     _sp = _BS(_t, 'html.parser')
     _h1 = _sp.find('h1'); _ttl = re.sub(r'\s+',' ',_h1.get_text(' ',strip=True)).replace(' Quick Reference','') if _h1 else _rel
     for _pan in _sp.select('section.panel'):
-        if _pan.get('data-tab') == 'eviq': continue
+        if _pan.get('data-tab') == 'eviq' or _pan.has_attr('data-borrowed'): continue
         for _c in _pan.select('article.card'):
             _x = re.sub(r'\s+',' ',_c.get_text(' ',strip=True))
             _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', _x])
