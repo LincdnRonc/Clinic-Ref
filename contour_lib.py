@@ -73,6 +73,7 @@ LIB = [
   (2018,'Target delineation for post-operative H&N RT','Evans · Oral Oncol','Practical post-op approach.','pm:30409314',False),
   (2014,'Contouring guide for perineural invasion in H&N cancer','Ko · Pract Radiat Oncol','Cranial-nerve pathways for PNI CTV.','pm:25407876',True),
   (2019,'Trigeminal nerve contouring guidelines (PNI)','Biau · Radiother Oncol','V1–V3 branches to the skull base.','pm:30206021',True),
+  (2013,'Lower cranial nerves IX–XII CT contouring atlas','Mourad · Oral Oncol','Jugular foramen and hypoglossal canal pathways.','pm:23623404',False),
   (2020,'HNCIG post-operative RT for cutaneous SCC of the H&N','Porceddu · IJROBP','Indications, volumes, PNI and nodal levels for skin SCC.','pm:32289475',True),
   (2026,'Re-irradiation of recurrent HNSCC: international consensus','Biau · Lancet Oncol','Selection, volumes and cumulative dose.','pm:42372755',False),
  ]),
