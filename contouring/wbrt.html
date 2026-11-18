@@ -166,7 +166,7 @@
 <div>
 <h3>2.3  Walkthrough (cranial to caudal)</h3>
 <ol class="steps">
-<li>Brain window W 1500–2000 / L 300–350 so the inner table edge is crisp. Start one slice above the vertex.</li>
+<li>Bone-type window W 1500–2000 / L 300–350 (SIOPE) so the inner table edge is crisp; on a narrow brain window the bone blooms and hides it. Find the three layers of the vault — bright <b>outer table</b>, darker <b>diploë</b>, thin bright <b>inner table</b> — and contour along the <b>inside edge of the inner table</b>, where it meets the dura. Not into the diploë. Start one slice above the vertex.</li>
 <li>Vertex to orbital roofs: follow the inner table; easy slices — interpolate every 2–3 slices, then check.</li>
 <li>Orbital roofs: switch to bone window W 3000 / L 400. Carry the contour down between the orbits onto the <b>cribriform plate</b>; this sits lower than the orbital roofs.</li>
 <li>Middle cranial fossae: the <b>temporal poles</b> lie anterior and inferior, behind the greater wings of the sphenoid. Include them to the floor of the fossa on every slice until they disappear.</li>
@@ -213,6 +213,8 @@
 </div>
 </div></article><article class="card" data-title="Pitfalls"><h3>2.4  Pitfalls</h3><ul class="tight">
 <li>Accepting an auto-segmented "Brain" as the CTV: it is the parenchyma, so it misses CSF over the convexity, the pituitary fossa and often the tonsils. Start from it if you like, then expand to the inner table.</li>
+<li>HU-threshold auto-contours <b>leak or clip</b> at the frontal sinuses, mastoid air cells and skull base: edit these slices by hand on the bone-type window.</li>
+<li>A fused T1 post-contrast or T2 MRI helps confirm that CSF spaces and dural reflections sit inside the contour, but the <b>CT defines the bony edge</b>; if they disagree at the inner table, follow the CT.</li>
 <li>Under-covering the <b>cribriform plate</b> and <b>temporal poles</b>: the classic marginal-miss sites in CSI series (SIOPE) and the reason field-era WBRT kept 1 cm below the skull base.</li>
 <li>Stopping above the foramen magnum, or running down to C2 by habit when there is no posterior fossa disease — the CC001 volume stops at the foramen magnum.</li>
 <li>Scans that do not include the vertex or are acquired with the mask tilted.</li>
@@ -413,7 +415,7 @@
 </section><section class="panel" id="p-s5" data-tab="s5" data-label="5 Pearls" hidden>
   <div class="panel-head"><p class="eyebrow">Section 5</p><h2><span class="sectnum">5</span>Pearls and common errors </h2><div class="jump"></div></div>
   <article class="card" data-title="All three volumes"><h3>5.1  All three volumes</h3><ul class="tight">
-<li><b>Inner table, not brain</b>: set the window first (W 1500–2000 / L 300–350); a soft-tissue window makes the inner table look further in than it is.</li>
+<li><b>Inner table, not brain</b>: set the window first (W 1500–2000 / L 300–350); a soft-tissue window makes the inner table look further in than it is. Contour the inside edge of the thin bright inner cortex, not the diploë.</li>
 <li>The two classic misses are the <b>cribriform plate</b> (low, between the orbits) and the <b>temporal poles</b> (low, in the middle fossae). Check both on sagittal and coronal before signing.</li>
 <li>Name the inferior extent in the prescription note (foramen magnum, C2) so the planner and checker know it is intended.</li>
 </ul></article><article class="card" data-title="HA-WBRT"><h3>5.2  HA-WBRT</h3><ul class="tight">
@@ -474,7 +476,7 @@
   <article class="card" data-title="Target and helper ROIs"><h3>8.1  Target and helper ROIs</h3><div class="tw"><table>
 <thead><tr><th style="width:24%">ROI</th><th>How to build</th></tr></thead>
 <tbody>
-<tr><td class="b">CTV_Brain</td><td>Start from auto-segmented Brain if available, then edit to the inner table on W 1500–2000 / L 300–350; or threshold the skull (bone HU), fill the cranial cavity and remove bone. Check the cribriform plate, temporal poles, sella and foramen magnum by hand.</td></tr>
+<tr><td class="b">CTV_Brain</td><td>Start from auto-segmented Brain if available, then edit to the inner table on W 1500–2000 / L 300–350; or threshold the skull (bone HU), fill the cranial cavity and remove bone. Check the cribriform plate, temporal poles, sella and foramen magnum by hand, and the frontal sinuses and mastoid air cells, where thresholds leak or clip.</td></tr>
 <tr><td class="b">Hippocampus_L, Hippocampus_R</td><td>Manual on the fused 3D T1 MRI (atlas). Union → <code>Hippocampi</code>.</td></tr>
 <tr><td class="b">Hippocampi_PRV05</td><td>Hippocampi + 5 mm, uniform 3D (ROI algebra: margin 0.5 cm).</td></tr>
 <tr><td class="b">PTV_3000 (HA)</td><td>CTV_Brain <b>subtract</b> Hippocampi_PRV05; no outer margin.</td></tr>
