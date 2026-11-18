@@ -33,7 +33,7 @@
       var label = document.createElement('span');
       label.className = 'site'; label.textContent = p.dataset.label;
       c.querySelector('h3').appendChild(label);
-      if(!jump) return;
+      if(!jump || (p.classList.contains('gathered') && !c.classList.contains('gather-head'))) return;
       var j = document.createElement('button');
       j.type = 'button'; j.textContent = c.dataset.title;
       j.addEventListener('click', function(){ c.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto':'smooth', block:'start'}); });

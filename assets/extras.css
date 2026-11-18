@@ -134,3 +134,11 @@ body:not(.searching) .mdt-off,body:not(.searching) .mdt-inactive{display:none}
 body.searching .mdt-in,body.searching .mdt-grp{display:none}
 @media (min-width:1500px){.panel>.mdt-in,.panel>.mdt-grp{column-span:all;margin:0 0 16px}.panel>.mdt-grp{margin:4px 0 10px}}
 @media print{.mdt-in{display:none}}
+/* Doses at a glance / consent numbers: one block per source page, single column */
+.panel.gathered:not([hidden]){display:grid;gap:12px}
+@media (min-width:1500px){.panel.gathered:not([hidden]){display:grid;column-count:auto}}
+.gather{display:grid;gap:12px;min-width:0}
+.gather+.gather{margin-top:22px}
+.card.gather-head{background:transparent;border:0;border-bottom:2px solid var(--accent);border-radius:0;padding:0 2px 6px}
+.card.gather-head h3{font-size:1.3rem;margin-bottom:2px}
+.card.gather-head p.note{margin:0}

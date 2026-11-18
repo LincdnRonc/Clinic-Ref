@@ -372,12 +372,12 @@ def _gather(pick):
                 titles, arts = _cards(body)
                 got += [a for t,a in zip(titles,arts) if pick(pid,label,t)]
             if got:
-                parts.append(f'<article class="card key" data-title="{html.escape(long)}"><h3>{html.escape(long)}</h3><p class="note">From the <a href="{f}">{html.escape(long)}</a> page, where sources and trials are cited.</p></article>' + ''.join(got))
+                parts.append(f'<div class="gather"><article class="card gather-head" data-title="{html.escape(long)}"><h3>{html.escape(long)}</h3><p class="note">From the <a href="{f}">{html.escape(long)}</a> page, where sources and trials are cited.</p></article>' + ''.join(got) + '</div>')
         if parts:
-            out.append(f'<section class="panel" id="p-{gid}" data-tab="{gid}" data-label="{html.escape(head)}"{" hidden" if out else ""}>\n<div class="panel-head"><h2>{html.escape(head)}</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>\n' + ''.join(parts) + '\n</section>')
+            out.append(f'<section class="panel gathered" id="p-{gid}" data-tab="{gid}" data-label="{html.escape(head)}"{" hidden" if out else ""}>\n<div class="panel-head"><h2>{html.escape(head)}</h2><div class="jump"></div><p><button type="button" class="printbtn" onclick="window.print()">Print this site</button></p></div>\n' + ''.join(parts) + '\n</section>')
     return '\n'.join(out)
 (root/'src'/'consent.html').write_text(_gather(lambda pid,label,t: pid in ('consent','toxicity') or re.search(r'consent|toxicit', t, re.I)))
-(root/'src'/'doses.html').write_text(_gather(lambda pid,label,t: re.search(r'\bdoses?\b|fractionation|regimen', t, re.I) and not re.search(r'constraint|OAR|toxicit|limit', t, re.I)))
+(root/'src'/'doses.html').write_text(_gather(lambda pid,label,t: (re.search(r'\bdoses?\b|fractionation|regimen', t, re.I) and not re.search(r'constraint|OAR|toxicit|limit', t, re.I)) or re.search(r'\bboost\b|HDR schedules', t, re.I)))
 import whats_new as _wn
 _TAG = {'practice':('Practice-changing','new'),'confirms':('Confirms practice','au'),'watch':('Watch','caution')}
 def _wn_page():
