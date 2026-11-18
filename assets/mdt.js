@@ -86,21 +86,6 @@
       next.textContent = ask.length ? 'Still to establish: ' + ask.join(' · ') : '';
       box.querySelector('.mdt-reset').disabled = !any;
     }
-    function summary(){
-      var box = ins[ids.indexOf(active)], sel = state[active], bits = [];
-      box.querySelectorAll('.mdt-f').forEach(function(f){
-        var v = sel[f.dataset.f]; if(!v) return;
-        var b = f.querySelector('.mdt-o[data-v="' + v + '"]');
-        bits.push(f.querySelector('legend').textContent + ': ' + (b ? b.textContent : v));
-      });
-      var out = [box.dataset.label + ' MDT', bits.join('; ') || 'No details entered'];
-      all('.mdt-row', active).forEach(function(r){
-        if(r.classList.contains('mdt-off')) return;
-        var rec = r.querySelector('.rec dd');
-        out.push('- ' + r.dataset.title.replace(/^MDT: /, '') + ': ' + (rec ? rec.textContent.replace(/\s+/g, ' ').trim() : ''));
-      });
-      return out.join('\n');
-    }
     panel.addEventListener('click', function(e){
       var t = e.target.closest('button'); if(!t || !panel.contains(t)) return;
       if(t.classList.contains('mdt-o')){
@@ -114,10 +99,6 @@
       } else if(t.classList.contains('mdt-compact')){
         var on = panel.classList.toggle('mdt-compactview');
         panel.querySelectorAll('.mdt-compact').forEach(function(b){ b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-      } else if(t.classList.contains('mdt-copy')){
-        var txt = summary(), done = function(){ var o = t.textContent; t.textContent = 'Copied'; setTimeout(function(){ t.textContent = o; }, 1400); };
-        var fallback = function(){ var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); done(); }catch(x){} ta.remove(); };
-        if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fallback); else fallback();
       }
     });
     render();

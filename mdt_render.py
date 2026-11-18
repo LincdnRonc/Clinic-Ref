@@ -23,8 +23,7 @@ def _matrix(m, first):
     out = [f'<div class="mdt-in{off}" data-m="{mid}" data-label="{html.escape(m["label"])}">{note}{fs}'
            '<p class="mdt-next" hidden></p><div class="mdt-bar"><span class="mdt-count"></span>'
            '<button type="button" class="mdt-reset">Clear case</button>'
-           '<button type="button" class="mdt-compact" aria-pressed="false">Decisions only</button>'
-           '<button type="button" class="mdt-copy">Copy for MDT notes</button></div></div>']
+           '<button type="button" class="mdt-compact" aria-pressed="false">Decisions only</button></div></div>']
     grp = None
     for r in m['rows']:
         g = re.sub(r'\W+', '-', r['grp'].lower()).strip('-')
