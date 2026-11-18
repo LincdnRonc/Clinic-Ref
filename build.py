@@ -1,3 +1,4 @@
+from version import VERSION, VERSION_DATE
 import re, pathlib, html
 root = pathlib.Path(__file__).resolve().parent
 GU = [
@@ -151,7 +152,7 @@ def page(f, short, long, desc, group, gname, gid, foot):
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#{gid}">{html.escape(gname)}</a> › <span>{html.escape(long)}</span></nav>
     <div class="title-row">
       <h1>{html.escape(long)} <span>Quick Reference</span></h1>
-      <div class="hdr-right" style="display:flex;align-items:center;gap:10px;align-self:center;flex-shrink:0">{APPLINKS}<div class="meta">Synthesised Nov 2026</div></div>
+      <div class="hdr-right" style="display:flex;align-items:center;gap:10px;align-self:center;flex-shrink:0">{APPLINKS}<div class="meta">v{VERSION}</div></div>
     </div>
     <form class="search" role="search" id="searchForm">
       <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
@@ -618,7 +619,7 @@ home = f'''<!DOCTYPE html>
   <div class="top-inner" style="padding-bottom:12px">
     <div class="title-row">
       <h1>Radiation Oncology <span>Quick Reference</span></h1>
-      <div class="hdr-right" style="display:flex;align-items:center;gap:10px;align-self:center;flex-shrink:0">{APPLINKS}<div class="meta">Synthesised Nov 2026</div></div>
+      <div class="hdr-right" style="display:flex;align-items:center;gap:10px;align-self:center;flex-shrink:0">{APPLINKS}<div class="meta">v{VERSION}</div></div>
     </div>
     <p class="lede" style="margin:4px 0 0">Clinic-ready summaries by tumour site: management by stage, doses, planning volumes and constraints, consent numbers and landmark trials.</p>
     <form class="search" role="search" id="siteSearch" onsubmit="return false">
@@ -646,6 +647,7 @@ home = f'''<!DOCTYPE html>
 </div>
 {FOOT.replace('RadOncReview GI document','RadOncReview tumour-site documents').replace('NCCN, ASTRO, ASCO','NCCN, ASTRO and others')}
 {DISCLAIMER}
+<p class="note" style="text-align:center;margin:8px 0 24px">Version {VERSION} · updated {VERSION_DATE}</p>
 <script src="assets/site.js"></script>
 <script src="assets/extras.js"></script>
 </body>
@@ -666,6 +668,11 @@ print('built')
 # ---------------- Search index and offline app files ----------------
 from bs4 import BeautifulSoup as _BS
 import json as _json, hashlib as _hl
+_metare = re.compile(r'(<div class="meta">)([^<]*)(</div>)')
+for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.html'))):
+    _t = _p.read_text()
+    _n = _metare.sub(lambda m: m.group(1) + re.sub(r'Synthesised Nov 2026|Nov 2026|v\d+\.\d+(?:\.\d+)?', 'v' + VERSION, m.group(2)) + m.group(3), _t)
+    if _n != _t: _p.write_text(_n)
 _idx = []; _files = ['index.html']
 for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.html'))):
     _rel = str(_p.relative_to(root))
