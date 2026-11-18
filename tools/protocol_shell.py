@@ -10,7 +10,7 @@ Source format A (most protocols): <section class="page" id="sN"> blocks, with op
 Source format B (rectal-long-course): a .masthead then a .wrap with <h2><span class="num">.
 """
 import html, re
-from bs4 import BeautifulSoup, NavigableString, Tag
+from bs4 import BeautifulSoup, NavigableString, Tag, Comment
 
 SKIP_STYLE_IDS = {'qr-mobile', 'site-band'}
 
@@ -220,6 +220,8 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, qui
     if mast:
         mast.extract()
 
+    for c in soup.find_all(string=lambda t: isinstance(t, Comment)):
+        c.extract()   # HTML comments (e.g. '==== STEP 0 ====') must not become card text
     _wrap_tables(soup)
     fmt_a = bool(soup.select('section.page'))
     segs = _segments_a(soup) if fmt_a else _segments_b(soup)
@@ -236,6 +238,14 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, qui
             if meta:
                 extra += f'<p class="note">{meta.decode_contents()}</p>'
             lede2, cards_html = _nodes_to_cards(wrapped, 'Overview', soup)
+            if not cards_html.strip():
+                items = []
+                for sg in segs[1:]:
+                    n_, t_, _e, _p = _head_parts(sg['head'])
+                    if t_:
+                        items.append(f'<li><a href="#{sg["id"]}">{html.escape((n_ + " " if n_ else "") + t_)}</a></li>')
+                if items:
+                    cards_html = f'<article class="card key" data-title="Steps in this guide"><h3>Steps in this guide</h3><ol class="steps-toc" style="list-style:none;padding:0">{"".join(items)}</ol></article>'
             head_html = f'<h2>{html.escape(long)}</h2>{lede_html}{lede2}{extra}'
             eb = _text(eyebrow) if eyebrow else ''
             if eb:
