@@ -104,7 +104,10 @@ LIB = [
   (2025,'DOTATATE PET in meningioma RT planning: guideline','Perlow · IJROBP','Using SSTR PET for meningioma GTV.','pm:39701546',False),
   (2026,'Skull-base chordoma target delineation consensus','McDonald · IJROBP','Chordoma GTV/CTV.','pm:42799736',False),
   (2018,'Consensus contouring for post-operative cavity SRS (brain metastases)','Soliman · IJROBP','Cavity, surgical tract, dural and bone-flap margins.','pm:29157748',True),
-  (2010,'Hippocampal contouring atlas (RTOG 0933)','Gondi · IJROBP','Hippocampus on T1 MRI; avoidance zone +5 mm.','q:Gondi hippocampal-sparing whole-brain radiotherapy a how-to technique hippocampal contouring',True),
+  (2010,'Hippocampal contouring atlas (RTOG 0933)','Gondi · IJROBP','Hippocampus on T1 MRI; avoidance zone +5 mm.','doi:10.1016/j.ijrobp.2010.01.039',True),
+  (2020,'NRG CC001: HA-WBRT plus memantine (phase III)','Brown · J Clin Oncol','CTV to foramen magnum; PTV = CTV − (hippocampi + 5 mm); D100% ≤9 Gy, Dmax ≤16 Gy.','doi:10.1200/JCO.19.02767',False),
+  (2026,'Optimised 4-arc VMAT technique for HA-WBRT','Liu · J Appl Clin Med Phys','Intermediate plan on PTV beyond 10 mm, hippocampal blocking with non-coplanar arcs.','doi:10.1002/acm2.70518',False),
+  (2023,'Leptomeningeal metastasis: EANO–ESMO guideline','Le Rhun · ESMO Open','RT targets for LM: skull base, optic nerves, basal cisterns, canal to C2; doses.','pm:37863528',False),
  ]),
  ('Neuro OARs',[
   (2018,'EPTN neuro-oncology contouring atlas (CT/MR)','Eekers · Radiother Oncol','Comprehensive brain OAR atlas (updated 2021, online).','pm:29548560',True),
@@ -228,7 +231,7 @@ LIB = [
 ]),
 ('peds','Paediatrics','Craniospinal, paediatric CNS and solid tumours (mostly trial protocols).',[
  ('Paediatric',[
-  (2018,'SIOPE guideline on craniospinal irradiation (target volumes and technique)','Ajithkumar · Radiother Oncol','CSI CTV: cribriform plate, temporal lobes, thecal sac.','q:Ajithkumar SIOPE brain tumour group consensus guideline on craniospinal target volume delineation',True),
+  (2018,'SIOPE guideline on craniospinal irradiation (target volumes and technique)','Ajithkumar · Radiother Oncol','CSI CTV: cribriform plate, temporal lobes, thecal sac.','doi:10.1016/j.radonc.2018.04.016',True),
   (2018,'Hippocampal sparing during craniospinal irradiation','Padovani · IJROBP','Feasibility and contouring.','pm:29485078',False),
   (2022,'Response-based RT for CNS germ cell tumours','Murphy · IJROBP','Whole-ventricular volumes.','pm:34990779',False),
   (2022,'Whole-ventricular RT: photon vs proton','Mak · Pediatr Blood Cancer','Ventricular CTV definition.','pm:35373903',False),

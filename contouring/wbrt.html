@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-site="cns">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whole brain VMAT contouring guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/protocol.css">
+<link rel="stylesheet" href="../assets/extras.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#10243f">
+<style>.p-elect{background:var(--dose-elective);}
+.p-bed{background:var(--dose-bed);}
+.p-sib{background:var(--dose-sib);}
+.p-boost{background:var(--dose-boost);}
+.p-pros{background:var(--dose-prostate);}
+.p-out{background:#fff;color:var(--navy);border:1.3px solid var(--navy);}
+
+  .p-gtv{background:#1d4f91;}
+  .p-hi{background:#b03a2e;}
+  .p-lo{background:#2f6fb0;}
+  .p-ctv{background:#14756b;}
+  .p-ptv{background:#a07a00;}
+  .chk{display:inline-block;background:#fbeae7;color:#8a2f23;border:1px solid #e3b5ad;border-radius:3px;font-size:12.0px;font-weight:700;padding:0 4px;letter-spacing:.03em;}
+  .src{font-size:12.6px;color:var(--muted);}
+  .follow{border-left:4px solid #6b3fa8;}
+</style>
+</head>
+<body class="proto">
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>Whole brain VMAT contouring guide</span></nav>
+    <div class="title-row">
+      <h1>Whole brain (VMAT) <span>Contouring guide</span></h1>
+      <div class="meta">Full guide · Nov 2026</div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this guide</label>
+      <input id="q" type="search" placeholder="Search this guide: border, margin, dose, trial" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="side"><details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary><nav class="tree" aria-label="All pages"><a class="home" href="../index.html">Home</a><a class="home" href="../index.html#search">Search all pages</a><details data-site="breast"><summary>Breast</summary><a href="../breast-early.html">DCIS &amp; early breast</a><a href="../breast-nodes-pmrt.html">Nodes &amp; PMRT</a><a href="../breast-planning.html">Breast planning &amp; consent</a></details><details data-site="cns"><summary>CNS &amp; Paediatrics</summary><a href="../cns-glioma.html">Glioma</a><a href="../cns-benign.html">Benign &amp; functional</a><a href="../cns-vs.html">Vestibular schwannoma</a><a href="../cns-general.html">Eye &amp; tolerances</a><a href="../peds-cns.html">Paediatric CNS</a><a href="../peds-solid.html">Paediatric solid tumours</a><a href="../peds-late.html">Paediatric late effects</a></details><details data-site="gi"><summary>Gastrointestinal</summary><a href="../gi-oesophagus-gastric.html">Oesophagus &amp; gastric</a><a href="../gi-pancreas.html">Pancreas</a><a href="../gi-hepatobiliary.html">Liver &amp; biliary</a><a href="../gi-rectum-colon.html">Rectum &amp; colon</a><a href="../gi-anal.html">Anal</a><a href="../gi-general.html">General GI</a></details><details data-site="gu"><summary>Genitourinary</summary><a href="../gu-prostate.html">Prostate</a><a href="../gu-bladder.html">Bladder</a><a href="../gu-kidney.html">Kidney</a><a href="../gu-testis.html">Testis</a><a href="../gu-other.html">UTUC, urethra &amp; penile</a></details><details data-site="gyn"><summary>Gynaecological</summary><a href="../gyn-cervix.html">Cervix</a><a href="../gyn-endometrial.html">Endometrial</a><a href="../gyn-vulva-vagina.html">Vulva &amp; vagina</a><a href="../gyn-general.html">General gynae</a></details><details data-site="heme"><summary>Haematology</summary><a href="../heme-hodgkin.html">Hodgkin</a><a href="../heme-nhl.html">Non-Hodgkin</a><a href="../heme-other.html">Myeloma, TBI &amp; skin</a></details><details data-site="hn"><summary>Head and neck &amp; Skin</summary><a href="../hn-general.html">H&amp;N general</a><a href="../hn-oropharynx.html">Oropharynx</a><a href="../hn-larynx.html">Larynx &amp; hypopharynx</a><a href="../hn-oral-salivary.html">Oral cavity &amp; salivary</a><a href="../hn-npc-sinonasal.html">Nasopharynx &amp; sinonasal</a><a href="../hn-thyroid-cup.html">Thyroid &amp; unknown primary</a><a href="../skin.html">Skin</a></details><details data-site="sarcoma"><summary>Sarcoma</summary><a href="../sarcoma-sts.html">Soft tissue &amp; bone sarcoma</a><a href="../benign.html">Benign MSK</a></details><details data-site="thorax"><summary>Thorax</summary><a href="../thorax-early.html">Early NSCLC (SABR)</a><a href="../thorax-stage3.html">Stage III NSCLC</a><a href="../thorax-metastatic.html">Metastatic NSCLC</a><a href="../thorax-sclc.html">Small cell</a><a href="../thorax-other.html">Thymic, meso &amp; other</a></details><details data-site="pall"><summary>Palliative &amp; oligometastases</summary><a href="../pall-brain.html">Brain metastases</a><a href="../pall-wbrt.html">WBRT principles</a><a href="../pall-bone-spine.html">Bone, cord &amp; spine SBRT</a><a href="../pall-oligo.html">Oligomets &amp; palliation</a></details><details data-site="sys"><summary>Systemic therapy &amp; supportive drugs</summary><a href="../sys-chemort.html">Concurrent chemo-RT</a><a href="../sys-timing.html">Targeted &amp; immunotherapy</a><a href="../sys-breast-endocrine.html">Breast endocrine</a><a href="../sys-prostate-adt.html">Prostate ADT</a><a href="../sys-bone.html">Bone agents</a><a href="../sys-supportive.html">Supportive drugs</a></details><details data-site="rert"><summary>Reirradiation</summary><a href="../rert-principles.html">Principles &amp; workflow</a><a href="../rert-constraints.html">Limits &amp; calculators</a><a href="../rert-cns.html">CNS, spine &amp; bone</a><a href="../rert-hn.html">Head &amp; neck</a><a href="../rert-thorax-breast.html">Thorax &amp; breast</a><a href="../rert-pelvis.html">Abdomen &amp; pelvis</a></details><details data-site="mrl"><summary>MR-linac</summary><a href="../mrl-images.html">Sequences &amp; signal</a><a href="../mrl-liver-gi.html">Liver &amp; upper GI</a><a href="../mrl-tumour-nodes.html">Tumours &amp; nodes</a><a href="../mrl-pelvis.html">Pelvis</a><a href="../mrl-workflow.html">Adaptive workflow</a></details><details data-site="exam"><summary>Phase 2 exam summary</summary><a href="../exam-overview.html">Epi &amp; memory aids</a><a href="../exam-breast.html">Breast</a><a href="../exam-cns.html">CNS</a><a href="../exam-peds.html">Paediatrics</a><a href="../exam-ugi.html">Upper GI</a><a href="../exam-lgi.html">Lower GI</a><a href="../exam-gu.html">Bladder, kidney, testis, penis</a><a href="../exam-prostate.html">Prostate</a><a href="../exam-gyn.html">Gynae</a><a href="../exam-heme.html">Haematology</a><a href="../exam-hn.html">Head and neck</a><a href="../exam-skin.html">Skin</a><a href="../exam-endocrine-benign.html">Endocrine &amp; benign</a><a href="../exam-sarcoma.html">Sarcoma</a><a href="../exam-thorax.html">Thorax</a><a href="../exam-pall.html">Palliative</a><a href="../exam-clinonc.html">Clinical oncology</a><a href="../exam-viva.html">Viva templates</a></details><details data-site="contouring" open><summary>Contouring</summary><a href="../ctr-library.html">Library</a><a href="../contouring/anal.html">Anal canal</a><a href="../contouring/biliary.html">Biliary</a><a href="../contouring/bladder.html">Bladder</a><a href="../contouring/breast.html">Breast</a><a href="../contouring/cns.html">CNS</a><a href="../contouring/gynae.html">Gynae</a><a href="../contouring/head-neck.html">Head &amp; neck</a><a href="../ctr-kidney-liver.html">Kidney SABR</a><a href="../contouring/liver-sbrt.html">Liver SBRT OARs</a><a href="../contouring/lymphoma.html">Lymphoma ISRT</a><a href="../contouring/oesophagus.html">Oesophagus &amp; GOJ</a><a href="../ctr-peds.html">Paeds</a><a href="../contouring/pancreas-stomach.html">Pancreas &amp; stomach</a><a href="../contouring/prostate.html">Prostate</a><a href="../contouring/rectal-long-course.html">Rectum</a><a href="../ctr-sarcoma.html">Sarcoma</a><a href="../ctr-skin.html">Skin</a><a href="../contouring/spine-bone.html">Spine &amp; bone SBRT</a><a href="../contouring/thorax.html">Thorax</a><a href="../contouring/wbrt.html" aria-current="page">Whole brain (VMAT)</a><a href="../ctr-mim.html">MIM shortcuts</a><a href="../ctr-monaco.html">Monaco shortcuts</a></details><details data-site="tools"><summary>Tools</summary><a href="../mdt.html">MDT decision matrix</a><a href="../links.html">Clinic links</a><a href="../contacts.html">Contacts</a><a href="../tools.html">Calculators</a><a href="../scores.html">Clinical scores</a><a href="../consent.html">Consent numbers</a><a href="../doses.html">Doses at a glance</a><a href="../whats-new.html">What&#x27;s new</a></details></nav></details></aside>
+<main id="main">
+<p class="xref"><b>Related:</b> <a href="../pall-wbrt.html">WBRT principles page</a> · <a href="../pall-brain.html">Brain metastases page</a> · <a href="cns.html">CNS contouring guide</a> · <a href="../ctr-peds.html">Paediatric (CSI) quick guide</a></p>
+<div class="empty" id="empty">No cards match. Try a shorter term such as a structure, a margin (5 mm) or a trial name.</div>
+<section class="panel" id="p-quick" data-tab="quick" data-label="Quick reference">
+  <div class="panel-head"><h2>Quick reference</h2><p class="lede">The one-screen version: volumes, margins and pitfalls. Use the numbered tabs for the full guide, or Contour now for tables and diagrams only.</p><div class="jump"></div></div>
+  <article class="card key" data-title="Which volume">
+<h3>Which volume, and where it stops</h3>
+<div class="tw wide"><table>
+<tr><th>Volume</th><th>CTV</th><th>Inferior</th><th>PTV</th></tr>
+<tr><td>Standard WBRT</td><td>Inner table: brain, brainstem, meninges, CSF, cribriform plate, temporal poles, pituitary fossa</td><td>Foramen magnum (C2 if posterior fossa metastases)</td><td>CTV + 3 mm (check local)</td></tr>
+<tr><td>HA-WBRT</td><td>Same CTV; HA region = hippocampi + 5 mm</td><td>Foramen magnum</td><td>CTV − HA region, no set-up margin (CC001)</td></tr>
+<tr><td>Helmet (LMD)</td><td>Inner table + optic nerve sheaths to back of globe + cribriform plate + 6 foramina pairs (SOF, rotundum, ovale, IAM, jugular, hypoglossal) + upper cervical thecal sac</td><td><b>Bottom of C2</b> (EANO–ESMO; field border was C2–3)</td><td>CTV + 3–5 mm (check local)</td></tr>
+</table></div>
+</article><article class="card" data-title="Hippocampus">
+<h3>Hippocampus in 6 rules (RTOG 0933 atlas)</h3>
+<ul>
+<li>Thin-slice 3D T1 post-gadolinium MRI (≤1.5 mm), fused.</li>
+<li>T1-dark grey matter medial to the temporal horn; start at the horn's crescent-shaped floor.</li>
+<li>Leave out the fimbria (T1-bright, above-medial) and parahippocampal gyrus (T1-bright, below-medial).</li>
+<li>Uncal recess = anterior limit; grey matter in front is amygdala/uncus.</li>
+<li>Medial: ambient cistern, then the lateral edge of the quadrigeminal cistern.</li>
+<li>Stop when the tail leaves the atrium (crus of fornix in front, splenium behind). Check on sagittal.</li>
+</ul>
+</article><article class="card" data-title="CC001 limits">
+<h3>CC001 limits, 30 Gy/10</h3>
+<ul>
+<li>PTV: D2% ≤37.5 Gy, D98% ≥25 Gy, V30 ≥95%.</li>
+<li>Hippocampi: D100% ≤9 Gy (≤10), Dmax ≤16 Gy (≤17).</li>
+<li>Optic nerves and chiasm: Dmax ≤30 Gy (≤37.5).</li>
+<li>Not for: metastasis within 5 mm of a hippocampus, LMD, survival &lt;4 months.</li>
+</ul>
+</article><article class="card" data-title="Helmet pitfalls">
+<h3>Helmet pitfalls</h3>
+<ul>
+<li>Do not trim the internal auditory meatus to spare the cochlea (SIOPE).</li>
+<li>Foramen lacerum is not included; foramina stop at the outer table.</li>
+<li>Lens stays out; the optic sheath ends at the back of the globe.</li>
+<li>No hippocampal avoidance with LMD.</li>
+</ul>
+</article>
+</section><section class="panel" id="p-overview" data-tab="overview" data-label="Overview" hidden>
+  <div class="panel-head"><p class="eyebrow">Contouring Guide · CNS · Palliative</p><h2>Whole brain VMAT contouring guide</h2><p class="lede">Volumes for <b>standard whole brain</b>, <b>hippocampal-avoidance whole brain (HA-WBRT)</b> and the <b>"German helmet" volume for leptomeningeal disease</b>, translated from field borders into CT/MRI structures for VMAT: what to include, where each volume stops (including the C2 question), slice-by-slice walkthroughs, OARs, constraints and RayStation build.</p><div class="pillrow">
+<span class="pill p-ctv">CTV_Brain</span>
+<span class="pill p-hi">Hippocampi / HA region</span>
+<span class="pill p-lo">CTV_Helmet</span>
+<span class="pill p-ptv">PTV</span>
+</div><p class="note">RTOG 0933 hippocampal atlas (Gondi) · Gondi 2010 IJROBP · NRG CC001 (Brown 2020 JCO) · Liu 2026 JACMP (4-arc VMAT) · SIOPE CSI guideline and atlas (Ajithkumar 2018) · EANO–ESMO leptomeningeal guideline (Le Rhun 2023) · Palliative planning handbook, helmet vs standard fields — Version 1.0 · Nov 2026</p><div class="jump"></div></div>
+  <article class="card key" data-title="Governing principles of this guide"><h3>Governing principles of this guide</h3><div class="callout"></div></article><article class="card" data-title="Contents"><h3>Contents</h3><div class="tw"><table class="toc">
+<tr><td class="n">1</td><td><a href="#s1">Choosing the volume; simulation and imaging</a></td></tr>
+<tr><td class="n">2</td><td><a href="#s2">Scenario A — Standard whole brain (VMAT)</a></td></tr>
+<tr><td class="n">3</td><td><a href="#s3">Scenario B — Hippocampal-avoidance whole brain</a></td></tr>
+<tr><td class="n">4</td><td><a href="#s4">Scenario C — Helmet volume for leptomeningeal disease</a></td></tr>
+<tr><td class="n">5</td><td><a href="#s5">Pearls and common errors</a></td></tr>
+<tr><td class="n">6</td><td><a href="#s6">Dose, fractionation, margins, IGRT and arcs</a></td></tr>
+<tr><td class="n">7</td><td><a href="#s7">Organs at risk and constraints</a></td></tr>
+<tr><td class="n">8</td><td><a href="#s8">RayStation build and TG-263 names</a></td></tr>
+<tr><td class="n">9</td><td><a href="#s9">References</a></td></tr>
+</table></div></article><article class="card" data-title="Sources used"><h3>Sources used</h3><div class="tw"><table>
+<thead><tr><th style="width:30%">Source</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td class="b">RTOG 0933 hippocampal contouring atlas (Gondi, Tomé, Rowley, Mehta)</td><td>Hippocampal slice-by-slice rules, MRI/CT requirements, HA region</td></tr>
+<tr><td class="b">Gondi 2010, IJROBP 78:1244</td><td>Hippocampal boundaries, avoidance volume size, perihippocampal metastasis risk, linac IMRT constraints</td></tr>
+<tr><td class="b">Brown 2020 (NRG CC001), JCO 38:1019</td><td>Eligibility, CTV/PTV definitions, Table 1 planning criteria, HA-region relapses</td></tr>
+<tr><td class="b">Liu 2026, JACMP 27:e70518</td><td>4-arc non-coplanar VMAT technique, optimisation helper structures, lens and pituitary objectives</td></tr>
+<tr><td class="b">SIOPE BTG (Ajithkumar 2018, Radiother Oncol 128:192) + SIOPE atlas</td><td>Inner-table CTV, cribriform plate, optic nerves, skull-base foramina and CSF extension distances, window settings</td></tr>
+<tr><td class="b">EANO–ESMO leptomeningeal guideline (Le Rhun 2023, ESMO Open)</td><td>LM indications, doses, skull base / optic nerve / basal cistern / C2 target</td></tr>
+<tr><td class="b">Planning handbook, ch. 13 Palliative RT, pp. 260–262 (uploaded excerpt) <span class="chk">CHECK title</span></td><td>Field-based standard WBRT vs German helmet borders (C1–2 vs C2–3, posterior orbit), VMAT arcs for HA</td></tr>
+</tbody>
+</table></div></article>
+</section><section class="panel" id="p-s1" data-tab="s1" data-label="1 Choosing the volume" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 1</p><h2><span class="sectnum">1</span>Choosing the volume; simulation and imaging </h2><div class="jump"></div></div>
+  <article class="card" data-title="Which volume?"><h3>1.1  Which volume?</h3><div class="tw"><table>
+<thead><tr><th style="width:17%">Volume</th><th>Use for</th><th>Do not use for</th><th style="width:22%">Inferior extent</th></tr></thead>
+<tbody>
+<tr><td class="b">Standard WBRT</td><td>Multiple brain metastases where SRS is not suitable; urgent or short-prognosis cases; metastasis within 5 mm of a hippocampus; PCI where HA is not used</td><td>Leptomeningeal disease (use helmet)</td><td>Foramen magnum (CC001); extend to C2 if posterior fossa metastases (HIPPORAD protocol)</td></tr>
+<tr><td class="b">HA-WBRT</td><td>Good performance status, expected survival ≥4 months, no metastasis within 5 mm of either hippocampus (CC001; benefit emerged from 4 months)</td><td>LMD; hydrocephalus or distorted ventricles (CC001 exclusions); survival &lt;4 months</td><td>Foramen magnum (CC001)</td></tr>
+<tr><td class="b">Helmet (LMD)</td><td>Extensive nodular or symptomatic linear LM (EANO–ESMO); cranial neuropathies; concern for leptomeningeal spread or posterior fossa lesions (handbook)</td><td>Isolated focal nodules best treated with focal RT; HA</td><td><b>Bottom of C2</b> (EANO–ESMO "up to C2"; field border C2–3 interspace)</td></tr>
+</tbody>
+</table></div></article><article class="card" data-title="Simulation"><h3>1.2  Simulation</h3><div class="tw"><table>
+<thead><tr><th style="width:17%">Item</th><th>Standard and HA</th><th>Helmet</th></tr></thead>
+<tbody>
+<tr><td class="b">Position</td><td colspan="2">Supine, head neutral, thermoplastic mask (Gondi 2010; handbook). Correct head rotation before the mask sets, using the lasers on the nose and ear canals (handbook). Treat in the mask.</td></tr>
+<tr><td class="b">CT</td><td>Non-contrast CT of the whole head; <b>1.25–1.5 mm preferred, ≤2.5 mm allowed</b> for HA (RTOG 0933 atlas)</td><td>1–2 mm; <b>1 mm over the skull base</b> to see the foramina (SIOPE). Scan from above the vertex to at least C4 so the C2 CTV, the PTV and the arc entry are on the scan <span class="chk">CHECK</span> (SIOPE CSI scans vertex to C3 for the cranial set)</td></tr>
+<tr><td class="b">MRI</td><td>Standard: recent diagnostic contrast T1 is enough to confirm no LMD. HA: <b>3D T1 post-gadolinium (SPGR), 1.25 mm preferred, ≤1.5 mm allowed</b>, plus axial and coronal FLAIR and T2, within 2 weeks of treatment; no mask needed for the MRI (atlas; Gondi 2010)</td><td>Contrast T1 and T2; a heavily T2-weighted 3D sequence (FIESTA / CISS) shows CSF inside the cranial nerve sheaths (SIOPE). Use it if available; otherwise outline the foramina on 1 mm bone-window CT</td></tr>
+<tr><td class="b">Fusion</td><td colspan="2">Rigid CT–MRI fusion on the skull base and temporal bones; for HA check the hippocampi on sagittal and coronal (atlas). CC001 scored an unacceptable fusion or hippocampal contour as a major deviation.</td></tr>
+</tbody>
+</table></div></article><article class="card" data-title="Window settings (SIOPE)"><h3>1.3  Window settings (SIOPE)</h3><div class="tw"><table>
+<thead><tr><th>Structure</th><th>Window / level</th></tr></thead>
+<tbody>
+<tr><td class="b">Inner table of skull (CTV_Brain edge)</td><td>W 1500–2000 / L 300–350</td></tr>
+<tr><td class="b">Cribriform plate, optic canals, skull-base foramina</td><td>W 3000 / L 400</td></tr>
+<tr><td class="b">Optic nerves</td><td>W 350 / L 40</td></tr>
+<tr><td class="b">Hippocampus</td><td>On the fused 3D T1 MRI, not CT</td></tr>
+</tbody>
+</table></div></article>
+</section><section class="panel" id="p-s2" data-tab="s2" data-label="2 Standard whole brain" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 2 · Scenario A</p><h2><span class="sectnum">2</span>Standard whole brain (VMAT) </h2><div class="lede"><p>Field-based WBRT used opposed laterals with the collimator rotated to block the anterior orbit, about 1 cm below the skull base anteriorly to make sure of the temporal lobes, the inferior border at C1–2 (also convenient for future matching), and 1 cm of flash above and behind the skull (handbook). With volumes, the target is simply the intracranial contents; the plan supplies the margin.</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Volume definitions"><h3>2.1  Volume definitions</h3><div class="tw"><table>
+<thead><tr><th style="width:15%">Volume</th><th>Definition</th><th style="width:28%">Source</th></tr></thead>
+<tbody>
+<tr><td class="b">CTV_Brain</td><td>Everything inside the <b>inner table of the skull</b> — brain, brainstem, cerebellum, meninges and CSF — down to the <b>foramen magnum</b>. Must include the <b>cribriform plate</b>, the <b>inferior temporal poles</b> in the middle cranial fossae and the <b>pituitary fossa</b>.</td><td>CC001 ("whole-brain parenchyma to the foramen magnum"); SIOPE step 1–2 for the inner table and the cribriform plate / temporal lobe / pituitary fossa rule</td></tr>
+<tr><td class="b">Posterior fossa variant</td><td>If there are posterior fossa metastases, extend the CTV down the upper cervical canal to C2</td><td>HIPPORAD protocol (NCT01414738): CTV to C1, or C2 with posterior fossa metastases</td></tr>
+<tr><td class="b">Not included</td><td>Orbits and globes, optic nerves anterior to the optic canal, skull-base foramina, scalp</td><td>Standard field blocked the anterior orbit (handbook)</td></tr>
+<tr><td class="b">PTV_2000 / PTV_3000</td><td>CTV_Brain + 3 mm <span class="chk">CHECK</span> local mask/IGRT audit. SIOPE uses 3–5 mm on the cranial CTV for CSI.</td><td>SIOPE (CSI); departmental</td></tr>
+</tbody>
+</table></div></article><article class="card" data-title="Borders"><h3>2.2  Borders</h3><div class="tw"><table>
+<thead><tr><th style="width:15%">Border</th><th>CTV_Brain</th></tr></thead>
+<tbody>
+<tr><td class="b">Cranial</td><td>Inner table at the vertex (scan must clear the vertex)</td></tr>
+<tr><td class="b">Caudal</td><td>Foramen magnum: the slice where the bony ring closes (basion anteriorly to opisthion posteriorly); include the cerebellar tonsils and medulla above it</td></tr>
+<tr><td class="b">Anterior</td><td>Inner table of the frontal bone; inferiorly the floor of the anterior cranial fossa, <b>including the cribriform plate</b> between the orbits</td></tr>
+<tr><td class="b">Posterior</td><td>Inner table of the occipital bone, including the posterior fossa to the opisthion</td></tr>
+<tr><td class="b">Lateral</td><td>Inner tables of the parietal and temporal bones; the temporal poles sit low in the middle cranial fossae, below the level of the orbital roofs</td></tr>
+<tr><td class="b">Inferior-central</td><td>Sella (pituitary fossa included), dorsum sellae and clivus inner surface, petrous ridges</td></tr>
+</tbody>
+</table></div><div class="grid2">
+<div>
+<h3>2.3  Walkthrough (cranial to caudal)</h3>
+<ol class="steps">
+<li>Brain window W 1500–2000 / L 300–350 so the inner table edge is crisp. Start one slice above the vertex.</li>
+<li>Vertex to orbital roofs: follow the inner table; easy slices — interpolate every 2–3 slices, then check.</li>
+<li>Orbital roofs: switch to bone window W 3000 / L 400. Carry the contour down between the orbits onto the <b>cribriform plate</b>; this sits lower than the orbital roofs.</li>
+<li>Middle cranial fossae: the <b>temporal poles</b> lie anterior and inferior, behind the greater wings of the sphenoid. Include them to the floor of the fossa on every slice until they disappear.</li>
+<li>Sella: include the pituitary fossa; follow the clivus and petrous ridges.</li>
+<li>Posterior fossa: inner table around the cerebellum to the foramen magnum.</li>
+<li>Stop at the foramen magnum (or C2 if there are posterior fossa metastases).</li>
+<li>Review on sagittal and coronal for gaps at the cribriform plate and temporal poles.</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg aria-label="Sagittal schematic comparing standard, hippocampal avoidance and helmet whole brain volumes" role="img" viewbox="0 0 320 290">
+<rect fill="#fff" height="290" width="320"></rect>
+<path d="M58,128 C50,58 118,14 182,12 C258,12 304,64 300,128 C298,172 270,200 230,206 L214,206 L190,202 L180,172 L162,178 L136,180 L128,156 L110,146 L70,144 Z" fill="none" stroke="#b9c1c9" stroke-width="9"></path>
+<path d="M68,128 C62,66 122,24 182,22 C250,22 290,70 288,128 C286,166 262,190 226,196 L212,196 L196,192 L186,164 L166,170 L140,172 L132,152 L114,140 L96,139 L92,146 L84,140 L72,138 Z" fill="rgba(20,117,107,.16)" stroke="#14756b" stroke-width="1.8"></path>
+<ellipse cx="78" cy="166" fill="#f6efe3" rx="24" ry="15" stroke="#b08a52"></ellipse>
+<circle cx="64" cy="166" fill="#fff" r="11" stroke="#8a6b3f"></circle>
+<circle cx="57" cy="166" fill="#cfe0f2" r="3" stroke="#2f6fb0"></circle>
+<path d="M74,160 L148,166 L150,174 L76,172 Z" fill="rgba(47,111,176,.30)" stroke="#2f6fb0" stroke-dasharray="3 2"></path>
+<path d="M88,139 L98,139 L98,148 L88,148 Z" fill="rgba(47,111,176,.45)" stroke="#2f6fb0"></path>
+<path d="M150,150 Q162,132 186,126 Q190,130 186,134 Q166,140 156,154 Z" fill="#b03a2e" opacity=".85"></path>
+<path d="M196,196 L224,196 L226,272 L198,272 Z" fill="rgba(47,111,176,.30)" stroke="#2f6fb0" stroke-dasharray="3 2"></path>
+<rect fill="#eef0f2" height="14" rx="2" stroke="#5b6b7c" width="20" x="172" y="206"></rect>
+<path d="M170,224 L194,224 L194,262 L170,262 Z" fill="#eef0f2" stroke="#5b6b7c"></path>
+<path d="M178,224 L178,204 L186,204 L186,224" fill="#eef0f2" stroke="#5b6b7c"></path>
+<line stroke="#8a2f23" stroke-dasharray="4 2" stroke-width="1.2" x1="160" x2="236" y1="267" y2="267"></line>
+<line stroke="#14756b" stroke-width="1.2" x1="186" x2="240" y1="198" y2="198"></line>
+<text fill="#14756b" font-size="7.5" x="242" y="195">foramen magnum</text><text fill="#14756b" font-size="7" x="242" y="204">(standard / HA stop)</text>
+<text fill="#2f6fb0" font-size="7.5" x="240" y="263">helmet: bottom of C2</text>
+<text fill="#8a2f23" font-size="7" x="240" y="272">C2–3 (old field border)</text>
+<text fill="#4f5f74" font-size="7" x="160" y="243">C2</text>
+<text fill="#4f5f74" font-size="7" x="158" y="216">C1</text>
+<text fill="#14756b" font-size="8" font-weight="700" x="200" y="70">CTV_Brain</text>
+<text fill="#14756b" font-size="7" x="200" y="80">(inner table)</text>
+<line stroke="#b03a2e" x1="170" x2="214" y1="128" y2="112"></line><text fill="#b03a2e" font-size="7.5" x="216" y="112">hippocampus (HA)</text>
+<line stroke="#2f6fb0" x1="93" x2="70" y1="140" y2="110"></line><text fill="#2f6fb0" font-size="7" x="18" y="106">cribriform plate</text>
+<line stroke="#2f6fb0" x1="112" x2="112" y1="168" y2="196"></line><text fill="#2f6fb0" font-size="7" x="70" y="206">optic nerve sheath to</text><text fill="#2f6fb0" font-size="7" x="70" y="214">back of globe (helmet)</text>
+<line stroke="#2f6fb0" x1="56" x2="30" y1="166" y2="186"></line><text fill="#2f6fb0" font-size="7" x="8" y="194">lens out</text>
+<line stroke="#14756b" x1="148" x2="140" y1="176" y2="186"></line><text fill="#14756b" font-size="6.5" x="128" y="194">temporal pole</text>
+<text fill="#555" font-size="7" x="8" y="284">Blue dashed = added for helmet. Not to scale.</text>
+</svg>
+<figcaption>Original sagittal schematic (face to the left). Teal: CTV_Brain for standard and HA-WBRT. Red: hippocampus (subtracted with a 5 mm margin for HA). Blue: helmet additions — cribriform plate, optic nerve sheath to the back of the globe, skull-base foramina (not shown) and the upper cervical thecal sac to the bottom of C2.</figcaption>
+</figure>
+</div>
+</div></article><article class="card" data-title="Pitfalls"><h3>2.4  Pitfalls</h3><ul class="tight">
+<li>Accepting an auto-segmented "Brain" as the CTV: it is the parenchyma, so it misses CSF over the convexity, the pituitary fossa and often the tonsils. Start from it if you like, then expand to the inner table.</li>
+<li>Under-covering the <b>cribriform plate</b> and <b>temporal poles</b>: the classic marginal-miss sites in CSI series (SIOPE) and the reason field-era WBRT kept 1 cm below the skull base.</li>
+<li>Stopping above the foramen magnum, or running down to C2 by habit when there is no posterior fossa disease — the CC001 volume stops at the foramen magnum.</li>
+<li>Scans that do not include the vertex or are acquired with the mask tilted.</li>
+</ul></article>
+</section><section class="panel" id="p-s3" data-tab="s3" data-label="3 HA-WBRT" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 3 · continued</p><h2><span class="sectnum">3</span>HA-WBRT: planning criteria and pitfalls </h2><div class="lede"><p>The target of avoidance is the neural stem cell niche (subgranular zone of the dentate gyrus), so you contour the <b>grey-matter hippocampus</b> (dentate gyrus and cornu ammonis), not the whole limbic circuit. Keeping the avoidance region small limits the risk of disease in it (Gondi 2010).</p></div><div class="jump"></div></div>
+  <article class="card" data-title="Eligibility and evidence"><h3>3.1  Eligibility and evidence</h3><ul class="tight">
+<li><b>CC001 (2020)</b>: 518 patients, WBRT 30 Gy/10 + memantine ± HA. Cognitive failure lower with HA (adjusted HR 0.74, 95% CI 0.58–0.95); less fatigue, less difficulty remembering and speaking. No difference in OS or intracranial PFS. Relapses in the HA region: 11 with HA vs 16 without.</li>
+<li>Eligible: metastases outside a 5 mm margin around either hippocampus, KPS ≥70. Excluded: hydrocephalus or distorted ventricles, leptomeningeal metastases, prior WBRT.</li>
+<li>Benefit emerged from 4 months; forgo HA if expected survival is &lt;4 months (Brown 2020 discussion).</li>
+<li>Risk in the avoidance region: in 371 patients with 1,133 metastases, 8.6% of patients (upper 95% CI 11.5%) and 3.0% of metastases were in the hippocampus + 5 mm; none were inside the hippocampus itself (Gondi 2010).</li>
+</ul></article><article class="card" data-title="Volume definitions"><h3>3.2  Volume definitions</h3><div class="tw"><table>
+<thead><tr><th style="width:18%">Volume</th><th>Definition</th><th style="width:22%">Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Hippocampus_L / _R</td><td>Contoured on the fused thin-slice 3D T1 post-gadolinium MRI (rules below). Mean volume 3.3 cc (range 2.8–4.0) for both together.</td><td>Atlas; Gondi 2010 Table 3</td></tr>
+<tr><td class="b">Hippocampi_PRV05 (HA region)</td><td>Bilateral hippocampi expanded <b>5 mm in 3D</b>. Mean 27.5 cc, about 2.1% of the brain. No dose objectives in CC001 — it is a dose-transition zone.</td><td>Atlas slide 24; CC001 Table 1 footnote</td></tr>
+<tr><td class="b">CTV_3000</td><td>Whole-brain parenchyma to the foramen magnum (build as CTV_Brain, section 2)</td><td>CC001 protocol</td></tr>
+<tr><td class="b">PTV_3000</td><td>CTV_3000 <b>minus</b> Hippocampi_PRV05. <b>No set-up margin added</b>.</td><td>CC001</td></tr>
+<tr><td class="b">Optimisation helpers</td><td>optPTV_10 = PTV_3000 minus (hippocampi + 10 mm); optPTV_5to10 = the shell of PTV_3000 between 5 and 10 mm from the hippocampi (section 8)</td><td>Liu 2026</td></tr>
+</tbody>
+</table></div><div class="grid2">
+<div>
+<h3>3.3  Hippocampus walkthrough (atlas slides 4–23)</h3>
+<ol class="steps">
+<li><b>Start caudally</b> at the lowest slice where the crescent-shaped floor of the <b>temporal horn</b> appears. Contour the T1-<i>hypointense</i> grey matter <b>medial</b> to the CSF of the temporal horn — not the bright white matter.</li>
+<li>Go cranially along the medial edge of the temporal horn. Leave out the <b>fimbria</b> (T1-bright, superomedial) and the <b>parahippocampal gyrus</b> (T1-bright, inferomedial).</li>
+<li><b>Anterior limit</b>: the anterior edge of the temporal horn, then the <b>uncal recess</b> when it appears — grey matter in front of it is <b>amygdala</b> and <b>uncus</b>; leave it out.</li>
+<li><b>Medial limit</b>: the edge of the T1-hypointensity up to the ambient cistern; the medial edge of the uncal recess; then, higher, the lateral edge of the <b>quadrigeminal cistern</b>.</li>
+<li>The contour moves <b>supero-posteriorly</b> slice by slice (the "banana"). Where the temporal horn is no longer seen, keep using the quadrigeminal cistern medially.</li>
+<li>The <b>tail</b> passes behind the thalamus, antero-medial to the <b>atrium</b> of the lateral ventricle, curving toward the splenium.</li>
+<li><b>Stop</b> when the hypointense structure no longer borders the atrium: the crus of the fornix appears in front and the splenium of the corpus callosum behind (Gondi 2010: at the lateral edges of the quadrigeminal cistern, before the crus of the fornix).</li>
+<li>Check the shape on <b>sagittal</b> (head inferior-anterior, body, tail superior-posterior; amygdala separate in front) and <b>coronal</b> (parahippocampal gyrus separate below).</li>
+<li>Expand 5 mm in 3D → Hippocampi_PRV05. Subtract from CTV_3000 → PTV_3000.</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg aria-label="Axial schematic at the level of the temporal horns showing hippocampi and the 5 mm avoidance region" role="img" viewbox="0 0 300 236">
+<rect fill="#fff" height="236" width="300"></rect>
+<ellipse cx="150" cy="120" fill="rgba(20,117,107,.12)" rx="128" ry="104" stroke="#b9c1c9" stroke-width="6"></ellipse>
+<circle cx="150" cy="128" fill="#eef0f2" r="24" stroke="#5b6b7c"></circle><text fill="#4f5f74" font-size="7" x="136" y="131">midbrain</text>
+<path d="M136,154 Q150,166 164,154 L168,170 Q150,180 132,170 Z" fill="#dce9f6" stroke="#7fa2c8"></path>
+<path d="M78,108 Q72,130 84,152" fill="none" stroke="#7fa2c8" stroke-width="5"></path>
+<path d="M222,108 Q228,130 216,152" fill="none" stroke="#7fa2c8" stroke-width="5"></path>
+<ellipse cx="96" cy="132" fill="none" rx="23" ry="34" stroke="#b03a2e" stroke-dasharray="4 2" stroke-width="1.3" transform="rotate(-12 96 132)"></ellipse>
+<ellipse cx="204" cy="132" fill="none" rx="23" ry="34" stroke="#b03a2e" stroke-dasharray="4 2" stroke-width="1.3" transform="rotate(12 204 132)"></ellipse>
+<ellipse cx="96" cy="132" fill="#b03a2e" opacity=".85" rx="9" ry="21" transform="rotate(-12 96 132)"></ellipse>
+<ellipse cx="204" cy="132" fill="#b03a2e" opacity=".85" rx="9" ry="21" transform="rotate(12 204 132)"></ellipse>
+<circle cx="104" cy="88" fill="#f6efe3" r="9" stroke="#a07a00"></circle><circle cx="196" cy="88" fill="#f6efe3" r="9" stroke="#a07a00"></circle>
+<text fill="#4f5f74" font-size="8" font-weight="700" x="10" y="18">R</text><text fill="#4f5f74" font-size="8" font-weight="700" x="284" y="18">L</text>
+<text fill="#4f5f74" font-size="7" x="138" y="20">anterior</text>
+<line stroke="#a07a00" x1="196" x2="232" y1="88" y2="58"></line><text fill="#a07a00" font-size="7" x="234" y="56">amygdala (out)</text>
+<line stroke="#2f6fb0" x1="222" x2="252" y1="118" y2="100"></line><text fill="#2f6fb0" font-size="7" x="244" y="96">temporal horn</text>
+<line stroke="#b03a2e" x1="204" x2="250" y1="140" y2="150"></line><text fill="#b03a2e" font-size="7" x="236" y="160">hippocampus</text>
+<line stroke="#b03a2e" x1="226" x2="250" y1="150" y2="178"></line><text fill="#b03a2e" font-size="7" x="214" y="188">+5 mm = HA region</text>
+<line stroke="#2f6fb0" x1="150" x2="150" y1="172" y2="200"></line><text fill="#2f6fb0" font-size="7" x="104" y="208">quadrigeminal / ambient cistern</text>
+<text fill="#14756b" font-size="7" x="20" y="228">PTV_3000 = CTV_3000 − HA region (teal)</text>
+</svg>
+<figcaption>Original axial schematic, radiological view. Hippocampi (red) lie medial to the temporal horns; the amygdala is in front and is not contoured. The dashed 5 mm HA region is removed from the PTV.</figcaption>
+</figure>
+<figure>
+<svg aria-label="Sagittal schematic of hippocampal head, body and tail" role="img" viewbox="0 0 300 168">
+<rect fill="#fff" height="168" width="300"></rect>
+<path d="M60,128 Q110,140 170,104 Q214,74 248,60" fill="none" stroke="#dce9f6" stroke-width="18"></path>
+<path d="M66,124 Q110,132 166,100 Q206,74 238,62" fill="none" stroke="#b03a2e" stroke-linecap="round" stroke-width="10"></path>
+<circle cx="48" cy="100" fill="#f6efe3" r="14" stroke="#a07a00"></circle>
+<path d="M120,104 Q170,82 226,52" fill="none" stroke="#e9e9e9" stroke-width="3"></path>
+<ellipse cx="262" cy="58" fill="#dce9f6" rx="16" ry="11" stroke="#7fa2c8"></ellipse>
+<path d="M90,148 Q140,150 190,124" fill="none" stroke="#c9b48a" stroke-width="6"></path>
+<text fill="#b03a2e" font-size="7" x="56" y="152">head</text><text fill="#b03a2e" font-size="7" x="130" y="128">body</text><text fill="#b03a2e" font-size="7" x="214" y="86">tail</text>
+<text fill="#a07a00" font-size="7" x="20" y="80">amygdala (out)</text>
+<text fill="#2f6fb0" font-size="7" x="244" y="40">atrium</text>
+<text fill="#8a6b3f" font-size="7" x="120" y="160">parahippocampal gyrus (out)</text>
+<text fill="#777" font-size="7" x="128" y="76">fimbria (out)</text><text fill="#2f6fb0" font-size="7" x="200" y="120">temporal horn (CSF)</text>
+<text fill="#4f5f74" font-size="7" x="8" y="14">anterior ←</text>
+<text fill="#555" font-size="7" x="196" y="14">start: temporal horn floor</text>
+<text fill="#555" font-size="7" x="196" y="24">stop: tail leaves the atrium</text>
+</svg>
+<figcaption>Original sagittal schematic of the hippocampal "banana": head inferior-anterior, tail superior-posterior beside the atrium. Check every contour on this view.</figcaption>
+</figure>
+</div>
+</div></article><article class="card" data-title="NRG CC001 planning criteria (30 Gy/10)"><h3>3.4  NRG CC001 planning criteria (30 Gy/10)</h3><div class="tw"><table>
+<thead><tr><th>Structure</th><th>Parameter</th><th>Per protocol</th><th>Variation acceptable</th></tr></thead>
+<tbody>
+<tr><td class="b">PTV_3000</td><td>D2%</td><td>≤37.5 Gy</td><td>37.5–40 Gy</td></tr>
+<tr><td class="b">PTV_3000</td><td>D98%</td><td>≥25 Gy</td><td>22.5–25 Gy</td></tr>
+<tr><td class="b">PTV_3000</td><td>V30Gy</td><td>≥95%</td><td>90–95%</td></tr>
+<tr><td class="b">Hippocampi (both)</td><td>D100%</td><td>≤9 Gy</td><td>9–10 Gy</td></tr>
+<tr><td class="b">Hippocampi (both)</td><td>Dmax (0.03 cc)</td><td>≤16 Gy</td><td>16–17 Gy</td></tr>
+<tr><td class="b">Optic nerves, chiasm</td><td>Dmax (0.03 cc)</td><td>≤30 Gy</td><td>30–37.5 Gy</td></tr>
+</tbody>
+</table></div><p class="src">Per protocol column: Brown 2020 Table 1. Variation column: CC001 protocol as reproduced by Gui 2020 (Radiat Oncol). RTOG 0933 and Liu 2026 used ≤37.5 Gy for the optic apparatus; CC001 tightened this to 30 Gy. This page follows CC001.</p></article><article class="card" data-title="What a good VMAT plan achieves"><h3>3.5  What a good VMAT plan achieves</h3><div class="tw"><table>
+<thead><tr><th>Metric</th><th>2 coplanar arcs</th><th>4 arcs (2 coplanar + 2 non-coplanar)</th></tr></thead>
+<tbody>
+<tr><td class="b">Hippocampus D100%</td><td>7.33 Gy</td><td>7.16 Gy</td></tr>
+<tr><td class="b">Hippocampus D0.03cc</td><td>12.66 Gy</td><td>10.55 Gy</td></tr>
+<tr><td class="b">Hippocampus Dmean</td><td>9.74 Gy</td><td>8.43 Gy</td></tr>
+<tr><td class="b">PTV D2% / D98%</td><td>32.90 / 27.97 Gy</td><td>32.49 / 28.55 Gy</td></tr>
+<tr><td class="b">Beam-on time</td><td>140 s</td><td>231 s (MU about doubled)</td></tr>
+</tbody>
+</table></div><p class="src">Liu 2026 Table 1–2, 10 patients, normalised to PTV V30Gy = 95%. Gondi 2010 linac IMRT (9 non-coplanar beams): hippocampal median 7.8 Gy, maximum 15.3 Gy; mean hippocampal EQD2 cut by 81%.</p></article><article class="card" data-title="Pitfalls"><h3>3.6  Pitfalls</h3><ul class="tight">
+<li>Including the <b>amygdala</b> (anterior to the uncal recess) or the <b>fimbria</b>: enlarges the avoidance region and the risk of under-dosing disease. Check on sagittal.</li>
+<li>Stopping too low: the tail climbs well above the level of the temporal horn, beside the atrium. Follow it until it leaves the atrium.</li>
+<li>Contouring on CT or on a thick-slice MRI: the atlas needs ≤1.5 mm 3D T1.</li>
+<li>Adding a PTV margin and then subtracting the HA region: CC001 adds none; if your department adds one, build PTV = (CTV + margin) − HA region and say so in the plan <span class="chk">CHECK</span>.</li>
+<li>Coverage between the hippocampi: coplanar arcs can only reach the midline bridge of PTV between the hippocampi through a narrow gantry window (about 340–20°), so blocking the hippocampi works only with non-coplanar arcs (Liu 2026 Fig. 5).</li>
+<li>A new metastasis inside the HA region on the planning MRI: HA is no longer appropriate; replan as standard WBRT or unilateral sparing.</li>
+</ul></article>
+</section><section class="panel" id="p-s4" data-tab="s4" data-label="4 Helmet" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 4 · continued</p><h2><span class="sectnum">4</span>Helmet: walkthrough, skull base map and pitfalls </h2><div class="lede"><p>The "German helmet" field is a slightly larger whole-brain field: the posterior half of the orbits is included to cover all meningeal surfaces, the inferior border is the C2–3 interspace, and a 5° posterior gantry tilt avoids divergence into the lenses (handbook). For VMAT the same intent becomes a CTV of the <b>whole intracranial subarachnoid space and its extensions</b>, borrowing the cranial part of the SIOPE CSI CTV and the EANO–ESMO target for cranial neuropathies.</p></div><div class="jump"></div></div>
+  <article class="card key" data-title="The C2 question"><h3>The C2 question</h3><div class="callout"></div></article><article class="card" data-title="Volume definitions"><h3>4.1  Volume definitions</h3><div class="tw"><table>
+<thead><tr><th style="width:20%">Component of CTV_Helmet</th><th>What to include</th><th style="width:24%">Source</th></tr></thead>
+<tbody>
+<tr><td class="b">1. CTV_Brain</td><td>Everything within the inner table, as in section 2 (cribriform plate, inferior temporal lobes, pituitary fossa)</td><td>SIOPE steps 1–2</td></tr>
+<tr><td class="b">2. Optic nerves and canals</td><td>Both optic canals and the <b>whole length of the optic nerves</b> with their sheaths, to the back of the globe (CSF reaches the posterior globe on MRI). Lens and anterior globe stay out.</td><td>SIOPE step 3 (no full consensus, most include); EANO–ESMO "entire length of optic nerves"; handbook "posterior half of the orbits"</td></tr>
+<tr><td class="b">3. Skull-base foramina (bilateral)</td><td>The CSF-containing dural sleeves: superior orbital fissure, foramen rotundum, foramen ovale, internal auditory meatus, jugular foramen, hypoglossal canal. Outline the bony canal on 1 mm bone-window CT, up to the outer table.</td><td>SIOPE Table 2, step 4</td></tr>
+<tr><td class="b">4. Cisterns and Meckel's cave</td><td>Basal (basilar) cisterns and Meckel's cave are inside the inner table, so they come with step 1 — check the CTV reaches them on the skull-base slices</td><td>EANO–ESMO; SIOPE (Meckel's cave within the middle-fossa CTV)</td></tr>
+<tr><td class="b">5. Upper cervical thecal sac</td><td>Entire subarachnoid space with nerve-root sleeves laterally (to the intervertebral foramina) from the foramen magnum to the <b>inferior endplate of C2</b></td><td>EANO–ESMO (to C2); SIOPE spinal CTV principle; handbook (C2–3 field border)</td></tr>
+<tr><td class="b">Not included</td><td>Foramen lacerum (no CSF sleeve); lenses; the cochlea is not spared by trimming the internal auditory meatus</td><td>SIOPE atlas; SIOPE recommendation</td></tr>
+<tr><td class="b">PTV_Helmet</td><td>CTV_Helmet + 3–5 mm <span class="chk">CHECK</span> local margin; consider a local crop off the lens with the trade-off documented</td><td>SIOPE (3–5 mm cranial; 5–8 mm spinal in CSI)</td></tr>
+</tbody>
+</table></div></article><article class="card" data-title="How far CSF runs out through the foramina (SIOPE)"><h3>4.2  How far CSF runs out through the foramina (SIOPE)</h3><div class="tw"><table>
+<thead><tr><th>Foramen</th><th>Nerves</th><th>CSF beyond the inner table</th></tr></thead>
+<tbody>
+<tr><td class="b">Internal auditory meatus</td><td>VII, VIII</td><td>Up to 16 mm (Noble, FIESTA, 96 scans); up to 12 mm, close to the cochlea (Janssens)</td></tr>
+<tr><td class="b">Jugular foramen</td><td>IX, X, XI</td><td>Up to 11–12 mm</td></tr>
+<tr><td class="b">Hypoglossal canal</td><td>XII</td><td>Up to 10 mm</td></tr>
+<tr><td class="b">Optic canal / nerve sheath</td><td>II</td><td>To the back of the globe in all 10 volunteers</td></tr>
+<tr><td class="b">Any foramen</td><td>—</td><td>Not beyond the outer table of the skull on CT correlation</td></tr>
+</tbody>
+</table></div><p class="src">Oculomotor, trochlear and abducens nerves have no dural cuff; the superior orbital fissure is still outlined in the SIOPE atlas because the ophthalmic division (V1) passes with them.</p></article><article class="card" data-title="Field (handbook) vs volume (this guide)"><h3>4.3  Field (handbook) vs volume (this guide)</h3><div class="tw"><table>
+<thead><tr><th style="width:18%">Item</th><th>Standard WBRT field</th><th>Helmet field</th><th>Helmet volume (VMAT)</th></tr></thead>
+<tbody>
+<tr><td class="b">Anterior / orbit</td><td>Collimator rotated to block the anterior orbit; 1 cm below skull base</td><td>Posterior half of the orbits included; 5° posterior gantry tilt to miss the lenses</td><td>Optic nerves and sheaths to the back of the globe; cribriform plate; lens excluded</td></tr>
+<tr><td class="b">Skull base</td><td>1 cm below the base for the temporal lobes</td><td>Same, more generous</td><td>Inner table + six foramina pairs to the outer table</td></tr>
+<tr><td class="b">Inferior</td><td>C1–2</td><td>C2–3 interspace</td><td>Thecal sac to the inferior endplate of C2</td></tr>
+<tr><td class="b">Superior / posterior</td><td colspan="2">1 cm flash beyond skull</td><td>Inner table; PTV margin and plan provide the rest</td></tr>
+</tbody>
+</table></div><div class="grid2">
+<div>
+<h3>4.4  Walkthrough (follows the SIOPE atlas order)</h3>
+<ol class="steps">
+<li>Build CTV_Brain (section 2) on brain window.</li>
+<li><b>Bone window W 3000 / L 400</b>, 1 mm slices. Start just above the <b>superior orbital fissures</b>; outline each fissure as it opens between the greater and lesser sphenoid wings.</li>
+<li><b>Cribriform plate</b>: confirm it is inside the CTV on every slice between the orbits (bounded laterally by the lateral lamella).</li>
+<li><b>Optic canals</b> (bone window), then the <b>optic nerves</b> (W 350 / L 40) forward through the orbit to the back of the globe. Keep the lens out.</li>
+<li><b>Pituitary fossa</b>: whole sella included.</li>
+<li><b>Internal auditory meati</b> (petrous bone, antero-superior to the jugular foramen): fill the canal to its lateral end. Do not trim toward the cochlea.</li>
+<li><b>Foramen rotundum</b> (greater wing, supero-lateral to the vidian canal), then <b>foramen ovale</b> (postero-lateral to rotundum). Leave out the foramen lacerum.</li>
+<li><b>Jugular foramina</b> (supero-lateral to the foramen magnum, below the carotid canal), then <b>hypoglossal canals</b> (in the occipital condyles, infero-medial to the jugular foramen).</li>
+<li>Below the foramen magnum switch to the <b>thecal sac</b>: the CSF space inside the canal with the root sleeves at C1–2, to the inferior endplate of C2. Use T2 MRI if fused.</li>
+<li>Union all parts → CTV_Helmet. Review in 3D: the foramina should look like short spurs off the skull-base CTV (SIOPE Fig. 3D).</li>
+</ol>
+</div>
+<div>
+<figure>
+<svg aria-label="Schematic of the cranial floor seen from above with the foramina included in the helmet CTV" role="img" viewbox="0 0 300 268">
+<rect fill="#fff" height="268" width="300"></rect>
+<path d="M150,16 C214,16 262,60 266,120 C270,184 228,246 150,250 C72,246 30,184 34,120 C38,60 86,16 150,16 Z" fill="#f7f8fa" stroke="#b9c1c9" stroke-width="5"></path>
+<path d="M60,96 Q150,70 240,96" fill="none" stroke="#cfd5db" stroke-width="3"></path>
+<path d="M64,170 Q110,140 140,150 M236,170 Q190,140 160,150" fill="none" stroke="#cfd5db" stroke-width="3"></path>
+<rect fill="rgba(47,111,176,.55)" height="38" rx="4" stroke="#2f6fb0" width="18" x="141" y="36"></rect>
+<circle cx="132" cy="88" fill="rgba(47,111,176,.55)" r="5" stroke="#2f6fb0"></circle><circle cx="168" cy="88" fill="rgba(47,111,176,.55)" r="5" stroke="#2f6fb0"></circle>
+<rect fill="rgba(20,117,107,.35)" height="16" rx="4" stroke="#14756b" width="20" x="140" y="96"></rect>
+<path d="M118,92 L98,104" stroke="#2f6fb0" stroke-linecap="round" stroke-width="4"></path><path d="M182,92 L202,104" stroke="#2f6fb0" stroke-linecap="round" stroke-width="4"></path>
+<circle cx="116" cy="114" fill="#2f6fb0" r="3.5"></circle><circle cx="184" cy="114" fill="#2f6fb0" r="3.5"></circle>
+<ellipse cx="118" cy="132" fill="#2f6fb0" rx="5" ry="3.5"></ellipse><ellipse cx="182" cy="132" fill="#2f6fb0" rx="5" ry="3.5"></ellipse>
+<circle cx="138" cy="134" fill="#cfd5db" r="3.5" stroke="#9aa3ad"></circle><circle cx="162" cy="134" fill="#cfd5db" r="3.5" stroke="#9aa3ad"></circle>
+<path d="M104,162 L114,158" stroke="#2f6fb0" stroke-linecap="round" stroke-width="4"></path><path d="M196,162 L186,158" stroke="#2f6fb0" stroke-linecap="round" stroke-width="4"></path>
+<ellipse cx="116" cy="184" fill="#2f6fb0" rx="6" ry="4"></ellipse><ellipse cx="184" cy="184" fill="#2f6fb0" rx="6" ry="4"></ellipse>
+<circle cx="132" cy="204" fill="#2f6fb0" r="3.5"></circle><circle cx="168" cy="204" fill="#2f6fb0" r="3.5"></circle>
+<ellipse cx="150" cy="210" fill="rgba(47,111,176,.20)" rx="16" ry="20" stroke="#2f6fb0"></ellipse>
+<text fill="#4f5f74" font-size="7" x="138" y="30">anterior</text>
+<line stroke="#2f6fb0" x1="159" x2="200" y1="54" y2="40"></line><text fill="#2f6fb0" font-size="7" x="202" y="42">cribriform plate</text>
+<line stroke="#2f6fb0" x1="168" x2="214" y1="88" y2="72"></line><text fill="#2f6fb0" font-size="7" x="216" y="72">optic canal</text>
+<line stroke="#2f6fb0" x1="202" x2="230" y1="104" y2="96"></line><text fill="#2f6fb0" font-size="7" x="226" y="90">sup. orbital fissure</text>
+<line stroke="#2f6fb0" x1="184" x2="236" y1="114" y2="114"></line><text fill="#2f6fb0" font-size="7" x="238" y="117">f. rotundum</text>
+<line stroke="#2f6fb0" x1="186" x2="236" y1="132" y2="134"></line><text fill="#2f6fb0" font-size="7" x="238" y="137">f. ovale</text>
+<line stroke="#2f6fb0" x1="196" x2="236" y1="161" y2="158"></line><text fill="#2f6fb0" font-size="7" x="238" y="161">int. auditory</text><text fill="#2f6fb0" font-size="7" x="238" y="169">meatus</text>
+<line stroke="#2f6fb0" x1="190" x2="236" y1="184" y2="186"></line><text fill="#2f6fb0" font-size="7" x="238" y="189">jugular f.</text>
+<line stroke="#2f6fb0" x1="168" x2="236" y1="204" y2="208"></line><text fill="#2f6fb0" font-size="7" x="238" y="211">hypoglossal</text>
+<text fill="#14756b" font-size="6.5" x="127" y="124">pituitary fossa</text>
+<line stroke="#9aa3ad" x1="138" x2="64" y1="134" y2="134"></line><text fill="#8a2f23" font-size="7" x="10" y="132">f. lacerum</text><text fill="#8a2f23" font-size="7" x="10" y="140">NOT included</text>
+<line stroke="#2f6fb0" x1="138" x2="80" y1="216" y2="230"></line><text fill="#2f6fb0" font-size="7" x="16" y="240">foramen magnum</text><text fill="#2f6fb0" font-size="7" x="16" y="248">→ thecal sac to C2</text>
+</svg>
+<figcaption>Original schematic of the cranial floor seen from above (not to scale; labels on one side only, structures bilateral). Blue: added to the helmet CTV. Grey: foramen lacerum, left out (SIOPE atlas).</figcaption>
+</figure>
+</div>
+</div></article><article class="card" data-title="Pitfalls"><h3>4.5  Pitfalls</h3><ul class="tight">
+<li><b>Using the whole-brain CTV for LMD</b>: highly conformal plans can under-dose CSF in the skull-base foramina if those extensions are not contoured (Noble 2017, cited by SIOPE).</li>
+<li><b>Sparing the cochlea</b> by cutting the internal auditory meatus: SIOPE advises against it; the CSF sleeve lies right beside the cochlea.</li>
+<li><b>Including the lens</b> while chasing the posterior globe: the nerve sheath ends at the back of the globe; the field era tilted the gantry for this reason.</li>
+<li><b>Hippocampal avoidance with LMD</b>: excluded in CC001; CSF disease bathes the temporal horns.</li>
+<li><b>Stopping at the foramen magnum</b>: the helmet volume runs down the upper cervical thecal sac to C2.</li>
+<li><b>Forgetting the junction</b>: if spinal RT is likely later, note the PTV's inferior edge (a C1–2 or C2–3 border was traditionally chosen with future matching in mind; handbook).</li>
+<li>For fit patients with controlled systemic disease, consider whether <b>proton CSI</b> (randomised phase II benefit in CNS-PFS and OS; EANO–ESMO) is the better option before committing to a helmet.</li>
+</ul></article>
+</section><section class="panel" id="p-s5" data-tab="s5" data-label="5 Pearls" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 5</p><h2><span class="sectnum">5</span>Pearls and common errors </h2><div class="jump"></div></div>
+  <article class="card" data-title="All three volumes"><h3>5.1  All three volumes</h3><ul class="tight">
+<li><b>Inner table, not brain</b>: set the window first (W 1500–2000 / L 300–350); a soft-tissue window makes the inner table look further in than it is.</li>
+<li>The two classic misses are the <b>cribriform plate</b> (low, between the orbits) and the <b>temporal poles</b> (low, in the middle fossae). Check both on sagittal and coronal before signing.</li>
+<li>Name the inferior extent in the prescription note (foramen magnum, C2) so the planner and checker know it is intended.</li>
+</ul></article><article class="card" data-title="HA-WBRT"><h3>5.2  HA-WBRT</h3><ul class="tight">
+<li>Grey matter, not white: the hippocampus is T1-dark; the fimbria and parahippocampal gyrus are T1-bright.</li>
+<li>The uncal recess is the anterior landmark; anything in front of it is amygdala.</li>
+<li>The tail is above the temporal horn and beside the atrium; most contours that are too short miss it.</li>
+<li>Review the hippocampal contour against the current MRI: a metastasis within 5 mm changes the plan.</li>
+</ul></article><article class="card" data-title="Helmet"><h3>5.3  Helmet</h3><ul class="tight">
+<li>Use 1 mm bone-window CT for the foramina; the SIOPE atlas order (SOF → cribriform → optic canal → sella → IAM → rotundum → jugular → ovale → hypoglossal) works top-down.</li>
+<li>The foramina are short spurs: they stop at the outer table.</li>
+<li>C2 means the bottom of C2 for the CTV.</li>
+</ul><hr class="soft"/></article>
+</section><section class="panel" id="p-s6" data-tab="s6" data-label="6 Dose" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 6</p><h2><span class="sectnum">6</span>Dose, fractionation, margins, IGRT and arcs </h2><div class="jump"></div></div>
+  <article class="card" data-title="Dose, fractionation, margins, IGRT and arcs"><h3>Dose, fractionation, margins, IGRT and arcs</h3><div class="tw"><table>
+<thead><tr><th style="width:16%">Scenario</th><th>Dose</th><th>Target / PTV</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td class="b">Standard WBRT</td><td>20 Gy/5 or 30 Gy/10</td><td>PTV = CTV_Brain + 3 mm <span class="chk">CHECK</span></td><td>Schedules: <a href="../pall-wbrt.html">WBRT principles page</a>; eviQ 1251</td></tr>
+<tr><td class="b">HA-WBRT</td><td>30 Gy/10 + memantine</td><td>PTV_3000 = CTV − HA region, no set-up margin</td><td>CC001; normalise to V30 ≥95%</td></tr>
+<tr><td class="b">HA-PCI (SCLC)</td><td>25 Gy/10</td><td>PTV_2500, same build</td><td>NRG CC003 (PTV_2500 D2% ≤31.25 Gy, V25 ≥95%)</td></tr>
+<tr><td class="b">Helmet (LMD)</td><td>30 Gy/10; 20 Gy/5 for poor prognosis</td><td>PTV = CTV_Helmet + 3–5 mm <span class="chk">CHECK</span></td><td>EANO–ESMO; avoid concurrent methotrexate</td></tr>
+</tbody>
+</table></div></article><article class="card" data-title="IGRT"><h3>6.1  IGRT</h3><ul class="tight">
+<li>HA-WBRT has no PTV margin around the transition zone, so daily volumetric or kV imaging matched to the skull is advised <span class="chk">CHECK</span> departmental IGRT protocol.</li>
+<li>Standard and helmet: departmental mask protocol <span class="chk">CHECK</span>. For the helmet, check neck flexion at C1–2 on the match, since the cervical CTV moves with the chin.</li>
+</ul></article><article class="card" data-title="Arc geometry"><h3>6.2  Arc geometry</h3><ul class="tight">
+<li><b>HA-WBRT, 4 arcs (Liu 2026)</b>: isocentre midway between the hippocampi. Two coplanar full arcs (181→179° clockwise for the upper brain, 179→181° counter-clockwise for the lower brain, 2 cm overlap) plus two half arcs at couch 90° (gantry 0–179°, collimator 15°).</li>
+<li>Handbook alternative: non-coplanar VMAT 182–178°, 178–182° and a half arc 2–178° at couch 90°.</li>
+<li><b>Standard and helmet</b>: two coplanar arcs usually suffice; add a non-coplanar arc if the lens or cochlea doses are high <span class="chk">CHECK</span> local class solution.</li>
+</ul></article>
+</section><section class="panel" id="p-s7" data-tab="s7" data-label="7 Organs at risk" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 7</p><h2><span class="sectnum">7</span>Organs at risk and constraints </h2><div class="jump"></div></div>
+  <article class="card" data-title="Which OARs"><h3>7.1  Which OARs</h3><div class="tw"><table>
+<thead><tr><th style="width:18%">Scenario</th><th>Contour</th></tr></thead>
+<tbody>
+<tr><td class="b">Standard</td><td>Lens_L/R, Eye_L/R; optic nerves and chiasm if 30 Gy/10 or more; cochleae optional</td></tr>
+<tr><td class="b">HA-WBRT</td><td>Hippocampus_L/R, Hippocampi_PRV05, OpticNrv_L/R, OpticChiasm, Lens_L/R, Eye_L/R; Pituitary (Liu 2026 used it)</td></tr>
+<tr><td class="b">Helmet</td><td>Lens_L/R (the optic nerves, chiasm and IAM are target); Eye_L/R; cochleae for reporting only; parotids and submandibular glands (SIOPE cranial OARs)</td></tr>
+</tbody>
+</table></div></article><article class="card" data-title="Constraints (30 Gy/10 unless stated)"><h3>7.2  Constraints (30 Gy/10 unless stated)</h3><div class="tw"><table>
+<thead><tr><th>OAR</th><th>Limit</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="b">Hippocampi D100%</td><td>≤9 Gy (≤10 Gy acceptable)</td><td>NRG CC001</td></tr>
+<tr><td class="b">Hippocampi Dmax (0.03 cc)</td><td>≤16 Gy (≤17 Gy acceptable)</td><td>NRG CC001</td></tr>
+<tr><td class="b">Optic nerves, chiasm Dmax</td><td>≤30 Gy (≤37.5 Gy acceptable)</td><td>NRG CC001; RTOG 0933 used ≤37.5 Gy</td></tr>
+<tr><td class="b">Lens D0.03cc</td><td>&lt;7 Gy</td><td>City of Hope institutional (Liu 2026); Gondi 2010 linac objective 5 Gy max</td></tr>
+<tr><td class="b">Eye Dmax</td><td>7 Gy (optimisation objective)</td><td>Gondi 2010 Table 1 (linac IMRT)</td></tr>
+<tr><td class="b">Pituitary D0.03cc</td><td>&lt;30 Gy</td><td>City of Hope (Liu 2026); in the CTV for standard and helmet, so not limited there</td></tr>
+<tr><td class="b">PTV hot spot</td><td>D2% ≤37.5 Gy (125%)</td><td>CC001</td></tr>
+</tbody>
+</table></div><p class="src">In the helmet volume the posterior globe and optic nerves are target: the lens objective is the only true eye limit, and its priority must not undercut the optic-sheath CTV. Lens limits for standard WBRT and the helmet are not set in the supplied sources <span class="chk">CHECK</span> departmental value.</p></article><article class="card" data-title="Prescribing and reporting"><h3>7.3  Prescribing and reporting</h3><ul class="tight">
+<li>HA-WBRT: normalise so PTV_3000 V30Gy ≥95%; report D2%, D98%, hippocampal D100% and D0.03cc (CC001; Liu 2026).</li>
+<li>Gondi 2010 normalised the linac plan to 92% of the PTV at 30 Gy; CC001 later set ≥95% — use CC001.</li>
+<li>Standard and helmet: ICRU 83 style — D98%, D50%, D2% and coverage of PTV; lens D0.03cc.</li>
+</ul></article>
+</section><section class="panel" id="p-s8" data-tab="s8" data-label="8 RayStation build" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 8</p><h2><span class="sectnum">8</span>RayStation build and TG-263 names </h2><div class="jump"></div></div>
+  <article class="card" data-title="Target and helper ROIs"><h3>8.1  Target and helper ROIs</h3><div class="tw"><table>
+<thead><tr><th style="width:24%">ROI</th><th>How to build</th></tr></thead>
+<tbody>
+<tr><td class="b">CTV_Brain</td><td>Start from auto-segmented Brain if available, then edit to the inner table on W 1500–2000 / L 300–350; or threshold the skull (bone HU), fill the cranial cavity and remove bone. Check the cribriform plate, temporal poles, sella and foramen magnum by hand.</td></tr>
+<tr><td class="b">Hippocampus_L, Hippocampus_R</td><td>Manual on the fused 3D T1 MRI (atlas). Union → <code>Hippocampi</code>.</td></tr>
+<tr><td class="b">Hippocampi_PRV05</td><td>Hippocampi + 5 mm, uniform 3D (ROI algebra: margin 0.5 cm).</td></tr>
+<tr><td class="b">PTV_3000 (HA)</td><td>CTV_Brain <b>subtract</b> Hippocampi_PRV05; no outer margin.</td></tr>
+<tr><td class="b">zopt_PTV_10</td><td>PTV_3000 subtract (Hippocampi + 10 mm). Optimise this alone first (Liu: 'intermediate plan').</td></tr>
+<tr><td class="b">zopt_PTV_5to10</td><td>PTV_3000 subtract zopt_PTV_10 (the 5–10 mm shell). Add its objective, then continue optimising from the intermediate plan rather than restarting.</td></tr>
+<tr><td class="b">CTV_Helmet</td><td>Union of CTV_Brain, OpticNrv sheaths to globe, the foramen ROIs (<code>z_SOF_L/R</code>, <code>z_FRotundum_L/R</code>, <code>z_FOvale_L/R</code>, <code>z_IAM_L/R</code>, <code>z_FJugular_L/R</code>, <code>z_CanalHypoglos_L/R</code>) and <code>CTV_ThecalSac_C1C2</code>.</td></tr>
+<tr><td class="b">PTV_Helmet / PTV_Brain</td><td>CTV + local margin <span class="chk">CHECK</span>; crop to External − 3 mm if your class solution does so for build-up.</td></tr>
+<tr><td class="b">zRing / zAvoid_Lens</td><td>Optional: Lens + 3–5 mm avoid ROI cropped off the CTV, for optimisation only <span class="chk">CHECK</span>.</td></tr>
+</tbody>
+</table></div></article><article class="card" data-title="Optimisation notes"><h3>8.2  Optimisation notes</h3><ul class="tight">
+<li>Liu 2026 blocked the hippocampi for entry and exit only on the non-coplanar arcs; on coplanar-only plans blocking left the PTV between the hippocampi under-dosed.</li>
+<li>Gondi 2010 starting objectives (linac IMRT): PTV min 32 / max 34 Gy; hippocampus max 11 Gy, 9 Gy to ≤40%; eyes max 7 Gy; lenses max 5 Gy. Useful as a first pass; final evaluation against CC001.</li>
+<li>Gondi 2010 showed coverage and homogeneity improve if you judge the PTV 2 mm further out from the HA region (hippocampus + 7 mm): expect the dose fall-off to sit in the first few mm outside the HA region.</li>
+<li>Name the plan with the volume type (WB, HA-WB, Helmet) and the inferior extent so checkers can verify the build.</li>
+</ul></article><article class="card" data-title="QA before approval"><h3>8.3  QA before approval</h3><ol class="steps">
+<li>Fusion checked on skull base and temporal bones (HA, helmet).</li>
+<li>Hippocampi reviewed on sagittal and coronal; volume plausible (about 3 cc together).</li>
+<li>CTV includes cribriform plate, temporal poles, sella; ends at foramen magnum (or C2).</li>
+<li>Helmet: all six foramina pairs and the optic sheaths are present; thecal sac reaches the C2 endplate; lens outside.</li>
+<li>DVH against section 7; hot spots outside the PTV checked.</li>
+</ol></article>
+</section><section class="panel" id="p-s9" data-tab="s9" data-label="9 References" hidden>
+  <div class="panel-head"><p class="eyebrow">Section 9</p><h2><span class="sectnum">9</span>References </h2><div class="jump"></div></div>
+  <article class="card" data-title="Supplied sources"><h3>Supplied sources</h3><ol class="ref">
+<li>Gondi V, Tomé WA, Rowley HA, Mehta MP. Hippocampal contouring: a contouring atlas for RTOG 0933. RTOG (slide atlas).</li>
+<li>Gondi V, Tolakanahalli R, Mehta MP, et al. Hippocampal-sparing whole-brain radiotherapy: a "how-to" technique using helical tomotherapy and linear accelerator-based intensity-modulated radiotherapy. Int J Radiat Oncol Biol Phys 2010;78:1244–1252. doi:10.1016/j.ijrobp.2010.01.039.</li>
+<li>Brown PD, Gondi V, Pugh S, et al. Hippocampal avoidance during whole-brain radiotherapy plus memantine for patients with brain metastases: phase III trial NRG Oncology CC001. J Clin Oncol 2020;38:1019–1029. doi:10.1200/JCO.19.02767.</li>
+<li>Liu B, Liu A, Williams T, Kim JH. An optimized VMAT planning technique for hippocampal-sparing whole-brain radiotherapy. J Appl Clin Med Phys 2026;27:e70518. doi:10.1002/acm2.70518.</li>
+<li>Ajithkumar T, Horan G, Padovani L, et al. SIOPE – Brain tumor group consensus guideline on craniospinal target volume delineation for high-precision radiotherapy. Radiother Oncol 2018;128:192–197. doi:10.1016/j.radonc.2018.04.016.</li>
+<li>SIOPE Brain Tumour Group. Atlas for target volume delineation for craniospinal radiotherapy (slide atlas accompanying ref. 5).</li>
+<li>Palliative radiotherapy chapter (ch. 13), brain metastases — whole brain radiation therapy, pp. 260–262: standard WBRT vs German helmet fields <span class="chk">CHECK</span> full citation of the handbook.</li>
+</ol></article><article class="card" data-title="Additional sources"><h3>Additional sources</h3><ol class="ref" start="8">
+<li>Le Rhun E, Weller M, van den Bent M, et al. Leptomeningeal metastasis from solid tumours: EANO–ESMO Clinical Practice Guideline. ESMO Open 2023;8:101624. doi:10.1016/j.esmoop.2023.101624. PMID 37863528.</li>
+<li>NRG Oncology CC001 protocol (NCT02360215): CTV_3000 = whole-brain parenchyma to the foramen magnum; PTV_3000 = CTV_3000 excluding the HA region, no set-up margin.</li>
+<li>Gui C, et al. Automated contouring and planning pipeline for hippocampal-avoidant whole-brain radiotherapy. Radiat Oncol 2020;15. doi:10.1186/s13014-020-01689-y (Table 2 reproduces the CC001 per-protocol and variation-acceptable limits).</li>
+<li>HIPPORAD-type HA-WBRT + SIB protocol (NCT01414738): CTV to C1, or C2 with posterior fossa metastases.</li>
+<li>NRG CC003 (NCT02635009): HA-PCI 25 Gy/10, PTV_2500 limits.</li>
+<li>Gondi V, Pugh SL, Tomé WA, et al. Preservation of memory with conformal avoidance of the hippocampal neural stem-cell compartment during WBRT (RTOG 0933). J Clin Oncol 2014;32:3810.</li>
+<li>Noble DJ, et al. Highly conformal craniospinal radiotherapy techniques can underdose the cranial CTV if leptomeningeal extension through skull base exit foramina is not contoured. Clin Oncol 2017;29:439–447.</li>
+</ol></article><article class="card" data-title="eviQ (links only)"><h3>eviQ (links only)</h3><ul class="tight">
+<li><a href="https://www.eviq.org.au/radiation-oncology/palliative/1251-brain-metastases-palliative-ebrt-whole-brain" rel="noopener" target="_blank">1251 · Brain metastases palliative EBRT whole brain</a></li>
+<li><a href="https://www.eviq.org.au/radiation-oncology/palliative/3882-palliative-brain-metastases-ebrt-hippocampal" rel="noopener" target="_blank">3882 · Brain metastases palliative EBRT hippocampal avoidance whole brain</a></li>
+</ul><div class="flag"><span class="lbl">Before clinical use</span> Schematics are original and not to scale. Have a colleague review this page and confirm the items marked CHECK, especially PTV margins, IGRT and the lens limit.</div></article>
+</section>
+</main>
+</div>
+<footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
+<script src="../assets/site.js"></script>
+<script src="../assets/extras.js"></script>
+</body>
+</html>
