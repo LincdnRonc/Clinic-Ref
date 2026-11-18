@@ -108,30 +108,73 @@
 </div>
 <div>
 <figure>
-<svg aria-label="Axial schematic of mid-prostate delineation" role="img" viewbox="0 0 300 250">
-<rect fill="#fff" height="250" width="300" x="0" y="0"></rect>
-<!-- pelvis hint -->
-<ellipse cx="150" cy="130" fill="#f4f1ea" rx="132" ry="98" stroke="#e3ddcf"></ellipse>
-<!-- levator ani sling -->
-<path d="M60 120 Q150 70 240 120 Q235 175 150 200 Q65 175 60 120 Z" fill="#e7edee" stroke="#9fb4b6"></path>
-<text fill="#5a6b6e" font-size="8.5" x="248" y="118">levator ani</text>
-<!-- rectum -->
-<ellipse cx="150" cy="196" fill="#f0e2d0" rx="26" ry="20" stroke="#c69a5f"></ellipse>
-<text fill="#8a6a3a" font-size="8.5" text-anchor="middle" x="150" y="200">rectum</text>
+<svg aria-label="Axial schematic of mid-prostate delineation: what to include and exclude" font-family="system-ui,-apple-system,sans-serif" role="img" viewbox="0 0 400 340">
+<defs>
+<pattern height="5" id="hatchDVC" patterntransform="rotate(45)" patternunits="userSpaceOnUse" width="5"><line stroke="#3f6fb5" stroke-width="1.3" x1="0" x2="0" y1="0" y2="5"></line></pattern>
+<pattern height="5" id="hatchLeg" patterntransform="rotate(45)" patternunits="userSpaceOnUse" width="5"><line stroke="#6b7680" stroke-width="1.2" x1="0" x2="0" y1="0" y2="5"></line></pattern>
+</defs>
+<rect fill="#fff" height="340" width="400"></rect>
+<text fill="#8a949c" font-size="9" text-anchor="middle" x="200" y="12">ANTERIOR</text>
+<text fill="#8a949c" font-size="9" text-anchor="middle" x="200" y="300">POSTERIOR</text>
+<!-- pubic symphysis -->
+<rect fill="#ece5d2" height="28" rx="9" stroke="#a89a74" stroke-width="1.2" width="28" x="170" y="18"></rect>
+<rect fill="#ece5d2" height="28" rx="9" stroke="#a89a74" stroke-width="1.2" width="28" x="202" y="18"></rect>
+<!-- Retzius fat -->
+<path d="M146 54 Q200 46 254 54 L246 106 Q200 80 154 106 Z" fill="#fbefc4" stroke="#e4d08a" stroke-width=".8"></path>
+<!-- mesorectal fat + rectum -->
+<ellipse cx="200" cy="254" fill="#fbefc4" rx="54" ry="34" stroke="#e4d08a" stroke-width=".8"></ellipse>
+<ellipse cx="200" cy="254" fill="#f1d3ad" rx="36" ry="24" stroke="#a8702f" stroke-width="1.6"></ellipse>
+<ellipse cx="200" cy="256" fill="#fff" rx="14" ry="8" stroke="#c99a63" stroke-width=".8"></ellipse>
+<!-- obturator internus -->
+<path d="M118 64 Q98 150 124 252 L137 247 Q113 150 131 66 Z" fill="#c9d6c4" stroke="#6f8b67" stroke-width="1"></path>
+<path d="M282 64 Q302 150 276 252 L263 247 Q287 150 269 66 Z" fill="#c9d6c4" stroke="#6f8b67" stroke-width="1"></path>
+<!-- levator ani -->
+<path d="M134 116 Q120 180 164 238 L173 231 Q135 180 143 118 Z" fill="#a9c6cc" stroke="#3f7884" stroke-width="1"></path>
+<path d="M266 116 Q280 180 236 238 L227 231 Q265 180 257 118 Z" fill="#a9c6cc" stroke="#3f7884" stroke-width="1"></path>
 <!-- prostate CTV -->
-<path d="M112 118 Q150 96 190 118 Q198 150 168 172 Q150 180 132 172 Q104 150 112 118 Z" fill="rgba(176,58,46,.13)" stroke="#b03a2e" stroke-width="2.3"></path>
-<text fill="#8a2f23" font-size="9" font-weight="700" text-anchor="middle" x="151" y="140">CTV_Prostate</text>
-<!-- Santorini plexus anterior -->
-<path d="M126 104 Q150 92 176 104 Q168 116 150 118 Q132 116 126 104 Z" fill="#dfe8f2" stroke="#7fa4cf"></path>
-<text fill="#3a6296" font-size="8" text-anchor="middle" x="150" y="86">Santorini plexus (exclude)</text>
-<!-- Retzius -->
-<text fill="#8a8a8a" font-size="7.6" text-anchor="middle" x="150" y="72">Retzius fat</text>
-<!-- urethra dot -->
-<circle cx="150" cy="150" fill="#fff" r="4.5" stroke="#b03a2e" stroke-dasharray="2 2"></circle>
-<line stroke="#b03a2e" stroke-width=".7" x1="205" x2="158" y1="150" y2="150"></line>
-<text fill="#8a2f23" font-size="7.6" x="207" y="153">urethra (apex: exclude)</text>
+<path d="M152 122 Q200 96 248 122 Q258 165 228 200 Q200 218 172 200 Q142 165 152 122 Z" fill="#f6d9d5" stroke="#b3261e" stroke-width="3"></path>
+<!-- AFMS (inside CTV) -->
+<path d="M156 121 Q200 99 244 121 Q236 134 200 129 Q164 134 156 121 Z" fill="#e7a59c"></path>
+<!-- transition zone -->
+<ellipse cx="200" cy="152" fill="#f0c4be" rx="28" ry="19" stroke="#c46b62" stroke-dasharray="3 2" stroke-width=".8"></ellipse>
+<text fill="#8f2a22" font-size="8.5" text-anchor="middle" x="200" y="166">TZ</text>
+<text fill="#8f2a22" font-size="8.5" text-anchor="middle" x="200" y="196">PZ</text>
+<!-- urethra -->
+<circle cx="200" cy="148" fill="#fff" r="5" stroke="#b3261e" stroke-width="1.4"></circle>
+<!-- Santorini / dorsal venous plexus -->
+<path d="M158 113 Q200 80 242 113 Q200 99 158 113 Z" fill="#cfe0f5" stroke="#2f5f9e" stroke-width="1.2"></path>
+<path d="M158 113 Q200 80 242 113 Q200 99 158 113 Z" fill="url(#hatchDVC)" opacity=".55"></path>
+<!-- NVB -->
+<g fill="#c7b3e6" stroke="#5b3f95" stroke-width="1"><circle cx="164" cy="201" r="5"></circle><circle cx="170" cy="208" r="3.2"></circle><circle cx="236" cy="201" r="5"></circle><circle cx="230" cy="208" r="3.2"></circle></g>
+<!-- leaders -->
+<g fill="none" stroke="#7a858e" stroke-width=".8">
+<path d="M108 62 L162 72"></path><path d="M108 98 L172 100"></path><path d="M108 150 L113 150"></path><path d="M108 200 L140 196"></path>
+<path d="M292 32 L231 32"></path><path d="M292 112 L232 120"></path><path d="M292 148 L206 148"></path><path d="M292 200 L242 201"></path><path d="M292 254 L237 254"></path>
+</g>
+<!-- left labels -->
+<g font-size="11" text-anchor="end">
+<text fill="#7a6416" font-weight="700" x="104" y="60">Retzius fat</text><text fill="#555" font-size="9.5" x="104" y="72">✕ exclude</text>
+<text fill="#2f5f9e" font-weight="700" x="104" y="96">Santorini plexus</text><text fill="#555" font-size="9.5" x="104" y="108">✕ exclude (pitfall)</text>
+<text fill="#4f6b48" font-weight="700" x="104" y="148">Obturator int.</text><text fill="#555" font-size="9.5" x="104" y="160">✕ exclude</text>
+<text fill="#2f6370" font-weight="700" x="104" y="198">Levator ani</text><text fill="#555" font-size="9.5" x="104" y="210">✕ lateral border</text>
+</g>
+<!-- right labels -->
+<g font-size="11">
+<text fill="#7d6f47" font-weight="700" x="296" y="30">Pubic symphysis</text><text fill="#555" font-size="9.5" x="296" y="42">✕ bone</text>
+<text fill="#b3261e" font-weight="700" x="296" y="110">AFMS</text><text fill="#b3261e" font-size="9.5" x="296" y="122">✓ include</text>
+<text fill="#b3261e" font-weight="700" x="296" y="146">Urethra</text><text fill="#b3261e" font-size="9.5" x="296" y="158">✓ in CTV (mid-gland)</text>
+<text fill="#5b3f95" font-weight="700" x="296" y="198">NVB</text><text fill="#555" font-size="9.5" x="296" y="210">✕ exclude (pitfall)</text>
+<text fill="#8a5a24" font-weight="700" x="296" y="252">Rectum</text><text fill="#555" font-size="9.5" x="296" y="264">✕ exclude</text>
+</g>
+<!-- legend -->
+<g font-size="10.5">
+<rect fill="#f6d9d5" height="14" rx="3" stroke="#b3261e" stroke-width="2.5" width="22" x="20" y="312"></rect>
+<text fill="#16212b" x="48" y="323"><tspan fill="#b3261e" font-weight="700">CTV_Prostate</tspan> — include all inside</text>
+<rect fill="url(#hatchLeg)" height="14" rx="3" stroke="#6b7680" width="22" x="230" y="312"></rect>
+<text fill="#16212b" x="258" y="323">✕ outside CTV</text>
+</g>
 </svg>
-<figcaption>Schematic axial mid-prostate CTV (red). Anterior border follows the anterior fibromuscular stroma, excluding the Santorini plexus / Retzius fat; lateral border is medial to the levator ani; posterior border is the anterior rectal wall. Diagrammatic, not to scale.</figcaption>
+<figcaption>Axial mid-gland, radiological view (patient's right on image left). <b>Include</b> everything inside the red line: peripheral and transition zones, the anterior fibromuscular stroma (AFMS) and the prostatic urethra. <b>Exclude</b> the Santorini plexus and Retzius fat anteriorly, levator ani and obturator internus laterally, the neurovascular bundles posterolaterally and the rectum posteriorly. At the apex, exclude the distal urethra / external sphincter (Section 2b). Diagrammatic, not to scale.</figcaption>
 </figure>
 <div class="flag">
 <span class="lbl">Physics / clinical review</span>
