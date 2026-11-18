@@ -63,7 +63,7 @@ def eviq_panel(f):
 '''
 CTR_SITE = {'ctr-breast.html':'breast','ctr-thorax.html':'thorax','ctr-hn.html':'hn','ctr-skin.html':'hn','ctr-cns.html':'cns','ctr-peds.html':'cns',
  'ctr-upper-gi.html':'gi','ctr-anal.html':'gi','ctr-gyn.html':'gyn','ctr-heme.html':'heme','ctr-sarcoma.html':'sarcoma','ctr-spine.html':'pall',
- 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/bladder.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/thorax.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','contouring/oesophagus.html':'gi','contouring/breast.html':'breast','contouring/gynae.html':'gyn','contouring/anal.html':'gi','contouring/spine-bone.html':'pall','contouring/cns.html':'cns','contouring/wbrt.html':'cns','contouring/head-neck.html':'hn','contouring/lymphoma.html':'heme','ctr-library.html':'contouring','ctr-mim.html':'contouring','ctr-monaco.html':'contouring'}
+ 'ctr-bladder.html':'gu','ctr-kidney-liver.html':'gu','contouring/prostate.html':'gu','contouring/bladder.html':'gu','contouring/rectal-long-course.html':'gi','contouring/liver-sbrt.html':'gi','contouring/thorax.html':'thorax','contouring/biliary.html':'gi','contouring/pancreas-stomach.html':'gi','contouring/oesophagus.html':'gi','contouring/breast.html':'breast','contouring/gynae.html':'gyn','contouring/anal.html':'gi','contouring/spine-bone.html':'pall','contouring/cns.html':'cns','contouring/wbrt.html':'cns','contouring/brain-mets.html':'cns','contouring/head-neck.html':'hn','contouring/lymphoma.html':'heme','ctr-library.html':'contouring','ctr-mim.html':'contouring','ctr-monaco.html':'contouring'}
 def _ds(f): return f' data-site="{CTR_SITE[f]}"' if f in CTR_SITE else ''
 def sitenav(current, group):
     links = ['<a href="index.html">Home</a>']
@@ -286,7 +286,7 @@ def _link(l):
     return l, 'Website'
 LIB_FULL = [(f,'',n,'',t) for f,n,t in [
  ('contouring/breast.html','Breast contouring guide',('breast',)),('contouring/thorax.html','Thorax contouring guide',('thorax',)),
- ('contouring/head-neck.html','Head and neck contouring guide',('hn',)),('contouring/cns.html','CNS contouring guide',('cns',)),('contouring/wbrt.html','Whole brain VMAT contouring guide (standard, HA, helmet)',('cns',)),
+ ('contouring/head-neck.html','Head and neck contouring guide',('hn',)),('contouring/cns.html','Primary CNS contouring guide',('cns',)),('contouring/brain-mets.html','Brain metastases contouring guide (SRS, cavity, HA-WBRT)',('cns',)),('contouring/wbrt.html','Whole brain VMAT contouring guide (standard, HA, helmet)',('cns',)),
  ('contouring/oesophagus.html','Oesophagus and GOJ contouring guide',('gi',)),('contouring/pancreas-stomach.html','Pancreas and stomach contouring guide',('gi',)),
  ('contouring/biliary.html','Cholangiocarcinoma and gallbladder contouring guide',('gi',)),('contouring/liver-sbrt.html','Liver SBRT OAR contouring guide',('gi',)),
  ('contouring/rectal-long-course.html','Rectal long-course atlas',('gi',)),('contouring/anal.html','Anal canal contouring guide',('gi',)),
@@ -323,7 +323,8 @@ CONTOUR = [
 (root/'src'/'ctr-library.html').write_text(build_library())
 CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
  ('contouring/breast.html','Breast','Breast contouring guide','Whole breast, tumour bed and SIB, partial breast with trial volumes, multicatheter APBI, chest wall with and without implants, ESTRO/RTOG nodal borders, Liverpool DVH scorecards.'),
- ('contouring/cns.html','CNS','CNS contouring guide','Glioblastoma (ESTRO-EANO 2023), IDH-mutant glioma (2025), meningioma (RTOG 0539/EORTC), vestibular schwannoma, SRS for metastases and cavities, HA-WBRT, EPTN OAR constraints.'),
+ ('contouring/cns.html','Primary CNS','Primary CNS contouring guide','Glioblastoma (ESTRO-EANO 2023), IDH-mutant glioma (2025), meningioma (RTOG 0539/EORTC), vestibular schwannoma, barrier editing, EPTN OAR constraints.'),
+ ('contouring/brain-mets.html','Brain metastases','Brain metastases contouring guide','Intact and cavity SRS (Soliman 2018, Canberra), dose by size, systemic therapy around SRS, HA-WBRT summary, SRS and HyTEC limits.'),
  ('contouring/wbrt.html','Whole brain (VMAT)','Whole brain VMAT contouring guide','Volume-based standard WBRT, hippocampal-avoidance WBRT (RTOG 0933 atlas, NRG CC001) and the helmet volume for leptomeningeal disease (SIOPE foramina, optic sheaths, thecal sac to C2); constraints and RayStation build.'),
  ('contouring/gynae.html','Gynae','Gynaecological contouring guide','Cervix EBRT (EMBRACE II ITV and nodal SIB), MRI-guided brachytherapy targets and aims, post-op cervix and endometrium, vaginal vault and vaginal cancer, vulva definitive and post-op, inguinal margins, constraints.'),
  ('contouring/spine-bone.html','Spine & bone SBRT','Spine and bone SBRT contouring guide','St George selection and workflow, ISRC sector CTV table, post-op spine, sacrum (Dunne), non-spine bone and soft tissue, re-irradiation cord limits, 1–5 fraction constraints.'),
