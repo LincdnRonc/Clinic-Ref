@@ -50,6 +50,8 @@ body.cn .panel{gap:8px;margin-bottom:14px}
 
 footer.disclaimer p{border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:0 8px 8px 0;padding:8px 12px;background:var(--panel);color:var(--ink)}
 .calc select{appearance:auto}
+.calc.stg{grid-template-columns:1fr}
+.calc.stg select{text-overflow:ellipsis}
 /* Clinic quick links */
 .card ul.qlinks{list-style:none;padding:0;margin:8px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
 .qlinks li{margin:0}
