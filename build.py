@@ -163,7 +163,7 @@ def exam_panel(f):
     if not parts: return ''
     return ('\n<section class="panel gathered" id="p-exam" data-tab="exam" data-label="Exam notes" data-borrowed="exam" hidden>\n'
             '  <div class="panel-head">\n    <h2>Exam notes</h2>\n'
-            '    <p class="lede">Phase 2 exam-summary notes for this site: AS\'s summary, with cards tagged LD from Lincoln\'s 2025 summary. Revision notes reproduced as written, not checked against sources like the rest of this page; where they disagree with it, go by this page.</p>\n'
+            '    <p class="lede">Phase 2 exam-summary notes for this site (AS\'s summary). Revision notes reproduced as written, not checked against sources like the rest of this page; where they disagree with it, go by this page.</p>\n'
             '    <div class="jump"></div>\n  </div>\n' + ''.join(parts) + '\n</section>')
 def page(f, short, long, desc, group, gname, gid, foot):
     body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f) + exam_panel(f)

@@ -26,8 +26,7 @@ EVIDENCE = [
   [('hn-npc-sinonasal.html#npc','Nasopharynx')]),
 ]
 SITE = [
-    ('2026-11-19', 'Exam notes tab on each tumour-site page (44 pages): the matching Phase 2 exam-summary notes, labelled as unverified revision notes. The standalone exam section stays for whole-topic revision and general viva tabs.', 'gu-prostate.html#exam'),
-    ('2026-11-19', "Exam summary: extra content from Lincoln's 2025 summary added to each tumour-site tab (cards tagged LD, nothing already in the AS summary repeated) and 14 new tabs, including viva framework, plan evaluation, ovary, retinoblastoma, late toxicity and pathogenesis.", 'exam-viva.html'),
+    ('2026-11-19', 'Exam notes tab on each tumour-site page (44 pages): the matching Phase 2 exam-summary notes (AS summary), labelled as unverified revision notes. The standalone exam section stays for whole-topic revision and general viva tabs.', 'gu-prostate.html#exam'),
  ('2026-11-19', 'Life expectancy calculator on Clinical scores (Prostate tab): Australian Life Tables 2020–22 by age and sex, NCCN ±50% health-quartile adjustment with a Charlson guide, and the NCCN life-expectancy thresholds for each risk group.', 'scores.html#prostate'),
  ('2026-11-19', 'Consent numbers moved from Tools to a Toxicity & consent tab on each tumour-site page, with a print button. Breast, head and neck sub-pages and brain metastases show the shared rates from their general page.', ''),
  ('2026-11-18', 'New MDT decision matrix: tap case details as they are presented and the matching evidence-based scenario remains, with decision, options, RT dose, trials and what still needs establishing. A tab on the prostate, pancreas, oesophagus and gastric, liver and biliary, rectum and lung pages, and all of them on one Tools page. Rows marked (check) are not yet verified.', 'mdt.html'),

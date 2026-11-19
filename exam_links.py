@@ -22,8 +22,7 @@ EXAM = [
 ]
 FOOT_EXAM = ('<footer><p>Exam-revision summary condensed from the Phase 2 "Super Summary" (AS) Word document, reproduced as written '
              '(Australian spelling of tumour; figures from the original are not reproduced). Written for the RANZCR Phase 2 examination, '
-             'so check eviQ, departmental protocols and current guidelines before applying anything clinically. '
-             'Cards tagged LD come from Lincoln\'s own 2025 summary and were added only where the AS summary did not already cover the point.</p></footer>')
+             'so check eviQ, departmental protocols and current guidelines before applying anything clinically.</p></footer>')
 # clinic page -> [(exam page, tab)]
 XREF = {
  'breast-early.html':[('exam-breast.html','dcis'),('exam-breast.html','early'),('exam-breast.html','male')],
@@ -34,7 +33,7 @@ XREF = {
  'cns-vs.html':[('exam-cns.html','vs')],
  'cns-general.html':[('exam-cns.html','ependymoma'),('exam-cns.html','pineal')],
  'peds-cns.html':[('exam-peds.html','medullo'),('exam-cns.html','germ'),('exam-peds.html','cranio'),('exam-peds.html','dmg')],
- 'peds-solid.html':[('exam-peds.html','wilms'),('exam-peds.html','nb'),('exam-peds.html','ewing'),('exam-peds.html','rms'),('exam-peds.html','retino')],
+ 'peds-solid.html':[('exam-peds.html','wilms'),('exam-peds.html','nb'),('exam-peds.html','ewing'),('exam-peds.html','rms')],
  'peds-late.html':[('exam-peds.html','survivorship'),('exam-peds.html','pedsrt')],
  'gi-oesophagus-gastric.html':[('exam-ugi.html','oesophagus'),('exam-ugi.html','gastric'),('exam-ugi.html','gist')],
  'gi-pancreas.html':[('exam-ugi.html','pancreas')],
@@ -53,13 +52,13 @@ XREF = {
  'heme-hodgkin.html':[('exam-heme.html','hodgkin')],
  'heme-nhl.html':[('exam-heme.html','fl'),('exam-heme.html','mzl'),('exam-heme.html','dlbcl'),('exam-heme.html','pcnsl'),('exam-heme.html','pmbcl'),('exam-heme.html','otherb')],
  'heme-other.html':[('exam-heme.html','plasmacytoma'),('exam-heme.html','myeloma'),('exam-heme.html','leukaemia'),('exam-heme.html','tcell')],
- 'hn-general.html':[('exam-hn.html','general'),('exam-hn.html','nodes'),('exam-hn.html','recurrent')],
+ 'hn-general.html':[('exam-hn.html','nodes'),('exam-hn.html','recurrent')],
  'hn-oropharynx.html':[('exam-hn.html','oropharynx')],
  'hn-larynx.html':[('exam-hn.html','larynx'),('exam-hn.html','hypopharynx')],
  'hn-oral-salivary.html':[('exam-hn.html','oral'),('exam-hn.html','salivary')],
  'hn-npc-sinonasal.html':[('exam-hn.html','nasopharynx'),('exam-hn.html','sinonasal')],
  'hn-thyroid-cup.html':[('exam-endocrine-benign.html','thyroid'),('exam-hn.html','cup')],
- 'skin.html':[('exam-skin.html','bcc'),('exam-skin.html','scc'),('exam-skin.html','merkel'),('exam-skin.html','melanoma'),('exam-skin.html','angiosarcoma'),('exam-skin.html','technique')],
+ 'skin.html':[('exam-skin.html','bcc'),('exam-skin.html','scc'),('exam-skin.html','merkel'),('exam-skin.html','melanoma')],
  'sarcoma-sts.html':[('exam-sarcoma.html','sts'),('exam-sarcoma.html','osteo'),('exam-sarcoma.html','chondro'),('exam-sarcoma.html','desmoid'),('exam-skin.html','kaposi')],
  'benign.html':[('exam-endocrine-benign.html','ho'),('exam-endocrine-benign.html','keloid'),('exam-endocrine-benign.html','otherbenign')],
  'thorax-early.html':[('exam-thorax.html','early')],
@@ -69,7 +68,5 @@ XREF = {
  'pall-brain.html':[('exam-pall.html','brain')],
  'pall-wbrt.html':[('exam-pall.html','brain')],
  'pall-bone-spine.html':[('exam-pall.html','bone'),('exam-pall.html','spine'),('exam-clinonc.html','mscc')],
- 'gyn-general.html':[('exam-gyn.html','ovarian')],
- 'rert-principles.html':[('exam-pall.html','reirr')],
  'pall-oligo.html':[('exam-pall.html','liver'),('exam-clinonc.html','svco')],
 }

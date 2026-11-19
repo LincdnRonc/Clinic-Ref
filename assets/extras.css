@@ -142,7 +142,3 @@ body.searching .mdt-in,body.searching .mdt-grp{display:none}
 .card.gather-head{background:transparent;border:0;border-bottom:2px solid var(--accent);border-radius:0;padding:0 2px 6px}
 .card.gather-head h3{font-size:1.3rem;margin-bottom:2px}
 .card.gather-head p.note{margin:0}
-
-/* Exam summary: cards added from Lincoln's own 2025 summary (tools/ld_summary.py) */
-.card.ld{border-left:3px solid var(--accent)}
-.card h3 .ldtag{font-family:var(--font-body);font-size:.66rem;font-weight:700;letter-spacing:.06em;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 5px}
