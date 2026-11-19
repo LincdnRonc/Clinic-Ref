@@ -71,6 +71,24 @@
     // D'Amico
     var dp=num('d_psa'), dg=num('d_gs'), dt2=sel('d_t');
     if(dp>=0&&dg>=2){ var hi=dp>20||dg>=8||dt2==='c', lo=dp<=10&&dg<=6&&dt2==='a'; out('o_damico','D\'Amico <b>'+(hi?'high':lo?'low':'intermediate')+'</b> risk'); } else out('o_damico','Enter PSA, Gleason score and T stage.');
+    // Life expectancy (AGA Australian Life Tables 2020–22, complete expectation of life at exact age 50–100)
+    var LEM=[33.31, 32.4, 31.5, 30.6, 29.7, 28.82, 27.93, 27.06, 26.19, 25.32, 24.47, 23.62, 22.78, 21.94, 21.12, 20.3, 19.48, 18.68, 17.89, 17.1, 16.32, 15.56, 14.8, 14.06, 13.33, 12.62, 11.92, 11.24, 10.58, 9.94, 9.32, 8.72, 8.14, 7.59, 7.06, 6.55, 6.08, 5.63, 5.21, 4.83, 4.48, 4.16, 3.88, 3.62, 3.39, 3.18, 2.99, 2.81, 2.65, 2.5, 2.37], LEF=[36.58, 35.64, 34.71, 33.78, 32.85, 31.92, 31, 30.08, 29.17, 28.26, 27.35, 26.45, 25.56, 24.67, 23.78, 22.9, 22.02, 21.15, 20.29, 19.43, 18.59, 17.75, 16.92, 16.1, 15.3, 14.5, 13.72, 12.96, 12.21, 11.48, 10.77, 10.08, 9.42, 8.78, 8.16, 7.57, 7.01, 6.48, 5.98, 5.51, 5.09, 4.69, 4.33, 4, 3.71, 3.44, 3.2, 2.99, 2.8, 2.63, 2.49];
+    var la=num('le_age'), ls=sel('le_sex'), lh=sel('le_hq'), lc=num('le_cci'), lr=sel('le_risk');
+    if(la>=50&&la<=100){ var ai=Math.floor(la), fr=la-ai, T=ls==='f'?LEF:LEM, i0=ai-50, base=T[i0]+(i0<50?(T[i0+1]-T[i0])*fr:0);
+      var hint=''; if(lc>=0){ var low=(la<75&&lc>=2)||(la>=75&&lc>=3); hint=' Charlson '+lc+(low?' puts him in the <b>lowest quartile</b> of health for age (Daskivich 2017: CCI ≥2 under 75, ≥3 at 75+).':' is not in the lowest-quartile range for age (CCI ≥2 under 75, ≥3 at 75+).'); }
+      var mul=lh==='top'?1.5:lh==='low'?0.5:1, adj=base*mul;
+      var h='Average for age: <b>'+f(base)+' years</b> (to about age '+f(la+base,0)+'). ';
+      if(mul!==1) h+='Adjusted for health ('+(mul>1?'+50%':'−50%')+'): <b>'+f(adj)+' years</b> (to about age '+f(la+adj,0)+').';
+      h+=hint;
+      var R={vl:[10,'Very low risk: life expectancy ≥10 y → active surveillance; &lt;10 y → observation. No definitive treatment either way.'],
+        lo:[10,'Low risk: ≥10 y → active surveillance preferred (RT or RP are options); &lt;10 y → observation.'],
+        fi:[10,'Favourable intermediate: &gt;10 y → active surveillance, RT (EBRT or brachytherapy) or RP; 5–10 y → RT or observation.'],
+        ui:[10,'Unfavourable intermediate: &gt;10 y → RT + short-course ADT, or RP; 5–10 y → RT + ADT or observation.'],
+        hi:[5,'High or very high risk: &gt;5 y or symptomatic → RT + ADT (± brachytherapy boost) or RP; ≤5 y and asymptomatic → observation, or ADT/RT for symptoms.']};
+      if(R[lr]){ var r=R[lr], t=r[0], ok=(lr==='fi'||lr==='ui')?(adj>10?(lr==='fi'?'active surveillance or definitive treatment':'definitive treatment is appropriate'):adj>=5?'between 5 and 10 y: RT is reasonable, observation also an option':'&lt;5 y: observation favoured'):lr==='hi'?(adj>5?'definitive treatment should be offered':'observation unless symptomatic'):(adj>=10?'surveillance rather than radical treatment':'observation');
+        h+='<br>Estimated <b>'+f(adj)+' y</b> → <b>'+ok+'</b>.<br><span class="note">'+r[1]+'</span>'; }
+      out('o_le',h);
+    } else out('o_le','Enter age 50–100.');
     // CTS5
     var a=num('c_age'), sz=num('c_size'), gr=num('c_grade'), nd=num('c_nodes');
     if(a>0&&sz>0){ var s2=Math.min(sz,30), nc=nd==0?0:nd==1?1:nd<=3?2:nd<=9?3:4;
