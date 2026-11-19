@@ -150,8 +150,23 @@ def consent_panel(f):
             f'  <div class="panel-head">\n    <h2>Toxicity and consent numbers</h2>\n'
             f'    <p class="lede">Shared rates from the <a href="{src_f}#consent">{html.escape(names.get(src_f, src_f))}</a> page, where sources are cited.</p>\n'
             f'    <div class="jump"></div>{_PRINTBTN}\n  </div>\n{m.group(1).strip()}\n</section>')
+def exam_panel(f):
+    """'Exam notes' tab: the matching Phase 2 exam-summary tabs (XREF), copied at build time, not indexed twice."""
+    if f not in XREF: return ''
+    parts = []
+    for ef, tab in XREF[f]:
+        m = re.search(rf'<section class="panel" id="p-{re.escape(tab)}" data-tab="{re.escape(tab)}" data-label="([^"]+)"[^>]*>.*?<div class="jump"></div>\s*</div>(.*?)</section>', (root/'src'/ef).read_text(), re.S)
+        if not m: continue
+        label, cards_ = m.group(1), re.sub(r'<!--.*?-->', '', m.group(2), flags=re.S).strip()
+        if not cards_: continue
+        parts.append(f'<div class="gather"><article class="card gather-head" data-title="{label}"><h3>{label}</h3><p class="note">From the <a href="{ef}#{tab}">exam summary</a>.</p></article>{cards_}</div>')
+    if not parts: return ''
+    return ('\n<section class="panel gathered" id="p-exam" data-tab="exam" data-label="Exam notes" data-borrowed="exam" hidden>\n'
+            '  <div class="panel-head">\n    <h2>Exam notes</h2>\n'
+            '    <p class="lede">Phase 2 exam-summary notes for this site: AS\'s summary, with cards tagged LD from Lincoln\'s 2025 summary. Revision notes reproduced as written, not checked against sources like the rest of this page; where they disagree with it, go by this page.</p>\n'
+            '    <div class="jump"></div>\n  </div>\n' + ''.join(parts) + '\n</section>')
 def page(f, short, long, desc, group, gname, gid, foot):
-    body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f)
+    body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f) + exam_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
     title = f'{long} Quick Reference'
     site = CTR_SITE.get(f, gid)
