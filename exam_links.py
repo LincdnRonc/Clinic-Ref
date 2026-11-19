@@ -22,7 +22,8 @@ EXAM = [
 ]
 FOOT_EXAM = ('<footer><p>Exam-revision summary condensed from the Phase 2 "Super Summary" (AS) Word document, reproduced as written '
              '(Australian spelling of tumour; figures from the original are not reproduced). Written for the RANZCR Phase 2 examination, '
-             'so check eviQ, departmental protocols and current guidelines before applying anything clinically.</p></footer>')
+             'so check eviQ, departmental protocols and current guidelines before applying anything clinically. '
+             'Cards tagged LD come from Lincoln\'s own 2025 summary and were added only where the AS summary did not already cover the point.</p></footer>')
 # clinic page -> [(exam page, tab)]
 XREF = {
  'breast-early.html':[('exam-breast.html','dcis'),('exam-breast.html','early'),('exam-breast.html','male')],
