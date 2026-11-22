@@ -24,6 +24,14 @@ EVIDENCE = [
   'Two joint Chinese Society of Clinical Oncology and ASCO guidelines published in JCO in November 2026: an update covering definitive treatment of stage IB to III NPC (replacing the 2021 stage II–IVA guideline on chemotherapy with RT), and a new guideline for recurrent and/or metastatic disease. Recommendations not yet read; compare with the NPC page before changing anything. (check)',
   'https://ascopubs.org/doi/10.1200/JCO-26-02648', 'Journal of Clinical Oncology (also JCO-26-02650 for recurrent/metastatic); seen via a journal search',
   [('hn-npc-sinonasal.html#npc','Nasopharynx')]),
+ ('2026-11-18', 'Breast', 'confirms', 'IRMA: partial-breast vs whole-breast irradiation for low-risk invasive breast cancer, 5-year results',
+  'Multicentre randomised phase III trial comparing external-beam accelerated partial-breast irradiation (twice-daily, 10 fractions) with whole-breast irradiation after breast-conserving surgery in low-risk invasive disease. Five-year results report low local recurrence with PBI, adding to IMPORT LOW and Florence in support of PBI for well-selected low-risk patients. (check)',
+  'https://pubmed.ncbi.nlm.nih.gov/43044095/', 'PubMed listing (journal to confirm); reported by Omnicuris (18 Nov 2026), MIMS and OncoDaily',
+  [('breast-early.html#pbi','Partial breast')]),
+ ('2026-11-20', 'Prostate', 'watch', '24 Gy single-dose vs five-fraction SBRT for intermediate-risk prostate cancer: long-term pooled analysis',
+  'Pooled analysis of two separately randomised cohorts comparing 24 Gy in a single fraction with five-fraction SBRT in intermediate-risk prostate cancer, reporting long-term toxicity and biochemical control. Headline figures were not visible in search results, so read the paper before quoting it; single-fraction treatment remains investigational. Date placed from PubMed indexing. (check)',
+  'https://pubmed.ncbi.nlm.nih.gov/43057343/', 'PubMed listing (journal to confirm); seen via a journal search',
+  [('gu-prostate.html#localised','Localised disease')]),
 ]
 SITE = [
     ('2026-11-19', 'Exam notes tab on each tumour-site page (44 pages): the matching Phase 2 exam-summary notes (AS summary), labelled as unverified revision notes. The standalone exam section stays for whole-topic revision and general viva tabs.', 'gu-prostate.html#exam'),
