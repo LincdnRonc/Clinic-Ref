@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.18'
+VERSION = '11.19'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.19', '23 Nov 2026', 'Staging & risk merged into the Overview (or first) tab on every tumour-site page; #staging links still jump to the stagers.'),
     ('11.18', '23 Nov 2026', 'Contouring guides grouped by tumour site (major sites first, then minor, then reference and software) on the home page and in the sidebar; Search all pages removed from the sidebar menu.'),
     ('11.17', '23 Nov 2026', 'Tumour-site gaps from Pocket RO: new LABC & inflammatory tab (Nodes and PMRT), Osteosarcoma tab (Paediatric solid), Other benign tab (keloid, gynaecomastia, thyroid eye disease, orbital, desmoid, vertebral haemangioma); brainstem glioma, ovarian and penile additions.'),
     ('11.16.2', '23 Nov 2026', 'Share button: larger, QR icon, top centre (top right on phones), with an × to hide it for the rest of the browser session.'),

@@ -221,7 +221,7 @@ def add_overview(body):
         led = re.search(r'<p class="lede"[^>]*>(.*?)</p>', head.group(1), re.S) if head else None
         rows.append(f'<dt><a href="#{tid}">{lab}</a></dt>' + (f'<dd>{led.group(1).strip()}</dd>' if led else ''))
     order = {'staging':0,'stage':0,'consent':1,'trials':2,'mdt':3}
-    side = [x for x in sorted(side, key=lambda x: order.get(x[0], 4 if 'trials' not in x[1].lower() else 2)) if x[0] not in ('eviq','guidelines','exam')]
+    side = [x for x in sorted(side, key=lambda x: order.get(x[0], 4 if 'trials' not in x[1].lower() else 2)) if x[0] not in ('eviq','guidelines','exam','staging','stage')]
     also = ' · '.join(f'<a href="#{t}">{l}</a>' for t, l in side)
     ov = ('<section class="panel" id="p-overview" data-tab="overview" data-label="Overview" data-generated="1">\n'
           '  <div class="panel-head"><h2>Overview</h2><div class="jump"></div></div>\n'
@@ -229,6 +229,19 @@ def add_overview(body):
           + (f'  <article class="card" data-title="Also on this page"><h3>Also on this page</h3><p>{also}</p></article>\n' if also else '')
           + '</section>\n')
     return body[:secs[0].start()] + ov + body[secs[0].start():]
+def merge_staging(body):
+    """Fold the Staging & risk panel into the first (overview) panel; keeps id="staging" so old #staging links work."""
+    m = re.search(r'<section class="panel" id="p-staging"[^>]*>(.*?)</section>\s*', body, re.S)
+    if not m: return body
+    inner = m.group(1)
+    head = re.search(r'<div class="panel-head">.*?<div class="jump"></div></div>', inner, re.S)
+    cards_ = inner[head.end():] if head else inner
+    block = ('<p class="note" id="staging"><b>Staging and risk:</b> a cross-check, not a substitute for the staging manual; '
+             'T definitions are abbreviated.</p>\n' + cards_.strip() + '\n')
+    body = body[:m.start()] + body[m.end():]
+    first = re.search(r'<section class="panel[^"]*"[^>]*>.*?</section>', body, re.S)
+    end = first.end() - len('</section>')
+    return body[:end] + block + body[end:]
 def order_tabs(body):
     secs = list(re.finditer(r'<section class="panel[^"]*"[^>]*>.*?</section>\s*', body, re.S))
     if len(secs) < 3 or any('<section' in m.group(0)[8:] for m in secs): return body
@@ -248,7 +261,7 @@ def order_tabs(body):
 def page(f, short, long, desc, group, gname, gid, foot):
     body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f) + exam_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
-    if gid in TUMOUR_GIDS: body = order_tabs(add_overview(body))
+    if gid in TUMOUR_GIDS: body = order_tabs(merge_staging(add_overview(body)))
     title = f'{long} Quick Reference'
     site = CTR_SITE.get(f, gid)
     return f'''<!DOCTYPE html>
