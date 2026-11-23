@@ -332,7 +332,7 @@ HEME = [
 ]
 SARCOMA = [
  ('sarcoma-sts.html','Soft tissue & bone sarcoma','Sarcoma','Extremity STS pre-op 50/25 vs post-op, volumes and bone limits, retroperitoneal (STRASS), chordoma, desmoid, Kaposi.'),
- ('benign.html','Benign MSK','Benign musculoskeletal','Heterotopic ossification 7/1, osteoarthritis, plantar fasciitis and Dupuytren\'s low-dose RT.'),
+ ('benign.html','Benign','Benign conditions','Heterotopic ossification, osteoarthritis, plantar fasciitis, Dupuytren\'s, keloid, gynaecomastia, thyroid eye disease and other low-dose RT.'),
 ]
 PALL = [
  ('pall-brain.html','Brain metastases','Brain metastases','SRS vs WBRT, SRS dose by size, cavity SRS, HA-WBRT + memantine, necrosis limits, QUARTZ.'),

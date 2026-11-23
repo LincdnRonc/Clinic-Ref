@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.16.2'
+VERSION = '11.17'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.17', '23 Nov 2026', 'Tumour-site gaps from Pocket RO: new LABC & inflammatory tab (Nodes and PMRT), Osteosarcoma tab (Paediatric solid), Other benign tab (keloid, gynaecomastia, thyroid eye disease, orbital, desmoid, vertebral haemangioma); brainstem glioma, ovarian and penile additions.'),
     ('11.16.2', '23 Nov 2026', 'Share button: larger, QR icon, top centre (top right on phones), with an × to hide it for the rest of the browser session.'),
     ('11.16.1', '23 Nov 2026', 'Fix: Genesis quick icon image was not uploaded (*.png is git-ignored); now committed.'),
     ('11.16', '23 Nov 2026', 'Floating Share button on every page: link to the current page (optionally the open tab), Copy link, phone Share sheet, and a QR code generated on the device.'),
