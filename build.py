@@ -171,9 +171,35 @@ def exam_panel(f):
             '    <div class="jump"></div>\n  </div>\n' + ''.join(parts) + '\n</section>')
 MORE_TABS = True  # rarely used tabs (eviQ, Guidelines, Exam notes) behind a "More" chip; set False to revert
 _MORE_JS = '<script src="assets/more-tabs.js"></script>' if MORE_TABS else ''
+# Tab order on tumour-site pages: overview/general tab if there is one, Staging & risk, management tabs in author order,
+# (planning tabs stay beside their management tab), toxicity and consent, key trials, MDT matrix, then eviQ / Guidelines / Exam notes.
+TUMOUR_GIDS = {'breast','cns','gi','gu','gyn','heme','hn','sarcoma','thorax','pall'}
+def _tab_rank(tid, label):
+    l = html.unescape(label).lower()
+    if tid in ('stage', 'staging'): return 1
+    if tid in ('eviq','guidelines','exam'): return 8
+    if tid == 'mdt' or 'mdt' in l: return 7
+    if 'key trials' in l: return 6
+    if l.startswith('toxicity'): return 5
+    return 2
+def order_tabs(body):
+    secs = list(re.finditer(r'<section class="panel[^"]*"[^>]*>.*?</section>\s*', body, re.S))
+    if len(secs) < 3 or any('<section' in m.group(0)[8:] for m in secs): return body
+    rest = body[:secs[0].start()] + ''.join(body[a.end():b.start()] for a, b in zip(secs, secs[1:])) + body[secs[-1].end():]
+    items = []
+    for i, m in enumerate(secs):
+        tid = re.search(r'data-tab="([^"]*)"', m.group(0)).group(1); lab = re.search(r'data-label="([^"]*)"', m.group(0)).group(1)
+        lead = i == 0 and re.search(r'overview|approach|general|management|decide|volumes', html.unescape(lab).lower())
+        items.append((0 if lead else _tab_rank(tid, lab), i, m.group(0)))
+    items.sort()
+    out = [x[2] for x in items]
+    # only the first tab is visible before the script runs
+    out = [re.sub(r'(<section class="panel[^>]*?)( hidden)?(>)', (r'\1\3' if k == 0 else (lambda m: m.group(1) + ' hidden' + m.group(3))), x, count=1) for k, x in enumerate(out)]
+    return rest + '\n'.join(out)
 def page(f, short, long, desc, group, gname, gid, foot):
     body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f) + exam_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
+    if gid in TUMOUR_GIDS: body = order_tabs(body)
     title = f'{long} Quick Reference'
     site = CTR_SITE.get(f, gid)
     return f'''<!DOCTYPE html>
