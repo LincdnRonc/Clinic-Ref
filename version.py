@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.16'
+VERSION = '11.16.1'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.16.1', '23 Nov 2026', 'Fix: Genesis quick icon image was not uploaded (*.png is git-ignored); now committed.'),
     ('11.16', '23 Nov 2026', 'Floating Share button on every page: link to the current page (optionally the open tab), Copy link, phone Share sheet, and a QR code generated on the device.'),
     ('11.15.1', '23 Nov 2026', 'Genesis quick icon now uses the GenesisCare image supplied by Lincoln.'),
     ('11.15', '23 Nov 2026', 'Header quick icons for Radiology, Pathology, Forms (Clinic links tabs) and Contacts, beside Keep, Tasks and Genesis.'),
