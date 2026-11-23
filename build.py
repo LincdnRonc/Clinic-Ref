@@ -42,6 +42,7 @@ APPLINKS = (
    ('https://anywhere.genesiscare.com.au/','GenesisCare Anywhere (remote access)','Genesis','linear-gradient(135deg,#00a86b,#007a4d)',
     '<rect x="4" y="5.5" width="16" height="10.5" rx="1.6" fill="none" stroke="#fff" stroke-width="2"/><path d="M9 19h6M12 16v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M9.3 11.6l2.1-2.1 1.5 1.5 2.1-2.1" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'),
   ])
+ + '<!--MEETING_LINK-->'  # Teams meeting icon: added at deploy from the MEETING_URL secret (tools/private_links.py)
  + '</nav>')
 
 def eviq_panel(f):

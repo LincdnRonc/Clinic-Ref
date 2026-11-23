@@ -46,6 +46,11 @@ jobs:
         env:
           CONTACTS_PRIVATE: ${{ secrets.CONTACTS_PRIVATE }}
         run: python3 tools/private_contacts.py
+      - name: Add private header links (Teams meeting; kept in the MEETING_URL secret, never in the repo)
+        if: steps.check.outputs.ready == 'true'
+        env:
+          MEETING_URL: ${{ secrets.MEETING_URL }}
+        run: python3 tools/private_links.py
       - name: Encrypt pages
         if: steps.check.outputs.ready == 'true'
         env:
