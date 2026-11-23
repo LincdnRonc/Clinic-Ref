@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.14'
+VERSION = '11.14.1'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.14.1', '23 Nov 2026', 'Fix: Staging & risk tabs lost their drop-down stagers after the 11.12 tab reorder (script was moved above the tabs); restored on all pages.'),
     ('11.14', '23 Nov 2026', 'New Principles & techniques section (8 pages): radiobiology, physics, imaging and IGRT, brachytherapy, protons and MR-guided RT, emergencies, simulation and set-up, statistics and trial design. Written in our own words, informed by Pocket Radiation Oncology 2nd ed. and cited sources.'),
     ('11.13', '23 Nov 2026', 'Overview tab added to every tumour-site page that did not open with an overview or general tab (38 pages): each management tab with its bottom line and a link, plus links to Staging & risk, Toxicity & consent, Key trials and the MDT matrix. Built from the page itself, so it updates when the page does; not indexed twice in search.'),
     ('11.12', '23 Nov 2026', 'Consistent tab order on every tumour-site page: overview or general tab (if any), then Staging & risk, management and planning tabs, Toxicity & consent, Key trials, MDT decision matrix, then eviQ, Guidelines and Exam notes.'),

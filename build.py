@@ -212,7 +212,9 @@ def add_overview(body):
 def order_tabs(body):
     secs = list(re.finditer(r'<section class="panel[^"]*"[^>]*>.*?</section>\s*', body, re.S))
     if len(secs) < 3 or any('<section' in m.group(0)[8:] for m in secs): return body
-    rest = body[:secs[0].start()] + ''.join(body[a.end():b.start()] for a, b in zip(secs, secs[1:])) + body[secs[-1].end():]
+    head = body[:secs[0].start()]
+    # scripts and anything else between or after panels must stay AFTER the panels (e.g. staging.js needs its boxes)
+    tail = ''.join(body[a.end():b.start()] for a, b in zip(secs, secs[1:])) + body[secs[-1].end():]
     items = []
     for i, m in enumerate(secs):
         tid = re.search(r'data-tab="([^"]*)"', m.group(0)).group(1); lab = re.search(r'data-label="([^"]*)"', m.group(0)).group(1)
@@ -222,7 +224,7 @@ def order_tabs(body):
     out = [x[2] for x in items]
     # only the first tab is visible before the script runs
     out = [re.sub(r'(<section class="panel[^>]*?)( hidden)?(>)', (r'\1\3' if k == 0 else (lambda m: m.group(1) + ' hidden' + m.group(3))), x, count=1) for k, x in enumerate(out)]
-    return rest + '\n'.join(out)
+    return head + '\n'.join(out) + '\n' + tail
 def page(f, short, long, desc, group, gname, gid, foot):
     body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f) + exam_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
