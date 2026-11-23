@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.8'
+VERSION = '11.9'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.9', '23 Nov 2026', 'Prostate guide 2d.3b: erectile-structure anatomy and variants on MRI (neurovascular patterns, IPA course, accessory pudendal arteries, external sphincter, crura) with an original schematic, from Lee and Spratt, Lancet Oncol 2016.'),
     ('11.8', '23 Nov 2026', 'Prostate contouring guide section 2d: erectile function-sparing RT (NVB, IPA, penile bulb, crura delineation; ERECT SBRT constraints; conventional and moderate hypofractionation constraints; POTEN-C, ERECT, Spratt, ETS-IMRT trials).'),
     ('11.7.1', '23 Nov 2026', 'Teams meeting shortcut in the header quick-launch icons (link kept in a GitHub secret, added only to the password-protected site).'),
     ('11.7', '23 Nov 2026', "What's new: evidence digest 23 Nov 2026 (IRMA 5-year partial-breast results; single-dose vs five-fraction prostate SBRT pooled analysis)."),
