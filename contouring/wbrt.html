@@ -35,7 +35,7 @@
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>Whole brain VMAT contouring guide</span></nav>
     <div class="title-row">
       <h1>Whole brain (VMAT) <span>contouring</span></h1>
-      <div class="meta">Full guide · v11.11</div>
+      <div class="meta">Full guide · v11.11.1</div>
     </div>
     <form class="search" role="search" id="searchForm">
       <label for="q" class="note" style="position:absolute;left:-9999px">Search this guide</label>
@@ -95,7 +95,13 @@
 <span class="pill p-lo">CTV_Helmet</span>
 <span class="pill p-ptv">PTV</span>
 </div><p class="note">RTOG 0933 hippocampal atlas (Gondi) · Gondi 2010 IJROBP · NRG CC001 (Brown 2020 JCO) · Liu 2026 JACMP (4-arc VMAT) · SIOPE CSI guideline and atlas (Ajithkumar 2018) · EANO–ESMO leptomeningeal guideline (Le Rhun 2023) · Palliative planning handbook, helmet vs standard fields — Version 1.0 · Nov 2026</p></details><div class="jump"></div></div>
-  <article class="card key" data-title="Governing principles of this guide"><h3>Governing principles of this guide</h3><div class="callout"></div></article><article class="card" data-title="Contents"><h3>Contents</h3><div class="tw"><table class="toc">
+  <article class="card key" data-title="Governing principles of this guide"><h3>Governing principles of this guide</h3><ul class="tight" style="margin-top:4px;">
+<li><b>No departmental WBRT or helmet volume protocol was supplied.</b> Trial definitions are used (NRG CC001 for whole brain and HA; SIOPE and EANO–ESMO for the leptomeningeal extensions). Local PTV margins and IGRT are marked <span class="chk">CHECK</span>.</li>
+<li><b>Build every whole-brain CTV from the inner table of the skull, not from an auto-segmented "Brain".</b> Auto-brain usually leaves out the CSF, meninges, brainstem, pituitary fossa and the inferior temporal poles, which are exactly the sites that field-based WBRT covered with flash and margin.</li>
+<li><b>Three volumes, one rule each:</b> standard = intracranial contents to the foramen magnum; HA = the same minus (hippocampi + 5 mm), no set-up margin (CC001); helmet = the whole intracranial subarachnoid space <i>including</i> its extensions (cribriform plate, optic nerve sheaths to the back of the globe, skull-base foramina) <i>plus</i> the upper cervical thecal sac <b>to the bottom of C2</b>.</li>
+<li><b>Field borders translate into CTV, not PTV:</b> the field era's "1 cm below the skull base" and "C2–3 interspace" borders carried penumbra and set-up margin. Contour the anatomy; let the PTV and the plan add the margin.</li>
+<li><b>Hippocampal avoidance is contraindicated</b> for leptomeningeal disease and for metastases within 5 mm of a hippocampus (CC001 eligibility).</li>
+</ul></article><article class="card" data-title="Contents"><h3>Contents</h3><div class="tw"><table class="toc">
 <tr><td class="n">1</td><td><a href="#s1">Choosing the volume; simulation and imaging</a></td></tr>
 <tr><td class="n">2</td><td><a href="#s2">Scenario A — Standard whole brain (VMAT)</a></td></tr>
 <tr><td class="n">3</td><td><a href="#s3">Scenario B — Hippocampal-avoidance whole brain</a></td></tr>
@@ -327,7 +333,7 @@
 </ul></article>
 </section><section class="panel" id="p-s4" data-tab="s4" data-label="4 Helmet" hidden>
   <div class="panel-head"><p class="eyebrow">Section 4 · continued</p><h2><span class="sectnum">4</span>Helmet: walkthrough, skull base map and pitfalls (foramen identification: section 4b) </h2><div class="lede"><p>The "German helmet" field is a slightly larger whole-brain field: the posterior half of the orbits is included to cover all meningeal surfaces, the inferior border is the C2–3 interspace, and a 5° posterior gantry tilt avoids divergence into the lenses (handbook). For VMAT the same intent becomes a CTV of the <b>whole intracranial subarachnoid space and its extensions</b>, borrowing the cranial part of the SIOPE CSI CTV and the EANO–ESMO target for cranial neuropathies.</p></div><div class="jump"></div></div>
-  <article class="card key" data-title="The C2 question"><h3>The C2 question</h3><div class="callout"></div></article><article class="card" data-title="Volume definitions"><h3>4.1  Volume definitions</h3><div class="tw"><table>
+  <article class="card key" data-title="The C2 question"><h3>The C2 question</h3><b>Yes — down to C2.</b> EANO–ESMO list the target for LM cranial neuropathies as the skull base (with the cribriform plate and whole pituitary fossa), the entire optic nerves, the basilar cisterns and the spinal canal <b>up to C2</b>. The field-era inferior border was the C2–3 interspace, but that border also carried penumbra and set-up margin. So contour the <b>thecal sac (whole subarachnoid space, with the nerve-root sleeves laterally) from the foramen magnum to the inferior endplate of C2</b>; the PTV then reaches the top of C3. Go lower only for spinal disease or symptoms, and record the inferior PTV edge for any future spinal junction.</article><article class="card" data-title="Volume definitions"><h3>4.1  Volume definitions</h3><div class="tw"><table>
 <thead><tr><th style="width:20%">Component of CTV_Helmet</th><th>What to include</th><th style="width:24%">Source</th></tr></thead>
 <tbody>
 <tr><td class="b">1. CTV_Brain</td><td>Everything within the inner table, as in section 2 (cribriform plate, inferior temporal lobes, pituitary fossa)</td><td>SIOPE steps 1–2</td></tr>

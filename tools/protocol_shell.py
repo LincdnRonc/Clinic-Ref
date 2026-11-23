@@ -95,7 +95,9 @@ def _nodes_to_cards(nodes, panel_title, soup):
                 title = _text(lbl)
                 lbl.decompose()
                 h3html = f'<h3>{html.escape(title)}</h3>'
-                first.unwrap()   # the card itself now carries the callout
+                # the card itself now carries the callout: put its children in its place
+                i = body.index(first)
+                body[i:i+1] = [c for c in list(first.contents) if not (isinstance(c, NavigableString) and not c.strip())]
                 lbl_card = True
             else:
                 title = panel_title
