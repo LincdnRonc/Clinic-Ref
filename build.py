@@ -42,6 +42,22 @@ APPLINKS = (
    ('https://anywhere.genesiscare.com.au/','GenesisCare Anywhere (remote access)','Genesis','linear-gradient(135deg,#00a86b,#007a4d)',
     '<rect x="4" y="5.5" width="16" height="10.5" rx="1.6" fill="none" stroke="#fff" stroke-width="2"/><path d="M9 19h6M12 16v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M9.3 11.6l2.1-2.1 1.5 1.5 2.1-2.1" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'),
   ])
+ + ''.join(  # site shortcuts: same tab, own icons
+  f'<a href="{u}" title="{t}" aria-label="{t}" class="al al-site" '
+  f'style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#5b6675;font-size:10px;line-height:1">'
+  f'<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" '
+  f'style="width:30px;height:30px;flex:none;border-radius:8px;padding:3px;box-sizing:border-box;background:{bg}">{g}</svg>'
+  f'<span>{lab}</span></a>'
+  for u,t,lab,bg,g in [
+   ('links.html#radiology','Radiology portals','Radiology','#35596b',
+    '<rect x="4.5" y="4.5" width="15" height="15" rx="2" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M12 7v10M8.5 9.5c1.5.6 2.5.6 3.5 0 1 .6 2 .6 3.5 0M8.5 12.5c1.5.6 2.5.6 3.5 0 1 .6 2 .6 3.5 0M9 15.5c1.2.5 2 .5 3 0 1 .5 1.8.5 3 0" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>'),
+   ('links.html#pathology','Pathology results','Pathology','#9b1c3f',
+    '<path d="M10 4.5h4M11 4.5v5.2l-4.3 7.6A1.6 1.6 0 0 0 8.1 19.7h7.8a1.6 1.6 0 0 0 1.4-2.4L13 9.7V4.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M8.7 15h6.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>'),
+   ('links.html#forms','Request and referral forms','Forms','#a14a0b',
+    '<path d="M7 3.8h7l3.5 3.5v12.9H7z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.8 3.8v3.7h3.7M9.5 11.5h5.5M9.5 14.5h5.5M9.5 17.3h3.5" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>'),
+   ('contacts.html','Phone and contact list','Contacts','#0d7366',
+    '<path d="M8.2 4.6l2 3.6-1.6 1.6a10 10 0 0 0 5.6 5.6l1.6-1.6 3.6 2-.9 2.9c-.2.6-.8 1-1.5.9A14 14 0 0 1 4.4 7a1.4 1.4 0 0 1 .9-1.5z" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/>'),
+  ])
  + '<!--MEETING_LINK-->'  # Teams meeting icon: added at deploy from the MEETING_URL secret (tools/private_links.py)
  + '</nav>')
 
