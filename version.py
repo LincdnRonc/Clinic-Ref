@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.15'
+VERSION = '11.15.1'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.15.1', '23 Nov 2026', 'Genesis quick icon now uses the GenesisCare image supplied by Lincoln.'),
     ('11.15', '23 Nov 2026', 'Header quick icons for Radiology, Pathology, Forms (Clinic links tabs) and Contacts, beside Keep, Tasks and Genesis.'),
     ('11.14.1', '23 Nov 2026', 'Fix: Staging & risk tabs lost their drop-down stagers after the 11.12 tab reorder (script was moved above the tabs); restored on all pages.'),
     ('11.14', '23 Nov 2026', 'New Principles & techniques section (8 pages): radiobiology, physics, imaging and IGRT, brachytherapy, protons and MR-guided RT, emergencies, simulation and set-up, statistics and trial design. Written in our own words, informed by Pocket Radiation Oncology 2nd ed. and cited sources.'),
