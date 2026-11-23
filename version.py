@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.20'
+VERSION = '11.20.1'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.20.1', '23 Nov 2026', 'Exam summary, Hodgkin: classical HL subtypes laid out as nested lists (features under each subtype).'),
     ('11.20', '23 Nov 2026', 'Contouring-guide links now shown as solid call-out boxes; 32 key trials added from the Pocket RO gap check (paediatric COG and SIOP, gynae GOG/NSGO/SOLO-1/PAOLA-1, Hodgkin ECHELON-1/RATHL, DLBCL SWOG 8736/S0014, RTOG 0424, ARUBA, NRG-HN006, ARTSCAN III, RTOG 0912, RTOG 0618, EORTC 08941/08993, RTOG 9904, EORTC 22911, TE19, MSLT-II), each flagged check.'),
     ('11.19', '23 Nov 2026', 'Staging & risk merged into the Overview (or first) tab on every tumour-site page; #staging links still jump to the stagers.'),
     ('11.18', '23 Nov 2026', 'Contouring guides grouped by tumour site (major sites first, then minor, then reference and software) on the home page and in the sidebar; Search all pages removed from the sidebar menu.'),
