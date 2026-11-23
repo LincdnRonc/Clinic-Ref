@@ -94,10 +94,14 @@ def tree(current):
     out = []
     for gid, head, pages in groups:
         here = any(pg[0]==current for pg in pages)
-        links = ''.join(f'<a href="{pg[0]}"{" aria-current=\"page\"" if pg[0]==current else ""}>{html.escape(pg[1])}</a>' for pg in pages)
+        links, last = '', None
+        for pg in pages:
+            sub = CGROUP_OF.get(pg[0]) if gid == 'contouring' else None
+            if sub and sub != last: links += f'<span class="tree-sub">{html.escape(sub)}</span>'; last = sub
+            links += f'<a href="{pg[0]}"{" aria-current=\"page\"" if pg[0]==current else ""}>{html.escape(pg[1])}</a>'
         out.append(f'<details data-site="{gid}"{" open" if here else ""}><summary>{html.escape(head)}</summary>{links}</details>')
     return ('<details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary>'
-            '<nav class="tree" aria-label="All pages"><a class="home" href="index.html">Home</a><a class="home" href="index.html#search">Search all pages</a>' + ''.join(out) + '</nav></details>')
+            '<nav class="tree" aria-label="All pages"><a class="home" href="index.html">Home</a>' + ''.join(out) + '</nav></details>')
 from exam_links import EXAM, FOOT_EXAM, XREF
 def _tablabels(f):
     t = (root/'src'/f).read_text()
@@ -568,8 +572,26 @@ CNAV = [(f,short,long,desc) for f,short,long,desc,_ in CONTOUR] + [
 SOFTWARE = [
  ('ctr-mim.html','MIM shortcuts','MIM contouring shortcuts','MIM 7.4 default hotkeys, creating your own, mouse actions, contouring tools, H&N OAR recipes, saving and recovery. Printable PDF.'),
  ('ctr-monaco.html','Monaco shortcuts','Monaco contouring shortcuts','Elekta Monaco hot keys, navigation, contouring toolkit, Monaco-specific gotchas, workflow and W/L presets. Printable PDF.')]
-CNAV = CNAV[:1] + sorted(CNAV[1:], key=lambda c: c[1].lower())
-CNAV += SOFTWARE
+# Contouring guides grouped by tumour site: major sites first, then minor sites, then reference material
+CGROUPS = [
+ ('Breast', ['contouring/breast.html']),
+ ('Genitourinary', ['contouring/prostate.html', 'contouring/bladder.html', 'ctr-kidney-liver.html']),
+ ('Thorax', ['contouring/thorax.html']),
+ ('Gastrointestinal', ['contouring/oesophagus.html', 'contouring/pancreas-stomach.html', 'contouring/liver-sbrt.html', 'contouring/biliary.html', 'contouring/rectal-long-course.html', 'contouring/anal.html']),
+ ('Head and neck', ['contouring/head-neck.html']),
+ ('Gynaecological', ['contouring/gynae.html']),
+ ('CNS', ['contouring/cns.html', 'contouring/brain-mets.html', 'contouring/wbrt.html']),
+ ('Haematology', ['contouring/lymphoma.html']),
+ ('Bone and spine', ['contouring/spine-bone.html']),
+ ('Sarcoma and skin', ['ctr-sarcoma.html', 'ctr-skin.html']),
+ ('Paediatrics', ['ctr-peds.html']),
+ ('Reference and software', ['ctr-library.html', 'ctr-mim.html', 'ctr-monaco.html']),
+]
+_cby = {c[0]: c for c in CNAV + SOFTWARE}
+_cgrouped = [f for _, fs in CGROUPS for f in fs]
+assert set(_cgrouped) == set(_cby), ('contouring pages missing from CGROUPS', set(_cby) ^ set(_cgrouped))
+CNAV = [_cby[f] for f in _cgrouped]
+CGROUP_OF = {f: g for g, fs in CGROUPS for f in fs}
 # ---------------- Tools: calculators, doses at a glance, what's new ----------------
 TOOLS = [
  ('mdt.html','MDT decision matrix','MDT decision matrix','Tap case details as they are presented to narrow to an evidence-based option: prostate, pancreas, upper GI (oesophagus, gastric, HCC, biliary, liver mets), rectum and lung (NSCLC, SCLC).'),
@@ -722,7 +744,7 @@ _redirect2('ctr-upper-gi.html', 'contouring/oesophagus.html#quick', {'stomach':'
 for gid,gname,_,pages,foot in GROUPS:
     for g in pages:
         (root/g[0]).write_text(page(*g, pages, gname, gid, foot))
-contour_cards = cards(CNAV)
+contour_cards = ''.join(f'<h3 class="sub-title">{html.escape(g)}</h3><div class="hub">{cards([_cby[f] for f in fs])}</div>' for g, fs in CGROUPS)
 # Old Tools page: consent numbers moved to each tumour-site page
 (root/'consent.html').write_text('<!DOCTYPE html>\n<html lang="en-AU"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=index.html"><title>Moved</title>'
   '<script>var h=location.hash.slice(1);location.replace("index.html"+(h?"#"+h:""));</script></head>'
@@ -771,7 +793,7 @@ home = f'''<!DOCTYPE html>
   <div class="hub">{cards(TOOLS)}</div>
 {sections}
   <h2 class="group-title" id="contouring" data-site="contouring">Contouring guides</h2>
-  <div class="hub">{contour_cards}</div>
+  {contour_cards}
 </div>
 </main>
 </div>
