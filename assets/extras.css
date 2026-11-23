@@ -171,3 +171,10 @@ details.about-guide[open]{padding-bottom:6px}
 .hubcard[data-site] h3{color:var(--ink)}
 .tree details>summary{color:var(--ink)}
 .home footer{border-top-color:var(--line)}
+/* Generated Overview tab */
+dl.ov{margin:0}
+dl.ov dt{font-weight:700;margin-top:10px}
+dl.ov dt:first-child{margin-top:0}
+dl.ov dt a{color:var(--accent);text-decoration:none}
+dl.ov dt a:hover{text-decoration:underline}
+dl.ov dd{margin:2px 0 0;color:var(--ink)}

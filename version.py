@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.12'
+VERSION = '11.13'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.13', '23 Nov 2026', 'Overview tab added to every tumour-site page that did not open with an overview or general tab (38 pages): each management tab with its bottom line and a link, plus links to Staging & risk, Toxicity & consent, Key trials and the MDT matrix. Built from the page itself, so it updates when the page does; not indexed twice in search.'),
     ('11.12', '23 Nov 2026', 'Consistent tab order on every tumour-site page: overview or general tab (if any), then Staging & risk, management and planning tabs, Toxicity & consent, Key trials, MDT decision matrix, then eviQ, Guidelines and Exam notes.'),
     ('11.11.1', '23 Nov 2026', 'Fix: callout boxes at the top of contouring guides (e.g. Governing principles of this guide) showed empty; their text is back on all 16 affected guides.'),
     ('11.11', '23 Nov 2026', 'Interface clean-up: one collapsible Related line replaces the three cross-link bars; shorter page titles; eviQ, Guidelines and Exam notes tabs behind a More chip (revert with MORE_TABS = False in build.py); home page uses the sidebar on wide screens and the group buttons on phones; group colours only on card borders; Still to add moved to Site updates; contouring-guide badges and sources in a collapsible About this guide.'),

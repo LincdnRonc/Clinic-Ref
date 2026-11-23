@@ -182,6 +182,33 @@ def _tab_rank(tid, label):
     if 'key trials' in l: return 6
     if l.startswith('toxicity'): return 5
     return 2
+_LEAD_RE = r'overview|approach|general|management|decide'
+_SIDE_TABS = ('staging','stage','consent','trials','mdt','eviq','guidelines','exam')
+def add_overview(body):
+    """Tumour-site pages without an overview/general first tab get a generated Overview tab built only from
+    the page's own tab bottom lines (no new content). Marked data-generated so search does not index it twice."""
+    secs = list(re.finditer(r'<section class="panel[^"]*"[^>]*>.*?</section>', body, re.S))
+    if not secs: return body
+    lab0 = html.unescape(re.search(r'data-label="([^"]*)"', secs[0].group(0)).group(1)).lower()
+    if re.search(_LEAD_RE, lab0): return body
+    rows, side = [], []
+    for m in secs:
+        t = m.group(0)
+        tid = re.search(r'data-tab="([^"]*)"', t).group(1); lab = re.search(r'data-label="([^"]*)"', t).group(1)
+        if tid in _SIDE_TABS or 'key trials' in lab.lower() or lab.lower().startswith('toxicity'):
+            side.append((tid, lab)); continue
+        head = re.search(r'<div class="panel-head">(.*?)<div class="jump">', t, re.S)
+        led = re.search(r'<p class="lede"[^>]*>(.*?)</p>', head.group(1), re.S) if head else None
+        rows.append(f'<dt><a href="#{tid}">{lab}</a></dt>' + (f'<dd>{led.group(1).strip()}</dd>' if led else ''))
+    order = {'staging':0,'stage':0,'consent':1,'trials':2,'mdt':3}
+    side = [x for x in sorted(side, key=lambda x: order.get(x[0], 4 if 'trials' not in x[1].lower() else 2)) if x[0] not in ('eviq','guidelines','exam')]
+    also = ' · '.join(f'<a href="#{t}">{l}</a>' for t, l in side)
+    ov = ('<section class="panel" id="p-overview" data-tab="overview" data-label="Overview" data-generated="1">\n'
+          '  <div class="panel-head"><h2>Overview</h2><div class="jump"></div></div>\n'
+          f'  <article class="card key" data-title="At a glance"><h3>At a glance</h3><dl class="ov">{"".join(rows)}</dl></article>\n'
+          + (f'  <article class="card" data-title="Also on this page"><h3>Also on this page</h3><p>{also}</p></article>\n' if also else '')
+          + '</section>\n')
+    return body[:secs[0].start()] + ov + body[secs[0].start():]
 def order_tabs(body):
     secs = list(re.finditer(r'<section class="panel[^"]*"[^>]*>.*?</section>\s*', body, re.S))
     if len(secs) < 3 or any('<section' in m.group(0)[8:] for m in secs): return body
@@ -189,7 +216,7 @@ def order_tabs(body):
     items = []
     for i, m in enumerate(secs):
         tid = re.search(r'data-tab="([^"]*)"', m.group(0)).group(1); lab = re.search(r'data-label="([^"]*)"', m.group(0)).group(1)
-        lead = i == 0 and re.search(r'overview|approach|general|management|decide|volumes', html.unescape(lab).lower())
+        lead = i == 0 and re.search(_LEAD_RE, html.unescape(lab).lower())
         items.append((0 if lead else _tab_rank(tid, lab), i, m.group(0)))
     items.sort()
     out = [x[2] for x in items]
@@ -199,7 +226,7 @@ def order_tabs(body):
 def page(f, short, long, desc, group, gname, gid, foot):
     body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f) + exam_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
-    if gid in TUMOUR_GIDS: body = order_tabs(body)
+    if gid in TUMOUR_GIDS: body = order_tabs(add_overview(body))
     title = f'{long} Quick Reference'
     site = CTR_SITE.get(f, gid)
     return f'''<!DOCTYPE html>
@@ -760,7 +787,7 @@ for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.ht
     _sp = _BS(_t, 'html.parser')
     _h1 = _sp.find('h1'); _ttl = re.sub(r'\s+',' ',_h1.get_text(' ',strip=True)).replace(' Quick Reference','') if _h1 else _rel
     for _pan in _sp.select('section.panel'):
-        if _pan.get('data-tab') == 'eviq' or _pan.has_attr('data-borrowed'): continue
+        if _pan.get('data-tab') == 'eviq' or _pan.has_attr('data-borrowed') or _pan.has_attr('data-generated'): continue
         for _c in _pan.select('article.card'):
             _x = re.sub(r'\s+',' ',_c.get_text(' ',strip=True))
             _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', _x])
