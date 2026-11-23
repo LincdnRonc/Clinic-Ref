@@ -34,8 +34,8 @@
   <div class="top-inner">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>Whole brain VMAT contouring guide</span></nav>
     <div class="title-row">
-      <h1>Whole brain (VMAT) <span>Contouring guide</span></h1>
-      <div class="meta">Full guide · v11.9</div>
+      <h1>Whole brain (VMAT) <span>contouring</span></h1>
+      <div class="meta">Full guide · v11.11</div>
     </div>
     <form class="search" role="search" id="searchForm">
       <label for="q" class="note" style="position:absolute;left:-9999px">Search this guide</label>
@@ -51,7 +51,7 @@
 <p class="xref"><b>Related:</b> <a href="../pall-wbrt.html">WBRT principles page</a> · <a href="../pall-brain.html">Brain metastases page</a> · <a href="cns.html">CNS contouring guide</a> · <a href="../ctr-peds.html">Paediatric (CSI) quick guide</a></p>
 <div class="empty" id="empty">No cards match. Try a shorter term such as a structure, a margin (5 mm) or a trial name.</div>
 <section class="panel" id="p-quick" data-tab="quick" data-label="Quick reference">
-  <div class="panel-head"><h2>Quick reference</h2><p class="lede">The one-screen version: volumes, margins and pitfalls. Use the numbered tabs for the full guide, or Contour now for tables and diagrams only.</p><div class="jump"></div></div>
+  <div class="panel-head"><h2>Quick reference</h2><div class="jump"></div></div>
   <article class="card key" data-title="Which volume">
 <h3>Which volume, and where it stops</h3>
 <div class="tw wide"><table>
@@ -89,12 +89,12 @@
 </ul>
 </article>
 </section><section class="panel" id="p-overview" data-tab="overview" data-label="Overview" hidden>
-  <div class="panel-head"><p class="eyebrow">Contouring Guide · CNS · Palliative</p><h2>Whole brain VMAT contouring guide</h2><p class="lede">Volumes for <b>standard whole brain</b>, <b>hippocampal-avoidance whole brain (HA-WBRT)</b> and the <b>"German helmet" volume for leptomeningeal disease</b>, translated from field borders into CT/MRI structures for VMAT: what to include, where each volume stops (including the C2 question), slice-by-slice walkthroughs, OARs, constraints and RayStation build.</p><div class="pillrow">
+  <div class="panel-head"><h2>Whole brain VMAT contouring guide</h2><details class="about-guide"><summary>About this guide</summary><p class="eyebrow">Contouring Guide · CNS · Palliative</p><div class="pillrow">
 <span class="pill p-ctv">CTV_Brain</span>
 <span class="pill p-hi">Hippocampi / HA region</span>
 <span class="pill p-lo">CTV_Helmet</span>
 <span class="pill p-ptv">PTV</span>
-</div><p class="note">RTOG 0933 hippocampal atlas (Gondi) · Gondi 2010 IJROBP · NRG CC001 (Brown 2020 JCO) · Liu 2026 JACMP (4-arc VMAT) · SIOPE CSI guideline and atlas (Ajithkumar 2018) · EANO–ESMO leptomeningeal guideline (Le Rhun 2023) · Palliative planning handbook, helmet vs standard fields — Version 1.0 · Nov 2026</p><div class="jump"></div></div>
+</div><p class="note">RTOG 0933 hippocampal atlas (Gondi) · Gondi 2010 IJROBP · NRG CC001 (Brown 2020 JCO) · Liu 2026 JACMP (4-arc VMAT) · SIOPE CSI guideline and atlas (Ajithkumar 2018) · EANO–ESMO leptomeningeal guideline (Le Rhun 2023) · Palliative planning handbook, helmet vs standard fields — Version 1.0 · Nov 2026</p></details><div class="jump"></div></div>
   <article class="card key" data-title="Governing principles of this guide"><h3>Governing principles of this guide</h3><div class="callout"></div></article><article class="card" data-title="Contents"><h3>Contents</h3><div class="tw"><table class="toc">
 <tr><td class="n">1</td><td><a href="#s1">Choosing the volume; simulation and imaging</a></td></tr>
 <tr><td class="n">2</td><td><a href="#s2">Scenario A — Standard whole brain (VMAT)</a></td></tr>
@@ -751,7 +751,7 @@
 </ul><div class="flag"><span class="lbl">Before clinical use</span> Schematics are original and not to scale. Have a colleague review this page and confirm the items marked CHECK, especially PTV margins, IGRT and the lens limit.</div></article>
 </section>
 <section class="panel" id="p-guidelines" data-tab="guidelines" data-label="Guidelines" hidden>
-  <div class="panel-head"><h2>Published guidelines and atlases</h2><p class="lede">The international guidelines behind this guide, with PubMed or DOI links. "Start here" marks the current standard.</p><div class="jump"></div></div>
+  <div class="panel-head"><h2>Published guidelines and atlases</h2><p class="lede">"Start here" marks the current standard.</p><div class="jump"></div></div>
 <article class="card" data-title="Skull base, meningioma and metastases"><h3>Skull base, meningioma and metastases</h3><ul class="lib"><li><span class="libstar">Start here</span> <a href="https://doi.org/10.1016/j.ijrobp.2010.01.039" target="_blank" rel="noopener">Hippocampal contouring atlas (RTOG 0933)</a><span class="libmeta">2010 · Gondi · IJROBP · DOI</span><span class="libnote">Hippocampus on T1 MRI; avoidance zone +5 mm.</span></li><li><a href="https://doi.org/10.1200/JCO.19.02767" target="_blank" rel="noopener">NRG CC001: HA-WBRT plus memantine (phase III)</a><span class="libmeta">2020 · Brown · J Clin Oncol · DOI</span><span class="libnote">CTV to foramen magnum; PTV = CTV − (hippocampi + 5 mm); D100% ≤9 Gy, Dmax ≤16 Gy.</span></li><li><a href="https://doi.org/10.1002/acm2.70518" target="_blank" rel="noopener">Optimised 4-arc VMAT technique for HA-WBRT</a><span class="libmeta">2026 · Liu · J Appl Clin Med Phys · DOI</span><span class="libnote">Intermediate plan on PTV beyond 10 mm, hippocampal blocking with non-coplanar arcs.</span></li><li><a href="https://pubmed.ncbi.nlm.nih.gov/37863528/" target="_blank" rel="noopener">Leptomeningeal metastasis: EANO–ESMO guideline</a><span class="libmeta">2023 · Le Rhun · ESMO Open · PubMed</span><span class="libnote">RT targets for LM: skull base, optic nerves, basal cisterns, canal to C2; doses.</span></li></ul></article>
 <article class="card key" data-title="Original PDFs"><h3>Original PDFs</h3><p>The original guideline and atlas PDFs for this site are kept in OneDrive (01 Contouring Guidelines). <a href="../ctr-library.html#cns">See the list of PDFs for this site</a>.</p></article>
 </section>
@@ -759,6 +759,7 @@
 </div>
 <footer><p>Quick-reference summaries of published contouring guidelines, written in our own words. Borders are condensed; anything marked for checking should be confirmed against the original paper and its images. Not affiliated with or endorsed by ESTRO, NRG, ILROG, AGITG or other groups. Follow departmental protocols.</p></footer>
 <script src="../assets/site.js"></script>
+<script src="../assets/more-tabs.js"></script>
 <script src="../assets/extras.js"></script>
 </body>
 </html>

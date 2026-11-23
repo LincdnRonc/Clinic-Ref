@@ -3,9 +3,7 @@ import re, html, json
 from mdt_data import MATRICES, MDT_PAGES
 
 _MDT = {m['id']: m for m in MATRICES}
-LEDE = ('Tap each detail as it is presented. Scenarios that no longer fit drop away, and the line in red says what '
-        'still needs to be established. Rows summarise this site\'s pages, where trials are cited; anything marked (check) '
-        'has not been verified against the source. A prompt for discussion, not a protocol: the MDT decides.')
+LEDE = 'Red line: still to be established. (check): not yet verified against the source. A prompt, not a protocol: the MDT decides.'
 
 def txt(x):
     x = html.escape(x, quote=False)

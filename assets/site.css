@@ -107,9 +107,9 @@ footer{max-width:900px;margin:0 auto;padding:0 16px 40px;font-size:.82rem;color:
 .sitenav a{font-size:.78rem;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--panel)}
 .sitenav a[aria-current="page"]{border-color:var(--accent);color:var(--accent);font-weight:700}
 .hub{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.hubcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;text-decoration:none;color:var(--ink);border-left:4px solid var(--accent)}
+.hubcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink);border-left:4px solid var(--accent)}
 .hubcard:hover,.hubcard:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.hubcard h3{font-size:1.2rem;margin-bottom:4px}
+.hubcard h3{font-size:1.05rem;margin:0}
 .hubcard p{margin:0;font-size:.9rem;color:var(--muted)}
 .hubcard.soon{border-left-color:var(--line);opacity:.7;pointer-events:none}
 .group-title{font-family:var(--font-display);font-size:1.25rem;font-weight:700;margin:18px 0 8px}

@@ -53,7 +53,6 @@ def eviq_panel(f):
 <section class="panel" id="p-eviq" data-tab="eviq" data-label="eviQ protocols" hidden>
   <div class="panel-head">
     <h2>eviQ protocols</h2>
-    <p class="lede">Links to the current Australian eviQ radiation oncology protocols for this site. They open on eviQ, which is the authoritative and up-to-date source; no eviQ content is copied here.</p>
     <div class="jump"></div>
   </div>
   <article class="card key" data-title="eviQ links">
@@ -109,6 +108,10 @@ def tools_bar(gid):
     t,l = _SCORETAB[gid]
     x,xl = _SYSLINK.get(gid, ('sys-chemort.html','Concurrent chemo-RT'))
     return f'<p class="xref"><b>Systemic therapy:</b> <a href="{x}">{xl}</a> · <a href="sys-timing.html">Targeted and immunotherapy with RT</a> · <a href="sys-supportive.html">Supportive drugs</a> · <b>Reirradiation:</b> <a href="rert-principles.html">principles</a>, <a href="rert-constraints.html">limits and calculators</a></p><p class="xref"><b>Calculators:</b> <a href="scores.html#{t}">{l} scores and nomograms</a> · <a href="tools.html">EQD2, BED and re-irradiation</a></p>'
+def related_bar(f, gid):
+    rows = re.findall(r'<p class="xref"[^>]*>(.*?)</p>', xref_bar(f) + tools_bar(gid), re.S)
+    if not rows: return ''
+    return '<details class="related"><summary>Related</summary>' + ''.join(f'<div class="rel-row">{r}</div>' for r in rows) + '</details>'
 DISCLAIMER = '<footer class="disclaimer"><p><b>Private resource, not for distribution.</b> This site is the author\'s own working reference and is not intended for use by anyone else. It may contain errors, omissions or out-of-date information, and is not medical advice or a medical device. Anyone who accesses it does so entirely at their own risk, must rely on their own clinical judgement, and must independently verify all information (including doses, volumes, constraints, scores and calculator results) against primary sources and local protocols. To the fullest extent permitted by law, the author accepts no responsibility or liability for any loss, injury or damage arising from use of, or reliance on, any content on this site.</p></footer>'
 STAGERS = {'nccn':'Prostate NCCN risk group','breast':'Breast (AJCC 8 anatomic stage)','lung':'Lung (TNM 9th edition)','prostate':'Prostate (AJCC 8)','crc':'Colon and rectum (AJCC 8)','anal':'Anal canal (AJCC 8)',
  'oes_scc':'Oesophagus, squamous (AJCC 8 clinical)','oes_ac':'Oesophagus, adenocarcinoma (AJCC 8 clinical)','gastric':'Stomach (AJCC 8 clinical)','pancreas':'Pancreas (AJCC 8)','hcc':'Hepatocellular carcinoma (AJCC 8)',
@@ -126,7 +129,7 @@ def stage_panel(f):
     cards_ = ''.join(f'<article class="card{" key" if i==0 else ""}" data-title="{html.escape(STAGERS[k])}"><h3>{html.escape(STAGERS[k])}</h3><div data-stage="{k}"></div></article>' for i,k in enumerate(ids))
     return f'''
 <section class="panel" id="p-staging" data-tab="staging" data-label="Staging &amp; risk" hidden>
-  <div class="panel-head"><h2>Auto-staging and risk groups</h2><p class="lede">Choose the T, N and M categories (or findings) to read the stage or risk group. A cross-check, not a substitute for the staging manual: T definitions are abbreviated.</p><div class="jump"></div></div>
+  <div class="panel-head"><h2>Auto-staging and risk groups</h2><p class="lede">A cross-check, not a substitute for the staging manual: T definitions are abbreviated.</p><div class="jump"></div></div>
   {cards_}
 </section>
 <script src="assets/staging.js"></script>'''
@@ -149,7 +152,7 @@ def consent_panel(f):
     names = {g[0]: g[2] for _,_,_,pages,_ in GROUPS for g in pages}
     return (f'\n<section class="panel" id="p-consent" data-tab="consent" data-label="Toxicity &amp; consent" data-borrowed="{src_f}" hidden>\n'
             f'  <div class="panel-head">\n    <h2>Toxicity and consent numbers</h2>\n'
-            f'    <p class="lede">Shared rates from the <a href="{src_f}#consent">{html.escape(names.get(src_f, src_f))}</a> page, where sources are cited.</p>\n'
+            f'    <p class="lede">From the <a href="{src_f}#consent">{html.escape(names.get(src_f, src_f))}</a> page.</p>\n'
             f'    <div class="jump"></div>{_PRINTBTN}\n  </div>\n{m.group(1).strip()}\n</section>')
 def exam_panel(f):
     """'Exam notes' tab: the matching Phase 2 exam-summary tabs (XREF), copied at build time, not indexed twice."""
@@ -164,8 +167,10 @@ def exam_panel(f):
     if not parts: return ''
     return ('\n<section class="panel gathered" id="p-exam" data-tab="exam" data-label="Exam notes" data-borrowed="exam" hidden>\n'
             '  <div class="panel-head">\n    <h2>Exam notes</h2>\n'
-            '    <p class="lede">Phase 2 exam-summary notes for this site (AS\'s summary). Revision notes reproduced as written, not checked against sources like the rest of this page; where they disagree with it, go by this page.</p>\n'
+            '    <p class="lede">AS\'s Phase 2 summary, as written and not source-checked. Where it disagrees with this page, go by this page.</p>\n'
             '    <div class="jump"></div>\n  </div>\n' + ''.join(parts) + '\n</section>')
+MORE_TABS = True  # rarely used tabs (eviQ, Guidelines, Exam notes) behind a "More" chip; set False to revert
+_MORE_JS = '<script src="assets/more-tabs.js"></script>' if MORE_TABS else ''
 def page(f, short, long, desc, group, gname, gid, foot):
     body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f) + exam_panel(f)
     if f.startswith('exam-'): body = xref_back(f, body)
@@ -188,7 +193,7 @@ def page(f, short, long, desc, group, gname, gid, foot):
   <div class="top-inner">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#{gid}">{html.escape(gname)}</a> › <span>{html.escape(long)}</span></nav>
     <div class="title-row">
-      <h1>{html.escape(long)} <span>Quick Reference</span></h1>
+      <h1>{html.escape(long)}</h1>
       <div class="hdr-right" style="display:flex;align-items:center;gap:10px;align-self:center;flex-shrink:0">{APPLINKS}<div class="meta">v{VERSION}</div></div>
     </div>
     <form class="search" role="search" id="searchForm">
@@ -202,8 +207,7 @@ def page(f, short, long, desc, group, gname, gid, foot):
 <div class="layout">
 <aside class="side">{tree(f)}</aside>
 <main id="main">
-{xref_bar(f)}
-{tools_bar(gid)}
+{related_bar(f, gid)}
 <div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
 {body}
 </main>
@@ -211,6 +215,7 @@ def page(f, short, long, desc, group, gname, gid, foot):
 {foot}
 <script src="assets/site.js"></script>
 <script src="assets/extras.js"></script>
+{_MORE_JS}
 </body>
 </html>
 '''
@@ -312,7 +317,7 @@ GROUPS = [
 ] + EXTRA
 # old gu.html -> redirect to home GU section
 (root/'gu.html').write_text('<!DOCTYPE html>\n<html lang="en-AU"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=index.html#gu"><title>GU Quick Reference</title></head><body><p>The GU reference is now split by tumour site. <a href="index.html#gu">Go to the GU pages</a>.</p></body></html>\n')
-def cards(pages): return ''.join(f'<a class="hubcard" href="{f}"{_ds(f)}><h3>{html.escape(long)}</h3><p>{html.escape(desc)}</p></a>' for f,short,long,desc in pages)
+def cards(pages): return ''.join(f'<a class="hubcard" href="{f}"{_ds(f)} title="{html.escape(desc, quote=True)}"><h3>{html.escape(long)}</h3></a>' for f,short,long,desc in pages)
 
 # ---------------- Contouring library and protocols ----------------
 from contour_lib import LIB
@@ -382,7 +387,7 @@ def guide_lib_panel(f):
     if tab:
         arts.append(f'<article class="card key" data-title="Original PDFs"><h3>Original PDFs</h3><p>The original guideline and atlas PDFs for this site are kept in OneDrive (01 Contouring Guidelines). <a href="{up}ctr-library.html#{tab}">See the list of PDFs for this site</a>.</p></article>')
     return (f'<section class="panel" id="p-guidelines" data-tab="guidelines" data-label="Guidelines" hidden>\n  <div class="panel-head"><h2>Published guidelines and atlases</h2>'
-            f'<p class="lede">The international guidelines behind this guide, with PubMed or DOI links. "Start here" marks the current standard.</p><div class="jump"></div></div>\n' + '\n'.join(arts) + '\n</section>')
+            f'<p class="lede">"Start here" marks the current standard.</p><div class="jump"></div></div>\n' + '\n'.join(arts) + '\n</section>')
 def _inject_panel(htmltext, panel):
     if not panel: return htmltext
     i = htmltext.rfind('</section>', 0, htmltext.find('</main>'))
@@ -426,7 +431,7 @@ def build_pdf_page():
     out = []
     for i,(tid,label,tops) in enumerate(PDF_TABS):
         mine = [p for p in pdfs if p['top'] in tops]
-        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{" hidden" if i else ""}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{len(mine)} PDFs in OneDrive › 01 Contouring Guidelines › {html.escape(" and ".join(tops))}. Titles link to the published version (PubMed or DOI where matched, otherwise a Google Scholar search).</p>\n    <div class="jump"></div>\n  </div>')
+        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{" hidden" if i else ""}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n\n    <div class="jump"></div>\n  </div>')
         guides = [c for c in LIB_FULL + CONTOUR if GUIDE_PDFTAB.get(c[0]) == tid]
         if guides:
             out.append('  <article class="card key" data-title="Our guides"><h3>Our guides</h3><ul class="eviq">'+''.join(f'<li><a href="{g[0]}#guidelines">{html.escape(g[2])}</a></li>' for g in guides)+'</ul></article>')
@@ -527,9 +532,12 @@ def _wn_page():
             cards_ += f'<article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3><p><span class="flag {cls}">{lab}</span> <b>{html.escape(site)}</b> · {d} · {html.escape(src_)}</p><p>{html.escape(summ)}</p><p class="note"><a href="{html.escape(url)}" target="_blank" rel="noopener">Open the source</a>.{affh}</p></article>'
     else:
         cards_ = '<article class="card key" data-title="No entries yet"><h3>No entries yet</h3><p>The weekly evidence digest adds entries here: new phase III radiotherapy trials and guideline updates, each tagged practice-changing, confirms practice or watch, with the page on this site it affects.</p></article>'
+    _done = {h for _,_,h,_,_ in GROUPS} | {x for _,_,h,_,_ in GROUPS for x in h.split(' & ')}
+    _soon = [x for x in ['Breast','Thorax','Head and neck','Skin','CNS','Haematology','Sarcoma','Paediatrics','Palliative & oligometastases'] if x not in _done]
+    soon_card = (f'<article class="card" data-title="Still to add"><h3>Still to add</h3><p>{", ".join(_soon)}</p></article>') if _soon else ''
     site_ = ''.join(f'<li><b>{d}</b> · {html.escape(t)}' + (f' <a href="{p}">Open</a>' if p else '') + '</li>' for d,t,p in _wn.SITE)
-    return (f'<section class="panel" id="p-evidence" data-tab="evidence" data-label="Evidence"><div class="panel-head"><h2>New evidence and landmark trials</h2><p class="lede">Summaries are in our own words; open the source for the full paper. Tags are a first read, not a guideline.</p><div class="jump"></div></div>{cards_}</section>\n'
-            f'<section class="panel" id="p-site" data-tab="site" data-label="Site updates" hidden><div class="panel-head"><h2>Site updates</h2><div class="jump"></div></div><article class="card" data-title="Change log"><h3>Change log</h3><ul>{site_}</ul></article></section>')
+    return (f'<section class="panel" id="p-evidence" data-tab="evidence" data-label="Evidence"><div class="panel-head"><h2>New evidence and landmark trials</h2><p class="lede">Tags are a first read, not a guideline.</p><div class="jump"></div></div>{cards_}</section>\n'
+            f'<section class="panel" id="p-site" data-tab="site" data-label="Site updates" hidden><div class="panel-head"><h2>Site updates</h2><div class="jump"></div></div><article class="card" data-title="Change log"><h3>Change log</h3><ul>{site_}</ul></article>{soon_card}</section>')
 (root/'src'/'whats-new.html').write_text(_wn_page())
 # ---------------- Clinic quick links (clinic_links.py -> src/links.html) ----------------
 import clinic_links as _cl
@@ -538,7 +546,7 @@ def _links_page():
     out = []
     for i,(tid,label,lede,cards_) in enumerate(_cl.TABS):
         h = ' hidden' if i else ''
-        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <div class="jump"></div>\n  </div>')
+        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>{chr(10)+'    <p class="lede">'+html.escape(lede)+'</p>' if lede else ''}\n    <div class="jump"></div>\n  </div>')
         for title,note,links in cards_:
             lis = []
             for name,url,n,tags in sorted(links, key=lambda x: x[0].lower()):
@@ -571,7 +579,7 @@ def _contacts_page():
     out = []
     for i,(tid,label,lede,cards_) in enumerate(_cc.TABS):
         h = ' hidden' if i else ''
-        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <div class="jump"></div>\n  </div>')
+        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(label)}"{h}>\n  <div class="panel-head">\n    <h2>{html.escape(label)}</h2>{chr(10)+'    <p class="lede">'+html.escape(lede)+'</p>' if lede else ''}\n    <div class="jump"></div>\n  </div>')
         if tid == 'centres':
             rows = ''.join(f'<tr><td><b>{html.escape(c)}</b><br><span class="note">{html.escape(a)}</span></td><td>' + '<br>'.join(f'{html.escape(l)}: {_num(n)}' for l,n in nums) + '</td></tr>' for c,a,nums in cards_)
             out.append(f'  <article class="card" data-title="GenesisCare centres"><h3>GenesisCare centres</h3><table class="contacts"><thead><tr><th>Centre</th><th>Contact</th></tr></thead><tbody>{rows}</tbody></table></article>')
@@ -654,14 +662,13 @@ home = f'''<!DOCTYPE html>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#10243f">
 </head>
-<body>
+<body class="home">
 <header class="top">
   <div class="top-inner" style="padding-bottom:12px">
     <div class="title-row">
       <h1>Radiation Oncology <span>Quick Reference</span></h1>
       <div class="hdr-right" style="display:flex;align-items:center;gap:10px;align-self:center;flex-shrink:0">{APPLINKS}<div class="meta">v{VERSION}</div></div>
     </div>
-    <p class="lede" style="margin:4px 0 0">Clinic-ready summaries by tumour site: management by stage, doses, planning volumes and constraints, consent numbers and landmark trials.</p>
     <form class="search" role="search" id="siteSearch" onsubmit="return false">
       <label for="gq" class="note" style="position:absolute;left:-9999px">Search all pages</label>
       <input id="gq" type="search" placeholder="Search every page: border, dose, trial, structure" autocomplete="off">
@@ -681,7 +688,6 @@ home = f'''<!DOCTYPE html>
 {sections}
   <h2 class="group-title" id="contouring" data-site="contouring">Contouring guides</h2>
   <div class="hub">{contour_cards}</div>
-{('<h2 class="group-title" id="soon">Still to add</h2><div class="hub">'+cards_soon+'</div>') if soon else ''}
 </div>
 </main>
 </div>
@@ -703,6 +709,10 @@ for _f in sorted(root.glob('src/*.html')):
 if _noyr:
     print(f'WARNING: {len(_noyr)} key trial(s) without a publication year (add <span class="yr">(YYYY)</span> inside the <b>):')
     for _x in _noyr: print('  ' + _x)
+for _p in list(root.glob('*.html')) + list((root/'contouring').glob('*.html')):
+    _t = _p.read_text(); _n = re.sub(r'\s*<p class="lede"[^>]*>\s*</p>', '', _t)
+    if not MORE_TABS: _n = re.sub(r'\n?<script src="(\.\./)?assets/more-tabs\.js"></script>', '', _n)
+    if _n != _t: _p.write_text(_n)
 print('built')
 
 # ---------------- Search index and offline app files ----------------
@@ -729,7 +739,7 @@ for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.ht
             _x = re.sub(r'\s+',' ',_c.get_text(' ',strip=True))
             _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', _x])
 (root/'assets'/'search-index.js').write_text('window.QR_INDEX=' + _json.dumps(_idx, ensure_ascii=False, separators=(',',':')) + ';')
-_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/rert.js','assets/mdt.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
+_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/rert.js','assets/more-tabs.js','assets/mdt.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
 (root/'manifest.webmanifest').write_text(_json.dumps({'name':'Radiation Oncology Quick Reference','short_name':'RadOnc QR','start_url':'./index.html','scope':'./','display':'standalone','background_color':'#f3f5f6','theme_color':'#10243f','icons':[{'src':'assets/icon-192.png','sizes':'192x192','type':'image/png'},{'src':'assets/icon-512.png','sizes':'512x512','type':'image/png','purpose':'any maskable'}]}, indent=1))
 _ver = _hl.md5(''.join((root/x).read_text(errors='ignore') if not x.endswith('.png') else x for x in _files+_assets).encode()).hexdigest()[:10]
 (root/'sw.js').write_text("""// Generated by build.py. Network first (2.5 s), then the offline copy.

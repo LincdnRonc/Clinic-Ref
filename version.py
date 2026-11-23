@@ -6,10 +6,12 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.9'
+VERSION = '11.11'
 VERSION_DATE = '23 Nov 2026'
 
 HISTORY = [
+    ('11.11', '23 Nov 2026', 'Interface clean-up: one collapsible Related line replaces the three cross-link bars; shorter page titles; eviQ, Guidelines and Exam notes tabs behind a More chip (revert with MORE_TABS = False in build.py); home page uses the sidebar on wide screens and the group buttons on phones; group colours only on card borders; Still to add moved to Site updates; contouring-guide badges and sources in a collapsible About this guide.'),
+    ('11.10', '23 Nov 2026', 'Cleaner interface: removed descriptive blurbs (home-page tagline, hub-card descriptions now shown on hover, section summaries that only described what follows, exam topic lists, PDF-library and calculator intros); kept and shortened only the caveats and clinical bottom lines. Compact home-page cards.'),
     ('11.9', '23 Nov 2026', 'Prostate guide 2d.3b: erectile-structure anatomy and variants on MRI (neurovascular patterns, IPA course, accessory pudendal arteries, external sphincter, crura) with an original schematic, from Lee and Spratt, Lancet Oncol 2016.'),
     ('11.8', '23 Nov 2026', 'Prostate contouring guide section 2d: erectile function-sparing RT (NVB, IPA, penile bulb, crura delineation; ERECT SBRT constraints; conventional and moderate hypofractionation constraints; POTEN-C, ERECT, Spratt, ETS-IMRT trials).'),
     ('11.7.1', '23 Nov 2026', 'Teams meeting shortcut in the header quick-launch icons (link kept in a GitHub secret, added only to the password-protected site).'),

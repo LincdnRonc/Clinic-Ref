@@ -188,7 +188,7 @@ def _quick_panel(quick_html):
                 note.decompose()
         parts += [str(c) for c in sec.select('article.card')]
     return ('<section class="panel" id="p-quick" data-tab="quick" data-label="Quick reference">\n  <div class="panel-head"><h2>Quick reference</h2>'
-            '<p class="lede">The one-screen version: volumes, margins and pitfalls. Use the numbered tabs for the full guide, or Contour now for tables and diagrams only.</p><div class="jump"></div></div>\n  '
+            '<div class="jump"></div></div>\n  '
             + ''.join(parts) + '\n</section>')
 
 
@@ -231,7 +231,7 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, qui
         wrapped = seg['nodes']
         if seg['id'] == 'overview':
             title, label = 'Overview', 'Overview'
-            lede_html = (f'<p class="lede">{sub.decode_contents()}</p>' if sub else '')
+            lede_html = ''  # descriptive subtitle dropped for a cleaner header
             extra = ''
             if pills:
                 extra += f'<div class="pillrow">{pills.decode_contents()}</div>'
@@ -246,10 +246,10 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, qui
                         items.append(f'<li><a href="#{sg["id"]}">{html.escape((n_ + " " if n_ else "") + t_)}</a></li>')
                 if items:
                     cards_html = f'<article class="card key" data-title="Steps in this guide"><h3>Steps in this guide</h3><ol class="steps-toc" style="list-style:none;padding:0">{"".join(items)}</ol></article>'
-            head_html = f'<h2>{html.escape(long)}</h2>{lede_html}{lede2}{extra}'
             eb = _text(eyebrow) if eyebrow else ''
-            if eb:
-                head_html = f'<p class="eyebrow">{html.escape(eb)}</p>' + head_html
+            about = (f'<p class="eyebrow">{html.escape(eb)}</p>' if eb else '') + extra
+            # badges, source line and atlas label tucked into a collapsible "About this guide"
+            head_html = f'<h2>{html.escape(long)}</h2>{lede_html}{lede2}' + (f'<details class="about-guide"><summary>About this guide</summary>{about}</details>' if about else '')
         else:
             num, title, eb, pill_html = _head_parts(seg['head'])
             if not title:
@@ -290,7 +290,7 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, qui
   <div class="top-inner">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>{html.escape(long)}</span></nav>
     <div class="title-row">
-      <h1>{html.escape(short)} <span>Contouring guide</span></h1>
+      <h1>{html.escape(short)} <span>contouring</span></h1>
       <div class="meta">Full guide · Nov 2026</div>
     </div>
     <form class="search" role="search" id="searchForm">
@@ -311,6 +311,7 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, qui
 </div>
 {foot}
 <script src="../assets/site.js"></script>
+<script src="../assets/more-tabs.js"></script>
 <script src="../assets/extras.js"></script>
 </body>
 </html>

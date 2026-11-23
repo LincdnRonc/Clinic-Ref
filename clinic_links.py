@@ -5,7 +5,7 @@
 # Do not put usernames, patient IDs or search queries in URLs: the repo is public.
 
 TABS = [
- ('radiology', 'Radiology', 'Referrer image and report portals, A to Z. Each opens in a new tab at the provider login.', [
+ ('radiology', 'Radiology', '', [
   ('Radiology portals', '', [
    ('I-MED Radiology', 'https://pacs.i-med.com.au/Portal/app#/', 'InteleConnect', ()),
    ('Sectra UniView', 'https://prod.nswcloud.sectra.com.au/UniView/#/', 'NSW Health PACS (Sectra cloud)', ()),
@@ -50,7 +50,7 @@ TABS = [
    ('Harbour Radiology', 'https://imaging.harbourradiology.com.au/Portal/app', '', ('new',)),
   ]),
  ]),
- ('pathology', 'Pathology', 'Results portals for referring doctors, A to Z.', [
+ ('pathology', 'Pathology', '', [
   ('Results portals', '', [
    ('MedWay', 'https://www.medway.com.au/Login/ReLogin', 'Laverty Pathology (Healius)', ()),
    ('Sonic Dx', 'https://www.sonicdx.com.au/#/login', 'Douglass Hanly Moir and other Sonic labs', ()),
@@ -63,7 +63,7 @@ TABS = [
    ('NSW Health Pathology: results for clinicians', 'https://pathology.health.nsw.gov.au/services/healthcare-professionals/results/', 'How to get public pathology results electronically (information page)', ('new',)),
   ]),
  ]),
- ('forms', 'Forms', 'Referral and pathology request forms. PDF links open or download the form directly.', [
+ ('forms', 'Forms', '', [
   ('I-MED Radiology request forms', 'i-med.com.au/resources/e-referrals/pdf', [
    ('I-MED standard image request', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/b7baf0a8-7cd7-4f54-8522-9e05f6fc6b9b/I-MED_Radiology_Editable_PDF_Imaging_Request_Form_0626.pdf', 'PDF, editable (June 2026)', ()),
    ('I-MED specialist MRI image request', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/eca5abb4-b864-4642-aa8c-863eba3e2f4a/VICT204_0626_Specialist_Referral_A4_Editable.pdf', 'PDF, editable (June 2026)', ()),

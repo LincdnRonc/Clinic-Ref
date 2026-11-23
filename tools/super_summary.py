@@ -539,7 +539,7 @@ def frag(tabs, order, f, intro=None):
             if s and s not in titles and s != 'Figure': titles.append(s)
         lede = ' · '.join(titles[:8])
         hid = '' if first else ' hidden'
-        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(tab["label"])}"{hid}>\n  <div class="panel-head">\n    <h2>{html.escape(tab["label"])}</h2>\n    <p class="lede">{html.escape(lede)}</p>\n    <!--xref:{tid}-->\n    <div class="jump"></div>\n  </div>')
+        out.append(f'<section class="panel" id="p-{tid}" data-tab="{tid}" data-label="{html.escape(tab["label"])}"{hid}>\n  <div class="panel-head">\n    <h2>{html.escape(tab["label"])}</h2>\n    <!--xref:{tid}-->\n    <div class="jump"></div>\n  </div>')
         if first and intro: out.append(intro)
         seen = {}
         for t, h, k in tab['cards']:
@@ -554,7 +554,6 @@ def frag(tabs, order, f, intro=None):
 EPI = '''<section class="panel" id="p-epi" data-tab="epi" data-label="Australian epidemiology">
   <div class="panel-head">
     <h2>Australian epidemiology</h2>
-    <p class="lede">Most common cancers by new cases and by deaths, estimated for 2025 (ranked from the charts in the source document).</p>
     <div class="jump"></div>
   </div>
   <article class="card key" data-title="Incidence 2025">

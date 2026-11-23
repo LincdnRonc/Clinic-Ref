@@ -8,7 +8,7 @@
 # Each row: (service, number(s), note)
 
 TABS = [
- ('gc-svh', 'GenesisCare SVH', "GenesisCare radiation oncology at St Vincent's: Level A (SVRO), Sacred Heart (SHRO) and Level 7. Four-digit numbers are extensions.", [
+ ('gc-svh', 'GenesisCare SVH', "Four-digit numbers are extensions.", [
   ('Level A (SVRO)', 'Main line 8302 5400', [
    ('Reception 1', '5401', ''),
    ('Reception 2', '5402', ''),
@@ -81,7 +81,7 @@ TABS = [
    ('Fax', '8382 3111', ''),
   ]),
  ]),
- ('centres', 'GenesisCare centres', 'Other GenesisCare NSW centres and head office, A to Z.', [
+ ('centres', 'GenesisCare centres', '', [
   # (centre, address, [(label, number)])
   ('Bella Vista (Norwest)', 'Level 3, Suite 311, 8 Elizabeth Macarthur Drive, Bella Vista NSW 2153', [('Phone', '02 8811 8400'), ('Email', 'norwest@genesiscare.com')]),
   ('Campbelltown', '38 Camden Rd, Campbelltown NSW 2560', [('Phone', '02 4632 5500'), ('Email', 'admin.campbelltown@genesiscare.com')]),

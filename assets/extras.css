@@ -142,3 +142,32 @@ body.searching .mdt-in,body.searching .mdt-grp{display:none}
 .card.gather-head{background:transparent;border:0;border-bottom:2px solid var(--accent);border-radius:0;padding:0 2px 6px}
 .card.gather-head h3{font-size:1.3rem;margin-bottom:2px}
 .card.gather-head p.note{margin:0}
+/* ---- v11.11 UI clean-up ---- */
+/* Related links: one collapsible line instead of three bars */
+details.related{font-size:.85rem;margin:0 0 10px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+details.related>summary{cursor:pointer;padding:5px 10px;font-weight:700;color:var(--muted);list-style:none}
+details.related>summary::-webkit-details-marker{display:none}
+details.related>summary::after{content:" ▾"}
+details.related[open]>summary::after{content:" ▴"}
+details.related .rel-row{padding:3px 10px 6px;border-top:1px solid var(--line)}
+details.related a{color:var(--accent);font-weight:600;text-decoration:none}
+details.related a:hover{text-decoration:underline}
+@media print{details.related{display:none}}
+/* More tabs (revert: MORE_TABS = False in build.py) */
+.chips .chip-rare{display:none}
+.chips.more-open .chip-rare{display:inline-block}
+.chip-more{color:var(--muted)}
+/* Contouring guide: collapsible About */
+details.about-guide{margin:6px 0 4px;font-size:.88rem}
+details.about-guide>summary{cursor:pointer;color:var(--muted);font-weight:600}
+details.about-guide[open]{padding-bottom:6px}
+/* Home: one navigation per interface. Wide screens use the sidebar; phones use the group buttons */
+@media (min-width:1100px){.home .sitenav{display:none}}
+@media (max-width:1099px){.home .side{display:none}}
+/* Fewer colours: group colour only on card borders */
+.group-title[data-site]{color:var(--ink);border-bottom:1px solid var(--line)}
+.group-title[data-site]::before{display:none}
+.sitenav a[data-site]{border-left:1px solid var(--line)}
+.hubcard[data-site] h3{color:var(--ink)}
+.tree details>summary{color:var(--ink)}
+.home footer{border-top-color:var(--line)}
