@@ -1,11 +1,17 @@
 // Floating Share button: link, copy, native share and an on-device QR code (assets/qrcode.js, MIT, Kazuhiko Arase).
 (function(){
-  if (document.querySelector('.sharebtn')) return;
+  if (document.querySelector('.sharewrap')) return;
   var base = (document.querySelector('script[src$="share.js"]').getAttribute('src') || '').replace(/share\.js$/, '');
+  // Hidden for the rest of this browser session if dismissed with its ×
+  try { if (sessionStorage.getItem('qr-share-hidden')) return; } catch(e) {}
+  var wrap = document.createElement('div'); wrap.className = 'sharewrap';
   var btn = document.createElement('button');
-  btn.type = 'button'; btn.className = 'sharebtn'; btn.setAttribute('aria-haspopup', 'dialog'); btn.title = 'Share this page';
-  btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="17.5" cy="5.5" r="2.5" fill="currentColor"/><circle cx="6.5" cy="12" r="2.5" fill="currentColor"/><circle cx="17.5" cy="18.5" r="2.5" fill="currentColor"/><path d="M8.7 10.8l6.6-4M8.7 13.2l6.6 4" stroke="currentColor" stroke-width="1.8"/></svg><span>Share</span>';
-  document.body.appendChild(btn);
+  btn.type = 'button'; btn.className = 'sharebtn'; btn.setAttribute('aria-haspopup', 'dialog'); btn.title = 'Share this page (link and QR code)';
+  btn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="currentColor"><path d="M3 3h7v7H3zm2 2v3h3V5zM14 3h7v7h-7zm2 2v3h3V5zM3 14h7v7H3zm2 2v3h3v-3z"/><path d="M14 14h2v2h-2zM18 14h3v2h-3zM16 16h2v2h-2zM14 18h2v3h-2zM18 18h3v3h-3z"/></svg><span>Share</span>';
+  var hide = document.createElement('button');
+  hide.type = 'button'; hide.className = 'sharehide'; hide.setAttribute('aria-label', 'Hide the Share button'); hide.title = 'Hide (comes back next visit)'; hide.textContent = '×';
+  wrap.appendChild(btn); wrap.appendChild(hide);
+  document.body.appendChild(wrap);
 
   var pop = document.createElement('div');
   pop.className = 'sharepop'; pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', 'Share this page'); pop.hidden = true;
@@ -37,6 +43,7 @@
   function close(){ pop.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
   btn.addEventListener('click', function(){ pop.hidden ? open() : close(); });
   pop.querySelector('.sp-x').addEventListener('click', close);
+  hide.addEventListener('click', function(){ close(); wrap.remove(); pop.remove(); try { sessionStorage.setItem('qr-share-hidden', '1'); } catch(e) {} });
   keepTab.addEventListener('change', render);
   window.addEventListener('hashchange', function(){ if (!pop.hidden) render(); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !pop.hidden) { close(); btn.focus(); } });
