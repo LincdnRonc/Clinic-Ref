@@ -208,3 +208,9 @@ dl.ov dd{margin:2px 0 0;color:var(--ink)}
 /* Contouring guides grouped by site */
 .tree .tree-sub{display:block;padding:10px 10px 2px 26px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
 h3.sub-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--muted);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.04em}
+/* Contouring-guide call-out: solid box with a button link */
+p.note.ctr-cta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;background:var(--accent);color:var(--panel);border-radius:10px;padding:10px 14px;margin:8px 0 12px;font-size:.92rem;line-height:1.4;max-width:none}
+p.note.ctr-cta::before{content:"";flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20l4-1 11-11-3-3L5 16z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20l4-1 11-11-3-3L5 16z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+p.note.ctr-cta a{display:inline-block;background:var(--panel);color:var(--accent);font-weight:700;text-decoration:none;padding:4px 12px;border-radius:999px;white-space:normal}
+p.note.ctr-cta a:hover,p.note.ctr-cta a:focus-visible{text-decoration:underline;outline:2px solid var(--panel);outline-offset:1px}
+p.note.ctr-cta sub{color:inherit}

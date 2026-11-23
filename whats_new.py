@@ -34,6 +34,7 @@ EVIDENCE = [
   [('gu-prostate.html#localised','Localised disease')]),
 ]
 SITE = [
+    ('2026-11-23', '32 more key trials across paediatrics, gynae, lymphoma, CNS, H&N, thorax, GI, GU and melanoma ("More key trials" cards); contouring-guide links shown as call-out boxes.', ''),
     ('2026-11-23', 'New tabs: locally advanced and inflammatory breast cancer, osteosarcoma, other benign conditions; additions on brainstem glioma, ovarian and penile cancer.', 'breast-nodes-pmrt.html#labc'),
     ('2026-11-23', 'New Principles & techniques section: radiobiology, physics, imaging and IGRT, brachytherapy, protons and MR-guided RT, emergencies, simulation and set-up, statistics and trial design.', 'prin-radiobiology.html'),
     ('2026-11-23', 'Prostate contouring guide 2d.3b: how to find the neurovascular elements, internal and accessory pudendal arteries, external sphincter and crura on MRI, with a schematic (Lee and Spratt 2016).', 'contouring/prostate.html#s2d'),

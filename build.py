@@ -831,6 +831,9 @@ if _noyr:
     for _x in _noyr: print('  ' + _x)
 for _p in list(root.glob('*.html')) + list((root/'contouring').glob('*.html')):
     _t = _p.read_text(); _n = re.sub(r'\s*<p class="lede"[^>]*>\s*</p>', '', _t)
+    # notes that link to a contouring guide become a solid call-out box
+    _n = re.sub(r'<p class="note">(?=(?:(?!</p>).)*?<a href="(?:\.\./)?contouring/)', '<p class="note ctr-cta">', _n, flags=re.S)
+    _n = re.sub(r'(<p class="note ctr-cta">(?:(?!</p>).)*?</a>)\.(\s*</p>)', r'\1\2', _n, flags=re.S)
     if not MORE_TABS: _n = re.sub(r'\n?<script src="(\.\./)?assets/more-tabs\.js"></script>', '', _n)
     if _n != _t: _p.write_text(_n)
 print('built')
