@@ -1,0 +1,238 @@
+<section class="panel" id="p-core" data-tab="core" data-label="Core concepts">
+  <div class="panel-head">
+    <h2>Core concepts</h2>
+    <p class="lede">Fractionation works because late-responding normal tissues are more sensitive to dose per fraction than most tumours and acute tissues. EQD2 and BED arithmetic: <a href="tools.html">EQD2 and BED calculator</a>.</p>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="The 5 Rs">
+    <h3>The 5 Rs</h3>
+    <div class="tw wide"><table>
+      <tr><th>R</th><th>What happens between fractions</th><th>Clinical consequence</th></tr>
+      <tr><td><b>Repair</b></td><td>Sublethal damage is repaired, mostly within about 6 h (slower in CNS).</td><td>Keep ≥6 h between BID fractions (≥8 h for cord/brain).</td></tr>
+      <tr><td><b>Redistribution</b></td><td>Survivors move into sensitive phases (G2/M most, late S least).</td><td>A modest gain in tumour kill per fraction.</td></tr>
+      <tr><td><b>Repopulation</b></td><td>Surviving clonogens divide, and can accelerate after about 3–4 weeks (H&amp;N, cervix, lung).</td><td>Avoid gaps and prolonged overall time; compensate if lost (<a href="tools.html">gap calculator</a>).</td></tr>
+      <tr><td><b>Reoxygenation</b></td><td>Hypoxic cells become better oxygenated as the tumour shrinks.</td><td>Single large fractions may leave hypoxic cells unsterilised.</td></tr>
+      <tr><td><b>Radiosensitivity</b></td><td>Intrinsic differences between cell types.</td><td>Explains why seminoma and lymphoma need low doses.</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card key" data-title="Linear-quadratic model">
+    <h3>Linear-quadratic model</h3>
+    <ul>
+      <li>Cell survival S = e<sup>−(αD + βD²)</sup>. α = single-hit (non-repairable) kill; β = two-hit (repairable) kill.</li>
+      <li><b>α/β</b> = dose at which the two components contribute equally. High α/β (≈10): acute tissues and most tumours, insensitive to fraction size. Low α/β (≈1.5–4): late-responding tissues, prostate, breast, melanoma and some sarcomas, sensitive to fraction size.</li>
+      <li><b>BED</b> = nd(1 + d/(α/β)). <b>EQD2</b> = nd(d + α/β)/(2 + α/β).</li>
+      <li>Hypofractionation only gains a therapeutic ratio when tumour α/β is at or below that of the dose-limiting normal tissue (prostate, breast); otherwise the benefit comes from geometry (SABR).</li>
+      <li>The LQ model is less reliable above about 8–10 Gy per fraction; treat SABR BED figures as a comparison tool, not a biological truth.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Alpha/beta values">
+    <h3>Working α/β values <span class="flag caution">Verify</span></h3>
+    <div class="tw wide"><table>
+      <tr><th>Tissue or tumour</th><th>α/β (Gy)</th><th>Note</th></tr>
+      <tr><td>Most carcinomas, acute mucosa and skin</td><td>10</td><td>Default tumour value</td></tr>
+      <tr><td>Late normal tissue (general)</td><td>3</td><td>Default late-effect value</td></tr>
+      <tr><td>Spinal cord, brain, optic apparatus</td><td>2</td><td>Used in cumulative CNS limits</td></tr>
+      <tr><td>Lung pneumonitis</td><td>≈3–4</td><td></td></tr>
+      <tr><td>Rectum (late)</td><td>≈3–5</td><td></td></tr>
+      <tr><td>Bladder (late)</td><td>≈5–10</td><td>Uncertain</td></tr>
+      <tr><td>Prostate cancer</td><td>≈1.5</td><td>Basis of moderate and ultra-hypofractionation</td></tr>
+      <tr><td>Breast cancer</td><td>≈3.5–4</td><td>Estimated from START</td></tr>
+      <tr><td>Melanoma, liposarcoma</td><td>Low (≈1 or less)</td><td>Rationale for larger fractions</td></tr>
+      <tr><td>Head and neck SCC</td><td>≈10 or higher</td><td>Accelerated repopulation matters more</td></tr>
+    </table></div>
+  </article>
+
+  <article class="card" data-title="LET RBE OER">
+    <h3>LET, RBE and oxygen</h3>
+    <ul>
+      <li><b>LET</b> (keV/μm): photons and electrons are low LET (&lt;1); clinical protons are low LET except at the distal end of the Bragg peak; neutrons, α-particles and carbon ions are high LET.</li>
+      <li><b>RBE</b> rises with LET to a maximum around 100 keV/μm (ionisation spacing matches the DNA double helix), then falls (overkill). Protons are planned with a fixed RBE of 1.1.</li>
+      <li><b>Oxygen</b> fixes free-radical damage to DNA; it must be present at the time of irradiation. OER for low-LET radiation ≈2.5–3; it falls towards 1 with high LET.</li>
+      <li>Only a little oxygen is needed: radiosensitivity is half-maximal at about 3 mmHg.</li>
+      <li>About 1 Gy produces roughly 1000 single-strand breaks and 40 double-strand breaks per cell; the double-strand break is the lethal lesion.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Dose rate">
+    <h3>Dose rate</h3>
+    <ul>
+      <li>Lowering the dose rate (LDR brachytherapy, TBI) allows repair during delivery and spares late tissues, much like fractionation.</li>
+      <li><b>Inverse dose-rate effect:</b> in a narrow range, lower dose rate can kill more cells, because cells accumulate in G2/M.</li>
+      <li>Pulsed-dose-rate brachytherapy delivers hourly HDR pulses to mimic LDR.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="DNA repair and death">
+    <h3>DNA repair and cell death</h3>
+    <ul>
+      <li><b>Non-homologous end joining:</b> fast, error-prone, active throughout the cycle (dominant in G1). Ku70/80 and DNA-PKcs.</li>
+      <li><b>Homologous recombination:</b> accurate, needs a sister chromatid (S/G2). ATM, MRN, BRCA1/2, RAD51. HR-deficient tumours (BRCA) are more radiosensitive and PARP-inhibitor sensitive.</li>
+      <li><b>Mismatch repair</b> loss (MLH1, MSH2, MSH6, PMS2) → MSI-high; predicts immunotherapy response (rectal dMMR: immunotherapy first).</li>
+      <li><b>Mitotic catastrophe</b> is the main mode of death in most solid tumours after RT; <b>apoptosis</b> dominates in lymphocytes, haematopoietic cells and salivary serous cells; <b>senescence</b> contributes in slow tumours (PSA can keep falling for years after prostate RT).</li>
+      <li>Radiosensitivity syndromes: ataxia-telangiectasia (ATM) is the classic severe one; caution also with Nijmegen breakage, Fanconi anaemia, Li–Fraumeni (TP53, second cancers), and active connective tissue disease.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-normal" data-tab="normal" data-label="Normal tissue" hidden>
+  <div class="panel-head">
+    <h2>Normal tissue effects</h2>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Early vs late">
+    <h3>Early and late effects</h3>
+    <div class="tw wide"><table>
+      <tr><th></th><th>Early (acute)</th><th>Late</th></tr>
+      <tr><td>Timing</td><td>During RT and up to about 90 days</td><td>Months to years</td></tr>
+      <tr><td>Tissues</td><td>Rapid turnover: mucosa, skin, bowel epithelium, marrow</td><td>Slow turnover: CNS, kidney, lung, connective tissue, vessels</td></tr>
+      <tr><td>Driven by</td><td>Total dose and dose per week (overall time)</td><td>Dose per fraction and total dose</td></tr>
+      <tr><td>Prolonging treatment</td><td>Reduces acute toxicity (repopulation)</td><td>Little effect</td></tr>
+      <tr><td>Recovery</td><td>Usually complete</td><td>Usually permanent and progressive</td></tr>
+    </table></div>
+    <p><b>Consequential late effects</b> follow severe acute damage that never heals (e.g. mucosal ulcer → fistula or stricture). Avoiding severe acute toxicity protects against them.</p>
+  </article>
+
+  <article class="card" data-title="Serial and parallel organs">
+    <h3>Serial and parallel organs</h3>
+    <ul>
+      <li><b>Serial</b> (cord, brainstem, optic nerve, bowel, oesophagus): damage to a small segment loses the function of the whole. Limits are on maximum dose (D0.03cc, D1cc).</li>
+      <li><b>Parallel</b> (lung, liver, kidney, parotid): function is lost only if enough volume is damaged. Limits are on mean dose or volume (V20, mean liver, critical volume spared).</li>
+      <li>Many organs are mixed (heart: coronary arteries behave serially, myocardium in parallel).</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Skin timeline">
+    <h3>Skin reaction timeline</h3>
+    <ul>
+      <li>Faint erythema within days (vasodilatation); main erythema from about week 2–3.</li>
+      <li>Dry desquamation from about 30 Gy, moist desquamation from about 45–50 Gy in conventional fractions, peaking 1–2 weeks after RT ends.</li>
+      <li>Epilation after about 2–3 weeks; regrowth from about 2–3 months, often permanent above about 45–50 Gy to the follicles.</li>
+      <li>Late: atrophy, telangiectasia, fibrosis (dermis; dose per fraction dependent).</li>
+      <li>Skin sparing is lost under bolus, with tangential beams and at skin folds.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Acute radiation syndrome">
+    <h3>Whole-body exposure (acute radiation syndrome) <span class="flag caution">Verify</span></h3>
+    <div class="tw wide"><table>
+      <tr><th>Syndrome</th><th>Approximate dose</th><th>Course</th></tr>
+      <tr><td>Haematopoietic</td><td>≈2–8 Gy</td><td>Prodrome, latent period, then cytopenias at 2–4 weeks. LD50/60 ≈3.5–4 Gy without treatment, higher with supportive care and growth factors.</td></tr>
+      <tr><td>Gastrointestinal</td><td>≈8–15 Gy</td><td>Diarrhoea, sepsis; death within about 1–2 weeks</td></tr>
+      <tr><td>Neurovascular</td><td>&gt;20–50 Gy</td><td>Rapid collapse; death within hours to days</td></tr>
+    </table></div>
+    <p>Earlier onset of vomiting implies a higher dose: vomiting within about 1–2 h suggests ≥2–4 Gy.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-modify" data-tab="modify" data-label="Hypoxia &amp; modifiers" hidden>
+  <div class="panel-head">
+    <h2>Hypoxia and dose modifiers</h2>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Tumour hypoxia">
+    <h3>Tumour hypoxia</h3>
+    <ul>
+      <li>Oxygen diffuses about 150–200 μm from a capillary; beyond that cells become chronically hypoxic. Acute (perfusion-limited) hypoxia comes from transiently closed vessels.</li>
+      <li>Hypoxia predicts worse local control in H&amp;N and cervix cancer and in sarcoma.</li>
+      <li><b>Anaemia</b> matters clinically: keep haemoglobin up in cervix cancer (transfuse if low); avoid smoking during RT (carboxyhaemoglobin).</li>
+      <li><b>Nimorazole</b> (hypoxic radiosensitiser) improved locoregional control in supraglottic and pharyngeal SCC in DAHANCA 5 (1998) and is standard in Denmark; not used routinely in Australia.</li>
+      <li>Hyperbaric oxygen, carbogen with nicotinamide (BCON in bladder), and hypoxic cytotoxins (tirapazamine) have mixed or negative results.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Radiosensitisers and protectors">
+    <h3>Radiosensitisers and protectors</h3>
+    <ul>
+      <li><b>Concurrent chemotherapy</b> is the main clinical sensitiser (cisplatin, 5-FU/capecitabine, mitomycin, temozolomide, gemcitabine). Agents and doses: <a href="sys-chemort.html">Concurrent chemo-RT</a>.</li>
+      <li><b>Amifostine</b> (thiol free-radical scavenger) can reduce xerostomia but causes hypotension and nausea; rarely used now that IMRT spares the parotids.</li>
+      <li>Targeted agents and immunotherapy with RT: timing and toxicity on <a href="sys-timing.html">Targeted and immunotherapy with RT</a>.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Radiation and immunity">
+    <h3>Radiation and the immune system</h3>
+    <ul>
+      <li>RT can release tumour antigens and danger signals (immunogenic cell death) and upregulate MHC-I and PD-L1.</li>
+      <li>The abscopal effect (regression outside the field) is real but uncommon, even with checkpoint inhibitors.</li>
+      <li>Lymphocytes are very radiosensitive: large fields and many fractions cause lymphopenia, which is associated with worse outcomes in several cancers.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-protect" data-tab="protect" data-label="Protection, pregnancy &amp; fertility" hidden>
+  <div class="panel-head">
+    <h2>Radiation protection, pregnancy and fertility</h2>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Deterministic and stochastic">
+    <h3>Deterministic and stochastic effects</h3>
+    <ul>
+      <li><b>Deterministic</b> (tissue reactions): threshold dose; severity rises with dose. Erythema, cataract, sterility, fetal malformation.</li>
+      <li><b>Stochastic:</b> no threshold assumed; probability rises with dose, severity does not. Cancer and heritable effects.</li>
+      <li>Nominal risk of fatal cancer ≈5% per Sv for the whole population (ICRP 103). Heritable risk is much smaller (≈0.2% per Sv).</li>
+      <li><b>Second cancers after RT:</b> latency about 5–10 years for solid tumours (shorter for leukaemia); sarcomas arise in or at the edge of high-dose regions, carcinomas (breast, lung, thyroid) in lower-dose regions. Young age at exposure is the strongest risk factor (Hodgkin survivors: breast cancer).</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Dose limits Australia">
+    <h3>Dose limits in Australia (ARPANSA) <span class="flag caution">Verify</span></h3>
+    <div class="tw wide"><table>
+      <tr><th></th><th>Occupational</th><th>Public</th></tr>
+      <tr><td>Effective dose</td><td>20 mSv/year averaged over 5 years (no more than 50 mSv in one year)</td><td>1 mSv/year</td></tr>
+      <tr><td>Lens of eye</td><td>20 mSv/year averaged over 5 years</td><td>15 mSv/year</td></tr>
+      <tr><td>Skin, hands and feet</td><td>500 mSv/year</td><td>50 mSv/year (skin)</td></tr>
+      <tr><td>Pregnant worker</td><td colspan="2">Embryo/fetus ≤1 mSv for the rest of the pregnancy once declared</td></tr>
+    </table></div>
+    <p class="note">Background in Australia is about 1.5–2 mSv/year. Effective doses: chest X-ray ≈0.02 mSv, CT chest ≈5–7 mSv, CT abdomen/pelvis ≈8–10 mSv, FDG PET-CT ≈10–25 mSv.</p>
+  </article>
+
+  <article class="card key" data-title="Pregnancy">
+    <h3>Treating near a pregnancy <span class="flag caution">Verify</span></h3>
+    <div class="tw wide"><table>
+      <tr><th>Gestation</th><th>Main risk</th><th>Approximate threshold</th></tr>
+      <tr><td>0–2 weeks (pre-implantation)</td><td>All-or-nothing: loss or normal development</td><td>≈0.1 Gy</td></tr>
+      <tr><td>3–8 weeks (organogenesis)</td><td>Malformation, growth restriction</td><td>≈0.1–0.2 Gy</td></tr>
+      <tr><td>8–15 weeks</td><td>Intellectual disability, microcephaly (highest risk)</td><td>≈0.3 Gy; IQ loss ≈25–30 points per Gy above it</td></tr>
+      <tr><td>16–25 weeks</td><td>Same effects, lower risk</td><td>≈0.5–0.7 Gy</td></tr>
+      <tr><td>Any time</td><td>Childhood cancer (stochastic)</td><td>No threshold</td></tr>
+    </table></div>
+    <ul>
+      <li>Below 0.1 Gy fetal dose, termination is not justified on radiation grounds (ICRP 84).</li>
+      <li>Check pregnancy status before simulation in anyone who could be pregnant. If treating during pregnancy, physics estimates fetal dose (mostly internal scatter, which shielding cannot stop); avoid high-energy (&gt;10 MV) beams to limit neutrons.</li>
+      <li>Breast cancer in pregnancy: RT is usually deferred until after delivery.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Fertility">
+    <h3>Fertility <span class="flag caution">Verify</span></h3>
+    <ul>
+      <li><b>Testis:</b> ≈0.1–0.15 Gy causes temporary oligospermia; ≈2–3 Gy prolonged azoospermia; ≥6 Gy likely permanent. Sperm counts fall from about 6–10 weeks and recover over 1–3 years. Fractionated doses are more damaging than single doses. Offer sperm banking before pelvic RT.</li>
+      <li><b>Ovary:</b> the human oocyte is very sensitive (LD50 &lt;2 Gy). The dose that sterilises immediately falls with age: about 20 Gy at birth, about 16 Gy at 20 years, about 14 Gy at 30 years (Wallace 2005). Consider oophoropexy (transposition) before pelvic RT and fertility referral.</li>
+      <li>Leydig cells (testosterone) tolerate much more than germ cells (≈20 Gy in adults).</li>
+      <li>Uterine irradiation in childhood reduces uterine volume and raises miscarriage and preterm-birth risk.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-source" data-tab="source" data-label="Sources" hidden>
+  <div class="panel-head">
+    <h2>Sources</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="Further reading">
+    <h3>Further reading</h3>
+    <ul>
+      <li>Tang C, Farooqi A (eds). <i>Pocket Radiation Oncology</i>, 2nd ed. Wolters Kluwer, 2025: Radiation Biology chapter.</li>
+      <li>Hall EJ, Giaccia AJ. <i>Radiobiology for the Radiologist</i>, 8th ed. Wolters Kluwer, 2018.</li>
+      <li>Joiner M, van der Kogel A. <i>Basic Clinical Radiobiology</i>, 5th ed. CRC Press, 2018.</li>
+      <li>ICRP Publication 103 (2007) and 84 (Pregnancy and medical radiation, 2000). ARPANSA Radiation Protection Series C-1 (2020).</li>
+      <li>Wallace WHB et al. Predicting age of ovarian failure after radiation to a field that includes the ovaries. IJROBP 2005.</li>
+    </ul>
+  </article>
+</section>

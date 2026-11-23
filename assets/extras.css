@@ -178,3 +178,5 @@ dl.ov dt:first-child{margin-top:0}
 dl.ov dt a{color:var(--accent);text-decoration:none}
 dl.ov dt a:hover{text-decoration:underline}
 dl.ov dd{margin:2px 0 0;color:var(--ink)}
+/* long one-word titles shrink and hyphenate on phones */
+.title-row h1{min-width:0;flex:1 1 auto;overflow-wrap:break-word;hyphens:auto}

@@ -1,0 +1,125 @@
+<section class="panel" id="p-basics" data-tab="basics" data-label="Basics &amp; isotopes">
+  <div class="panel-head">
+    <h2>Brachytherapy basics</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Dose rate">
+    <h3>Dose-rate categories (ICRU 38)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Category</th><th>Dose rate</th><th>Example</th></tr>
+      <tr><td>LDR</td><td>0.4–2 Gy/h</td><td>Permanent prostate seeds (much lower, decaying), eye plaques</td></tr>
+      <tr><td>MDR</td><td>2–12 Gy/h</td><td>Rarely used (worse late effects than expected)</td></tr>
+      <tr><td>HDR</td><td>&gt;12 Gy/h</td><td>Ir-192 afterloader: gynae, prostate, breast, skin, oesophagus, bronchus</td></tr>
+      <tr><td>PDR</td><td>HDR pulses, usually hourly</td><td>Mimics LDR with an HDR-type source</td></tr>
+    </table></div>
+    <ul>
+      <li>Dose falls with roughly the inverse square of distance near the source: very high dose inside the implant, steep fall-off outside. Hot spots around catheters are expected and accepted.</li>
+      <li>HDR uses large fractions, so convert to EQD2 (α/β 10 for tumour, 3 for late OARs) when adding to EBRT.</li>
+    </ul>
+  </article>
+  <article class="card key" data-title="Isotopes">
+    <h3>Isotopes <span class="flag caution">Verify</span></h3>
+    <div class="tw wide"><table>
+      <tr><th>Isotope</th><th>Half-life</th><th>Mean energy</th><th>Main use</th></tr>
+      <tr><td>Ir-192</td><td>74 days</td><td>≈0.38 MeV γ</td><td>HDR and PDR afterloaders (source changed about every 3–4 months)</td></tr>
+      <tr><td>Co-60</td><td>5.3 years</td><td>1.25 MeV γ</td><td>HDR afterloaders (some centres), Gamma Knife</td></tr>
+      <tr><td>I-125</td><td>59.4 days</td><td>≈28 keV</td><td>Prostate LDR seeds, eye plaques</td></tr>
+      <tr><td>Pd-103</td><td>17 days</td><td>≈21 keV</td><td>Prostate LDR (faster dose delivery)</td></tr>
+      <tr><td>Cs-131</td><td>9.7 days</td><td>≈30 keV</td><td>Prostate LDR, brain cavity implants</td></tr>
+      <tr><td>Ru-106</td><td>1 year</td><td>β (max 3.5 MeV)</td><td>Thin uveal melanoma plaques</td></tr>
+      <tr><td>Sr-90 / Y-90</td><td>28.8 years / 64 hours</td><td>β</td><td>Pterygium (historical); Y-90 microspheres (SIRT) for liver</td></tr>
+      <tr><td>Ra-223</td><td>11.4 days</td><td>α</td><td>Bone-only mCRPC (ALSYMPCA)</td></tr>
+      <tr><td>Lu-177</td><td>6.7 days</td><td>β (and γ for imaging)</td><td>Lu-PSMA (VISION, TheraP), Lu-DOTATATE (NETTER-1)</td></tr>
+      <tr><td>I-131</td><td>8 days</td><td>β and γ</td><td>Thyroid ablation and treatment</td></tr>
+    </table></div>
+  </article>
+  <article class="card" data-title="Procedures">
+    <h3>Before an implant</h3>
+    <ul>
+      <li>Anaesthetic review, consent (including the possibility of no implant if anatomy is unsuitable), and a plan for analgesia and catheter care.</li>
+      <li>Anticoagulants and antiplatelets: stop and restart according to the local peri-procedural policy and the prescriber; most invasive implants need anticoagulants held, aspirin often continued.</li>
+      <li>Prophylactic antibiotics for transperineal and transrectal procedures per local protocol; bowel preparation for prostate and gynae.</li>
+      <li>Radiation safety: patients with permanent seeds get written instructions (close contact with pregnant women and children limited for about 2 months for I-125; condoms for the first few ejaculations).</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-prostate" data-tab="prostate" data-label="Prostate" hidden>
+  <div class="panel-head">
+    <h2>Prostate brachytherapy</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Selection">
+    <h3>Selection</h3>
+    <ul>
+      <li><b>LDR or HDR monotherapy:</b> low and favourable intermediate risk.</li>
+      <li><b>Brachytherapy boost with EBRT ± ADT:</b> unfavourable intermediate and high risk. ASCENDE-RT (LDR boost) roughly halved biochemical failure compared with dose-escalated EBRT, at the cost of more late GU toxicity (strictures).</li>
+      <li><b>Relative contraindications:</b> large gland (&gt;60 cc, pubic arch interference), high IPSS (&gt;15–20) or high post-void residual, recent TURP with a large defect, inflammatory bowel disease, previous pelvic RT.</li>
+      <li>Salvage brachytherapy for local recurrence after EBRT: selected patients, experienced centres (<a href="rert-pelvis.html">Reirradiation: prostate</a>).</li>
+    </ul>
+  </article>
+  <article class="card key" data-title="Doses and metrics">
+    <h3>Doses and plan metrics <span class="flag caution">Verify</span></h3>
+    <div class="tw wide"><table>
+      <tr><th>Setting</th><th>Typical dose</th></tr>
+      <tr><td>I-125 monotherapy</td><td><span class="d">145 Gy</span></td></tr>
+      <tr><td>Pd-103 monotherapy</td><td><span class="d">125 Gy</span></td></tr>
+      <tr><td>I-125 boost after 45–46 Gy EBRT</td><td><span class="d">110 Gy</span> (ASCENDE-RT 115 Gy)</td></tr>
+      <tr><td>HDR monotherapy</td><td><span class="d">27/2</span> (single 19 Gy gave worse control in randomised data)</td></tr>
+      <tr><td>HDR boost</td><td><span class="d">15/1</span> or <span class="d">10/2</span> with EBRT 46/23 or hypofractionated EBRT</td></tr>
+    </table></div>
+    <ul>
+      <li><b>LDR post-implant (day 0–30 CT/MRI):</b> prostate D90 ≥100% and V100 ≥90–95%; urethra D10 &lt;150%, D30 &lt;130%; rectum V100 &lt;1 cc (D2cc below about 145 Gy for I-125 monotherapy).</li>
+      <li><b>HDR (GEC-ESTRO/ABS):</b> prostate V100 ≥95%; urethra D10 &lt;115–120%; rectum D2cc &lt;75% of the prescription.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-gyn" data-tab="gyn" data-label="Gynae &amp; other sites" hidden>
+  <div class="panel-head">
+    <h2>Gynae and other sites</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Gynae">
+    <h3>Gynae</h3>
+    <ul>
+      <li><b>Cervix:</b> image-guided adaptive brachytherapy with MRI at the time of implant; HR-CTV D90 aims and OAR D2cc limits (EMBRACE II) are on <a href="gyn-cervix.html#brachy">Cervix: Brachytherapy</a> and the <a href="contouring/gynae.html">gynae contouring guide</a>. Interstitial needles for parametrial or distal vaginal extension.</li>
+      <li><b>Endometrium (post-hysterectomy):</b> vaginal vault brachytherapy, e.g. <span class="d">21/3</span> at 0.5 cm or <span class="d">30/5</span> at the surface (PORTEC-2 used 21/3 HDR at 5 mm), treating the upper half of the vagina.</li>
+      <li>Keep overall treatment time for cervix ≤50 days, including brachytherapy.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Breast">
+    <h3>Breast</h3>
+    <ul>
+      <li><b>Multicatheter interstitial APBI</b> (GEC-ESTRO phase III): non-inferior local control to whole-breast RT at long-term follow-up, with good cosmesis. HDR schedules such as <span class="d">32/8</span> or <span class="d">30.3/7</span> twice daily; NSABP B-39 used <span class="d">34/10</span> twice daily.</li>
+      <li>Single-entry balloon and strut devices are an alternative where available.</li>
+      <li>Selection follows ASTRO/GEC-ESTRO low-risk criteria (<a href="breast-early.html#pbi">Partial breast</a>).</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Other sites">
+    <h3>Other sites</h3>
+    <ul>
+      <li><b>Skin:</b> surface moulds or flaps for curved sites (nose, ear, scalp) where electrons fit poorly.</li>
+      <li><b>Oesophagus and bronchus:</b> intraluminal HDR for palliation of dysphagia or haemoptysis (e.g. single 12–16 Gy oesophageal fraction), not routinely as a boost.</li>
+      <li><b>Uveal melanoma:</b> I-125 or Ru-106 plaques (COMS: survival equal to enucleation for medium tumours) (<a href="cns-general.html">Uveal melanoma</a>).</li>
+      <li><b>Keloid:</b> post-excision HDR or electrons within 24–48 h of surgery (<a href="benign.html">Benign</a>).</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-source" data-tab="source" data-label="Sources" hidden>
+  <div class="panel-head">
+    <h2>Sources</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="Further reading">
+    <h3>Further reading</h3>
+    <ul>
+      <li>Tang C, Farooqi A (eds). <i>Pocket Radiation Oncology</i>, 2nd ed. Wolters Kluwer, 2025: Brachytherapy chapter.</li>
+      <li>Morris WJ et al. ASCENDE-RT. IJROBP 2017.</li>
+      <li>Strnad V et al. GEC-ESTRO APBI trial. Lancet 2016 and 2023 update.</li>
+      <li>Nath R et al. AAPM TG-137 (prostate seed dosimetry). Med Phys 2009. Yamada Y et al. ABS HDR prostate consensus. Brachytherapy 2012.</li>
+      <li>Pötter R et al. EMBRACE II. Clin Transl Radiat Oncol 2018.</li>
+    </ul>
+  </article>
+</section>

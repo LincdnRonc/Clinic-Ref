@@ -321,6 +321,17 @@ PALL = [
  ('pall-bone-spine.html','Bone, cord & spine SBRT','Bone metastases, cord compression and spine SBRT','8/1 vs multiple fractions, SC.24, MSCC (NOMS, SINS, SCORAD), HyTEC cord limits, VCF.'),
  ('pall-oligo.html','Oligomets & palliation','Oligometastases and general palliation','SABR-COMET, CURB, NRG-LU002; palliative regimens for lung, SVC, H&N, bleeding, liver and coeliac plexus.'),
 ]
+PRIN = [
+ ('prin-radiobiology.html','Radiobiology','Radiobiology','5 Rs, LQ model and α/β, normal tissue effects, hypoxia, radiation protection, pregnancy and fertility.'),
+ ('prin-physics.html','Physics','Radiation physics','Photon and electron beams, ICRU volumes and reporting, PTV margins, implanted cardiac devices.'),
+ ('prin-imaging.html','Imaging & IGRT','Imaging and IGRT','CT numbers and windows, MRI sequences, PET tracers, image guidance and adaptation.'),
+ ('prin-brachy.html','Brachytherapy','Brachytherapy','Dose rates, isotopes, prostate LDR and HDR doses and metrics, gynae, breast and other sites.'),
+ ('prin-techniques.html','Protons & MRgRT','Protons and MR-guided RT','Bragg peak, range uncertainty, indications and access; MR-guided adaptive RT and its evidence.'),
+ ('prin-emergencies.html','Emergencies','Emergencies','Cord compression, SVC obstruction, airway compromise, bleeding, raised ICP and leptomeningeal disease.'),
+ ('prin-setup.html','Simulation & set-up','Simulation and set-up','Pre-simulation checklist, set-up and preparation by site, landmarks and motion management.'),
+ ('prin-stats.html','Statistics & trials','Statistics and trial design','Error and power, hazard ratios and NNT, non-inferiority, bias, test choice, levels of evidence.'),
+]
+FOOT_PRIN = '<footer><p>Principles pages written in our own words for this site, informed by Tang and Farooqi, Pocket Radiation Oncology, 2nd ed. (Wolters Kluwer, 2025) and the other sources listed on each page. Items flagged Verify are teaching values to confirm against a primary source before relying on them clinically.</p></footer>'
 MRL = [
  ('mrl-images.html','Sequences & signal','MR-linac sequences and signal','T2 nav vs 3D Vane, what shade each organ is (biliary tree, stomach, duodenum, vessels), pitfalls and artefacts.'),
  ('mrl-liver-gi.html','Liver & upper GI','MR-linac liver and upper GI','Liver lesion appearance by type, Couinaud orientation for liver SABR, duodenum D1–D4, stomach, bowel and pancreas.'),
@@ -365,6 +376,7 @@ GROUPS = [
  ('pall','Palliative','Palliative & oligometastases',PALL,mkfoot('Brain Mets/Palliative/Oligo/Immuno','NCCN, ASTRO, ASCO')),
  ('sys','Systemic therapy','Systemic therapy & supportive drugs',SYS,FOOT_SYS),
  ('rert','Reirradiation','Reirradiation',RERT,FOOT_RERT),
+ ('prin','Principles','Principles & techniques',PRIN,FOOT_PRIN),
  ('mrl','MR-linac','MR-linac',MRL,FOOT_MRL),
  ('exam','Exam summary','Phase 2 exam summary',EXAM,FOOT_EXAM),
 ] + EXTRA
@@ -558,7 +570,7 @@ def _cards(body):
 def _gather(pick):
     out = []
     for i,(gid,gname,head,pages,_) in enumerate(GROUPS):
-        if gid in ('exam','mrl','sys','rert'): continue
+        if gid in ('exam','mrl','sys','rert','prin'): continue
         parts = []
         for g in pages:
             f, short, long = g[0], g[1], g[2]

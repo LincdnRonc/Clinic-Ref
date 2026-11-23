@@ -1,0 +1,164 @@
+<section class="panel" id="p-photons" data-tab="photons" data-label="Photons">
+  <div class="panel-head">
+    <h2>Photon beams</h2>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Interactions">
+    <h3>How photons interact with tissue</h3>
+    <div class="tw wide"><table>
+      <tr><th>Interaction</th><th>Dominant range</th><th>Depends on</th><th>Why it matters</th></tr>
+      <tr><td>Photoelectric</td><td>kV (diagnostic)</td><td>≈Z³ / E³</td><td>Bone–soft tissue contrast on kV imaging; high-Z contrast and implants</td></tr>
+      <tr><td>Compton</td><td>MV therapy beams</td><td>Electron density, not Z</td><td>Dose in tissue tracks density (CT number → electron density); poor contrast on MV portal images</td></tr>
+      <tr><td>Pair production</td><td>&gt;1.02 MeV, important &gt;10 MV</td><td>≈Z²</td><td>Minor at 6 MV</td></tr>
+    </table></div>
+    <p>High-energy beams (&gt;10 MV) also produce photoneutrons: avoid them for patients with cardiac devices and in pregnancy.</p>
+  </article>
+
+  <article class="card" data-title="Depth dose">
+    <h3>Depth dose: working figures <span class="flag caution">Verify</span></h3>
+    <div class="tw wide"><table>
+      <tr><th>Beam</th><th>d<sub>max</sub></th><th>PDD at 10 cm (10×10, SSD 100)</th><th>Attenuation beyond d<sub>max</sub></th></tr>
+      <tr><td>Co-60</td><td>0.5 cm</td><td>≈56%</td><td>≈4%/cm</td></tr>
+      <tr><td>6 MV</td><td>1.5 cm</td><td>≈67%</td><td>≈3–3.5%/cm</td></tr>
+      <tr><td>10 MV</td><td>2.5 cm</td><td>≈73%</td><td>≈2.5%/cm</td></tr>
+      <tr><td>18 MV</td><td>3.0–3.5 cm</td><td>≈79–80%</td><td>≈2%/cm</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Build-up region:</b> skin sparing increases with energy; it is lost with bolus, oblique incidence and immobilisation masks.</li>
+      <li><b>Lung:</b> low density widens the penumbra and reduces build-up at the tumour edge; prefer 6 MV for small lung targets and use a type B (or Monte Carlo) algorithm.</li>
+      <li><b>Inverse square law:</b> dose ∝ 1/distance². Moving from 100 to 110 cm reduces dose by about 17%.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="MU calculation">
+    <h3>Hand monitor unit check</h3>
+    <ul>
+      <li><b>Isocentric (SAD):</b> MU = Dose ÷ (output × S<sub>c</sub> × S<sub>p</sub> × TMR × inverse-square factor × other factors, e.g. wedge or tray).</li>
+      <li><b>Fixed SSD:</b> MU = Dose ÷ (output × S<sub>c</sub> × S<sub>p</sub> × PDD/100 × other factors). If SSD ≠ 100 cm, correct PDD with the Mayneord F factor.</li>
+      <li><b>Equivalent square</b> of a rectangle ≈ 4 × area ÷ perimeter.</li>
+      <li>Independent MU checks for IMRT/VMAT use secondary dose-calculation software; a hand calculation is still useful for simple palliative fields.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Techniques">
+    <h3>Treatment techniques</h3>
+    <ul>
+      <li><b>3D conformal:</b> shaped static fields. Still fine for many palliative and whole-breast cases.</li>
+      <li><b>IMRT / VMAT:</b> inverse-planned modulated fluence; more conformal, more low-dose spread and more MU. VMAT is faster.</li>
+      <li><b>SRS / SABR:</b> very high dose per fraction, steep fall-off, small margins; requires high-precision immobilisation and image guidance. Prescription and reporting: ICRU 91.</li>
+      <li><b>Field-in-field:</b> forward-planned segments to improve homogeneity (e.g. breast tangents).</li>
+      <li><b>Large-field:</b> TBI (extended distance, lung blocks or compensators, low dose rate) and total skin electron therapy.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-electrons" data-tab="electrons" data-label="Electrons" hidden>
+  <div class="panel-head">
+    <h2>Electron beams</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Electron rules of thumb">
+    <h3>Rules of thumb (E in MeV)</h3>
+    <ul>
+      <li>Depth of 80% dose ≈ E/3 cm; 90% dose ≈ E/3.2 cm; practical range ≈ E/2 cm.</li>
+      <li>Surface dose rises with energy (≈75–80% at 6 MeV, ≈90% or more at higher energies): add bolus if the skin surface must receive full dose at low energy.</li>
+      <li>Lead thickness to stop the beam (mm) ≈ E/2 (add about 20% for Cerrobend). Internal shields (lip, eyelid) need a low-Z coating to absorb backscatter.</li>
+      <li>Isodose lines bulge out at depth for low isodoses and constrict for high isodoses: margins at depth are larger than they look on the surface. Allow ≈1 cm beyond the target at the surface for the 90% line, more for small fields.</li>
+      <li>Heterogeneities change range: air cavities and lung extend it, bone shortens it.</li>
+      <li>Avoid gaps and overlaps between abutting electron fields at the surface; feather the junction.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Electron uses">
+    <h3>Common uses</h3>
+    <ul>
+      <li>Skin cancer, scar and chest-wall boosts, tumour-bed boost in breast, superficial nodes (posterior neck in older techniques), total skin electron therapy for mycosis fungoides.</li>
+      <li>Orthovoltage (kV) photons are an alternative for superficial skin lesions: no build-up (maximum at surface), but higher dose to bone (photoelectric).</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-icru" data-tab="icru" data-label="Volumes &amp; reporting" hidden>
+  <div class="panel-head">
+    <h2>Target volumes and dose reporting</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="ICRU volumes">
+    <h3>ICRU volumes (50, 62, 83)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>Meaning</th></tr>
+      <tr><td>GTV</td><td>Visible or palpable disease</td></tr>
+      <tr><td>CTV</td><td>GTV plus subclinical spread, or an elective region at risk</td></tr>
+      <tr><td>ITV</td><td>CTV plus internal motion and shape change (4DCT, multiple scans)</td></tr>
+      <tr><td>PTV</td><td>Geometric margin for set-up and residual motion uncertainty; dose is reported to it</td></tr>
+      <tr><td>PRV</td><td>OAR plus a margin, for serial organs near steep gradients (cord, optic chiasm)</td></tr>
+      <tr><td>TV / IV</td><td>Treated volume (enclosed by the prescription isodose) and irradiated volume (significant dose)</td></tr>
+    </table></div>
+  </article>
+  <article class="card" data-title="Margin recipe">
+    <h3>PTV margin recipe</h3>
+    <ul>
+      <li><b>van Herk:</b> PTV margin ≈ 2.5Σ + 0.7σ, where Σ is the systematic and σ the random error (SD). This gives at least 95% of the prescription to the CTV in 90% of patients.</li>
+      <li>Systematic errors matter about three times more than random ones: fix them first (simulation, delineation, set-up procedures).</li>
+      <li>Delineation variation is a systematic error that daily imaging cannot correct.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Reporting">
+    <h3>Dose reporting (ICRU 83 and 91)</h3>
+    <ul>
+      <li>IMRT: report D<sub>50%</sub> (median), D<sub>98%</sub> (near-minimum) and D<sub>2%</sub> (near-maximum) to the PTV, not a point dose.</li>
+      <li>Conventional aims: D<sub>95%</sub> ≥95% and D<sub>2%</sub> ≤107% of prescription.</li>
+      <li>SABR (ICRU 91): prescribe to an isodose covering the PTV (often 60–90% of the maximum); report D<sub>near-max</sub> as D<sub>2%</sub> or, for small volumes, D<sub>0.035cc</sub>; report conformity (e.g. Paddick CI) and gradient indices.</li>
+      <li>Homogeneity index = (D<sub>2%</sub> − D<sub>98%</sub>) / D<sub>50%</sub>.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-safety" data-tab="safety" data-label="Safety &amp; devices" hidden>
+  <div class="panel-head">
+    <h2>Safety and implanted devices</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Cardiac devices">
+    <h3>Pacemakers and defibrillators (CIEDs) <span class="flag caution">Verify</span></h3>
+    <ul>
+      <li>Follow the local CIED policy (based on AAPM TG-203). Risk is graded by cumulative device dose, beam energy and whether the patient is pacing-dependent.</li>
+      <li>Typical thresholds: device dose &lt;2 Gy low risk; 2–5 Gy medium; &gt;5 Gy or pacing-dependent high risk, needing cardiology input and monitoring.</li>
+      <li>Avoid beams &gt;10 MV (neutrons cause resets). Never place the device in the primary beam if it can be avoided.</li>
+      <li>Check the device before the course and after it (and weekly for high risk), and have a defibrillator and staff trained available.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Other implants">
+    <h3>Other implants and hardware</h3>
+    <ul>
+      <li>Metal (hip prostheses, spinal hardware, dental work) causes CT artefact and dose perturbation: avoid beams through prostheses, override artefact densities, consider MVCT or dual-energy CT.</li>
+      <li>Breast expanders with a metallic port: check the port position and dose effect with physics.</li>
+      <li>Insulin pumps, neurostimulators and cochlear implants: remove or keep out of field where possible; follow manufacturer advice.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Shielding">
+    <h3>Bunker shielding (concepts)</h3>
+    <ul>
+      <li>Primary barriers face the beam; secondary barriers handle scatter and leakage.</li>
+      <li>Workload (W), use factor (U) and occupancy factor (T) set the barrier thickness, expressed in tenth-value layers.</li>
+      <li>Above about 10 MV the maze and door must also deal with neutrons (polyethylene, borated materials).</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-source" data-tab="source" data-label="Sources" hidden>
+  <div class="panel-head">
+    <h2>Sources</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="Further reading">
+    <h3>Further reading</h3>
+    <ul>
+      <li>Tang C, Farooqi A (eds). <i>Pocket Radiation Oncology</i>, 2nd ed. Wolters Kluwer, 2025: Radiation Physics chapter.</li>
+      <li>Khan FM, Gibbons JP. <i>Khan's The Physics of Radiation Therapy</i>, 6th ed. 2019.</li>
+      <li>ICRU Reports 50, 62, 83 (IMRT) and 91 (stereotactic small fields).</li>
+      <li>van Herk M et al. The probability of correct target dosage. IJROBP 2000.</li>
+      <li>Miften M et al. AAPM TG-203: management of radiotherapy patients with implanted cardiac pacemakers and defibrillators. Med Phys 2019.</li>
+    </ul>
+  </article>
+</section>

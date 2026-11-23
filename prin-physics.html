@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-site="prin">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radiation physics Quick Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/extras.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#10243f">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> › <a href="index.html#prin">Principles</a> › <span>Radiation physics</span></nav>
+    <div class="title-row">
+      <h1>Radiation physics</h1>
+      <div class="hdr-right" style="display:flex;align-items:center;gap:10px;align-self:center;flex-shrink:0"><nav class="applinks" aria-label="Quick launch" style="display:flex;gap:6px"><a href="https://keep.google.com/" target="_blank" rel="noopener" title="Google Keep" aria-label="Google Keep" class="al" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#5b6675;font-size:10px;line-height:1"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" style="width:30px;height:30px;flex:none;border-radius:8px;padding:3px;box-sizing:border-box;background:#f4b400"><path d="M12 4.5a5 5 0 0 0-3 9v1.8h6v-1.8a5 5 0 0 0-3-9z" fill="#fff"/><rect x="9.6" y="16.4" width="4.8" height="2.2" rx=".8" fill="#fff"/></svg><span>Keep</span></a><a href="https://tasks.google.com/" target="_blank" rel="noopener" title="Google Tasks" aria-label="Google Tasks" class="al" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#5b6675;font-size:10px;line-height:1"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" style="width:30px;height:30px;flex:none;border-radius:8px;padding:3px;box-sizing:border-box;background:#2f6fde"><path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tasks</span></a><a href="https://anywhere.genesiscare.com.au/" target="_blank" rel="noopener" title="GenesisCare Anywhere (remote access)" aria-label="GenesisCare Anywhere (remote access)" class="al" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#5b6675;font-size:10px;line-height:1"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" style="width:30px;height:30px;flex:none;border-radius:8px;padding:3px;box-sizing:border-box;background:linear-gradient(135deg,#00a86b,#007a4d)"><rect x="4" y="5.5" width="16" height="10.5" rx="1.6" fill="none" stroke="#fff" stroke-width="2"/><path d="M9 19h6M12 16v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M9.3 11.6l2.1-2.1 1.5 1.5 2.1-2.1" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Genesis</span></a><!--MEETING_LINK--></nav><div class="meta">v11.14</div></div>
+    </div>
+    <form class="search" role="search" id="searchForm">
+      <label for="q" class="note" style="position:absolute;left:-9999px">Search this page</label>
+      <input id="q" type="search" placeholder="Search this page: trial, dose, drug" autocomplete="off">
+      <button type="button" id="clear">Clear</button>
+    </form>
+    <nav class="chips" role="tablist" aria-label="Sections" id="chips"></nav>
+  </div>
+</header>
+<div class="layout">
+<aside class="side"><details class="menu"><summary><span class="burger" aria-hidden="true"></span>All pages</summary><nav class="tree" aria-label="All pages"><a class="home" href="index.html">Home</a><a class="home" href="index.html#search">Search all pages</a><details data-site="breast"><summary>Breast</summary><a href="breast-early.html">DCIS &amp; early breast</a><a href="breast-nodes-pmrt.html">Nodes &amp; PMRT</a><a href="breast-planning.html">Breast planning &amp; consent</a></details><details data-site="cns"><summary>CNS &amp; Paediatrics</summary><a href="cns-glioma.html">Glioma</a><a href="cns-benign.html">Benign &amp; functional</a><a href="cns-vs.html">Vestibular schwannoma</a><a href="cns-general.html">Eye &amp; tolerances</a><a href="peds-cns.html">Paediatric CNS</a><a href="peds-solid.html">Paediatric solid tumours</a><a href="peds-late.html">Paediatric late effects</a></details><details data-site="gi"><summary>Gastrointestinal</summary><a href="gi-oesophagus-gastric.html">Oesophagus &amp; gastric</a><a href="gi-pancreas.html">Pancreas</a><a href="gi-hepatobiliary.html">Liver &amp; biliary</a><a href="gi-rectum-colon.html">Rectum &amp; colon</a><a href="gi-anal.html">Anal</a><a href="gi-general.html">General GI</a></details><details data-site="gu"><summary>Genitourinary</summary><a href="gu-prostate.html">Prostate</a><a href="gu-bladder.html">Bladder</a><a href="gu-kidney.html">Kidney</a><a href="gu-testis.html">Testis</a><a href="gu-other.html">UTUC, urethra &amp; penile</a></details><details data-site="gyn"><summary>Gynaecological</summary><a href="gyn-cervix.html">Cervix</a><a href="gyn-endometrial.html">Endometrial</a><a href="gyn-vulva-vagina.html">Vulva &amp; vagina</a><a href="gyn-general.html">General gynae</a></details><details data-site="heme"><summary>Haematology</summary><a href="heme-hodgkin.html">Hodgkin</a><a href="heme-nhl.html">Non-Hodgkin</a><a href="heme-other.html">Myeloma, TBI &amp; skin</a></details><details data-site="hn"><summary>Head and neck &amp; Skin</summary><a href="hn-general.html">H&amp;N general</a><a href="hn-oropharynx.html">Oropharynx</a><a href="hn-larynx.html">Larynx &amp; hypopharynx</a><a href="hn-oral-salivary.html">Oral cavity &amp; salivary</a><a href="hn-npc-sinonasal.html">Nasopharynx &amp; sinonasal</a><a href="hn-thyroid-cup.html">Thyroid &amp; unknown primary</a><a href="skin.html">Skin</a></details><details data-site="sarcoma"><summary>Sarcoma</summary><a href="sarcoma-sts.html">Soft tissue &amp; bone sarcoma</a><a href="benign.html">Benign MSK</a></details><details data-site="thorax"><summary>Thorax</summary><a href="thorax-early.html">Early NSCLC (SABR)</a><a href="thorax-stage3.html">Stage III NSCLC</a><a href="thorax-metastatic.html">Metastatic NSCLC</a><a href="thorax-sclc.html">Small cell</a><a href="thorax-other.html">Thymic, meso &amp; other</a></details><details data-site="pall"><summary>Palliative &amp; oligometastases</summary><a href="pall-brain.html">Brain metastases</a><a href="pall-wbrt.html">WBRT principles</a><a href="pall-bone-spine.html">Bone, cord &amp; spine SBRT</a><a href="pall-oligo.html">Oligomets &amp; palliation</a></details><details data-site="sys"><summary>Systemic therapy &amp; supportive drugs</summary><a href="sys-chemort.html">Concurrent chemo-RT</a><a href="sys-timing.html">Targeted &amp; immunotherapy</a><a href="sys-breast-endocrine.html">Breast endocrine</a><a href="sys-prostate-adt.html">Prostate ADT</a><a href="sys-bone.html">Bone agents</a><a href="sys-supportive.html">Supportive drugs</a></details><details data-site="rert"><summary>Reirradiation</summary><a href="rert-principles.html">Principles &amp; workflow</a><a href="rert-constraints.html">Limits &amp; calculators</a><a href="rert-cns.html">CNS, spine &amp; bone</a><a href="rert-hn.html">Head &amp; neck</a><a href="rert-thorax-breast.html">Thorax &amp; breast</a><a href="rert-pelvis.html">Abdomen &amp; pelvis</a></details><details data-site="prin" open><summary>Principles &amp; techniques</summary><a href="prin-radiobiology.html">Radiobiology</a><a href="prin-physics.html" aria-current="page">Physics</a><a href="prin-imaging.html">Imaging &amp; IGRT</a><a href="prin-brachy.html">Brachytherapy</a><a href="prin-techniques.html">Protons &amp; MRgRT</a><a href="prin-emergencies.html">Emergencies</a><a href="prin-setup.html">Simulation &amp; set-up</a><a href="prin-stats.html">Statistics &amp; trials</a></details><details data-site="mrl"><summary>MR-linac</summary><a href="mrl-images.html">Sequences &amp; signal</a><a href="mrl-liver-gi.html">Liver &amp; upper GI</a><a href="mrl-tumour-nodes.html">Tumours &amp; nodes</a><a href="mrl-pelvis.html">Pelvis</a><a href="mrl-workflow.html">Adaptive workflow</a></details><details data-site="exam"><summary>Phase 2 exam summary</summary><a href="exam-overview.html">Epi &amp; memory aids</a><a href="exam-breast.html">Breast</a><a href="exam-cns.html">CNS</a><a href="exam-peds.html">Paediatrics</a><a href="exam-ugi.html">Upper GI</a><a href="exam-lgi.html">Lower GI</a><a href="exam-gu.html">Bladder, kidney, testis, penis</a><a href="exam-prostate.html">Prostate</a><a href="exam-gyn.html">Gynae</a><a href="exam-heme.html">Haematology</a><a href="exam-hn.html">Head and neck</a><a href="exam-skin.html">Skin</a><a href="exam-endocrine-benign.html">Endocrine &amp; benign</a><a href="exam-sarcoma.html">Sarcoma</a><a href="exam-thorax.html">Thorax</a><a href="exam-pall.html">Palliative</a><a href="exam-clinonc.html">Clinical oncology</a><a href="exam-viva.html">Viva templates</a></details><details data-site="contouring"><summary>Contouring</summary><a href="ctr-library.html">Guideline PDFs</a><a href="contouring/anal.html">Anal canal</a><a href="contouring/biliary.html">Biliary</a><a href="contouring/bladder.html">Bladder</a><a href="contouring/brain-mets.html">Brain metastases</a><a href="contouring/breast.html">Breast</a><a href="contouring/gynae.html">Gynae</a><a href="contouring/head-neck.html">Head &amp; neck</a><a href="ctr-kidney-liver.html">Kidney SABR</a><a href="contouring/liver-sbrt.html">Liver SBRT OARs</a><a href="contouring/lymphoma.html">Lymphoma ISRT</a><a href="contouring/oesophagus.html">Oesophagus &amp; GOJ</a><a href="ctr-peds.html">Paeds</a><a href="contouring/pancreas-stomach.html">Pancreas &amp; stomach</a><a href="contouring/cns.html">Primary CNS</a><a href="contouring/prostate.html">Prostate</a><a href="contouring/rectal-long-course.html">Rectum</a><a href="ctr-sarcoma.html">Sarcoma</a><a href="ctr-skin.html">Skin</a><a href="contouring/spine-bone.html">Spine &amp; bone SBRT</a><a href="contouring/thorax.html">Thorax</a><a href="contouring/wbrt.html">Whole brain (VMAT)</a><a href="ctr-mim.html">MIM shortcuts</a><a href="ctr-monaco.html">Monaco shortcuts</a></details><details data-site="tools"><summary>Tools</summary><a href="mdt.html">MDT decision matrix</a><a href="links.html">Clinic links</a><a href="contacts.html">Contacts</a><a href="tools.html">Calculators</a><a href="scores.html">Clinical scores</a><a href="doses.html">Doses at a glance</a><a href="whats-new.html">What&#x27;s new</a></details></nav></details></aside>
+<main id="main">
+
+<div class="empty" id="empty">No cards match. Try a shorter term such as a trial name, a dose (50/25) or a drug.</div>
+<section class="panel" id="p-photons" data-tab="photons" data-label="Photons">
+  <div class="panel-head">
+    <h2>Photon beams</h2>
+    <div class="jump"></div>
+  </div>
+
+  <article class="card key" data-title="Interactions">
+    <h3>How photons interact with tissue</h3>
+    <div class="tw wide"><table>
+      <tr><th>Interaction</th><th>Dominant range</th><th>Depends on</th><th>Why it matters</th></tr>
+      <tr><td>Photoelectric</td><td>kV (diagnostic)</td><td>≈Z³ / E³</td><td>Bone–soft tissue contrast on kV imaging; high-Z contrast and implants</td></tr>
+      <tr><td>Compton</td><td>MV therapy beams</td><td>Electron density, not Z</td><td>Dose in tissue tracks density (CT number → electron density); poor contrast on MV portal images</td></tr>
+      <tr><td>Pair production</td><td>&gt;1.02 MeV, important &gt;10 MV</td><td>≈Z²</td><td>Minor at 6 MV</td></tr>
+    </table></div>
+    <p>High-energy beams (&gt;10 MV) also produce photoneutrons: avoid them for patients with cardiac devices and in pregnancy.</p>
+  </article>
+
+  <article class="card" data-title="Depth dose">
+    <h3>Depth dose: working figures <span class="flag caution">Verify</span></h3>
+    <div class="tw wide"><table>
+      <tr><th>Beam</th><th>d<sub>max</sub></th><th>PDD at 10 cm (10×10, SSD 100)</th><th>Attenuation beyond d<sub>max</sub></th></tr>
+      <tr><td>Co-60</td><td>0.5 cm</td><td>≈56%</td><td>≈4%/cm</td></tr>
+      <tr><td>6 MV</td><td>1.5 cm</td><td>≈67%</td><td>≈3–3.5%/cm</td></tr>
+      <tr><td>10 MV</td><td>2.5 cm</td><td>≈73%</td><td>≈2.5%/cm</td></tr>
+      <tr><td>18 MV</td><td>3.0–3.5 cm</td><td>≈79–80%</td><td>≈2%/cm</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Build-up region:</b> skin sparing increases with energy; it is lost with bolus, oblique incidence and immobilisation masks.</li>
+      <li><b>Lung:</b> low density widens the penumbra and reduces build-up at the tumour edge; prefer 6 MV for small lung targets and use a type B (or Monte Carlo) algorithm.</li>
+      <li><b>Inverse square law:</b> dose ∝ 1/distance². Moving from 100 to 110 cm reduces dose by about 17%.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="MU calculation">
+    <h3>Hand monitor unit check</h3>
+    <ul>
+      <li><b>Isocentric (SAD):</b> MU = Dose ÷ (output × S<sub>c</sub> × S<sub>p</sub> × TMR × inverse-square factor × other factors, e.g. wedge or tray).</li>
+      <li><b>Fixed SSD:</b> MU = Dose ÷ (output × S<sub>c</sub> × S<sub>p</sub> × PDD/100 × other factors). If SSD ≠ 100 cm, correct PDD with the Mayneord F factor.</li>
+      <li><b>Equivalent square</b> of a rectangle ≈ 4 × area ÷ perimeter.</li>
+      <li>Independent MU checks for IMRT/VMAT use secondary dose-calculation software; a hand calculation is still useful for simple palliative fields.</li>
+    </ul>
+  </article>
+
+  <article class="card" data-title="Techniques">
+    <h3>Treatment techniques</h3>
+    <ul>
+      <li><b>3D conformal:</b> shaped static fields. Still fine for many palliative and whole-breast cases.</li>
+      <li><b>IMRT / VMAT:</b> inverse-planned modulated fluence; more conformal, more low-dose spread and more MU. VMAT is faster.</li>
+      <li><b>SRS / SABR:</b> very high dose per fraction, steep fall-off, small margins; requires high-precision immobilisation and image guidance. Prescription and reporting: ICRU 91.</li>
+      <li><b>Field-in-field:</b> forward-planned segments to improve homogeneity (e.g. breast tangents).</li>
+      <li><b>Large-field:</b> TBI (extended distance, lung blocks or compensators, low dose rate) and total skin electron therapy.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-electrons" data-tab="electrons" data-label="Electrons" hidden>
+  <div class="panel-head">
+    <h2>Electron beams</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Electron rules of thumb">
+    <h3>Rules of thumb (E in MeV)</h3>
+    <ul>
+      <li>Depth of 80% dose ≈ E/3 cm; 90% dose ≈ E/3.2 cm; practical range ≈ E/2 cm.</li>
+      <li>Surface dose rises with energy (≈75–80% at 6 MeV, ≈90% or more at higher energies): add bolus if the skin surface must receive full dose at low energy.</li>
+      <li>Lead thickness to stop the beam (mm) ≈ E/2 (add about 20% for Cerrobend). Internal shields (lip, eyelid) need a low-Z coating to absorb backscatter.</li>
+      <li>Isodose lines bulge out at depth for low isodoses and constrict for high isodoses: margins at depth are larger than they look on the surface. Allow ≈1 cm beyond the target at the surface for the 90% line, more for small fields.</li>
+      <li>Heterogeneities change range: air cavities and lung extend it, bone shortens it.</li>
+      <li>Avoid gaps and overlaps between abutting electron fields at the surface; feather the junction.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Electron uses">
+    <h3>Common uses</h3>
+    <ul>
+      <li>Skin cancer, scar and chest-wall boosts, tumour-bed boost in breast, superficial nodes (posterior neck in older techniques), total skin electron therapy for mycosis fungoides.</li>
+      <li>Orthovoltage (kV) photons are an alternative for superficial skin lesions: no build-up (maximum at surface), but higher dose to bone (photoelectric).</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-icru" data-tab="icru" data-label="Volumes &amp; reporting" hidden>
+  <div class="panel-head">
+    <h2>Target volumes and dose reporting</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="ICRU volumes">
+    <h3>ICRU volumes (50, 62, 83)</h3>
+    <div class="tw wide"><table>
+      <tr><th>Volume</th><th>Meaning</th></tr>
+      <tr><td>GTV</td><td>Visible or palpable disease</td></tr>
+      <tr><td>CTV</td><td>GTV plus subclinical spread, or an elective region at risk</td></tr>
+      <tr><td>ITV</td><td>CTV plus internal motion and shape change (4DCT, multiple scans)</td></tr>
+      <tr><td>PTV</td><td>Geometric margin for set-up and residual motion uncertainty; dose is reported to it</td></tr>
+      <tr><td>PRV</td><td>OAR plus a margin, for serial organs near steep gradients (cord, optic chiasm)</td></tr>
+      <tr><td>TV / IV</td><td>Treated volume (enclosed by the prescription isodose) and irradiated volume (significant dose)</td></tr>
+    </table></div>
+  </article>
+  <article class="card" data-title="Margin recipe">
+    <h3>PTV margin recipe</h3>
+    <ul>
+      <li><b>van Herk:</b> PTV margin ≈ 2.5Σ + 0.7σ, where Σ is the systematic and σ the random error (SD). This gives at least 95% of the prescription to the CTV in 90% of patients.</li>
+      <li>Systematic errors matter about three times more than random ones: fix them first (simulation, delineation, set-up procedures).</li>
+      <li>Delineation variation is a systematic error that daily imaging cannot correct.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Reporting">
+    <h3>Dose reporting (ICRU 83 and 91)</h3>
+    <ul>
+      <li>IMRT: report D<sub>50%</sub> (median), D<sub>98%</sub> (near-minimum) and D<sub>2%</sub> (near-maximum) to the PTV, not a point dose.</li>
+      <li>Conventional aims: D<sub>95%</sub> ≥95% and D<sub>2%</sub> ≤107% of prescription.</li>
+      <li>SABR (ICRU 91): prescribe to an isodose covering the PTV (often 60–90% of the maximum); report D<sub>near-max</sub> as D<sub>2%</sub> or, for small volumes, D<sub>0.035cc</sub>; report conformity (e.g. Paddick CI) and gradient indices.</li>
+      <li>Homogeneity index = (D<sub>2%</sub> − D<sub>98%</sub>) / D<sub>50%</sub>.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-safety" data-tab="safety" data-label="Safety &amp; devices" hidden>
+  <div class="panel-head">
+    <h2>Safety and implanted devices</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card key" data-title="Cardiac devices">
+    <h3>Pacemakers and defibrillators (CIEDs) <span class="flag caution">Verify</span></h3>
+    <ul>
+      <li>Follow the local CIED policy (based on AAPM TG-203). Risk is graded by cumulative device dose, beam energy and whether the patient is pacing-dependent.</li>
+      <li>Typical thresholds: device dose &lt;2 Gy low risk; 2–5 Gy medium; &gt;5 Gy or pacing-dependent high risk, needing cardiology input and monitoring.</li>
+      <li>Avoid beams &gt;10 MV (neutrons cause resets). Never place the device in the primary beam if it can be avoided.</li>
+      <li>Check the device before the course and after it (and weekly for high risk), and have a defibrillator and staff trained available.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Other implants">
+    <h3>Other implants and hardware</h3>
+    <ul>
+      <li>Metal (hip prostheses, spinal hardware, dental work) causes CT artefact and dose perturbation: avoid beams through prostheses, override artefact densities, consider MVCT or dual-energy CT.</li>
+      <li>Breast expanders with a metallic port: check the port position and dose effect with physics.</li>
+      <li>Insulin pumps, neurostimulators and cochlear implants: remove or keep out of field where possible; follow manufacturer advice.</li>
+    </ul>
+  </article>
+  <article class="card" data-title="Shielding">
+    <h3>Bunker shielding (concepts)</h3>
+    <ul>
+      <li>Primary barriers face the beam; secondary barriers handle scatter and leakage.</li>
+      <li>Workload (W), use factor (U) and occupancy factor (T) set the barrier thickness, expressed in tenth-value layers.</li>
+      <li>Above about 10 MV the maze and door must also deal with neutrons (polyethylene, borated materials).</li>
+    </ul>
+  </article>
+</section>
+
+<section class="panel" id="p-source" data-tab="source" data-label="Sources" hidden>
+  <div class="panel-head">
+    <h2>Sources</h2>
+    <div class="jump"></div>
+  </div>
+  <article class="card" data-title="Further reading">
+    <h3>Further reading</h3>
+    <ul>
+      <li>Tang C, Farooqi A (eds). <i>Pocket Radiation Oncology</i>, 2nd ed. Wolters Kluwer, 2025: Radiation Physics chapter.</li>
+      <li>Khan FM, Gibbons JP. <i>Khan's The Physics of Radiation Therapy</i>, 6th ed. 2019.</li>
+      <li>ICRU Reports 50, 62, 83 (IMRT) and 91 (stereotactic small fields).</li>
+      <li>van Herk M et al. The probability of correct target dosage. IJROBP 2000.</li>
+      <li>Miften M et al. AAPM TG-203: management of radiotherapy patients with implanted cardiac pacemakers and defibrillators. Med Phys 2019.</li>
+    </ul>
+  </article>
+</section>
+
+</main>
+</div>
+<footer><p>Principles pages written in our own words for this site, informed by Tang and Farooqi, Pocket Radiation Oncology, 2nd ed. (Wolters Kluwer, 2025) and the other sources listed on each page. Items flagged Verify are teaching values to confirm against a primary source before relying on them clinically.</p></footer>
+<script src="assets/site.js"></script>
+<script src="assets/extras.js"></script>
+<script src="assets/more-tabs.js"></script>
+</body>
+</html>
