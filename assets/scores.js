@@ -94,6 +94,15 @@
     if(a>0&&sz>0){ var s2=Math.min(sz,30), nc=nd==0?0:nd==1?1:nd<=3?2:nd<=9?3:4;
       var c=0.438*nc+0.988*(0.093*s2-0.001*s2*s2+0.375*gr+0.017*a);
       out('o_cts5','CTS5 <b>'+f(c,2)+'</b>: '+(c<3.13?'low':c<=3.86?'intermediate':'high')+' risk of late distant recurrence (years 5–10) (<3.13 low, 3.13–3.86 intermediate, >3.86 high)'); } else out('o_cts5','Enter age, tumour size, grade and number of positive nodes.');
+    // IBTR! 2.0 (Sanghani 2010 hazard ratios; baseline 10-y IBTR-free 0.958, matched to Evidencio)
+    var ia=num('ib_age'), is=num('ib_size');
+    if(ia>0&&is>0){
+      var ahr=ia<=40?2.03:ia<=45?1.47:ia<=50?0.86:ia<=55?1:ia<=60?0.71:ia<=70?0.74:0.53;
+      var shr=is<=1?1.40:is<=2?1:1.07;
+      var hr=ahr*shr*num('ib_grade')*num('ib_margin')*num('ib_lvi')*num('ib_chemo')*num('ib_endo');
+      var wrt=Math.round(1000*(1-Math.pow(0.958,hr)))/10, wo=Math.round(10*wrt/0.3)/10;
+      out('o_ibtr','10-year IBTR <b>with RT '+wrt.toFixed(1)+'%</b>; without RT '+(wo>100?'<b>not meaningful</b> (the ÷0.3 extrapolation exceeds 100%)':'<b>'+wo.toFixed(1)+'%</b> (unvalidated)')+'. Absolute reduction with RT '+(wo>100?'–':(wo-wrt).toFixed(1)+'%')+'.');
+    } else out('o_ibtr','Enter age and tumour size.');
     // ALBI and MELD
     var bil=num('l_bil'), alb=num('l_alb'), inr=num('l_inr'), cr=num('l_cr');
     if(bil>0&&alb>0){ var al=0.66*Math.log10(bil)-0.085*alb; out('o_albi','ALBI <b>'+f(al,2)+'</b>: grade <b>'+(al<=-2.60?1:al<=-1.39?2:3)+'</b> (≤ −2.60 grade 1; > −2.60 to −1.39 grade 2; > −1.39 grade 3)'); } else out('o_albi','Enter bilirubin (µmol/L) and albumin (g/L).');

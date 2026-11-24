@@ -10,6 +10,7 @@ VERSION = '11.20.3'
 VERSION_DATE = '24 Nov 2026'
 
 HISTORY = [
+    ('11.21', '24 Nov 2026', 'IBTR! 2.0 calculator built into Clinical scores, Breast (10-year in-breast recurrence with and without RT); reproduces the Evidencio tool on 33 test cases.'),
     ('11.20.3', '24 Nov 2026', 'T Pro and Heidi sign-in icons added to the quick-launch bar.'),
     ('11.20.2', '23 Nov 2026', 'Clinical scores, Breast: IBTR! 2.0 now links directly to the Evidencio calculators (with and without RT) instead of a web search.'),
     ('11.20.1', '23 Nov 2026', 'Exam summary, Hodgkin: classical HL subtypes laid out as nested lists (features under each subtype).'),
