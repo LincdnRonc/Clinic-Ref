@@ -152,3 +152,61 @@
   window.addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(upd); } },{passive:true});
   upd();
 })();
+
+// Favourite clinic links (links.html): star a link to keep it in a Favourites card at the top of its tab.
+// Stored in this browser only (localStorage), like pins.
+(function(){
+  var lists = document.querySelectorAll('ul.qlinks');
+  if(!lists.length) return;
+  var FK = 'qr-link-favs';
+  function favs(){ try{return JSON.parse(localStorage.getItem(FK)||'[]');}catch(e){return [];} }
+  function saveFavs(f){ try{localStorage.setItem(FK,JSON.stringify(f));}catch(e){} }
+  function sync(){
+    var f = favs();
+    Array.prototype.forEach.call(document.querySelectorAll('.qlinks .fav'), function(b){
+      var on = f.indexOf(b.dataset.href) >= 0;
+      b.textContent = on ? '★' : '☆';
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.setAttribute('aria-label', on ? 'Remove from favourites' : 'Add to favourites');
+      b.title = on ? 'Remove from favourites' : 'Add to favourites';
+    });
+  }
+  // Stars are built into each link by build.py; add an (initially empty) Favourites card to each tab with links
+  var panels = Array.prototype.filter.call(document.querySelectorAll('section.panel'), function(p){ return p.querySelector('ul.qlinks'); });
+  panels.forEach(function(p){
+    var card = document.createElement('article'); card.className='card favcard'; card.hidden=true;
+    card.innerHTML = '<h3>★ Favourites</h3><ul class="qlinks qfav"></ul>';
+    var head = p.querySelector('.panel-head');
+    p.insertBefore(card, head ? head.nextSibling : p.firstChild);
+  });
+  function draw(){
+    var f = favs();
+    panels.forEach(function(p){
+      var card = p.querySelector('.favcard');
+      card.innerHTML = '<h3>★ Favourites</h3><ul class="qlinks qfav"></ul>';
+      var ul = card.querySelector('ul');
+      var seen = {};
+      // keep the order in which links were starred
+      f.forEach(function(h){
+        if(seen[h]) return;
+        var src = p.querySelector('ul.qlinks:not(.qfav) .fav[data-href="'+(window.CSS&&CSS.escape?CSS.escape(h):h.replace(/"/g,'\\"'))+'"]');
+        if(!src) return; seen[h]=1;
+        var li = src.parentNode.cloneNode(true); ul.appendChild(li);
+      });
+      card.hidden = !ul.children.length;
+    });
+    sync();
+  }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest && e.target.closest('.qlinks .fav'); if(!b) return;
+    e.preventDefault();
+    var f = favs(), h = b.dataset.href, i = f.indexOf(h);
+    if(i >= 0) f.splice(i,1); else f.push(h);
+    saveFavs(f); draw();
+  });
+  window.addEventListener('storage', function(e){ if(e.key===FK) draw(); });
+  // The page search restores cards from saved copies; redraw so stars and Favourites stay right
+  var q = document.getElementById('q'); if(q) q.addEventListener('input', function(){ setTimeout(draw,0); });
+  draw();
+})();

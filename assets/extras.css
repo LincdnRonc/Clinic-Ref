@@ -230,3 +230,11 @@ p.note.ctr-cta sub{color:inherit}
 .rclash{display:block;font-size:.78rem;font-weight:400;color:var(--warn)}
 .rmine{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:4px 10px;margin:4px 0}
 .rpick{font-size:.92rem}
+/* Favourite clinic links */
+.qlinks li{position:relative}
+.qlinks li a{padding-right:34px}
+.qlinks .fav{position:absolute;top:4px;right:4px;width:28px;height:28px;border:0;background:none;cursor:pointer;font-size:1.15rem;line-height:1;color:var(--muted);border-radius:6px;padding:0}
+.qlinks .fav:hover,.qlinks .fav:focus-visible{background:var(--accent-soft);color:var(--accent)}
+.qlinks .fav.on{color:#c98a00}
+.favcard{border-color:#e3c46b}
+.favcard h3{color:#8a6100}

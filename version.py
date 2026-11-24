@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.22'
+VERSION = '11.23'
 VERSION_DATE = '25 Nov 2026'
 
 HISTORY = [
+    ('11.23', '25 Nov 2026', 'Clinic links: star (☆) any radiology, pathology or forms link to add it to a Favourites box at the top of its tab; saved in this browser.'),
     ('11.22', '25 Nov 2026', 'New Tools page: My weekly roster (Week A/B sessions with this week\'s MDTs, week navigation, choice of MDTs, full Kinghorn MDT planner).'),
     ('11.21', '24 Nov 2026', 'IBTR! 2.0 calculator built into Clinical scores, Breast (10-year in-breast recurrence with and without RT); reproduces the Evidencio tool on 33 test cases.'),
     ('11.20.3', '24 Nov 2026', 'T Pro and Heidi sign-in icons added to the quick-launch bar.'),
