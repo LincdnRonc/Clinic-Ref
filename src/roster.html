@@ -1,0 +1,80 @@
+<section class="panel" id="p-week" data-tab="week" data-label="This week">
+  <div class="panel-head">
+    <h2>This week</h2>
+  </div>
+  <article class="card key" data-title="Weekly roster with MDTs">
+    <h3>Week view</h3>
+    <div class="rhead">
+      <div id="rosterLabel"></div>
+      <div class="rnav"><button type="button" id="rPrev" aria-label="Previous week">‹</button><button type="button" id="rNow">Today</button><button type="button" id="rNext" aria-label="Next week">›</button></div>
+    </div>
+    <div id="rosterWeek" class="rweek"></div>
+    <p class="note">Shaded rows are MDTs. Week A/B and MDT week are counted from Monday 23 Nov 2026 (Week A, MDT week 3). Monthly MDTs (thyroid, lung nodule, haematology) are set by week of the month on the planner, so check them in five-week months.</p>
+  </article>
+  <article class="card" data-title="My MDTs and week settings">
+    <h3>My MDTs</h3>
+    <div id="rosterMine" class="rmine"></div>
+    <p class="note">Ticked MDTs appear in the week view. Saved on this device only.</p>
+    <h3>If the week is wrong</h3>
+    <div class="rnav"><button type="button" id="rFlipAB">Swap Week A/B</button><button type="button" id="rMdtUp">MDT week +1</button><button type="button" id="rReset">Reset</button></div>
+  </article>
+</section>
+
+<section class="panel" id="p-ab" data-tab="ab" data-label="Week A / B" hidden>
+  <div class="panel-head">
+    <h2>Week A and Week B</h2>
+  </div>
+  <article class="card" data-title="Week A and B sessions">
+    <h3>Sessions</h3>
+    <div class="tw"><table class="xs">
+      <thead><tr><th>Day</th><th>Week A</th><th>Week B</th></tr></thead>
+      <tbody>
+        <tr><td>Mon AM</td><td>ZAP-X / MR-linac</td><td>ZAP-X / MR-linac</td></tr>
+        <tr><td>Mon PM</td><td>ZAP-X / MR-linac</td><td>ZAP-X / MR-linac</td></tr>
+        <tr><td>Tue AM</td><td>MR-linac</td><td>MR-linac</td></tr>
+        <tr><td>Tue PM</td><td><b>SS clinic</b></td><td><b>JdL clinic</b></td></tr>
+        <tr><td>Wed AM</td><td>JdL overflow clinic</td><td>JdL overflow clinic</td></tr>
+        <tr><td>Wed PM</td><td>ZAP-X</td><td>ZAP-X</td></tr>
+        <tr><td>Thu AM</td><td>JdL clinic</td><td>JdL clinic</td></tr>
+        <tr><td>Thu PM</td><td><b>JdL clinic</b></td><td><b>SS clinic</b></td></tr>
+        <tr><td>Fri AM</td><td>—</td><td>—</td></tr>
+        <tr><td>Fri PM</td><td>MR-linac</td><td>MR-linac</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Bold: the only sessions that differ between weeks (Tuesday PM and Thursday PM swap). Initials are the consultant whose patients are covered.</p>
+  </article>
+</section>
+
+<section class="panel" id="p-mdts" data-tab="mdts" data-label="All MDTs" hidden>
+  <div class="panel-head">
+    <h2>Kinghorn Cancer Centre MDTs</h2>
+  </div>
+  <article class="card" data-title="MDT planner">
+    <h3>MDT planner</h3>
+    <div class="tw"><table class="xs">
+      <thead><tr><th>Day</th><th>MDT</th><th>Time</th><th>Weeks</th></tr></thead>
+      <tbody>
+        <tr><td>Mon</td><td>Upper GI</td><td>7:30–8:30am</td><td>2 and 4</td></tr>
+        <tr><td>Mon</td><td><b>Colorectal</b></td><td>1–2pm</td><td>1 and 3</td></tr>
+        <tr><td>Tue</td><td>Urology</td><td>7–8:30am</td><td>2 and 4</td></tr>
+        <tr><td>Tue</td><td>Breast</td><td>9–10am</td><td>Weekly</td></tr>
+        <tr><td>Tue</td><td>H&amp;N pathology</td><td>10–10:45am</td><td>1 and 3</td></tr>
+        <tr><td>Tue</td><td>Head and neck</td><td>11am–1pm</td><td>Weekly</td></tr>
+        <tr><td>Tue</td><td>Haematology</td><td>3:30–4:30pm</td><td>2nd and 4th Tue</td></tr>
+        <tr><td>Wed</td><td>Liver</td><td>7:30–8:30am</td><td>2 and 4</td></tr>
+        <tr><td>Wed</td><td><b>Neuro-oncology</b></td><td>8–9am</td><td>1 and 3</td></tr>
+        <tr><td>Thu</td><td>Lung nodule</td><td>7:30–8am</td><td>Week 3 (monthly)</td></tr>
+        <tr><td>Thu</td><td>Lung</td><td>8–9am</td><td>Weekly</td></tr>
+        <tr><td>Thu</td><td>Thyroid</td><td>9–10am</td><td>Week 1 (monthly)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">From the Weekly MDT Meeting Planner (updated Nov 2026). Bold: MDTs shown in the week view by default.</p>
+  </article>
+  <article class="card" data-title="MDT coordinator">
+    <h3>MDT coordinator, Cancer Services</h3>
+    <p>The Kinghorn Cancer Centre, 370 Victoria St, Darlinghurst<br>
+    Tel <a href="tel:0293555623">02 9355 5623</a> · <a href="mailto:Svhs.CancerServices.MDT@svha.org.au">Svhs.CancerServices.MDT@svha.org.au</a></p>
+    <p class="note">Telehealth: NSW Health video meeting room from the planner (join from Chrome or by phone). Link not stored here.</p>
+  </article>
+</section>
+<script src="assets/roster.js"></script>

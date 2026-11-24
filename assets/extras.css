@@ -214,3 +214,19 @@ p.note.ctr-cta::before{content:"";flex:none;width:20px;height:20px;background:cu
 p.note.ctr-cta a{display:inline-block;background:var(--panel);color:var(--accent);font-weight:700;text-decoration:none;padding:4px 12px;border-radius:999px;white-space:normal}
 p.note.ctr-cta a:hover,p.note.ctr-cta a:focus-visible{text-decoration:underline;outline:2px solid var(--panel);outline-offset:1px}
 p.note.ctr-cta sub{color:inherit}
+/* My roster */
+.rhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.rnav{display:flex;gap:6px;flex-wrap:wrap}
+.rnav button{font:inherit;font-size:.9rem;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.rweek{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:8px}
+.rday{border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.rday.today{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent)}
+.rday h4{margin:0 0 4px;font-family:var(--font-display);font-size:1.05rem}
+.rday ul{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.rday li{display:grid;grid-template-columns:5.6em 1fr;gap:6px;padding:3px 6px;border-radius:6px}
+.rday li.rmdt{background:var(--accent-soft);font-weight:600}
+.rday li.rfree{color:var(--muted)}
+.rt{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
+.rclash{display:block;font-size:.78rem;font-weight:400;color:var(--warn)}
+.rmine{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:4px 10px;margin:4px 0}
+.rpick{font-size:.92rem}
