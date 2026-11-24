@@ -41,6 +41,10 @@ APPLINKS = (
    ('https://tasks.google.com/','Google Tasks','Tasks','#2f6fde',
     '<path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'),
    ('https://anywhere.genesiscare.com.au/','GenesisCare Anywhere (remote access)','Genesis','img','assets/icon-genesis.png'),
+   ('https://tpro-au.com/signin','T Pro dictation (sign in)','T Pro','#1f4e8c',
+    '<rect x="9.2" y="3.8" width="5.6" height="10" rx="2.8" fill="#fff"/><path d="M6.6 11.4a5.4 5.4 0 0 0 10.8 0M12 16.8v3M9 19.8h6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>'),
+   ('https://scribe.heidihealth.com/en/','Heidi scribe (sign in)','Heidi','#5b3f8f',
+    '<path d="M5 6.2A1.7 1.7 0 0 1 6.7 4.5h10.6A1.7 1.7 0 0 1 19 6.2v8.1a1.7 1.7 0 0 1-1.7 1.7h-6.8L7 19.3V16h-.3A1.7 1.7 0 0 1 5 14.3z" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 10.2v0M10.9 8.4v3.6M13 7.5v5.4M15.1 9.1v2.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>'),
   ])
  + ''.join(  # site shortcuts: same tab, own icons
   f'<a href="{u}" title="{t}" aria-label="{t}" class="al al-site" '
