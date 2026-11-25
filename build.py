@@ -781,8 +781,9 @@ contour_cards = ''.join(f'<h3 class="sub-title">{html.escape(g)}</h3><div class=
   '<script>var h=location.hash.slice(1);location.replace("index.html"+(h?"#"+h:""));</script></head>'
   '<body><p>Consent numbers are now in the Toxicity &amp; consent tab of each tumour-site page. <a href="index.html">Go to the home page</a>.</p></body></html>\n')
 # Home
-groupnav = ''.join(f'<a href="#{gid}" data-site="{gid}">{html.escape(head)}</a>' for gid,_,head,_,_ in GROUPS)
-sections = ''.join(f'\n  <h2 class="group-title" id="{gid}" data-site="{gid}">{html.escape(head)}</h2>\n  <div class="hub" data-site="{gid}">{cards(pages)}</div>' for gid,_,head,pages,_ in GROUPS)
+HOME_HIDE = {'exam'}  # sections reachable from the sidebar menu only, not shown as cards on the home page
+groupnav = ''.join(f'<a href="#{gid}" data-site="{gid}">{html.escape(head)}</a>' for gid,_,head,_,_ in GROUPS if gid not in HOME_HIDE)
+sections = ''.join(f'\n  <h2 class="group-title" id="{gid}" data-site="{gid}">{html.escape(head)}</h2>\n  <div class="hub" data-site="{gid}">{cards(pages)}</div>' for gid,_,head,pages,_ in GROUPS if gid not in HOME_HIDE)
 ALL = ['Breast','Thorax','Head and neck','Skin','CNS','Haematology','Sarcoma','Paediatrics','Palliative & oligometastases']
 DONE = {head for _,_,head,_,_ in GROUPS} | {x for _,_,head,_,_ in GROUPS for x in head.split(' & ')}
 soon = [x for x in ALL if x not in DONE]
