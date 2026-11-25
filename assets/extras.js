@@ -72,7 +72,7 @@
       if(v.length<2){ out.hidden=true; out.innerHTML=''; homebody.hidden=false; return; }
       load(function(){
         if(gq.value.trim().toLowerCase()!==v) return;
-        if(window.QR_LOCKED){ out.innerHTML='<p class="gcount">Search needs “Remember me on this device”. Log out (add <code>?staticrypt_logout</code> to the address), then log in again with it ticked.</p>'; out.hidden=false; homebody.hidden=true; return; }
+        if(window.QR_LOCKED){ out.innerHTML='<p class="gcount">Search needs “Remember me on this device”. Tap Log out (top right), then log in again with it ticked.</p>'; out.hidden=false; homebody.hidden=true; return; }
         var terms=v.split(/\s+/), hits=[];
         for(var i=0;i<low.length;i++){
           var t=low[i]; if(!terms.every(function(x){return t.indexOf(x)>=0;})) continue;

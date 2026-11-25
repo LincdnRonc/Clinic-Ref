@@ -63,6 +63,14 @@ APPLINKS = (
     '<path d="M8.2 4.6l2 3.6-1.6 1.6a10 10 0 0 0 5.6 5.6l1.6-1.6 3.6 2-.9 2.9c-.2.6-.8 1-1.5.9A14 14 0 0 1 4.4 7a1.4 1.4 0 0 1 .9-1.5z" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/>'),
   ])
  + '<!--MEETING_LINK-->'  # Teams meeting icon: added at deploy from the MEETING_URL secret (tools/private_links.py)
+ # Log out (always last): StatiCrypt clears the remembered password when the URL has ?staticrypt_logout
+ + '<a href="?staticrypt_logout" title="Log out" aria-label="Log out" class="al al-logout" '
+   'style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#5b6675;font-size:10px;line-height:1">'
+   '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" '
+   'style="width:30px;height:30px;flex:none;border-radius:8px;padding:3px;box-sizing:border-box;background:#5b6675">'
+   '<path d="M13.5 8V5.5a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1V16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'
+   '<path d="M9.5 12h10M16.5 8.8l3.2 3.2-3.2 3.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'
+   '</svg><span>Log out</span></a>'
  + '</nav>')
 
 def eviq_panel(f):

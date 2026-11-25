@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.23.4'
-VERSION_DATE = '25 Nov 2026'
+VERSION = '11.23.5'
+VERSION_DATE = '26 Nov 2026'
 
 HISTORY = [
+    ('11.23.5', '26 Nov 2026', 'Log out icon added at the right-hand end of the quick-launch bar (clears the remembered password and returns to the login screen).'),
     ('11.23.4', '25 Nov 2026', 'Guideline PDFs page: Google Scholar search links replaced with direct PubMed (PMID) links where verified, otherwise an exact-title PubMed search; protocols, books and departmental documents marked Not on PubMed.'),
     ('11.23.3', '25 Nov 2026', 'Floating Share button (link and QR code) removed from all pages; site is for personal use only.'),
     ('11.23.2', '25 Nov 2026', "Clinic links, Radiology: St Vincent's VueMotion link replaced with the onsite SVH PACS portal (SVH network only, no 2FA)."),
