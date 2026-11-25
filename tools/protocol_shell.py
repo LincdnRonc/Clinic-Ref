@@ -315,7 +315,6 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, qui
 <script src="../assets/site.js"></script>
 <script src="../assets/more-tabs.js"></script>
 <script src="../assets/extras.js"></script>
-<script src="../assets/share.js"></script>
 </body>
 </html>
 '''
