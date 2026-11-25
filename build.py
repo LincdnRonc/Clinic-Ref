@@ -519,6 +519,7 @@ def _pdf_title(p):
 _STOP = set('the and for with from into guideline guidelines consensus contouring delineation radiotherapy radiation therapy target volume volumes cancer atlas recommendations international estro acrop group'.split())
 def _words(s): return {w for w in re.findall(r'[a-z]{4,}', s.lower()) if w not in _STOP}
 def _pdf_link(p, yr, title):
+    if p['link'] == 'none': return None, 'Not on PubMed'
     if p['link']: return _link(p['link'])
     best = None
     for tid,label,lede,cards_ in LIB:
@@ -528,7 +529,7 @@ def _pdf_link(p, yr, title):
                 ov = len(_words(title) & _words(e[1]+' '+e[2]))
                 if ov >= 2 and (best is None or ov > best[0]): best = (ov, e[4])
     if best: return _link(best[1])
-    return 'https://scholar.google.com/scholar?q=' + quote_plus(title + (' ' + yr if yr else '')), 'Scholar search'
+    return _link('q:' + title)
 def build_pdf_page():
     import json as _j
     pdfs = _j.loads((root/'pdf_index.json').read_text())
@@ -549,7 +550,8 @@ def build_pdf_page():
                 yr, jour, t = _pdf_title(p)
                 u, kind = _pdf_link(p, yr, t)
                 meta = ' · '.join(x for x in [yr, jour, kind, f'{p["mb"]} MB'] if x)
-                lis.append(f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(t)}</a><span class="libmeta">{html.escape(meta)}</span><span class="libnote">OneDrive file: {html.escape(p["path"])}</span></li>')
+                ttl = f'<a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(t)}</a>' if u else f'<span class="libtitle">{html.escape(t)}</span>'
+                lis.append(f'<li>{ttl}<span class="libmeta">{html.escape(meta)}</span><span class="libnote">OneDrive file: {html.escape(p["path"])}</span></li>')
             out.append(f'  <article class="card" data-title="{html.escape(ctitle)}"><h3>{html.escape(ctitle)}</h3><ul class="lib">{"".join(lis)}</ul></article>')
         if tid == 'general':
             for title,entries in _LIBD['general'][2]:
