@@ -741,12 +741,16 @@ for f,short,long,desc,_ in CONTOUR:
 # Full contouring protocols: authored in src/contouring/, wrapped in the site shell
 import sys as _sys; _sys.path.insert(0, str(root/'tools'))
 from protocol_shell import convert as _proto_convert
+# Same quick-launch bar for pages one folder down (contouring/): point site links and images up a level
+APPLINKS_SUB = (APPLINKS.replace('href="links.html', 'href="../links.html')
+                .replace('href="contacts.html', 'href="../contacts.html')
+                .replace('src="assets/', 'src="../assets/'))
 for f,short,long,desc in CNAV:
     if not f.startswith('contouring/'): continue
     srcp = root/'src'/f
     if not srcp.exists(): continue
     _qp = root/'src'/'quick'/pathlib.Path(f).name
-    (root/f).write_text(_inject_panel(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR, _qp.read_text() if _qp.exists() else None), guide_lib_panel(f)))
+    (root/f).write_text(_inject_panel(_proto_convert(srcp.read_text(), f, long, short, CTR_SITE.get(f,'contouring'), tree(f), FONTS, FOOT_CTR, _qp.read_text() if _qp.exists() else None, APPLINKS_SUB, VERSION), guide_lib_panel(f)))
 # Retired URLs: lung protocol and thorax quick guide merged into contouring/thorax.html
 def _redirect(path, target, tabmap=None):
     tm = repr(tabmap or {}).replace("'", '"')

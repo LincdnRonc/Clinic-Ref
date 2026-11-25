@@ -194,7 +194,7 @@ def _quick_panel(quick_html):
             + ''.join(parts) + '\n</section>')
 
 
-def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, quick_html=None):
+def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, quick_html=None, applinks='', version=''):
     soup = BeautifulSoup(src_html, 'html.parser')
     for s in soup.find_all('script'):
         s.decompose()
@@ -293,7 +293,7 @@ def convert(src_html, fname, long, short, data_site, tree_html, fonts, foot, qui
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › <a href="../index.html#contouring">Contouring</a> › <span>{html.escape(long)}</span></nav>
     <div class="title-row">
       <h1>{html.escape(short)} <span>contouring</span></h1>
-      <div class="meta">Full guide · Nov 2026</div>
+      <div class="hdr-right">{applinks}<div class="meta">{('v'+html.escape(version)) if version else ''}</div></div>
     </div>
     <form class="search" role="search" id="searchForm">
       <label for="q" class="note" style="position:absolute;left:-9999px">Search this guide</label>
