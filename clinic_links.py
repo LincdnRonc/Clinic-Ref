@@ -1,4 +1,4 @@
-# Clinic quick links: radiology and pathology login portals, forms and imaging references.
+# Clinic quick links: radiology and pathology login portals, forms, and clinical tools (decision support, guidelines, drugs, contouring, trials).
 # Edit this file, then run build.py; it writes src/links.html.
 # Each link: (name, url, note, tags). Tags: 'net' = NSW Health network only; 'new' = added Nov 2026 from provider
 # websites, may need an account; 'check' = URL not confirmed by the provider.
@@ -105,6 +105,42 @@ TABS = [
   ('Imaging forms', '', [
    ('Liverpool PET-CT referral form', 'https://www.swslhd.health.nsw.gov.au/Liverpool/PET%5Ccontent/pdf/PET%20CT%20Referral%20Form.pdf', 'PDF', ()),
    ('Liverpool Hospital MRI screening form', 'https://swslhd-intranet.sswahs.nsw.gov.au/Liverpool/Forms/MRI_Screening.pdf', 'PDF, for patients', ('net',)),
+  ]),
+ ]),
+ ('clinical', 'Clinical tools', '', [
+  ('Decision support', 'Each opens in a new tab; sign in with your own account.', [
+   ('Mednet (Mednet AI)', 'https://www.themednet.org', 'Expert Q&A and AI answers; also an iOS/Android app. Free for US physicians, check access from Australia', ()),
+   ('UpToDate', 'https://www.uptodate.com', 'Subscription or institutional access', ()),
+   ('eviQ', 'https://www.eviq.org.au', 'Cancer Institute NSW protocols', ()),
+   ('Therapeutic Guidelines', 'https://www.tg.org.au', 'Formerly eTG complete', ()),
+   ('CIAP', 'https://www.ciap.health.nsw.gov.au', 'NSW Health library portal; StaffLink sign-in offsite', ()),
+   ('OpenEvidence', 'https://www.openevidence.com', 'AI literature answers for clinicians', ()),
+   ('MDCalc', 'https://www.mdcalc.com', 'General medical calculators', ()),
+  ]),
+  ('Guidelines', '', [
+   ('NCCN Guidelines', 'https://www.nccn.org/guidelines/category_1', 'Free account needed', ()),
+   ('ESMO Guidelines', 'https://www.esmo.org/guidelines', '', ()),
+   ('ASTRO clinical practice guidelines', 'https://www.astro.org/patient-care-and-research/clinical-practice-statements', '', ('check',)),
+   ('Cancer Council Australia guidelines', 'https://www.cancer.org.au/health-professionals/clinical-practice-guidelines', '', ('check',)),
+   ('Optimal care pathways', 'https://www.cancer.org.au/OCP', 'Cancer Council Australia', ('check',)),
+  ]),
+  ('Drugs and interactions', '', [
+   ('Australian Medicines Handbook', 'https://amhonline.amh.net.au', 'Subscription or CIAP', ()),
+   ('Cancer Drug Interactions (Liverpool)', 'https://cancer-druginteractions.org', 'Anticancer drug interaction checker', ()),
+   ('eMIMS', 'https://www.emims.com.au', 'Subscription or CIAP', ('check',)),
+  ]),
+  ('Contouring and anatomy', 'The site\'s own contouring guides are under Contouring.', [
+   ('eContour', 'https://www.econtour.org', 'Interactive contouring cases and atlases', ()),
+   ('NRG Oncology contouring atlases (CIRO)', 'https://www.nrgoncology.org/About-Us/Center-for-Innovation-in-Radiation-Oncology', 'RTOG/NRG atlases and templates', ()),
+   ('Radiopaedia', 'https://radiopaedia.org', 'Imaging reference and cases', ()),
+   ('IMAIOS e-Anatomy', 'https://www.imaios.com/en/e-anatomy', 'Cross-sectional anatomy atlas; subscription for full access', ()),
+  ]),
+  ('Trials and evidence', '', [
+   ('PubMed', 'https://pubmed.ncbi.nlm.nih.gov', '', ()),
+   ('ClinicalTrials.gov', 'https://clinicaltrials.gov', '', ()),
+   ('ANZCTR', 'https://www.anzctr.org.au', 'Australian New Zealand Clinical Trials Registry', ()),
+   ('Australian Cancer Trials', 'https://www.australiancancertrials.gov.au', 'Search recruiting cancer trials by location', ('check',)),
+   ('TROG trials now recruiting', 'https://trog.com.au/our-research/open-trials-recruiting/', 'TROG Cancer Research', ()),
   ]),
  ]),
 ]

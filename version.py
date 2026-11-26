@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.23.7'
+VERSION = '11.24'
 VERSION_DATE = '26 Nov 2026'
 
 HISTORY = [
+    ('11.24', '26 Nov 2026', 'Clinic links: new Clinical tools tab (Mednet, UpToDate, eviQ, Therapeutic Guidelines, CIAP, OpenEvidence, MDCalc, NCCN, ESMO, ASTRO, drug interaction checkers, eContour, NRG atlases, Radiopaedia, trial registries).'),
     ('11.23.7', '26 Nov 2026', 'Home page: Phase 2 exam summary cards removed; exam pages now reached from the sidebar menu only.'),
     ('11.23.6', '26 Nov 2026', 'Contouring guides: quick-launch icons (including Log out) added to the header, and the fixed "Full guide · Nov 2026" label replaced with the site version.'),
     ('11.23.5', '26 Nov 2026', 'Log out icon added at the right-hand end of the quick-launch bar (clears the remembered password and returns to the login screen).'),
