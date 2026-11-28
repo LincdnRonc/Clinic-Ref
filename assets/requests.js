@@ -21,13 +21,30 @@
 
   // My details
   var me={}; try{ me=JSON.parse(ls(ME_KEY)||'{}'); }catch(e){ me={}; }
-  [].forEach.call(meForm.elements,function(el){ if(el.name&&me[el.name]) el.value=me[el.name]; });
-  meForm.addEventListener('input',function(){
-    var o={}; [].forEach.call(meForm.elements,function(el){ if(el.name&&el.value) o[el.name]=el.value; });
+  [].forEach.call(meForm.elements,function(el){ if(el.type==='radio') return; if(el.name&&me[el.name]) el.value=me[el.name]; });
+  function saveMe(){
+    var o={}; [].forEach.call(meForm.elements,function(el){ if(el.type==='radio'&&!el.checked) return; if(el.name&&el.value) o[el.name]=el.value; });
     ls(ME_KEY,JSON.stringify(o));
-  });
+  }
+  meForm.addEventListener('input',saveMe); meForm.addEventListener('change',saveMe);
 
-  ls(SIG_KEY,null); // drawn signatures are no longer used
+  // Signature: drawn (pad) or "Electronically signed by"
+  var cv=document.getElementById('rqSig'), cx=cv.getContext('2d'), drawn=false, keep=document.getElementById('rqSigKeep');
+  cx.lineWidth=3; cx.lineCap='round'; cx.lineJoin='round'; cx.strokeStyle='#0b1f3a';
+  var saved=ls(SIG_KEY);
+  if(saved){ keep.checked=true; var im=new Image(); im.onload=function(){ cx.drawImage(im,0,0); drawn=true; }; im.src=saved; }
+  function pos(e){ var r=cv.getBoundingClientRect(); return [(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]; }
+  var down=false;
+  cv.addEventListener('pointerdown',function(e){ down=true; try{cv.setPointerCapture(e.pointerId);}catch(_){} var p=pos(e); cx.beginPath(); cx.moveTo(p[0],p[1]); e.preventDefault(); });
+  cv.addEventListener('pointermove',function(e){ if(!down) return; var p=pos(e); cx.lineTo(p[0],p[1]); cx.stroke(); drawn=true; e.preventDefault(); });
+  function up(){ if(!down) return; down=false; if(keep.checked) ls(SIG_KEY,cv.toDataURL('image/png')); }
+  cv.addEventListener('pointerup',up); cv.addEventListener('pointercancel',up);
+  document.getElementById('rqSigClear').addEventListener('click',function(){ cx.clearRect(0,0,cv.width,cv.height); drawn=false; ls(SIG_KEY,null); });
+  keep.addEventListener('change',function(){ if(keep.checked&&drawn) ls(SIG_KEY,cv.toDataURL('image/png')); if(!keep.checked) ls(SIG_KEY,null); });
+  function sigMode(){ var r=meForm.querySelector('input[name="me_sigmode"]:checked'); return r?r.value:'draw'; }
+  function showMode(){ var e=sigMode()==='esign'; meForm.querySelector('.rq-draw').hidden=e; meForm.querySelector('.rq-esign').hidden=!e; }
+  [].forEach.call(meForm.querySelectorAll('input[name="me_sigmode"]'),function(r){ r.checked=(r.value===(me.me_sigmode||'draw')); r.addEventListener('change',showMode); });
+  showMode();
 
   // Clear
   [].forEach.call(document.querySelectorAll('.rqclear'),function(b){
@@ -78,7 +95,7 @@
     if(urg&&urg!=='Routine'){ doc.setFontSize(10); doc.setFillColor(176,32,40); var tw=doc.getTextWidth(urg.toUpperCase())+8; doc.roundedRect(W-M-tw,6.5,tw,8,1.5,1.5,'F'); doc.text(urg.toUpperCase(),W-M-tw+4,12); }
     y=28;
 
-    var m={}; [].forEach.call(meForm.elements,function(el){ if(el.name) m[el.name]=(el.value||'').trim(); });
+    var m={}; [].forEach.call(meForm.elements,function(el){ if(el.type==='radio') return; if(el.name) m[el.name]=(el.value||'').trim(); });
 
     // Patient
     head('Patient');
@@ -131,13 +148,22 @@
     pairs([['Name',[m.me_name,m.me_quals].filter(Boolean).join(', ')],['Provider number',m.me_prov],['Department or practice',m.me_prac],['Address',m.me_addr],['Phone',m.me_phone],['Fax',m.me_fax],['Email',m.me_email]]);
     need(16); y+=1;
     var now=new Date(), stamp=('0'+now.getDate()).slice(-2)+'/'+('0'+(now.getMonth()+1)).slice(-2)+'/'+now.getFullYear()+' '+('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
-    doc.setFont('helvetica','normal'); doc.setFontSize(10); c(ink); doc.text('Electronically signed by:',M,y);
-    var lx=M+doc.getTextWidth('Electronically signed by:')+3;
-    doc.setFont('helvetica','bold'); doc.text(clean(m.me_esign||m.me_name||''),lx,y);
-    doc.setDrawColor(60,70,85); doc.setLineWidth(0.3); doc.line(lx,y+1.2,M+cw*0.6,y+1.2);
-    doc.setFont('helvetica','normal'); doc.text('Date:',M+cw*0.64,y); doc.setFont('helvetica','bold'); doc.text(clean(val(f,'rq_date')),M+cw*0.64+doc.getTextWidth('Date: ')+1,y);
-    y+=5; doc.setFont('helvetica','normal'); doc.setFontSize(7.5); c(mute); doc.text('Signed electronically '+stamp+'.',M,y); y+=4;
-    if(kind==='path'){ need(12); y+=3; doc.setFontSize(8.5); c(mute); doc.text('For collector:   Collected by ____________________   Date ___________   Time _______   Fasting  Y / N',M,y); y+=4; }
+    if(sigMode()==='esign'){
+      doc.setFont('helvetica','normal'); doc.setFontSize(10); c(ink); doc.text('Electronically signed by:',M,y);
+      var lx=M+doc.getTextWidth('Electronically signed by:')+3;
+      doc.setFont('helvetica','bold'); doc.text(clean(m.me_esign||m.me_name||''),lx,y);
+      doc.setDrawColor(60,70,85); doc.setLineWidth(0.3); doc.line(lx,y+1.2,M+cw*0.6,y+1.2);
+      doc.setFont('helvetica','normal'); doc.text('Date:',M+cw*0.64,y); doc.setFont('helvetica','bold'); doc.text(clean(val(f,'rq_date')),M+cw*0.64+doc.getTextWidth('Date: ')+1,y);
+      y+=5; doc.setFont('helvetica','normal'); doc.setFontSize(7.5); c(mute); doc.text('Signed electronically '+stamp+'.',M,y); y+=4;
+    } else {
+      need(28);
+      doc.setFont('helvetica','normal'); doc.setFontSize(7.5); c(mute); doc.text('Signature',M,y); doc.text('Date of request',M+cw*0.64,y);
+      if(drawn){ try{ doc.addImage(cv.toDataURL('image/png'),'PNG',M,y+1,60,18); }catch(e){} }
+      doc.setDrawColor(60,70,85); doc.setLineWidth(0.3); doc.line(M,y+20,M+80,y+20);
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); c(ink); doc.text(clean(val(f,'rq_date')),M+cw*0.64,y+6);
+      y+=24;
+    }
+    if(kind==='path'){ need(12); y+=3; doc.setFont('helvetica','normal'); doc.setFontSize(8.5); c(mute); doc.text('For collector:   Collected by ____________________   Date ___________   Time _______   Fasting  Y / N',M,y); y+=4; }
 
     // Footer on each page
     var n=doc.getNumberOfPages();
@@ -154,7 +180,7 @@
     if(!val(f,'pt_dob')) miss.push('date of birth');
     if(kind==='img'&&!val(f,'i_exam')) miss.push('examination');
     if(kind==='path'&&!f.querySelector('input[name="t_tests"]:checked')&&!val(f,'t_other')) miss.push('at least one test');
-    var mn=(meForm.elements.me_esign.value||meForm.elements.me_name.value).trim(), mp=meForm.elements.me_prov.value.trim();
+    var mn=meForm.elements.me_name.value.trim(), mp=meForm.elements.me_prov.value.trim();
     if(!mn||!mp) miss.push('your name and provider number (My details tab)');
     return miss;
   }
