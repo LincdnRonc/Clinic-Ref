@@ -692,8 +692,10 @@ def _links_page():
             for name,url,n,tags in sorted(links, key=lambda x: x[0].lower()):
                 fl = ''.join(f' <span class="flag {_QTAG[t][1]}">{_QTAG[t][0]}</span>' for t in tags)
                 host = re.sub(r'^https?://(www\.)?','',url).split('/')[0]
+                ext = url.startswith('http')
+                if not ext: host = 'This site'
                 nn = f'<span class="qn">{html.escape(n)}</span>' if n else ''
-                lis.append(f'<li><a href="{html.escape(url)}" target="_blank" rel="noopener"><b>{html.escape(name)}</b>{nn}<span class="qh">{html.escape(host)}</span>{fl}</a><button type="button" class="fav" data-href="{html.escape(url)}" aria-label="Add to favourites" title="Add to favourites">☆</button></li>')
+                lis.append(f'<li><a href="{html.escape(url)}"' + (' target="_blank" rel="noopener"' if ext else '') + f'><b>{html.escape(name)}</b>{nn}<span class="qh">{html.escape(host)}</span>{fl}</a><button type="button" class="fav" data-href="{html.escape(url)}" aria-label="Add to favourites" title="Add to favourites">☆</button></li>')
             np_ = f'<p class="note">{html.escape(note)}</p>' if note else ''
             out.append(f'  <article class="card" data-title="{html.escape(title)}"><h3>{html.escape(title)}</h3>{np_}<ul class="qlinks">{"".join(lis)}</ul></article>')
         out.append('</section>')

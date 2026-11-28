@@ -6,6 +6,9 @@
 
 TABS = [
  ('radiology', 'Radiology', '', [
+  ('Generic request form', '', [
+   ('Generic radiology / nuclear medicine request', 'requests.html#img', 'Fill in and generate a PDF', ()),
+  ]),
   ('Radiology portals', '', [
    ('I-MED Radiology', 'https://pacs.i-med.com.au/Portal/app#/', 'InteleConnect', ()),
    ('Sectra UniView', 'https://prod.nswcloud.sectra.com.au/UniView/#/', 'NSW Health PACS (Sectra cloud)', ()),
@@ -52,6 +55,9 @@ TABS = [
   ]),
  ]),
  ('pathology', 'Pathology', '', [
+  ('Generic request form', '', [
+   ('Generic pathology request', 'requests.html#path', 'Fill in and generate a PDF', ()),
+  ]),
   ('Results portals', '', [
    ('MedWay', 'https://www.medway.com.au/Login/ReLogin', 'Laverty Pathology (Healius)', ()),
    ('Sonic Dx', 'https://www.sonicdx.com.au/#/login', 'Douglass Hanly Moir and other Sonic labs', ()),
@@ -65,6 +71,10 @@ TABS = [
   ]),
  ]),
  ('forms', 'Forms', '', [
+  ('Generic request forms', '', [
+   ('Generic pathology request', 'requests.html#path', 'Fill in and generate a PDF', ()),
+   ('Generic radiology / nuclear medicine request', 'requests.html#img', 'Fill in and generate a PDF', ()),
+  ]),
   ('I-MED Radiology request forms', 'i-med.com.au/resources/e-referrals/pdf', [
    ('I-MED standard image request', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/b7baf0a8-7cd7-4f54-8522-9e05f6fc6b9b/I-MED_Radiology_Editable_PDF_Imaging_Request_Form_0626.pdf', 'PDF, editable (June 2026)', ()),
    ('I-MED specialist MRI image request', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/eca5abb4-b864-4642-aa8c-863eba3e2f4a/VICT204_0626_Specialist_Referral_A4_Editable.pdf', 'PDF, editable (June 2026)', ()),
