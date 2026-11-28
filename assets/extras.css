@@ -219,3 +219,19 @@ p.note.ctr-cta sub{color:inherit}
 .qlinks .fav.on{color:#c98a00}
 .favcard{border-color:#e3c46b}
 .favcard h3{color:#8a6100}
+
+/* Rad Onc Tables (Estes): Trial tables and Oral boards tabs */
+.et-tools{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:6px 0 4px}
+.et-filter{flex:1 1 220px;min-width:0;font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+.et-tools label{font-size:.88rem;color:var(--muted);white-space:nowrap}
+.et-count{font-family:var(--font-body);font-weight:400;font-size:.8rem;color:var(--muted)}
+.et-tag{display:inline-block;margin-left:6px;padding:0 6px;border-radius:999px;border:1px solid var(--line);font-size:.72rem;color:var(--muted);vertical-align:1px}
+.et-tag.et-star{border-color:var(--accent);color:var(--accent)}
+.et-tag.et-new{background:var(--accent-soft)}
+.et-more{margin-top:2px}
+.et-more>summary{cursor:pointer;font-size:.82rem;color:var(--accent);width:max-content}
+.et-more dl,.ob-dl{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;margin:6px 0 2px;font-size:.88rem}
+.et-more dt,.ob-dl dt{font-weight:700;margin-top:6px;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.03em}
+.et-more dd,.ob-dl dd{margin:0;overflow-wrap:anywhere}
+.ob .note{margin:2px 0 4px}
+.trial.et.et-hide{display:none}

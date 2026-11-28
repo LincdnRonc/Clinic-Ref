@@ -22,6 +22,7 @@ This repo is the single source of truth: the built pages and the build kit that 
 | `exam_links.py` | Phase 2 exam-summary page list (`EXAM`) and the cross-links between clinic pages and exam-summary tabs (`XREF`). |
 | `tools/super_summary.py` | Regenerates `src/exam-*.html` from the Super Summary .docx (`python3 tools/super_summary.py Super_Summary.docx`), one tab per subsite. The .docx itself is not stored here. |
 | `tools/encrypt_site.js` | Builds the password-protected copy of the site for deployment (see Password protection). |
+| `tools/estes_import.py`, `data/estes.json`, `estes_render.py` | Rad Onc Tables (C. Estes): `python3 tools/estes_import.py KeyStudies.xlsx OralBoards.xlsx` rewrites `data/estes.json`; the build renders it as the Trial tables tab (tumour-site pages, routing in `route()`) and the Oral boards tab (exam pages, `board_route()`). The .xlsx files are not stored here. |
 | `tools/check.py` | Render check at phone width (Playwright): overflow, console errors. |
 | `notes/` | Removed. The list of figures to verify is kept in the Claude Project (`claude/figures-to-verify.md`), not in this repo or on the site. |
 

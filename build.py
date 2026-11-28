@@ -203,6 +203,8 @@ def exam_panel(f):
             '    <div class="jump"></div>\n  </div>\n' + ''.join(parts) + '\n</section>')
 MORE_TABS = True  # rarely used tabs (eviQ, Guidelines, Exam notes) behind a "More" chip; set False to revert
 _MORE_JS = '<script src="assets/more-tabs.js"></script>' if MORE_TABS else ''
+import estes_render as _estes  # Rad Onc Tables (Estes): Trial tables and Oral boards tabs, from data/estes.json
+_ESTES_JS = '<script src="assets/estes.js"></script>'
 # Tab order on tumour-site pages: overview/general tab if there is one, Staging & risk, management tabs in author order,
 # (planning tabs stay beside their management tab), toxicity and consent, key trials, MDT matrix, then eviQ / Guidelines / Exam notes.
 TUMOUR_GIDS = {'breast','cns','gi','gu','gyn','heme','hn','sarcoma','thorax','pall'}
@@ -211,11 +213,11 @@ def _tab_rank(tid, label):
     if tid in ('stage', 'staging'): return 1
     if tid in ('eviq','guidelines','exam'): return 8
     if tid == 'mdt' or 'mdt' in l: return 7
-    if 'key trials' in l: return 6
+    if 'key trials' in l or tid == 'tables': return 6
     if l.startswith('toxicity'): return 5
     return 2
 _LEAD_RE = r'overview|approach|general|management|decide'
-_SIDE_TABS = ('staging','stage','consent','trials','mdt','eviq','guidelines','exam')
+_SIDE_TABS = ('staging','stage','consent','trials','tables','mdt','eviq','guidelines','exam')
 def add_overview(body):
     """Tumour-site pages without an overview/general first tab get a generated Overview tab built only from
     the page's own tab bottom lines (no new content). Marked data-generated so search does not index it twice."""
@@ -272,6 +274,7 @@ def order_tabs(body):
     return head + '\n'.join(out) + '\n' + tail
 def page(f, short, long, desc, group, gname, gid, foot):
     body = _consent_print((root/'src'/f).read_text()) + consent_panel(f) + _mdt.panel(f) + stage_panel(f) + eviq_panel(f) + guide_lib_panel(f) + exam_panel(f)
+    body += _estes.boards_panel(f) if f.startswith('exam-') else _estes.trials_panel(f, body)
     if f.startswith('exam-'): body = xref_back(f, body)
     if gid in TUMOUR_GIDS: body = order_tabs(merge_staging(add_overview(body)))
     title = f'{long} Quick Reference'
@@ -315,6 +318,7 @@ def page(f, short, long, desc, group, gname, gid, foot):
 {foot}
 <script src="assets/site.js"></script>
 <script src="assets/extras.js"></script>
+{_ESTES_JS if 'data-src="estes"' in body else ''}
 {_MORE_JS}
 </body>
 </html>
@@ -877,10 +881,18 @@ for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.ht
     for _pan in _sp.select('section.panel'):
         if _pan.get('data-tab') == 'eviq' or _pan.has_attr('data-borrowed') or _pan.has_attr('data-generated'): continue
         for _c in _pan.select('article.card'):
+            if _pan.get('data-src') == 'estes':
+                # keep the index small: trial names and bottom lines only; oral-board cards truncated
+                for _d in _c.select('details'): _d.decompose()
+                _trs = _c.select('div.trial')
+                for _tr in _trs:
+                    _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', re.sub(r'\s+',' ',_tr.get_text(' ',strip=True))[:300]])
+                if not _trs: _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', re.sub(r'\s+',' ',_c.get_text(' ',strip=True))[:400]])
+                continue
             _x = re.sub(r'\s+',' ',_c.get_text(' ',strip=True))
             _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', _x])
 (root/'assets'/'search-index.js').write_text('window.QR_INDEX=' + _json.dumps(_idx, ensure_ascii=False, separators=(',',':')) + ';')
-_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/rert.js','assets/more-tabs.js','assets/icon-genesis.png','assets/mdt.js','assets/roster.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
+_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/rert.js','assets/more-tabs.js','assets/estes.js','assets/icon-genesis.png','assets/mdt.js','assets/roster.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
 (root/'manifest.webmanifest').write_text(_json.dumps({'name':'Radiation Oncology Quick Reference','short_name':'RadOnc QR','start_url':'./index.html','scope':'./','display':'standalone','background_color':'#f3f5f6','theme_color':'#10243f','icons':[{'src':'assets/icon-192.png','sizes':'192x192','type':'image/png'},{'src':'assets/icon-512.png','sizes':'512x512','type':'image/png','purpose':'any maskable'}]}, indent=1))
 _ver = _hl.md5(''.join((root/x).read_text(errors='ignore') if not x.endswith('.png') else x for x in _files+_assets).encode()).hexdigest()[:10]
 (root/'sw.js').write_text("""// Generated by build.py. Network first (2.5 s), then the offline copy.
