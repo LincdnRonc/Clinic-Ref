@@ -113,6 +113,4 @@ def boards_panel(f):
         cards.append(f'<article class="card ob" data-title="{html.escape(e["title"])}"><h3>{html.escape(e["title"])}</h3>{sub}<dl class="ob-dl">{dl}</dl></article>')
     return ('\n<section class="panel" id="p-boards" data-tab="boards" data-label="Oral boards" data-src="estes" hidden>\n'
             '  <div class="panel-head">\n    <h2>Oral boards tables</h2>\n'
-            f'    <p class="lede">{SRC}, Oral Boards 2026: workup, treatment, simulation, dose, fields, constraints, follow-up and outcomes by case. '
-            'Written for the US oral boards, reproduced as written and not source-checked; check eviQ and departmental protocols.</p>\n'
             '    <div class="jump"></div>\n  </div>\n' + '\n'.join(cards) + '\n</section>')
