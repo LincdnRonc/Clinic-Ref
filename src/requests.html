@@ -26,7 +26,6 @@
       <label>Ward / bed<input name="pt_ward" autocomplete="off"></label>
       <label>Interpreter (language)<input name="pt_interp" autocomplete="off" placeholder="Leave blank if not needed"></label>
     </div>
-    <p class="note">Patient and copy-to details are shared between the pathology and imaging forms and are never saved: they clear when you close the page or press Clear.</p>
   </article>
   <article class="card" data-title="Tests">
     <h3>Tests</h3>
@@ -68,7 +67,6 @@
     <div class="calc rq"><label>Request date<input name="rq_date" type="date"></label></div>
     <div class="rqact"><button type="button" class="rqgo" data-form="path">Generate PDF</button><button type="button" class="rqshare" data-form="path" hidden>Share PDF</button><button type="button" class="rqclear">Clear patient and tests</button></div>
     <p class="rqmsg note" aria-live="polite"></p>
-    <p class="note">The requesting doctor and electronic signature come from the My details tab and print at the bottom of the form.</p>
   </article>
 </form>
 </section>
@@ -101,7 +99,6 @@
       <label>Ward / bed<input name="pt_ward" autocomplete="off"></label>
       <label>Interpreter (language)<input name="pt_interp" autocomplete="off" placeholder="Leave blank if not needed"></label>
     </div>
-    <p class="note">Patient and copy-to details are shared between the pathology and imaging forms and are never saved: they clear when you close the page or press Clear.</p>
   </article>
   <article class="card" data-title="Examination">
     <h3>Examination</h3>
@@ -160,7 +157,6 @@
     <div class="calc rq"><label>Request date<input name="rq_date" type="date"></label></div>
     <div class="rqact"><button type="button" class="rqgo" data-form="img">Generate PDF</button><button type="button" class="rqshare" data-form="img" hidden>Share PDF</button><button type="button" class="rqclear">Clear patient and tests</button></div>
     <p class="rqmsg note" aria-live="polite"></p>
-    <p class="note">The requesting doctor and electronic signature come from the My details tab and print at the bottom of the form.</p>
   </article>
 </form>
 </section>
@@ -183,7 +179,6 @@
       <label>Fax<input name="me_fax" type="tel"></label>
       <label>Email<input name="me_email" type="email"></label>
     </div>
-    <p class="note">Saved in this browser only, never on the site or in the repository.</p>
   </article>
   <article class="card" data-title="Signature">
     <h3>Signature</h3>
@@ -194,11 +189,9 @@
     <div class="rq-draw">
       <canvas id="rqSig" class="rqsig" width="600" height="180" aria-label="Signature pad"></canvas>
       <div class="rqact"><button type="button" id="rqSigClear">Clear signature</button><label class="rqchk"><input type="checkbox" id="rqSigKeep"> Remember signature on this device</label></div>
-      <p class="note">Sign with a finger, stylus or mouse. Leave blank to sign the printed form by hand.</p>
     </div>
     <div class="rq-esign" hidden>
       <div class="calc rq"><label class="wide">Electronically signed by<input name="me_esign" placeholder="Defaults to your name"></label></div>
-      <p class="note">Prints as “Electronically signed by: …” with the date and time the PDF was made.</p>
     </div>
   </article>
 </form>

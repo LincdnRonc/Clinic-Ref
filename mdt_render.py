@@ -3,7 +3,7 @@ import re, html, json
 from mdt_data import MATRICES, MDT_PAGES
 
 _MDT = {m['id']: m for m in MATRICES}
-LEDE = 'Red line: still to be established. (check): not yet verified against the source. A prompt, not a protocol: the MDT decides.'
+LEDE = 'Red line: still to be established. (check): not yet verified against the source.'
 
 def txt(x):
     x = html.escape(x, quote=False)

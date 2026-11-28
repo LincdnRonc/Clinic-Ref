@@ -8,7 +8,7 @@
 # Each row: (service, number(s), note)
 
 TABS = [
- ('gc-svh', 'GenesisCare SVH', "Four-digit numbers are extensions.", [
+ ('gc-svh', 'GenesisCare SVH', "", [
   ('Level A (SVRO)', 'Main line 8302 5400', [
    ('Reception 1', '5401', ''),
    ('Reception 2', '5402', ''),
@@ -55,7 +55,7 @@ TABS = [
    ('GenesisCare IT', '1300 436 638', ''),
   ]),
  ]),
- ('svh', "St Vincent's Hospital", "St Vincent's Hospital Sydney. Short numbers are hospital extensions.", [
+ ('svh', "St Vincent's Hospital", "", [
   ('Switch, paging and bookings', '', [
    ('Switch', '59', ''),
    ('Paging', '26888', 'Then pager number, then #'),

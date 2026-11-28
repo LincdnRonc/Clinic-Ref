@@ -676,7 +676,7 @@ def _wn_page():
     _soon = [x for x in ['Breast','Thorax','Head and neck','Skin','CNS','Haematology','Sarcoma','Paediatrics','Palliative & oligometastases'] if x not in _done]
     soon_card = (f'<article class="card" data-title="Still to add"><h3>Still to add</h3><p>{", ".join(_soon)}</p></article>') if _soon else ''
     site_ = ''.join(f'<li><b>{d}</b> · {html.escape(t)}' + (f' <a href="{p}">Open</a>' if p else '') + '</li>' for d,t,p in _wn.SITE)
-    return (f'<section class="panel" id="p-evidence" data-tab="evidence" data-label="Evidence"><div class="panel-head"><h2>New evidence and landmark trials</h2><p class="lede">Tags are a first read, not a guideline.</p><div class="jump"></div></div>{cards_}</section>\n'
+    return (f'<section class="panel" id="p-evidence" data-tab="evidence" data-label="Evidence"><div class="panel-head"><h2>New evidence and landmark trials</h2><div class="jump"></div></div>{cards_}</section>\n'
             f'<section class="panel" id="p-site" data-tab="site" data-label="Site updates" hidden><div class="panel-head"><h2>Site updates</h2><div class="jump"></div></div><article class="card" data-title="Change log"><h3>Change log</h3><ul>{site_}</ul></article>{soon_card}</section>')
 (root/'src'/'whats-new.html').write_text(_wn_page())
 # ---------------- Clinic quick links (clinic_links.py -> src/links.html) ----------------
@@ -736,10 +736,10 @@ def _contacts_page():
         out.append('</section>')
     return '\n'.join(out)
 (root/'src'/'contacts.html').write_text(_contacts_page())
-FOOT_CONTACTS = '<footer><p>From the SVH contact list, November 2026. Short numbers are internal extensions; tap a full number to call. Mobile numbers and staff names are added only to the password-protected site when it deploys (GitHub secret CONTACTS_PRIVATE, see tools/private_contacts.py), never to the public repository. Check with switch if a number no longer works. Edit clinic_contacts.py for the rest.</p></footer>'
+FOOT_CONTACTS = '<footer><p>From the SVH contact list, November 2026.</p></footer>'
 
-FOOT_REQ = '<footer><p>The PDF is made in your browser; nothing is sent anywhere. Patient details are not saved. Your details and signature are kept in this browser only. Some providers ask for their own form for certain tests (e.g. PSMA PET, MRI safety).</p></footer>'
-FOOT_LINKS = '<footer><p>Links open each provider\'s own login page; nothing is stored here. Accounts, passwords and MFA are set up with each provider. Links marked "Added Nov 2026" came from provider websites and a published NSW provider list and may need a new account. Edit clinic_links.py to change them.</p></footer>'
+FOOT_REQ = ''
+FOOT_LINKS = '<footer><p>"Added Nov 2026": from provider websites; may need a new account.</p></footer>'
 for g in TOOLS:
     (root/g[0]).write_text(page(*g, TOOLS, 'Tools', 'tools', FOOT_LINKS if g[0]=='links.html' else FOOT_REQ if g[0]=='requests.html' else FOOT_CONTACTS if g[0]=='contacts.html' else FOOT_TOOLS))
 

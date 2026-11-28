@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.28.4'
+VERSION = '11.29'
 VERSION_DATE = '28 Nov 2026'
 
 HISTORY = [
+    ('11.29', '28 Nov 2026', 'Obvious instructional text removed: request forms hints, roster and clinic-link notes, contacts extension notes, tools/scores/MDT/What\'s new boilerplate, generic "clinical judgement" and "follow departmental protocol" lines, contouring-guide version boilerplate; shorter Tools footers.'),
     ('11.28.4', '28 Nov 2026', 'Clinic links, Forms: generic request forms box tidied (heading in capitals, shorter link names, no "This site" label, readable in dark mode).'),
     ('11.28.3', '28 Nov 2026', 'Clinic links: generic request forms now only at the top of the Forms tab, in a highlighted box.'),
     ('11.28.2', '28 Nov 2026', 'Clinic links: generic pathology and imaging request forms linked at the top of the Pathology, Radiology and Forms tabs.'),

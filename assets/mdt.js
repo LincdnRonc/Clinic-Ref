@@ -70,7 +70,7 @@
       });
       // count and what to ask next
       var count = box.querySelector('.mdt-count');
-      count.textContent = !any ? base + ' scenarios. Tap what is known.' :
+      count.textContent = !any ? base + ' scenarios.' :
         main.length === 0 ? 'No scenario fits this combination: discuss individually.' :
         main.length === 1 ? '1 scenario fits.' : main.length + ' of ' + base + ' scenarios fit.';
       var next = box.querySelector('.mdt-next'), ask = [];

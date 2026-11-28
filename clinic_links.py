@@ -112,7 +112,7 @@ TABS = [
   ]),
  ]),
  ('clinical', 'Clinical tools', '', [
-  ('Decision support', 'Each opens in a new tab; sign in with your own account.', [
+  ('Decision support', '', [
    ('Mednet (Mednet AI)', 'https://www.themednet.org', 'Expert Q&A and AI answers; also an iOS/Android app. Free for US physicians, check access from Australia', ()),
    ('UpToDate', 'https://www.uptodate.com', 'Subscription or institutional access', ()),
    ('eviQ', 'https://www.eviq.org.au', 'Cancer Institute NSW protocols', ()),
