@@ -34,6 +34,7 @@ EVIDENCE = [
   [('gu-prostate.html#localised','Localised disease')]),
 ]
 SITE = [
+    ('2026-11-28', 'Request forms under Tools: generic pathology and radiology / nuclear medicine requests that generate a PDF.', 'requests.html'),
     ('2026-11-26', 'Clinic links: new Clinical tools tab with Mednet, UpToDate, eviQ, guidelines, drug interaction checkers, contouring atlases and trial registries.', 'links.html#clinical'),
     ('2026-11-25', 'My weekly roster under Tools: Week A/B sessions merged with MDTs, plus the Kinghorn MDT planner.', 'roster.html'),
     ('2026-11-23', '32 more key trials across paediatrics, gynae, lymphoma, CNS, H&N, thorax, GI, GU and melanoma ("More key trials" cards); contouring-guide links shown as call-out boxes.', ''),

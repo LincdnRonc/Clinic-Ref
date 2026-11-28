@@ -627,6 +627,7 @@ TOOLS = [
  ('roster.html','My roster','My weekly roster','Week A/B sessions merged with this week\'s MDTs, with the full Kinghorn MDT planner.'),
  ('mdt.html','MDT decision matrix','MDT decision matrix','Tap case details as they are presented to narrow to an evidence-based option: prostate, pancreas, upper GI (oesophagus, gastric, HCC, biliary, liver mets), rectum and lung (NSCLC, SCLC).'),
  ('links.html','Clinic links','Clinic quick links','Radiology PACS and pathology results logins, A to Z, and referral forms.'),
+ ('requests.html','Request forms','Request forms','Fill in a generic pathology or radiology / nuclear medicine request and generate a PDF.'),
  ('contacts.html','Contacts','Phone and contact list',"GenesisCare St Vincent's extensions, St Vincent's Hospital numbers and other GenesisCare NSW centres."),
  ('tools.html','Calculators','Calculators and tools','EQD2 and BED, cumulative dose across courses, treatment gap, and links to re-irradiation tools and SABR constraint tables.'),
  ('scores.html','Clinical scores','Clinical scores and nomograms','Auto-staging for 18 sites, Child-Pugh, ALBI, MELD, PSA doubling time, life expectancy, Roach, CAPRA, CTS5, Van Nuys, SINS, Mirels, RPA, IPI, Sedlis, brachytherapy EQD2 and more, with links to MSKCC, PREDICT, GPA and other external tools.'),
@@ -732,9 +733,10 @@ def _contacts_page():
 (root/'src'/'contacts.html').write_text(_contacts_page())
 FOOT_CONTACTS = '<footer><p>From the SVH contact list, November 2026. Short numbers are internal extensions; tap a full number to call. Mobile numbers and staff names are added only to the password-protected site when it deploys (GitHub secret CONTACTS_PRIVATE, see tools/private_contacts.py), never to the public repository. Check with switch if a number no longer works. Edit clinic_contacts.py for the rest.</p></footer>'
 
+FOOT_REQ = '<footer><p>The PDF is made in your browser; nothing is sent anywhere. Patient details are not saved. Your details and signature are kept in this browser only. Some providers ask for their own form for certain tests (e.g. PSMA PET, MRI safety).</p></footer>'
 FOOT_LINKS = '<footer><p>Links open each provider\'s own login page; nothing is stored here. Accounts, passwords and MFA are set up with each provider. Links marked "Added Nov 2026" came from provider websites and a published NSW provider list and may need a new account. Edit clinic_links.py to change them.</p></footer>'
 for g in TOOLS:
-    (root/g[0]).write_text(page(*g, TOOLS, 'Tools', 'tools', FOOT_LINKS if g[0]=='links.html' else FOOT_CONTACTS if g[0]=='contacts.html' else FOOT_TOOLS))
+    (root/g[0]).write_text(page(*g, TOOLS, 'Tools', 'tools', FOOT_LINKS if g[0]=='links.html' else FOOT_REQ if g[0]=='requests.html' else FOOT_CONTACTS if g[0]=='contacts.html' else FOOT_TOOLS))
 
 FOOT_SW = '<footer><p>Software quick references compiled from vendor user and training guides and a departmental MIM guide. Shortcuts and tool names change between versions and local configurations; check in your installed version. Not affiliated with or endorsed by MIM Software, GE HealthCare or Elekta. Follow departmental work instructions.</p></footer>'
 for f,short,long,desc in SOFTWARE:
@@ -892,7 +894,7 @@ for _p in sorted(list(root.glob('*.html')) + list((root/'contouring').glob('*.ht
             _x = re.sub(r'\s+',' ',_c.get_text(' ',strip=True))
             _idx.append([_rel, _ttl, _pan.get('data-tab'), _pan.get('data-label'), _c.get('data-title') or '', _x])
 (root/'assets'/'search-index.js').write_text('window.QR_INDEX=' + _json.dumps(_idx, ensure_ascii=False, separators=(',',':')) + ';')
-_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/rert.js','assets/more-tabs.js','assets/estes.js','assets/icon-genesis.png','assets/mdt.js','assets/roster.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
+_assets = ['assets/site.css','assets/extras.css','assets/protocol.css','assets/site.js','assets/extras.js','assets/tools.js','assets/scores.js','assets/staging.js','assets/rert.js','assets/more-tabs.js','assets/estes.js','assets/icon-genesis.png','assets/mdt.js','assets/roster.js','assets/requests.js','assets/jspdf.umd.min.js','assets/search-index.js','assets/icon-192.png','assets/icon-512.png','manifest.webmanifest']
 (root/'manifest.webmanifest').write_text(_json.dumps({'name':'Radiation Oncology Quick Reference','short_name':'RadOnc QR','start_url':'./index.html','scope':'./','display':'standalone','background_color':'#f3f5f6','theme_color':'#10243f','icons':[{'src':'assets/icon-192.png','sizes':'192x192','type':'image/png'},{'src':'assets/icon-512.png','sizes':'512x512','type':'image/png','purpose':'any maskable'}]}, indent=1))
 _ver = _hl.md5(''.join((root/x).read_text(errors='ignore') if not x.endswith('.png') else x for x in _files+_assets).encode()).hexdigest()[:10]
 (root/'sw.js').write_text("""// Generated by build.py. Network first (2.5 s), then the offline copy.

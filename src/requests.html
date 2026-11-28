@@ -1,0 +1,149 @@
+<section class="panel" id="p-path" data-tab="path" data-label="Pathology">
+  <div class="panel-head">
+    <h2>Pathology request</h2>
+    <div class="jump"></div>
+  </div>
+<form class="rqform" data-form="path" autocomplete="off" onsubmit="return false">
+  <article class="card" data-title="Patient">
+    <h3>Patient</h3>
+    <div class="calc rq">
+      <label>Surname<input name="pt_surname" autocomplete="off"></label>
+      <label>Given names<input name="pt_given" autocomplete="off"></label>
+      <label>Date of birth<input name="pt_dob" type="date"></label>
+      <label>Sex<select name="pt_sex"><option></option><option>Female</option><option>Male</option><option>Other</option></select></label>
+      <label>Phone<input name="pt_phone" type="tel" autocomplete="off"></label>
+      <label class="wide">Address<input name="pt_address" autocomplete="off"></label>
+      <label>Medicare number<input name="pt_medicare" inputmode="numeric" autocomplete="off"></label>
+      <label>IRN<input name="pt_irn" inputmode="numeric" autocomplete="off"></label>
+      <label>DVA number<input name="pt_dva" autocomplete="off"></label>
+      <label>MRN / URN<input name="pt_mrn" autocomplete="off"></label>
+      <label>Billing<select name="pt_billing"><option></option><option>Bulk bill</option><option>Private</option><option>Hospital (public)</option><option>DVA</option><option>Workers compensation</option></select></label>
+      <label>Copy results to<input name="pt_copyto" autocomplete="off" placeholder="e.g. GP name"></label>
+    </div>
+    <p class="note">Patient details are shared between the pathology and imaging forms and are never saved: they clear when you close the page or press Clear.</p>
+  </article>
+  <article class="card" data-title="Tests">
+    <h3>Tests</h3>
+    <h4>Haematology and biochemistry</h4><div class="rqbox"><label><input type="checkbox" name="t_tests" value="FBC"> FBC</label><label><input type="checkbox" name="t_tests" value="EUC"> EUC</label><label><input type="checkbox" name="t_tests" value="LFT"> LFT</label><label><input type="checkbox" name="t_tests" value="CMP (Ca, Mg, PO4)"> CMP (Ca, Mg, PO4)</label><label><input type="checkbox" name="t_tests" value="CRP"> CRP</label><label><input type="checkbox" name="t_tests" value="Coagulation (INR, APTT)"> Coagulation (INR, APTT)</label><label><input type="checkbox" name="t_tests" value="Glucose"> Glucose</label><label><input type="checkbox" name="t_tests" value="HbA1c"> HbA1c</label><label><input type="checkbox" name="t_tests" value="Lipids"> Lipids</label><label><input type="checkbox" name="t_tests" value="TFT"> TFT</label><label><input type="checkbox" name="t_tests" value="Iron studies"> Iron studies</label><label><input type="checkbox" name="t_tests" value="B12 and folate"> B12 and folate</label><label><input type="checkbox" name="t_tests" value="Vitamin D"> Vitamin D</label><label><input type="checkbox" name="t_tests" value="Group and hold"> Group and hold</label></div>
+    <h4>Tumour markers and hormones</h4><div class="rqbox"><label><input type="checkbox" name="t_tests" value="PSA"> PSA</label><label><input type="checkbox" name="t_tests" value="Free/total PSA"> Free/total PSA</label><label><input type="checkbox" name="t_tests" value="Testosterone"> Testosterone</label><label><input type="checkbox" name="t_tests" value="CEA"> CEA</label><label><input type="checkbox" name="t_tests" value="CA 19-9"> CA 19-9</label><label><input type="checkbox" name="t_tests" value="CA 125"> CA 125</label><label><input type="checkbox" name="t_tests" value="CA 15-3"> CA 15-3</label><label><input type="checkbox" name="t_tests" value="AFP"> AFP</label><label><input type="checkbox" name="t_tests" value="β-hCG"> β-hCG</label><label><input type="checkbox" name="t_tests" value="LDH"> LDH</label><label><input type="checkbox" name="t_tests" value="Thyroglobulin"> Thyroglobulin</label><label><input type="checkbox" name="t_tests" value="Chromogranin A"> Chromogranin A</label></div>
+    <h4>Urine and microbiology</h4><div class="rqbox"><label><input type="checkbox" name="t_tests" value="Urine MCS"> Urine MCS</label><label><input type="checkbox" name="t_tests" value="Urine ACR"> Urine ACR</label><label><input type="checkbox" name="t_tests" value="Urine β-hCG"> Urine β-hCG</label><label><input type="checkbox" name="t_tests" value="Swab MCS"> Swab MCS</label><label><input type="checkbox" name="t_tests" value="Blood cultures"> Blood cultures</label></div>
+    <div class="calc rq">
+      <label class="wide">Other tests<input name="t_other" placeholder="e.g. cortisol 8 am, swab site"></label>
+      <label>Urgency<select name="t_urgency"><option>Routine</option><option>Urgent</option><option>Urgent: phone results</option></select></label>
+      <label>Fasting<select name="t_fasting"><option></option><option>Fasting</option><option>Non-fasting</option></select></label>
+      <label>Collect on or after<input name="t_collect" type="date"></label>
+      <label>Repeat (standing order)<input name="t_repeat" placeholder="e.g. weekly × 6"></label>
+    </div>
+  </article>
+  <article class="card" data-title="Clinical notes (pathology)">
+    <h3>Clinical notes</h3>
+    <div class="calc rq"><label class="wide">Clinical notes<textarea name="t_notes" rows="4" placeholder="Diagnosis, treatment, relevant medicines (e.g. anticoagulants)"></textarea></label></div>
+  </article>
+  <article class="card key" data-title="Generate PDF">
+    <h3>Request date and PDF</h3>
+    <div class="calc rq"><label>Request date<input name="rq_date" type="date"></label></div>
+    <div class="rqact"><button type="button" class="rqgo" data-form="path">Generate PDF</button><button type="button" class="rqshare" data-form="path" hidden>Share PDF</button><button type="button" class="rqclear">Clear patient and tests</button></div>
+    <p class="rqmsg note" aria-live="polite"></p>
+    <p class="note">Your name, provider number and signature come from the My details tab.</p>
+  </article>
+</form>
+</section>
+
+<section class="panel" id="p-img" data-tab="img" data-label="Radiology / nuclear medicine" hidden>
+  <div class="panel-head">
+    <h2>Radiology and nuclear medicine request</h2>
+    <div class="jump"></div>
+  </div>
+<form class="rqform" data-form="img" autocomplete="off" onsubmit="return false">
+  <article class="card" data-title="Patient">
+    <h3>Patient</h3>
+    <div class="calc rq">
+      <label>Surname<input name="pt_surname" autocomplete="off"></label>
+      <label>Given names<input name="pt_given" autocomplete="off"></label>
+      <label>Date of birth<input name="pt_dob" type="date"></label>
+      <label>Sex<select name="pt_sex"><option></option><option>Female</option><option>Male</option><option>Other</option></select></label>
+      <label>Phone<input name="pt_phone" type="tel" autocomplete="off"></label>
+      <label class="wide">Address<input name="pt_address" autocomplete="off"></label>
+      <label>Medicare number<input name="pt_medicare" inputmode="numeric" autocomplete="off"></label>
+      <label>IRN<input name="pt_irn" inputmode="numeric" autocomplete="off"></label>
+      <label>DVA number<input name="pt_dva" autocomplete="off"></label>
+      <label>MRN / URN<input name="pt_mrn" autocomplete="off"></label>
+      <label>Billing<select name="pt_billing"><option></option><option>Bulk bill</option><option>Private</option><option>Hospital (public)</option><option>DVA</option><option>Workers compensation</option></select></label>
+      <label>Copy results to<input name="pt_copyto" autocomplete="off" placeholder="e.g. GP name"></label>
+    </div>
+    <p class="note">Patient details are shared between the pathology and imaging forms and are never saved: they clear when you close the page or press Clear.</p>
+  </article>
+  <article class="card" data-title="Examination">
+    <h3>Examination</h3>
+    <h4>Modality</h4><div class="rqbox"><label><input type="checkbox" name="i_mod" value="X-ray"> X-ray</label><label><input type="checkbox" name="i_mod" value="Ultrasound"> Ultrasound</label><label><input type="checkbox" name="i_mod" value="CT"> CT</label><label><input type="checkbox" name="i_mod" value="MRI"> MRI</label><label><input type="checkbox" name="i_mod" value="FDG PET/CT"> FDG PET/CT</label><label><input type="checkbox" name="i_mod" value="PSMA PET/CT"> PSMA PET/CT</label><label><input type="checkbox" name="i_mod" value="DOTATATE PET/CT"> DOTATATE PET/CT</label><label><input type="checkbox" name="i_mod" value="Bone scan"> Bone scan</label><label><input type="checkbox" name="i_mod" value="Other nuclear medicine"> Other nuclear medicine</label></div>
+    <div class="calc rq">
+      <label class="wide">Examination and region<input name="i_exam" placeholder="e.g. CT chest, abdomen and pelvis"></label>
+      <label>Contrast<select name="i_contrast"><option></option><option>With contrast</option><option>Without contrast</option><option>Radiologist to decide</option></select></label>
+      <label>Urgency<select name="i_urgency"><option>Routine</option><option>Urgent</option><option>Urgent: phone results</option></select></label>
+      <label>Needed by<input name="i_by" type="date"></label>
+      <label>Preferred provider or site<input name="i_site"></label>
+    </div>
+  </article>
+  <article class="card" data-title="Clinical details (imaging)">
+    <h3>Clinical details</h3>
+    <div class="calc rq">
+      <label class="wide">Clinical notes and question to answer<textarea name="i_notes" rows="4" placeholder="History, current treatment, specific question"></textarea></label>
+      <label class="wide">Previous relevant imaging<input name="i_prev" placeholder="Where and when, for comparison"></label>
+    </div>
+  </article>
+  <article class="card" data-title="Safety screening">
+    <h3>Safety screening</h3>
+    <div class="calc rq">
+      <label>eGFR (mL/min/1.73 m²)<input name="i_egfr" inputmode="decimal"></label>
+      <label>eGFR date<input name="i_egfrdate" type="date"></label>
+      <label>Diabetes on metformin<select name="i_dm"><option></option><option>No</option><option>Yes</option></select></label>
+      <label>Previous contrast reaction<select name="i_allergy"><option></option><option>No</option><option>Yes</option></select></label>
+      <label>Pregnant or may be<select name="i_preg"><option></option><option>No</option><option>Yes</option><option>Not applicable</option></select></label>
+      <label>Breastfeeding<select name="i_breast"><option></option><option>No</option><option>Yes</option><option>Not applicable</option></select></label>
+      <label>Pacemaker, implant or metal (MRI)<select name="i_implant"><option></option><option>No</option><option>Yes</option></select></label>
+      <label>Claustrophobia<select name="i_claus"><option></option><option>No</option><option>Yes</option></select></label>
+      <label>Weight (kg)<input name="i_wt" inputmode="decimal"></label>
+      <label>Height (cm)<input name="i_ht" inputmode="decimal"></label>
+      <label class="wide">Safety details<input name="i_safety" placeholder="Implant type, allergy details, mobility, interpreter"></label>
+    </div>
+  </article>
+  <article class="card key" data-title="Generate PDF">
+    <h3>Request date and PDF</h3>
+    <div class="calc rq"><label>Request date<input name="rq_date" type="date"></label></div>
+    <div class="rqact"><button type="button" class="rqgo" data-form="img">Generate PDF</button><button type="button" class="rqshare" data-form="img" hidden>Share PDF</button><button type="button" class="rqclear">Clear patient and tests</button></div>
+    <p class="rqmsg note" aria-live="polite"></p>
+    <p class="note">Your name, provider number and signature come from the My details tab.</p>
+  </article>
+</form>
+</section>
+
+<section class="panel" id="p-me" data-tab="me" data-label="My details" hidden>
+  <div class="panel-head">
+    <h2>My details</h2>
+    <div class="jump"></div>
+  </div>
+<form class="rqme" autocomplete="off" onsubmit="return false">
+  <article class="card key" data-title="Requesting doctor">
+    <h3>Requesting doctor</h3>
+    <div class="calc rq">
+      <label>Name<input name="me_name" placeholder="Dr ..."></label>
+      <label>Qualifications<input name="me_quals" placeholder="e.g. MBBS FRANZCR"></label>
+      <label>Provider number<input name="me_prov"></label>
+      <label>Department or practice<input name="me_prac"></label>
+      <label class="wide">Address<input name="me_addr"></label>
+      <label>Phone<input name="me_phone" type="tel"></label>
+      <label>Fax<input name="me_fax" type="tel"></label>
+      <label>Email<input name="me_email" type="email"></label>
+    </div>
+    <p class="note">Saved in this browser only, never on the site or in the repository.</p>
+  </article>
+  <article class="card" data-title="Signature">
+    <h3>Signature</h3>
+    <canvas id="rqSig" class="rqsig" width="600" height="180" aria-label="Signature pad"></canvas>
+    <div class="rqact"><button type="button" id="rqSigClear">Clear signature</button><label class="rqchk"><input type="checkbox" id="rqSigKeep"> Remember signature on this device</label></div>
+    <p class="note">Sign with a finger, stylus or mouse. Leave blank to sign the printed form by hand.</p>
+  </article>
+</form>
+</section>
+<script src="assets/jspdf.umd.min.js"></script>
+<script src="assets/requests.js"></script>
