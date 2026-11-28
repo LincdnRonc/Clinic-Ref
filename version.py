@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.27.1'
+VERSION = '11.28'
 VERSION_DATE = '28 Nov 2026'
 
 HISTORY = [
+    ('11.28', '28 Nov 2026', 'Request forms: "Electronically signed by" field replaces the signature pad; requesting doctor moved to the bottom of the PDF; copies-to (cc) section; more fields (Medicare expiry, concession card, health fund, hospital status, interpreter, results phone/fax, medicines, LMP, mobility, infection precautions, anticoagulants, image-guided procedure).'),
     ('11.27.1', '28 Nov 2026', 'Tools icon added to the quick-launch bar on every page (jumps to the Tools section of the home page).'),
     ('11.27', '28 Nov 2026', 'New Tools page: Request forms (generic pathology and radiology / nuclear medicine requests, with My details, signature pad and Generate PDF).'),
     ('11.26.1', '28 Nov 2026', 'Access log: deploy also reads ACCESS_LOG_URL when saved as an Actions variable rather than a secret.'),

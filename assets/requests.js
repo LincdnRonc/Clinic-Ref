@@ -1,5 +1,5 @@
 // Request forms: fill in, then make an A4 PDF with jsPDF (assets/jspdf.umd.min.js).
-// Patient details are never stored. "My details" (and the signature, if ticked) are kept in localStorage on this device only.
+// Patient details are never stored. "My details" are kept in localStorage on this device only.
 (function(){
   var ME_KEY='rq_me', SIG_KEY='rq_sig';
   function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); if(v===null) localStorage.removeItem(k); else localStorage.setItem(k,v); }catch(e){ return null; } }
@@ -14,7 +14,7 @@
   // Patient fields are shared between the forms
   forms.forEach(function(f){
     f.addEventListener('input',function(e){
-      var n=e.target.name; if(!n||n.indexOf('pt_')!==0) return;
+      var n=e.target.name; if(!n||!/^(pt_|cc\d)/.test(n)) return;
       forms.forEach(function(g){ if(g!==f && g.elements[n]) g.elements[n].value=e.target.value; });
     });
   });
@@ -27,19 +27,7 @@
     ls(ME_KEY,JSON.stringify(o));
   });
 
-  // Signature pad
-  var cv=document.getElementById('rqSig'), cx=cv.getContext('2d'), drawn=false, keep=document.getElementById('rqSigKeep');
-  cx.lineWidth=3; cx.lineCap='round'; cx.lineJoin='round'; cx.strokeStyle='#0b1f3a';
-  var saved=ls(SIG_KEY);
-  if(saved){ keep.checked=true; var im=new Image(); im.onload=function(){ cx.drawImage(im,0,0); drawn=true; }; im.src=saved; }
-  function pos(e){ var r=cv.getBoundingClientRect(); return [(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]; }
-  var down=false;
-  cv.addEventListener('pointerdown',function(e){ down=true; cv.setPointerCapture(e.pointerId); var p=pos(e); cx.beginPath(); cx.moveTo(p[0],p[1]); e.preventDefault(); });
-  cv.addEventListener('pointermove',function(e){ if(!down) return; var p=pos(e); cx.lineTo(p[0],p[1]); cx.stroke(); drawn=true; e.preventDefault(); });
-  function up(){ if(!down) return; down=false; if(keep.checked) ls(SIG_KEY,cv.toDataURL('image/png')); }
-  cv.addEventListener('pointerup',up); cv.addEventListener('pointercancel',up);
-  document.getElementById('rqSigClear').addEventListener('click',function(){ cx.clearRect(0,0,cv.width,cv.height); drawn=false; ls(SIG_KEY,null); });
-  keep.addEventListener('change',function(){ if(keep.checked&&drawn) ls(SIG_KEY,cv.toDataURL('image/png')); if(!keep.checked) ls(SIG_KEY,null); });
+  ls(SIG_KEY,null); // drawn signatures are no longer used
 
   // Clear
   [].forEach.call(document.querySelectorAll('.rqclear'),function(b){
@@ -90,15 +78,12 @@
     if(urg&&urg!=='Routine'){ doc.setFontSize(10); doc.setFillColor(176,32,40); var tw=doc.getTextWidth(urg.toUpperCase())+8; doc.roundedRect(W-M-tw,6.5,tw,8,1.5,1.5,'F'); doc.text(urg.toUpperCase(),W-M-tw+4,12); }
     y=28;
 
-    // Referrer
     var m={}; [].forEach.call(meForm.elements,function(el){ if(el.name) m[el.name]=(el.value||'').trim(); });
-    head('Requesting doctor');
-    pairs([['Name',[m.me_name,m.me_quals].filter(Boolean).join(', ')],['Provider number',m.me_prov],['Department or practice',m.me_prac],['Address',m.me_addr],['Phone',m.me_phone],['Fax',m.me_fax],['Email',m.me_email]]);
 
     // Patient
     head('Patient');
     var name=[val(f,'pt_surname').toUpperCase(),val(f,'pt_given')].filter(Boolean).join(', ');
-    pairs([['Name',name],['Date of birth',val(f,'pt_dob')],['Sex',val(f,'pt_sex')],['Phone',val(f,'pt_phone')],['Address',val(f,'pt_address')],['Medicare number',[val(f,'pt_medicare'),val(f,'pt_irn')?'IRN '+val(f,'pt_irn'):''].filter(Boolean).join('  ')],['DVA number',val(f,'pt_dva')],['MRN / URN',val(f,'pt_mrn')],['Billing',val(f,'pt_billing')],['Copy results to',val(f,'pt_copyto')]]);
+    pairs([['Name',name],['Date of birth',val(f,'pt_dob')],['Sex',val(f,'pt_sex')],['Phone',val(f,'pt_phone')],['Address',val(f,'pt_address')],['Medicare number',[val(f,'pt_medicare'),val(f,'pt_irn')?'IRN '+val(f,'pt_irn'):''].filter(Boolean).join('  ')],['DVA number',val(f,'pt_dva')],['MRN / URN',val(f,'pt_mrn')],['Medicare valid to',val(f,'pt_medexp')],['Concession / pension card',val(f,'pt_concession')],['Private health fund',val(f,'pt_fund')],['Billing',val(f,'pt_billing')],['Hospital status',[val(f,'pt_status'),val(f,'pt_ward')].filter(Boolean).join(', ')],['Email',val(f,'pt_email')],['Interpreter',val(f,'pt_interp')]]);
 
     if(kind==='path'){
       head('Tests requested');
@@ -106,18 +91,19 @@
       for(var k=0;k<boxes.length;k++){
         drawGroup(hs[k]?hs[k].textContent:'',[].slice.call(boxes[k].querySelectorAll('input')));
       }
-      pairs([['Other tests',val(f,'t_other')],['Urgency',val(f,'t_urgency')],['Fasting',val(f,'t_fasting')],['Collect on or after',val(f,'t_collect')],['Repeat (standing order)',val(f,'t_repeat')]]);
+      pairs([['Other tests',val(f,'t_other')],['Urgency',val(f,'t_urgency')],['Fasting',val(f,'t_fasting')],['Collect on or after',val(f,'t_collect')],['Repeat (standing order)',val(f,'t_repeat')],['Phone or fax results to',val(f,'t_phone')]]);
       head('Clinical notes');
       para('',val(f,'t_notes')||' ');
+      pairs([['Relevant medicines',val(f,'t_meds')],['Last menstrual period',val(f,'t_lmp')]]);
     } else {
       head('Examination');
       drawGroup('Modality',[].slice.call(f.querySelectorAll('input[name="i_mod"]')));
-      pairs([['Examination and region',val(f,'i_exam')],['Contrast',val(f,'i_contrast')],['Urgency',val(f,'i_urgency')],['Needed by',val(f,'i_by')],['Preferred provider or site',val(f,'i_site')]]);
+      pairs([['Examination and region',val(f,'i_exam')],['Contrast',val(f,'i_contrast')],['Urgency',val(f,'i_urgency')],['Needed by',val(f,'i_by')],['Preferred provider or site',val(f,'i_site')],['Phone or fax results to',val(f,'i_phone')]]);
       head('Clinical details');
       para('Clinical notes and question to answer',val(f,'i_notes')||' ');
       para('Previous relevant imaging',val(f,'i_prev'));
-      var s=[['eGFR (mL/min/1.73 m2)',[val(f,'i_egfr'),val(f,'i_egfrdate')?'('+val(f,'i_egfrdate')+')':''].filter(Boolean).join(' ')],['Diabetes on metformin',val(f,'i_dm')],['Previous contrast reaction',val(f,'i_allergy')],['Pregnant or may be',val(f,'i_preg')],['Breastfeeding',val(f,'i_breast')],['Pacemaker, implant or metal',val(f,'i_implant')],['Claustrophobia',val(f,'i_claus')],['Weight (kg)',val(f,'i_wt')],['Height (cm)',val(f,'i_ht')]];
-      if(s.some(function(p){ return p[1]; })||val(f,'i_safety')){ head('Safety screening'); pairs(s,3); para('Safety details',val(f,'i_safety')); }
+      var s=[['eGFR (mL/min/1.73 m2)',[val(f,'i_egfr'),val(f,'i_egfrdate')?'('+val(f,'i_egfrdate')+')':''].filter(Boolean).join(' ')],['Diabetes on metformin',val(f,'i_dm')],['Previous contrast reaction',val(f,'i_allergy')],['Pregnant or may be',val(f,'i_preg')],['Breastfeeding',val(f,'i_breast')],['Pacemaker, implant or metal',val(f,'i_implant')],['Claustrophobia',val(f,'i_claus')],['Infection precautions',val(f,'i_infect')],['Mobility',val(f,'i_mob')],['Weight (kg)',val(f,'i_wt')],['Height (cm)',val(f,'i_ht')]];
+      if(s.some(function(p){ return p[1]; })||val(f,'i_safety')||val(f,'i_anticoag')){ head('Safety screening'); pairs(s,3); para('Anticoagulants or antiplatelets',val(f,'i_anticoag')); para('Safety details',val(f,'i_safety')); }
     }
 
     function drawGroup(t,inputs){
@@ -136,14 +122,22 @@
       y+=2;
     }
 
-    // Signature block
-    need(32); y+=2;
-    doc.setDrawColor(150,158,170); doc.setLineWidth(0.3); doc.line(M,y,W-M,y); y+=6;
-    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); c(mute); doc.text('Signature',M,y); doc.text('Date of request',M+cw*0.62,y);
-    if(drawn){ try{ doc.addImage(cv.toDataURL('image/png'),'PNG',M,y+1,60,18); }catch(e){} }
-    doc.setDrawColor(60,70,85); doc.line(M,y+20,M+80,y+20);
-    doc.setFont('helvetica','bold'); doc.setFontSize(10); c(ink); doc.text(clean(val(f,'rq_date')),M+cw*0.62,y+6);
-    if(m.me_name){ doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.text(clean(m.me_name),M,y+24.5); }
+    // Copies to
+    var ccs=[1,2,3].map(function(i){ return [val(f,'cc'+i+'_name'),val(f,'cc'+i+'_addr'),val(f,'cc'+i+'_prov')].filter(Boolean).join(', '); }).filter(Boolean);
+    if(ccs.length){ head('Copies of results to'); ccs.forEach(function(t,i){ para('cc '+(i+1),t); }); }
+
+    // Requesting doctor and electronic signature (bottom of the form)
+    need(52); head('Requesting doctor');
+    pairs([['Name',[m.me_name,m.me_quals].filter(Boolean).join(', ')],['Provider number',m.me_prov],['Department or practice',m.me_prac],['Address',m.me_addr],['Phone',m.me_phone],['Fax',m.me_fax],['Email',m.me_email]]);
+    need(16); y+=1;
+    var now=new Date(), stamp=('0'+now.getDate()).slice(-2)+'/'+('0'+(now.getMonth()+1)).slice(-2)+'/'+now.getFullYear()+' '+('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+    doc.setFont('helvetica','normal'); doc.setFontSize(10); c(ink); doc.text('Electronically signed by:',M,y);
+    var lx=M+doc.getTextWidth('Electronically signed by:')+3;
+    doc.setFont('helvetica','bold'); doc.text(clean(m.me_esign||m.me_name||''),lx,y);
+    doc.setDrawColor(60,70,85); doc.setLineWidth(0.3); doc.line(lx,y+1.2,M+cw*0.6,y+1.2);
+    doc.setFont('helvetica','normal'); doc.text('Date:',M+cw*0.64,y); doc.setFont('helvetica','bold'); doc.text(clean(val(f,'rq_date')),M+cw*0.64+doc.getTextWidth('Date: ')+1,y);
+    y+=5; doc.setFont('helvetica','normal'); doc.setFontSize(7.5); c(mute); doc.text('Signed electronically '+stamp+'.',M,y); y+=4;
+    if(kind==='path'){ need(12); y+=3; doc.setFontSize(8.5); c(mute); doc.text('For collector:   Collected by ____________________   Date ___________   Time _______   Fasting  Y / N',M,y); y+=4; }
 
     // Footer on each page
     var n=doc.getNumberOfPages();
@@ -160,7 +154,7 @@
     if(!val(f,'pt_dob')) miss.push('date of birth');
     if(kind==='img'&&!val(f,'i_exam')) miss.push('examination');
     if(kind==='path'&&!f.querySelector('input[name="t_tests"]:checked')&&!val(f,'t_other')) miss.push('at least one test');
-    var mn=meForm.elements.me_name.value.trim(), mp=meForm.elements.me_prov.value.trim();
+    var mn=(meForm.elements.me_esign.value||meForm.elements.me_name.value).trim(), mp=meForm.elements.me_prov.value.trim();
     if(!mn||!mp) miss.push('your name and provider number (My details tab)');
     return miss;
   }
