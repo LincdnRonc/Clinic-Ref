@@ -53,6 +53,8 @@ APPLINKS = (
   f'style="width:30px;height:30px;flex:none;border-radius:8px;padding:3px;box-sizing:border-box;background:{bg}">{g}</svg>'
   f'<span>{lab}</span></a>'
   for u,t,lab,bg,g in [
+   ('index.html#tools','Tools: roster, MDT matrix, links, request forms, calculators','Tools','#0d5d78',
+    '<rect x="5" y="5" width="6" height="6" rx="1.3" fill="#fff"/><rect x="13" y="5" width="6" height="6" rx="1.3" fill="none" stroke="#fff" stroke-width="1.7"/><rect x="5" y="13" width="6" height="6" rx="1.3" fill="none" stroke="#fff" stroke-width="1.7"/><rect x="13" y="13" width="6" height="6" rx="1.3" fill="#fff"/>'),
    ('links.html#radiology','Radiology portals','Radiology','#35596b',
     '<rect x="4.5" y="4.5" width="15" height="15" rx="2" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M12 7v10M8.5 9.5c1.5.6 2.5.6 3.5 0 1 .6 2 .6 3.5 0M8.5 12.5c1.5.6 2.5.6 3.5 0 1 .6 2 .6 3.5 0M9 15.5c1.2.5 2 .5 3 0 1 .5 1.8.5 3 0" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>'),
    ('links.html#pathology','Pathology results','Pathology','#9b1c3f',
@@ -749,6 +751,7 @@ import sys as _sys; _sys.path.insert(0, str(root/'tools'))
 from protocol_shell import convert as _proto_convert
 # Same quick-launch bar for pages one folder down (contouring/): point site links and images up a level
 APPLINKS_SUB = (APPLINKS.replace('href="links.html', 'href="../links.html')
+                .replace('href="index.html', 'href="../index.html')
                 .replace('href="contacts.html', 'href="../contacts.html')
                 .replace('src="assets/', 'src="../assets/'))
 for f,short,long,desc in CNAV:

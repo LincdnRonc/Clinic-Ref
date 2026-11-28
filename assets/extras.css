@@ -249,3 +249,4 @@ p.note.ctr-cta sub{color:inherit}
 .rqchk{display:flex;align-items:center;gap:6px;font-size:.88rem;color:var(--muted)}
 .rqsig{width:100%;max-width:600px;aspect-ratio:10/3;border:1px dashed var(--line);border-radius:8px;background:#fff;touch-action:none;display:block}
 .rqmsg:empty{display:none}
+@media (max-width:440px){.applinks{gap:3px!important}.applinks svg,.applinks .al-img{width:28px!important;height:28px!important}}
