@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.25'
+VERSION = '11.25.1'
 VERSION_DATE = '28 Nov 2026'
 
 HISTORY = [
+    ('11.25.1', '28 Nov 2026', 'Trial tables tab: source and caveat line under the heading removed.'),
     ('11.25', '28 Nov 2026', 'Rad Onc Tables (Estes) added: new Trial tables tab on each tumour-site page (about 980 key studies routed by site, with need-to-know, recent and also-in-Key-trials tags, filter box, details on tap) and new Oral boards tab on each Phase 2 exam-summary page (about 380 case rows: workup, treatment, sim, dose, fields, constraints, follow-up). Imported by tools/estes_import.py into data/estes.json.'),
     ('11.24', '26 Nov 2026', 'Clinic links: new Clinical tools tab (Mednet, UpToDate, eviQ, Therapeutic Guidelines, CIAP, OpenEvidence, MDCalc, NCCN, ESMO, ASTRO, drug interaction checkers, eContour, NRG atlases, Radiopaedia, trial registries).'),
     ('11.23.7', '26 Nov 2026', 'Home page: Phase 2 exam summary cards removed; exam pages now reached from the sidebar menu only.'),

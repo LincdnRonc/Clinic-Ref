@@ -90,11 +90,8 @@ def trials_panel(f, body):
         if not es: continue
         cards.append(f'<article class="card" data-title="{html.escape(t)}"><h3>{html.escape(t)} <span class="et-count">{len(es)}</span></h3>'
                      + ''.join(_trial(e, keyset) for e in es) + '</article>')
-    n = sum(1 for e in rows if e['trial'] != 'Introduction')
     return ('\n<section class="panel" id="p-tables" data-tab="tables" data-label="Trial tables" data-src="estes" hidden>\n'
             '  <div class="panel-head">\n    <h2>Trial tables</h2>\n'
-            f'    <p class="lede">{n} studies from {SRC}, Key Studies, as written (US practice and spelling, not source-checked). '
-            '🏆 marks the favoured arm. Where it disagrees with Key trials, go by Key trials.</p>\n'
             '    <div class="et-tools"><input type="search" class="et-filter" placeholder="Filter trials on this tab" aria-label="Filter trials">'
             '<label><input type="checkbox" class="et-only"> Need to know only</label></div>\n'
             '    <div class="jump"></div>\n  </div>\n' + '\n'.join(cards) + '\n</section>')
