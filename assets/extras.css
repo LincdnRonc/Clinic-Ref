@@ -250,3 +250,10 @@ p.note.ctr-cta sub{color:inherit}
 .rqsig{width:100%;max-width:600px;aspect-ratio:10/3;border:1px dashed var(--line);border-radius:8px;background:#fff;touch-action:none;display:block}
 .rqmsg:empty{display:none}
 @media (max-width:440px){.applinks{gap:3px!important}.applinks svg,.applinks .al-img{width:28px!important;height:28px!important}}
+/* Generic request forms box (Clinic links, Forms tab) */
+.card.rqcard{background:#a14a0b;border-color:#a14a0b;color:#fff}
+.card.rqcard h3{color:#fff}
+.card.rqcard .qlinks a{background:#fff;border:2px solid #fff;font-weight:700}
+.card.rqcard .qlinks a:hover,.card.rqcard .qlinks a:focus-visible{background:#fff4ec}
+.card.rqcard .qlinks b{color:#7a3500;font-size:1.05rem}
+.card.rqcard .fav{color:#fff}

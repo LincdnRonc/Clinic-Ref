@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.28.2'
+VERSION = '11.28.3'
 VERSION_DATE = '28 Nov 2026'
 
 HISTORY = [
+    ('11.28.3', '28 Nov 2026', 'Clinic links: generic request forms now only at the top of the Forms tab, in a highlighted box.'),
     ('11.28.2', '28 Nov 2026', 'Clinic links: generic pathology and imaging request forms linked at the top of the Pathology, Radiology and Forms tabs.'),
     ('11.28.1', '28 Nov 2026', 'Request forms: signature pad restored, with an option to print "Electronically signed by" instead.'),
     ('11.28', '28 Nov 2026', 'Request forms: "Electronically signed by" field replaces the signature pad; requesting doctor moved to the bottom of the PDF; copies-to (cc) section; more fields (Medicare expiry, concession card, health fund, hospital status, interpreter, results phone/fax, medicines, LMP, mobility, infection precautions, anticoagulants, image-guided procedure).'),

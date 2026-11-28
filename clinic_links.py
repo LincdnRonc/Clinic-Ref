@@ -6,9 +6,6 @@
 
 TABS = [
  ('radiology', 'Radiology', '', [
-  ('Generic request form', '', [
-   ('Generic radiology / nuclear medicine request', 'requests.html#img', 'Fill in and generate a PDF', ()),
-  ]),
   ('Radiology portals', '', [
    ('I-MED Radiology', 'https://pacs.i-med.com.au/Portal/app#/', 'InteleConnect', ()),
    ('Sectra UniView', 'https://prod.nswcloud.sectra.com.au/UniView/#/', 'NSW Health PACS (Sectra cloud)', ()),
@@ -55,9 +52,6 @@ TABS = [
   ]),
  ]),
  ('pathology', 'Pathology', '', [
-  ('Generic request form', '', [
-   ('Generic pathology request', 'requests.html#path', 'Fill in and generate a PDF', ()),
-  ]),
   ('Results portals', '', [
    ('MedWay', 'https://www.medway.com.au/Login/ReLogin', 'Laverty Pathology (Healius)', ()),
    ('Sonic Dx', 'https://www.sonicdx.com.au/#/login', 'Douglass Hanly Moir and other Sonic labs', ()),
