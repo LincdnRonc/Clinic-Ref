@@ -256,4 +256,6 @@ p.note.ctr-cta sub{color:inherit}
 .card.rqcard .qlinks a{background:#fff;border:2px solid #fff;font-weight:700}
 .card.rqcard .qlinks a:hover,.card.rqcard .qlinks a:focus-visible{background:#fff4ec}
 .card.rqcard .qlinks b{color:#7a3500;font-size:1.05rem}
-.card.rqcard .fav{color:#fff}
+.card.rqcard .fav{color:#7a3500}
+.card.rqcard h3{text-transform:uppercase;letter-spacing:.03em}
+.card.rqcard .qlinks .qn{color:#4a3a2c}

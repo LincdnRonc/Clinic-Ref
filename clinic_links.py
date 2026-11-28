@@ -66,8 +66,8 @@ TABS = [
  ]),
  ('forms', 'Forms', '', [
   ('Generic request forms', '', [
-   ('Generic pathology request', 'requests.html#path', 'Fill in and generate a PDF', ()),
-   ('Generic radiology / nuclear medicine request', 'requests.html#img', 'Fill in and generate a PDF', ()),
+   ('Pathology request', 'requests.html#path', 'Fill in and generate a PDF', ()),
+   ('Radiology / nuclear medicine request', 'requests.html#img', 'Fill in and generate a PDF', ()),
   ]),
   ('I-MED Radiology request forms', 'i-med.com.au/resources/e-referrals/pdf', [
    ('I-MED standard image request', 'https://assets-us-01.kc-usercontent.com:443/0f1bf390-09c2-00ff-dbea-bab90e37fcfe/b7baf0a8-7cd7-4f54-8522-9e05f6fc6b9b/I-MED_Radiology_Editable_PDF_Imaging_Request_Form_0626.pdf', 'PDF, editable (June 2026)', ()),
