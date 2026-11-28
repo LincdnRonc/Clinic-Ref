@@ -167,7 +167,6 @@ details.about-guide[open]{padding-bottom:6px}
 /* Fewer colours: group colour only on card borders */
 .group-title[data-site]{color:var(--ink);border-bottom:1px solid var(--line)}
 .group-title[data-site]::before{display:none}
-.sitenav a[data-site]{border-left:1px solid var(--line)}
 .hubcard[data-site] h3{color:var(--ink)}
 .tree details>summary{color:var(--ink)}
 .home footer{border-top-color:var(--line)}
@@ -259,3 +258,5 @@ p.note.ctr-cta sub{color:inherit}
 .card.rqcard .fav{color:#7a3500}
 .card.rqcard h3{text-transform:uppercase;letter-spacing:.03em}
 .card.rqcard .qlinks .qn{color:#4a3a2c}
+/* Home group buttons: same colour as the matching cards below (4px left border) */
+.home .sitenav a{border-left:4px solid var(--accent)}
