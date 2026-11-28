@@ -39,12 +39,52 @@ function copy(dir, rel = "") {
 copy(ROOT);
 fs.writeFileSync(path.join(OUT, "robots.txt"), "User-agent: *\nDisallow: /\n");
 
+// 1b. Access log (optional): if the ACCESS_LOG_URL secret is set, every page gets a small script,
+//     inside the encryption so the URL stays private, that sends the visitor's name to a Google Sheet.
+const LOG_URL = (process.env.ACCESS_LOG_URL || "").trim();
+if (LOG_URL) {
+  const logJs = fs.readFileSync(path.join(__dirname, "access_log.js"), "utf8").replace("__LOG_URL__", LOG_URL);
+  let n = 0;
+  (function walk(d) {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) { walk(p); continue; }
+      if (!e.name.endsWith(".html")) continue;
+      const t = fs.readFileSync(p, "utf8");
+      const i = t.lastIndexOf("</body>");
+      if (i < 0) continue;
+      fs.writeFileSync(p, t.slice(0, i) + "<script>" + logJs + "</script>\n" + t.slice(i));
+      n++;
+    }
+  })(OUT);
+  console.log("Access log added to " + n + " pages");
+} else {
+  console.log("ACCESS_LOG_URL not set: no access log");
+}
+
 // 2. Encrypt every page. "Remember me" is ticked by default so people log in once per device.
 const tplSrc = require.resolve("staticrypt/lib/password_template.html");
 const tpl = path.join(ROOT, "node_modules", ".clinicref_template.html");
 let html = fs.readFileSync(tplSrc, "utf8").replace('name="remember" />', 'name="remember" checked />');
 if (!html.includes('name="remember" checked')) throw new Error("StatiCrypt template changed: remember-me default not set");
 html = html.replace("<head>", '<head>\n        <meta name="robots" content="noindex, nofollow" />');
+if (LOG_URL) {
+  // Name box above the password; remembered on this device and logged after a successful login.
+  const nameBox = '<input id="qr-name" type="text" name="qrname" placeholder="Your name" autocomplete="name" required maxlength="80" '
+    + 'style="width:100%;box-sizing:border-box;padding:15px;margin-bottom:15px;font-size:14px;border:0;outline:0;background:#f3f5f6" />';
+  const before = '<div class="staticrypt-password-container">';
+  if (!html.includes(before)) throw new Error("StatiCrypt template changed: name box not added");
+  html = html.replace(before, nameBox + "\n" + before);
+  const note = '<p style="font-size:12px;color:#5b6675;margin:10px 0 0">Your name is recorded each time you open the site.</p>';
+  html = html.replace("</form>", note + "\n</form>");
+  const hook = 'const { isSuccessful } = await staticrypt.handleDecryptionOfPage(password, isRememberChecked);';
+  if (!html.includes(hook)) throw new Error("StatiCrypt template changed: name not saved on login");
+  html = html.replace(hook,
+    'try { localStorage.setItem("qr_user", document.getElementById("qr-name").value.trim()); sessionStorage.setItem("qr_login", "1"); } catch (_) {}\n                ' + hook);
+  html = html.replace("</body>",
+    '<script>try{var qn=document.getElementById("qr-name"),qv=localStorage.getItem("qr_user");if(qv)qn.value=qv;'
+    + 'window.addEventListener("load",function(){setTimeout(function(){if(!qn.value)qn.focus();},0);});}catch(_){}</script>\n</body>');
+}
 fs.writeFileSync(tpl, html);
 
 const pages = [];

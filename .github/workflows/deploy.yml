@@ -55,6 +55,7 @@ jobs:
         if: steps.check.outputs.ready == 'true'
         env:
           SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+          ACCESS_LOG_URL: ${{ secrets.ACCESS_LOG_URL }}  # optional: Google Apps Script web app URL (tools/access_log.gs)
         run: |
           npm install --no-save --no-package-lock staticrypt@3.5.4
           node tools/encrypt_site.js
