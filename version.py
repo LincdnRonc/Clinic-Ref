@@ -6,10 +6,11 @@
 #   - PATCH is for small fixes (typos, a link, a single figure): 11.3 -> 11.3.1 -> 11.3.2.
 # Bump VERSION and VERSION_DATE in every commit that changes the site, and add a line to HISTORY.
 
-VERSION = '11.26'
+VERSION = '11.26.1'
 VERSION_DATE = '28 Nov 2026'
 
 HISTORY = [
+    ('11.26.1', '28 Nov 2026', 'Access log: deploy also reads ACCESS_LOG_URL when saved as an Actions variable rather than a secret.'),
     ('11.26', '28 Nov 2026', 'Access log: name box on the password screen (remembered per device); each login, and each return visit after 30 minutes, is recorded to a Google Sheet when the ACCESS_LOG_URL secret is set (tools/access_log.js, tools/access_log.gs).'),
     ('11.25.2', '28 Nov 2026', 'Oral boards tab: source and caveat line under the heading removed.'),
     ('11.25.1', '28 Nov 2026', 'Trial tables tab: source and caveat line under the heading removed.'),
